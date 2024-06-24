@@ -94,6 +94,37 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        
+        if (!isGameStart) return;
+
+        // 매니저 먼저
+        if(ManagerStarts != null)
+        {
+            ManagerStarts.Invoke();
+            ManagerStarts = null;
+        }
+        else
+        {
+            BuildingStarts?.Invoke();
+            BuildingStarts = null;
+            CharacterStarts?.Invoke();
+            CharacterStarts = null;
+            ControllerStarts?.Invoke();
+            ControllerStarts = null;
+
+            ManagerUpdates?.Invoke(Time.deltaTime);
+            ControllerUpdates?.Invoke(Time.deltaTime);
+            BuildingUpdates?.Invoke(Time.deltaTime);
+            CharacterUpdates?.Invoke(Time.deltaTime);
+            
+        }
+
+        ControllerDestroies?.Invoke();
+        ControllerDestroies = null;
+        CharacterDestroies?.Invoke();
+        CharacterDestroies = null;
+        BuildingDestroies?.Invoke();
+        BuildingDestroies = null;
+        ManagerDestroies?.Invoke();
+        ManagerDestroies = null;
     }
 }
