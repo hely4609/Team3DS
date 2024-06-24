@@ -6,7 +6,7 @@ public enum BuildingEnum
 {
     Tower,
     Pylon,
-    Bridge,
+    Bridge
 }
 
 public abstract class Building : MonoBehaviour
