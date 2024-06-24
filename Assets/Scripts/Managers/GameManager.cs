@@ -2,16 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void StartFunction();
+public delegate void UpdateFunction(float deltaTime);
+public delegate void DestroyFunction();
+
 public class GameManager : MonoBehaviour
 {
     protected static GameManager instance;
     public static GameManager Instance => instance;
 
+    public static StartFunction ManagerStarts;
+    public static StartFunction CharacterStarts;
+    public static StartFunction BuildingStarts;
+    public static StartFunction ControllerStarts;
+
+    public static UpdateFunction ManagerUpdates;
+    public static UpdateFunction CharacterUpdates;
+    public static UpdateFunction BuildingUpdates;
+    public static UpdateFunction ControllerUpdates;
+
+    public static DestroyFunction ManagerDestroies;
+    public static DestroyFunction CharacterDestroies;
+    public static DestroyFunction BuildingDestroies;
+    public static DestroyFunction ControllerDestroies;
     private void Awake()
     {
         if (instance == null)
         {
             instance = this;
+            DontDestroyOnLoad(this);
         }
         else
         {
