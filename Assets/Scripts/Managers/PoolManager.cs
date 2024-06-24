@@ -6,8 +6,8 @@ using UnityEngine;
 public class PoolManager : Manager
 { 
     protected Dictionary<ResourceEnum.Prefab, Queue<GameObject>> poolDictionary;
-    public IEnumerator ClaimPool() { return default; }
-    public override IEnumerator Initiate() { return default; }
+    public IEnumerator ClaimPool() { yield return null; }
+    public override IEnumerator Initiate() { yield return null; }
     protected void ReadStock() { }
     public GameObject Instantiate(ResourceEnum.Prefab target) { return default; }
     public GameObject Instantiate(ResourceEnum.Prefab target, Vector3 pos) { return default; }

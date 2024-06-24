@@ -7,6 +7,6 @@ public class ResourceManager : Manager
 {
     public override IEnumerator Initiate()
     {
-        return base.Initiate();
+        yield return base.Initiate();
     }
 }
