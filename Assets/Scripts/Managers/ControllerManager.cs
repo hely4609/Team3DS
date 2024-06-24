@@ -7,8 +7,6 @@ public class ControllerManager : Manager
 {
     protected Player controlledPlayer;
 
-<<<<<<< HEAD
-    
     protected void OnMove(InputValue value) 
     {
         
@@ -17,11 +15,11 @@ public class ControllerManager : Manager
     //{
     //    controlledPlayer.ScreenRotate(value.Get<Vector2>());
     //}
-=======
+
     public override IEnumerator Initiate() { yield return null; }
 
     protected void OnMove(InputValue value) { }
->>>>>>> SubMaster
+
     protected void OnPickUp() { }
     protected void OnPutDown() { }
     protected void OnDesignBuiling() { }

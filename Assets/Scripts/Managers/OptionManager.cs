@@ -4,12 +4,8 @@ using UnityEngine;
 
 public class OptionManager : Manager
 {
-<<<<<<< HEAD
     // 마우스 감도.
     private float mouseSensitivity;
 
-    
-=======
     public override IEnumerator Initiate() { yield return null; }
->>>>>>> SubMaster
 }
