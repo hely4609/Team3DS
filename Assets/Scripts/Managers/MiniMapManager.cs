@@ -8,5 +8,5 @@ public class MiniMapManager : Manager
     //Layer설정으로관리
     //MiniMapCamera의 CullingMask로 보고싶은 Layer조정가능
     //RenderTexture필요
-    public override IEnumerator Initiate() { return default; }
+    public override IEnumerator Initiate() { yield return null; }
 }

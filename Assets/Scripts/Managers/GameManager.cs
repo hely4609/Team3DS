@@ -41,17 +41,11 @@ public class GameManager : MonoBehaviour
     protected ControllerManager controllerManager;
     public ControllerManager ControllerManager => controllerManager;
 
-    protected BuildingManager buildingManager;
-    public BuildingManager BuildingManager => buildingManager;
-
     protected MiniMapManager miniMapManager;
     public MiniMapManager MiniMapManager => miniMapManager;
 
     protected OptionManager optionManager;
     public OptionManager OptionManager => optionManager;
-
-    protected PoolManager poolManager;
-    public PoolManager PoolManager => poolManager;
 
     protected ResourceManager resourceManager;
     public ResourceManager ResourceManager => resourceManager;
@@ -65,16 +59,36 @@ public class GameManager : MonoBehaviour
     protected UIManager uiManager;
     public UIManager UIManager => uiManager;
 
-    protected WaveManager waveManager;
-    public WaveManager WaveManager => waveManager;
 
     //protected NetworkManager networkManager;
     //public NetworkManager NetworkManager => networkManager;
 
+    bool isGameStart;
+    public static bool IsGameStart => instance && instance.isGameStart;
 
     IEnumerator Start()
     {
-        return default;
+        resourceManager = new ResourceManager();
+        yield return resourceManager.Initiate();
+        soundManager = new SoundManager();
+        yield return soundManager.Initiate();
+        saveManager = new SaveManager();
+        yield return saveManager.Initiate();
+        optionManager = new OptionManager();
+        yield return optionManager.Initiate();
+        controllerManager = new ControllerManager();
+        yield return controllerManager.Initiate();
+        uiManager = new UIManager();
+        yield return uiManager.Initiate();
+        miniMapManager = new MiniMapManager();
+        yield return miniMapManager.Initiate();
+
+        ManagerUpdates += SoundManager.ManagerUpdate;
+        ManagerUpdates += UIManager.ManagerUpdate;
+        ManagerUpdates += MiniMapManager.ManagerUpdate;
+        ManagerUpdates += ControllerManager.ManagerUpdate;
+
+        isGameStart = true;
     }
 
     

@@ -15,7 +15,7 @@ public class UIManager : Manager
 
     public override IEnumerator Initiate()
     {
-        return base.Initiate();
+        yield return base.Initiate();
     }
     public void GetUI(UIEnum wantUI) { }
     public void Open(UIEnum wantUI) { }

@@ -7,7 +7,7 @@ public class ControllerManager : Manager
 {
     protected Player controlledPlayer;
 
-    public override IEnumerator Initiate() { return default; }
+    public override IEnumerator Initiate() { yield return null; }
 
     protected void OnMove(InputValue value) { }
     protected void OnPickUp() { }
