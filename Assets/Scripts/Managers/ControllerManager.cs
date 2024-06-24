@@ -8,8 +8,14 @@ public class ControllerManager : Manager
     protected Player controlledPlayer;
 
     public override IEnumerator Initiate() { return default; }
-
-    protected void OnMove(InputValue value) { }
+    protected void OnMove(InputValue value) 
+    {
+        
+    }
+    //protected void OnScreenRotate(InputValue value)
+    //{
+    //    controlledPlayer.ScreenRotate(value.Get<Vector2>());
+    //}
     protected void OnPickUp() { }
     protected void OnPutDown() { }
     protected void OnDesignBuiling() { }
