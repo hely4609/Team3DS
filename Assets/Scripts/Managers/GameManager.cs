@@ -97,6 +97,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += ControllerManager.ManagerUpdate;
 
         CloseLoadInfo();
+        
         isGameStart = true;
     }
 
@@ -152,7 +153,6 @@ public class GameManager : MonoBehaviour
 
     public static void CloseLoadInfo()
     {
-        Debug.Log("gd");
         if (instance && instance.loadingCanvas)
         {
             instance.loadingCanvas.gameObject.SetActive(false);
