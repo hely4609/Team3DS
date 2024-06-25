@@ -15,10 +15,4 @@ public class CameraManager : MonoBehaviour
         rotate_x = Mathf.Clamp(rotate_x, -45f, 45f); // 위, 아래 고정
         transform.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
-
-    //protected void OnScreenRotate(InputValue value)
-    //{
-    //    ScreenRotate(value.Get<Vector2>());
-    //}
-
 }

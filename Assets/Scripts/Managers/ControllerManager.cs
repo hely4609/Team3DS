@@ -5,37 +5,47 @@ using UnityEngine.InputSystem;
 
 public class ControllerManager : Manager
 {
-    protected Player controlledPlayer;
+    // 컨트롤러 매니저 = 로컬플레이어 지정 컨트롤러들(로컬,네트워크) 관리
 
-    public override IEnumerator Initiate() 
-    {
-        yield return null; 
-    }
+    //protected Player controlledPlayer;
 
-    protected void OnMove(InputValue value)
+    protected List<ControllerBase> controllerList;
+
+    public override IEnumerator Initiate()
     {
-        // 테스트
-        if (controlledPlayer == null)
+        if (controllerList == null)
         {
-            controlledPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            controllerList = new List<ControllerBase>();
+            // Controller 목록받아올 방법 생각해보기.
         }
-        controlledPlayer.Move(value.Get<Vector3>());
+        else yield break;
+        yield return null;
     }
 
-    protected void OnScreenRotate(InputValue value)
-    {
-        if (controlledPlayer == null)
-        {
-            controlledPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-        }
-        controlledPlayer.ScreenRotate(value.Get<Vector2>());
-    }
+    //protected void OnMove(InputValue value)
+    //{
+    //    // 테스트
+    //    if (controlledPlayer == null)
+    //    {
+    //        controlledPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    //    }
+    //    controlledPlayer.Move(value.Get<Vector3>());
+    //}
 
-    protected void OnPickUp() { }
-    protected void OnPutDown() { }
-    protected void OnDesignBuiling() { }
-    protected void OnBulid() { }
-    protected void OnRepair() { }
-    ////////////////////////////////////////////
-    //protected void OnInteract() { }
+    //protected void OnScreenRotate(InputValue value)
+    //{
+    //    if (controlledPlayer == null)
+    //    {
+    //        controlledPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    //    }
+    //    controlledPlayer.ScreenRotate(value.Get<Vector2>());
+    //}
+
+    //protected void OnPickUp() { }
+    //protected void OnPutDown() { }
+    //protected void OnDesignBuiling() { }
+    //protected void OnBulid() { }
+    //protected void OnRepair() { }
+    //////////////////////////////////////////////
+    ////protected void OnInteract() { }
 }
