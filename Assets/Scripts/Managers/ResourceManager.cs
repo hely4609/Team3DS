@@ -14,7 +14,7 @@ public class ResourceManager : Manager
     {
         if (prefabDictionary != null) yield break;
 
-        prefabDictionary = new Dictionary<ResourceEnum.Prefab, GameObject> ();
+        prefabDictionary = new Dictionary<ResourceEnum.Prefab, GameObject>();
 
         resourceAmount = 0;
         resourceLoadCompleted = 0;
@@ -28,7 +28,7 @@ public class ResourceManager : Manager
     // resourceType : 로딩할때 보여주기용
     IEnumerator Load<key, value>(Dictionary<key, value> dictionary, string[] pathArray, string resourceType) where key : Enum where value : UnityEngine.Object
     {
-        for(int i =0; i < pathArray.Length; i++)
+        for (int i = 0; i < pathArray.Length; i++)
         {
             if (Load(pathArray[i], dictionary))
             {
@@ -87,4 +87,12 @@ public class ResourceManager : Manager
         }
     }
 
+    public static GameObject Get(ResourceEnum.Prefab prefab)
+    {
+        if (prefabDictionary.TryGetValue(prefab, out GameObject result))
+        {
+            return result;
+        }
+        return null;
+    }
 }
