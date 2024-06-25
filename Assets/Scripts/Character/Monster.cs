@@ -9,5 +9,5 @@ public class Monster : Character
 {
     protected int oreAmount;
 
-    protected override void Attack(Character target) { }
+    public override void Attack(Character target) { }
 }
