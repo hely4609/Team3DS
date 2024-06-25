@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuildingManager : Manager
 {
     protected List<Building> buildings;
+    public List<Building> Buildings => buildings;
 
     public override IEnumerator Initiate() { yield return null; }
 }

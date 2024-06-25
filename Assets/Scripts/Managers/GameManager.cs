@@ -63,6 +63,9 @@ public class GameManager : MonoBehaviour
     protected PoolManager poolManager;
     public PoolManager PoolManager => poolManager;
 
+    protected BuildingManager buildingManager;
+    public BuildingManager BuildingManager => buildingManager;
+
     //protected NetworkManager networkManager;
     //public NetworkManager NetworkManager => networkManager;
 
