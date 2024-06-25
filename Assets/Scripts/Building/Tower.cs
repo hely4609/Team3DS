@@ -18,12 +18,16 @@ public class Tower : Building
     protected Monster target; // 타겟 지정된 몬스터
     [SerializeField] protected List<Monster> targetList;
     protected bool onOff; // 꺼졌는지 켜졌는지.
-
-    private void Start()
+    
+    protected override void Initialize()
     {
+        // 디폴트 값.
+        type = BuildingEnum.Tower;
         AttackDamage = 1;
         AttackSpeed = 1;
         AttackRange = 2;
+        buildingTimeMax = 10;
+        size = new Vector2Int(10, 10);
     }
 
     private void Update()
@@ -46,20 +50,27 @@ public class Tower : Building
 
                 // 공격
                 // *애니메이션 재생*
-                //target.TakeDamage();
-                //if (target.hpCurrent <= 0)
-                //{
-                //    Destroy(target.gameObject);
-                //    targetList.Remove(target);
-                //    target = null;
-                //}
+                OnHit();
+
+                if (target.HpCurrent <= 0)
+                {
+                    // 파괴할때.
+                    Destroy(target.gameObject);
+                    targetList.Remove(target);
+                    target = null;
+                }
                 nowTime = attackSpeed;
             }
             else
             {
-                nowTime += Time.deltaTime;
+                nowTime -= Time.deltaTime;
             }
         }
+    }
+
+    protected virtual void OnHit()
+    {
+        target.TakeDamage(this, attackDamage);
     }
 
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가
@@ -79,6 +90,7 @@ public class Tower : Building
         if (targetList.Count > 0)
         {
             target = targetList[0];
+            Debug.Log("targeting ready");
         }
     }
 

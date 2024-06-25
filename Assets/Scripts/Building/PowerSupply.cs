@@ -22,4 +22,8 @@ public class PowerSupply : Building
     protected int expCurrent; // 몹을 잡아서 Ore를 넣으면 .. 레벨업..
     protected int expMax;
 
+
+    protected override void Initialize()
+    {
+    }
 }

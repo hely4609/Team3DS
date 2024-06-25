@@ -13,4 +13,9 @@ public class EnergyBarrierGenerator : Building
 
     public void SetActiveEnergyBarrier() { }
     public void TakeDamage() {}
+
+
+    protected override void Initialize()
+    {
+    }
 }

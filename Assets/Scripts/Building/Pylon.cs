@@ -7,4 +7,8 @@ public class Pylon : Building
     protected int cost;
     // protected int powerCurrent;
     protected float powerRange;
+
+    protected override void Initialize()
+    {
+    }
 }
