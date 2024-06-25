@@ -7,18 +7,29 @@ public class ControllerManager : Manager
 {
     protected Player controlledPlayer;
 
-    protected void OnMove(InputValue value) 
+    public override IEnumerator Initiate() 
     {
-        
+        yield return null; 
     }
-    //protected void OnScreenRotate(InputValue value)
-    //{
-    //    controlledPlayer.ScreenRotate(value.Get<Vector2>());
-    //}
 
-    public override IEnumerator Initiate() { yield return null; }
+    protected void OnMove(InputValue value)
+    {
+        // Å×½ºÆ®
+        if (controlledPlayer == null)
+        {
+            controlledPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
+        controlledPlayer.Move(value.Get<Vector3>());
+    }
 
-    protected void OnMove(InputValue value) { }
+    protected void OnScreenRotate(InputValue value)
+    {
+        if (controlledPlayer == null)
+        {
+            controlledPlayer = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        }
+        controlledPlayer.ScreenRotate(value.Get<Vector2>());
+    }
 
     protected void OnPickUp() { }
     protected void OnPutDown() { }

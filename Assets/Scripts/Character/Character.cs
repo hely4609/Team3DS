@@ -10,7 +10,14 @@ public abstract class Character : MonoBehaviour
     protected float attackSpeed;
     protected float moveSpeed;
 
-    public virtual void Move(Vector3 direction) { } // 1인칭이니까 방향만 있어도 괜찮을듯
+
+    protected Vector3 preferedDir;
+    
+
+    public virtual void Move(Vector3 direction) 
+    {
+        
+    } 
     public virtual void MoveToDestination(Vector3 destination) { }
     public virtual int TakeDamage(Character attacker, int damage) { return default; }
     public virtual int TakeDamage(Tower attacker, int damage) { return default; }
