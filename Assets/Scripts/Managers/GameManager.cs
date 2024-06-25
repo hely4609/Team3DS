@@ -88,7 +88,7 @@ public class GameManager : MonoBehaviour
         optionManager = new OptionManager();
         yield return optionManager.Initiate();
         controllerManager = new ControllerManager();
-        yield return controllerManager.Initiate();
+        yield return controllerManager.Initiate();        
         uiManager = new UIManager();
         yield return uiManager.Initiate();
         miniMapManager = new MiniMapManager();
@@ -98,7 +98,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += UIManager.ManagerUpdate;
         ManagerUpdates += MiniMapManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
-
+        
         CloseLoadInfo();
         
         isGameStart = true;
