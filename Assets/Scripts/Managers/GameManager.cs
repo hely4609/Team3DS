@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public delegate void StartFunction();
@@ -8,7 +9,7 @@ public delegate void DestroyFunction();
 
 public class GameManager : MonoBehaviour
 {
-    protected static GameManager instance;
+    [SerializeField]protected static GameManager instance;
     public static GameManager Instance => instance;
 
     public static StartFunction ManagerStarts;
@@ -59,6 +60,8 @@ public class GameManager : MonoBehaviour
     protected UIManager uiManager;
     public UIManager UIManager => uiManager;
 
+    protected PoolManager poolManager;
+    public PoolManager PoolManager => poolManager;
 
     //protected NetworkManager networkManager;
     //public NetworkManager NetworkManager => networkManager;
@@ -66,8 +69,13 @@ public class GameManager : MonoBehaviour
     bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
 
+    LoadingCanvas loadingCanvas;
+
+
     IEnumerator Start()
     {
+        loadingCanvas = GetComponentInChildren<LoadingCanvas>();
+
         resourceManager = new ResourceManager();
         yield return resourceManager.Initiate();
         soundManager = new SoundManager();
@@ -88,6 +96,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += MiniMapManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
 
+        CloseLoadInfo();
         isGameStart = true;
     }
 
@@ -126,5 +135,32 @@ public class GameManager : MonoBehaviour
         BuildingDestroies = null;
         ManagerDestroies?.Invoke();
         ManagerDestroies = null;
+    }
+
+    public static void ClaimLoadInfo(string info)
+    {
+        if(instance && instance.loadingCanvas)
+        {
+            instance.loadingCanvas.SetLoadInfo(info);
+            instance.loadingCanvas.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning("There is no GameManager or loadingCanvas");
+        }
+    }
+
+    public static void CloseLoadInfo()
+    {
+        Debug.Log("gd");
+        if (instance && instance.loadingCanvas)
+        {
+            instance.loadingCanvas.gameObject.SetActive(false);
+        }
+        else
+        {
+            Debug.LogWarning("There is no GameManager or loadingCanvas");
+        }
+
     }
 }
