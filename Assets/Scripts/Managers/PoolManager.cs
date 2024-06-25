@@ -7,7 +7,13 @@ public class PoolManager : Manager
 { 
     protected Dictionary<ResourceEnum.Prefab, Queue<GameObject>> poolDictionary;
     public IEnumerator ClaimPool() { yield return null; }
-    public override IEnumerator Initiate() { yield return null; }
+
+    Transform poolContainer;
+    public override IEnumerator Initiate() 
+    {
+        if (poolContainer == null) poolContainer = new GameObject("Pool Container").transform;
+        yield return null; 
+    }
     protected void ReadStock() { }
     public GameObject Instantiate(ResourceEnum.Prefab target) { return default; }
     public GameObject Instantiate(ResourceEnum.Prefab target, Vector3 pos) { return default; }

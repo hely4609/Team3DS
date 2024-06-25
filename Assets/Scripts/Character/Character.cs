@@ -9,20 +9,22 @@ public abstract class Character : MonoBehaviour
     public int HpCurrent => hpCurrent;
     protected int attackDamage;
     protected float attackSpeed;
-    protected float moveSpeed;
+    protected float moveSpeed = 10;
     public float MoveSpeed
     {
         get => moveSpeed;
         set => moveSpeed = value;
     }
-
-
     protected Vector3 preferedDir;
-    
+        
+    private void FixedUpdate()
+    {
+        transform.Translate(preferedDir * Time.fixedDeltaTime);
+    }
 
     public virtual void Move(Vector3 direction) 
     {
-        
+        preferedDir = direction.normalized;
     } 
     public virtual void MoveToDestination(Vector3 destination) { }
     public virtual int TakeDamage(Character attacker, int damage) { return default; }
