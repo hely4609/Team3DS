@@ -25,7 +25,6 @@ public abstract class Character : MonoBehaviour
     public virtual void Move(Vector3 direction) 
     {
         preferedDir = direction.normalized;
-        Debug.Log(preferedDir);
     } 
     public virtual void MoveToDestination(Vector3 destination) { }
     public virtual int TakeDamage(Character attacker, int damage) { return default; }

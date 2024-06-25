@@ -3,16 +3,34 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraManager : MonoBehaviour
+public class CameraManager : Manager
 {
-    private float rotate_x;
-    private float mouseDelta_y;
+    protected Player observingPlayer;
+    protected Camera mainCamera;
 
-    public void ScreenRotate(Vector2 mouseDelta)
+    public override IEnumerator Initiate()
     {
-        mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
-        rotate_x = rotate_x + mouseDelta_y;
-        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f); // 위, 아래 고정
-        transform.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+        return base.Initiate();
+    }
+
+    // OnSceenLoad << 씬이 로드 될때마다 메인카메라를 새로 받아와줘야한다.
+
+    public override void ManagerStart()
+    {
+        mainCamera = Camera.main;
+        base.ManagerStart();
+    }
+
+    public override void ManagerUpdate(float deltaTime)
+    {
+        // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
+        if (observingPlayer == null) 
+        {
+            GameObject inst = GameObject.Find("LocalController");
+            LocalController controller = inst.GetComponent<LocalController>();
+            observingPlayer = controller.ControlledPlayer;
+        }        
+        mainCamera.transform.position = observingPlayer.CameraOffset.position;
+        mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
     }
 }
