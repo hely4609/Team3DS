@@ -6,9 +6,15 @@ public abstract class Character : MonoBehaviour
 {
     protected int hpMax;
     protected int hpCurrent;
+    public int HpCurrent => hpCurrent;
     protected int attackDamage;
     protected float attackSpeed;
     protected float moveSpeed;
+    public float MoveSpeed
+    {
+        get => moveSpeed;
+        set => moveSpeed = value;
+    }
 
 
     protected Vector3 preferedDir;
