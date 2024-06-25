@@ -8,13 +8,28 @@ public class Tower : Building
     protected int currentPowerConsumption; // 현재 사용중인 전력 소모량
 
     protected int attackDamage; // 공격력
+    public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } }
     protected float nowTime;
     protected float attackSpeed; // 공격 스피드
+    public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
     protected float attackRange; // 공격 범위
+    public float AttackRange { get { return attackRange; } set { attackRange = value; AttackRangeSetting(); } }
 
     protected Monster target; // 타겟 지정된 몬스터
-    [SerializeField]protected List<Monster> targetList;
+    [SerializeField] protected List<Monster> targetList;
     protected bool onOff; // 꺼졌는지 켜졌는지.
+
+    private void Start()
+    {
+        AttackDamage = 1;
+        AttackSpeed = 1;
+        AttackRange = 2;
+    }
+
+    private void Update()
+    {
+        Attack();
+    }
 
     public void Attack()
     {
@@ -49,27 +64,29 @@ public class Tower : Building
 
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가
     {
-        Debug.Log(other.gameObject.name);
         other.gameObject.TryGetComponent<Monster>(out Monster monster);
-
         targetList.Add(monster);
-        
-
     }
     protected void OnTriggerExit(Collider other) // 영역에서 나가면 리스트에서 제외
     {
         other.gameObject.TryGetComponent<Monster>(out Monster monster);
-        
-            targetList.Remove(monster);
-        
+        targetList.Remove(monster);
     }
 
 
     public virtual void LockOn()
     {
-        target = targetList[0];
+        if (targetList.Count > 0)
+        {
+            target = targetList[0];
+        }
     }
 
+    public virtual void AttackRangeSetting()
+    {
+        TryGetComponent<SphereCollider>(out SphereCollider col);
+        col.radius = attackRange;
+    }
 
     public void TurnOnOff(bool power) //전원을 키고 끌때.
     {
