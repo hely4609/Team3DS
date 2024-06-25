@@ -6,5 +6,5 @@ public class BuildingManager : Manager
 {
     protected List<Building> buildings;
 
-    public override IEnumerator Initiate() { return default; }
+    public override IEnumerator Initiate() { yield return null; }
 }

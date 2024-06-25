@@ -11,7 +11,7 @@ public class WaveManager : Manager
 
     public override IEnumerator Initiate()
     {
-        return base.Initiate();
+        yield return base.Initiate();
     }
 
     public override void ManagerUpdate(float deltaTime)

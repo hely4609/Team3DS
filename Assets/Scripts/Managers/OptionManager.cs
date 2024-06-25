@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class OptionManager : Manager
 {
-    public override IEnumerator Initiate() { return default; }
+    public override IEnumerator Initiate() { yield return null; }
 }

@@ -6,6 +6,6 @@ public class SaveManager : Manager
 {
     public override IEnumerator Initiate()
     {
-        return base.Initiate();
+        yield return base.Initiate();
     }
 }
