@@ -1923,7 +1923,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2c066a6ef9e0374ab093cadf92ac854, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loadingText: {fileID: 757117848}
   loadingBar: {fileID: 212918798}
   loadingProgressText: {fileID: 683440532}
 --- !u!114 &1840251143
