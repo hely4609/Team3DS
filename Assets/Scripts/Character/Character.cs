@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Character : MonoBehaviour
+public abstract class Character : MyComponent
 {
     protected int hpMax;
     protected int hpCurrent;
@@ -16,10 +16,10 @@ public abstract class Character : MonoBehaviour
         set => moveSpeed = value;
     }
     protected Vector3 preferedDir;
-        
-    private void FixedUpdate()
-    {
-        transform.Translate(preferedDir * Time.fixedDeltaTime);
+
+    protected override void MyUpdate(float deltaTime)
+    {        
+        transform.Translate(preferedDir * Time.deltaTime * moveSpeed);
     }
 
     public virtual void Move(Vector3 direction) 

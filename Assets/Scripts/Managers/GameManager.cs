@@ -13,18 +13,15 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance => instance;
 
     public static StartFunction ManagerStarts;
-    public static StartFunction CharacterStarts;
-    public static StartFunction BuildingStarts;
+    public static StartFunction ObjectStarts;
     public static StartFunction ControllerStarts;
 
     public static UpdateFunction ManagerUpdates;
-    public static UpdateFunction CharacterUpdates;
-    public static UpdateFunction BuildingUpdates;
+    public static UpdateFunction ObjectUpdates;
     public static UpdateFunction ControllerUpdates;
 
     public static DestroyFunction ManagerDestroies;
-    public static DestroyFunction CharacterDestroies;
-    public static DestroyFunction BuildingDestroies;
+    public static DestroyFunction ObjectDestroies;
     public static DestroyFunction ControllerDestroies;
     private void Awake()
     {
@@ -117,26 +114,21 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            BuildingStarts?.Invoke();
-            BuildingStarts = null;
-            CharacterStarts?.Invoke();
-            CharacterStarts = null;
+            ObjectStarts?.Invoke();
+            ObjectStarts = null;
             ControllerStarts?.Invoke();
             ControllerStarts = null;
 
             ManagerUpdates?.Invoke(Time.deltaTime);
             ControllerUpdates?.Invoke(Time.deltaTime);
-            BuildingUpdates?.Invoke(Time.deltaTime);
-            CharacterUpdates?.Invoke(Time.deltaTime);
+            ObjectUpdates?.Invoke(Time.deltaTime);
             
         }
 
         ControllerDestroies?.Invoke();
         ControllerDestroies = null;
-        CharacterDestroies?.Invoke();
-        CharacterDestroies = null;
-        BuildingDestroies?.Invoke();
-        BuildingDestroies = null;
+        ObjectDestroies?.Invoke();
+        ObjectDestroies = null;
         ManagerDestroies?.Invoke();
         ManagerDestroies = null;
     }
