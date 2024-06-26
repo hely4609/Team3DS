@@ -35,9 +35,9 @@ public class TestControl : MonoBehaviour
         }
         if(Input.GetKey(KeyCode.A))
         {
-            for(int i = 0; i<BuildingManager.Buildings.Count; i++)
+            for(int i = 0; i<GameManager.Instance.BuildingManager.Buildings.Count; i++)
             {
-                Debug.Log(BuildingManager.Buildings[i].transform.position);
+                Debug.Log(GameManager.Instance.BuildingManager.Buildings[i].transform.position);
             }
         }
     }

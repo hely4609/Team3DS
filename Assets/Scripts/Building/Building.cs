@@ -9,7 +9,7 @@ public enum BuildingEnum
     Bridge
 }
 
-public abstract class Building : MonoBehaviour
+public abstract class Building : MyComponent
 {
     protected BuildingEnum type; // 타워 종류
     protected bool isNeedLine; // 전선이 필요한가?
@@ -29,15 +29,15 @@ public abstract class Building : MonoBehaviour
 
     [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 왼쪽 아래 지점
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
-    private void OnEnable()
+    protected override void MyStart()
     {
         Initialize();
     }
     protected abstract void Initialize();
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
-        //List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings; 
-        List<Building> buildingList = BuildingManager.Buildings; // 임시 코드
+        List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings; 
+        //List<Building> buildingList = BuildingManager.Buildings; // 임시 코드
         Vector2Int rightUp = tiledBuildingPositionLast + size;
         Vector2Int[] buildingPoint = { tiledBuildingPositionLast, rightUp };
         if (buildingList.Count > 0)

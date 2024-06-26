@@ -2,11 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestBatch : MonoBehaviour
+public class TestBatch : MyComponent
 {
-    private void OnEnable()
+    protected override void MyStart()
     {
         Building thisObject = GetComponent<Building>();
-        BuildingManager.Buildings.Add(thisObject);
+        GameManager.Instance.BuildingManager.Buildings.Add(thisObject);
     }
 }

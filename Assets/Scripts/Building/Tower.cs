@@ -30,7 +30,7 @@ public class Tower : Building
         size = new Vector2Int(10, 10);
     }
 
-    private void Update()
+    protected override void MyUpdate(float deltaTime)
     {
         Attack();
     }
