@@ -10,23 +10,35 @@ public class TestControl : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.UpArrow)) 
         {
-            transform.position += new Vector3(1, 0, 0);
-            building.TiledBuildingPos += new Vector2Int(1, 0);
+            transform.position += new Vector3(0, 0, 1);
+            building.TiledBuildingPos += new Vector2Int(0, 1);
+            building.CheckBuild();
+
         }
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            transform.position += new Vector3(-1, 0, 0);
-            building.TiledBuildingPos += new Vector2Int(-1, 0);
+            transform.position += new Vector3(0, 0, -1);
+            building.TiledBuildingPos += new Vector2Int(0, -1);
+            building.CheckBuild();
         }
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            transform.position += new Vector3(0, 0, 1);
-            building.TiledBuildingPos += new Vector2Int(0, 1);
+            transform.position += new Vector3(1, 0, 0);
+            building.TiledBuildingPos += new Vector2Int(1, 0);
+            building.CheckBuild();
         }
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            transform.position += new Vector3(0, 0, -1);
-            building.TiledBuildingPos += new Vector2Int(0, -1);
+            transform.position += new Vector3(-1, 0, 0);
+            building.TiledBuildingPos += new Vector2Int(-1, 0);
+            building.CheckBuild();
+        }
+        if(Input.GetKey(KeyCode.A))
+        {
+            for(int i = 0; i<BuildingManager.Buildings.Count; i++)
+            {
+                Debug.Log(BuildingManager.Buildings[i].transform.position);
+            }
         }
     }
 }
