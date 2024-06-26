@@ -69,9 +69,6 @@ public class GameManager : MonoBehaviour
     protected NetworkManager networkManager;
     public NetworkManager NetworkManager => networkManager;
 
-    private CameraManager cameraManager;
-    public CameraManager CameraManager => cameraManager;
-
     bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
 
