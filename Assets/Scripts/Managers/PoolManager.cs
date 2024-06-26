@@ -29,7 +29,8 @@ public class PoolManager : Manager
         // µÒº≈≥ ∏Æø° ≈∞∞° ¿÷¿∏∏È
         if(poolDictionary.TryGetValue(target, out Queue<GameObject> result))
         {
-
+            poolDictionary[target] = result;
+            
         }
         else
         {
@@ -37,6 +38,13 @@ public class PoolManager : Manager
             Queue<GameObject> queue = new Queue<GameObject>();
             poolDictionary.Add(target, queue);
         }
+
+        GameObject inst = GameObject.Instantiate(ResourceManager.Get(target));
+        inst.AddComponent<PoolingInfo>();
+        inst.SetActive(false);
+        poolDictionary[target].Enqueue(inst);
+
+
     }
     public GameObject Instantiate(ResourceEnum.Prefab target) { return default; }
     public GameObject Instantiate(ResourceEnum.Prefab target, Vector3 pos) { return default; }
