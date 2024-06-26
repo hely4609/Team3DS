@@ -21,17 +21,21 @@ public class CameraManager : Manager
         mainCamera = Camera.main;
         base.ManagerStart();
     }
-
+    /*
     public override void ManagerUpdate(float deltaTime)
     {
         // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
         if (observingPlayer == null) 
         {
             GameObject inst = GameObject.Find("LocalController");
-            LocalController controller = inst.GetComponent<LocalController>();
-            observingPlayer = controller.ControlledPlayer;
+            if (inst != null)
+            {
+                LocalController controller = inst.GetComponent<LocalController>();
+                observingPlayer = controller.ControlledPlayer;
+            }
         }        
         mainCamera.transform.position = observingPlayer.CameraOffset.position;
         mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
     }
+    */
 }

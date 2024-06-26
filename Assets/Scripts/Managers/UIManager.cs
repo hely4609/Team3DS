@@ -27,6 +27,7 @@ public class UIManager : Manager
         GameObject errorCanvasObject = new GameObject("ErrorCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
         errorCanvas = errorCanvasObject.GetComponent<Canvas>();
         errorCanvas.sortingOrder = short.MaxValue;
+        errorCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         errorCanvas.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         errorCanvas.transform.SetParent(GameManager.Instance.transform);
 
@@ -34,7 +35,22 @@ public class UIManager : Manager
     }
     public GameObject GetUI(UIEnum wantUI) 
     {
-        return default;
+        // 인스턴스가 있으면 inst 반환
+        if(instanceDictionary.TryGetValue(wantUI, out GameObject inst) && inst != null) 
+        {
+            inst.SetActive(true);
+            return inst;
+        }
+        // 없으면 프리팹은 있는지 확인
+        else if(prefabDictionary.TryGetValue(wantUI, out GameObject prefab))
+        {
+            inst = GameObject.Instantiate(prefab, errorCanvas.transform);
+            instanceDictionary.Add(wantUI, inst);
+            return inst;
+        }
+        // 프리팹도 없으면 에러
+        Debug.LogError($"Can't find UI prefab '{wantUI}'");
+        return null;
     }
     public void Open(UIEnum wantUI) 
     { 
@@ -50,8 +66,8 @@ public class UIManager : Manager
         gotUI.SetActive(!gotUI.activeInHierarchy);
     }
     public void ClaimError(string bar, string context, string confirm, System.Action confirmAction) 
-    { 
-        // ErrorWindow 스크립트 만들기
-        // errorCanvas에 ErrorWindow 프리팹 띄우기 (SetInfo하고)
+    {
+        GameObject errorWindow = GetUI(UIEnum.ErrorWindow);
+        errorWindow.GetComponent<ErrorWindow>().SetText(bar, context, confirm, confirmAction + (() => { GameObject.Destroy(errorWindow); }));
     }
 }
