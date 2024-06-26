@@ -5,8 +5,8 @@ using UnityEngine;
 public class PoolingInfo : MyComponent
 {
     private ResourceEnum.Prefab origin;
-    private Queue<GameObject> originPool;
     public ResourceEnum.Prefab Origin => origin;
+    private Queue<GameObject> originPool;
     private float lifespan;
     public float Lisfespan 
     { 
@@ -25,7 +25,7 @@ public class PoolingInfo : MyComponent
     {
         if(lifespan <= 0)
         {
-            // 풀매니저.Destroy
+            GameManager.Instance.PoolManager.Destroy(this);
         }
     }
 
