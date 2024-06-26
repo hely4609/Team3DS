@@ -488,7 +488,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 476055968663659204, guid: 81a7a9e997dc2c642baf6e2cae773fb4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 476055968663659204, guid: 81a7a9e997dc2c642baf6e2cae773fb4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -496,7 +496,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 476055968663659204, guid: 81a7a9e997dc2c642baf6e2cae773fb4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 476055968663659204, guid: 81a7a9e997dc2c642baf6e2cae773fb4, type: 3}
       propertyPath: m_LocalRotation.w
@@ -526,10 +526,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7033266806839949412, guid: 81a7a9e997dc2c642baf6e2cae773fb4, type: 3}
+      propertyPath: startPos.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7033266806839949412, guid: 81a7a9e997dc2c642baf6e2cae773fb4, type: 3}
+      propertyPath: startPos.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7139158512777397583, guid: 81a7a9e997dc2c642baf6e2cae773fb4, type: 3}
       propertyPath: m_Name
       value: Tower (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 8324571905183983871, guid: 81a7a9e997dc2c642baf6e2cae773fb4, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9d55f199e1798f34b845b56ef8b191ef, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
