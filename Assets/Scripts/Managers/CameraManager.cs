@@ -10,6 +10,7 @@ public class CameraManager : Manager
 
     public override IEnumerator Initiate()
     {
+        GameManager.ManagerStarts += ManagerStart;
         return base.Initiate();
     }
 

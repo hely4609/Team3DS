@@ -11,6 +11,7 @@ public class ControllerManager : Manager
 
     protected List<ControllerBase> controllerList;
 
+    // OnSceenLoad
     public override IEnumerator Initiate()
     {
         if (controllerList == null)
