@@ -66,6 +66,9 @@ public class GameManager : MonoBehaviour
     //protected NetworkManager networkManager;
     //public NetworkManager NetworkManager => networkManager;
 
+    private CameraManager cameraManager;
+    public CameraManager CameraManager => cameraManager;
+
     bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
 
@@ -91,11 +94,16 @@ public class GameManager : MonoBehaviour
         miniMapManager = new MiniMapManager();
         yield return miniMapManager.Initiate();
 
+        cameraManager = new CameraManager();
+        yield return cameraManager.Initiate();
+
         ManagerUpdates += SoundManager.ManagerUpdate;
         ManagerUpdates += UIManager.ManagerUpdate;
         ManagerUpdates += MiniMapManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
-        
+
+        ManagerUpdates += CameraManager.ManagerUpdate;
+
         CloseLoadInfo();
         
         isGameStart = true;

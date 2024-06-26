@@ -15,17 +15,9 @@ public abstract class Character : MyComponent
         get => moveSpeed;
         set => moveSpeed = value;
     }
-    protected Vector3 preferedDir;
+    protected Vector3 moveDir;
 
-    protected override void MyUpdate(float deltaTime)
-    {        
-        transform.Translate(preferedDir * Time.deltaTime * moveSpeed);
-    }
-
-    public virtual void Move(Vector3 direction) 
-    {
-        preferedDir = direction.normalized;
-    } 
+    public virtual void Move(Vector3 direction) { }
     public virtual void MoveToDestination(Vector3 destination) { }
     public virtual int TakeDamage(Character attacker, int damage) { return default; }
     public virtual int TakeDamage(Tower attacker, int damage) { return default; }
