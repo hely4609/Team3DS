@@ -65,8 +65,8 @@ public class UIManager : Manager
         gotUI.SetActive(!gotUI.activeInHierarchy);
     }
     public void ClaimError(string bar, string context, string confirm, System.Action confirmAction) 
-    { 
-        // ErrorWindow 스크립트 만들기
-        // errorCanvas에 ErrorWindow 프리팹 띄우기 (SetInfo하고)
+    {
+        GameObject errorWindow = GetUI(UIEnum.ErrorWindow);
+        errorWindow.GetComponent<ErrorWindow>().SetText(bar, context, confirm, confirmAction + (() => { GameObject.Destroy(errorWindow); }));
     }
 }
