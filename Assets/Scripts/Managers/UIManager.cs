@@ -27,6 +27,7 @@ public class UIManager : Manager
         GameObject errorCanvasObject = new GameObject("ErrorCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
         errorCanvas = errorCanvasObject.GetComponent<Canvas>();
         errorCanvas.sortingOrder = short.MaxValue;
+        errorCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
         errorCanvas.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         errorCanvas.transform.SetParent(GameManager.Instance.transform);
 
@@ -36,14 +37,14 @@ public class UIManager : Manager
     {
         // 인스턴스가 있으면 inst 반환
         if(instanceDictionary.TryGetValue(wantUI, out GameObject inst) && inst != null) 
-        { 
+        {
             inst.SetActive(true);
             return inst;
         }
         // 없으면 프리팹은 있는지 확인
         else if(prefabDictionary.TryGetValue(wantUI, out GameObject prefab))
         {
-            inst = GameObject.Instantiate(prefab);
+            inst = GameObject.Instantiate(prefab, errorCanvas.transform);
             instanceDictionary.Add(wantUI, inst);
             return inst;
         }
