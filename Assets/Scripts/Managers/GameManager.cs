@@ -93,6 +93,13 @@ public class GameManager : MonoBehaviour
         yield return uiManager.Initiate();
         miniMapManager = new MiniMapManager();
         yield return miniMapManager.Initiate();
+        buildingManager = new BuildingManager();
+        yield return buildingManager.Initiate();
+        cameraManager = new CameraManager();
+        yield return cameraManager.Initiate();
+        networkManager = new NetworkManager();
+        yield return networkManager.Initiate();
+
 
         ManagerUpdates += SoundManager.ManagerUpdate;
         ManagerUpdates += UIManager.ManagerUpdate;
