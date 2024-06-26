@@ -20,5 +20,6 @@ public class MyComponent : MonoBehaviour
         GameManager.ObjectDestroies += MyDestroy;
         GameManager.ObjectUpdates -= MyUpdate;
         GameManager.ObjectStarts -= MyStart;
+
     }
 }
