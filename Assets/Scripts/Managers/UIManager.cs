@@ -34,7 +34,22 @@ public class UIManager : Manager
     }
     public GameObject GetUI(UIEnum wantUI) 
     {
-        return default;
+        // 인스턴스가 있으면 inst 반환
+        if(instanceDictionary.TryGetValue(wantUI, out GameObject inst) && inst != null) 
+        { 
+            inst.SetActive(true);
+            return inst;
+        }
+        // 없으면 프리팹은 있는지 확인
+        else if(prefabDictionary.TryGetValue(wantUI, out GameObject prefab))
+        {
+            inst = GameObject.Instantiate(prefab);
+            instanceDictionary.Add(wantUI, inst);
+            return inst;
+        }
+        // 프리팹도 없으면 에러
+        Debug.LogError($"Can't find UI prefab '{wantUI}'");
+        return null;
     }
     public void Open(UIEnum wantUI) 
     { 
