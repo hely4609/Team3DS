@@ -7,15 +7,15 @@ public class Tower : Building
     protected int powerConsumption; // 타워가 진짜로 소모할 양.
     protected int currentPowerConsumption; // 현재 사용중인 전력 소모량
 
-    protected int attackDamage; // 공격력
+    [SerializeField]protected int attackDamage; // 공격력
     public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } }
     protected float nowTime;
-    protected float attackSpeed; // 공격 스피드
+    [SerializeField]protected float attackSpeed; // 공격 스피드
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
     protected float attackRange; // 공격 범위
     public float AttackRange { get { return attackRange; } set { attackRange = value; AttackRangeSetting(); } }
 
-    protected Monster target; // 타겟 지정된 몬스터
+    [SerializeField]protected Monster target; // 타겟 지정된 몬스터
     [SerializeField] protected List<Monster> targetList;
     protected bool onOff; // 꺼졌는지 켜졌는지.
     
@@ -24,7 +24,7 @@ public class Tower : Building
         // 디폴트 값.
         type = BuildingEnum.Tower;
         AttackDamage = 1;
-        AttackSpeed = 1;
+        AttackSpeed = 0.5f;
         AttackRange = 2;
         buildingTimeMax = 10;
         size = new Vector2Int(10, 10);
@@ -76,12 +76,20 @@ public class Tower : Building
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가
     {
         other.gameObject.TryGetComponent<Monster>(out Monster monster);
-        targetList.Add(monster);
+        if (monster != null)
+        {
+            targetList.Add(monster);
+        }
     }
     protected void OnTriggerExit(Collider other) // 영역에서 나가면 리스트에서 제외
     {
         other.gameObject.TryGetComponent<Monster>(out Monster monster);
-        targetList.Remove(monster);
+        if (monster != null)
+        {
+            if (target == monster)
+            { target = null; }
+            targetList.Remove(monster);
+        }
     }
 
 

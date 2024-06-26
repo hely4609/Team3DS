@@ -33,11 +33,11 @@ public class TestControl : MonoBehaviour
             building.TiledBuildingPos += new Vector2Int(-1, 0);
             building.CheckBuild();
         }
-        if(Input.GetKey(KeyCode.A))
+        if(Input.GetKeyDown(KeyCode.A))
         {
             for(int i = 0; i<GameManager.Instance.BuildingManager.Buildings.Count; i++)
             {
-                Debug.Log(GameManager.Instance.BuildingManager.Buildings[i].transform.position);
+                Debug.Log($"{GameManager.Instance.BuildingManager.Buildings[i].transform.position} / {GameManager.Instance.BuildingManager.Buildings.Count}");
             }
         }
     }

@@ -36,6 +36,7 @@ public abstract class Building : MyComponent
     protected abstract void Initialize();
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
+        isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings; 
         //List<Building> buildingList = BuildingManager.Buildings; // 임시 코드
         Vector2Int rightUp = tiledBuildingPositionLast + size;
@@ -50,14 +51,26 @@ public abstract class Building : MyComponent
                 if ((buildingPoint[0].x >= availableEndPos.x || buildingPoint[1].x <= availableStartPos.x) ||
                     (buildingPoint[0].y >= availableEndPos.y || buildingPoint[1].y <= availableStartPos.y))
                 {
-                    return true;
+                    isBuildable = true;
+                }
+                else
+                {
+                    isBuildable = false;
+                    break;
                 }
 
             }
         }
-
-        Debug.Log("안됨");
-        return false;
+        if(isBuildable)
+        {
+            Debug.Log("OK");
+            return true;
+        }
+        else
+        {
+            Debug.Log("안됨");
+            return false;
+        }
     }
     public virtual bool FixPlace()
     {
