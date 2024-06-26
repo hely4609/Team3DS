@@ -4,6 +4,8 @@ using UnityEngine;
 
 public abstract class Character : MyComponent
 {
+    protected Rigidbody rb;
+
     protected int hpMax;
     protected int hpCurrent;
     public int HpCurrent => hpCurrent;
@@ -15,7 +17,7 @@ public abstract class Character : MyComponent
         get => moveSpeed;
         set => moveSpeed = value;
     }
-    protected Vector3 moveDir;
+    
 
     public virtual void Move(Vector3 direction) { }
     public virtual void MoveToDestination(Vector3 destination) { }

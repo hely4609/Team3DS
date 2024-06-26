@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : Character
-{
-    [SerializeField] protected Rigidbody rb;
-
+{    
     protected ControllerManager possessionController;
     protected Transform cameraOffset;
     public Transform CameraOffset => cameraOffset;
@@ -14,9 +12,11 @@ public class Player : Character
     // protected bool isHandFree;
     protected Building designingBuilding;
 
-    private float rotate_x;
-    private float rotate_y;
-    private float mouseDelta_y;
+    protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
+    protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
+    protected float mouseDelta_y; // 마우스 이동 변화량 y값
+
+    protected Vector3 moveDir;
 
     protected override void MyStart()
     {
