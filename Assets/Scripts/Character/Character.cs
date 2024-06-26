@@ -7,7 +7,7 @@ public abstract class Character : MyComponent
     protected Rigidbody rb;
 
     protected int hpMax;
-    [SerializeField]protected int hpCurrent;
+    protected int hpCurrent;
     public int HpCurrent => hpCurrent;
     protected int attackDamage;
     protected float attackSpeed;
@@ -22,7 +22,7 @@ public abstract class Character : MyComponent
     public virtual void Move(Vector3 direction) { }
     public virtual void MoveToDestination(Vector3 destination) { }
     public virtual int TakeDamage(Character attacker, int damage) { return default; }
-    public virtual int TakeDamage(Tower attacker, int damage) { hpCurrent -= damage; return default; }
+    public virtual int TakeDamage(Tower attacker, int damage) { return default; }
     public virtual void Attack(Character target) { }
 
     
