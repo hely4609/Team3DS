@@ -28,8 +28,11 @@ public class CameraManager : Manager
         if (observingPlayer == null) 
         {
             GameObject inst = GameObject.Find("LocalController");
-            LocalController controller = inst.GetComponent<LocalController>();
-            observingPlayer = controller.ControlledPlayer;
+            if (inst != null)
+            {
+                LocalController controller = inst.GetComponent<LocalController>();
+                observingPlayer = controller.ControlledPlayer;
+            }
         }        
         mainCamera.transform.position = observingPlayer.CameraOffset.position;
         mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
