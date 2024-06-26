@@ -63,8 +63,11 @@ public class GameManager : MonoBehaviour
     protected BuildingManager buildingManager;
     public BuildingManager BuildingManager => buildingManager;
 
-    //protected NetworkManager networkManager;
-    //public NetworkManager NetworkManager => networkManager;
+    protected CameraManager cameraManager;
+    public CameraManager CameraManager => cameraManager;
+
+    protected NetworkManager networkManager;
+    public NetworkManager NetworkManager => networkManager;
 
     private CameraManager cameraManager;
     public CameraManager CameraManager => cameraManager;
@@ -93,6 +96,13 @@ public class GameManager : MonoBehaviour
         yield return uiManager.Initiate();
         miniMapManager = new MiniMapManager();
         yield return miniMapManager.Initiate();
+        buildingManager = new BuildingManager();
+        yield return buildingManager.Initiate();
+        cameraManager = new CameraManager();
+        yield return cameraManager.Initiate();
+        networkManager = new NetworkManager();
+        yield return networkManager.Initiate();
+
 
         cameraManager = new CameraManager();
         yield return cameraManager.Initiate();
