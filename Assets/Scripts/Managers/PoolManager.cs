@@ -77,7 +77,9 @@ public class PoolManager : Manager
             ReadyStock(target);
             poolDictionary.TryGetValue(target, out result);
         }
-        return result.Dequeue(); 
+        GameObject inst = result.Dequeue();
+        inst.SetActive(true);
+        return inst; 
     }
     public GameObject Instantiate(ResourceEnum.Prefab target, Vector3 pos) 
     { 
