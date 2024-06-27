@@ -112,8 +112,6 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += CameraManager.ManagerUpdate;
 
         CloseLoadInfo();
-
-        uiManager.ClaimError("Test", "Test", "Test", null);
         
         isGameStart = true;
     }
