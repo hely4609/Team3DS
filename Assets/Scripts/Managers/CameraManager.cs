@@ -21,7 +21,7 @@ public class CameraManager : Manager
         mainCamera = Camera.main;
         base.ManagerStart();
     }
-    /*
+
     public override void ManagerUpdate(float deltaTime)
     {
         // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
@@ -37,5 +37,4 @@ public class CameraManager : Manager
         mainCamera.transform.position = observingPlayer.CameraOffset.position;
         mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
     }
-    */
 }

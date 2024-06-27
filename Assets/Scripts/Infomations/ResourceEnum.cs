@@ -2,6 +2,11 @@ namespace ResourceEnum
 {
     public enum Prefab
     {
-        Test, ErrorWindow
+        Test, 
+        ErrorWindow,
+
+        Player,
+        
+        Tower,
     }
 }

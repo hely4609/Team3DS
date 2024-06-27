@@ -17,10 +17,21 @@ public class PoolManager : Manager
 
     //                                              어떤 프리팹, 몇 개
     public IEnumerator ClaimPool(Dictionary<ResourceEnum.Prefab, int> dictionary, int numbersOnAFrame = 7) 
-    { 
-        for(int i = 0;  i < poolDictionary.Count; i++)
+    {
+        if(numbersOnAFrame < 1) numbersOnAFrame = 1;
+        int count = 0;
+        foreach(var keyValue in dictionary)
         {
-
+            for(int i=0; i<keyValue.Value; i++)
+            {
+                ReadyStock(keyValue.Key);
+                GameManager.ClaimLoadInfo($"{keyValue.Key} : {count} / {keyValue.Value}");
+                count++;
+                if(count % numbersOnAFrame == 0)
+                {
+                    yield return null;
+                }
+            }
         }
         yield return null; 
     }
