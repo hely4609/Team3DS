@@ -28,7 +28,7 @@ public class UIManager : Manager
         errorCanvas = errorCanvasObject.GetComponent<Canvas>();
         errorCanvas.sortingOrder = short.MaxValue;
         errorCanvas.renderMode = RenderMode.ScreenSpaceOverlay;
-        errorCanvas.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
+        errorCanvas.GetComponent<CanvasScaler>().uiScaleMode = CanvasScaler.ScaleMode.ConstantPhysicalSize;
         errorCanvas.transform.SetParent(GameManager.Instance.transform);
 
         yield return base.Initiate();
