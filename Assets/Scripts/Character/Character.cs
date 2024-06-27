@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public abstract class Character : MyComponent
 {
@@ -17,8 +18,8 @@ public abstract class Character : MyComponent
         get => moveSpeed;
         set => moveSpeed = value;
     }
-    
 
+    
     public virtual void Move(Vector3 direction) { }
     public virtual void MoveToDestination(Vector3 destination) { }
     public virtual int TakeDamage(Character attacker, int damage) { return default; }
