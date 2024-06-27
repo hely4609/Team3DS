@@ -6,7 +6,7 @@ using static UnityEngine.GraphicsBuffer;
 
 public class PoolManager : Manager
 { 
-    protected Dictionary<ResourceEnum.Prefab, Queue<GameObject>> poolDictionary;
+    protected Dictionary<ResourceEnum.Prefab, Queue<GameObject>> poolDictionary = new();
     
     Transform poolContainer;
     public override IEnumerator Initiate() 
