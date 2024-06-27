@@ -5,7 +5,7 @@ namespace ResourceEnum
         Test, 
         ErrorWindow,
 
-        Character,
+        Player,
         
         Tower,
     }
