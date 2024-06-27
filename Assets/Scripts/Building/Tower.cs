@@ -55,9 +55,10 @@ public class Tower : Building
                 if (target.HpCurrent <= 0)
                 {
                     // ÆÄ±«ÇÒ¶§.
-                    Destroy(target.gameObject);
                     targetList.Remove(target);
+                    Destroy(target.gameObject);
                     target = null;
+                    Debug.Log("dd");
                 }
                 nowTime = attackSpeed;
             }
