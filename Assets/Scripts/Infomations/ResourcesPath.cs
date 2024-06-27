@@ -8,6 +8,6 @@ public class ResourcesPath
         // Character
         "Prefabs/Characters/Player",
         // Tower
-        "Prefabs/Building/Tower",
+        "Prefabs/Buildings/Tower",
     };
 }
