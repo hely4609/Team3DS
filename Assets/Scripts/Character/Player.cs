@@ -1,10 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public class Player : Character
 {    
-    protected ControllerManager possessionController;
+    protected ControllerBase possessionController;
     protected Transform cameraOffset;
     public Transform CameraOffset => cameraOffset;
 
@@ -17,6 +18,46 @@ public class Player : Character
     protected float mouseDelta_y; // 마우스 이동 변화량 y값
 
     protected Vector3 moveDir;
+
+    public bool TryPossession() => possessionController == null;
+
+    protected void RegistrationFunctions(ControllerBase targetController)
+    {
+        targetController.DoMove -= Move;
+        targetController.DoScreenRotate -= ScreenRotate;
+
+        targetController.DoMove += Move;
+        targetController.DoScreenRotate += ScreenRotate;
+    }
+    protected void UnRegistrationFunction(ControllerBase targetController)
+    {
+        targetController.DoMove -= Move;
+        targetController.DoScreenRotate -= ScreenRotate;
+    }
+
+    public virtual void Possession(ControllerBase targetController)
+    {
+        if (TryPossession() == false)
+        {
+            targetController.OnPossessionFailed(this);
+            return;
+        }
+
+        possessionController = targetController;
+
+        //함수를 전달만 하면 되는 거예요! -> 컨트롤러가 일하고 싶을 때
+        //내 함수를 대신 실행해줘!
+        RegistrationFunctions(possessionController);
+        targetController.OnPossessionComplete(this);
+    }
+    public virtual void UnPossess()
+    {
+        if (possessionController == null) return;
+        UnRegistrationFunction(possessionController);
+        possessionController.OnUnPossessionComplete(this);
+        possessionController = null;
+    }
+
 
     protected override void MyStart()
     {
