@@ -33,8 +33,12 @@ public class CameraManager : Manager
                 LocalController controller = inst.GetComponent<LocalController>();
                 observingPlayer = controller.ControlledPlayer;
             }
-        }        
-        mainCamera.transform.position = observingPlayer.CameraOffset.position;
-        mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
+        }
+
+        if (observingPlayer.CameraOffset)
+        {
+            mainCamera.transform.position = observingPlayer.CameraOffset.position;
+            mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
+        }
     }
 }

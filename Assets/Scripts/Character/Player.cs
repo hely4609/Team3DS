@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem.XR;
 
 public class Player : Character
-{    
+{
     protected ControllerBase possessionController;
     protected Transform cameraOffset;
     public Transform CameraOffset => cameraOffset;
@@ -58,14 +58,26 @@ public class Player : Character
         possessionController = null;
     }
 
-
     protected override void MyStart()
     {
-        if (rb == null) rb = GetComponent<Rigidbody>();
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
+        if (cameraOffset == null)
+        {
+            cameraOffset = transform.Find("CameraOffset");
+        }
     }
 
     protected override void MyUpdate(float deltaTime)
     {
+        if (rb == null)
+        {
+            rb = GetComponent<Rigidbody>();
+        }
+
         if (moveDir.magnitude == 0)
         {
             float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
