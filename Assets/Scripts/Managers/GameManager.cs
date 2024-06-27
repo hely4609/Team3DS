@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
         yield return optionManager.Initiate();
         controllerManager = new ControllerManager();
         yield return controllerManager.Initiate();        
+        poolManager = new PoolManager();
+        yield return poolManager.Initiate();
         uiManager = new UIManager();
         yield return uiManager.Initiate();
         miniMapManager = new MiniMapManager();
