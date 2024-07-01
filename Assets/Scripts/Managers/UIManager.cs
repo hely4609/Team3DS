@@ -1,3 +1,4 @@
+using ResourceEnum;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -36,15 +37,26 @@ public class UIManager : Manager
     public GameObject GetUI(UIEnum wantUI) 
     {
         // 인스턴스가 있으면 inst 반환
-        if(instanceDictionary.TryGetValue(wantUI, out GameObject inst) && inst != null) 
+        if(instanceDictionary.TryGetValue(wantUI, out GameObject inst)) 
         {
-            inst.SetActive(true);
-            return inst;
+            if(inst == null)
+            {
+                if (prefabDictionary.TryGetValue(wantUI, out GameObject prefab))
+                {
+                    inst = GameObject.Instantiate(prefab);
+                    instanceDictionary[wantUI] = inst;
+                    return inst;
+                }
+            }
+            else
+            {
+                return inst;
+            }
         }
         // 없으면 프리팹은 있는지 확인
         else if(prefabDictionary.TryGetValue(wantUI, out GameObject prefab))
         {
-            inst = GameObject.Instantiate(prefab, errorCanvas.transform);
+            inst = GameObject.Instantiate(prefab);
             instanceDictionary.Add(wantUI, inst);
             return inst;
         }
@@ -65,9 +77,13 @@ public class UIManager : Manager
         GameObject gotUI = GetUI(wantUI);
         gotUI.SetActive(!gotUI.activeInHierarchy);
     }
-    public void ClaimError(string bar, string context, string confirm, System.Action confirmAction) 
+    public void ClaimError(string bar, string context, string confirm, System.Action confirmAction = null) 
     {
-        GameObject errorWindow = GetUI(UIEnum.ErrorWindow);
-        errorWindow.GetComponent<ErrorWindow>().SetText(bar, context, confirm, confirmAction + (() => { GameObject.Destroy(errorWindow); }));
+        if (prefabDictionary.TryGetValue(UIEnum.ErrorWindow, out GameObject prefab))
+        {
+            GameObject errorWindow = GameObject.Instantiate(prefab, errorCanvas.transform);
+            errorWindow.GetComponent<ErrorWindow>().SetText(bar, context, confirm, confirmAction + (() => { GameObject.Destroy(errorWindow); }));
+
+        }
     }
 }
