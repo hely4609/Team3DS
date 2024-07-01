@@ -1,7 +1,11 @@
 fileFormatVersion: 2
 guid: 8c8f01d0afcfcd04b898e9f5cf177753
 ModelImporter:
+<<<<<<< HEAD
   serializedVersion: 21202
+=======
+  serializedVersion: 22200
+>>>>>>> Character
   internalIDToNameTable:
   - first:
       74: 7548143727634802015
@@ -81,6 +85,10 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+<<<<<<< HEAD
+=======
+    importPhysicalCameras: 1
+>>>>>>> Character
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -108,6 +116,10 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+<<<<<<< HEAD
+=======
+    strictVertexDataChecks: 0
+>>>>>>> Character
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -890,13 +902,22 @@ ModelImporter:
     hasTranslationDoF: 0
     hasExtraRoot: 1
     skeletonHasParents: 1
+<<<<<<< HEAD
   lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: f40707028e5c90a428c6f0c68c2189ee,
     type: 3}
+=======
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: f40707028e5c90a428c6f0c68c2189ee, type: 3}
+>>>>>>> Character
   autoGenerateAvatarMappingIfUnspecified: 1
   animationType: 3
   humanoidOversampling: 1
   avatarSetup: 2
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+<<<<<<< HEAD
+=======
+  importBlendShapeDeformPercent: 0
+  remapMaterialsIfMaterialImportModeIsNone: 1
+>>>>>>> Character
   additionalBone: 0
   userData: 
   assetBundleName: 

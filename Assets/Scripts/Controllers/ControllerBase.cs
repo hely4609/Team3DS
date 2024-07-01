@@ -8,8 +8,6 @@ public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
 
 public class ControllerBase : MyComponent
 {
-    [SerializeField] GameObject PlayerPrefab;    
-
     public MoveDelegate         DoMove;
     public ScreenRotateDelegate DoScreenRotate;
 
@@ -32,13 +30,8 @@ public class ControllerBase : MyComponent
 
     protected override void MyStart()
     {
+        // Å×½ºÆ®  
         Spawn(0, 0, 0);
-
-        //GameObject inst = GameObject.Instantiate(PlayerPrefab);
-        //controlledPlayer = inst.GetComponent<Player>();
-        //controlledPlayer.Possession(this);
-
-        base.MyStart();
     }
 
     public void Spawn(float dst_x, float dst_y, float dst_z)
