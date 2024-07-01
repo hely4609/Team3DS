@@ -21,7 +21,16 @@ public partial class NetworkManager : Manager
 
     public static void ClaimSignIn(string inputID,  string inputPassword)
     {
-        var bro = Backend.BMember.CustomLogin(inputID, inputPassword);
+        GameManager.Instance.StartCoroutine(SignInStart(inputID, inputPassword));
+    }
+    public static IEnumerator SignInStart(string inputID, string inputPassword)
+    {
+        BackendReturnObject bro = null;
+        yield return new WaitForFunction(() =>
+        {
+            bro = Backend.BMember.CustomLogin(inputID, inputPassword);
+        });
+
         if(bro.IsSuccess())
         {
             Debug.Log("로그인 성공 " + bro);
@@ -36,7 +45,17 @@ public partial class NetworkManager : Manager
 
     public static void UpdateNickname(string inputNickname)
     {
-        var bro = Backend.BMember.UpdateNickname(inputNickname);
+        GameManager.Instance.StartCoroutine(UpdateNicknameStart(inputNickname));
+    }
+
+    public static IEnumerator UpdateNicknameStart(string inputNickname)
+    {
+        BackendReturnObject bro = null;
+        yield return new WaitForFunction(() =>
+        {
+            bro = Backend.BMember.UpdateNickname(inputNickname);
+
+        });
         if(bro.IsSuccess())
         {
             GameManager.Instance.UIManager.Close(UIEnum.SetNicknameCanvas);
@@ -47,5 +66,6 @@ public partial class NetworkManager : Manager
             GameManager.Instance.UIManager.ClaimError(bro.GetErrorCode(), bro.GetMessage(), "OK");
 
         }
+
     }
 }
