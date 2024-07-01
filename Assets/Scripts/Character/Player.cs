@@ -73,11 +73,12 @@ public class Player : Character
 
     protected override void MyUpdate(float deltaTime)
     {
+        // Å×½ºÆ®
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
         }
-
+        //
         if (moveDir.magnitude == 0)
         {
             float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
@@ -88,6 +89,9 @@ public class Player : Character
         {
             rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
         }
+
+
+        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
     }
 
     public override void Move(Vector3 direction)
