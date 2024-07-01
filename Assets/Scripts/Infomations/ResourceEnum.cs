@@ -4,6 +4,7 @@ namespace ResourceEnum
     {
         Test, 
         ErrorWindow,
+        SignInCanvas,
 
         Player,
         
