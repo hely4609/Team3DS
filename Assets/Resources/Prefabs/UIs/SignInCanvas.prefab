@@ -2910,6 +2910,7 @@ GameObject:
   - component: {fileID: 6235995174235270549}
   - component: {fileID: 1195353111992492064}
   - component: {fileID: 8526831669580928035}
+  - component: {fileID: 9157384475224856289}
   m_Layer: 0
   m_Name: SignInCanvas
   m_TagString: Untagged
@@ -3000,6 +3001,23 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &9157384475224856289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6383720958026284339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4df887d7fded0044d951766a5488c733, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SignInId: {fileID: 1246040375343624850}
+  SignInPassword: {fileID: 1073235372532266044}
+  SignUpId: {fileID: 2513539158959996844}
+  SignUpPassword: {fileID: 5512829765165249976}
+  SignUpConfirmPassword: {fileID: 8416297479514714079}
 --- !u!1 &6509048185372807583
 GameObject:
   m_ObjectHideFlags: 0
@@ -3355,7 +3373,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4668354518075231720}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9157384475224856289}
+        m_TargetAssemblyTypeName: SignInCanvas, Assembly-CSharp
+        m_MethodName: SignUp
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &7299315484518552121
 GameObject:
   m_ObjectHideFlags: 0
@@ -3631,7 +3661,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8481570752940219615}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 9157384475224856289}
+        m_TargetAssemblyTypeName: SignInCanvas, Assembly-CSharp
+        m_MethodName: SignIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &8718032749476882762
 GameObject:
   m_ObjectHideFlags: 0
