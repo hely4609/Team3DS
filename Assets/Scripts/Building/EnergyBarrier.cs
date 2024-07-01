@@ -2,17 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnergyBarrier : MonoBehaviour
+public class EnergyBarrier : Building
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void Initialize()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        type = BuildingEnum.Barrier;
     }
 }

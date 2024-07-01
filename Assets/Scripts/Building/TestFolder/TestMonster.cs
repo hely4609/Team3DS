@@ -2,8 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public delegate void MonsterDestroyFunction(TestMonster monster);
+
 public class TestMonster : Monster
 {
+    public MonsterDestroyFunction destroyFunction;
     protected override void MyStart()
     {
         hpMax = 5;
@@ -12,6 +15,12 @@ public class TestMonster : Monster
     public override int TakeDamage(Tower attacker, int damage)
     {
         hpCurrent -= damage;
+        if(hpCurrent <= 0)
+        {
+            destroyFunction.Invoke(this);
+            Destroy(gameObject);
+        }
+        Debug.Log($"{HpCurrent} / {gameObject.name}");
         return 0;
     }
 

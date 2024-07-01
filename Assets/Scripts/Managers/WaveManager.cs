@@ -9,6 +9,8 @@ public class WaveManager : Manager
     protected int currentMonsterIndex; //현재 웨이브에서 몇번째 몬스터인가.
     protected float spawnCoolTime;
 
+
+
     public override IEnumerator Initiate()
     {
         yield return base.Initiate();
