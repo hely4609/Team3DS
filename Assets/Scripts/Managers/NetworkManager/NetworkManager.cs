@@ -4,7 +4,7 @@ using UnityEngine;
 using BackEnd;
 using System.Threading.Tasks;
 
-public enum NetworkStatus
+public enum NetworkState
 {
     Offline, Initiating, Connected, SignIn,
     OnMatchingServer, OnMatchRoom, Matching,
@@ -13,24 +13,25 @@ public enum NetworkStatus
 }
 public partial class NetworkManager : Manager
 {
-    NetworkStatus currentNetworkStatus = NetworkStatus.Offline;
+    NetworkState currentNetworkState = NetworkState.Offline;
+    public NetworkState CurrentNetworkState => currentNetworkState;
     public override IEnumerator Initiate()
     {
         GameManager.ClaimLoadInfo("Network Initializing");
         yield return null;
 
-        currentNetworkStatus = NetworkStatus.Initiating;
+        currentNetworkState = NetworkState.Initiating;
         var bro = Backend.Initialize(true);
 
         if(bro.IsSuccess())
         {
             Debug.Log("초기화 성공! " + bro);
-            currentNetworkStatus = NetworkStatus.Connected;
+            currentNetworkState = NetworkState.Connected;
         }
         else
         {
             Debug.Log("초기화 실패 " + bro);
-            currentNetworkStatus = NetworkStatus.Disconnected;
+            currentNetworkState = NetworkState.Disconnected;
         }
         yield return null;
     }
