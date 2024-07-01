@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 
 public class Tower : Building
@@ -51,15 +52,6 @@ public class Tower : Building
                 // 공격
                 // *애니메이션 재생*
                 OnHit();
-
-                if (target.HpCurrent <= 0)
-                {
-                    // 파괴할때.
-                    targetList.Remove(target);
-                    Destroy(target.gameObject);
-                    target = null;
-                    Debug.Log("dd");
-                }
                 nowTime = attackSpeed;
             }
             else
@@ -72,26 +64,36 @@ public class Tower : Building
     protected virtual void OnHit()
     {
         target.TakeDamage(this, attackDamage);
+
+        Debug.Log($"{gameObject.name}");
     }
 
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가
     {
-        other.gameObject.TryGetComponent<Monster>(out Monster monster);
+        other.gameObject.TryGetComponent<TestMonster>(out TestMonster monster);
         if (monster != null)
         {
             targetList.Add(monster);
+            monster.destroyFunction += MonsterListOut; 
         }
     }
     protected void OnTriggerExit(Collider other) // 영역에서 나가면 리스트에서 제외
     {
-        other.gameObject.TryGetComponent<Monster>(out Monster monster);
+        other.gameObject.TryGetComponent<TestMonster>(out TestMonster monster);
         if (monster != null)
         {
             if (target == monster)
             { target = null; }
             targetList.Remove(monster);
+            monster.destroyFunction -= MonsterListOut;
         }
     }
+
+    protected void MonsterListOut(TestMonster monster) // 한줄짜리 함수 만든 이유 : 델리게이트에 넣고 빼기 할수 있게하려고. 람다식은 빼기 불가능.
+    {
+        targetList.Remove(monster);
+    }
+
 
 
     public virtual void LockOn()
@@ -100,6 +102,10 @@ public class Tower : Building
         {
             target = targetList[0];
             Debug.Log("targeting ready");
+        }
+        else
+        {
+            target = null;
         }
     }
 
