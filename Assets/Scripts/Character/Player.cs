@@ -86,7 +86,7 @@ public class Player : Character
         {
             float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
             float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
-            rb.velocity = new Vector3(velocityX, 0f, velocityZ);
+            rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
         }
         else
         {
