@@ -7,6 +7,11 @@ public abstract class Character : MyComponent
 {
     protected Rigidbody rb;
 
+    public System.Action<string> AnimTrigger;
+    public System.Action<string, float> AnimFloat;
+    public System.Action<string, int> AnimInt;
+    public System.Action<string, bool> AnimBool;
+
     protected int hpMax;
     protected int hpCurrent;
     public int HpCurrent => hpCurrent;

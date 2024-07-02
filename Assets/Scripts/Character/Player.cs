@@ -18,6 +18,7 @@ public class Player : Character
     protected float mouseDelta_y; // 마우스 이동 변화량 y값
 
     protected Vector3 moveDir;
+    protected Vector3 currentDir = Vector3.zero;
 
     public bool TryPossession() => possessionController == null;
 
@@ -71,13 +72,16 @@ public class Player : Character
         }
     }
 
+    
+
     protected override void MyUpdate(float deltaTime)
     {
+        // 테스트
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
         }
-
+        //
         if (moveDir.magnitude == 0)
         {
             float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
@@ -88,6 +92,13 @@ public class Player : Character
         {
             rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
         }
+
+        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
+
+        currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
+
+        AnimFloat?.Invoke("MoveForward", currentDir.z);
+        AnimFloat?.Invoke("MoveRight", currentDir.x);
     }
 
     public override void Move(Vector3 direction)

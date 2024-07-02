@@ -4,6 +4,8 @@ namespace ResourceEnum
     {
         Test, 
         ErrorWindow,
+        SignInCanvas,
+        SetNicknameCanvas,
 
         Player,
         

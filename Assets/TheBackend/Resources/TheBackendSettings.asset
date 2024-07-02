@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 660911240, guid: f624596d5fe1bd5459a5da424a8abc1b, type: 3}
   m_Name: TheBackendSettings
   m_EditorClassIdentifier: 
-  clientAppID: 
-  signatureKey: 
+  clientAppID: 05c59600-3375-11ef-ad96-f3fd299193437862
+  signatureKey: 05c59601-3375-11ef-ad96-f3fd299193437862
   functionAuthKey: 
   packageName: com.DefaultCompany.3DS-TowerDefense
   isAllPlatform: 1
