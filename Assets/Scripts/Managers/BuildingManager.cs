@@ -13,8 +13,8 @@ public class BuildingManager : Manager
     public override IEnumerator Initiate()
     {
         roadData[0] = new Vector2(95, 0); // 시작점
-        roadData[1] = new Vector2(50, 0);
-        roadData[2] = new Vector2(50, 40);
+        roadData[1] = new Vector2(50, 0); // 다음 지점까지 y 40, 길에서는 위치값 : (50,0.1,20), 스케일 : (1,1,5)
+        roadData[2] = new Vector2(50, 40); // 다음 지점까지 x -40, 길에서의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
         roadData[3] = new Vector2(10, 40);
         roadData[4] = new Vector2(10, -50);
         roadData[5] = new Vector2(-30, -50);
