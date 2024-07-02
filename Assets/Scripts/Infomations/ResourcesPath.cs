@@ -6,6 +6,7 @@ public class ResourcesPath
         "Prefabs/Test",
         "Prefabs/UIs/ErrorWindow",
         "Prefabs/UIs/SignInCanvas",
+        "Prefabs/UIs/SetNicknameCanvas",
         // Character
         "Prefabs/Characters/Player",
         // Tower
