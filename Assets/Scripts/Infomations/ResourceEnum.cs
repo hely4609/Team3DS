@@ -11,5 +11,6 @@ namespace ResourceEnum
         
         Tower,
         Road,
+        EnergyBarrier
     }
 }
