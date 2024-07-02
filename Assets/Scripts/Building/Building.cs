@@ -6,7 +6,8 @@ public enum BuildingEnum
 {
     Tower,
     Pylon,
-    Bridge
+    Bridge,
+    Barrier
 }
 
 public abstract class Building : MyComponent
@@ -33,11 +34,11 @@ public abstract class Building : MyComponent
     {
         Initialize();
     }
-    protected abstract void Initialize();
+    protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
         isBuildable = true;
-        List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings; 
+        List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
         //List<Building> buildingList = BuildingManager.Buildings; // 임시 코드
         Vector2Int rightUp = tiledBuildingPositionLast + size;
         Vector2Int[] buildingPoint = { tiledBuildingPositionLast, rightUp };
@@ -61,7 +62,7 @@ public abstract class Building : MyComponent
 
             }
         }
-        if(isBuildable)
+        if (isBuildable)
         {
             Debug.Log("OK");
             return true;
@@ -75,6 +76,14 @@ public abstract class Building : MyComponent
     public virtual bool FixPlace()
     {
         startPos = tiledBuildingPositionLast;
-        return default;
+        if (CheckBuild())
+        {
+            GameManager.Instance.BuildingManager.AddBuilding(this);
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     } // 위치를 고정함.
 }
