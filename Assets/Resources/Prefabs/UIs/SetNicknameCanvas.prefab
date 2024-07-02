@@ -1186,6 +1186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputNickname: {fileID: 1246040375343624850}
+  closeBtn: {fileID: 6962494708924889123}
 --- !u!1 &8232735636761853259
 GameObject:
   m_ObjectHideFlags: 0

@@ -22,6 +22,14 @@ public partial class NetworkManager : Manager
         public string nickname;
     }
 
+    public class MatchCard
+    {
+        public string inDate, matchTitle;
+        public int matchHeadCount;
+    }
+
+    public MatchCard[] matchCardArray;
+
     UserInfo myInfo;
     public string MyNickname
     {
@@ -35,6 +43,7 @@ public partial class NetworkManager : Manager
             }
         }
     }
+
     public override IEnumerator Initiate()
     {
         GameManager.ClaimLoadInfo("Network Initializing");
@@ -47,6 +56,7 @@ public partial class NetworkManager : Manager
         {
             Debug.Log("초기화 성공! " + bro);
             currentNetworkState = NetworkState.Connected;
+            RegistCallBackFunction();
         }
         else
         {

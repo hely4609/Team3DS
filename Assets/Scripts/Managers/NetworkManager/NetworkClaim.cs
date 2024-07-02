@@ -3,16 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
 using LitJson;
+using BackEnd.Tcp;
+using UnityEngine.SceneManagement;
+using System;
 
 public partial class NetworkManager : Manager
 {
 
     public static void ClaimSignUp(string  inputID, string inputPassword) 
     {
-        var bro = Backend.BMember.CustomSignUp(inputID, inputPassword);
+    }
+
+    public static IEnumerator SignUpStart(string inputID, string inputPassword)
+    {
+        BackendReturnObject bro = null;
+        yield return new WaitForFunction(() =>
+        {
+            bro = Backend.BMember.CustomSignUp(inputID, inputPassword);
+        });
         if(bro.IsSuccess())
         {
             Debug.Log("회원가입 성공! " + bro);
+            GameManager.Instance.UIManager.ClaimError("Success", "Signed up successfully", "OK");
         }
         else
         {
@@ -45,12 +57,17 @@ public partial class NetworkManager : Manager
             if(getUserInfoResult.IsSuccess()) 
             {
                 JsonData userInfoJson = getUserInfoResult.GetReturnValuetoJSON();
-                UserInfo gotInfo = new();
-                gotInfo.gamerId = userInfoJson["row"]["gamerId"].ToString();
-                gotInfo.nickname = userInfoJson["row"]["nickname"]?.ToString();
+                UserInfo gotInfo = new()
+                {
+                    gamerId = userInfoJson["row"]["gamerId"].ToString(),
+                    nickname = userInfoJson["row"]["nickname"]?.ToString()
+                };
                 GameManager.Instance.NetworkManager.myInfo = gotInfo;
 
                 if (GameManager.Instance.NetworkManager.MyNickname == null) GameManager.ManagerStarts += () => GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
+                
+                yield return new WaitWhile(() => GameManager.Instance.NetworkManager.MyNickname == null);
+                yield return MatchMakingServerStart();
             }
             else
             {
@@ -87,5 +104,57 @@ public partial class NetworkManager : Manager
 
         }
 
+    }
+
+    public static void ClaimMatchMakingServer()
+    {
+        GameManager.Instance.StartCoroutine(MatchMakingServerStart());
+    }
+
+    public static IEnumerator MatchMakingServerStart()
+    {
+        ErrorInfo errorInfo;
+        yield return new WaitForFunction(() =>
+        {
+            if(!Backend.Match.JoinMatchMakingServer(out errorInfo))
+            {
+                GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(errorInfo.Category.ToString(), errorInfo.Reason.ToString(), "OK", ()=>SceneManager.LoadScene(0));
+            }
+        });
+
+        BackendReturnObject gotMatchCards = null;
+        yield return new WaitForFunction(() =>
+        {
+            gotMatchCards = Backend.Match.GetMatchList();
+        });
+        if(!gotMatchCards.IsSuccess())
+        {
+            GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(gotMatchCards.GetErrorCode(), gotMatchCards.GetMessage(), "OK", () => SceneManager.LoadScene(0));
+        }
+        
+        List<MatchCard> matchCards = new();
+        JsonData matchCardsJson = gotMatchCards.FlattenRows();
+        foreach (JsonData currentRow in matchCardsJson)
+        {
+            MatchCard card = new()
+            {
+                inDate = currentRow["inDate"].ToString(),
+                matchHeadCount = int.Parse(currentRow["matchHeadCount"].ToString()),
+                matchTitle = currentRow["title"].ToString(),
+            };
+            matchCards.Add(card);
+        }
+        GameManager.Instance.NetworkManager.matchCardArray = matchCards.ToArray();
+        Debug.Log("매치카드 로딩 성공");
+    }
+
+    public static void ClaimMakeRoom()
+    {
+        GameManager.Instance.StartCoroutine(MakeRoomStart());
+    }
+
+    public static IEnumerator MakeRoomStart()
+    {
+        yield return null;
     }
 }
