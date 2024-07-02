@@ -25,15 +25,28 @@ public class EnergyBarrierGenerator : Building
         if (hpCurrent <= 0)
         {
             onOff= false;
+            SetActiveEnergyBarrier();
         }
         Debug.Log($"{HpCurrent} / {gameObject.name}");
     }
-
+    public void RepairBarrier()
+    {
+        hpCurrent += 1;
+        if(hpCurrent >= hpMax)
+        {
+            hpCurrent = hpMax;
+            onOff = true;
+            SetActiveEnergyBarrier();
+        }
+    }
 
     protected override void Initialize()
     {
         onOff = true;
+        hpMax = 3;
         hpCurrent = hpMax;
+        energyBarrierArray =  GameObject.FindGameObjectsWithTag("EnergyBarrier");
+        
         SetActiveEnergyBarrier();
     }
 }
