@@ -121,6 +121,9 @@ public partial class NetworkManager : Manager
                 GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(errorInfo.Category.ToString(), errorInfo.Reason.ToString(), "OK", ()=>SceneManager.LoadScene(0));
             }
         });
+        // 서버에 접속했으면 델리게이트에 매치폴 넣어주기!(중요)
+        GameManager.NetworkUpdates -= (deltaTime) => Backend.Match.Poll();
+        GameManager.NetworkUpdates += (deltaTime) => Backend.Match.Poll();
 
         BackendReturnObject gotMatchCards = null;
         yield return new WaitForFunction(() =>
@@ -155,6 +158,11 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator MakeRoomStart()
     {
-        yield return null;
+        yield return new WaitForFunction(() =>
+        {
+            Backend.Match.CreateMatchRoom();
+        });
+        LobbyScript lobbyScript = GameObject.FindAnyObjectByType<LobbyScript>();
+        lobbyScript.OpenRoom();
     }
 }

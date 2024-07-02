@@ -44,6 +44,8 @@ public partial class NetworkManager : Manager
         }
     }
 
+    
+
     public override IEnumerator Initiate()
     {
         GameManager.ClaimLoadInfo("Network Initializing");
