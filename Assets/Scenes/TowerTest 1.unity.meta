@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Scenes/TowerTest 1.unity.meta
 guid: 811ddbe54a164e246b734bb7e59b5266
 DefaultImporter:
+========
+guid: a3ffc4779caa0aa44a528c586ee3345a
+PrefabImporter:
+>>>>>>>> adae4a835a0d22856ce7c20a4a244a50c154115d:Assets/Resources/Prefabs/UIs/NicknameRegistrationCanvas.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 
