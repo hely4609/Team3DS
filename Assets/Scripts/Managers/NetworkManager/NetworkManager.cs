@@ -15,6 +15,37 @@ public partial class NetworkManager : Manager
 {
     NetworkState currentNetworkState = NetworkState.Offline;
     public NetworkState CurrentNetworkState => currentNetworkState;
+
+    public class UserInfo
+    {
+        public string gamerId;
+        public string nickname;
+    }
+
+    public class MatchCard
+    {
+        public string inDate, matchTitle;
+        public int matchHeadCount;
+    }
+
+    public MatchCard[] matchCardArray;
+
+    UserInfo myInfo;
+    public string MyNickname
+    {
+        get => myInfo?.nickname;
+        set
+        {
+            if (myInfo != null) return;
+            else
+            {
+                myInfo.nickname = value;
+            }
+        }
+    }
+
+    
+
     public override IEnumerator Initiate()
     {
         GameManager.ClaimLoadInfo("Network Initializing");
@@ -27,6 +58,7 @@ public partial class NetworkManager : Manager
         {
             Debug.Log("초기화 성공! " + bro);
             currentNetworkState = NetworkState.Connected;
+            RegistCallBackFunction();
         }
         else
         {

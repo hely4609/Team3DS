@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public static UpdateFunction ManagerUpdates;
     public static UpdateFunction ObjectUpdates;
     public static UpdateFunction ControllerUpdates;
+    public static UpdateFunction NetworkUpdates;
 
     public static DestroyFunction ManagerDestroies;
     public static DestroyFunction ObjectDestroies;
@@ -121,6 +122,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
+        NetworkUpdates?.Invoke(Time.deltaTime);
         if (!isGameStart) return;
 
         // 매니저 먼저
