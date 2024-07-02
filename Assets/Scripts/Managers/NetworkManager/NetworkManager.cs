@@ -15,6 +15,26 @@ public partial class NetworkManager : Manager
 {
     NetworkState currentNetworkState = NetworkState.Offline;
     public NetworkState CurrentNetworkState => currentNetworkState;
+
+    public class UserInfo
+    {
+        public string gamerId;
+        public string nickname;
+    }
+
+    UserInfo myInfo;
+    public string MyNickname
+    {
+        get => myInfo?.nickname;
+        set
+        {
+            if (myInfo != null) return;
+            else
+            {
+                myInfo.nickname = value;
+            }
+        }
+    }
     public override IEnumerator Initiate()
     {
         GameManager.ClaimLoadInfo("Network Initializing");

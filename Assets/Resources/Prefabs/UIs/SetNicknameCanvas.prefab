@@ -742,7 +742,7 @@ GameObject:
   - component: {fileID: 4481250666063115799}
   - component: {fileID: 6536380822787029726}
   m_Layer: 0
-  m_Name: NicknameRegistation
+  m_Name: SetNickname
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1084,7 +1084,7 @@ GameObject:
   - component: {fileID: 8526831669580928035}
   - component: {fileID: 3335473480111661092}
   m_Layer: 0
-  m_Name: NicknameRegistrationCanvas
+  m_Name: SetNicknameCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

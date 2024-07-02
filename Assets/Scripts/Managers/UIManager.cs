@@ -25,6 +25,7 @@ public class UIManager : Manager
 
         prefabDictionary.Add(UIEnum.ErrorWindow, ResourceManager.Get(ResourceEnum.Prefab.ErrorWindow));
         prefabDictionary.Add(UIEnum.SignInCanvas, ResourceManager.Get(ResourceEnum.Prefab.SignInCanvas));
+        prefabDictionary.Add(UIEnum.SetNicknameCanvas, ResourceManager.Get(ResourceEnum.Prefab.SetNicknameCanvas));
 
         GameObject errorCanvasObject = new GameObject("ErrorCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
         errorCanvas = errorCanvasObject.GetComponent<Canvas>();
