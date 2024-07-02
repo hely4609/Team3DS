@@ -10,5 +10,7 @@ namespace ResourceEnum
         Player,
         
         Tower,
+        Road,
+        EnergyBarrier
     }
 }

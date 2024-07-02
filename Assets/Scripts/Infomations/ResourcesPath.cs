@@ -11,5 +11,7 @@ public class ResourcesPath
         "Prefabs/Characters/Player",
         // Tower
         "Prefabs/Buildings/Tower",
+        "Prefabs/Buildings/Road",
+        "Prefabs/Buildings/EnergyBarrier"
     };
 }
