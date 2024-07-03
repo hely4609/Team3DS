@@ -69,4 +69,9 @@ public class LobbyScript : MonoBehaviour
         inviteWindow.SetActive(false);
     }
 
+    public void OnClickGameStart()
+    {
+
+    }
+
 }

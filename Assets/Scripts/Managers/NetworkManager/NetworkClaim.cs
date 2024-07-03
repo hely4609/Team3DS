@@ -218,4 +218,14 @@ public partial class NetworkManager : Manager
             Backend.Match.LeaveMatchRoom();
         });
     }
+
+    public static void ClaimMatchMaking()
+    {
+
+    }
+
+    public static IEnumerator MatchMaking()
+    {
+        yield return null;
+    }
 }
