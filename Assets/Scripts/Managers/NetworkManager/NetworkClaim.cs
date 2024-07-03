@@ -178,4 +178,30 @@ public partial class NetworkManager : Manager
             Backend.Match.InviteUser(nickname);
         });
     }
+
+    public static void ClaimAcceptInvite(SessionId roomId, string roomToken)
+    {
+        GameManager.Instance.StartCoroutine(AcceptInvite(roomId, roomToken));
+    }
+
+    public static IEnumerator AcceptInvite(SessionId roomId, string roomToken)
+    {
+        yield return new WaitForFunction(() =>
+        {
+            Backend.Match.AcceptInvitation(roomId, roomToken);
+        });
+    }
+
+    public static void ClaimRejectInvite(SessionId roomId, string roomToken)
+    {
+        GameManager.Instance.StartCoroutine(RejectInvite(roomId, roomToken));
+    }
+
+    public static IEnumerator RejectInvite(SessionId roomId, string roomToken)
+    {
+        yield return new WaitForFunction(() =>
+        {
+            Backend.Match.DeclineInvitation(roomId, roomToken);
+        });
+    }
 }

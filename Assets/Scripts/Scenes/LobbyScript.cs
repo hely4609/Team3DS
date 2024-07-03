@@ -9,8 +9,10 @@ public class LobbyScript : MonoBehaviour
     [SerializeField] GameObject[] players;
     TextMeshProUGUI[] playerNicknames;
     [SerializeField] GameObject inviteWindow;
+    [SerializeField] TMP_InputField nicknameWhoesToInvite;
     private void Start()
     {
+        playerNicknames = new TextMeshProUGUI[players.Length];
         for (int i=0; i<players.Length; i++)
         {
             playerNicknames[i] = players[i].GetComponentInChildren<TextMeshProUGUI>();
@@ -41,8 +43,19 @@ public class LobbyScript : MonoBehaviour
         playerNicknames[index].text = name;
     }
 
-    public void Invite(string nickname)
+    public void Invite()
     {
-        NetworkManager.ClaimInvite(nickname);
+        NetworkManager.ClaimInvite(nicknameWhoesToInvite.text);
+        CloseInviteWindow();
+    }
+
+    public void OpenInviteWindow()
+    {
+        inviteWindow.SetActive(true);
+    }
+
+    public void CloseInviteWindow()
+    {
+        inviteWindow.SetActive(false);
     }
 }

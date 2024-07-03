@@ -1,12 +1,15 @@
+using BackEnd.Tcp;
 using ResourceEnum;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public enum UIEnum
 {
-    ErrorWindow, SignInCanvas, SetNicknameCanvas,
+    ErrorWindow, SignInCanvas, SetNicknameCanvas, BeInvitedWindow,
 }
 
 public class UIManager : Manager
@@ -26,6 +29,7 @@ public class UIManager : Manager
         prefabDictionary.Add(UIEnum.ErrorWindow, ResourceManager.Get(ResourceEnum.Prefab.ErrorWindow));
         prefabDictionary.Add(UIEnum.SignInCanvas, ResourceManager.Get(ResourceEnum.Prefab.SignInCanvas));
         prefabDictionary.Add(UIEnum.SetNicknameCanvas, ResourceManager.Get(ResourceEnum.Prefab.SetNicknameCanvas));
+        prefabDictionary.Add(UIEnum.BeInvitedWindow, ResourceManager.Get(ResourceEnum.Prefab.BeInvitedWindow));
 
         GameObject errorCanvasObject = new GameObject("ErrorCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
         errorCanvas = errorCanvasObject.GetComponent<Canvas>();
@@ -87,5 +91,16 @@ public class UIManager : Manager
             errorWindow.GetComponent<ErrorWindow>().SetText(bar, context, confirm, confirmAction + (() => { GameObject.Destroy(errorWindow); }));
 
         }
+    }
+
+    public void ClaimInviteWindow(string inviter, SessionId roomId, string roomToken)
+    {
+        Canvas LobbyCanvas = GameObject.Find("LobbyCanvas").GetComponent<Canvas>();
+        if (prefabDictionary.TryGetValue(UIEnum.BeInvitedWindow, out GameObject prefab))
+        {
+            GameObject inviteWindow = GameObject.Instantiate(prefab, LobbyCanvas.transform);
+            inviteWindow.GetComponent<BeInvitedWindow>().SetInviteInfo(inviter, roomId, roomToken);
+        }
+
     }
 }
