@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : Building
@@ -16,9 +17,9 @@ public class Tower : Building
     protected float attackRange; // 공격 범위
     public float AttackRange { get { return attackRange; } set { attackRange = value; AttackRangeSetting(); } }
 
-    [SerializeField]protected Monster target; // 타겟 지정된 몬스터
-    [SerializeField] protected List<Monster> targetList;
-    protected bool onOff; // 꺼졌는지 켜졌는지.
+    [SerializeField] protected Monster target = null; // 타겟 지정된 몬스터
+    [SerializeField] protected List<Monster> targetList = new List<Monster>();
+    [SerializeField] protected bool onOff ; // 꺼졌는지 켜졌는지.
     
     protected override void Initialize()
     {
@@ -26,14 +27,19 @@ public class Tower : Building
         type = BuildingEnum.Tower;
         AttackDamage = 1;
         AttackSpeed = 0.5f;
-        AttackRange = 2;
+        AttackRange = 5;
         buildingTimeMax = 10;
         size = new Vector2Int(10, 10);
+        TurnOnOff(true);
     }
 
     protected override void MyUpdate(float deltaTime)
     {
-        Attack();
+        if(onOff)
+        {
+            Attack();
+        }
+        
     }
 
     public void Attack()
@@ -111,15 +117,22 @@ public class Tower : Building
 
     public virtual void AttackRangeSetting()
     {
-        TryGetComponent<SphereCollider>(out SphereCollider col);
-        col.radius = attackRange;
+        if(gameObject.TryGetComponent<SphereCollider>(out SphereCollider col))
+        {
+            col.radius = attackRange;
+        }
+        else
+        {
+            Debug.Log("dd");
+        }
     }
 
-    public void TurnOnOff(bool power) //전원을 키고 끌때.
+    public void TurnOnOff(bool power) //전원을 키고 끄는 함수
     {
         if (power != onOff)
         {
-            if (power)
+            onOff = power;
+            if (onOff)
             {
                 currentPowerConsumption = powerConsumption;
             }

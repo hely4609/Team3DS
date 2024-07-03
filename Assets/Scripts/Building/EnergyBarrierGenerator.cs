@@ -40,6 +40,8 @@ public class EnergyBarrierGenerator : Building
         }
     }
 
+
+
     protected override void Initialize()
     {
         onOff = true;

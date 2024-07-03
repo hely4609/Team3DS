@@ -10,11 +10,13 @@ public class CannonTower : Tower
         type = BuildingEnum.Tower;
         AttackDamage = 1;
         AttackSpeed = 0.5f;
-        AttackRange = 2;
+        AttackRange = 5;
         buildingTimeMax = 10;
         splashRadius = 10;
         size = new Vector2Int(10, 10);
+        TurnOnOff(true);
     }
+
     protected override void OnHit()
     {
         RaycastHit[] targets = Physics.SphereCastAll(target.transform.position, splashRadius, Vector3.up);
