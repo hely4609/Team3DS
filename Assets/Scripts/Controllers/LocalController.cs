@@ -17,7 +17,10 @@ public class LocalController : ControllerBase
 
     protected void OnPickUp() { }
     protected void OnPutDown() { }
-    protected void OnDesignBuiling() { }
+    protected void OnDesignBuiling() 
+    {
+        DoDesignBuilding?.Invoke(BuildingEnum.Tower);
+    }
     protected void OnBulid() { }
     protected void OnRepair() { }
     ////////////////////////////////////////////

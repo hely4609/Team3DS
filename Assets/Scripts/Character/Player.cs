@@ -26,14 +26,18 @@ public class Player : Character
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
+        targetController.DoDesignBuilding -= DesignBuiling;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
+        targetController.DoDesignBuilding += DesignBuiling;
+
     }
     protected void UnRegistrationFunction(ControllerBase targetController)
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
+        targetController.DoDesignBuilding -= DesignBuiling;
     }
 
     public virtual void Possession(ControllerBase targetController)
@@ -72,16 +76,15 @@ public class Player : Character
         }
     }
 
-    
-
     protected override void MyUpdate(float deltaTime)
     {
         // Å×½ºÆ®
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody>();
-        }
+        //if (rb == null)
+        //{
+        //    rb = GetComponent<Rigidbody>();
+        //}
         //
+
         if (moveDir.magnitude == 0)
         {
             float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
@@ -122,7 +125,10 @@ public class Player : Character
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
-    public bool DesignBuiling(BuildingEnum wantBuilding) { return default; }
+    public bool DesignBuiling(BuildingEnum wantBuilding) 
+    {
+        return default; 
+    }
     public bool Build(Building building) { return default; }
     public bool Repair(EnergyBarrierGenerator target) { return default; }
 }
