@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
-using System.Threading.Tasks;
+using BackEnd.Tcp;
 
 public enum NetworkState
 {
@@ -24,8 +24,9 @@ public partial class NetworkManager : Manager
 
     public class MatchCard
     {
-        public string inDate, matchTitle;
-        public int matchHeadCount;
+        public string inDate;
+        public MatchType matchType;
+        public MatchModeType matchModeType;
     }
 
     public MatchCard[] matchCardArray;
