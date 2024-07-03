@@ -5,7 +5,7 @@ using UnityEngine.InputSystem.XR;
 
 public abstract class Character : MyComponent
 {
-    protected Rigidbody rb;
+    [SerializeField] protected Rigidbody rb;
 
     public System.Action<string> AnimTrigger;
     public System.Action<string, float> AnimFloat;
@@ -17,7 +17,7 @@ public abstract class Character : MyComponent
     public int HpCurrent => hpCurrent;
     protected int attackDamage;
     protected float attackSpeed;
-    protected float moveSpeed = 10;
+    [SerializeField] protected float moveSpeed = 5;
     public float MoveSpeed
     {
         get => moveSpeed;
