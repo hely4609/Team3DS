@@ -6,12 +6,14 @@ using LitJson;
 using BackEnd.Tcp;
 using UnityEngine.SceneManagement;
 using System;
+using Unity.VisualScripting;
 
 public partial class NetworkManager : Manager
 {
 
     public static void ClaimSignUp(string  inputID, string inputPassword) 
     {
+        GameManager.Instance.StartCoroutine(SignUpStart(inputID, inputPassword));
     }
 
     public static IEnumerator SignUpStart(string inputID, string inputPassword)
@@ -24,6 +26,8 @@ public partial class NetworkManager : Manager
         if(bro.IsSuccess())
         {
             Debug.Log("회원가입 성공! " + bro);
+            SignInCanvas signin = GameObject.FindAnyObjectByType<SignInCanvas>();
+            signin.CloseSignUp();
             GameManager.Instance.UIManager.ClaimError("Success", "Signed up successfully", "OK");
         }
         else
@@ -139,12 +143,11 @@ public partial class NetworkManager : Manager
         JsonData matchCardsJson = gotMatchCards.FlattenRows();
         foreach (JsonData currentRow in matchCardsJson)
         {
-            MatchCard card = new()
-            {
-                inDate = currentRow["inDate"].ToString(),
-                matchHeadCount = int.Parse(currentRow["matchHeadCount"].ToString()),
-                matchTitle = currentRow["title"].ToString(),
-            };
+            MatchCard card = new();
+            card.inDate = currentRow["inDate"].ToString();
+            // ※ matchType은 FirstCharacterToUpper() 해줘야됨!
+            Enum.TryParse(currentRow["matchType"].ToString().FirstCharacterToUpper(), out card.matchType);
+            Enum.TryParse(currentRow["matchModeType"].ToString(), out card.matchModeType);
             matchCards.Add(card);
         }
         GameManager.Instance.NetworkManager.matchCardArray = matchCards.ToArray();
@@ -162,8 +165,6 @@ public partial class NetworkManager : Manager
         {
             Backend.Match.CreateMatchRoom();
         });
-        LobbyScript lobbyScript = GameObject.FindAnyObjectByType<LobbyScript>();
-        lobbyScript.OpenRoom();
     }
 
     public static void ClaimInvite(string nickname)
@@ -202,6 +203,19 @@ public partial class NetworkManager : Manager
         yield return new WaitForFunction(() =>
         {
             Backend.Match.DeclineInvitation(roomId, roomToken);
+        });
+    }
+
+    public static void ClaimLeaveRoom()
+    {
+        GameManager.Instance.StartCoroutine(LeaveRoom());
+    }
+
+    public static IEnumerator LeaveRoom()
+    {
+        yield return new WaitForFunction(() =>
+        {
+            Backend.Match.LeaveMatchRoom();
         });
     }
 }

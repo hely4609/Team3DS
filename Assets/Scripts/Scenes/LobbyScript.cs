@@ -10,13 +10,14 @@ public class LobbyScript : MonoBehaviour
     TextMeshProUGUI[] playerNicknames;
     [SerializeField] GameObject inviteWindow;
     [SerializeField] TMP_InputField nicknameWhoesToInvite;
+    [SerializeField] GameObject startBtn;
     private void Start()
     {
         playerNicknames = new TextMeshProUGUI[players.Length];
         for (int i=0; i<players.Length; i++)
         {
             playerNicknames[i] = players[i].GetComponentInChildren<TextMeshProUGUI>();
-            playerNicknames[i].text = "";
+            SetPlayerName(i, "");
         }
         GameManager.ManagerStarts += (() =>
         {
@@ -28,9 +29,16 @@ public class LobbyScript : MonoBehaviour
         NetworkManager.ClaimMakeRoom();
     }
 
-    public void OpenRoom()
+    public void LeaveRoom()
+    {
+        NetworkManager.ClaimLeaveRoom();
+    }
+
+    public void OpenRoom(bool isHost)
     {
         room.SetActive(true);
+        if (isHost) startBtn.SetActive(true);
+        else startBtn.SetActive(false);
     }
 
     public void CloseRoom()
@@ -40,7 +48,8 @@ public class LobbyScript : MonoBehaviour
 
     public void SetPlayerName(int index, string name)
     {
-        playerNicknames[index].text = name;
+        if(name == "") playerNicknames[index].text = "<i>Click here to invite</i>";
+        else playerNicknames[index].text = name;
     }
 
     public void Invite()
@@ -56,6 +65,8 @@ public class LobbyScript : MonoBehaviour
 
     public void CloseInviteWindow()
     {
+        nicknameWhoesToInvite.text = "";
         inviteWindow.SetActive(false);
     }
+
 }

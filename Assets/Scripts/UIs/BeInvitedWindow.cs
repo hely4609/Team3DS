@@ -2,7 +2,6 @@ using BackEnd.Tcp;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Timeline.Actions;
 using UnityEngine;
 
 public class BeInvitedWindow : MonoBehaviour
@@ -13,7 +12,7 @@ public class BeInvitedWindow : MonoBehaviour
 
     public void SetInviteInfo(string inviter, SessionId roomId, string roomToken)
     {
-        message.text = $"You had been invited by <b><i>{inviter}</b></i>";
+        message.text = $"You has been invited by <b><i>{inviter}</b></i>";
         this.roomId = roomId;
         this.roomToken = roomToken;
     }
