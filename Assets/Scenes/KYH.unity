@@ -1805,7 +1805,7 @@ MonoBehaviour:
   - {fileID: 579571610}
   - {fileID: 1134030319}
   inviteWindow: {fileID: 1677212644}
-  nicknameWhoesToInvite: {fileID: 0}
+  nicknameWhoesToInvite: {fileID: 1979554199}
 --- !u!1 &762329203
 GameObject:
   m_ObjectHideFlags: 0
@@ -3038,7 +3038,7 @@ MonoBehaviour:
       - m_Target: {fileID: 733662856}
         m_TargetAssemblyTypeName: LobbyScript, Assembly-CSharp
         m_MethodName: Invite
-        m_Mode: 5
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
