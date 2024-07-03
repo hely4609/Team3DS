@@ -26,13 +26,22 @@ public partial class NetworkManager : Manager
             Debug.Log("规积己凳");
             if(args.ErrInfo != ErrorCode.Success)
             {
-                GameManager.Instance.UIManager.ClaimError(args.ErrInfo.ToString(), args.ErrInfo.Summary(), "OK");
+                GameManager.Instance.UIManager.ClaimError(args.ErrInfo.ToString(), args.Reason.ToString(), "OK");
             }
             else
             {
                 LobbyScript lobby = GameObject.FindAnyObjectByType<LobbyScript>();
                 Debug.Log(lobby);
                 lobby.SetPlayerName(0, MyNickname);
+            }
+        };
+
+        // 檬措 价脚
+        Backend.Match.OnMatchMakingRoomInvite = (args) =>
+        {
+            if(args.ErrInfo != ErrorCode.Success)
+            {
+                GameManager.Instance.UIManager.ClaimError(args.ErrInfo.ToString(), args.Reason.ToString(), "OK");
             }
         };
 

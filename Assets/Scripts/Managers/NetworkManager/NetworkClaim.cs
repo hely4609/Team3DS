@@ -165,4 +165,17 @@ public partial class NetworkManager : Manager
         LobbyScript lobbyScript = GameObject.FindAnyObjectByType<LobbyScript>();
         lobbyScript.OpenRoom();
     }
+
+    public static void ClaimInvite(string nickname)
+    {
+        GameManager.Instance.StartCoroutine(InvateStart(nickname));
+    }
+
+    public static IEnumerator InvateStart(string nickname)
+    {
+        yield return new WaitForFunction(() =>
+        {
+            Backend.Match.InviteUser(nickname);
+        });
+    }
 }
