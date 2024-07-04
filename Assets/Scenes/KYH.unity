@@ -4540,7 +4540,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 733662856}
         m_TargetAssemblyTypeName: LobbyScript, Assembly-CSharp
-        m_MethodName: MakingRoom
+        m_MethodName: JoinRandomRoom
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
