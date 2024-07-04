@@ -39,6 +39,7 @@ public abstract class Building : MyComponent
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
+        Debug.Log($"{buildingList.Count}");
         //List<Building> buildingList = BuildingManager.Buildings; // 임시 코드
         Vector2Int rightUp = tiledBuildingPositionLast + size;
         Vector2Int[] buildingPoint = { tiledBuildingPositionLast, rightUp };
@@ -46,8 +47,10 @@ public abstract class Building : MyComponent
         {
             foreach (Building building in buildingList)
             {
+
                 Vector2Int availableStartPos = building.startPos;
                 Vector2Int availableEndPos = building.startPos + size;
+                Debug.Log($"{availableStartPos} / {buildingPoint[0]}");
 
                 if ((buildingPoint[0].x >= availableEndPos.x || buildingPoint[1].x <= availableStartPos.x) ||
                     (buildingPoint[0].y >= availableEndPos.y || buildingPoint[1].y <= availableStartPos.y))

@@ -116,7 +116,6 @@ GameObject:
   - component: {fileID: 476055968663659204}
   - component: {fileID: 7033266806839949412}
   - component: {fileID: 8946724194607406019}
-  - component: {fileID: 7684103578789609686}
   m_Layer: 0
   m_Name: Tower
   m_TagString: Untagged
@@ -160,6 +159,7 @@ MonoBehaviour:
   attackSpeed: 0
   target: {fileID: 0}
   targetList: []
+  onOff: 0
 --- !u!135 &8946724194607406019
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -181,15 +181,3 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7684103578789609686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7139158512777397583}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 944eaff7f3c0b9c4381e571b53c25262, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
