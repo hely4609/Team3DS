@@ -174,6 +174,20 @@ public partial class NetworkManager : Manager
         });
     }
 
+    public static void ClaimJoinRandomRoom()
+    {
+        GameManager.Instance.StartCoroutine(JoinRandomRoom());
+    }
+
+    public static IEnumerator JoinRandomRoom()
+    {
+        Debug.Log("Join random room");
+        yield return new WaitForFunction(() =>
+        {
+            PhotonNetwork.JoinRandomRoom();
+        });
+    }
+
     public static void ClaimMatchMaking()
     {
 
