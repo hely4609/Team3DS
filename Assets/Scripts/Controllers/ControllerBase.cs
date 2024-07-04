@@ -5,13 +5,17 @@ using UnityEngine.InputSystem;
 
 public delegate void MoveDelegate(Vector3 dir);
 public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
-public delegate bool DesignBuildingDelegate(BuildingEnum wantBuilding);
+//public delegate bool DesignBuildingDelegate(BuildingEnum wantBuilding);
+public delegate bool DesignBuildingDelegate(ResourceEnum.Prefab wantBuilding);
+public delegate bool BuildDelegate();
+
 
 public class ControllerBase : MyComponent
 {
     public MoveDelegate             DoMove;
     public ScreenRotateDelegate     DoScreenRotate;
     public DesignBuildingDelegate   DoDesignBuilding;
+    public BuildDelegate            DoBuild;
 
     protected Player controlledPlayer;
     public Player ControlledPlayer => controlledPlayer;
