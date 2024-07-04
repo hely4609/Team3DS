@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
+using UnityEngine.UIElements;
 
 public class Player : Character
 {
@@ -27,10 +28,12 @@ public class Player : Character
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
+        targetController.DoBuild -= Build;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
         targetController.DoDesignBuilding += DesignBuiling;
+        targetController.DoBuild += Build;
 
     }
     protected void UnRegistrationFunction(ControllerBase targetController)
@@ -38,6 +41,7 @@ public class Player : Character
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
+        targetController.DoBuild -= Build;
     }
 
     public virtual void Possession(ControllerBase targetController)
@@ -102,6 +106,17 @@ public class Player : Character
 
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
+
+        // Å×½ºÆ®
+        if (designingBuilding != null)
+        {
+            Vector3 pickPos = transform.position + transform.forward * 5f;
+            int x = (int)pickPos.x;
+            int z = (int)pickPos.z;
+            designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.lossyScale.y * 0.5f, z);
+            designingBuilding.TiledBuildingPos = new Vector2Int((int)designingBuilding.transform.position.x, (int)designingBuilding.transform.position.z);
+        }
+
     }
 
     public override void Move(Vector3 direction)
@@ -125,10 +140,31 @@ public class Player : Character
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
-    public bool DesignBuiling(BuildingEnum wantBuilding) 
+
+    //public bool DesignBuiling(BuildingEnum wantBuilding) 
+    //{
+        
+    //    return default; 
+    //}
+
+    public bool DesignBuiling(ResourceEnum.Prefab wantBuilding)
     {
-        return default; 
+        designingBuilding = GameManager.Instance.PoolManager.Instantiate(wantBuilding).GetComponent<Building>();
+        //bePicked.transform.parent = gameObject.transform;
+        return default;
     }
-    public bool Build(Building building) { return default; }
+
+    public bool Build() 
+    {
+        if (designingBuilding != null)
+        {
+            if (designingBuilding.FixPlace())
+            {
+                designingBuilding = null;
+                return true;
+            }
+        }
+        return false; 
+    }
     public bool Repair(EnergyBarrierGenerator target) { return default; }
 }
