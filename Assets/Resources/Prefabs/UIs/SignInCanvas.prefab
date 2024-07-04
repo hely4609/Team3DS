@@ -1667,10 +1667,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8826781465269985172}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 9157384475224856289}
+        m_TargetAssemblyTypeName: SignInCanvas, Assembly-CSharp
+        m_MethodName: CloseSignUp
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -2777,7 +2777,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Close
+  m_text: Cancel
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3018,6 +3018,7 @@ MonoBehaviour:
   SignUpId: {fileID: 2513539158959996844}
   SignUpPassword: {fileID: 5512829765165249976}
   SignUpConfirmPassword: {fileID: 8416297479514714079}
+  SignUpWindow: {fileID: 8826781465269985172}
 --- !u!1 &6509048185372807583
 GameObject:
   m_ObjectHideFlags: 0

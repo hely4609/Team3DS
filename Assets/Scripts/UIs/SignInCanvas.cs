@@ -10,6 +10,7 @@ public class SignInCanvas : MonoBehaviour
     [SerializeField] TMP_InputField SignUpId;
     [SerializeField] TMP_InputField SignUpPassword;
     [SerializeField] TMP_InputField SignUpConfirmPassword;
+    [SerializeField] GameObject SignUpWindow;
 
     public void SignIn()
     {
@@ -27,6 +28,20 @@ public class SignInCanvas : MonoBehaviour
             NetworkManager.ClaimSignUp(SignUpId.text, SignUpPassword.text);
 
         }
+    }
+
+    public void ClearSignUp()
+    {
+        SignUpId.text = "";
+        SignUpPassword.text = "";
+        SignUpConfirmPassword.text = "";
+
+    }
+
+    public void CloseSignUp()
+    {
+        ClearSignUp();
+        SignUpWindow.SetActive(false);
     }
 
 }

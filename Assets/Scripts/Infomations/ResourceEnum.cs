@@ -6,6 +6,7 @@ namespace ResourceEnum
         ErrorWindow,
         SignInCanvas,
         SetNicknameCanvas,
+        BeInvitedWindow,
 
         Player,
         
