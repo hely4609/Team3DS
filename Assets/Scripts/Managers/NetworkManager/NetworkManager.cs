@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
 using BackEnd.Tcp;
+using Photon.Pun;
 
 // 네트워크 백엔드 : 뒤끝 -> 포톤
 public enum NetworkState
@@ -14,8 +15,11 @@ public enum NetworkState
 }
 public partial class NetworkManager : Manager
 {
+    public NetworkPunCallBacks punCallBacks;
     NetworkState currentNetworkState = NetworkState.Offline;
     public NetworkState CurrentNetworkState => currentNetworkState;
+
+    string gameVersion = "1";
 
     public class UserInfo
     {
@@ -45,29 +49,26 @@ public partial class NetworkManager : Manager
             }
         }
     }
-
     
 
     public override IEnumerator Initiate()
     {
         GameManager.ClaimLoadInfo("Network Initializing");
-        yield return null;
 
         currentNetworkState = NetworkState.Initiating;
-        var bro = Backend.Initialize(true);
 
-        if(bro.IsSuccess())
+        // 나중에 while로 커넥팅 
+        yield return new WaitForFunction(() =>
         {
-            Debug.Log("초기화 성공! " + bro);
-            currentNetworkState = NetworkState.Connected;
-            RegistCallBackFunction();
-        }
-        else
-        {
-            Debug.Log("초기화 실패 " + bro);
-            currentNetworkState = NetworkState.Disconnected;
-        }
-        yield return null;
+            PhotonNetwork.PhotonServerSettings.DevRegion = "kr";
+            PhotonNetwork.ConnectUsingSettings();
+            if (!PhotonNetwork.IsConnected)
+            {
+                PhotonNetwork.GameVersion = gameVersion;
+                PhotonNetwork.ConnectUsingSettings();
+            }
+        });
+        
     }
 
     // Async vs Coroutine

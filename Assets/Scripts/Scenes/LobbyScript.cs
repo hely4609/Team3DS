@@ -19,14 +19,16 @@ public class LobbyScript : MonoBehaviour
             playerNicknames[i] = players[i].GetComponentInChildren<TextMeshProUGUI>();
             SetPlayerName(i, "");
         }
+        
         GameManager.ManagerStarts += (() =>
         {
-            GameManager.Instance.UIManager.Open(UIEnum.SignInCanvas);
+            GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
         });
+        
     }
-    public void MakingRoom()
+    public void CreateRoom()
     {
-        NetworkManager.ClaimMakeRoom();
+        NetworkManager.ClaimCreateRoom();
     }
 
     public void LeaveRoom()

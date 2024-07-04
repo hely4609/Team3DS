@@ -101,6 +101,8 @@ public class GameManager : MonoBehaviour
         cameraManager = new CameraManager();
         yield return cameraManager.Initiate();
         networkManager = new NetworkManager();
+        NetworkPunCallBacks punCallBacks = gameObject.AddComponent<NetworkPunCallBacks>();
+        networkManager.punCallBacks = punCallBacks;
         yield return networkManager.Initiate();
 
 

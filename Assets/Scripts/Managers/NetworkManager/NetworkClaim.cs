@@ -7,16 +7,17 @@ using BackEnd.Tcp;
 using UnityEngine.SceneManagement;
 using System;
 using Unity.VisualScripting;
+using Photon.Pun;
 
 public partial class NetworkManager : Manager
 {
 
     public static void ClaimSignUp(string  inputID, string inputPassword) 
     {
-        GameManager.Instance.StartCoroutine(SignUpStart(inputID, inputPassword));
+        GameManager.Instance.StartCoroutine(SignUp(inputID, inputPassword));
     }
 
-    public static IEnumerator SignUpStart(string inputID, string inputPassword)
+    public static IEnumerator SignUp(string inputID, string inputPassword)
     {
         BackendReturnObject bro = null;
         yield return new WaitForFunction(() =>
@@ -38,9 +39,9 @@ public partial class NetworkManager : Manager
 
     public static void ClaimSignIn(string inputID,  string inputPassword)
     {
-        GameManager.Instance.StartCoroutine(SignInStart(inputID, inputPassword));
+        GameManager.Instance.StartCoroutine(SignIn(inputID, inputPassword));
     }
-    public static IEnumerator SignInStart(string inputID, string inputPassword)
+    public static IEnumerator SignIn(string inputID, string inputPassword)
     {
         BackendReturnObject bro = null;
         yield return new WaitForFunction(() =>
@@ -71,7 +72,6 @@ public partial class NetworkManager : Manager
                 if (GameManager.Instance.NetworkManager.MyNickname == null) GameManager.ManagerStarts += () => GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
                 
                 yield return new WaitWhile(() => GameManager.Instance.NetworkManager.MyNickname == null);
-                yield return MatchMakingServerStart();
             }
             else
             {
@@ -84,95 +84,50 @@ public partial class NetworkManager : Manager
         }
     }
 
-    public static void UpdateNickname(string inputNickname)
+    public static void ClaimUpdateNickname(string inputNickname)
     {
-        GameManager.Instance.StartCoroutine(UpdateNicknameStart(inputNickname));
+        GameManager.Instance.StartCoroutine(UpdateNickname(inputNickname));
     }
 
-    public static IEnumerator UpdateNicknameStart(string inputNickname)
+    public static IEnumerator UpdateNickname(string inputNickname)
     {
-        BackendReturnObject bro = null;
         yield return new WaitForFunction(() =>
         {
-            bro = Backend.BMember.UpdateNickname(inputNickname);
-
+            PhotonNetwork.NickName = inputNickname;
         });
-        if(bro.IsSuccess())
+        // 임시
+        UserInfo gotInfo = new()
         {
-            GameManager.Instance.UIManager.Close(UIEnum.SetNicknameCanvas);
-            GameManager.Instance.UIManager.ClaimError("Success", "Nickname has been changed successfully", "OK");
-        }
-        else
-        {
-            GameManager.Instance.UIManager.ClaimError(bro.GetErrorCode(), bro.GetMessage(), "OK");
-
-        }
-
-    }
-
-    public static void ClaimMatchMakingServer()
-    {
-        GameManager.Instance.StartCoroutine(MatchMakingServerStart());
-    }
-
-    public static IEnumerator MatchMakingServerStart()
-    {
-        ErrorInfo errorInfo;
-        yield return new WaitForFunction(() =>
-        {
-            if(!Backend.Match.JoinMatchMakingServer(out errorInfo))
-            {
-                GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(errorInfo.Category.ToString(), errorInfo.Reason.ToString(), "OK", ()=>SceneManager.LoadScene(0));
-            }
-        });
-        // 서버에 접속했으면 델리게이트에 매치폴 넣어주기!(중요)
-        GameManager.NetworkUpdates -= (deltaTime) => Backend.Match.Poll();
-        GameManager.NetworkUpdates += (deltaTime) => Backend.Match.Poll();
-
-        BackendReturnObject gotMatchCards = null;
-        yield return new WaitForFunction(() =>
-        {
-            gotMatchCards = Backend.Match.GetMatchList();
-        });
-        if(!gotMatchCards.IsSuccess())
-        {
-            GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(gotMatchCards.GetErrorCode(), gotMatchCards.GetMessage(), "OK", () => SceneManager.LoadScene(0));
-        }
+            gamerId = null,
+            nickname = inputNickname
+        };
+        GameManager.Instance.NetworkManager.myInfo = gotInfo;
         
-        List<MatchCard> matchCards = new();
-        JsonData matchCardsJson = gotMatchCards.FlattenRows();
-        foreach (JsonData currentRow in matchCardsJson)
-        {
-            MatchCard card = new();
-            card.inDate = currentRow["inDate"].ToString();
-            // ※ matchType은 FirstCharacterToUpper() 해줘야됨!
-            Enum.TryParse(currentRow["matchType"].ToString().FirstCharacterToUpper(), out card.matchType);
-            Enum.TryParse(currentRow["matchModeType"].ToString(), out card.matchModeType);
-            matchCards.Add(card);
-        }
-        GameManager.Instance.NetworkManager.matchCardArray = matchCards.ToArray();
-        Debug.Log("매치카드 로딩 성공");
+        GameManager.Instance.UIManager.Close(UIEnum.SetNicknameCanvas);
+        GameManager.Instance.UIManager.ClaimError("Success", "Nickname has been changed successfully", "OK");
+
     }
 
-    public static void ClaimMakeRoom()
+    public static void ClaimCreateRoom()
     {
-        GameManager.Instance.StartCoroutine(MakeRoomStart());
+        GameManager.Instance.StartCoroutine(CreateRoom());
     }
 
-    public static IEnumerator MakeRoomStart()
+    public static IEnumerator CreateRoom()
     {
         yield return new WaitForFunction(() =>
         {
-            Backend.Match.CreateMatchRoom();
+            PhotonNetwork.CreateRoom("Test");
         });
+
     }
 
     public static void ClaimInvite(string nickname)
     {
-        GameManager.Instance.StartCoroutine(InvateStart(nickname));
+        GameManager.Instance.StartCoroutine(Invate(nickname));
     }
 
-    public static IEnumerator InvateStart(string nickname)
+    public static IEnumerator Invate(string nickname)
     {
         yield return new WaitForFunction(() =>
         {
@@ -215,7 +170,7 @@ public partial class NetworkManager : Manager
     {
         yield return new WaitForFunction(() =>
         {
-            Backend.Match.LeaveMatchRoom();
+            PhotonNetwork.LeaveRoom();
         });
     }
 
