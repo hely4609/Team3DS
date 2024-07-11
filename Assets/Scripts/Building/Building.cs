@@ -23,6 +23,7 @@ public abstract class Building : MyComponent
     public float CompletePercent { get; set; }
 
     [SerializeField] protected MeshRenderer mesh;
+    [SerializeField] protected BoxCollider boxCol;
 
     [SerializeField] protected bool isBuildable; // 이 장소에 건설할 수 있나
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
@@ -49,7 +50,7 @@ public abstract class Building : MyComponent
             foreach (Building building in buildingList)
             {
                 Vector2Int distance = building.startPos - tiledBuildingPositionLast;
-                Vector2Int sizeSum = (building.size + size)/2;
+                Vector2Int sizeSum = (building.size + size+Vector2Int.one)/2;
                 if ( Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
                 {
                     isBuildable = true;
@@ -66,6 +67,7 @@ public abstract class Building : MyComponent
         {
             Debug.Log("OK");
             mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+            
             return true;
         }
         else
