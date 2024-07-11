@@ -1,3 +1,4 @@
+using ExitGames.Client.Photon.StructWrapping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.AssetImporters;
@@ -20,6 +21,8 @@ public abstract class Building : MyComponent
     protected float buildingTimeCurrent; // 얼마나 제작했나
     protected float completePercent; //(0~1) 제작한 퍼센트
     public float CompletePercent { get; set; }
+
+    [SerializeField] protected MeshRenderer mesh;
 
     [SerializeField] protected bool isBuildable; // 이 장소에 건설할 수 있나
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
@@ -47,7 +50,7 @@ public abstract class Building : MyComponent
             {
                 Vector2Int distance = building.startPos - tiledBuildingPositionLast;
                 Vector2Int sizeSum = (building.size + size)/2;
-                if ( distance.x > sizeSum.x && distance.y > sizeSum.y)
+                if ( Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
                 {
                     isBuildable = true;
                 }
@@ -62,11 +65,13 @@ public abstract class Building : MyComponent
         if (isBuildable)
         {
             Debug.Log("OK");
+            mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
             return true;
         }
         else
         {
             Debug.Log("안됨");
+            mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
             return false;
         }
     }
