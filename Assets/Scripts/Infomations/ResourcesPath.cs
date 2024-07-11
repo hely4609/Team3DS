@@ -20,7 +20,7 @@ public class ResourcesPath
 
     public static string[] MaterialPathArray =
     {
-        "Materials/Temporary/Buildable.mat",
-        "Materials/Temporary/Buildunable.mat",
+        "Materials/Temporary/Buildable",
+        "Materials/Temporary/Buildunable",
     };
 }

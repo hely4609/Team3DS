@@ -151,6 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 61af0b388c34bd94f80d66d6f6d6f32f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mesh: {fileID: 8324571905183983871}
   isBuildable: 0
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
