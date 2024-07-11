@@ -118,8 +118,8 @@ public class Player : Character
             Vector2Int currentPos = new Vector2Int(x, z);
             if (designingBuilding.TiledBuildingPos != currentPos)
             {
-                designingBuilding.CheckBuild();
                 designingBuilding.TiledBuildingPos = currentPos;
+                designingBuilding.CheckBuild();
             }            
             
         }
