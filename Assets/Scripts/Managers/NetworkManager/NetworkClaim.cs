@@ -7,8 +7,19 @@ using BackEnd.Tcp;
 using UnityEngine.SceneManagement;
 using System;
 using Unity.VisualScripting;
-using Photon.Pun;
+using Fusion;
+using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
+public enum GameType : int
+{
+    Default,
+}
+
+public enum GameMap : int
+{
+    Default,
+}
 public partial class NetworkManager : Manager
 {
 
@@ -91,10 +102,8 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator UpdateNickname(string inputNickname)
     {
-        yield return new WaitForFunction(() =>
-        {
-            PhotonNetwork.NickName = inputNickname;
-        });
+        yield return null;
+
         // юс╫ц
         UserInfo gotInfo = new()
         {
@@ -108,17 +117,34 @@ public partial class NetworkManager : Manager
 
     }
 
-    public static void ClaimCreateRoom()
+    public static void ClaimStartHost()
     {
-        GameManager.Instance.StartCoroutine(CreateRoom());
+        _ = StartHost(GameManager.Instance.NetworkManager.Runner, GameMap.Default, GameType.Default);
     }
 
-    public static IEnumerator CreateRoom()
+    public static async Task StartHost(NetworkRunner runner, GameMap gameMap, GameType gameType)
     {
-        yield return new WaitForFunction(() =>
+        SceneManager.LoadScene("NetworkTest");
+        var customProps = new Dictionary<string, SessionProperty>();
+        customProps["map"] = (int)gameMap;
+        customProps["type"] = (int)gameType;
+
+        GameManager.ClaimLoadInfo("Game scene");
+        var result = await runner.StartGame(new StartGameArgs()
         {
-            PhotonNetwork.CreateRoom("Test");
+            GameMode = GameMode.Host,
+            SessionProperties = customProps,
+            CustomLobbyName = $"{GameManager.Instance.NetworkManager.MyNickname}'s lobby",
         });
+        GameManager.CloseLoadInfo();
+        if (result.Ok)
+        {
+            // all good
+        }
+        else
+        {
+            GameManager.Instance.UIManager.ClaimError("Failed to Start", result.ShutdownReason.ToString(), "OK");
+        }
 
     }
 
@@ -168,24 +194,53 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator LeaveRoom()
     {
-        yield return new WaitForFunction(() =>
-        {
-            PhotonNetwork.LeaveRoom();
-        });
+        yield return null;
     }
 
     public static void ClaimJoinRandomRoom()
     {
-        GameManager.Instance.StartCoroutine(JoinRandomRoom());
+        _ = JoinRandomRoom(GameManager.Instance.NetworkManager.Runner, GameType.Default);
     }
 
-    public static IEnumerator JoinRandomRoom()
+    public static async Task JoinRandomRoom(NetworkRunner runner, GameType gameType)
     {
-        Debug.Log("Join random room");
-        yield return new WaitForFunction(() =>
+        var customProps = new Dictionary<string, SessionProperty>() {
+            { "type", (int)gameType }
+        };
+
+        var result = await runner.StartGame(new StartGameArgs()
         {
-            PhotonNetwork.JoinRandomRoom();
+            GameMode = GameMode.Client,
+            SessionProperties = customProps,
         });
+
+        if (result.Ok)
+        {
+            // all good
+        }
+        else
+        {
+            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), result.ErrorMessage, "OK");
+        }
+    }
+
+    public static void ClaimJoinRoom(string roomName)
+    {
+        _ = JoinRoom(GameManager.Instance.NetworkManager.Runner, roomName);
+    }
+
+    public static async Task JoinRoom(NetworkRunner runner, string roomName)
+    {
+        var result = await runner.JoinSessionLobby(SessionLobby.Custom, roomName);
+
+        if (result.Ok)
+        {
+            // all good
+        }
+        else
+        {
+            Debug.LogError($"Failed to Start: {result.ShutdownReason}");
+        }
     }
 
     public static void ClaimMatchMaking()

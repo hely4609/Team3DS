@@ -26,9 +26,9 @@ public class LobbyScript : MonoBehaviour
         });
         
     }
-    public void CreateRoom()
+    public void StartHost()
     {
-        NetworkManager.ClaimCreateRoom();
+        NetworkManager.ClaimStartHost();
     }
 
     public void LeaveRoom()
@@ -39,6 +39,11 @@ public class LobbyScript : MonoBehaviour
     public void JoinRandomRoom()
     {
         NetworkManager.ClaimJoinRandomRoom();
+    }
+
+    public void JoinRoom(string roomName)
+    {
+        NetworkManager.ClaimJoinRoom(roomName);
     }
 
     public void OpenRoom(bool isHost)

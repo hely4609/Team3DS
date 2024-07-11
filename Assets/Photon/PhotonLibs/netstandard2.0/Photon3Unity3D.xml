@@ -2655,6 +2655,15 @@
         <member name="F:ExitGames.Client.Photon.TPeer.ALL_HEADER_BYTES">
             <summary>TCP header combined: 9 bytes</summary>
         </member>
+        <member name="F:ExitGames.Client.Photon.TPeer.lastPingActivity">
+            <summary>Timestamp of last ping activity (updated when sending to avoid sending again immediately).</summary>
+        </member>
+        <member name="F:ExitGames.Client.Photon.TPeer.pingRequest">
+            <summary>Re-used binary message used in the TCP protocol (WSS uses a Ping Operation due to lack of framing).</summary>
+        </member>
+        <member name="F:ExitGames.Client.Photon.TPeer.pingParamDict">
+            <summary>Re-used ping-Operation parameter-dict used in the WS/WSS protocol (TCP uses pingRequest).</summary>
+        </member>
         <member name="F:ExitGames.Client.Photon.TPeer.DoFraming">
             <summary>Defines if the (TCP) socket implementation needs to do "framing".</summary>
             <remarks>The WebSocket protocol (e.g.) includes framing, so when that is used, we set DoFraming to false.</remarks>
@@ -2678,7 +2687,7 @@
             <summary>enqueues serialized operations to be sent as tcp stream / package</summary>
         </member>
         <member name="M:ExitGames.Client.Photon.TPeer.SendPing">
-            <summary>Sends a ping and modifies this.lastPingResult to avoid another ping for a while.</summary>
+            <summary>Queues a ping (operation or "message") and updates this.lastPingActivity to avoid another ping for a while.</summary>
         </member>
         <member name="M:ExitGames.Client.Photon.TPeer.ReceiveIncomingCommands(System.Byte[],System.Int32)">
             <summary>reads incoming tcp-packages to create and queue incoming commands*</summary>

@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
 using BackEnd.Tcp;
-using Photon.Pun;
+using Fusion;
+using UnityEngine.SceneManagement;
+using Unity.VisualScripting;
 
 // 네트워크 백엔드 : 뒤끝 -> 포톤
 public enum NetworkState
@@ -15,7 +17,16 @@ public enum NetworkState
 }
 public partial class NetworkManager : Manager
 {
-    public NetworkPunCallBacks punCallBacks;
+    private GameObject _runner;
+    public NetworkRunner Runner
+    {
+        get
+        {
+            if(_runner) return _runner.GetComponent<NetworkRunner>();
+            else return null;
+        }
+
+    }
     NetworkState currentNetworkState = NetworkState.Offline;
     public NetworkState CurrentNetworkState => currentNetworkState;
 
@@ -50,29 +61,46 @@ public partial class NetworkManager : Manager
         }
     }
     
-
     public override IEnumerator Initiate()
     {
         GameManager.ClaimLoadInfo("Network Initializing");
 
+        // Create the Fusion runner and let it know that we will be providing user input
+        _runner = new GameObject("NetworkRunner");
+        _runner.AddComponent<NetworkRunner>();
+        Runner.ProvideInput = true;
+
         currentNetworkState = NetworkState.Initiating;
 
-        // 나중에 while로 커넥팅 
-        yield return new WaitForFunction(() =>
-        {
-            PhotonNetwork.PhotonServerSettings.DevRegion = "kr";
-            PhotonNetwork.ConnectUsingSettings();
-            if (!PhotonNetwork.IsConnected)
+        GameManager.NetworkUpdates += (deltaTime) => {
+            if(!Runner)
             {
-                PhotonNetwork.GameVersion = gameVersion;
-                PhotonNetwork.ConnectUsingSettings();
+                _runner = new GameObject("NetworkRunner");
+                _runner.AddComponent<NetworkRunner>();
             }
-        });
-        
+        };
+
+        yield return null;
     }
 
-    // Async vs Coroutine
-    // Async는 주어진 task가 끝나면 다음 메소드가 시행되는 경우에 좋고
-    // Coroutine은 여러 프레임에 걸쳐 메소드를 실행하는 경우에 유용하다
-    // 
+    public IEnumerator StartGame(GameMode mode)
+    {
+        // Create the NetworkSceneInfo from the current scene
+        var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
+        var sceneInfo = new NetworkSceneInfo();
+        if (scene.IsValid)
+        {
+            sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
+        }
+
+        // Start or join (depends on gamemode) a session with a specific name
+        yield return new WaitForFunction(()=> Runner.StartGame(new StartGameArgs()
+        {
+            GameMode = mode,
+            SessionName = "TestRoom",
+            Scene = scene,
+            SceneManager = GameManager.Instance.AddComponent<NetworkSceneManagerDefault>()
+        }));
+
+    }
 }
