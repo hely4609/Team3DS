@@ -83,6 +83,7 @@ public abstract class Building : MyComponent
         if (CheckBuild())
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
+            boxCol.enabled = true;
             return true;
         }
         else
