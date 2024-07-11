@@ -152,6 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 8324571905183983871}
+  boxCol: {fileID: 3066182166943079789}
   isBuildable: 0
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
