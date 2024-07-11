@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AssetImporters;
 using UnityEngine;
 
 public enum BuildingEnum
@@ -28,7 +29,7 @@ public abstract class Building : MyComponent
     // tiledBuildingPositionLast는 생성할려고한다 하는 처음 위치.
     // 그러다가 움직이면, float형을 받아오고, 반올림을 했을 때, tiledBuildingPosiotionLast 와 다르면 그때 CheckBuild를 실행
 
-    [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 왼쪽 아래 지점
+    [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 중앙값
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
     protected override void MyStart()
     {
@@ -40,20 +41,13 @@ public abstract class Building : MyComponent
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
         Debug.Log($"{buildingList.Count}");
-        //List<Building> buildingList = BuildingManager.Buildings; // 임시 코드
-        Vector2Int rightUp = tiledBuildingPositionLast + size;
-        Vector2Int[] buildingPoint = { tiledBuildingPositionLast, rightUp };
         if (buildingList.Count > 0)
         {
             foreach (Building building in buildingList)
             {
-
-                Vector2Int availableStartPos = building.startPos;
-                Vector2Int availableEndPos = building.startPos + size;
-                Debug.Log($"{availableStartPos} / {buildingPoint[0]}");
-
-                if ((buildingPoint[0].x >= availableEndPos.x || buildingPoint[1].x <= availableStartPos.x) ||
-                    (buildingPoint[0].y >= availableEndPos.y || buildingPoint[1].y <= availableStartPos.y))
+                Vector2Int distance = building.startPos - tiledBuildingPositionLast;
+                Vector2Int sizeSum = (building.size + size)/2;
+                if ( distance.x > sizeSum.x && distance.y > sizeSum.y)
                 {
                     isBuildable = true;
                 }
