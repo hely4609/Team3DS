@@ -1,3 +1,4 @@
+using ResourceEnum;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,21 +8,26 @@ using UnityEngine;
 public class ResourceManager : Manager
 {
     static Dictionary<ResourceEnum.Prefab, GameObject> prefabDictionary;
+    static Dictionary<ResourceEnum.Material, UnityEngine.Material> materialDictionary;
 
     public static int resourceAmount = 0;
     public static int resourceLoadCompleted = 0;
     public override IEnumerator Initiate()
     {
         if (prefabDictionary != null) yield break;
+        if (materialDictionary != null) yield break;
 
         prefabDictionary = new Dictionary<ResourceEnum.Prefab, GameObject>();
+        materialDictionary = new Dictionary<ResourceEnum.Material, UnityEngine.Material>();
 
         resourceAmount = 0;
         resourceLoadCompleted = 0;
 
         resourceAmount += prefabDictionary.Count;
+        resourceAmount += materialDictionary.Count;
 
         yield return Load<ResourceEnum.Prefab, GameObject>(prefabDictionary, ResourcesPath.prefabPathArray, "prefabs");
+        yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.MaterialPathArray, "materials");
     }
 
 
@@ -90,6 +96,15 @@ public class ResourceManager : Manager
     public static GameObject Get(ResourceEnum.Prefab prefab)
     {
         if (prefabDictionary.TryGetValue(prefab, out GameObject result))
+        {
+            return result;
+        }
+        return null;
+    }
+
+    public static UnityEngine.Material Get(ResourceEnum.Material material)
+    {
+        if (materialDictionary.TryGetValue(material, out UnityEngine.Material result))
         {
             return result;
         }
