@@ -42,6 +42,13 @@ public abstract class Building : MyComponent
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
+        isBuildable = CheckAlreadyBuild();
+        
+        VisualizeBuildable();
+        return isBuildable;
+    }
+    public virtual bool CheckAlreadyBuild() // 건설하려는 건물이 다른 건물에 겹쳤는지 체크.
+    {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
         Debug.Log($"{buildingList.Count}");
@@ -50,8 +57,8 @@ public abstract class Building : MyComponent
             foreach (Building building in buildingList)
             {
                 Vector2Int distance = building.startPos - tiledBuildingPositionLast;
-                Vector2Int sizeSum = (building.size + size+Vector2Int.one)/2;
-                if ( Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+                Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
+                if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
                 {
                     isBuildable = true;
                 }
@@ -63,18 +70,20 @@ public abstract class Building : MyComponent
 
             }
         }
+        return isBuildable;
+    }
+
+    public void VisualizeBuildable() // 건설 가능한지 화면에 표시함.
+    { 
         if (isBuildable)
         {
             Debug.Log("OK");
             mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
-            
-            return true;
         }
         else
         {
             Debug.Log("안됨");
             mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
-            return false;
         }
     }
     public virtual bool FixPlace()
