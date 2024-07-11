@@ -114,7 +114,14 @@ public class Player : Character
             int x = (int)pickPos.x;
             int z = (int)pickPos.z;
             designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.lossyScale.y * 0.5f, z);
-            designingBuilding.TiledBuildingPos = new Vector2Int((int)designingBuilding.transform.position.x, (int)designingBuilding.transform.position.z);
+
+            Vector2Int currentPos = new Vector2Int(x, z);
+            if (designingBuilding.TiledBuildingPos != currentPos)
+            {
+                designingBuilding.CheckBuild();
+                designingBuilding.TiledBuildingPos = currentPos;
+            }            
+            
         }
 
     }
