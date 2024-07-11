@@ -124,7 +124,6 @@ public partial class NetworkManager : Manager
 
     public static async Task StartHost(NetworkRunner runner, GameMap gameMap, GameType gameType)
     {
-        SceneManager.LoadScene("NetworkTest");
         var customProps = new Dictionary<string, SessionProperty>();
         customProps["map"] = (int)gameMap;
         customProps["type"] = (int)gameType;
@@ -134,12 +133,14 @@ public partial class NetworkManager : Manager
         {
             GameMode = GameMode.Host,
             SessionProperties = customProps,
-            CustomLobbyName = $"{GameManager.Instance.NetworkManager.MyNickname}'s lobby",
+            //CustomLobbyName = $"{GameManager.Instance.NetworkManager.MyNickname}'s lobby",
         });
         GameManager.CloseLoadInfo();
+
         if (result.Ok)
         {
             // all good
+            GameObject.Find("LobbyCanvas").SetActive(false);
         }
         else
         {
@@ -199,14 +200,14 @@ public partial class NetworkManager : Manager
 
     public static void ClaimJoinRandomRoom()
     {
-        _ = JoinRandomRoom(GameManager.Instance.NetworkManager.Runner, GameType.Default);
+        _ = JoinRandomRoom(GameManager.Instance.NetworkManager.Runner, GameMap.Default, GameType.Default);
     }
 
-    public static async Task JoinRandomRoom(NetworkRunner runner, GameType gameType)
+    public static async Task JoinRandomRoom(NetworkRunner runner, GameMap gameMap, GameType gameType)
     {
-        var customProps = new Dictionary<string, SessionProperty>() {
-            { "type", (int)gameType }
-        };
+        var customProps = new Dictionary<string, SessionProperty>();
+        customProps["map"] = (int)gameMap;
+        customProps["type"] = (int)gameType;
 
         var result = await runner.StartGame(new StartGameArgs()
         {
@@ -217,6 +218,7 @@ public partial class NetworkManager : Manager
         if (result.Ok)
         {
             // all good
+            GameObject.Find("LobbyCanvas").SetActive(false);
         }
         else
         {
