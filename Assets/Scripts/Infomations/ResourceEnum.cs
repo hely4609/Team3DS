@@ -13,7 +13,7 @@ namespace ResourceEnum
         // Building
         Tower,
         Road,
-        EnergyBarrier,       
+        EnergyBarrier,
     }
 
     public enum Material
