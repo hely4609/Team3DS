@@ -428,6 +428,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8522698738898084457}
   - component: {fileID: 8755128991734659688}
+  - component: {fileID: 5341527644010371962}
   m_Layer: 0
   m_Name: Turret1a
   m_TagString: Untagged
@@ -463,8 +464,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14452aa5abe999c449177db142962373, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mesh: {fileID: 0}
-  boxCol: {fileID: 0}
+  mesh:
+  - {fileID: 1213593497623742753}
+  - {fileID: 928844447124107611}
+  - {fileID: 5990246788191409780}
+  - {fileID: 3317812685788943892}
+  - {fileID: 8239844606282766427}
+  - {fileID: 4267604265090691170}
+  col: {fileID: 5341527644010371962}
   isBuildable: 0
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
@@ -482,6 +489,28 @@ MonoBehaviour:
   - {fileID: 8239844606282766427}
   - {fileID: 4267604265090691170}
   value: 0
+--- !u!64 &5341527644010371962
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860581916195568055}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 5
+  m_Convex: 0
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 0}
 --- !u!1 &8177992274299104779
 GameObject:
   m_ObjectHideFlags: 0

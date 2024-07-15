@@ -40,9 +40,5 @@ public class CameraManager : Manager
             mainCamera.transform.position = observingPlayer.CameraOffset.position;
             mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
         }
-<<<<<<< HEAD
-=======
-
->>>>>>> Character
     }
 }
