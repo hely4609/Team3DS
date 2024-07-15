@@ -1,5 +1,7 @@
+using ExitGames.Client.Photon.StructWrapping;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.AssetImporters;
 using UnityEngine;
 
 public enum BuildingEnum
@@ -20,6 +22,9 @@ public abstract class Building : MyComponent
     protected float completePercent; //(0~1) 제작한 퍼센트
     public float CompletePercent { get; set; }
 
+    [SerializeField] protected MeshRenderer mesh;
+    [SerializeField] protected BoxCollider boxCol;
+
     [SerializeField] protected bool isBuildable; // 이 장소에 건설할 수 있나
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
     [SerializeField] protected Vector2Int tiledBuildingPositionLast; // 건설하고자하는 마지막 위치.
@@ -28,7 +33,7 @@ public abstract class Building : MyComponent
     // tiledBuildingPositionLast는 생성할려고한다 하는 처음 위치.
     // 그러다가 움직이면, float형을 받아오고, 반올림을 했을 때, tiledBuildingPosiotionLast 와 다르면 그때 CheckBuild를 실행
 
-    [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 왼쪽 아래 지점
+    [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 중앙값
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
     protected override void MyStart()
     {
@@ -37,23 +42,23 @@ public abstract class Building : MyComponent
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
+        isBuildable = CheckAlreadyBuild();
+        
+        VisualizeBuildable();
+        return isBuildable;
+    }
+    public virtual bool CheckAlreadyBuild() // 건설하려는 건물이 다른 건물에 겹쳤는지 체크.
+    {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
         Debug.Log($"{buildingList.Count}");
-        //List<Building> buildingList = BuildingManager.Buildings; // 임시 코드
-        Vector2Int rightUp = tiledBuildingPositionLast + size;
-        Vector2Int[] buildingPoint = { tiledBuildingPositionLast, rightUp };
         if (buildingList.Count > 0)
         {
             foreach (Building building in buildingList)
             {
-
-                Vector2Int availableStartPos = building.startPos;
-                Vector2Int availableEndPos = building.startPos + size;
-                Debug.Log($"{availableStartPos} / {buildingPoint[0]}");
-
-                if ((buildingPoint[0].x >= availableEndPos.x || buildingPoint[1].x <= availableStartPos.x) ||
-                    (buildingPoint[0].y >= availableEndPos.y || buildingPoint[1].y <= availableStartPos.y))
+                Vector2Int distance = building.startPos - tiledBuildingPositionLast;
+                Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
+                if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
                 {
                     isBuildable = true;
                 }
@@ -65,15 +70,20 @@ public abstract class Building : MyComponent
 
             }
         }
+        return isBuildable;
+    }
+
+    public void VisualizeBuildable() // 건설 가능한지 화면에 표시함.
+    { 
         if (isBuildable)
         {
             Debug.Log("OK");
-            return true;
+            mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
         }
         else
         {
             Debug.Log("안됨");
-            return false;
+            mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
         }
     }
     public virtual bool FixPlace()
@@ -82,6 +92,7 @@ public abstract class Building : MyComponent
         if (CheckBuild())
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
+            boxCol.enabled = true;
             return true;
         }
         else

@@ -4,7 +4,11 @@ www.photonengine.com  -  Join our Discord Server: https://dashboard.photonengine
 
 
 
-Version 4.1.8.4 (26. April 2024 - rev7529)
+Version 4.1.8.5 (13. May 2024 - rev7556)
+    Changed: TPeer.SendPing() will now enqueue the message instead of sending it immmediately. This makes sure a ping is never sent as first message (which has to be an Init).
+    Changed: To re-using a ParameterDictionary for pinging in WS / WSS.
+
+Version 4.1.8.4 (26. April 2024 - rev7530)
     Changed: SendAcksOnly and SendOutgoingCommands logging (they only log successful re-sends).
     Changed: In QueueSentCommand the reliableCommandsSent is increased only for commands that are sent the first time (not counting repeats anymore).
 

@@ -2969,8 +2969,8 @@ Transform:
   m_GameObject: {fileID: 7139158513839706278}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.02, y: 1.5, z: 1.2}
-  m_LocalScale: {x: 3, y: 3, z: 3}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1004581167880720142}
@@ -3147,8 +3147,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isBuildable: 0
   tiledBuildingPositionLast: {x: 0, y: 0}
-  startPos: {x: 5, y: 5}
-  size: {x: 10, y: 10}
+  startPos: {x: 0, y: 0}
+  size: {x: 4, y: 4}
   attackDamage: 2
   attackSpeed: 0.5
   target: {fileID: 0}

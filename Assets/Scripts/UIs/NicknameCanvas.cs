@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using WebSocketSharp;
 
 public class NicknameCanvas : MonoBehaviour
 {
@@ -11,7 +12,13 @@ public class NicknameCanvas : MonoBehaviour
 
     public void UpdateNickname()
     {
-        NetworkManager.UpdateNickname(inputNickname.text);
+        // #Important
+        if (string.IsNullOrEmpty(inputNickname.text))
+        {
+            GameManager.Instance.UIManager.ClaimError("", "Nickname Can't set null or empty", "OK");
+            return;
+        }
+        NetworkManager.ClaimUpdateNickname(inputNickname.text);
     }
 
     public void Close()

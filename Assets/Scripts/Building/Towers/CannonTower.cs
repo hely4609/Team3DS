@@ -8,12 +8,13 @@ public class CannonTower : Tower
     protected override void Initialize()
     {
         type = BuildingEnum.Tower;
+        isNeedLine = true;
         AttackDamage = 1;
         AttackSpeed = 0.5f;
         AttackRange = 5;
         buildingTimeMax = 10;
         splashRadius = 10;
-        size = new Vector2Int(10, 10);
+        size = new Vector2Int(4, 4);
         TurnOnOff(true);
     }
 

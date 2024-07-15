@@ -1,3 +1,5 @@
+using UnityEditor.Build.Reporting;
+
 public class ResourcesPath
 {
     public static string[] prefabPathArray =
@@ -13,6 +15,12 @@ public class ResourcesPath
         // Tower
         "Prefabs/Buildings/Tower",
         "Prefabs/Buildings/Road",
-        "Prefabs/Buildings/EnergyBarrier"
+        "Prefabs/Buildings/EnergyBarrier"        
+    };
+
+    public static string[] MaterialPathArray =
+    {
+        "Materials/Temporary/Buildable",
+        "Materials/Temporary/Buildunable",
     };
 }

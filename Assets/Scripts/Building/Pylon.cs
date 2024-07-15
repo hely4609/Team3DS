@@ -10,5 +10,13 @@ public class Pylon : Building
 
     protected override void Initialize()
     {
+        // 디폴트 값.
+        type = BuildingEnum.Pylon;
+        buildingTimeMax = 10;
+        size = new Vector2Int(1, 1);
+        powerRange = 20;
     }
+
+    // 줄 기능.
+
 }
