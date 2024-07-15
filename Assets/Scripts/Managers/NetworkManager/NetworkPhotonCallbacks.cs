@@ -16,10 +16,8 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
     }
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-            Debug.Log("ぞし");
         if (runner.IsServer)
         {
-            Debug.Log("ぞし2");
             // Create a unique position for the player
             Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 3, 1, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
@@ -38,30 +36,47 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         var data = new NetworkInputData();
-
         if (Input.GetKey(KeyCode.W))
+        {
             data.direction += Vector3.forward;
+        }
 
         if (Input.GetKey(KeyCode.S))
+        {
             data.direction += Vector3.back;
+        }
 
         if (Input.GetKey(KeyCode.A))
+        {
             data.direction += Vector3.left;
+        }
 
         if (Input.GetKey(KeyCode.D))
+        {
             data.direction += Vector3.right;
+        }
 
         input.Set(data);
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
-    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) { }
-    public void OnConnectedToServer(NetworkRunner runner) 
+    public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
-    
+        GameManager.Instance.UIManager.ClaimError("Shutdowned", shutdownReason.ToString(), "OK");
     }
-    public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) { }
+    public void OnConnectedToServer(NetworkRunner runner) 
+    {
+        Debug.Log("Connected to server");
+    }
+    public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) 
+    { 
+        GameManager.Instance.UIManager.ClaimError("Disconneccted", reason.ToString(), "OK");
+    }
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
-    public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) { }
+    public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) 
+    { 
+        GameManager.Instance.UIManager.ClaimError("Connect failed", reason.ToString(), "OK");
+
+    }
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {

@@ -30,22 +30,7 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator SignUp(string inputID, string inputPassword)
     {
-        BackendReturnObject bro = null;
-        yield return new WaitForFunction(() =>
-        {
-            bro = Backend.BMember.CustomSignUp(inputID, inputPassword);
-        });
-        if(bro.IsSuccess())
-        {
-            Debug.Log("회원가입 성공! " + bro);
-            SignInCanvas signin = GameObject.FindAnyObjectByType<SignInCanvas>();
-            signin.CloseSignUp();
-            GameManager.Instance.UIManager.ClaimError("Success", "Signed up successfully", "OK");
-        }
-        else
-        {
-            GameManager.Instance.UIManager.ClaimError(bro.GetErrorCode(), bro.GetMessage(), "OK");
-        }
+        yield return null;
     }
 
     public static void ClaimSignIn(string inputID,  string inputPassword)
@@ -54,45 +39,7 @@ public partial class NetworkManager : Manager
     }
     public static IEnumerator SignIn(string inputID, string inputPassword)
     {
-        BackendReturnObject bro = null;
-        yield return new WaitForFunction(() =>
-        {
-            bro = Backend.BMember.CustomLogin(inputID, inputPassword);
-        });
-
-        if(bro.IsSuccess())
-        {
-            Debug.Log("로그인 성공 " + bro);
-            GameManager.Instance.NetworkManager.currentNetworkState = NetworkState.SignIn;
-            GameManager.ManagerStarts += () => GameManager.Instance.UIManager.Close(UIEnum.SignInCanvas);
-            BackendReturnObject getUserInfoResult = null;
-            yield return new WaitForFunction(() =>
-            {
-                getUserInfoResult = Backend.BMember.GetUserInfo();
-            });
-            if(getUserInfoResult.IsSuccess()) 
-            {
-                JsonData userInfoJson = getUserInfoResult.GetReturnValuetoJSON();
-                UserInfo gotInfo = new()
-                {
-                    gamerId = userInfoJson["row"]["gamerId"].ToString(),
-                    nickname = userInfoJson["row"]["nickname"]?.ToString()
-                };
-                GameManager.Instance.NetworkManager.myInfo = gotInfo;
-
-                if (GameManager.Instance.NetworkManager.MyNickname == null) GameManager.ManagerStarts += () => GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
-                
-                yield return new WaitWhile(() => GameManager.Instance.NetworkManager.MyNickname == null);
-            }
-            else
-            {
-                GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(getUserInfoResult.GetErrorCode(), getUserInfoResult.GetMessage(), "OK");
-            }
-        }
-        else
-        {
-            GameManager.Instance.UIManager.ClaimError(bro.GetErrorCode(), bro.GetMessage(), "OK");
-        }
+        yield return null;
     }
 
     public static void ClaimUpdateNickname(string inputNickname)
@@ -156,10 +103,7 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator Invate(string nickname)
     {
-        yield return new WaitForFunction(() =>
-        {
-            Backend.Match.InviteUser(nickname);
-        });
+        yield return null;
     }
 
     public static void ClaimAcceptInvite(SessionId roomId, string roomToken)
@@ -169,10 +113,7 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator AcceptInvite(SessionId roomId, string roomToken)
     {
-        yield return new WaitForFunction(() =>
-        {
-            Backend.Match.AcceptInvitation(roomId, roomToken);
-        });
+        yield return null;
     }
 
     public static void ClaimRejectInvite(SessionId roomId, string roomToken)
@@ -182,10 +123,7 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator RejectInvite(SessionId roomId, string roomToken)
     {
-        yield return new WaitForFunction(() =>
-        {
-            Backend.Match.DeclineInvitation(roomId, roomToken);
-        });
+        yield return null;
     }
 
     public static void ClaimLeaveRoom()
