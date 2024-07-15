@@ -36,7 +36,10 @@ public class Pylon : Building
     }
     public void SetRope(Vector3Int beforePos, Vector3Int nowPos)
     {
-
+        // 이전 위치 부터 현재 위치를 받아오고, 그 사이에 줄을 연결함.
+        GameObject ropePrefab = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Rope);
+        ropePrefab.transform.position = (Vector3)(nowPos - beforePos)*0.5f + (Vector3)(beforePos);
     }
+    //public void ResetRope()
 
 }

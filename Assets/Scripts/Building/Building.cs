@@ -22,8 +22,8 @@ public abstract class Building : MyComponent
     protected float completePercent; //(0~1) 제작한 퍼센트
     public float CompletePercent { get; set; }
 
-    [SerializeField] protected MeshRenderer mesh;
-    [SerializeField] protected BoxCollider boxCol;
+    [SerializeField] protected MeshRenderer[] mesh;
+    [SerializeField] protected Collider col;
 
     [SerializeField] protected bool isBuildable; // 이 장소에 건설할 수 있나
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
@@ -78,12 +78,18 @@ public abstract class Building : MyComponent
         if (isBuildable)
         {
             Debug.Log("OK");
-            mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+            foreach(MeshRenderer meshes in mesh)
+            {
+                meshes.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+            }
         }
         else
         {
             Debug.Log("안됨");
-            mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
+            foreach (MeshRenderer meshes in mesh)
+            { 
+                meshes.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
+            }
         }
     }
     public virtual bool FixPlace()
@@ -92,7 +98,7 @@ public abstract class Building : MyComponent
         if (CheckBuild())
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
-            boxCol.enabled = true;
+            col.enabled = true;
             return true;
         }
         else
