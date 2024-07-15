@@ -68,7 +68,8 @@ public partial class NetworkManager : Manager
         // NetworkRunner가 Shutdown 될 때 gameObject를 Destroy해서 GameManager가 들고있으면 GameManager를 삭제해버림
         // 그래서 새로운 오브젝트가 들게 하고 그 오브젝트의 NetworkRunner를 GetComponent함.
         // Create the Fusion runner and let it know that we will be providing user input
-        _runner = new GameObject("NetworkRunner");
+        //_runner = new GameObject("NetworkRunner");
+        _runner = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Photon"));
         _runner.AddComponent<NetworkRunner>();
         Runner.ProvideInput = true;
 
@@ -77,7 +78,9 @@ public partial class NetworkManager : Manager
         GameManager.NetworkUpdates += (deltaTime) => {
             if(!Runner)
             {
-                _runner = new GameObject("NetworkRunner");
+                Debug.Log("fuck");
+                //_runner = new GameObject("NetworkRunner");
+                _runner = Resources.Load<GameObject>("Photon");
                 _runner.AddComponent<NetworkRunner>();
             }
         };
@@ -101,7 +104,7 @@ public partial class NetworkManager : Manager
             GameMode = mode,
             SessionName = "TestRoom",
             Scene = scene,
-            SceneManager = GameManager.Instance.AddComponent<NetworkSceneManagerDefault>()
+            SceneManager = GameManager.Instance.NetworkManager.Runner.AddComponent<NetworkSceneManagerDefault>()
         }));
 
     }
