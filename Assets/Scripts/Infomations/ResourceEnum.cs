@@ -14,7 +14,10 @@ namespace ResourceEnum
         Tower,
         Road,
         EnergyBarrier,
+<<<<<<< HEAD
         Rope
+=======
+>>>>>>> Character
     }
 
     public enum Material
