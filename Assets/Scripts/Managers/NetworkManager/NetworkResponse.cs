@@ -10,37 +10,6 @@ public partial class NetworkManager : Manager
     public static int numberOfPeopleInRoom = 0;
     void RegistCallBackFunction()
     {
-        // 서버 매칭
-        Backend.Match.OnJoinMatchMakingServer = (args) =>
-        {
-            if(args.ErrInfo != ErrorInfo.Success)
-            {
-                GameManager.Instance.UIManager.ClaimError(args.ErrInfo.Category.ToString(), args.ErrInfo.Reason.ToString(), "OK");
-            }
-            
-        };
-
-        // 방 생성
-        Backend.Match.OnMatchMakingRoomCreate = (args) =>
-        {
-            
-            if(args.ErrInfo != ErrorCode.Success)
-            {
-                GameManager.Instance.UIManager.ClaimError(args.ErrInfo.ToString(), args.Reason.ToString(), "OK");
-            }
-            else
-            {
-                Debug.Log("방생성됨");
-                numberOfPeopleInRoom = 1;
-                LobbyScript lobby = GameObject.FindAnyObjectByType<LobbyScript>();
-                lobby.OpenRoom(true);
-                lobby.SetPlayerName(0, MyNickname);
-                lobby.SetPlayerName(1, "");
-                lobby.SetPlayerName(2, "");
-                lobby.SetPlayerName(3, "");
-            }
-        };
-
         // 초대 송신
         Backend.Match.OnMatchMakingRoomInvite = (args) =>
         {
