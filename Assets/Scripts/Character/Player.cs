@@ -122,6 +122,7 @@ public class Player : Character
                 designingBuilding.CheckBuild();
             }            
             
+
         }
 
     }
