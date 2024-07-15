@@ -14,6 +14,7 @@ namespace ResourceEnum
         Tower,
         Road,
         EnergyBarrier,
+        Rope
     }
 
     public enum Material

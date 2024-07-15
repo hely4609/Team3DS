@@ -12,6 +12,7 @@ public class ResourcesPath
         "Prefabs/UIs/BeInvitedWindow",
         // Character
         "Prefabs/Characters/Player",
+        "Prefabs/Characters/Rope",
         // Tower
         "Prefabs/Buildings/Tower",
         "Prefabs/Buildings/Road",

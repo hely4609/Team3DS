@@ -1,8 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Photon/PhotonUnityNetworking/Resources/PhotonServerSettings.asset.meta
+guid: a8fc7299bc5a03c408c8673f2db9df35
+========
 guid: 695b12f1d02ad8c4a8009b5ff3115f88
+>>>>>>>> Character:Assets/Sci Fi Assets/Simple SciFi Gun Turret Set/Fbx/Materials/2.mat.meta
 NativeFormatImporter:
   externalObjects: {}
-  mainObjectFileID: 2100000
+  mainObjectFileID: 11400000
   userData: 
   assetBundleName: 
   assetBundleVariant: 

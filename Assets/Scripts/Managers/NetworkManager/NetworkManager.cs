@@ -3,11 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using BackEnd;
 using BackEnd.Tcp;
-using Fusion;
-using UnityEngine.SceneManagement;
-using Unity.VisualScripting;
 
-// 네트워크 백엔드 : 뒤끝 -> 포톤
 public enum NetworkState
 {
     Offline, Initiating, Connected, SignIn,
@@ -17,20 +13,8 @@ public enum NetworkState
 }
 public partial class NetworkManager : Manager
 {
-    private GameObject _runner;
-    public NetworkRunner Runner
-    {
-        get
-        {
-            if(_runner) return _runner.GetComponent<NetworkRunner>();
-            else return null;
-        }
-
-    }
     NetworkState currentNetworkState = NetworkState.Offline;
     public NetworkState CurrentNetworkState => currentNetworkState;
-
-    string gameVersion = "1";
 
     public class UserInfo
     {
@@ -60,52 +44,33 @@ public partial class NetworkManager : Manager
             }
         }
     }
+
     
+
     public override IEnumerator Initiate()
     {
         GameManager.ClaimLoadInfo("Network Initializing");
-
-        // NetworkRunner가 Shutdown 될 때 gameObject를 Destroy해서 GameManager가 들고있으면 GameManager를 삭제해버림
-        // 그래서 새로운 오브젝트가 들게 하고 그 오브젝트의 NetworkRunner를 GetComponent함.
-        // Create the Fusion runner and let it know that we will be providing user input
-        //_runner = new GameObject("NetworkRunner");
-        _runner = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Photon"));
-        _runner.AddComponent<NetworkRunner>();
-        Runner.ProvideInput = true;
+        yield return null;
 
         currentNetworkState = NetworkState.Initiating;
+        var bro = Backend.Initialize(true);
 
-        GameManager.NetworkUpdates += (deltaTime) => {
-            if(!Runner)
-            {
-                Debug.Log("fuck");
-                //_runner = new GameObject("NetworkRunner");
-                _runner = Resources.Load<GameObject>("Photon");
-                _runner.AddComponent<NetworkRunner>();
-            }
-        };
-
+        if(bro.IsSuccess())
+        {
+            Debug.Log("초기화 성공! " + bro);
+            currentNetworkState = NetworkState.Connected;
+            RegistCallBackFunction();
+        }
+        else
+        {
+            Debug.Log("초기화 실패 " + bro);
+            currentNetworkState = NetworkState.Disconnected;
+        }
         yield return null;
     }
 
-    public IEnumerator StartGame(GameMode mode)
-    {
-        // Create the NetworkSceneInfo from the current scene
-        var scene = SceneRef.FromIndex(SceneManager.GetActiveScene().buildIndex);
-        var sceneInfo = new NetworkSceneInfo();
-        if (scene.IsValid)
-        {
-            sceneInfo.AddSceneRef(scene, LoadSceneMode.Additive);
-        }
-
-        // Start or join (depends on gamemode) a session with a specific name
-        yield return new WaitForFunction(()=> Runner.StartGame(new StartGameArgs()
-        {
-            GameMode = mode,
-            SessionName = "TestRoom",
-            Scene = scene,
-            SceneManager = GameManager.Instance.NetworkManager.Runner.AddComponent<NetworkSceneManagerDefault>()
-        }));
-
-    }
+    // Async vs Coroutine
+    // Async는 주어진 task가 끝나면 다음 메소드가 시행되는 경우에 좋고
+    // Coroutine은 여러 프레임에 걸쳐 메소드를 실행하는 경우에 유용하다
+    // 
 }

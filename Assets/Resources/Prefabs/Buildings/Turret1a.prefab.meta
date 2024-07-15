@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Photon/PhotonUnityNetworking/Code/Utilities.meta
+guid: 24daf1a6138e5ee4f86e7622f95b8561
+folderAsset: yes
+DefaultImporter:
+========
 guid: 4c05de522b5f922409f74e3d4e4c7a3e
 PrefabImporter:
+>>>>>>>> Character:Assets/Resources/Prefabs/Buildings/Turret1a.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Photon/PhotonUnityNetworking/Code/Interfaces.meta
+guid: 370a044025c59914083e50096d499773
+========
 guid: ea6f8cf51eb826b43912572e370fc9fe
+>>>>>>>> Character:Assets/Sci Fi Assets/Simple SciFi Gun Turret Set/Fbx/Materials.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
