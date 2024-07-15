@@ -8,7 +8,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/KYH.unity
     guid: ed2680e42d0ebe644b6f943ab7410fb1
-  - enabled: 1
-    path: Assets/Scenes/NetworkTest.unity
-    guid: fc660acd7c0e8d64f9e3aaed87ed1ed9
   m_configObjects: {}
