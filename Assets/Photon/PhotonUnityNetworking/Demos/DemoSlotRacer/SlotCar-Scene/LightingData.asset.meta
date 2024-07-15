@@ -1,5 +1,13 @@
 fileFormatVersion: 2
-guid: 7c8e0d280c24c4aba81a4294e87548ec
+<<<<<<<< HEAD:Assets/Photon/PhotonUnityNetworking/Demos/DemoSlotRacer/SlotCar-Scene/LightingData.asset.meta
+<<<<<<< HEAD
+guid: ebcebba443bae854ab2abe5a4fa5dbcb
+=======
+guid: 291b7a58d833c2048b32906ac1698838
+>>>>>>> Character
+========
+guid: fd781f3fe1f223143beab61594e5601b
+>>>>>>>> Character:Assets/Sci Fi Assets/Simple SciFi Gun Turret Set/Fbx/Materials/11 - Default.mat.meta
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 25800000
