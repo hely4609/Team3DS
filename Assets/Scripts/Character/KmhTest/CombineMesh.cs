@@ -5,8 +5,6 @@ using System.Collections;
 // CombineInstance stores the list of meshes.  These are combined
 // and assigned to the attached Mesh.
 
-[RequireComponent(typeof(MeshFilter))]
-[RequireComponent(typeof(MeshRenderer))]
 public class CombineMesh : MonoBehaviour
 {
     void Start()
@@ -19,14 +17,13 @@ public class CombineMesh : MonoBehaviour
         {
             combine[i].mesh = meshFilters[i].sharedMesh;
             combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
-            meshFilters[i].gameObject.SetActive(false);
-
+            
             i++;
         }
 
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
-        transform.GetComponent<MeshFilter>().sharedMesh = mesh;
-        transform.gameObject.SetActive(true);
+        
+        Debug.Log(mesh.bounds.size.y);
     }
 }
