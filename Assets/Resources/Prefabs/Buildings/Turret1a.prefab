@@ -489,6 +489,7 @@ MonoBehaviour:
   - {fileID: 8239844606282766427}
   - {fileID: 4267604265090691170}
   value: 0
+  isBuildComplete: 0
 --- !u!64 &5341527644010371962
 MeshCollider:
   m_ObjectHideFlags: 0

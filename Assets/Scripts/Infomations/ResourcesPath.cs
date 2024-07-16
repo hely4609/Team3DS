@@ -16,12 +16,15 @@ public class ResourcesPath
         // Tower
         "Prefabs/Buildings/Tower",
         "Prefabs/Buildings/Road",
-        "Prefabs/Buildings/EnergyBarrier"        
+        "Prefabs/Buildings/EnergyBarrier",
+        "Prefabs/Buildings/Turret1a",
+
     };
 
     public static string[] MaterialPathArray =
     {
         "Materials/Temporary/Buildable",
         "Materials/Temporary/Buildunable",
+        "Materials/Temporary/Turret1a"
     };
 }
