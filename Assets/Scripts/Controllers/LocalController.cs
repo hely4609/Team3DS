@@ -21,7 +21,7 @@ public class LocalController : ControllerBase
     {
         // 어떤 건물을 지을지 UI를 띄워준다.
         // 그리고 그 버튼을 누르면 거기서 플레이어의 건물짓기를 시도한다.
-        DoDesignBuilding?.Invoke(ResourceEnum.Prefab.Tower);
+        DoDesignBuilding?.Invoke(ResourceEnum.Prefab.Turret1a);
     }
     protected void OnBuild() 
     {
