@@ -19,10 +19,12 @@ public class LobbyScript : MonoBehaviour
             playerNicknames[i] = players[i].GetComponentInChildren<TextMeshProUGUI>();
             SetPlayerName(i, "");
         }
+        
         GameManager.ManagerStarts += (() =>
         {
             GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
         });
+        
     }
     public void StartHost()
     {
@@ -32,6 +34,16 @@ public class LobbyScript : MonoBehaviour
     public void LeaveRoom()
     {
         NetworkManager.ClaimLeaveRoom();
+    }
+
+    public void JoinRandomRoom()
+    {
+        NetworkManager.ClaimJoinRandomRoom();
+    }
+
+    public void JoinRoom(string roomName)
+    {
+        NetworkManager.ClaimJoinRoom(roomName);
     }
 
     public void OpenRoom(bool isHost)
@@ -54,8 +66,8 @@ public class LobbyScript : MonoBehaviour
 
     public void Invite()
     {
-        NetworkManager.ClaimInvite(nicknameWhoesToInvite.text);
-        CloseInviteWindow();
+        //NetworkManager.ClaimInvite(nicknameWhoesToInvite.text);
+        //CloseInviteWindow();
     }
 
     public void OpenInviteWindow()

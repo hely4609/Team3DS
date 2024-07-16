@@ -11,7 +11,7 @@ public class NicknameCanvas : MonoBehaviour
 
     public void UpdateNickname()
     {
-        NetworkManager.UpdateNickname(inputNickname.text);
+        NetworkManager.ClaimUpdateNickname(inputNickname.text);
     }
 
     public void Close()
