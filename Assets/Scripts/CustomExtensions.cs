@@ -2,6 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IInteraction
+{
+    public bool Interaction();
+}
+
+
 public static class CustomExtensions
 {
     public static string GetFileName(this string path)
@@ -36,4 +42,5 @@ public static class CustomExtensions
         return newPath[(path.LastIndexOf("/") + 1)..];
 
     }
+
 }

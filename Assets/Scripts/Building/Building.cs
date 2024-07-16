@@ -2,6 +2,7 @@ using ExitGames.Client.Photon.StructWrapping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum BuildingEnum
 {
@@ -11,7 +12,7 @@ public enum BuildingEnum
     Barrier
 }
 
-public abstract class Building : MyComponent
+public abstract class Building : MyComponent, IInteraction
 {
     protected BuildingEnum type; // 타워 종류
     protected bool isNeedLine; // 전선이 필요한가?
@@ -21,8 +22,8 @@ public abstract class Building : MyComponent
     protected float completePercent; //(0~1) 제작한 퍼센트
     public float CompletePercent { get; set; }
 
-    [SerializeField] protected MeshRenderer[] mesh;
-    [SerializeField] protected Collider col;
+    [SerializeField] protected MeshRenderer[] meshes;
+    [SerializeField] protected Collider[] cols;
 
     [SerializeField] protected bool isBuildable; // 이 장소에 건설할 수 있나
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
@@ -78,7 +79,7 @@ public abstract class Building : MyComponent
         {
             Debug.Log("OK");
             
-                foreach(MeshRenderer render in mesh)
+                foreach(MeshRenderer render in meshes)
                 {
                     render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
                 }
@@ -88,19 +89,22 @@ public abstract class Building : MyComponent
         else
         {
             Debug.Log("안됨");
-            foreach (MeshRenderer render in mesh)
+            foreach (MeshRenderer render in meshes)
             { 
                 render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
             }
         }
     }
-    public virtual bool FixPlace()
+    public virtual bool FixPlace() // 건설완료
     {
         startPos = tiledBuildingPositionLast;
         if (CheckBuild())
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
-            col.enabled = true;
+            foreach (Collider col in cols)
+            {
+                col.enabled = true;
+            }
             return true;
         }
         else
@@ -108,4 +112,20 @@ public abstract class Building : MyComponent
             return false;
         }
     } // 위치를 고정함.
+
+    public bool Interaction()
+    {
+            foreach (MeshRenderer r in meshes)
+            {
+                //r.material.SetFloat("_CompletValue", value);
+            }
+
+            if (completePercent >= 1)
+            {
+                foreach (MeshRenderer r in meshes)
+                    r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+            }
+        
+        return true;
+    }
 }
