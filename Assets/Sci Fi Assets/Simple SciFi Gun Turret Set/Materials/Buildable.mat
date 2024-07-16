@@ -63,6 +63,10 @@ Material:
     - _BUILTIN_ZWrite: 1
     - _BUILTIN_ZWriteControl: 0
     - _CompletValue: 0
+    - _CompletePercent: 0
+    - _Height: 8
+    - _HeightMax: 0
+    - _HeightMin: 0
     - _Metallic_Value: 1
     - _Smoothness_Value: 1
     - _Split_Value: 0.76

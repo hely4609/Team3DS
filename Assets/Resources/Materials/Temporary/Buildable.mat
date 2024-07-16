@@ -78,6 +78,7 @@ Material:
     - _BUILTIN_QueueOffset: 0
     - _BumpScale: 1
     - _CompletValue: 0
+    - _CompletePercent: 0
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 10

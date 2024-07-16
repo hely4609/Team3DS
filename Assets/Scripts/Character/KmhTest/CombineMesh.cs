@@ -25,5 +25,9 @@ public class CombineMesh : MonoBehaviour
         mesh.CombineMeshes(combine);
         
         Debug.Log(mesh.bounds.size.y);
+        Debug.Log(mesh.bounds.max.y);
+        Debug.Log(mesh.bounds.min.y);
+
+        Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));   
     }
 }

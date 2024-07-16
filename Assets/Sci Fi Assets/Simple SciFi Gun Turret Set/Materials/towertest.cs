@@ -4,12 +4,40 @@ using UnityEngine;
 
 public class towertest : Tower
 {
-    [Range(0,10)]
+    [Range(0,1)]
     [SerializeField] float value;
+    [SerializeField] float min;
+    [SerializeField] float max;
     [SerializeField] bool isBuildComplete;
     void Start()
     {
-        
+        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+        int i = 0;
+        while (i < meshFilters.Length)
+        {
+            combine[i].mesh = meshFilters[i].sharedMesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+
+            i++;
+        }
+
+        Mesh mesh = new Mesh();
+        mesh.CombineMeshes(combine);
+
+        max = mesh.bounds.max.y;
+        min = mesh.bounds.min.y;
+        Debug.Log(mesh.bounds.max.y);
+        Debug.Log(mesh.bounds.min.y);
+
+        Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));
+
+        foreach (var r in meshes)
+        {
+            r.material.SetFloat("_HeightMin", min);
+            r.material.SetFloat("_HeightMax", max);
+        }
     }
 
     // Update is called once per frame
@@ -17,7 +45,7 @@ public class towertest : Tower
     {
         foreach (var r in meshes) 
         {
-            r.material.SetFloat("_CompletValue", value);
+            r.material.SetFloat("_CompletePercent", value);
         }
 
         if (isBuildComplete)
