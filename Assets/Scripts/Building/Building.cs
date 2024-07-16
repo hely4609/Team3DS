@@ -21,7 +21,7 @@ public abstract class Building : MyComponent
     protected float completePercent; //(0~1) 제작한 퍼센트
     public float CompletePercent { get; set; }
 
-    [SerializeField] protected MeshRenderer mesh;
+    [SerializeField] protected MeshRenderer[] mesh;
     [SerializeField] protected Collider col;
 
     [SerializeField] protected bool isBuildable; // 이 장소에 건설할 수 있나
@@ -77,17 +77,20 @@ public abstract class Building : MyComponent
         if (isBuildable)
         {
             Debug.Log("OK");
-            //foreach(MeshRenderer meshes in mesh)
-            {
-                mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
-            }
+            
+                foreach(MeshRenderer render in mesh)
+                {
+                    render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+                }
+                
+            
         }
         else
         {
             Debug.Log("안됨");
-            //foreach (MeshRenderer meshes in mesh)
+            foreach (MeshRenderer render in mesh)
             { 
-                mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
+                render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
             }
         }
     }
