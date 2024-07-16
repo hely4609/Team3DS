@@ -7,177 +7,103 @@ using BackEnd.Tcp;
 using UnityEngine.SceneManagement;
 using System;
 using Unity.VisualScripting;
+using Fusion;
+using UnityEngine.InputSystem;
+using System.Threading.Tasks;
 
+public enum GameType : int
+{
+    Default,
+}
+
+public enum GameMap : int
+{
+    Default,
+}
 public partial class NetworkManager : Manager
 {
 
     public static void ClaimSignUp(string  inputID, string inputPassword) 
     {
-        GameManager.Instance.StartCoroutine(SignUpStart(inputID, inputPassword));
+        GameManager.Instance.StartCoroutine(SignUp(inputID, inputPassword));
     }
 
-    public static IEnumerator SignUpStart(string inputID, string inputPassword)
+    public static IEnumerator SignUp(string inputID, string inputPassword)
     {
-        BackendReturnObject bro = null;
-        yield return new WaitForFunction(() =>
-        {
-            bro = Backend.BMember.CustomSignUp(inputID, inputPassword);
-        });
-        if(bro.IsSuccess())
-        {
-            Debug.Log("회원가입 성공! " + bro);
-            SignInCanvas signin = GameObject.FindAnyObjectByType<SignInCanvas>();
-            signin.CloseSignUp();
-            GameManager.Instance.UIManager.ClaimError("Success", "Signed up successfully", "OK");
-        }
-        else
-        {
-            GameManager.Instance.UIManager.ClaimError(bro.GetErrorCode(), bro.GetMessage(), "OK");
-        }
+        yield return null;
     }
 
     public static void ClaimSignIn(string inputID,  string inputPassword)
     {
-        GameManager.Instance.StartCoroutine(SignInStart(inputID, inputPassword));
+        GameManager.Instance.StartCoroutine(SignIn(inputID, inputPassword));
     }
-    public static IEnumerator SignInStart(string inputID, string inputPassword)
+    public static IEnumerator SignIn(string inputID, string inputPassword)
     {
-        BackendReturnObject bro = null;
-        yield return new WaitForFunction(() =>
-        {
-            bro = Backend.BMember.CustomLogin(inputID, inputPassword);
-        });
-
-        if(bro.IsSuccess())
-        {
-            Debug.Log("로그인 성공 " + bro);
-            GameManager.Instance.NetworkManager.currentNetworkState = NetworkState.SignIn;
-            GameManager.ManagerStarts += () => GameManager.Instance.UIManager.Close(UIEnum.SignInCanvas);
-            BackendReturnObject getUserInfoResult = null;
-            yield return new WaitForFunction(() =>
-            {
-                getUserInfoResult = Backend.BMember.GetUserInfo();
-            });
-            if(getUserInfoResult.IsSuccess()) 
-            {
-                JsonData userInfoJson = getUserInfoResult.GetReturnValuetoJSON();
-                UserInfo gotInfo = new()
-                {
-                    gamerId = userInfoJson["row"]["gamerId"].ToString(),
-                    nickname = userInfoJson["row"]["nickname"]?.ToString()
-                };
-                GameManager.Instance.NetworkManager.myInfo = gotInfo;
-
-                if (GameManager.Instance.NetworkManager.MyNickname == null) GameManager.ManagerStarts += () => GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
-                
-                yield return new WaitWhile(() => GameManager.Instance.NetworkManager.MyNickname == null);
-                yield return MatchMakingServerStart();
-            }
-            else
-            {
-                GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(getUserInfoResult.GetErrorCode(), getUserInfoResult.GetMessage(), "OK");
-            }
-        }
-        else
-        {
-            GameManager.Instance.UIManager.ClaimError(bro.GetErrorCode(), bro.GetMessage(), "OK");
-        }
+        yield return null;
     }
 
-    public static void UpdateNickname(string inputNickname)
+    public static void ClaimUpdateNickname(string inputNickname)
     {
-        GameManager.Instance.StartCoroutine(UpdateNicknameStart(inputNickname));
+        GameManager.Instance.StartCoroutine(UpdateNickname(inputNickname));
     }
 
-    public static IEnumerator UpdateNicknameStart(string inputNickname)
+    public static IEnumerator UpdateNickname(string inputNickname)
     {
-        BackendReturnObject bro = null;
-        yield return new WaitForFunction(() =>
-        {
-            bro = Backend.BMember.UpdateNickname(inputNickname);
+        yield return null;
 
-        });
-        if(bro.IsSuccess())
+        // 임시
+        UserInfo gotInfo = new()
         {
-            GameManager.Instance.UIManager.Close(UIEnum.SetNicknameCanvas);
-            GameManager.Instance.UIManager.ClaimError("Success", "Nickname has been changed successfully", "OK");
-        }
-        else
-        {
-            GameManager.Instance.UIManager.ClaimError(bro.GetErrorCode(), bro.GetMessage(), "OK");
-
-        }
-
-    }
-
-    public static void ClaimMatchMakingServer()
-    {
-        GameManager.Instance.StartCoroutine(MatchMakingServerStart());
-    }
-
-    public static IEnumerator MatchMakingServerStart()
-    {
-        ErrorInfo errorInfo;
-        yield return new WaitForFunction(() =>
-        {
-            if(!Backend.Match.JoinMatchMakingServer(out errorInfo))
-            {
-                GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(errorInfo.Category.ToString(), errorInfo.Reason.ToString(), "OK", ()=>SceneManager.LoadScene(0));
-            }
-        });
-        // 서버에 접속했으면 델리게이트에 매치폴 넣어주기!(중요)
-        GameManager.NetworkUpdates -= (deltaTime) => Backend.Match.Poll();
-        GameManager.NetworkUpdates += (deltaTime) => Backend.Match.Poll();
-
-        BackendReturnObject gotMatchCards = null;
-        yield return new WaitForFunction(() =>
-        {
-            gotMatchCards = Backend.Match.GetMatchList();
-        });
-        if(!gotMatchCards.IsSuccess())
-        {
-            GameManager.ManagerStarts += () => GameManager.Instance.UIManager.ClaimError(gotMatchCards.GetErrorCode(), gotMatchCards.GetMessage(), "OK", () => SceneManager.LoadScene(0));
-        }
+            gamerId = null,
+            nickname = inputNickname
+        };
+        GameManager.Instance.NetworkManager.myInfo = gotInfo;
         
-        List<MatchCard> matchCards = new();
-        JsonData matchCardsJson = gotMatchCards.FlattenRows();
-        foreach (JsonData currentRow in matchCardsJson)
-        {
-            MatchCard card = new();
-            card.inDate = currentRow["inDate"].ToString();
-            // ※ matchType은 FirstCharacterToUpper() 해줘야됨!
-            Enum.TryParse(currentRow["matchType"].ToString().FirstCharacterToUpper(), out card.matchType);
-            Enum.TryParse(currentRow["matchModeType"].ToString(), out card.matchModeType);
-            matchCards.Add(card);
-        }
-        GameManager.Instance.NetworkManager.matchCardArray = matchCards.ToArray();
-        Debug.Log("매치카드 로딩 성공");
+        GameManager.Instance.UIManager.Close(UIEnum.SetNicknameCanvas);
+        GameManager.Instance.UIManager.ClaimError("Success", "Nickname has been changed successfully", "OK");
+
     }
 
-    public static void ClaimMakeRoom()
+    public static void ClaimStartHost()
     {
-        GameManager.Instance.StartCoroutine(MakeRoomStart());
+        _ = StartHost(GameManager.Instance.NetworkManager.Runner, GameMap.Default, GameType.Default);
     }
 
-    public static IEnumerator MakeRoomStart()
+    public static async Task StartHost(NetworkRunner runner, GameMap gameMap, GameType gameType)
     {
-        yield return new WaitForFunction(() =>
+        var customProps = new Dictionary<string, SessionProperty>();
+        customProps["map"] = (int)gameMap;
+        customProps["type"] = (int)gameType;
+
+        GameManager.ClaimLoadInfo("Game scene");
+        var result = await runner.StartGame(new StartGameArgs()
         {
-            Backend.Match.CreateMatchRoom();
+            GameMode = GameMode.Host,
+            SessionProperties = customProps,
+            //CustomLobbyName = $"{GameManager.Instance.NetworkManager.MyNickname}'s lobby",
         });
+        GameManager.CloseLoadInfo();
+
+        if (result.Ok)
+        {
+            // all good
+            GameObject.Find("LobbyCanvas").SetActive(false);
+        }
+        else
+        {
+            GameManager.Instance.UIManager.ClaimError("Failed to Start", result.ShutdownReason.ToString(), "OK");
+        }
+
     }
 
     public static void ClaimInvite(string nickname)
     {
-        GameManager.Instance.StartCoroutine(InvateStart(nickname));
+        GameManager.Instance.StartCoroutine(Invate(nickname));
     }
 
-    public static IEnumerator InvateStart(string nickname)
+    public static IEnumerator Invate(string nickname)
     {
-        yield return new WaitForFunction(() =>
-        {
-            Backend.Match.InviteUser(nickname);
-        });
+        yield return null;
     }
 
     public static void ClaimAcceptInvite(SessionId roomId, string roomToken)
@@ -187,10 +113,7 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator AcceptInvite(SessionId roomId, string roomToken)
     {
-        yield return new WaitForFunction(() =>
-        {
-            Backend.Match.AcceptInvitation(roomId, roomToken);
-        });
+        yield return null;
     }
 
     public static void ClaimRejectInvite(SessionId roomId, string roomToken)
@@ -200,10 +123,7 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator RejectInvite(SessionId roomId, string roomToken)
     {
-        yield return new WaitForFunction(() =>
-        {
-            Backend.Match.DeclineInvitation(roomId, roomToken);
-        });
+        yield return null;
     }
 
     public static void ClaimLeaveRoom()
@@ -213,10 +133,54 @@ public partial class NetworkManager : Manager
 
     public static IEnumerator LeaveRoom()
     {
-        yield return new WaitForFunction(() =>
+        yield return null;
+    }
+
+    public static void ClaimJoinRandomRoom()
+    {
+        _ = JoinRandomRoom(GameManager.Instance.NetworkManager.Runner, GameMap.Default, GameType.Default);
+    }
+
+    public static async Task JoinRandomRoom(NetworkRunner runner, GameMap gameMap, GameType gameType)
+    {
+        var customProps = new Dictionary<string, SessionProperty>();
+        customProps["map"] = (int)gameMap;
+        customProps["type"] = (int)gameType;
+
+        var result = await runner.StartGame(new StartGameArgs()
         {
-            Backend.Match.LeaveMatchRoom();
+            GameMode = GameMode.Client,
+            SessionProperties = customProps,
         });
+
+        if (result.Ok)
+        {
+            // all good
+            GameObject.Find("LobbyCanvas").SetActive(false);
+        }
+        else
+        {
+            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), result.ErrorMessage, "OK");
+        }
+    }
+
+    public static void ClaimJoinRoom(string roomName)
+    {
+        _ = JoinRoom(GameManager.Instance.NetworkManager.Runner, roomName);
+    }
+
+    public static async Task JoinRoom(NetworkRunner runner, string roomName)
+    {
+        var result = await runner.JoinSessionLobby(SessionLobby.Custom, roomName);
+
+        if (result.Ok)
+        {
+            // all good
+        }
+        else
+        {
+            Debug.LogError($"Failed to Start: {result.ShutdownReason}");
+        }
     }
 
     public static void ClaimMatchMaking()
