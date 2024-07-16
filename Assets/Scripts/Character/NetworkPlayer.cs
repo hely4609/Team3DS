@@ -4,25 +4,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using static NetworkPhotonCallbacks;
 
-public class PhotonPlayer : Character
+public class NetworkPlayer : Player
 {
     private NetworkCharacterController _cc;
 
-    protected Vector3 moveDir;
-    protected Vector3 currentDir = Vector3.zero;
     private void Awake()
     {
         _cc = GetComponent<NetworkCharacterController>();
     }
-    protected override void MyStart()
+
+    protected override void MyUpdate(float deltaTime)
     {
-        if (rb == null)
-        {
-            rb = GetComponent<Rigidbody>();
-        }
 
     }
-
 
     public override void FixedUpdateNetwork()
     {
@@ -38,4 +32,5 @@ public class PhotonPlayer : Character
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
     }
+
 }

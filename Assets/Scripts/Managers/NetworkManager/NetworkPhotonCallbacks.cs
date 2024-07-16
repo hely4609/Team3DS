@@ -5,58 +5,46 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public struct NetworkInputData : INetworkInput
+{
+    public Vector3 direction;
+}
 
 public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab;
+    [SerializeField]NetworkPlayer controlledCharacter;
+
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
-    public struct NetworkInputData : INetworkInput
-    {
-        public Vector3 direction;
-    }
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (runner.IsServer)
         {
-            
             // Create a unique position for the player
             Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 3, 1, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
-            
+
+            controlledCharacter = networkPlayerObject.GetComponent<NetworkPlayer>();
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         if (_spawnedCharacters.TryGetValue(player, out NetworkObject networkObject))
         {
+            controlledCharacter = null;
             runner.Despawn(networkObject);
             _spawnedCharacters.Remove(player);
         }
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+        if (controlledCharacter == null) return;
         var data = new NetworkInputData();
-        if (Input.GetKey(KeyCode.W))
-        {
-            data.direction += Vector3.forward;
-        }
 
-        if (Input.GetKey(KeyCode.S))
-        {
-            data.direction += Vector3.back;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            data.direction += Vector3.left;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            data.direction += Vector3.right;
-        }
+        //Debug.Log(controlledCharacter.moveDir);
+        data.direction = controlledCharacter.moveDir;
 
         input.Set(data);
     }
