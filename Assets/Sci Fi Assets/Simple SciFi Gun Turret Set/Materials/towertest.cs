@@ -6,10 +6,13 @@ public class towertest : Tower
 {
     [Range(0,1)]
     [SerializeField] float value;
-    [SerializeField] float min;
-    [SerializeField] float max;
     [SerializeField] bool isBuildComplete;
     void Start()
+    {
+        HeightCheck();
+    }
+
+    protected void HeightCheck()
     {
         MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
         CombineInstance[] combine = new CombineInstance[meshFilters.Length];
@@ -26,8 +29,8 @@ public class towertest : Tower
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
 
-        max = mesh.bounds.max.y;
-        min = mesh.bounds.min.y;
+        float max = mesh.bounds.max.y;
+        float min = mesh.bounds.min.y;
         Debug.Log(mesh.bounds.max.y);
         Debug.Log(mesh.bounds.min.y);
 
@@ -39,7 +42,6 @@ public class towertest : Tower
             r.material.SetFloat("_HeightMax", max);
         }
     }
-
     // Update is called once per frame
     void Update()
     {

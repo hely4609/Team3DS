@@ -2,9 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+public enum Interaction
+{
+    // 건물짓기, 켜고끄기, 수리, 버리기, 줍기, 납품, 
+    Build, OnOff, Repair, Dump, Pick, Deliver, 
+}
 public interface IInteraction
 {
-    public bool Interaction();
+    // 인터액션 enum 제작해야함. 
+    public bool InteractionStart(Interaction interactionType);
+
+    public bool Interaction(float deltaTime);
+
+    public bool InteractionEnd();
 }
 
 

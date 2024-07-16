@@ -113,11 +113,19 @@ public abstract class Building : MyComponent, IInteraction
         }
     } // 위치를 고정함.
 
-    public bool Interaction()
+    public bool Interaction(float deltaTime) // 상호작용시 적용할 함수. 제작을 진행함.
     {
+        // 마우스를 누르고 있으면 점점 수치가 차오름.
+        // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
+
+        // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.
+        
+        // 완성되면 완성본 Material로 한다.
+
+        // 건설 완료시 
             foreach (MeshRenderer r in meshes)
             {
-                //r.material.SetFloat("_CompletValue", value);
+                r.material.SetFloat("_CompletPercent", CompletePercent);
             }
 
             if (completePercent >= 1)
@@ -127,5 +135,37 @@ public abstract class Building : MyComponent, IInteraction
             }
         
         return true;
+    }
+
+
+    protected void HeightCheck()
+    {
+        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+        int i = 0;
+        while (i < meshFilters.Length)
+        {
+            combine[i].mesh = meshFilters[i].sharedMesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+
+            i++;
+        }
+
+        Mesh mesh = new Mesh();
+        mesh.CombineMeshes(combine);
+
+        float max = mesh.bounds.max.y;
+        float min = mesh.bounds.min.y;
+        Debug.Log(mesh.bounds.max.y);
+        Debug.Log(mesh.bounds.min.y);
+
+        Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));
+
+        foreach (var r in meshes)
+        {
+            r.material.SetFloat("_HeightMin", min);
+            r.material.SetFloat("_HeightMax", max);
+        }
     }
 }
