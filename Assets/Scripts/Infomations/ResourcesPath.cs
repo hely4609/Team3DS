@@ -1,5 +1,3 @@
-using UnityEditor.Build.Reporting;
-
 public class ResourcesPath
 {
     public static string[] prefabPathArray =
