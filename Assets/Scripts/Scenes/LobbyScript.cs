@@ -21,12 +21,12 @@ public class LobbyScript : MonoBehaviour
         }
         GameManager.ManagerStarts += (() =>
         {
-            GameManager.Instance.UIManager.Open(UIEnum.SignInCanvas);
+            GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
         });
     }
-    public void MakingRoom()
+    public void StartHost()
     {
-        NetworkManager.ClaimMakeRoom();
+        NetworkManager.ClaimStartHost();
     }
 
     public void LeaveRoom()
