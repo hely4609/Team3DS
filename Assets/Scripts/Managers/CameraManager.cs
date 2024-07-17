@@ -34,12 +34,12 @@ public class CameraManager : Manager
                 observingPlayer = controller.ControlledPlayer;
             }
         }
-        /*
+
         if (observingPlayer.CameraOffset)
         {
             mainCamera.transform.position = observingPlayer.CameraOffset.position;
             mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
         }
-        */
+
     }
 }

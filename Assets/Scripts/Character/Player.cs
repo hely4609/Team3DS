@@ -3,13 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem.XR;
 using UnityEngine.UIElements;
+using TMPro;
+using UnityEngine.UI;
 
 public class Player : Character
 {
     protected ControllerBase possessionController;
-    protected Transform cameraOffset;
+    [SerializeField]protected Transform cameraOffset;
     public Transform CameraOffset => cameraOffset;
-
+         
+    public List<IInteraction> interactionObjectList = new List<IInteraction>();
+    public IInteraction interactionObject;
     protected GameObject bePicked;
     // protected bool isHandFree;
     protected Building designingBuilding;
@@ -29,11 +33,14 @@ public class Player : Character
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
+        targetController.DoInteraction -= Interaction;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
         targetController.DoDesignBuilding += DesignBuiling;
         targetController.DoBuild += Build;
+        targetController.DoInteraction += Interaction;
+
 
     }
     protected void UnRegistrationFunction(ControllerBase targetController)
@@ -42,6 +49,7 @@ public class Player : Character
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
+        targetController.DoInteraction -= Interaction;
     }
 
     public virtual void Possession(ControllerBase targetController)
@@ -113,7 +121,7 @@ public class Player : Character
             Vector3 pickPos = transform.position + transform.forward * 5f;
             int x = (int)pickPos.x;
             int z = (int)pickPos.z;
-            designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.lossyScale.y * 0.5f, z);
+            designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.position.y, z);
 
             Vector2Int currentPos = new Vector2Int(x, z);
             if (designingBuilding.TiledBuildingPos != currentPos)
@@ -121,10 +129,9 @@ public class Player : Character
                 designingBuilding.TiledBuildingPos = currentPos;
                 designingBuilding.CheckBuild();
             }            
-            
-
         }
 
+        
     }
 
     public override void Move(Vector3 direction)
@@ -140,20 +147,11 @@ public class Player : Character
         mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
         rotate_x = rotate_x + mouseDelta_y;
         rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        if (cameraOffset == null)
-        {
-            cameraOffset = transform.Find("CameraOffset");
-        }
+        
         cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
-
-    //public bool DesignBuiling(BuildingEnum wantBuilding) 
-    //{
-        
-    //    return default; 
-    //}
 
     public bool DesignBuiling(ResourceEnum.Prefab wantBuilding)
     {
@@ -175,4 +173,50 @@ public class Player : Character
         return false; 
     }
     public bool Repair(EnergyBarrierGenerator target) { return default; }
+
+    public bool Interaction<T> (T target) where T : IInteraction
+    {
+        if (target == null) return false;
+        
+        
+        return default;
+    }
+
+    //public void CheckInteractionObject()
+    //{
+    //    RaycastHit[] hits = Physics.SphereCastAll(transform.position + transform.forward, 1f, Vector3.up, 0f);
+
+    //    foreach (RaycastHit hit in hits) 
+    //    {
+    //        hit.transform.gameObject.TryGetComponent(out IInteraction inst);
+    //    }
+    //}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out IInteraction interactableObj))
+        {
+            if (interactionObjectList.Exists(target => target == interactableObj)) return;
+            
+            interactionObjectList.Add(interactableObj);
+            //if (interactionObjectList.Count > 0)
+            //{
+            //    // UI매니저한테 상호작용오브젝트리스트 드롭다운 UI출력 부탁
+            //    // 드롭다운에 해당 오브젝트에 관한 내용추가
+            //}
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out IInteraction target))
+        {
+            interactionObjectList.Remove(target);
+            //if (interactionObjectList.Count == 0)
+            //{
+            //    // UI매니저한테 드롭다운 꺼달라하기
+            //    // 드롭다운에 해당 오브젝트에 관한 내용제거
+            //}
+        }
+    }
 }
