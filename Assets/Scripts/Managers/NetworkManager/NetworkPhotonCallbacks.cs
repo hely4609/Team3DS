@@ -5,15 +5,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MyButtons
+{
+    Forward = 0,
+    Backward = 1,
+    Left = 2,
+    Right = 3,
+}
 public struct NetworkInputData : INetworkInput
 {
     public Vector3 direction;
+    public Vector2 lookRotationDelta;
+    public NetworkButtons buttons;
 }
 
 public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab;
-    [SerializeField]NetworkPlayer controlledCharacter;
 
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -26,26 +34,25 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
 
-            controlledCharacter = networkPlayerObject.GetComponent<NetworkPlayer>();
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
     {
         if (_spawnedCharacters.TryGetValue(player, out NetworkObject networkObject))
         {
-            controlledCharacter = null;
             runner.Despawn(networkObject);
             _spawnedCharacters.Remove(player);
         }
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
-        if (controlledCharacter == null) return;
         var data = new NetworkInputData();
-
-        //Debug.Log(controlledCharacter.moveDir);
-        data.direction = controlledCharacter.moveDir;
-
+        
+        data.buttons.Set(MyButtons.Forward, Input.GetKey(KeyCode.W));
+        data.buttons.Set(MyButtons.Backward, Input.GetKey(KeyCode.S));
+        data.buttons.Set(MyButtons.Left, Input.GetKey(KeyCode.A));
+        data.buttons.Set(MyButtons.Right, Input.GetKey(KeyCode.D));
+        
         input.Set(data);
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }

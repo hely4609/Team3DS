@@ -132,7 +132,7 @@ public class Player : Character
         moveDir = direction.normalized;
     }
 
-    public void ScreenRotate(Vector2 mouseDelta)
+    public virtual void ScreenRotate(Vector2 mouseDelta)
     {
         rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
         transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);

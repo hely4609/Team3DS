@@ -3473,7 +3473,7 @@ GameObject:
   - component: {fileID: 5314609561174821285}
   - component: {fileID: 7972636452116571196}
   m_Layer: 0
-  m_Name: Body
+  m_Name: MANUKA_Obsidian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3488,7 +3488,7 @@ Transform:
   m_GameObject: {fileID: 1129097313062114863}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.08, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3511,7 +3511,7 @@ Animator:
   m_GameObject: {fileID: 1129097313062114863}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e6b3fb3160346e6429c0c3b0fe8f5b59, type: 2}
-  m_Controller: {fileID: 9100000, guid: c51b68bdbb26bac4c847bd08000c3830, type: 2}
+  m_Controller: {fileID: 9100000, guid: 15fb6cc6d874d5349a7540193bf51f2a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
