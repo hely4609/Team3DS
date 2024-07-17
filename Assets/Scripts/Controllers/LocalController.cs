@@ -29,5 +29,8 @@ public class LocalController : ControllerBase
     }
     protected void OnRepair() { }
     ////////////////////////////////////////////
-    //protected void OnInteract() { }
+    protected void OnInteraction() 
+    {
+        //DoInteraction?.Invoke(ControlledPlayer.interactionObject);
+    }
 }
