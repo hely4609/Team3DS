@@ -5,15 +5,16 @@ using UnityEngine;
 
 public enum Interaction
 {
-    // 건물짓기, 켜고끄기, 수리, 버리기, 줍기, 납품, 
-    Build, OnOff, Repair, Dump, Pick, Deliver, 
+    // 아무것도 안함, 건물짓기, 켜고끄기, 수리, 버리기, 줍기, 납품, 전선 잡기
+    None, Build, OnOff, Repair, Dump, Pick, Deliver, takeRope
 }
+
 public interface IInteraction
 {
     // 인터액션 enum 제작해야함. 
-    public bool InteractionStart(Interaction interactionType);
+    public Interaction InteractionStart( Player player);
 
-    public bool Interaction(float deltaTime);
+    public bool InteractionUpdate(float deltaTime);
 
     public bool InteractionEnd();
 }

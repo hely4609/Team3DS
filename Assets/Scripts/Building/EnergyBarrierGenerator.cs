@@ -13,18 +13,18 @@ public class EnergyBarrierGenerator : Building
     protected bool onOff; // on/off시 올라오고 내려가는 연출 like 경찰바리게이트 
 
     public void SetActiveEnergyBarrier()  // 현재 On인지 Off인제 
-    { 
-        for(int i = 0; i< energyBarrierArray.Length; i++)
+    {
+        for (int i = 0; i < energyBarrierArray.Length; i++)
         {
             energyBarrierArray[i].SetActive(onOff);
         }
     }
-    public void TakeDamage(int damage) 
+    public void TakeDamage(int damage)
     {
         hpCurrent -= damage;
         if (hpCurrent <= 0)
         {
-            onOff= false;
+            onOff = false;
             SetActiveEnergyBarrier();
         }
         Debug.Log($"{HpCurrent} / {gameObject.name}");
@@ -32,7 +32,7 @@ public class EnergyBarrierGenerator : Building
     public void RepairBarrier()
     {
         hpCurrent += 1;
-        if(hpCurrent >= hpMax)
+        if (hpCurrent >= hpMax)
         {
             hpCurrent = hpMax;
             onOff = true;
@@ -47,8 +47,20 @@ public class EnergyBarrierGenerator : Building
         onOff = true;
         hpMax = 3;
         hpCurrent = hpMax;
-        energyBarrierArray =  GameObject.FindGameObjectsWithTag("EnergyBarrier");
-        
+        energyBarrierArray = GameObject.FindGameObjectsWithTag("EnergyBarrier");
+
         SetActiveEnergyBarrier();
+    }
+
+    public override Interaction InteractionStart(Player player)
+    {
+        if (!onOff) // 에너지방벽이 고장났다면
+        {
+            return Interaction.Repair;
+        }
+        else
+        {
+            return Interaction.None;
+        }
     }
 }

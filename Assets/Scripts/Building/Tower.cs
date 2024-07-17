@@ -33,7 +33,19 @@ public class Tower : Building
         size = new Vector2Int(4, 4);
         TurnOnOff(true);
     }
-
+    public override Interaction InteractionStart(Player player)
+    {
+        // 완성이 아직 안됨.
+        if (completePercent < 1)
+        {
+            return Interaction.Build;
+        }
+        else
+        {
+            // 전원 끄기.
+            return Interaction.OnOff;
+        }
+    }
     protected override void MyUpdate(float deltaTime)
     {
         if(onOff)

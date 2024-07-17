@@ -2,12 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IInteractable
-{
-    bool Interaction(GameObject target);
-}
-
-public class PowerSupply : Building, IInteractable
+public class PowerSupply : Building
 {
     protected int powerMax;
     public int PowerMax
@@ -50,17 +45,28 @@ public class PowerSupply : Building, IInteractable
         expMax = 10;
     }
 
-    public bool Interaction(GameObject target) // 납품 받기
+    public override Interaction InteractionStart(Player player)
     {
-        if (target.TryGetComponent<Player>(out Player player)) // 상호작용한것이 플레이어인가?
+        if (player != null) // 플레이어가 가진 물건이 납품할 물건이라면
         {
-            // 그렇다면 bePicked가 있나?
-            // 그것이 납품하는 물건인가?
-            // 납품할 물건의 수가 0보다 큰가?
-            Debug.Log($"{gameObject.name}과 납품 상호작용을 하였습니다.");
-            return true;
+            return Interaction.Deliver;
         }
-
-        return false;
+        else
+        {
+            return Interaction.None;
+        }
     }
+    //public bool Interaction(GameObject target) // 납품 받기
+    //{
+        //if (target.TryGetComponent<Player>(out Player player)) // 상호작용한것이 플레이어인가?
+        //{
+            //// 그렇다면 bePicked가 있나?
+            //// 그것이 납품하는 물건인가?
+            //// 납품할 물건의 수가 0보다 큰가?
+            //Debug.Log($"{gameObject.name}과 납품 상호작용을 하였습니다.");
+            //return true;
+        //}
+
+        //return false;
+    //}
 }

@@ -16,7 +16,19 @@ public class Pylon : Building
         size = new Vector2Int(1, 1);
         powerRange = 20;
     }
-
+    public override Interaction InteractionStart(Player player)
+    {
+        // 완성이 아직 안됨.
+        if (completePercent < 1)
+        {
+            return Interaction.Build;
+        }
+        else
+        {
+            // 줄을 집을거임.
+            return Interaction.takeRope;
+        }
+    }
     // 줄 기능.
     public virtual void Rope(Player player)
     {

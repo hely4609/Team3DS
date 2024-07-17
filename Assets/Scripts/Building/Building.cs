@@ -113,31 +113,66 @@ public abstract class Building : MyComponent, IInteraction
         }
     } // 위치를 고정함.
 
-    public bool Interaction(float deltaTime) // 상호작용시 적용할 함수. 제작을 진행함.
+
+    // 상호작용을 시작함.
+    // 상호작용을 할 분류를 받아와서 어떤 걸 할 지 저장.
+    // 플레이어가 
+
+    // 스타트와 엔드는 단발성.
+    // 플레이어는 상호작용 키 만 누를거임. 내용은 모름.
+    // 뭘 할지는 얘가 플레이어한테 알려줄거임.
+    // 플레이어는 건설, 수리이면 망치를 휘두를거고, onoff 면 손만 나와서 누를거고, 납품이면 손에 있는게 사라질거임.
+    // 지속 = 업데이트.
+
+    // 아무것도 없는 깡통건물. 세우기만 하고 상호작용 없음. ex) 육교
+    public virtual Interaction InteractionStart( Player player)
+    {
+        // 완성이 아직 안됨.
+        if (completePercent < 1)
+        {
+            return Interaction.Build;
+        }
+        else
+        {
+            return Interaction.None;
+        }
+    }
+    public bool InteractionUpdate(float deltaTime) // 상호작용시 적용할 함수. 제작을 진행함.
+    {
+        BuildBuilding();
+        
+        return true;
+    }
+
+    public bool InteractionEnd()
+    {
+        return true;
+    }
+
+    public void BuildBuilding()
     {
         // 마우스를 누르고 있으면 점점 수치가 차오름.
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
 
         // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.
-        
+
         // 완성되면 완성본 Material로 한다.
 
         // 건설 완료시 
-            foreach (MeshRenderer r in meshes)
-            {
-                r.material.SetFloat("_CompletPercent", CompletePercent);
-            }
+        foreach (MeshRenderer r in meshes)
+        {
+            r.material.SetFloat("_CompletPercent", CompletePercent);
+        }
 
-            if (completePercent >= 1)
-            {
-                foreach (MeshRenderer r in meshes)
-                    r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
-            }
-        
-        return true;
+        if (completePercent >= 1)
+        {
+            foreach (MeshRenderer r in meshes)
+                r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+        }
     }
 
-
+    // 건물의 높이를 측정하는 함수.
+    // 건물을 지을 때 진행도에 따라 차오르는것을 표현하기 위함.
     protected void HeightCheck()
     {
         MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
@@ -162,7 +197,7 @@ public abstract class Building : MyComponent, IInteraction
 
         Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));
 
-        foreach (var r in meshes)
+        foreach (MeshRenderer r in meshes)
         {
             r.material.SetFloat("_HeightMin", min);
             r.material.SetFloat("_HeightMax", max);
