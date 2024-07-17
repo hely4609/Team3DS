@@ -22,7 +22,7 @@ public class Player : Character
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
     protected float mouseDelta_y; // 마우스 이동 변화량 y값
 
-    protected Vector3 moveDir;
+    public Vector3 moveDir;
     protected Vector3 currentDir = Vector3.zero;
 
     public bool TryPossession() => possessionController == null;
@@ -139,7 +139,7 @@ public class Player : Character
         moveDir = direction.normalized;
     }
 
-    public void ScreenRotate(Vector2 mouseDelta)
+    public virtual void ScreenRotate(Vector2 mouseDelta)
     {
         rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
         transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);

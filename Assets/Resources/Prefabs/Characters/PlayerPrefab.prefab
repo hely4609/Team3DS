@@ -3473,7 +3473,7 @@ GameObject:
   - component: {fileID: 5314609561174821285}
   - component: {fileID: 7972636452116571196}
   m_Layer: 0
-  m_Name: Body
+  m_Name: MANUKA_Obsidian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3488,7 +3488,7 @@ Transform:
   m_GameObject: {fileID: 1129097313062114863}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.08, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3511,7 +3511,7 @@ Animator:
   m_GameObject: {fileID: 1129097313062114863}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e6b3fb3160346e6429c0c3b0fe8f5b59, type: 2}
-  m_Controller: {fileID: 9100000, guid: c51b68bdbb26bac4c847bd08000c3830, type: 2}
+  m_Controller: {fileID: 9100000, guid: 15fb6cc6d874d5349a7540193bf51f2a, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -16381,6 +16381,8 @@ GameObject:
   - component: {fileID: -26425253841057424}
   - component: {fileID: 4044310307752897347}
   - component: {fileID: 7428974415925952024}
+  - component: {fileID: 8127065621516109675}
+  - component: {fileID: 6624588293085932485}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -16474,6 +16476,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 4044310307752897347}
   - {fileID: 7428974415925952024}
+  - {fileID: 8127065621516109675}
 --- !u!143 &-26425253841057424
 CharacterController:
   m_ObjectHideFlags: 0
@@ -16531,7 +16534,50 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4896616549607160579}
-  moveSpeed: 5
+  moveSpeed: 1
+  moveDir: {x: 0, y: 0, z: 0}
+--- !u!114 &8127065621516109675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900007637909447916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a410a97d6976074eb1895acb8bd7f29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6624588293085932485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900007637909447916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 79b5fff33291db0499e827e05699358a, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Normal
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &6902586972774711075
 GameObject:
   m_ObjectHideFlags: 0
