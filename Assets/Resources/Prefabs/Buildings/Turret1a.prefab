@@ -433,6 +433,7 @@ GameObject:
   - component: {fileID: 5364410524237927022}
   - component: {fileID: 217081395227794833}
   - component: {fileID: 7630605579735506491}
+  - component: {fileID: -7105231291510333394}
   m_Layer: 0
   m_Name: Turret1a
   m_TagString: Untagged
@@ -597,6 +598,27 @@ MonoBehaviour:
   target: {fileID: 0}
   targetList: []
   onOff: 0
+--- !u!135 &-7105231291510333394
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860581916195568055}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 10
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &8177992274299104779
 GameObject:
   m_ObjectHideFlags: 0

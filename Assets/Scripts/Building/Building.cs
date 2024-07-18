@@ -38,6 +38,7 @@ public abstract class Building : MyComponent, IInteraction
     protected override void MyStart()
     {
         Initialize();
+        HeightCheck();
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래

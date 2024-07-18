@@ -28,7 +28,7 @@ public class Tower : Building
         isNeedLine = true;
         AttackDamage = 1;
         AttackSpeed = 0.5f;
-        AttackRange = 5;
+        AttackRange = 10;
         buildingTimeMax = 10;
         size = new Vector2Int(4, 4);
         TurnOnOff(true);
@@ -133,10 +133,11 @@ public class Tower : Building
         if(gameObject.TryGetComponent<SphereCollider>(out SphereCollider col))
         {
             col.radius = attackRange;
+            col.center = new Vector3(0, col.radius * 0.5f, 0);
         }
         else
         {
-            Debug.Log("dd");
+            Debug.Log("공격 범위 콜라이더가 존재하지 않습니다.");
         }
     }
 
