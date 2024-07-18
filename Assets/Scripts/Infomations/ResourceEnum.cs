@@ -8,6 +8,7 @@ namespace ResourceEnum
         SignInCanvas,
         SetNicknameCanvas,
         BeInvitedWindow,
+        InteractableObjButton,
         // Character
         Player,
         // Building
