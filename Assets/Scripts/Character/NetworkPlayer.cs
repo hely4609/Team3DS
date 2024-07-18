@@ -1,61 +1,21 @@
 using Fusion;
-using Fusion.Addons.SimpleKCC;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class NetworkPlayer : Player, IBeforeUpdate
+public class NetworkPlayer : Player
 {
     [Networked] public NetworkButtons ButtonsPrevious { get; set; }
-    private NetworkCharacterController _cc;
-    //private NetworkInputData _accumulatedInput;
-    private Vector2Accumulator _lookRotationAccumulator = new Vector2Accumulator(0.02f, true);
-
-    private void Awake()
-    {
-        _cc = GetComponent<NetworkCharacterController>();
-    }
 
     protected override void MyUpdate(float deltaTime)
     {
 
     }
 
-    
-
-    public override void Spawned()
-    {
-        if (HasInputAuthority == false)
-            return;
-
-        // Register to Fusion input poll callback.
-        var networkEvents = Runner.GetComponent<NetworkEvents>();
-        networkEvents.OnInput.AddListener(OnInput);
-
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
-
-    public override void Despawned(NetworkRunner runner, bool hasState)
-    {
-        if (runner == null)
-            return;
-
-        var networkEvents = runner.GetComponent<NetworkEvents>();
-        if (networkEvents != null)
-        {
-            networkEvents.OnInput.RemoveListener(OnInput);
-        }
-    }
-    void IBeforeUpdate.BeforeUpdate()
-    {
-
-    }
-    Vector3 lastPos;
-    float velocity;
     public override void FixedUpdateNetwork()
     {
+        /*
         if (HasInputAuthority == false)
             return;
 
@@ -74,12 +34,14 @@ public class NetworkPlayer : Player, IBeforeUpdate
                 Cursor.visible = false;
             }
         }
-
+        */
         if (GetInput(out NetworkInputData data))
         {
-            //data.direction = moveDir.normalized;
-            _cc.Move(5 * data.direction * Runner.DeltaTime);
-
+            /*
+            data.direction = moveDir;
+            data.lookRotationDelta = new Vector2(rotate_x, rotate_y);
+            DoMove(data.direction);
+            */
             
             // compute pressed/released state
             var pressed = data.buttons.GetPressed(ButtonsPrevious);
@@ -95,46 +57,39 @@ public class NetworkPlayer : Player, IBeforeUpdate
 
             if (data.buttons.IsSet(MyButtons.Left)) { vector.x -= 1; }
             if (data.buttons.IsSet(MyButtons.Right)) { vector.x += 1; }
-            Debug.Log(vector);
-            DoMove(vector.normalized * 0.1f);
-            
+            //DoMove(vector.normalized * 0.1f);
+            DoMove(vector);
 
-            velocity = (lastPos - transform.localPosition).magnitude;
-            AnimFloat?.Invoke("Speed", velocity);
-
-            currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
-
-            AnimFloat?.Invoke("MoveForward", currentDir.z);
-            AnimFloat?.Invoke("MoveRight", currentDir.x);
-
-            lastPos = transform.localPosition;
+            /*
+            transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+            if (cameraOffset == null)
+            {
+                cameraOffset = transform.Find("CameraOffset");
+            }
+            else cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+            */
         }
     }
 
     public void DoMove(Vector3 direction)
     {
-        transform.position += direction;
+        transform.position += (transform.forward * direction.z + transform.right * direction.x).normalized * 0.1f;
+        AnimFloat?.Invoke("Speed", direction.magnitude);
+
+        //currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
+
+        AnimFloat?.Invoke("MoveForward", direction.z);
+        AnimFloat?.Invoke("MoveRight", direction.x);
     }
 
     public override void ScreenRotate(Vector2 mouseDelta)
     {
-        var mouse = Mouse.current;
-        if (mouse != null)
-        {
-            var lookRotationDelta = new Vector2(-mouseDelta.y, mouseDelta.x);
-            lookRotationDelta *= 10 / 60f;
-            _lookRotationAccumulator.Accumulate(lookRotationDelta);
-        }
+        rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
+
+        mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
+        rotate_x = rotate_x + mouseDelta_y;
+        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
     }
 
-    private void OnInput(NetworkRunner runner, NetworkInput networkInput)
-    {
-        // Mouse movement (delta values) is aligned to engine update.
-        // To get perfectly smooth interpolated look, we need to align the mouse input with Fusion ticks.
-        //_accumulatedInput.lookRotationDelta = _lookRotationAccumulator.ConsumeTickAligned(runner);
-
-        // Fusion polls accumulated input. This callback can be executed multiple times in a row if there is a performance spike.
-        //networkInput.Set(_accumulatedInput);
-    }
 
 }

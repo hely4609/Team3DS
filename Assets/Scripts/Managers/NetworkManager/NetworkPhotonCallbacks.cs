@@ -11,17 +11,24 @@ public enum MyButtons
     Backward = 1,
     Left = 2,
     Right = 3,
+    mouseUp = 4,
+    mouseDown = 5,
+    mouseLeft = 6,
+    mouseRight = 7,
 }
 public struct NetworkInputData : INetworkInput
 {
     public Vector3 direction;
     public Vector2 lookRotationDelta;
     public NetworkButtons buttons;
+
+    public float moveSpeed;
 }
 
 public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab;
+    NetworkPlayer controlledCharater;
 
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -33,6 +40,7 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
+            controlledCharater = networkPlayerObject.GetComponent<NetworkPlayer>();
 
         }
     }
@@ -46,13 +54,19 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
     }
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+        /*
+        if (controlledCharater == null) return;
         var data = new NetworkInputData();
-        
+        data.direction = controlledCharater.MoveDir;
+        data.lookRotationDelta = new Vector2(controlledCharater.Rotate_x, controlledCharater.Rotate_y);
+        */
+        NetworkInputData data = new NetworkInputData();
+
         data.buttons.Set(MyButtons.Forward, Input.GetKey(KeyCode.W));
         data.buttons.Set(MyButtons.Backward, Input.GetKey(KeyCode.S));
         data.buttons.Set(MyButtons.Left, Input.GetKey(KeyCode.A));
         data.buttons.Set(MyButtons.Right, Input.GetKey(KeyCode.D));
-        
+
         input.Set(data);
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }

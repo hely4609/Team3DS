@@ -17,8 +17,12 @@ public class Player : Character
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
     protected float mouseDelta_y; // 마우스 이동 변화량 y값
+    public float Rotate_x => rotate_x;
+    public float Rotate_y => rotate_y;
+    public float MouseDelta_y => mouseDelta_y;
 
-    public Vector3 moveDir;
+    protected Vector3 moveDir;
+    public Vector3 MoveDir => moveDir;
     protected Vector3 currentDir = Vector3.zero;
 
     public bool TryPossession() => possessionController == null;

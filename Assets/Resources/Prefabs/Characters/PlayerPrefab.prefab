@@ -16379,7 +16379,6 @@ GameObject:
   - component: {fileID: 5317811880070004779}
   - component: {fileID: -3984646624486380998}
   - component: {fileID: -26425253841057424}
-  - component: {fileID: 4044310307752897347}
   - component: {fileID: 7428974415925952024}
   - component: {fileID: 8127065621516109675}
   - component: {fileID: 6624588293085932485}
@@ -16429,8 +16428,8 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
+  m_UseGravity: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -16474,7 +16473,6 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 4044310307752897347}
   - {fileID: 7428974415925952024}
   - {fileID: 8127065621516109675}
 --- !u!143 &-26425253841057424
@@ -16503,24 +16501,6 @@ CharacterController:
   m_SkinWidth: 0.08
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4044310307752897347
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6900007637909447916}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 378411a89480da345945c2f888327a2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  gravity: -20
-  jumpImpulse: 8
-  acceleration: 10
-  braking: 10
-  maxSpeed: 2
-  rotationSpeed: 15
 --- !u!114 &7428974415925952024
 MonoBehaviour:
   m_ObjectHideFlags: 0
