@@ -27,10 +27,15 @@ public class LocalController : ControllerBase
     {
         DoBuild?.Invoke();
     }
+
+    protected void OnMouseWheel(InputValue value)
+    {
+        DoMouseWheel?.Invoke(value.Get<Vector2>());
+    }
     protected void OnRepair() { }
     ////////////////////////////////////////////
     protected void OnInteraction() 
     {
-        //DoInteraction?.Invoke(ControlledPlayer.interactionObject);
+        DoInteraction?.Invoke(ControlledPlayer.interactionObject);
     }
 }

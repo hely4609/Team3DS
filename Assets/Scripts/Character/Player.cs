@@ -1,23 +1,24 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.UIElements;
 using TMPro;
 using UnityEngine.UI;
 
 public class Player : Character
 {
-
-
     protected ControllerBase possessionController;
     [SerializeField] protected Transform cameraOffset;
     public Transform CameraOffset => cameraOffset;
 
-    [SerializeField] protected Transform interactContent;
-         
+    // test
+    [SerializeField] protected RectTransform interactContent;
+    protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new Dictionary<IInteraction, GameObject>();
+    protected int interactionIndex = 0;
     public List<IInteraction> interactionObjectList = new List<IInteraction>();
-    public IInteraction interactionObject;
+    public IInteraction interactionObject = null;
+    protected TextMeshProUGUI buttonText;
+    //
+
     protected GameObject bePicked;
     // protected bool isHandFree;
     protected Building designingBuilding;
@@ -38,15 +39,16 @@ public class Player : Character
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
         targetController.DoInteraction -= Interaction;
+        targetController.DoMouseWheel -= MouseWheel;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
         targetController.DoDesignBuilding += DesignBuiling;
         targetController.DoBuild += Build;
         targetController.DoInteraction += Interaction;
-
-
+        targetController.DoMouseWheel += MouseWheel;
     }
+    
     protected void UnRegistrationFunction(ControllerBase targetController)
     {
         targetController.DoMove -= Move;
@@ -54,6 +56,7 @@ public class Player : Character
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
         targetController.DoInteraction -= Interaction;
+        targetController.DoMouseWheel -= MouseWheel;
     }
 
     public virtual void Possession(ControllerBase targetController)
@@ -135,7 +138,6 @@ public class Player : Character
             }            
         }
 
-        
     }
 
     public override void Move(Vector3 direction)
@@ -181,42 +183,101 @@ public class Player : Character
     public bool Interaction<T> (T target) where T : IInteraction
     {
         if (target == null) return false;
-        
+        Debug.Log($"{target} 과 상호작용");
         
         return default;
     }
 
-    //public void CheckInteractionObject()
-    //{
-    //    RaycastHit[] hits = Physics.SphereCastAll(transform.position + transform.forward, 1f, Vector3.up, 0f);
-
-    //    foreach (RaycastHit hit in hits) 
-    //    {
-    //        hit.transform.gameObject.TryGetComponent(out IInteraction inst);
-    //    }
-    //}
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out IInteraction interactableObj))
+        if (other.TryGetComponent(out IInteraction target))
         {
-            if (interactionObjectList.Exists(target => target == interactableObj)) return;
-            
-            interactionObjectList.Add(interactableObj);
-            
+            if (interactionObjectList.Exists(inst => inst == target)) return;
+
+            interactionObjectList.Add(target);
+
+            GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactContent);
+            buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            buttonText.text = $"{other.name}";
+            interactionObjectDictionary.Add(target, button);
+
+            if (interactionObjectList.Count == 1)
+            {
+                interactionIndex = 0;
+                interactionObject = target;
+            }
+
+            ChangeInteractionUI(interactionIndex);
         }
     }
 
+    
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out IInteraction target))
         {
             interactionObjectList.Remove(target);
-            //if (interactionObjectList.Count == 0)
-            //{
-            //    // UI매니저한테 드롭다운 꺼달라하기
-            //    // 드롭다운에 해당 오브젝트에 관한 내용제거
-            //}
+
+            if (interactionObjectList.Count == 0)
+            {
+                interactionIndex = -1;
+                interactionObject = null;
+            }
+            else
+            {
+                interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                interactionObject = interactionObjectList[interactionIndex];
+
+                ChangeInteractionUI(interactionIndex);
+            }
+
+            if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
+            {
+                GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
+                interactionObjectDictionary.Remove(target);
+            }
+        }
+    }
+    public void MouseWheel(Vector2 scrollDelta)
+    {
+        //Debug.Log($"{scrollDelta.x}, {scrollDelta.y}");
+        if (interactionObjectList.Count == 0) return;
+        if (scrollDelta.y == 0f) return;
+        else if (scrollDelta.y > 0)
+        {
+            interactionIndex--;
+            interactionIndex = Mathf.Max(interactionIndex, 0);
+            interactionObject = interactionObjectList[interactionIndex];
+
+            if (interactionIndex < interactionObjectList.Count - 4)
+            {
+                interactContent.anchoredPosition -= new Vector2(0, 12.5f);
+            }
+
+        }
+        else if (scrollDelta.y < 0)
+        {
+            interactionIndex++;
+            interactionIndex = Mathf.Min(interactionObjectList.Count - 1, interactionIndex);
+            interactionObject = interactionObjectList[interactionIndex];
+
+            if (interactionIndex > 4)
+            {
+                interactContent.anchoredPosition += new Vector2(0, 12.5f);
+            }
+        }
+
+        ChangeInteractionUI(interactionIndex);
+    }
+
+    private void ChangeInteractionUI(int targetIndex)
+    {
+        for (int i = 0; i < interactionObjectList.Count; i++)
+        {
+            GameObject button = interactionObjectDictionary[interactionObjectList[i]];
+            Image buttonImage = button.GetComponentInChildren<Image>();
+            if (targetIndex == i) buttonImage.color = Color.yellow;
+            else buttonImage.color = Color.white;
         }
     }
 }
