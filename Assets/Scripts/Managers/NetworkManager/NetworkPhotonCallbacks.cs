@@ -5,26 +5,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum MyButtons
+{
+    Forward = 0,
+    Backward = 1,
+    Left = 2,
+    Right = 3,
+}
+public struct NetworkInputData : INetworkInput
+{
+    public Vector3 direction;
+    public Vector2 lookRotationDelta;
+    public NetworkButtons buttons;
+}
 
 public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab;
+
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
-    public struct NetworkInputData : INetworkInput
-    {
-        public Vector3 direction;
-    }
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (runner.IsServer)
         {
-            
             // Create a unique position for the player
             Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 3, 1, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
-            
+
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -38,26 +47,12 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         var data = new NetworkInputData();
-        if (Input.GetKey(KeyCode.W))
-        {
-            data.direction += Vector3.forward;
-        }
-
-        if (Input.GetKey(KeyCode.S))
-        {
-            data.direction += Vector3.back;
-        }
-
-        if (Input.GetKey(KeyCode.A))
-        {
-            data.direction += Vector3.left;
-        }
-
-        if (Input.GetKey(KeyCode.D))
-        {
-            data.direction += Vector3.right;
-        }
-
+        
+        data.buttons.Set(MyButtons.Forward, Input.GetKey(KeyCode.W));
+        data.buttons.Set(MyButtons.Backward, Input.GetKey(KeyCode.S));
+        data.buttons.Set(MyButtons.Left, Input.GetKey(KeyCode.A));
+        data.buttons.Set(MyButtons.Right, Input.GetKey(KeyCode.D));
+        
         input.Set(data);
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
