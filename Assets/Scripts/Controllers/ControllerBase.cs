@@ -9,6 +9,7 @@ public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
 public delegate bool DesignBuildingDelegate(ResourceEnum.Prefab wantBuilding);
 public delegate bool BuildDelegate();
 public delegate bool InteractionDelegate(IInteraction interactionTarget);
+public delegate void WheelDelegate(Vector2 scrollDelta);
 
 
 public class ControllerBase : MyComponent
@@ -18,6 +19,7 @@ public class ControllerBase : MyComponent
     public DesignBuildingDelegate   DoDesignBuilding;
     public BuildDelegate            DoBuild;
     public InteractionDelegate      DoInteraction;
+    public WheelDelegate            DoMouseWheel;
 
     protected Player controlledPlayer;
     public Player ControlledPlayer => controlledPlayer;
