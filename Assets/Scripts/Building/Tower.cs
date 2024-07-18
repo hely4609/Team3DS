@@ -42,7 +42,8 @@ public class Tower : Building
         }
         else
         {
-            // 전원 끄기.
+            // 전원 끄기. 반대 상태로 토글합니다.
+            TurnOnOff(!onOff);
             return Interaction.OnOff;
         }
     }

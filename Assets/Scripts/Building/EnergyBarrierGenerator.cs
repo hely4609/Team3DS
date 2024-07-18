@@ -29,6 +29,7 @@ public class EnergyBarrierGenerator : Building
         }
         Debug.Log($"{HpCurrent} / {gameObject.name}");
     }
+
     public void RepairBarrier()
     {
         hpCurrent += 1;
@@ -62,5 +63,11 @@ public class EnergyBarrierGenerator : Building
         {
             return Interaction.None;
         }
+    }
+
+    public override bool InteractionUpdate(float deltaTime)
+    {
+        RepairBarrier();
+        return base.InteractionUpdate(deltaTime);
     }
 }
