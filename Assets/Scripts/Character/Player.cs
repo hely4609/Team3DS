@@ -8,9 +8,13 @@ using UnityEngine.UI;
 
 public class Player : Character
 {
+
+
     protected ControllerBase possessionController;
-    [SerializeField]protected Transform cameraOffset;
+    [SerializeField] protected Transform cameraOffset;
     public Transform CameraOffset => cameraOffset;
+
+    [SerializeField] protected Transform interactContent;
          
     public List<IInteraction> interactionObjectList = new List<IInteraction>();
     public IInteraction interactionObject;
@@ -22,7 +26,7 @@ public class Player : Character
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
     protected float mouseDelta_y; // 마우스 이동 변화량 y값
 
-    public Vector3 moveDir;
+    protected Vector3 moveDir;
     protected Vector3 currentDir = Vector3.zero;
 
     public bool TryPossession() => possessionController == null;
@@ -199,11 +203,7 @@ public class Player : Character
             if (interactionObjectList.Exists(target => target == interactableObj)) return;
             
             interactionObjectList.Add(interactableObj);
-            //if (interactionObjectList.Count > 0)
-            //{
-            //    // UI매니저한테 상호작용오브젝트리스트 드롭다운 UI출력 부탁
-            //    // 드롭다운에 해당 오브젝트에 관한 내용추가
-            //}
+            
         }
     }
 
