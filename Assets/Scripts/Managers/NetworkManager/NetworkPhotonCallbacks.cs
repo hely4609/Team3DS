@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public enum MyButtons
 {
@@ -39,7 +40,7 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
-
+            
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -53,17 +54,21 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         /*
-        if (controlledCharater == null) return;
+        if (controlledCharacter == null) return;
         var data = new NetworkInputData();
-        data.direction = controlledCharater.MoveDir;
-        data.lookRotationDelta = new Vector2(controlledCharater.Rotate_x, controlledCharater.Rotate_y);
+        data.direction = controlledCharacter.MoveDir;
+        data.lookRotationDelta = new Vector2(controlledCharacter.Rotate_x, controlledCharacter.Rotate_y);
         */
         NetworkInputData data = new NetworkInputData();
-
         data.buttons.Set(MyButtons.Forward, Input.GetKey(KeyCode.W));
         data.buttons.Set(MyButtons.Backward, Input.GetKey(KeyCode.S));
         data.buttons.Set(MyButtons.Left, Input.GetKey(KeyCode.A));
         data.buttons.Set(MyButtons.Right, Input.GetKey(KeyCode.D));
+
+        float rotate_x, rotate_y;
+        rotate_x = Input.GetAxis("Mouse X");
+        rotate_y = Input.GetAxis("Mouse Y");
+        data.lookRotationDelta = new Vector2(rotate_x, -rotate_y) * 5f;
 
         input.Set(data);
     }

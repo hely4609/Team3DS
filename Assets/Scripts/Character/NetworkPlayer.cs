@@ -39,11 +39,9 @@ public class NetworkPlayer : Player
         if (GetInput(out NetworkInputData data))
         {
             /*
-            data.direction = moveDir;
-            data.lookRotationDelta = new Vector2(rotate_x, rotate_y);
+            Debug.Log(data.direction);
             DoMove(data.direction);
             */
-            
             // compute pressed/released state
             var pressed = data.buttons.GetPressed(ButtonsPrevious);
             var released = data.buttons.GetReleased(ButtonsPrevious);
@@ -61,13 +59,18 @@ public class NetworkPlayer : Player
             //DoMove(vector.normalized * 0.1f);
             DoMove(vector);
 
-            
-            transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+            transform.localEulerAngles += new Vector3(0f, data.lookRotationDelta.x, 0f);
             if (cameraOffset == null)
             {
                 cameraOffset = transform.Find("CameraOffset");
             }
-            else cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+            else
+            {
+                if (cameraOffset.localEulerAngles.x + data.lookRotationDelta.y > 45f && cameraOffset.localEulerAngles.x + data.lookRotationDelta.y < 180) cameraOffset.localEulerAngles = new Vector3(45f, 0, 0);
+                else if (cameraOffset.localEulerAngles.x + data.lookRotationDelta.y < 315f && cameraOffset.localEulerAngles.x + data.lookRotationDelta.y > 180) cameraOffset.localEulerAngles = new Vector3(315f, 0, 0);
+                else cameraOffset.localEulerAngles += new Vector3(data.lookRotationDelta.y, 0f, 0f);
+            }
             
         }
     }
@@ -85,11 +88,7 @@ public class NetworkPlayer : Player
 
     public override void ScreenRotate(Vector2 mouseDelta)
     {
-        rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
 
-        mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
-        rotate_x = rotate_x + mouseDelta_y;
-        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
     }
 
 

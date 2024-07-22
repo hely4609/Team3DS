@@ -57,13 +57,13 @@ public class CameraManager : Manager
                 observingPlayer = controller.ControlledPlayer;
             }
         }
-        
-        else
+
+        else if (observingPlayer.CameraOffset)
         {
-            Vector3 offset = new Vector3(observingPlayer.transform.position.x, 1.1f, observingPlayer.transform.position.z);
-            mainCamera.transform.SetPositionAndRotation(offset, observingPlayer.transform.rotation);
+            mainCamera.transform.position = observingPlayer.CameraOffset.position;
+            mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
         }
-         
+
 
     }
 }
