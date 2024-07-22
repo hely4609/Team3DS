@@ -28,7 +28,6 @@ public struct NetworkInputData : INetworkInput
 public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab;
-    NetworkPlayer controlledCharater;
 
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -40,7 +39,6 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
-            controlledCharater = networkPlayerObject.GetComponent<NetworkPlayer>();
 
         }
     }

@@ -16382,6 +16382,7 @@ GameObject:
   - component: {fileID: 7428974415925952024}
   - component: {fileID: 8127065621516109675}
   - component: {fileID: 6624588293085932485}
+  - component: {fileID: 6997351833116599533}
   m_Layer: 0
   m_Name: PlayerPrefab
   m_TagString: Untagged
@@ -16475,6 +16476,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 7428974415925952024}
   - {fileID: 8127065621516109675}
+  - {fileID: 6997351833116599533}
 --- !u!143 &-26425253841057424
 CharacterController:
   m_ObjectHideFlags: 0
@@ -16515,7 +16517,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4896616549607160579}
   moveSpeed: 1
-  moveDir: {x: 0, y: 0, z: 0}
 --- !u!114 &8127065621516109675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16558,6 +16559,24 @@ MonoBehaviour:
   m_DefaultActionMap: Normal
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
+--- !u!114 &6997351833116599533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6900007637909447916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 378411a89480da345945c2f888327a2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gravity: -20
+  jumpImpulse: 8
+  acceleration: 10
+  braking: 10
+  maxSpeed: 2
+  rotationSpeed: 15
 --- !u!1 &6902586972774711075
 GameObject:
   m_ObjectHideFlags: 0

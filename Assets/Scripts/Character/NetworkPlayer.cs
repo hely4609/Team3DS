@@ -6,6 +6,7 @@ using UnityEngine.InputSystem;
 
 public class NetworkPlayer : Player
 {
+    // Network Character Controller 컴포넌트를 플레이어에 삽입 해줄 것! 
     [Networked] public NetworkButtons ButtonsPrevious { get; set; }
 
     protected override void MyUpdate(float deltaTime)
@@ -60,14 +61,14 @@ public class NetworkPlayer : Player
             //DoMove(vector.normalized * 0.1f);
             DoMove(vector);
 
-            /*
+            
             transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
             if (cameraOffset == null)
             {
                 cameraOffset = transform.Find("CameraOffset");
             }
             else cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-            */
+            
         }
     }
 
