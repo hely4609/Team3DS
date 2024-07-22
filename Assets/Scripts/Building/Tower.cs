@@ -111,6 +111,7 @@ public class Tower : Building
 
     protected void MonsterListOut(TestMonster monster) // 한줄짜리 함수 만든 이유 : 델리게이트에 넣고 빼기 할수 있게하려고. 람다식은 빼기 불가능.
     {
+        // 몬스터를 타겟 리스트에서 제거한다.
         targetList.Remove(monster);
     }
 
@@ -129,6 +130,7 @@ public class Tower : Building
         }
     }
 
+    // 공격범위 세팅
     public virtual void AttackRangeSetting()
     {
         if(gameObject.TryGetComponent<SphereCollider>(out SphereCollider col))

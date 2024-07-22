@@ -65,9 +65,9 @@ public class EnergyBarrierGenerator : Building
         }
     }
 
-    public override bool InteractionUpdate(float deltaTime)
+    public override bool InteractionUpdate(float deltaTime, Interaction interaction)
     {
         RepairBarrier();
-        return base.InteractionUpdate(deltaTime);
+        return true;    
     }
 }

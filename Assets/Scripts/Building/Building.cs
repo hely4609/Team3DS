@@ -139,15 +139,19 @@ public abstract class Building : MyComponent, IInteraction
             return Interaction.None;
         }
     }
-    public virtual bool InteractionUpdate(float deltaTime) // 상호작용시 적용할 함수. 제작을 진행함.
+    public virtual bool InteractionUpdate(float deltaTime, Interaction interaction) // 상호작용시 적용할 함수. 제작하라는 명령이 들어오면 제작을 진행함.
     {
-        BuildBuilding(deltaTime);
-        
+        if(interaction == Interaction.Build)
+        {
+            BuildBuilding(deltaTime);
+        }
         return true;
     }
 
     public bool InteractionEnd()
     {
+
+        Debug.Log("끝");
         return true;
     }
 
@@ -174,6 +178,7 @@ public abstract class Building : MyComponent, IInteraction
         {
             foreach (MeshRenderer r in meshes)
                 r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+
         }
     }
 
