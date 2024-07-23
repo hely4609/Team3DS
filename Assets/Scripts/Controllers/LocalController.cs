@@ -47,8 +47,8 @@ public class LocalController : ControllerBase
         {
             //Debug.Log("눌렀다");
             // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
-            ControlledPlayer.InteractionObject.InteractionStart(controlledPlayer);
-            ControlledPlayer.isInteracting = true;
+            ControlledPlayer.InteractionStart(ControlledPlayer.InteractionObject);
+            
             // 업데이트 함수를 등록해서 뗄때까지 실행
         }
         else

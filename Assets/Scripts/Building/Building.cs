@@ -39,7 +39,7 @@ public abstract class Building : MyComponent, IInteraction
     protected override void MyStart()
     {
         Initialize();
-        HeightCheck();
+        //HeightCheck();
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
@@ -103,6 +103,7 @@ public abstract class Building : MyComponent, IInteraction
         if (CheckBuild())
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
+            HeightCheck();
             foreach (Collider col in cols)
             {
                 col.enabled = true;
@@ -171,10 +172,10 @@ public abstract class Building : MyComponent, IInteraction
         // 건설 완료시 
         foreach (MeshRenderer r in meshes)
         {
-            r.material.SetFloat("_CompletPercent", CompletePercent);
+            r.material.SetFloat("_CompletePercent", CompletePercent);
         }
 
-        if (completePercent >= 1)
+        if (CompletePercent >= 1)
         {
             foreach (MeshRenderer r in meshes)
                 r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
@@ -203,15 +204,17 @@ public abstract class Building : MyComponent, IInteraction
 
         float max = mesh.bounds.max.y;
         float min = mesh.bounds.min.y;
-        Debug.Log(mesh.bounds.max.y);
-        Debug.Log(mesh.bounds.min.y);
+        //Debug.Log(mesh.bounds.max.y);
+        //Debug.Log(mesh.bounds.min.y);
 
-        Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));
+        //Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));
 
         foreach (MeshRenderer r in meshes)
         {
             r.material.SetFloat("_HeightMin", min);
+            Debug.Log(min);
             r.material.SetFloat("_HeightMax", max);
+            Debug.Log(max);
         }
     }
 }

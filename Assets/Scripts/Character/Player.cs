@@ -43,14 +43,14 @@ public class Player : Character
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
-        targetController.DoInteraction -= Interaction;
+        targetController.DoInteraction -= InteractionStart;
         targetController.DoMouseWheel -= MouseWheel;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
         targetController.DoDesignBuilding += DesignBuiling;
         targetController.DoBuild += Build;
-        targetController.DoInteraction += Interaction;
+        targetController.DoInteraction += InteractionStart;
         targetController.DoMouseWheel += MouseWheel;
     }
     
@@ -60,7 +60,7 @@ public class Player : Character
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
-        targetController.DoInteraction -= Interaction;
+        targetController.DoInteraction -= InteractionStart;
         targetController.DoMouseWheel -= MouseWheel;
     }
 
@@ -152,7 +152,7 @@ public class Player : Character
 
         if (isInteracting && interactionObject != null)
         {
-            interactionObject.InteractionUpdate(deltaTime);
+            interactionObject.InteractionUpdate(deltaTime, Interaction.Build);
             Debug.Log("°Ç¼³!");
         }
 
@@ -204,7 +204,7 @@ public class Player : Character
 
     public bool Repair(EnergyBarrierGenerator target) { return default; }
 
-    public bool Interaction<T> (T target) where T : IInteraction
+    public bool InteractionStart<T> (T target) where T : IInteraction
     {
         if (target == null) return false;
         

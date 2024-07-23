@@ -14,7 +14,7 @@ public class InteractTest : MonoBehaviour ,IInteraction
         throw new System.NotImplementedException();
     }
 
-    bool IInteraction.InteractionUpdate(float deltaTime)
+    bool IInteraction.InteractionUpdate(float deltaTime, Interaction interaction)
     {
         throw new System.NotImplementedException();
     }
