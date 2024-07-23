@@ -90,7 +90,7 @@ public class Tower : Building
 
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가
     {
-        other.gameObject.TryGetComponent<TestMonster>(out TestMonster monster);
+        other.gameObject.TryGetComponent<Monster>(out Monster monster);
         if (monster != null)
         {
             targetList.Add(monster);
@@ -99,7 +99,7 @@ public class Tower : Building
     }
     protected void OnTriggerExit(Collider other) // 영역에서 나가면 리스트에서 제외
     {
-        other.gameObject.TryGetComponent<TestMonster>(out TestMonster monster);
+        other.gameObject.TryGetComponent<Monster>(out Monster monster);
         if (monster != null)
         {
             if (target == monster)
@@ -109,7 +109,7 @@ public class Tower : Building
         }
     }
 
-    protected void MonsterListOut(TestMonster monster) // 한줄짜리 함수 만든 이유 : 델리게이트에 넣고 빼기 할수 있게하려고. 람다식은 빼기 불가능.
+    protected void MonsterListOut(Monster monster) // 한줄짜리 함수 만든 이유 : 델리게이트에 넣고 빼기 할수 있게하려고. 람다식은 빼기 불가능.
     {
         // 몬스터를 타겟 리스트에서 제거한다.
         targetList.Remove(monster);
