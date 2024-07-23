@@ -18,7 +18,7 @@ public class Player : Character
     protected int interactionIndex = 0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
-    protected bool isInteracting; // 나는 지금 상호작용 중인가?
+    public bool isInteracting; // 나는 지금 상호작용 중인가?
     public bool IsInteracting => isInteracting;
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
     /////////////////////////////
@@ -153,6 +153,7 @@ public class Player : Character
         if (isInteracting && interactionObject != null)
         {
             interactionObject.InteractionUpdate(deltaTime);
+            Debug.Log("건설!");
         }
 
     }
@@ -283,7 +284,7 @@ public class Player : Character
 
             if (interactionIndex < interactionObjectList.Count - 4)
             {
-                interactionContent.anchoredPosition -= new Vector2(0, 12.5f);
+                interactionContent.anchoredPosition -= new Vector2(0, 40f);
             }
         }
         // 휠을 아래로 굴렸을 때
@@ -295,7 +296,7 @@ public class Player : Character
 
             if (interactionIndex > 4)
             {
-                interactionContent.anchoredPosition += new Vector2(0, 12.5f);
+                interactionContent.anchoredPosition += new Vector2(0, 40f);
             }
         }
 
