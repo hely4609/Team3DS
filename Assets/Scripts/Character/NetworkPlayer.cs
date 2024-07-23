@@ -2,7 +2,6 @@ using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class NetworkPlayer : Player
 {
@@ -20,11 +19,13 @@ public class NetworkPlayer : Player
 
     public override void FixedUpdateNetwork()
     {
+        // KeyCode.Return¿Ã Enter¿”
         if(Input.GetKeyDown(KeyCode.Return))
         {
             if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
             else Cursor.lockState = CursorLockMode.Locked;
         }
+
         if (GetInput(out NetworkInputData data))
         {
             DoMove(data.direction);
@@ -35,7 +36,7 @@ public class NetworkPlayer : Player
 
     public void DoMove(Vector3 direction)
     {
-        transform.position += (transform.forward * direction.z + transform.right * direction.x).normalized * 0.1f;
+        transform.position += (transform.forward * direction.z + transform.right * direction.x).normalized * Runner.DeltaTime * moveSpeed * 10f;
         AnimFloat?.Invoke("Speed", direction.magnitude);
 
         //currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
@@ -46,13 +47,17 @@ public class NetworkPlayer : Player
 
     public void DoScreenRotate(Vector2 mouseDelta)
     {
-        transform.localEulerAngles = new Vector3(0f, mouseDelta.y, 0f);
+        rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+        mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
+        rotate_x += mouseDelta_y;
+        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
         if (cameraOffset == null)
         {
             cameraOffset = transform.Find("CameraOffset");
         }
-        cameraOffset.localEulerAngles = new Vector3(mouseDelta.x, 0f, 0f);
-
+        cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
 
     }
 
