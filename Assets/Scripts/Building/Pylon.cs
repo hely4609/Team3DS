@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pylon : Building
+public class Pylon : InteractableBuilding
 {
     protected int cost;
     // protected int powerCurrent;

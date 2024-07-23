@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public enum MonsterEnum
 { }
@@ -32,5 +33,11 @@ public class Monster : Character
         }
         Debug.Log($"{HpCurrent} / {gameObject.name}");
         return 0;
+    }
+
+    public void ReleaseMonster()
+    {
+        isRelease= true;
+        //NavMesh.SetAreaCost
     }
 }

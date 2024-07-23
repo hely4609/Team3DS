@@ -1,8 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
-public class EnergyBarrierGenerator : Building
+public class EnergyBarrierGenerator : InteractableBuilding
 {
     protected int hpMax;
     protected int hpCurrent;

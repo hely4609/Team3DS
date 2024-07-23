@@ -121,7 +121,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 112b236ecc60ab8408cfc4d409406213, type: 2}
 --- !u!1 &31066741
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,8 +338,8 @@ GameObject:
   m_Name: Road
   m_TagString: Road
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &115108355
 Transform:
@@ -515,6 +515,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyBarrier (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
       value: 30
@@ -584,6 +588,10 @@ PrefabInstance:
     - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_Name
       value: EnergyBarrier (8)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
@@ -659,8 +667,8 @@ GameObject:
   m_Name: Road
   m_TagString: Road
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &569300125
 Transform:
@@ -761,6 +769,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyBarrier (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
       value: 40
@@ -830,6 +842,10 @@ PrefabInstance:
     - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_Name
       value: EnergyBarrier (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
@@ -906,7 +922,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!64 &659925677
 MeshCollider:
@@ -1011,8 +1027,8 @@ GameObject:
   m_Name: Road
   m_TagString: Road
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &667582958
 Transform:
@@ -1117,8 +1133,8 @@ GameObject:
   m_Name: Road
   m_TagString: Road
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &692230368
 Transform:
@@ -1219,6 +1235,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyBarrier
       objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
       value: 45
@@ -1293,8 +1313,8 @@ GameObject:
   m_Name: Road
   m_TagString: Road
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &767581748
 Transform:
@@ -1395,6 +1415,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyBarrier (11)
       objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
       value: 50
@@ -1464,6 +1488,10 @@ PrefabInstance:
     - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_Name
       value: EnergyBarrier (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
@@ -1718,6 +1746,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyBarrier (10)
       objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
       value: 50
@@ -1832,6 +1864,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyBarrier (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
       value: 90
@@ -1902,6 +1938,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyBarrier (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
       value: 55
@@ -1971,6 +2011,10 @@ PrefabInstance:
     - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_Name
       value: EnergyBarrier (9)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
@@ -2133,6 +2177,10 @@ PrefabInstance:
     - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_Name
       value: EnergyBarrier (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
@@ -2622,6 +2670,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnergyBarrier (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
+      objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
       value: 50
@@ -2696,8 +2748,8 @@ GameObject:
   m_Name: Road
   m_TagString: Road
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &1978291934
 Transform:
@@ -2797,6 +2849,10 @@ PrefabInstance:
     - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_Name
       value: EnergyBarrier (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4212514650890028259, guid: f392c9a869c390149813e439eb775ee0, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 2147483647
       objectReference: {fileID: 0}
     - target: {fileID: 8162923075301488157, guid: f392c9a869c390149813e439eb775ee0, type: 3}
       propertyPath: m_LocalScale.x
@@ -2940,8 +2996,8 @@ GameObject:
   m_Name: Road
   m_TagString: Road
   m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_NavMeshLayer: 3
+  m_StaticEditorFlags: 2147483647
   m_IsActive: 1
 --- !u!4 &2117426337
 Transform:

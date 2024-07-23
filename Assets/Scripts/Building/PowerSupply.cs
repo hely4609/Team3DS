@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PowerSupply : Building
+public class PowerSupply : InteractableBuilding
 {
     protected int powerMax;
     public int PowerMax
