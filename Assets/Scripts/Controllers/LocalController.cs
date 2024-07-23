@@ -41,17 +41,21 @@ public class LocalController : ControllerBase
 
     protected void OnTest(InputValue value)
     {
+        if (ControlledPlayer.InteractionObject == null) return;
+
         if (value.isPressed)
         {
             //Debug.Log("눌렀다");
             // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
-            //Interaction interaction = ControlledPlayer.InteractionObject.InteractionStart(controlledPlayer);
+            ControlledPlayer.InteractionObject.InteractionStart(controlledPlayer);
+            ControlledPlayer.isInteracting = true;
             // 업데이트 함수를 등록해서 뗄때까지 실행
         }
         else
         {
             //Debug.Log("뗏다");
-            //ControlledPlayer.InteractionObject.InteractionEnd();
+            ControlledPlayer.InteractionObject.InteractionEnd();
+            ControlledPlayer.isInteracting= false;
         }    
     }
 }

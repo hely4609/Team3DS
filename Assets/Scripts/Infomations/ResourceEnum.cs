@@ -9,6 +9,7 @@ namespace ResourceEnum
         SetNicknameCanvas,
         BeInvitedWindow,
         InteractableObjButton,
+        CharacterUICanvas,
         // Character
         Player,
         // Building

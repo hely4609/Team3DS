@@ -9,6 +9,7 @@ public class ResourcesPath
         "Prefabs/UIs/SetNicknameCanvas",
         "Prefabs/UIs/BeInvitedWindow",
         "Prefabs/UIs/InteractableObjButton",
+        "Prefabs/UIs/CharacterUICanvas",
         // Character
         "Prefabs/Characters/Player",
         "Prefabs/Characters/Rope",
