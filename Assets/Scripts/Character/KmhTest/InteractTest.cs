@@ -6,17 +6,18 @@ public class InteractTest : MonoBehaviour ,IInteraction
 {
     bool IInteraction.InteractionEnd()
     {
-        throw new System.NotImplementedException();
+        return default;
     }
 
     Interaction IInteraction.InteractionStart(Player player)
     {
-        throw new System.NotImplementedException();
+        return default;
+
     }
 
     bool IInteraction.InteractionUpdate(float deltaTime, Interaction interaction)
     {
-        throw new System.NotImplementedException();
+        return default;
     }
 
     // Start is called before the first frame update

@@ -36,7 +36,7 @@ public class Tower : InteractableBuilding
     public override Interaction InteractionStart(Player player)
     {
         // 완성이 아직 안됨.
-        if (completePercent < 1)
+        if (CompletePercent < 1)
         {
             return Interaction.Build;
         }

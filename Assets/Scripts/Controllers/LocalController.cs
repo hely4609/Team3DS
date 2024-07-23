@@ -36,7 +36,7 @@ public class LocalController : ControllerBase
     ////////////////////////////////////////////
     protected void OnInteraction() 
     {
-        DoInteraction?.Invoke(ControlledPlayer.InteractionObject);
+        DoInteractionStart?.Invoke(ControlledPlayer.InteractionObject);
     }
 
     protected void OnTest(InputValue value)
@@ -45,17 +45,13 @@ public class LocalController : ControllerBase
 
         if (value.isPressed)
         {
-            //Debug.Log("눌렀다");
             // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
-            ControlledPlayer.InteractionStart(ControlledPlayer.InteractionObject);
-            
             // 업데이트 함수를 등록해서 뗄때까지 실행
+            DoInteractionStart?.Invoke(ControlledPlayer.InteractionObject);
         }
         else
         {
-            //Debug.Log("뗏다");
-            ControlledPlayer.InteractionObject.InteractionEnd();
-            ControlledPlayer.isInteracting= false;
+            DoInteractionEnd?.Invoke(ControlledPlayer.InteractionObject);
         }    
     }
 }
