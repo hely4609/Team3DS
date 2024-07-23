@@ -8,7 +8,8 @@ public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
 //public delegate bool DesignBuildingDelegate(BuildingEnum wantBuilding);
 public delegate bool DesignBuildingDelegate(ResourceEnum.Prefab wantBuilding);
 public delegate bool BuildDelegate();
-public delegate bool InteractionDelegate(IInteraction interactionTarget);
+public delegate bool InteractionStartDelegate(IInteraction interactionTarget);
+public delegate bool InteractionEndDelegate(IInteraction interactionTarget);
 public delegate void WheelDelegate(Vector2 scrollDelta);
 
 
@@ -18,7 +19,8 @@ public class ControllerBase : MyComponent
     public ScreenRotateDelegate     DoScreenRotate;
     public DesignBuildingDelegate   DoDesignBuilding;
     public BuildDelegate            DoBuild;
-    public InteractionDelegate      DoInteraction;
+    public InteractionStartDelegate DoInteractionStart;
+    public InteractionEndDelegate   DoInteractionEnd;
     public WheelDelegate            DoMouseWheel;
 
     protected Player controlledPlayer;

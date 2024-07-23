@@ -18,7 +18,7 @@ public class Player : Character
     protected int interactionIndex = 0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
-    public bool isInteracting; // 나는 지금 상호작용 중인가?
+    protected bool isInteracting; // 나는 지금 상호작용 중인가?
     public bool IsInteracting => isInteracting;
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
     /////////////////////////////
@@ -43,14 +43,16 @@ public class Player : Character
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
-        targetController.DoInteraction -= InteractionStart;
+        targetController.DoInteractionStart -= InteractionStart;
+        targetController.DoInteractionEnd -= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
         targetController.DoDesignBuilding += DesignBuiling;
         targetController.DoBuild += Build;
-        targetController.DoInteraction += InteractionStart;
+        targetController.DoInteractionStart += InteractionStart;
+        targetController.DoInteractionEnd += InteractionEnd;
         targetController.DoMouseWheel += MouseWheel;
     }
     
@@ -60,7 +62,8 @@ public class Player : Character
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
-        targetController.DoInteraction -= InteractionStart;
+        targetController.DoInteractionStart -= InteractionStart;
+        targetController.DoInteractionEnd-= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
     }
 
@@ -102,13 +105,6 @@ public class Player : Character
 
     protected override void MyUpdate(float deltaTime)
     {
-        // 테스트
-        //if (rb == null)
-        //{
-        //    rb = GetComponent<Rigidbody>();
-        //}
-        //
-
         ///////////////////////////// 
         // 이동방향이 있을 시 해당 방향으로 움직임. + 애니메이션 설정
         if (moveDir.magnitude == 0)
@@ -130,7 +126,6 @@ public class Player : Character
         AnimFloat?.Invoke("MoveRight", currentDir.x);
         //////////////////////////////
 
-        // 테스트
         ///////////////////////////// 
         // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
         if (designingBuilding != null)
@@ -149,13 +144,12 @@ public class Player : Character
             }
         }
         /////////////////////////////
-
+        // 상호작용
         if (isInteracting && interactionObject != null)
         {
-            interactionObject.InteractionUpdate(deltaTime, Interaction.Build);
-            Debug.Log("건설!");
+            interactionObject.InteractionUpdate(deltaTime, interactionType);
         }
-
+        ////////////////////////////
     }
 
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
@@ -209,15 +203,41 @@ public class Player : Character
         if (target == null) return false;
         
         isInteracting = true;
+        interactionType = target.InteractionStart(this);
+
+        switch (interactionType)
+        {
+            default : break;
+            case Interaction.Build: AnimBool?.Invoke("isBulid", true); break;
+
+        }
 
         Debug.Log($"{target} 과 상호작용");
         
         return default;
-    } 
+    }
+
+    public bool InteractionEnd<T>(T target) where T : IInteraction
+    {
+        if (target == null) return false;
+
+        isInteracting = false;
+        target.InteractionEnd();
+        switch (interactionType)
+        {
+            default: break;
+            case Interaction.Build: AnimBool?.Invoke("isBulid", false); break;
+        }
+        interactionType = Interaction.None;
+
+        return default;
+    }
 
     // 상호작용 가능한 대상이 감지되었을 때 처리
     private void OnTriggerEnter(Collider other)
     {
+        if (other.GetType() == typeof(SphereCollider)) return;
+        // if (other.isTrigger) return;
         if (other.TryGetComponent(out IInteraction target))
         {
             // 이미 있다면 추가하지않음
@@ -250,11 +270,19 @@ public class Player : Character
             if (interactionObjectList.Count == 0)
             {
                 interactionIndex = -1;
+                if (isInteracting)
+                {
+                    InteractionEnd(interactionObject);
+                }
                 interactionObject = null;
             }
             else
             {
                 interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                if (isInteracting)
+                {
+                    InteractionEnd(interactionObject);
+                }
                 interactionObject = interactionObjectList[interactionIndex];
 
                 UpdateInteractionUI(interactionIndex);
