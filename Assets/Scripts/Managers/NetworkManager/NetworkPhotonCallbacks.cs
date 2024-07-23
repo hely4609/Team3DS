@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.InputSystem;
 
 public enum MyButtons
 {
@@ -26,7 +26,7 @@ public struct NetworkInputData : INetworkInput
     public float moveSpeed;
 }
 
-public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
+public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab;
 
@@ -51,28 +51,6 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
             _spawnedCharacters.Remove(player);
         }
     }
-    public void OnInput(NetworkRunner runner, NetworkInput input)
-    {
-        /*
-        if (controlledCharacter == null) return;
-        var data = new NetworkInputData();
-        data.direction = controlledCharacter.MoveDir;
-        data.lookRotationDelta = new Vector2(controlledCharacter.Rotate_x, controlledCharacter.Rotate_y);
-        */
-        NetworkInputData data = new NetworkInputData();
-        data.buttons.Set(MyButtons.Forward, Input.GetKey(KeyCode.W));
-        data.buttons.Set(MyButtons.Backward, Input.GetKey(KeyCode.S));
-        data.buttons.Set(MyButtons.Left, Input.GetKey(KeyCode.A));
-        data.buttons.Set(MyButtons.Right, Input.GetKey(KeyCode.D));
-
-        float rotate_x, rotate_y;
-        rotate_x = Input.GetAxis("Mouse X");
-        rotate_y = Input.GetAxis("Mouse Y");
-        data.lookRotationDelta = new Vector2(rotate_x, -rotate_y) * 5f;
-
-        input.Set(data);
-    }
-    public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
         GameManager.Instance.UIManager.ClaimError("Shutdowned", shutdownReason.ToString(), "OK");

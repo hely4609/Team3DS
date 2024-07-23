@@ -9,6 +9,10 @@ public class NetworkPlayer : Player
     // Network Character Controller 컴포넌트를 플레이어에 삽입 해줄 것! 
     [Networked] public NetworkButtons ButtonsPrevious { get; set; }
 
+    protected override void MyStart()
+    {
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     protected override void MyUpdate(float deltaTime)
     {
 
@@ -16,62 +20,16 @@ public class NetworkPlayer : Player
 
     public override void FixedUpdateNetwork()
     {
-        /*
-        if (HasInputAuthority == false)
-            return;
-
-        // Enter key is used for locking/unlocking cursor in game view.
-        var keyboard = Keyboard.current;
-        if (keyboard != null && (keyboard.enterKey.wasPressedThisFrame || keyboard.numpadEnterKey.wasPressedThisFrame))
+        if(Input.GetKeyDown(KeyCode.Return))
         {
-            if (Cursor.lockState == CursorLockMode.Locked)
-            {
-                Cursor.lockState = CursorLockMode.None;
-                Cursor.visible = true;
-            }
-            else
-            {
-                Cursor.lockState = CursorLockMode.Locked;
-                Cursor.visible = false;
-            }
+            if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+            else Cursor.lockState = CursorLockMode.Locked;
         }
-        */
         if (GetInput(out NetworkInputData data))
         {
-            /*
-            Debug.Log(data.direction);
             DoMove(data.direction);
-            */
-            // compute pressed/released state
-            var pressed = data.buttons.GetPressed(ButtonsPrevious);
-            var released = data.buttons.GetReleased(ButtonsPrevious);
+            DoScreenRotate(data.lookRotationDelta);
 
-            // store latest input as 'previous' state we had
-            ButtonsPrevious = data.buttons;
-
-            // movement (check for down)
-            var vector = default(Vector3);
-            if (data.buttons.IsSet(MyButtons.Forward)) { vector.z += 1; }
-            if (data.buttons.IsSet(MyButtons.Backward)) { vector.z -= 1; }
-
-            if (data.buttons.IsSet(MyButtons.Left)) { vector.x -= 1; }
-            if (data.buttons.IsSet(MyButtons.Right)) { vector.x += 1; }
-            //DoMove(vector.normalized * 0.1f);
-            DoMove(vector);
-
-
-            transform.localEulerAngles += new Vector3(0f, data.lookRotationDelta.x, 0f);
-            if (cameraOffset == null)
-            {
-                cameraOffset = transform.Find("CameraOffset");
-            }
-            else
-            {
-                if (cameraOffset.localEulerAngles.x + data.lookRotationDelta.y > 45f && cameraOffset.localEulerAngles.x + data.lookRotationDelta.y < 180) cameraOffset.localEulerAngles = new Vector3(45f, 0, 0);
-                else if (cameraOffset.localEulerAngles.x + data.lookRotationDelta.y < 315f && cameraOffset.localEulerAngles.x + data.lookRotationDelta.y > 180) cameraOffset.localEulerAngles = new Vector3(315f, 0, 0);
-                else cameraOffset.localEulerAngles += new Vector3(data.lookRotationDelta.y, 0f, 0f);
-            }
-            
         }
     }
 
@@ -86,8 +44,15 @@ public class NetworkPlayer : Player
         AnimFloat?.Invoke("MoveRight", direction.x);
     }
 
-    public override void ScreenRotate(Vector2 mouseDelta)
+    public void DoScreenRotate(Vector2 mouseDelta)
     {
+        transform.localEulerAngles = new Vector3(0f, mouseDelta.y, 0f);
+        if (cameraOffset == null)
+        {
+            cameraOffset = transform.Find("CameraOffset");
+        }
+        cameraOffset.localEulerAngles = new Vector3(mouseDelta.x, 0f, 0f);
+
 
     }
 
