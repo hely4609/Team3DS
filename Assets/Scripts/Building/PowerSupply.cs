@@ -69,4 +69,16 @@ public class PowerSupply : Building
 
         //return false;
     //}
+    protected void Deliver(Player player)
+    {
+        //if(player.BePicked != null)
+        {
+            // if(player.BePicked == 款馆前)
+            {
+                // expCurrent += 款馆前.currentOre
+                // 款馆前阑 厚劝己拳.
+                // player.bePicked = null
+            }
+        }
+    }
 }

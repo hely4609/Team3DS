@@ -20,8 +20,9 @@ public abstract class Building : MyComponent, IInteraction
     protected float buildingTimeMax; // 제작에 얼마나 걸리나
     protected float buildingTimeCurrent; // 얼마나 제작했나
     protected float completePercent; //(0~1) 제작한 퍼센트
-    public float CompletePercent { get; set; }
-
+    public float CompletePercent { get { return buildingTimeCurrent / buildingTimeMax; } 
+        set { buildingTimeCurrent = buildingTimeMax * value; } }
+    // 10%로 하라. 라고 들어옴.
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
 
@@ -138,22 +139,30 @@ public abstract class Building : MyComponent, IInteraction
             return Interaction.None;
         }
     }
-    public bool InteractionUpdate(float deltaTime) // 상호작용시 적용할 함수. 제작을 진행함.
+    public virtual bool InteractionUpdate(float deltaTime, Interaction interaction) // 상호작용시 적용할 함수. 제작하라는 명령이 들어오면 제작을 진행함.
     {
-        BuildBuilding();
-        
+        if(interaction == Interaction.Build)
+        {
+            BuildBuilding(deltaTime);
+        }
         return true;
     }
 
     public bool InteractionEnd()
     {
+
+        Debug.Log("끝");
         return true;
     }
 
-    public void BuildBuilding()
+    public void BuildBuilding(float deltaTime)
     {
         // 마우스를 누르고 있으면 점점 수치가 차오름.
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
+        if(completePercent< 1)
+        {
+            buildingTimeCurrent += deltaTime;
+        }
 
         // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.
 
@@ -169,6 +178,7 @@ public abstract class Building : MyComponent, IInteraction
         {
             foreach (MeshRenderer r in meshes)
                 r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+
         }
     }
 

@@ -7,10 +7,10 @@ public class towertest : Tower
     [Range(0,1)]
     [SerializeField] float value;
     [SerializeField] bool isBuildComplete;
-    void Start()
-    {
-        HeightCheck();
-    }
+    //void Start()
+    //{
+    //    HeightCheck();
+    //}
 
     
     // Update is called once per frame

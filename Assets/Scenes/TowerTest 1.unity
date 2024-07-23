@@ -134,9 +134,9 @@ GameObject:
   - component: {fileID: 31066747}
   - component: {fileID: 31066746}
   - component: {fileID: 31066745}
-  - component: {fileID: 31066749}
   - component: {fileID: 31066744}
   - component: {fileID: 31066742}
+  - component: {fileID: 31066749}
   m_Layer: 0
   m_Name: Enemy2
   m_TagString: Untagged
@@ -279,7 +279,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 31066741}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a56e084a073fc94c849d28ce08fb0a7, type: 3}
+  m_Script: {fileID: 11500000, guid: a35fe32ba98e97f4595653f4b6469d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
@@ -2298,9 +2298,9 @@ GameObject:
   - component: {fileID: 1807917738}
   - component: {fileID: 1807917737}
   - component: {fileID: 1807917736}
-  - component: {fileID: 1807917741}
   - component: {fileID: 1807917735}
   - component: {fileID: 1807917740}
+  - component: {fileID: 1807917741}
   m_Layer: 0
   m_Name: Enemy1
   m_TagString: Untagged
@@ -2443,7 +2443,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1807917733}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a56e084a073fc94c849d28ce08fb0a7, type: 3}
+  m_Script: {fileID: 11500000, guid: a35fe32ba98e97f4595653f4b6469d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
@@ -2460,9 +2460,9 @@ GameObject:
   - component: {fileID: 1951691907}
   - component: {fileID: 1951691906}
   - component: {fileID: 1951691905}
-  - component: {fileID: 1951691909}
   - component: {fileID: 1951691904}
   - component: {fileID: 1951691902}
+  - component: {fileID: 1951691909}
   m_Layer: 0
   m_Name: Enemy3
   m_TagString: Untagged
@@ -2590,7 +2590,7 @@ Transform:
   m_GameObject: {fileID: 1951691901}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -75, y: 2.6, z: 29.8}
+  m_LocalPosition: {x: 80.4, y: 2.6, z: -0.5}
   m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2605,7 +2605,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1951691901}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a56e084a073fc94c849d28ce08fb0a7, type: 3}
+  m_Script: {fileID: 11500000, guid: a35fe32ba98e97f4595653f4b6469d4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}

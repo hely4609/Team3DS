@@ -2,14 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public delegate void MonsterDestroyFunction(TestMonster monster);
+//public delegate void MonsterDestroyFunction(TestMonster monster);
 
 public class TestMonster : Monster
 {
 
     bool isRelease = false;
 
-    public MonsterDestroyFunction destroyFunction;
+    //public MonsterDestroyFunction destroyFunction;
     protected override void MyStart()
     {
         hpMax = 5;
