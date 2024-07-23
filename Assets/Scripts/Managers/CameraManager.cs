@@ -60,7 +60,7 @@ public class CameraManager : Manager
 
         else if (observingPlayer.CameraOffset)
         {
-            mainCamera.transform.position = observingPlayer.CameraOffset.position;
+            mainCamera.transform.position = new Vector3(observingPlayer.CameraOffset.position.x, 1.1f, observingPlayer.CameraOffset.position.z);
             mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
         }
 

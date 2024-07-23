@@ -5,7 +5,11 @@ using UnityEngine;
 
 public class NetworkPlayer : Player
 {
-    // Network Character Controller 컴포넌트를 플레이어에 삽입 해줄 것! 
+    NetworkCharacterController _ncc;
+    private void Awake()
+    {
+        _ncc = GetComponent<NetworkCharacterController>();
+    }
     [Networked] public NetworkButtons ButtonsPrevious { get; set; }
 
     protected override void MyStart()
@@ -36,7 +40,9 @@ public class NetworkPlayer : Player
 
     public void DoMove(Vector3 direction)
     {
-        transform.position += (transform.forward * direction.z + transform.right * direction.x).normalized * Runner.DeltaTime * moveSpeed * 10f;
+        //transform.position += (transform.forward * direction.z + transform.right * direction.x).normalized * Runner.DeltaTime * moveSpeed * 10f;
+        //rb.velocity = direction;
+        _ncc.Move(direction, moveSpeed * 10);
         AnimFloat?.Invoke("Speed", direction.magnitude);
 
         //currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));

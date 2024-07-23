@@ -74,7 +74,7 @@ namespace Fusion {
       }
     }
 
-    public void Move(Vector3 direction) {
+    public void Move(Vector3 direction, float moveSpeed) {
       var deltaTime    = Runner.DeltaTime;
       var previousPos  = transform.position;
       var moveVelocity = Data.Velocity;
@@ -95,13 +95,15 @@ namespace Fusion {
         horizontalVel = Vector3.Lerp(horizontalVel, default, braking * deltaTime);
       } else {
         horizontalVel      = Vector3.ClampMagnitude(horizontalVel + direction * acceleration * deltaTime, maxSpeed);
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Runner.DeltaTime);
+        //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(direction), rotationSpeed * Runner.DeltaTime);
       }
 
       moveVelocity.x = horizontalVel.x;
       moveVelocity.z = horizontalVel.z;
 
-      _controller.Move(moveVelocity * deltaTime);
+      //_controller.Move(moveVelocity * deltaTime);
+      _controller.Move((transform.forward * direction.z + transform.right * direction.x).normalized * deltaTime * moveSpeed);
+
 
       Data.Velocity = (transform.position - previousPos) * Runner.TickRate;
       Data.Grounded = _controller.isGrounded;
