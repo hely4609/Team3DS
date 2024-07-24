@@ -144,41 +144,6 @@ public class Player : Character
             }
         }
 
-        if (interactionObjectList != GameManager.Instance.InteractionManager.CheckInteractionObjInRange(transform.position + transform.forward * 0.5f, 0.8f))
-        {
-            foreach (var interaction in interactionObjectList)
-            {
-                GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[interaction]);
-            }
-            interactionObjectDictionary.Clear();
-
-            interactionObjectList = GameManager.Instance.InteractionManager.CheckInteractionObjInRange(transform.position + transform.forward * 0.5f, 0.8f);
-            if (interactionObjectList.Exists(target => target == interactionObject))
-            {
-                interactionIndex = interactionObjectList.IndexOf(interactionObject);
-            }
-
-            foreach (var interaction in interactionObjectList)
-            {
-                GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
-                buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = $"test";
-                interactionObjectDictionary.Add(interaction, button);
-
-                if (interactionObjectList.Count == 1)
-                {
-                    interactionIndex = 0;
-                    interactionObject = interaction;
-                }
-            }
-            UpdateInteractionUI(interactionIndex);
-        }
-        
-        //Debug.Log(interactionObjectList.Count);
-        //interactionObjectDictionary.Clear();
-
-        
-
         /////////////////////////////
         // 상호작용
         if (isInteracting && interactionObject != null)
@@ -243,8 +208,8 @@ public class Player : Character
 
         switch (interactionType)
         {
-            default : break;
-            case Interaction.Build: AnimBool?.Invoke("isBulid", true); break;
+            default: break;
+            case Interaction.Build: AnimBool?.Invoke("isBuild", true); break;
         }
 
         Debug.Log($"{target} 과 상호작용");
@@ -258,79 +223,84 @@ public class Player : Character
 
         isInteracting = false;
         target.InteractionEnd();
+
         switch (interactionType)
         {
             default: break;
-            case Interaction.Build: AnimBool?.Invoke("isBulid", false); break;
+            case Interaction.Build: AnimBool?.Invoke("isBuild", false); break;
         }
+
         interactionType = Interaction.None;
 
         return default;
     }
 
     // 상호작용 가능한 대상이 감지되었을 때 처리
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.GetType() == typeof(SphereCollider)) return;
-    //    // if (other.isTrigger) return;
-    //    if (other.TryGetComponent(out IInteraction target))
-    //    {
-    //        // 이미 있다면 추가하지않음
-    //        if (interactionObjectList.Exists(inst => inst == target)) return;
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out IInteraction target))
+        {
+            // 이미 있다면 추가하지않음
+            if (interactionObjectList.Exists(inst => inst == target)) return;
+            if (System.Array.Find(target.GetInteractionColliders(), col => other == col)) 
+            {
+                interactionObjectList.Add(target);
 
-    //        interactionObjectList.Add(target);
+                GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+                buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+                buttonText.text = $"{other.name}";
+                interactionObjectDictionary.Add(target, button);
 
-    //        GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
-    //        buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-    //        buttonText.text = $"{other.name}";
-    //        interactionObjectDictionary.Add(target, button);
+                if (interactionObjectList.Count == 1)
+                {
+                    interactionIndex = 0;
+                    interactionObject = target;
+                }
 
-    //        if (interactionObjectList.Count == 1)
-    //        {
-    //            interactionIndex = 0;
-    //            interactionObject = target;
-    //        }
-
-    //        UpdateInteractionUI(interactionIndex);
-    //    }
-    //}
+                UpdateInteractionUI(interactionIndex);
+            }
+        }
+    }
 
     // 상호작용 가능한 대상 리스트에 있는 대상이 감지범위에서 나갔을 때 처리
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.TryGetComponent(out IInteraction target))
-    //    {
-    //        interactionObjectList.Remove(target);
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.TryGetComponent(out IInteraction target))
+        {
+            if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
+            { 
+                interactionObjectList.Remove(target);
 
-    //        if (interactionObjectList.Count == 0)
-    //        {
-    //            interactionIndex = -1;
-    //            if (isInteracting)
-    //            {
-    //                InteractionEnd(interactionObject);
-    //            }
-    //            interactionObject = null;
-    //        }
-    //        else
-    //        {
-    //            interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
-    //            if (isInteracting)
-    //            {
-    //                InteractionEnd(interactionObject);
-    //            }
-    //            interactionObject = interactionObjectList[interactionIndex];
+                if (interactionObjectList.Count == 0)
+                {
+                    interactionIndex = -1;
+                    if (isInteracting)
+                    {
+                        InteractionEnd(interactionObject);
+                    }
+                    interactionObject = null;
+                }
+                else
+                {
+                    interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                    if (isInteracting)
+                    {
+                        InteractionEnd(interactionObject);
+                    }
+                    interactionObject = interactionObjectList[interactionIndex];
 
-    //            UpdateInteractionUI(interactionIndex);
-    //        }
+                    UpdateInteractionUI(interactionIndex);
+                }
 
-    //        if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
-    //        {
-    //            interactionObjectDictionary.GetEnumerator();
-    //            GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
-    //            interactionObjectDictionary.Remove(target);
-    //        }
-    //    }
-    //}
+                if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
+                {
+                    interactionObjectDictionary.GetEnumerator();
+                    GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
+                    interactionObjectDictionary.Remove(target);
+                }
+            }
+        }
+    }
 
     // 마우스 휠을 굴려서 상호작용할 대상을 정함.
     public void MouseWheel(Vector2 scrollDelta)

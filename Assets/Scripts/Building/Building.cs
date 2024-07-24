@@ -160,7 +160,7 @@ public abstract class Building : MyComponent
 
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
-
+        
         float max = mesh.bounds.max.y;
         float min = mesh.bounds.min.y;
         //Debug.Log(mesh.bounds.max.y);
