@@ -33,13 +33,13 @@ public class NetworkPlayer : Player
 
         if (GetInput(out NetworkInputData data))
         {
-            DoMove(data.direction);
+            DoMove(data.moveDirection);
             DoScreenRotate(data.lookRotationDelta);
 
             HoldingDesign();
 
-            if(data.buttons.IsSet(MyButtons.DesignBuilding)) DoDesignBuilding(buildables[0]);
-            if(data.buttons.IsSet(MyButtons.Build)) Build();
+            //if(data.buttons.IsSet(MyButtons.DesignBuilding)) DoDesignBuilding(buildables[0]);
+            if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
         }
     }
 
@@ -72,26 +72,32 @@ public class NetworkPlayer : Player
 
     }
 
+    public NetworkObject designBuildingPrefab;
     bool DoDesignBuilding(GameObject buildingPrefab)
     {
-        if (designingBuilding == null)
+        if (designBuildingPrefab == null && Runner.IsServer)
         {
-            Runner.Spawn(buildingPrefab);
-            designingBuilding = buildingPrefab.GetComponent<Building>();
+            designBuildingPrefab = Runner.Spawn(buildingPrefab, transform.position + transform.forward * 5f);
+            designingBuilding = designBuildingPrefab.GetComponent<Building>();
             return true;
         }
-        else return false;
+        else
+        {
+            Debug.Log(Runner.State);
+            return false;
+        }
     }
     
 
     void HoldingDesign()
     {
-        if (designingBuilding == null) return;
+        if (designBuildingPrefab == null) return;
+        designingBuilding = designBuildingPrefab.GetComponent<Building>();
 
         Vector3 pickPos = transform.position + transform.forward * 5f;
         int x = (int)pickPos.x;
         int z = (int)pickPos.z;
-        designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.position.y, z);
+        designBuildingPrefab.transform.position = new Vector3(x, designBuildingPrefab.transform.position.y, z);
         Vector2Int currentPos = new Vector2Int(x, z);
 
         // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
@@ -99,8 +105,22 @@ public class NetworkPlayer : Player
         {
             designingBuilding.TiledBuildingPos = currentPos;
             designingBuilding.CheckBuild();
-            }
-
         }
+
+    }
+
+    bool DoBuild()
+    {
+        if (designingBuilding != null)
+        {
+            if (designingBuilding.FixPlace())
+            {
+                designingBuilding = null;
+                designBuildingPrefab = null;
+                return true;
+            }
+        }
+        return false;
+    }
 
 }

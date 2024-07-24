@@ -48,6 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab:
     RawGuidValue: 40c6b7c0c5230194dbe68dda67829f72
+  buildables:
+  - {fileID: 6860581916195568055, guid: b7a3e566405353949a47c6e995f78bd8, type: 3}
 --- !u!114 &6693131604893588327
 MonoBehaviour:
   m_ObjectHideFlags: 0
