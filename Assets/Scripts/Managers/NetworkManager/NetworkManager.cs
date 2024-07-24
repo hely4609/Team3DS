@@ -78,7 +78,7 @@ public partial class NetworkManager : Manager
         GameManager.NetworkUpdates += (deltaTime) => {
             if(!Runner)
             {
-                _runner = Resources.Load<GameObject>("Photon");
+                _runner = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Photon"));
                 _runner.AddComponent<NetworkRunner>();
             }
         };

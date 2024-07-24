@@ -7,7 +7,7 @@ public class BuildingManager : Manager
 {
     protected List<Building> buildings = new List<Building>();
     public List<Building> Buildings => buildings;
-    protected Vector2[] roadData = new Vector2[8]; // 시작점 배열.
+    public Vector2[] roadData = new Vector2[8]; // 시작점 배열.
     // 시작점만 알면 하나의 시작점과 다음 시작점을 이으면 해당 길이 됨.
     protected GameObject[] roads;
 
