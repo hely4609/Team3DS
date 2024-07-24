@@ -171,9 +171,9 @@ public abstract class Building : MyComponent
         foreach (MeshRenderer r in meshes)
         {
             r.material.SetFloat("_HeightMin", min);
-            Debug.Log(min);
+            //Debug.Log(min);
             r.material.SetFloat("_HeightMax", max);
-            Debug.Log(max);
+            //Debug.Log(max);
         }
     }
 }
