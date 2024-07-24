@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "DesignBuiling",
+                    "name": "DesignBuilding",
                     "type": "Button",
                     "id": "d13b626f-0c65-4bb3-9159-95ac80796a3b",
                     "expectedControlType": "Button",
@@ -236,7 +236,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DesignBuiling",
+                    "action": "DesignBuilding",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
