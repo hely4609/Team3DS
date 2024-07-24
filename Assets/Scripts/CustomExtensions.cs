@@ -17,6 +17,8 @@ public interface IInteraction
     public bool InteractionUpdate(float deltaTime, Interaction interaction);
 
     public bool InteractionEnd();
+
+    public Vector3 GetPosition();
 }
 
 

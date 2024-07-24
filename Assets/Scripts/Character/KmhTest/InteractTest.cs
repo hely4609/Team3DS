@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class InteractTest : MonoBehaviour ,IInteraction
 {
+    Vector3 IInteraction.GetPosition()
+    {
+        return transform.position;
+    }
+
     bool IInteraction.InteractionEnd()
     {
         return default;
@@ -20,10 +25,12 @@ public class InteractTest : MonoBehaviour ,IInteraction
         return default;
     }
 
+    
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        GameManager.Instance.InteractionManager.AddInteractionObject(this);
     }
 
     // Update is called once per frame

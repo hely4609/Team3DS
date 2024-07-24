@@ -43,10 +43,13 @@ public class InteractableBuilding : Building, IInteraction
     }
 
     public bool InteractionEnd()
-    {
-
+    { 
         Debug.Log("³¡");
         return true;
     }
 
+    Vector3 IInteraction.GetPosition()
+    {
+        return transform.position;
+    }
 }
