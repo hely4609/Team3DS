@@ -42,6 +42,6 @@ public class InteractionManager : Manager
             }
         }
 
-        return insts;
+        return newInteractions;
     }
 }

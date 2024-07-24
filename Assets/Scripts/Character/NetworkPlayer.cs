@@ -6,6 +6,7 @@ using UnityEngine;
 public class NetworkPlayer : Player
 {
     NetworkCharacterController _ncc;
+    [SerializeField] private GameObject[] buildables;
     private void Awake()
     {
         _ncc = GetComponent<NetworkCharacterController>();
@@ -35,14 +36,14 @@ public class NetworkPlayer : Player
             DoMove(data.direction);
             DoScreenRotate(data.lookRotationDelta);
 
-            if(data.buttons.IsSet(MyButtons.DesignBuilding))
-            {
-                Debug.Log("DesignBuilding");
-            }
+            HoldingDesign();
+
+            if(data.buttons.IsSet(MyButtons.DesignBuilding)) DoDesignBuilding(buildables[0]);
+            if(data.buttons.IsSet(MyButtons.Build)) Build();
         }
     }
 
-    public void DoMove(Vector3 direction)
+    void DoMove(Vector3 direction)
     {
         //transform.position += (transform.forward * direction.z + transform.right * direction.x).normalized * Runner.DeltaTime * moveSpeed * 10f;
         //rb.velocity = direction;
@@ -55,7 +56,7 @@ public class NetworkPlayer : Player
         AnimFloat?.Invoke("MoveRight", direction.x);
     }
 
-    public void DoScreenRotate(Vector2 mouseDelta)
+    void DoScreenRotate(Vector2 mouseDelta)
     {
         rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
         transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
@@ -71,5 +72,35 @@ public class NetworkPlayer : Player
 
     }
 
+    bool DoDesignBuilding(GameObject buildingPrefab)
+    {
+        if (designingBuilding == null)
+        {
+            Runner.Spawn(buildingPrefab);
+            designingBuilding = buildingPrefab.GetComponent<Building>();
+            return true;
+        }
+        else return false;
+    }
+    
+
+    void HoldingDesign()
+    {
+        if (designingBuilding == null) return;
+
+        Vector3 pickPos = transform.position + transform.forward * 5f;
+        int x = (int)pickPos.x;
+        int z = (int)pickPos.z;
+        designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.position.y, z);
+        Vector2Int currentPos = new Vector2Int(x, z);
+
+        // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
+        if (designingBuilding.TiledBuildingPos != currentPos)
+        {
+            designingBuilding.TiledBuildingPos = currentPos;
+            designingBuilding.CheckBuild();
+            }
+
+        }
 
 }

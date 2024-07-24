@@ -19,6 +19,9 @@ public partial class NetworkPhotonCallbacks
         data.buttons.Set(MyButtons.Build, tryBuild);
 
         input.Set(data);
+
+        tryDesignBuilding = false;
+        tryBuild = false;
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     public void OnMove(InputValue value)
@@ -32,7 +35,6 @@ public partial class NetworkPhotonCallbacks
 
     public void OnDesignBuilding()
     {
-        Debug.Log("B pressed");
         tryDesignBuilding = true;
     }
 

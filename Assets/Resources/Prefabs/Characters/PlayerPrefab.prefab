@@ -16492,6 +16492,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4896616549607160579}
   moveSpeed: 1
+  cameraOffset: {fileID: 0}
+  interactionContent: {fileID: 0}
+  buildables:
+  - {fileID: 6860581916195568055, guid: 24daf1a6138e5ee4f86e7622f95b8561, type: 3}
 --- !u!114 &8127065621516109675
 MonoBehaviour:
   m_ObjectHideFlags: 0
