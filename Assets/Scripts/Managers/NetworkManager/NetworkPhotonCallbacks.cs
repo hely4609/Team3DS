@@ -8,22 +8,15 @@ using UnityEngine.InputSystem;
 
 public enum MyButtons
 {
-    Forward = 0,
-    Backward = 1,
-    Left = 2,
-    Right = 3,
-    mouseUp = 4,
-    mouseDown = 5,
-    mouseLeft = 6,
-    mouseRight = 7,
+    DesignBuilding = 0,
+    Build = 1,
+    CancelDesignBuilding = 2,
 }
 public struct NetworkInputData : INetworkInput
 {
     public Vector3 direction;
     public Vector2 lookRotationDelta;
     public NetworkButtons buttons;
-
-    public float moveSpeed;
 }
 
 public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks

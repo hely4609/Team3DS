@@ -35,6 +35,10 @@ public class NetworkPlayer : Player
             DoMove(data.direction);
             DoScreenRotate(data.lookRotationDelta);
 
+            if(data.buttons.IsSet(MyButtons.DesignBuilding))
+            {
+                Debug.Log("DesignBuilding");
+            }
         }
     }
 

@@ -22,6 +22,7 @@ public class CameraManager : Manager
         base.ManagerStart();
     }
     
+    /*
     public override void ManagerUpdate(float deltaTime)
     {
         // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
@@ -43,7 +44,7 @@ public class CameraManager : Manager
 
 
     }
-    /*
+    */
     public override void ManagerUpdate(float deltaTime)
     {
         // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
@@ -65,5 +66,4 @@ public class CameraManager : Manager
       
     
     }
-    */
 }
