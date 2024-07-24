@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class InteractableBuilding : Building, IInteraction
-{ 
+{
+    //protected Collider[] interactionColliders;
+
     protected override void Initialize()
     {
     }
@@ -48,8 +51,52 @@ public class InteractableBuilding : Building, IInteraction
         return true;
     }
 
-    Vector3 IInteraction.GetPosition()
+    public Collider[] GetInteractionColliders()
     {
-        return transform.position;
+        return cols;
     }
+
+//    protected override void HeightCheck()
+//    {
+//        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+//        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+//        int i = 0;
+//        while (i < meshFilters.Length)
+//        {
+//            combine[i].mesh = meshFilters[i].sharedMesh;
+//            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+
+//            i++;
+//        }
+
+//        MeshFilter inst = gameObject.AddComponent<MeshFilter>();
+
+//        Mesh mesh = inst.mesh;
+//        mesh.Clear();
+//        mesh.CombineMeshes(combine);
+
+//        MeshCollider col = gameObject.AddComponent<MeshCollider>();
+//        col.sharedMesh = mesh;
+
+//#if UNITY_EDITOR
+//        { // Mesh ¿˙¿Â
+//            string path = "Assets/MyMesh.asset";
+//            AssetDatabase.CreateAsset(transform.GetComponent<MeshFilter>().mesh, AssetDatabase.GenerateUniqueAssetPath(path));
+//            AssetDatabase.SaveAssets();
+//        }
+//#endif
+
+//        float max = mesh.bounds.max.y;
+//        float min = mesh.bounds.min.y;
+
+//        foreach (MeshRenderer r in meshes)
+//        {
+//            r.material.SetFloat("_HeightMin", min);
+//            Debug.Log(min);
+//            r.material.SetFloat("_HeightMax", max);
+//            Debug.Log(max);
+//        }
+//    }
+
 }

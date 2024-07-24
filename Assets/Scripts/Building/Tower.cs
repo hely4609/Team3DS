@@ -33,8 +33,6 @@ public class Tower : InteractableBuilding
         size = new Vector2Int(4, 4);
         TurnOnOff(true);
 
-        GameManager.Instance.InteractionManager.AddInteractionObject(this);
-        
     }
     public override Interaction InteractionStart(Player player)
     {

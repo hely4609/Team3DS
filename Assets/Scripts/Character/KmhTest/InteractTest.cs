@@ -4,9 +4,15 @@ using UnityEngine;
 
 public class InteractTest : MonoBehaviour ,IInteraction
 {
-    Vector3 IInteraction.GetPosition()
+    Collider[] colliders;
+    public Collider[] GetInteractionColliders()
     {
-        return transform.position;
+        if (colliders == null)
+        {
+            colliders = GetComponentsInChildren<Collider>();
+        }
+
+        return colliders;
     }
 
     bool IInteraction.InteractionEnd()
@@ -25,17 +31,4 @@ public class InteractTest : MonoBehaviour ,IInteraction
         return default;
     }
 
-    
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        GameManager.Instance.InteractionManager.AddInteractionObject(this);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
