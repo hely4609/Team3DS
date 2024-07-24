@@ -4,23 +4,27 @@ using UnityEngine;
 
 public class towertest : Tower
 {
-    [SerializeField] Renderer[] render;
-    [Range(0,10)]
+    [Range(0,1)]
     [SerializeField] float value;
-    void Start()
-    {
-        
-    }
+    [SerializeField] bool isBuildComplete;
+    //void Start()
+    //{
+    //    HeightCheck();
+    //}
 
+    
     // Update is called once per frame
     void Update()
     {
-        
-
-        foreach (var r in render) 
+        foreach (var r in meshes) 
         {
-            r.material.SetFloat("_CompletValue", value);
+            r.material.SetFloat("_CompletePercent", value);
         }
-        
+
+        if (isBuildComplete)
+        {
+            foreach(var r in meshes)
+                r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+        }
     }
 }

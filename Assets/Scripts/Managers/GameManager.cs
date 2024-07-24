@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
     protected NetworkManager networkManager;
     public NetworkManager NetworkManager => networkManager;
 
+    protected InteractionManager interactionManager;
+    public InteractionManager InteractionManager => interactionManager;
+
     bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
 
@@ -102,6 +105,8 @@ public class GameManager : MonoBehaviour
         yield return cameraManager.Initiate();
         networkManager = new NetworkManager();
         yield return networkManager.Initiate();
+        interactionManager = new InteractionManager();
+        yield return interactionManager.Initiate();
 
 
         cameraManager = new CameraManager();

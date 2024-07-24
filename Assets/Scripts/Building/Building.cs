@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public enum BuildingEnum
 {
     Tower,
@@ -19,10 +20,11 @@ public abstract class Building : MyComponent
     protected float buildingTimeMax; // 제작에 얼마나 걸리나
     protected float buildingTimeCurrent; // 얼마나 제작했나
     protected float completePercent; //(0~1) 제작한 퍼센트
-    public float CompletePercent { get; set; }
-
-    [SerializeField] protected MeshRenderer mesh;
-    [SerializeField] protected Collider col;
+    public float CompletePercent { get { return buildingTimeCurrent / buildingTimeMax; } 
+        set { buildingTimeCurrent = buildingTimeMax * value; } }
+    // 10%로 하라. 라고 들어옴.
+    [SerializeField] protected MeshRenderer[] meshes;
+    [SerializeField] protected Collider[] cols;
 
     [SerializeField] protected bool isBuildable; // 이 장소에 건설할 수 있나
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
@@ -37,6 +39,7 @@ public abstract class Building : MyComponent
     protected override void MyStart()
     {
         Initialize();
+        //HeightCheck();
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
@@ -77,32 +80,100 @@ public abstract class Building : MyComponent
         if (isBuildable)
         {
             Debug.Log("OK");
-            //foreach(MeshRenderer meshes in mesh)
-            {
-                mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
-            }
+            
+                foreach(MeshRenderer render in meshes)
+                {
+                    render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+                }
+                
+            
         }
         else
         {
             Debug.Log("안됨");
-            //foreach (MeshRenderer meshes in mesh)
+            foreach (MeshRenderer render in meshes)
             { 
-                mesh.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
+                render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
             }
         }
     }
-    public virtual bool FixPlace()
+    public virtual bool FixPlace() // 건설완료
     {
         startPos = tiledBuildingPositionLast;
         if (CheckBuild())
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
-            col.enabled = true;
+            HeightCheck();
+            foreach (Collider col in cols)
+            {
+                col.enabled = true;
+            }
             return true;
         }
         else
         {
             return false;
         }
-    } // 위치를 고정함.
+    }
+    public void BuildBuilding(float deltaTime)
+    {
+        // 마우스를 누르고 있으면 점점 수치가 차오름.
+        // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
+        if(completePercent< 1)
+        {
+            buildingTimeCurrent += deltaTime;
+        }
+
+        // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.
+
+        // 완성되면 완성본 Material로 한다.
+
+        // 건설 완료시 
+        foreach (MeshRenderer r in meshes)
+        {
+            r.material.SetFloat("_CompletePercent", CompletePercent);
+        }
+
+        if (CompletePercent >= 1)
+        {
+            foreach (MeshRenderer r in meshes)
+                r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+
+        }
+    }
+
+    // 건물의 높이를 측정하는 함수.
+    // 건물을 지을 때 진행도에 따라 차오르는것을 표현하기 위함.
+    protected void HeightCheck()
+    {
+        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+
+        int i = 0;
+        while (i < meshFilters.Length)
+        {
+            combine[i].mesh = meshFilters[i].sharedMesh;
+            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+
+            i++;
+        }
+
+        Mesh mesh = new Mesh();
+        mesh.CombineMeshes(combine);
+
+        float max = mesh.bounds.max.y;
+        float min = mesh.bounds.min.y;
+        //Debug.Log(mesh.bounds.max.y);
+        //Debug.Log(mesh.bounds.min.y);
+
+        //Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));
+
+        foreach (MeshRenderer r in meshes)
+        {
+            r.material.SetFloat("_HeightMin", min);
+            Debug.Log(min);
+            r.material.SetFloat("_HeightMax", max);
+            Debug.Log(max);
+        }
+    }
 }

@@ -8,18 +8,23 @@ public class ResourcesPath
         "Prefabs/UIs/SignInCanvas",
         "Prefabs/UIs/SetNicknameCanvas",
         "Prefabs/UIs/BeInvitedWindow",
+        "Prefabs/UIs/InteractableObjButton",
+        "Prefabs/UIs/CharacterUICanvas",
         // Character
         "Prefabs/Characters/Player",
         "Prefabs/Characters/Rope",
         // Tower
         "Prefabs/Buildings/Tower",
         "Prefabs/Buildings/Road",
-        "Prefabs/Buildings/EnergyBarrier"        
+        "Prefabs/Buildings/EnergyBarrier",
+        "Prefabs/Buildings/Turret1a",
+
     };
 
     public static string[] MaterialPathArray =
     {
         "Materials/Temporary/Buildable",
         "Materials/Temporary/Buildunable",
+        "Materials/Temporary/Turret1a"
     };
 }

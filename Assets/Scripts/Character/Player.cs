@@ -1,16 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
-using UnityEngine.UIElements;
+using TMPro;
+using UnityEngine.UI;
 
 public class Player : Character
 {
     protected ControllerBase possessionController;
-    protected Transform cameraOffset;
+    [SerializeField] protected Transform cameraOffset;
     public Transform CameraOffset => cameraOffset;
+   
+    /////////////////////////////interaction 변수들
+    [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
+    protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
+    protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
+    public IInteraction InteractionObject => interactionObject;
+    protected int interactionIndex = 0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
+    protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
+    protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
+    protected bool isInteracting; // 나는 지금 상호작용 중인가?
+    public bool IsInteracting => isInteracting;
+    protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
+    /////////////////////////////
 
     protected GameObject bePicked;
+    public GameObject BePicked => bePicked;
     // protected bool isHandFree;
     protected Building designingBuilding;
 
@@ -29,19 +43,28 @@ public class Player : Character
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
+        targetController.DoInteractionStart -= InteractionStart;
+        targetController.DoInteractionEnd -= InteractionEnd;
+        targetController.DoMouseWheel -= MouseWheel;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
         targetController.DoDesignBuilding += DesignBuiling;
         targetController.DoBuild += Build;
-
+        targetController.DoInteractionStart += InteractionStart;
+        targetController.DoInteractionEnd += InteractionEnd;
+        targetController.DoMouseWheel += MouseWheel;
     }
+    
     protected void UnRegistrationFunction(ControllerBase targetController)
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuiling;
         targetController.DoBuild -= Build;
+        targetController.DoInteractionStart -= InteractionStart;
+        targetController.DoInteractionEnd-= InteractionEnd;
+        targetController.DoMouseWheel -= MouseWheel;
     }
 
     public virtual void Possession(ControllerBase targetController)
@@ -82,13 +105,8 @@ public class Player : Character
 
     protected override void MyUpdate(float deltaTime)
     {
-        // 테스트
-        //if (rb == null)
-        //{
-        //    rb = GetComponent<Rigidbody>();
-        //}
-        //
-
+        ///////////////////////////// 
+        // 이동방향이 있을 시 해당 방향으로 움직임. + 애니메이션 설정
         if (moveDir.magnitude == 0)
         {
             float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
@@ -106,62 +124,101 @@ public class Player : Character
 
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
+        //////////////////////////////
 
-        // 테스트
+        ///////////////////////////// 
+        // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
         if (designingBuilding != null)
         {
             Vector3 pickPos = transform.position + transform.forward * 5f;
             int x = (int)pickPos.x;
             int z = (int)pickPos.z;
-            designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.lossyScale.y * 0.5f, z);
-
+            designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.position.y, z);
             Vector2Int currentPos = new Vector2Int(x, z);
+
+            // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
             if (designingBuilding.TiledBuildingPos != currentPos)
             {
                 designingBuilding.TiledBuildingPos = currentPos;
                 designingBuilding.CheckBuild();
-            }            
-            
-
+            }
         }
 
+        if (interactionObjectList != GameManager.Instance.InteractionManager.CheckInteractionObjInRange(transform.position + transform.forward * 0.5f, 0.5f))
+        {
+            foreach (var interaction in interactionObjectList)
+            {
+                GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[interaction]);
+            }
+            interactionObjectDictionary.Clear();
+
+            interactionObjectList = GameManager.Instance.InteractionManager.CheckInteractionObjInRange(transform.position + transform.forward * 0.5f, 0.5f);
+            if (interactionObjectList.Exists(target => target == interactionObject))
+            {
+                interactionIndex = interactionObjectList.IndexOf(interactionObject);
+            }
+
+            foreach (var interaction in interactionObjectList)
+            {
+                GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+                buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+                buttonText.text = $"test";
+                interactionObjectDictionary.Add(interaction, button);
+
+                if (interactionObjectList.Count == 1)
+                {
+                    interactionIndex = 0;
+                    interactionObject = interaction;
+                }
+            }
+            UpdateInteractionUI(interactionIndex);
+        }
+        
+        //Debug.Log(interactionObjectList.Count);
+        //interactionObjectDictionary.Clear();
+
+        
+
+        /////////////////////////////
+        // 상호작용
+        if (isInteracting && interactionObject != null)
+        {
+            interactionObject.InteractionUpdate(deltaTime, interactionType);
+        }
+        ////////////////////////////
     }
 
+    // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
     public override void Move(Vector3 direction)
     {
         moveDir = direction.normalized;
     }
 
+    // 마우스를 움직임에 따라서 카메라를 회전시키는 함수.
     public virtual void ScreenRotate(Vector2 mouseDelta)
     {
+        // 좌우회전은 캐릭터를 회전
         rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
         transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
 
         mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
         rotate_x = rotate_x + mouseDelta_y;
         rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        if (cameraOffset == null)
-        {
-            cameraOffset = transform.Find("CameraOffset");
-        }
+        
+        // 상하회전은 카메라만 회전
         cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
 
-    //public bool DesignBuiling(BuildingEnum wantBuilding) 
-    //{
-        
-    //    return default; 
-    //}
-
+    // 건설한 건물을 반투명(가건물) 상태로 만드는 함수
     public bool DesignBuiling(ResourceEnum.Prefab wantBuilding)
     {
         designingBuilding = GameManager.Instance.PoolManager.Instantiate(wantBuilding).GetComponent<Building>();
         //bePicked.transform.parent = gameObject.transform;
         return default;
     }
-
+    
     public bool Build() 
     {
         if (designingBuilding != null)
@@ -174,5 +231,151 @@ public class Player : Character
         }
         return false; 
     }
+
     public bool Repair(EnergyBarrierGenerator target) { return default; }
+
+    public bool InteractionStart<T> (T target) where T : IInteraction
+    {
+        if (target == null) return false;
+        
+        isInteracting = true;
+        interactionType = target.InteractionStart(this);
+
+        switch (interactionType)
+        {
+            default : break;
+            case Interaction.Build: AnimBool?.Invoke("isBulid", true); break;
+
+        }
+
+        Debug.Log($"{target} 과 상호작용");
+        
+        return default;
+    }
+
+    public bool InteractionEnd<T>(T target) where T : IInteraction
+    {
+        if (target == null) return false;
+
+        isInteracting = false;
+        target.InteractionEnd();
+        switch (interactionType)
+        {
+            default: break;
+            case Interaction.Build: AnimBool?.Invoke("isBulid", false); break;
+        }
+        interactionType = Interaction.None;
+
+        return default;
+    }
+
+    // 상호작용 가능한 대상이 감지되었을 때 처리
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    if (other.GetType() == typeof(SphereCollider)) return;
+    //    // if (other.isTrigger) return;
+    //    if (other.TryGetComponent(out IInteraction target))
+    //    {
+    //        // 이미 있다면 추가하지않음
+    //        if (interactionObjectList.Exists(inst => inst == target)) return;
+
+    //        interactionObjectList.Add(target);
+            
+    //        GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+    //        buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+    //        buttonText.text = $"{other.name}";
+    //        interactionObjectDictionary.Add(target, button);
+
+    //        if (interactionObjectList.Count == 1)
+    //        {
+    //            interactionIndex = 0;
+    //            interactionObject = target;
+    //        }
+
+    //        UpdateInteractionUI(interactionIndex);
+    //    }
+    //}
+
+    // 상호작용 가능한 대상 리스트에 있는 대상이 감지범위에서 나갔을 때 처리
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.TryGetComponent(out IInteraction target))
+    //    {
+    //        interactionObjectList.Remove(target);
+
+    //        if (interactionObjectList.Count == 0)
+    //        {
+    //            interactionIndex = -1;
+    //            if (isInteracting)
+    //            {
+    //                InteractionEnd(interactionObject);
+    //            }
+    //            interactionObject = null;
+    //        }
+    //        else
+    //        {
+    //            interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+    //            if (isInteracting)
+    //            {
+    //                InteractionEnd(interactionObject);
+    //            }
+    //            interactionObject = interactionObjectList[interactionIndex];
+
+    //            UpdateInteractionUI(interactionIndex);
+    //        }
+
+    //        if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
+    //        {
+    //            interactionObjectDictionary.GetEnumerator();
+    //            GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
+    //            interactionObjectDictionary.Remove(target);
+    //        }
+    //    }
+    //}
+
+    // 마우스 휠을 굴려서 상호작용할 대상을 정함.
+    public void MouseWheel(Vector2 scrollDelta)
+    {
+        if (interactionObjectList.Count == 0) return;
+        if (scrollDelta.y == 0f) return;
+
+        // 휠을 위로 굴렸을 때
+        else if (scrollDelta.y > 0)
+        {
+            interactionIndex--;
+            interactionIndex = Mathf.Max(interactionIndex, 0);
+            interactionObject = interactionObjectList[interactionIndex];
+
+            if (interactionIndex < interactionObjectList.Count - 4)
+            {
+                interactionContent.anchoredPosition -= new Vector2(0, 40f);
+            }
+        }
+        // 휠을 아래로 굴렸을 때
+        else if (scrollDelta.y < 0)
+        {
+            interactionIndex++;
+            interactionIndex = Mathf.Min(interactionObjectList.Count - 1, interactionIndex);
+            interactionObject = interactionObjectList[interactionIndex];
+
+            if (interactionIndex > 4)
+            {
+                interactionContent.anchoredPosition += new Vector2(0, 40f);
+            }
+        }
+
+        UpdateInteractionUI(interactionIndex);
+    }
+
+    // 상호작용 UI를 최신화하는 함수
+    private void UpdateInteractionUI(int targetIndex)
+    {
+        for (int i = 0; i < interactionObjectList.Count; i++)
+        {
+            GameObject button = interactionObjectDictionary[interactionObjectList[i]];
+            Image buttonImage = button.GetComponentInChildren<Image>();
+            if (targetIndex == i) buttonImage.color = Color.yellow;
+            else buttonImage.color = Color.white;
+        }
+    }
 }

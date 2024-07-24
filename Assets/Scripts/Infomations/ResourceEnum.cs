@@ -8,6 +8,8 @@ namespace ResourceEnum
         SignInCanvas,
         SetNicknameCanvas,
         BeInvitedWindow,
+        InteractableObjButton,
+        CharacterUICanvas,
         // Character
         Player,
         // Building
@@ -15,11 +17,13 @@ namespace ResourceEnum
         Road,
         EnergyBarrier,
         Rope,
+        Turret1a,
     }
 
     public enum Material
     {
         Buildable,
         Buildunable,
+        Turret1a,
     }
 }

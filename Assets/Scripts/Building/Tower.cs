@@ -4,7 +4,7 @@ using System.Threading;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Tower : Building
+public class Tower : InteractableBuilding
 {
     protected int powerConsumption; // 타워가 진짜로 소모할 양.
     protected int currentPowerConsumption; // 현재 사용중인 전력 소모량
@@ -28,12 +28,28 @@ public class Tower : Building
         isNeedLine = true;
         AttackDamage = 1;
         AttackSpeed = 0.5f;
-        AttackRange = 5;
+        AttackRange = 10;
         buildingTimeMax = 10;
         size = new Vector2Int(4, 4);
         TurnOnOff(true);
-    }
 
+        GameManager.Instance.InteractionManager.AddInteractionObject(this);
+        
+    }
+    public override Interaction InteractionStart(Player player)
+    {
+        // 완성이 아직 안됨.
+        if (CompletePercent < 1)
+        {
+            return Interaction.Build;
+        }
+        else
+        {
+            // 전원 끄기. 반대 상태로 토글합니다.
+            TurnOnOff(!onOff);
+            return Interaction.OnOff;
+        }
+    }
     protected override void MyUpdate(float deltaTime)
     {
         if(onOff)
@@ -77,7 +93,7 @@ public class Tower : Building
 
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가
     {
-        other.gameObject.TryGetComponent<TestMonster>(out TestMonster monster);
+        other.gameObject.TryGetComponent<Monster>(out Monster monster);
         if (monster != null)
         {
             targetList.Add(monster);
@@ -86,7 +102,7 @@ public class Tower : Building
     }
     protected void OnTriggerExit(Collider other) // 영역에서 나가면 리스트에서 제외
     {
-        other.gameObject.TryGetComponent<TestMonster>(out TestMonster monster);
+        other.gameObject.TryGetComponent<Monster>(out Monster monster);
         if (monster != null)
         {
             if (target == monster)
@@ -96,8 +112,9 @@ public class Tower : Building
         }
     }
 
-    protected void MonsterListOut(TestMonster monster) // 한줄짜리 함수 만든 이유 : 델리게이트에 넣고 빼기 할수 있게하려고. 람다식은 빼기 불가능.
+    protected void MonsterListOut(Monster monster) // 한줄짜리 함수 만든 이유 : 델리게이트에 넣고 빼기 할수 있게하려고. 람다식은 빼기 불가능.
     {
+        // 몬스터를 타겟 리스트에서 제거한다.
         targetList.Remove(monster);
     }
 
@@ -116,15 +133,17 @@ public class Tower : Building
         }
     }
 
+    // 공격범위 세팅
     public virtual void AttackRangeSetting()
     {
         if(gameObject.TryGetComponent<SphereCollider>(out SphereCollider col))
         {
             col.radius = attackRange;
+            col.center = new Vector3(0, col.radius * 0.5f, 0);
         }
         else
         {
-            Debug.Log("dd");
+            Debug.Log("공격 범위 콜라이더가 존재하지 않습니다.");
         }
     }
 

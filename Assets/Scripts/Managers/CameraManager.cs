@@ -21,7 +21,7 @@ public class CameraManager : Manager
         mainCamera = Camera.main;
         base.ManagerStart();
     }
-    /*
+    
     public override void ManagerUpdate(float deltaTime)
     {
         // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
@@ -34,17 +34,16 @@ public class CameraManager : Manager
                 observingPlayer = controller.ControlledPlayer;
             }
         }
-        
+
         if (observingPlayer.CameraOffset)
         {
             mainCamera.transform.position = observingPlayer.CameraOffset.position;
             mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
         }
 
-    }
-    */
 
-    // Network
+    }
+    /*
     public override void ManagerUpdate(float deltaTime)
     {
         // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
@@ -57,13 +56,14 @@ public class CameraManager : Manager
                 observingPlayer = controller.ControlledPlayer;
             }
         }
-
-        else if (observingPlayer.CameraOffset)
+        
+        else
         {
-            mainCamera.transform.position = new Vector3(observingPlayer.CameraOffset.position.x, 1.1f, observingPlayer.CameraOffset.position.z);
-            mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
+            Vector3 offset = new Vector3(observingPlayer.transform.position.x, 1.1f, observingPlayer.transform.position.z);
+            mainCamera.transform.SetPositionAndRotation(offset, observingPlayer.transform.rotation);
         }
-
-
+      
+    
     }
+    */
 }

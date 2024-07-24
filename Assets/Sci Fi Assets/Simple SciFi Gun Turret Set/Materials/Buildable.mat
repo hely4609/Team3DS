@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: TowerMaterial
+  m_Name: Buildable
   m_Shader: {fileID: -6465566751694194690, guid: 9fcb962ce01ca2941b8823641c158ab0, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -63,6 +63,10 @@ Material:
     - _BUILTIN_ZWrite: 1
     - _BUILTIN_ZWriteControl: 0
     - _CompletValue: 0
+    - _CompletePercent: 0
+    - _Height: 8
+    - _HeightMax: 0
+    - _HeightMin: 0
     - _Metallic_Value: 1
     - _Smoothness_Value: 1
     - _Split_Value: 0.76
