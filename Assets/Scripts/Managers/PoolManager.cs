@@ -52,11 +52,10 @@ public class PoolManager : Manager
         }
 
         GameObject inst = GameObject.Instantiate(ResourceManager.Get(target));
-        inst.AddComponent<PoolingInfo>();
+        inst.AddComponent<PoolingInfo>().SetInfo(target, result);
         inst.SetActive(false);
         poolDictionary[target].Enqueue(inst);
-
-
+        //Debug.Log(inst.gameObject);
     }
     public GameObject Instantiate(ResourceEnum.Prefab target) 
     { 

@@ -209,7 +209,10 @@ public class Player : Character
         switch (interactionType)
         {
             default: break;
-            case Interaction.Build: AnimBool?.Invoke("isBuild", true); break;
+            case Interaction.Build: 
+                AnimBool?.Invoke("isBuild", true);
+                GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Rope, sockets.FindSocket("RightHand").gameObject.transform);
+                break;
         }
 
         Debug.Log($"{target} 과 상호작용");
@@ -227,7 +230,10 @@ public class Player : Character
         switch (interactionType)
         {
             default: break;
-            case Interaction.Build: AnimBool?.Invoke("isBuild", false); break;
+            case Interaction.Build: 
+                AnimBool?.Invoke("isBuild", false);
+                GameManager.Instance.PoolManager.Destroy(sockets.FindSocket("RightHand").gameObject.GetComponentInChildren<PoolingInfo>());
+                break;
         }
 
         interactionType = Interaction.None;
