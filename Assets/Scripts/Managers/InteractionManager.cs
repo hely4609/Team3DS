@@ -5,6 +5,7 @@ using System.Linq;
 
 public class InteractionManager : Manager
 {
+    protected List<IInteraction> newInteractions;
     protected List<IInteraction> interactions;
     //protected Dictionary<IInteraction, GameObject> interactionDictionary;
 
@@ -31,14 +32,13 @@ public class InteractionManager : Manager
     {
         if (center == null) return null;
         if (range <= 0f) return null;
-        Debug.Log(interactions.Count);
-
-        List<IInteraction> insts = new List<IInteraction>();
+        //Debug.Log(interactions.Count);
+        
         foreach (var inst in interactions)
         {
             if (Vector3.Distance(center, inst.GetPosition()) <= range)
             {
-                insts.Add(inst);
+                newInteractions.Add(inst);
             }
         }
 

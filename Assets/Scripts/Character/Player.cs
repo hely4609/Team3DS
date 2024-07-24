@@ -41,7 +41,7 @@ public class Player : Character
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
-        targetController.DoDesignBuilding -= DesignBuiling;
+        targetController.DoDesignBuilding -= DesignBuilding;
         targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
         targetController.DoInteractionEnd -= InteractionEnd;
@@ -49,7 +49,7 @@ public class Player : Character
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
-        targetController.DoDesignBuilding += DesignBuiling;
+        targetController.DoDesignBuilding += DesignBuilding;
         targetController.DoBuild += Build;
         targetController.DoInteractionStart += InteractionStart;
         targetController.DoInteractionEnd += InteractionEnd;
@@ -60,7 +60,7 @@ public class Player : Character
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
-        targetController.DoDesignBuilding -= DesignBuiling;
+        targetController.DoDesignBuilding -= DesignBuilding;
         targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
         targetController.DoInteractionEnd-= InteractionEnd;
@@ -144,7 +144,7 @@ public class Player : Character
             }
         }
 
-        if (interactionObjectList != GameManager.Instance.InteractionManager.CheckInteractionObjInRange(transform.position + transform.forward * 0.5f, 0.5f))
+        if (interactionObjectList != GameManager.Instance.InteractionManager.CheckInteractionObjInRange(transform.position + transform.forward * 0.5f, 0.8f))
         {
             foreach (var interaction in interactionObjectList)
             {
@@ -152,7 +152,7 @@ public class Player : Character
             }
             interactionObjectDictionary.Clear();
 
-            interactionObjectList = GameManager.Instance.InteractionManager.CheckInteractionObjInRange(transform.position + transform.forward * 0.5f, 0.5f);
+            interactionObjectList = GameManager.Instance.InteractionManager.CheckInteractionObjInRange(transform.position + transform.forward * 0.5f, 0.8f);
             if (interactionObjectList.Exists(target => target == interactionObject))
             {
                 interactionIndex = interactionObjectList.IndexOf(interactionObject);
@@ -212,7 +212,7 @@ public class Player : Character
     public bool PutDown() { return default; }
 
     // 건설한 건물을 반투명(가건물) 상태로 만드는 함수
-    public bool DesignBuiling(ResourceEnum.Prefab wantBuilding)
+    public bool DesignBuilding(ResourceEnum.Prefab wantBuilding)
     {
         designingBuilding = GameManager.Instance.PoolManager.Instantiate(wantBuilding).GetComponent<Building>();
         //bePicked.transform.parent = gameObject.transform;
@@ -245,7 +245,6 @@ public class Player : Character
         {
             default : break;
             case Interaction.Build: AnimBool?.Invoke("isBulid", true); break;
-
         }
 
         Debug.Log($"{target} 과 상호작용");
@@ -280,7 +279,7 @@ public class Player : Character
     //        if (interactionObjectList.Exists(inst => inst == target)) return;
 
     //        interactionObjectList.Add(target);
-            
+
     //        GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
     //        buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
     //        buttonText.text = $"{other.name}";
