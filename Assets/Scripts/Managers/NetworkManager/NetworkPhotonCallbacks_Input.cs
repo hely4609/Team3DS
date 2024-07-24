@@ -8,7 +8,6 @@ public partial class NetworkPhotonCallbacks
 {
     Vector3 moveDir;
     Vector2 mouseDelta;
-    float rotate_x, rotate_y, mouseDelta_y;
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
