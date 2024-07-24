@@ -11,7 +11,7 @@ public delegate void MonsterDestroyFunction(Monster monster);
 public class Monster : Character
 {
     protected int oreAmount;
-    protected Vector2[] roadsVector2; // 길 정보 배열
+    protected List<Vector2> roadsVector2; // 길 정보 배열
     protected int roadDestination; // 지금 어디로 향하고 있는가.
     public override void Attack(Character target) { }
 
@@ -46,6 +46,7 @@ public class Monster : Character
 
     protected Vector3 NextDestination()
     {
+
         Vector2 dest = roadsVector2[roadDestination];
         return new Vector3(dest.x, transform.position.y, dest.y);
     }

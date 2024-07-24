@@ -7,21 +7,25 @@ public class BuildingManager : Manager
 {
     protected List<Building> buildings = new List<Building>();
     public List<Building> Buildings => buildings;
-    public Vector2[] roadData = new Vector2[8]; // 시작점 배열.
+    public List<Vector2> roadData= new List<Vector2>(); // 시작점 리스트
     // 시작점만 알면 하나의 시작점과 다음 시작점을 이으면 해당 길이 됨.
     protected GameObject[] roads;
 
     public override IEnumerator Initiate()
     {
         roads = GameObject.FindGameObjectsWithTag("Road");
-        roadData[0] = new Vector2(95, 0); // 시작점
-        roadData[1] = new Vector2(50, 0); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
-        roadData[2] = new Vector2(50, 40); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
-        roadData[3] = new Vector2(10, 40); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
-        roadData[4] = new Vector2(10, -50);
-        roadData[5] = new Vector2(-30, -50);
-        roadData[6] = new Vector2(-30, 0);
-        roadData[7] = new Vector2(-75, 0); // 마지막점
+
+        // 리스트로 만들고, 순서를 역순으로 변경.
+        // 길을 만든 뒤에도 계속 길이 확장될 예정이라 추가되기 위해서는 이 구조가 편할것으로 예상.
+        roadData.Add(new Vector2(-75, 0)); // 마지막점. 에너지 베리어 생성기 지점부터 제작.
+        roadData.Add(new Vector2(-30, 0));
+        roadData.Add(new Vector2(-30, -50));
+        roadData.Add(new Vector2(10, -50));
+        roadData.Add(new Vector2(10, 40)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
+        roadData.Add(new Vector2(50, 40)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
+        roadData.Add(new Vector2(50, 0)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
+        roadData.Add(new Vector2(95, 0)); // 시작점
+
         for (int i = 0; i<roads.Length; i++)
         {   
             roads[i].transform.localScale = RoadScale(roadData[i], roadData[i + 1]);
