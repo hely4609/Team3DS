@@ -17,7 +17,7 @@ public class LocalController : ControllerBase
 
     protected void OnPickUp() { }
     protected void OnPutDown() { }
-    protected void OnDesignBuiling() 
+    protected void OnDesignBuilding() 
     {
         // 어떤 건물을 지을지 UI를 띄워준다.
         // 그리고 그 버튼을 누르면 거기서 플레이어의 건물짓기를 시도한다.

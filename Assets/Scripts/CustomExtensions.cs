@@ -18,7 +18,7 @@ public interface IInteraction
 
     public bool InteractionEnd();
 
-    public Vector3 GetPosition();
+    public Collider[] GetInteractionColliders();
 }
 
 
