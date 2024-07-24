@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public enum MyButtons
 {
@@ -11,15 +12,21 @@ public enum MyButtons
     Backward = 1,
     Left = 2,
     Right = 3,
+    mouseUp = 4,
+    mouseDown = 5,
+    mouseLeft = 6,
+    mouseRight = 7,
 }
 public struct NetworkInputData : INetworkInput
 {
     public Vector3 direction;
     public Vector2 lookRotationDelta;
     public NetworkButtons buttons;
+
+    public float moveSpeed;
 }
 
-public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
+public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab;
 
@@ -33,7 +40,7 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
-
+            
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
@@ -44,18 +51,6 @@ public class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
             _spawnedCharacters.Remove(player);
         }
     }
-    public void OnInput(NetworkRunner runner, NetworkInput input)
-    {
-        var data = new NetworkInputData();
-        
-        data.buttons.Set(MyButtons.Forward, Input.GetKey(KeyCode.W));
-        data.buttons.Set(MyButtons.Backward, Input.GetKey(KeyCode.S));
-        data.buttons.Set(MyButtons.Left, Input.GetKey(KeyCode.A));
-        data.buttons.Set(MyButtons.Right, Input.GetKey(KeyCode.D));
-        
-        input.Set(data);
-    }
-    public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
         GameManager.Instance.UIManager.ClaimError("Shutdowned", shutdownReason.ToString(), "OK");
