@@ -17307,7 +17307,7 @@ MonoBehaviour:
   m_Content: {fileID: 4893239100565184931}
   m_Horizontal: 0
   m_Vertical: 1
-  m_MovementType: 2
+  m_MovementType: 0
   m_Elasticity: 0.1
   m_Inertia: 0
   m_DecelerationRate: 5
@@ -18328,6 +18328,7 @@ MonoBehaviour:
   moveSpeed: 5
   cameraOffset: {fileID: 3314105118029073812}
   interactionContent: {fileID: 4893239100565184931}
+  scrollbar: {fileID: 5544257747198038348}
 --- !u!1 &6902586972774711075
 GameObject:
   m_ObjectHideFlags: 0

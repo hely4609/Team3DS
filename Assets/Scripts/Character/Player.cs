@@ -12,12 +12,14 @@ public class Player : Character
    
     /////////////////////////////interaction 변수들
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
+    protected GameObject mouseLeftUI;
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
     protected int interactionIndex = 0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
+
     protected bool isInteracting; // 나는 지금 상호작용 중인가?
     public bool IsInteracting => isInteracting;
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
@@ -101,6 +103,7 @@ public class Player : Character
         {
             cameraOffset = transform.Find("CameraOffset");
         }
+
     }
 
     protected override void MyUpdate(float deltaTime)
@@ -211,7 +214,7 @@ public class Player : Character
             default: break;
             case Interaction.Build: 
                 AnimBool?.Invoke("isBuild", true);
-                GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Rope, sockets.FindSocket("RightHand").gameObject.transform);
+                GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
                 break;
         }
 
@@ -263,9 +266,12 @@ public class Player : Character
                 {
                     interactionIndex = 0;
                     interactionObject = target;
+                    mouseLeftUI = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, GetComponentInChildren<Canvas>().transform);
+                    Canvas.ForceUpdateCanvases();
                 }
 
                 UpdateInteractionUI(interactionIndex);
+                
             }
         }
     }
@@ -287,6 +293,7 @@ public class Player : Character
                         InteractionEnd(interactionObject);
                     }
                     interactionObject = null;
+                    GameManager.Instance.PoolManager.Destroy(mouseLeftUI);
                 }
                 else
                 {
@@ -302,7 +309,7 @@ public class Player : Character
 
                 if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
                 {
-                    interactionObjectDictionary.GetEnumerator();
+                    //interactionObjectDictionary.GetEnumerator();
                     //Destroy(interactionObjectDictionary[target]);
                     GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
                     interactionObjectDictionary.Remove(target);
@@ -326,7 +333,9 @@ public class Player : Character
 
             if (interactionIndex < interactionObjectList.Count - 4)
             {
-                interactionContent.anchoredPosition -= new Vector2(0, 40f);
+                //scrollbar.value += 50 / interactionContent.rect.height;
+                interactionContent.anchoredPosition -= new Vector2(0, 50f);
+                interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y,0, (interactionObjectList.Count - 6) * 50f));
             }
         }
         // 휠을 아래로 굴렸을 때
@@ -338,7 +347,9 @@ public class Player : Character
 
             if (interactionIndex > 4)
             {
-                interactionContent.anchoredPosition += new Vector2(0, 40f);
+                //scrollbar.value -= 50 / interactionContent.rect.height;
+                interactionContent.anchoredPosition += new Vector2(0, 50f);
+                interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionObjectList.Count - 6) * 50f));
             }
         }
 
@@ -352,10 +363,15 @@ public class Player : Character
         {
             GameObject button = interactionObjectDictionary[interactionObjectList[i]];
             Image buttonImage = button.GetComponentInChildren<Image>();
-            if (targetIndex == i) buttonImage.color = Color.yellow;
+            if (targetIndex == i)
+            {
+                buttonImage.color = Color.yellow;
+                // 활성화버튼 어떤키를 누르세요.
+                mouseLeftUI.transform.position = button.transform.position;
+            } 
             else buttonImage.color = Color.white;
 
-            // 활성화버튼 어떤키를 누르세요.
+            
         }
     }
 }
