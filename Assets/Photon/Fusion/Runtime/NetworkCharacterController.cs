@@ -101,8 +101,8 @@ namespace Fusion {
       moveVelocity.x = horizontalVel.x;
       moveVelocity.z = horizontalVel.z;
 
-      //_controller.Move(moveVelocity * deltaTime);
-      _controller.Move((transform.forward * direction.z + transform.right * direction.x).normalized * deltaTime * moveSpeed);
+            //_controller.Move(moveVelocity * deltaTime);
+            _controller.Move((new Vector3(0, moveVelocity.y, 0) + (transform.forward * direction.z + transform.right * direction.x).normalized) * deltaTime * moveSpeed);
 
 
       Data.Velocity = (transform.position - previousPos) * Runner.TickRate;

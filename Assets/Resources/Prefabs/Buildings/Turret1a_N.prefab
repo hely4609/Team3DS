@@ -432,11 +432,12 @@ GameObject:
   - component: {fileID: 6263576778540548452}
   - component: {fileID: 5364410524237927022}
   - component: {fileID: 217081395227794833}
-  - component: {fileID: 7630605579735506491}
   - component: {fileID: -7105231291510333394}
-  - component: {fileID: 6397042309039671226}
+  - component: {fileID: -6715446782961703449}
+  - component: {fileID: -1811685113695953846}
+  - component: {fileID: 6847287217731528156}
   m_Layer: 0
-  m_Name: Turret1a
+  m_Name: Turret1a_N
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -500,7 +501,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1.6, z: 3}
+  m_Size: {x: 3, y: 16, z: 3}
   m_Center: {x: 0, y: 0.7, z: 4.2}
 --- !u!65 &6263576778540548452
 BoxCollider:
@@ -521,7 +522,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1.6, z: 3}
+  m_Size: {x: 3, y: 16, z: 3}
   m_Center: {x: 4.2, y: 0.7, z: 0}
 --- !u!65 &5364410524237927022
 BoxCollider:
@@ -542,7 +543,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1.6, z: 3}
+  m_Size: {x: 3, y: 16, z: 3}
   m_Center: {x: -4.2, y: 0.7, z: 0}
 --- !u!65 &217081395227794833
 BoxCollider:
@@ -563,9 +564,65 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1.6, z: 3}
+  m_Size: {x: 3, y: 16, z: 3}
   m_Center: {x: 0, y: 0.7, z: -4.2}
---- !u!114 &7630605579735506491
+--- !u!135 &-7105231291510333394
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860581916195568055}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 10
+  m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &-6715446782961703449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860581916195568055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 3680362588
+  ObjectInterest: 1
+  Flags: 262145
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: -1811685113695953846}
+  - {fileID: 6847287217731528156}
+--- !u!114 &-1811685113695953846
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860581916195568055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
+--- !u!114 &6847287217731528156
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -599,43 +656,6 @@ MonoBehaviour:
   target: {fileID: 0}
   targetList: []
   onOff: 0
---- !u!135 &-7105231291510333394
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6860581916195568055}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 10
-  m_Center: {x: 0, y: 5, z: 0}
---- !u!208 &6397042309039671226
-NavMeshObstacle:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6860581916195568055}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 1
-  m_Extents: {x: 0.5, y: 0.5, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
 --- !u!1 &8177992274299104779
 GameObject:
   m_ObjectHideFlags: 0
