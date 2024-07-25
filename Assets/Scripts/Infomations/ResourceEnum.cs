@@ -10,6 +10,7 @@ namespace ResourceEnum
         BeInvitedWindow,
         InteractableObjButton,
         CharacterUICanvas,
+        MouseLeftUI,
         // Character
         Player,
         // Building
