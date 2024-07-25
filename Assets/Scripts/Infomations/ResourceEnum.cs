@@ -17,6 +17,8 @@ namespace ResourceEnum
         Road,
         EnergyBarrier,
         Turret1a,
+        CornerWithBarrier,
+        RoadWithBarrier,
         // Object
         Hammer,
         Rope,

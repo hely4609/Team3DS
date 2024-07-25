@@ -19,6 +19,9 @@ public class ResourcesPath
         "Prefabs/Buildings/Road",
         "Prefabs/Buildings/EnergyBarrier",
         "Prefabs/Buildings/Turret1a",
+        "Prefabs/Buildings/CornerWithBarrier",
+        "Prefabs/Buildings/RoadWithBarrier",
+
 
     };
 
