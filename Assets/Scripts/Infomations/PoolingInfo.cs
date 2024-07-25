@@ -33,7 +33,7 @@ public class PoolingInfo : MyComponent
     protected override void MyDestroy()
     {
         // 파괴된 후에 초기화
-        lifespan = -1;
+        lifespan = -1f;
     }
 
     public void SetInfo(ResourceEnum.Prefab wantOrigin, Queue<GameObject> wantQueue) 

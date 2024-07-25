@@ -252,7 +252,9 @@ public class Player : Character
             {
                 interactionObjectList.Add(target);
 
+                //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
                 GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+                button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
                 buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
                 buttonText.text = $"{other.name}";
                 interactionObjectDictionary.Add(target, button);
@@ -301,6 +303,7 @@ public class Player : Character
                 if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
                 {
                     interactionObjectDictionary.GetEnumerator();
+                    //Destroy(interactionObjectDictionary[target]);
                     GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
                     interactionObjectDictionary.Remove(target);
                 }
@@ -351,6 +354,8 @@ public class Player : Character
             Image buttonImage = button.GetComponentInChildren<Image>();
             if (targetIndex == i) buttonImage.color = Color.yellow;
             else buttonImage.color = Color.white;
+
+            // 활성화버튼 어떤키를 누르세요.
         }
     }
 }

@@ -11,9 +11,6 @@
         },
         {
             "m_Id": "e8383f94c6374795b2697ab89342a2c8"
-        },
-        {
-            "m_Id": "e46579817a5d41d0ad172c1a3b4965f8"
         }
     ],
     "m_Keywords": [],
@@ -375,9 +372,6 @@
     "m_ChildObjectList": [
         {
             "m_Id": "96382f245d3349498698096ed9ba1f87"
-        },
-        {
-            "m_Id": "e46579817a5d41d0ad172c1a3b4965f8"
         },
         {
             "m_Id": "b40bcb0638f34bf99fab13a4129dd68b"
@@ -823,9 +817,9 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -93.00000762939453,
-            "y": 865.0,
-            "width": 125.99999237060547,
+            "x": -539.0,
+            "y": 1046.0,
+            "width": 126.0,
             "height": 77.0
         }
     },
@@ -905,10 +899,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -93.00001525878906,
-            "y": 695.0,
-            "width": 120.0000228881836,
-            "height": 149.00006103515626
+            "x": -539.0,
+            "y": 876.0,
+            "width": 120.0,
+            "height": 149.0
         }
     },
     "m_Slots": [
@@ -2035,10 +2029,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -338.0000305175781,
-            "y": 695.0000610351563,
+            "x": -784.0,
+            "y": 876.0,
             "width": 208.0,
-            "height": 315.00006103515627
+            "height": 315.0
         }
     },
     "m_Slots": [
@@ -2146,10 +2140,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 85.0,
-            "y": 682.0,
-            "width": 208.0,
-            "height": 302.00006103515627
+            "x": -361.0,
+            "y": 863.0,
+            "width": 207.99998474121095,
+            "height": 302.0
         }
     },
     "m_Slots": [
@@ -2385,36 +2379,6 @@
 }
 
 {
-    "m_SGVersion": 3,
-    "m_Type": "UnityEditor.ShaderGraph.Internal.ColorShaderProperty",
-    "m_ObjectId": "e46579817a5d41d0ad172c1a3b4965f8",
-    "m_Guid": {
-        "m_GuidSerialized": "006cf232-9cc0-44b3-9982-ffd78d40e1a5"
-    },
-    "m_Name": "Albedo Color",
-    "m_DefaultRefNameVersion": 1,
-    "m_RefNameGeneratedByDisplayName": "Albedo Color",
-    "m_DefaultReferenceName": "_Albedo_Color",
-    "m_OverrideReferenceName": "",
-    "m_GeneratePropertyBlock": true,
-    "m_UseCustomSlotLabel": false,
-    "m_CustomSlotLabel": "",
-    "m_DismissedVersion": 0,
-    "m_Precision": 0,
-    "overrideHLSLDeclaration": false,
-    "hlslDeclarationOverride": 0,
-    "m_Hidden": false,
-    "m_Value": {
-        "r": 0.8313725590705872,
-        "g": 0.8313725590705872,
-        "b": 0.8313725590705872,
-        "a": 1.0
-    },
-    "isMainColor": false,
-    "m_ColorMode": 0
-}
-
-{
     "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.UVMaterialSlot",
     "m_ObjectId": "e4a3689235a543728325a00419ae6693",
@@ -2508,10 +2472,10 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": 383.0,
-            "y": 682.0,
-            "width": 208.0,
-            "height": 278.0
+            "x": -103.9999771118164,
+            "y": 863.0000610351563,
+            "width": 207.99996948242188,
+            "height": 278.00006103515627
         }
     },
     "m_Slots": [
