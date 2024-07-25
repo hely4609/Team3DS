@@ -17318,7 +17318,7 @@ MonoBehaviour:
   m_HorizontalScrollbarVisibility: 1
   m_VerticalScrollbarVisibility: 2
   m_HorizontalScrollbarSpacing: -3
-  m_VerticalScrollbarSpacing: -5
+  m_VerticalScrollbarSpacing: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -18328,7 +18328,6 @@ MonoBehaviour:
   moveSpeed: 5
   cameraOffset: {fileID: 3314105118029073812}
   interactionContent: {fileID: 4893239100565184931}
-  scrollbar: {fileID: 5544257747198038348}
 --- !u!1 &6902586972774711075
 GameObject:
   m_ObjectHideFlags: 0
