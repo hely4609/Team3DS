@@ -12,6 +12,8 @@ public abstract class Character : MyComponent
     public System.Action<string, int> AnimInt;
     public System.Action<string, bool> AnimBool;
 
+    protected Socket.Container sockets = new Socket.Container();
+
     protected int hpMax;
     protected int hpCurrent;
     public int HpCurrent => hpCurrent;
@@ -24,7 +26,14 @@ public abstract class Character : MyComponent
         set => moveSpeed = value;
     }
 
-    
+    protected virtual void Awake()
+    {
+        foreach (var socket in GetComponentsInChildren<Socket>())
+        {
+            sockets.AttachSocket(socket);
+        }
+    }
+
     public virtual void Move(Vector3 direction) { }
     public virtual void MoveToDestination(Vector3 destination) { }
     public virtual int TakeDamage(Character attacker, int damage) { return default; }

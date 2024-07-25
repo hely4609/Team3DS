@@ -16,8 +16,12 @@ namespace ResourceEnum
         Tower,
         Road,
         EnergyBarrier,
-        Rope,
         Turret1a,
+        CornerWithBarrier,
+        RoadWithBarrier,
+        // Object
+        Hammer,
+        Rope,
     }
 
     public enum Material
