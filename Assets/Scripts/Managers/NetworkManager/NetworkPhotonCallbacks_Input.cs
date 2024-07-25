@@ -17,12 +17,7 @@ public partial class NetworkPhotonCallbacks
         var data = new NetworkInputData();
         data.moveDirection = moveDir;
         data.lookRotationDelta = mouseDelta;
-        //data.buttons.Set(MyButtons.DesignBuilding, tryDesignBuilding);
-        if(tryDesignBuilding)
-        {
-            _spawnedCharacters[runner.LocalPlayer].GetComponent<NetworkPlayer>().designBuildingPrefab = runner.Spawn(buildables[0]);
-
-        }
+        data.buttons.Set(MyButtons.DesignBuilding, tryDesignBuilding);
         data.buttons.Set(MyButtons.Build, tryBuild);
 
         input.Set(data);

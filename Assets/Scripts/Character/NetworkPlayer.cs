@@ -36,10 +36,13 @@ public class NetworkPlayer : Player
             DoMove(data.moveDirection);
             DoScreenRotate(data.lookRotationDelta);
 
-            HoldingDesign();
+            if(HasStateAuthority)
+            {
+                HoldingDesign();
+                if(data.buttons.IsSet(MyButtons.DesignBuilding)) DoDesignBuilding(buildables[0]);
+                if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
 
-            //if(data.buttons.IsSet(MyButtons.DesignBuilding)) DoDesignBuilding(buildables[0]);
-            if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
+            }
         }
     }
 
@@ -72,10 +75,11 @@ public class NetworkPlayer : Player
 
     }
 
-    public NetworkObject designBuildingPrefab;
+    NetworkObject designBuildingPrefab;
     bool DoDesignBuilding(GameObject buildingPrefab)
     {
-        if (designBuildingPrefab == null && Runner.IsServer)
+        //Debug.Log(HasStateAuthority);
+        if (designBuildingPrefab == null)
         {
             designBuildingPrefab = Runner.Spawn(buildingPrefab, transform.position + transform.forward * 5f);
             designingBuilding = designBuildingPrefab.GetComponent<Building>();
@@ -83,7 +87,6 @@ public class NetworkPlayer : Player
         }
         else
         {
-            Debug.Log(Runner.State);
             return false;
         }
     }
@@ -98,6 +101,8 @@ public class NetworkPlayer : Player
         int x = (int)pickPos.x;
         int z = (int)pickPos.z;
         designBuildingPrefab.transform.position = new Vector3(x, designBuildingPrefab.transform.position.y, z);
+        //임시
+        //designBuildingPrefab.GetComponent<NetworkTower>().SetPickPos(x, z);
         Vector2Int currentPos = new Vector2Int(x, z);
 
         // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
@@ -113,6 +118,7 @@ public class NetworkPlayer : Player
     {
         if (designingBuilding != null)
         {
+            Debug.Log(designingBuilding);
             if (designingBuilding.FixPlace())
             {
                 designingBuilding = null;
