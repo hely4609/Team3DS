@@ -30,7 +30,7 @@ public class BuildingManager : Manager
         {   
             roads[i].transform.localScale = RoadScale(roadData[i], roadData[i + 1]);
             roads[i].transform.position =  RoadPosition(roadData[i], roadData[i + 1], i);
-            
+            //roads[i].transform.rotation = Quaternion.Euler()
             //Debug.Log($"{roads[i].transform.localScale}, {roads[i].transform.position}");
             
         }
@@ -67,6 +67,74 @@ public class BuildingManager : Manager
         }
 
         return result;
+    }
+
+    public Vector3 CornerRotation(Vector2 before, Vector2 now, Vector2 after)
+    {
+        // 현재값과 앞과 뒤의 차를 구해서 x가 변화했는지, y가 변화했는지 파악
+        // 정규화 해서 단위벡터로 변경
+        Vector2 front = (now - before).normalized;
+        Vector2 back = (after- now).normalized;
+        
+        if(front == Vector2.right) // x가 커짐
+        {
+            // 뒤는 바뀌는게 달라져야함. 
+            if (back == Vector2.up) // y가 커짐
+            {
+                // 0도 돌아감.
+                return Vector3.zero;
+            }
+            if(back == Vector2.down)
+            {
+                // 270도 돌아감
+                return new Vector3(0, 270, 0);
+            }
+        }
+        else if(front == Vector2.left) // x가 작아짐
+        {
+            if (back == Vector2.up) // y가 커짐
+            {
+                // 90
+                return new Vector3(0, 90, 0);
+
+            }
+            if (back == Vector2.down)
+            {
+                // 180
+                return new Vector3(0, 180, 0);
+
+            }
+        }
+        else if(front == Vector2.up) // y가 커짐
+        {
+            if(back == Vector2.right) // x가 커짐
+            {
+                // 180도
+                return new Vector3(0, 180, 0);
+
+            }
+            else if(back== Vector2.left) // x가 작아짐
+            {
+                // 270
+                return new Vector3(0, 270, 0);
+
+            }
+        }
+        else if(front == Vector2.down) // y가 작아짐
+        {
+            if (back == Vector2.right) // x가 커짐
+            {
+                // 90도
+                return new Vector3(0, 90, 0);
+
+            }
+            else if (back == Vector2.left) // x가 작아짐
+            {
+                // 0
+                return Vector3.zero;
+            }
+        }
+        return Vector3.one;
     }
 
     public void AddBuilding(Building addedBuilding) // 건물을 새로 건설했다.
