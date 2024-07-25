@@ -7,14 +7,13 @@ public class BuildingManager : Manager
 {
     protected List<Building> buildings = new List<Building>();
     public List<Building> Buildings => buildings;
-    public List<Vector2> roadData= new List<Vector2>(); // 시작점 리스트
+    public List<Vector2> roadData = new List<Vector2>(); // 시작점 리스트
     // 시작점만 알면 하나의 시작점과 다음 시작점을 이으면 해당 길이 됨.
-    protected GameObject[] roads;
+    protected List<GameObject> corners = new List<GameObject>();
+    protected List<GameObject> roads = new List<GameObject>();
 
     public override IEnumerator Initiate()
     {
-        roads = GameObject.FindGameObjectsWithTag("Road");
-
         // 리스트로 만들고, 순서를 역순으로 변경.
         // 길을 만든 뒤에도 계속 길이 확장될 예정이라 추가되기 위해서는 이 구조가 편할것으로 예상.
         roadData.Add(new Vector2(-75, 0)); // 마지막점. 에너지 베리어 생성기 지점부터 제작.
@@ -26,14 +25,41 @@ public class BuildingManager : Manager
         roadData.Add(new Vector2(50, 0)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
         roadData.Add(new Vector2(95, 0)); // 시작점
 
-        for (int i = 0; i<roads.Length; i++)
-        {   
-            roads[i].transform.localScale = RoadScale(roadData[i], roadData[i + 1]);
-            roads[i].transform.position =  RoadPosition(roadData[i], roadData[i + 1], i);
-            
-            //Debug.Log($"{roads[i].transform.localScale}, {roads[i].transform.position}");
-            
+        for (int i = 0; i < roadData.Count; i++)
+        {
+            if (i == 0 || i == roadData.Count - 1)
+            {
+                corners.Add(RoadInstantiate());
+                corners[i].transform.position = new Vector3(roadData[i].x, 0.1f, roadData[i].y);
+            }
+            else
+            {
+                corners.Add(CornerInstantiate());
+                corners[i].transform.position = new Vector3(roadData[i].x, 0.1f, roadData[i].y);
+                corners[i].transform.rotation = Quaternion.Euler(CornerRotation(roadData[i - 1], roadData[i], roadData[i + 1]));
+            }
         }
+
+        for (int j = 0; j < roadData.Count - 1; j++)
+        {
+            Vector2 roadVector = roadData[j] - roadData[j + 1];
+            if (Mathf.Abs(roadVector.y) > 0)
+            {
+                roads.Add(RoadInstantiate());
+                roads[j].transform.position = RoadPosition(roadData[j], roadData[j + 1]);
+                roads[j].transform.localScale = RoadScale(roadData[j], roadData[j + 1]);
+                roads[j].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+
+            }
+            else if (Mathf.Abs(roadVector.x) > 0)
+            {
+                roads.Add(RoadInstantiate());
+                roads[j].transform.position = RoadPosition(roadData[j], roadData[j + 1]);
+                roads[j].transform.localScale = RoadScale(roadData[j], roadData[j+1]);
+                roads[j].transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
+            }
+        }
+
         yield return null;
     }
 
@@ -41,32 +67,92 @@ public class BuildingManager : Manager
     {
         Vector3 result;
         Vector2 delta = end - start;
-        float deltaScale = (Mathf.Abs(delta.x + delta.y) + 10) / 10;
-        if(delta.x != 0)
-        {
-            result = new Vector3(deltaScale,1,1);
-        }
-        else
-        {
-            result = new Vector3(1, 1, deltaScale);
-        }
+        float deltaScale = (Mathf.Abs(delta.x + delta.y) - 10) / 10;
+        
+        result = new Vector3(deltaScale, 1, 1);
+        
         return result;
     }
-    public Vector3 RoadPosition(Vector2 start, Vector2 end, int numb)
+    public Vector3 RoadPosition(Vector2 start, Vector2 end)
     {
-        Vector3 result;
-        Vector2 lengthSize = end - start;
-        if(numb %2 == 0)
-        {
-            result = new Vector3(start.x+lengthSize.x*0.5f, 0.1f, start.y);
-        }
-        else
-        {
-            result = new Vector3(start.x, 0.1f, start.y + lengthSize.y*0.5f);
+        Vector2 lengthSize = (end - start)*0.5f;
+        
+        return new Vector3(start.x + lengthSize.x, 0.1f, start.y + lengthSize.y);
+    }
+    protected GameObject CornerInstantiate()
+    {
+        return GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.CornerWithBarrier);
+    }
+    protected GameObject RoadInstantiate()
+    {
+        return GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.RoadWithBarrier);
+    }
+    public Vector3 CornerRotation(Vector2 before, Vector2 now, Vector2 after)
+    {
+        // 현재값과 앞과 뒤의 차를 구해서 x가 변화했는지, y가 변화했는지 파악
+        // 정규화 해서 단위벡터로 변경
+        Vector2 front = (now - before).normalized;
+        Vector2 back = (after - now).normalized;
 
+        if (front == Vector2.right) // x가 커짐
+        {
+            // 뒤는 바뀌는게 달라져야함. 
+            if (back == Vector2.up) // y가 커짐
+            {
+                // 0도 돌아감.
+                return Vector3.zero;
+            }
+            if (back == Vector2.down)
+            {
+                // 270도 돌아감
+                return new Vector3(0, 270, 0);
+            }
         }
+        else if (front == Vector2.left) // x가 작아짐
+        {
+            if (back == Vector2.up) // y가 커짐
+            {
+                // 90
+                return new Vector3(0, 90, 0);
 
-        return result;
+            }
+            if (back == Vector2.down)
+            {
+                // 180
+                return new Vector3(0, 180, 0);
+
+            }
+        }
+        else if (front == Vector2.up) // y가 커짐
+        {
+            if (back == Vector2.right) // x가 커짐
+            {
+                // 180도
+                return new Vector3(0, 180, 0);
+
+            }
+            else if (back == Vector2.left) // x가 작아짐
+            {
+                // 270
+                return new Vector3(0, 270, 0);
+
+            }
+        }
+        else if (front == Vector2.down) // y가 작아짐
+        {
+            if (back == Vector2.right) // x가 커짐
+            {
+                // 90도
+                return new Vector3(0, 90, 0);
+
+            }
+            else if (back == Vector2.left) // x가 작아짐
+            {
+                // 0
+                return Vector3.zero;
+            }
+        }
+        return Vector3.one;
     }
 
     public void AddBuilding(Building addedBuilding) // 건물을 새로 건설했다.
