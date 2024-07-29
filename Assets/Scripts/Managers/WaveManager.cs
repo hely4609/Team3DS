@@ -10,7 +10,10 @@ public class WaveManager : Manager
     protected float spawnCoolTime;
 
 
-
+    protected void MonsterInstantiate()
+    {
+        //allWaveInfo[currentWaveIndex].
+    }
     public override IEnumerator Initiate()
     {
         yield return base.Initiate();
