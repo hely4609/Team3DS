@@ -114,6 +114,7 @@ public class Player : Character
         }
 
         buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
+        buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
         //for (ResourceEnum.Prefab.)
     }
 
@@ -201,7 +202,6 @@ public class Player : Character
     public bool DesignBuilding(int index)
     {
         if (buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
-        //buildingSeletUI.SetActive(true);
 
         designingBuilding = GameManager.Instance.PoolManager.Instantiate(buildableEnumArray[buildableEnumPageIndex,index]).GetComponent<Building>();
         buildingSeletUI.SetActive(false);
@@ -210,14 +210,14 @@ public class Player : Character
     
     public bool Build() 
     {
-        if (designingBuilding != null)
-        {
-            if (designingBuilding.FixPlace())
-            {
-                designingBuilding = null;
-                return true;
-            }
-        }
+        //if (designingBuilding != null)
+        //{
+        //    if (designingBuilding.FixPlace())
+        //    {
+        //        designingBuilding = null;
+        //        return true;
+        //    }
+        //}
         return false; 
     }
 
@@ -278,6 +278,7 @@ public class Player : Character
                 break;
         }
 
+        //interactionObject = null;
         interactionType = Interaction.None;
 
         return default;
@@ -409,6 +410,16 @@ public class Player : Character
 
     protected void BuildSelectUI()
     {
-        buildingSeletUI.SetActive(true);
+        if (designingBuilding == null)
+        {
+            buildingSeletUI.SetActive(true);
+        }
+        else
+        {
+            if (designingBuilding.FixPlace())
+            {
+                designingBuilding = null;
+            }
+        }
     }
 }

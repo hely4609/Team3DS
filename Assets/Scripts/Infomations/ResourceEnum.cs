@@ -18,6 +18,7 @@ namespace ResourceEnum
         Road,
         EnergyBarrier,
         Turret1a,
+        ION_Cannon,
         CornerWithBarrier,
         RoadWithBarrier,
         // Object
@@ -30,5 +31,6 @@ namespace ResourceEnum
         Buildable,
         Buildunable,
         Turret1a,
+        ION_Cannon,
     }
 }

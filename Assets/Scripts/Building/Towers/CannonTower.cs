@@ -31,7 +31,36 @@ public class CannonTower : Tower
         Debug.Log($"{gameObject.name}");
     }
 
-    
+    public override void BuildBuilding(float deltaTime)
+    {
+        // 마우스를 누르고 있으면 점점 수치가 차오름.
+        // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
+        if (completePercent < 1)
+        {
+            buildingTimeCurrent += deltaTime;
+        }
+        else
+        {
+
+        }
+
+        // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.
+
+        // 완성되면 완성본 Material로 한다.
+
+        // 건설 완료시 
+        foreach (MeshRenderer r in meshes)
+        {
+            r.material.SetFloat("_CompletePercent", CompletePercent);
+        }
+
+        if (CompletePercent >= 1)
+        {
+            foreach (MeshRenderer r in meshes)
+                r.material = ResourceManager.Get(ResourceEnum.Material.ION_Cannon);
+
+        }
+    }
 
     public override void LockOn()
     {
