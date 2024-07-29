@@ -61,12 +61,12 @@
                 },
                 {
                     "name": "DesignBuilding",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "d13b626f-0c65-4bb3-9159-95ac80796a3b",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "Vector3",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Interaction",
@@ -94,6 +94,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "BuildingSelectUI",
+                    "type": "Button",
+                    "id": "640b8291-8d7c-4210-966e-d40e286d240a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -231,17 +240,6 @@
                 },
                 {
                     "name": "",
-                    "id": "6889a98e-921e-48cf-8601-0b7696cb30b6",
-                    "path": "<Keyboard>/b",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "DesignBuilding",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "5d5ab422-d410-4e0a-8865-175376917ca6",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -270,6 +268,94 @@
                     "processors": "",
                     "groups": "",
                     "action": "Test",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "3D Vector",
+                    "id": "a3b49e26-b752-4038-8987-e80603abe743",
+                    "path": "3DVector",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DesignBuilding",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "up",
+                    "id": "6c0900b0-7c8c-4ab7-a46e-84c92b98c2ea",
+                    "path": "<Keyboard>/1",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DesignBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "ab184d59-dfa3-4fd7-bdf9-84d07bb5f069",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DesignBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "0a89714b-124d-4a03-944a-2fcc975a96e4",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DesignBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "right",
+                    "id": "f8655e50-0ebd-4730-bbe5-9b84339b2572",
+                    "path": "<Keyboard>/4",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DesignBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "forward",
+                    "id": "e956b126-6ae8-4f06-adc4-b1a23d61035c",
+                    "path": "<Keyboard>/5",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DesignBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "backward",
+                    "id": "33082e10-903e-4b48-afaf-db07a227f03a",
+                    "path": "",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DesignBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "1c7c99fb-9cb3-457c-afd2-299940da91dc",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "BuildingSelectUI",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
