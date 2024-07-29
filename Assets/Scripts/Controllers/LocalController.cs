@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public class LocalController : ControllerBase
 {
@@ -34,12 +35,7 @@ public class LocalController : ControllerBase
     }
     protected void OnRepair() { }
     ////////////////////////////////////////////
-    protected void OnInteraction() 
-    {
-        DoInteractionStart?.Invoke(ControlledPlayer.InteractionObject);
-    }
-
-    protected void OnTest(InputValue value)
+    protected void OnInteraction(InputValue value) 
     {
         if (ControlledPlayer.InteractionObject == null) return;
 
@@ -47,11 +43,29 @@ public class LocalController : ControllerBase
         {
             // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
             // 업데이트 함수를 등록해서 뗄때까지 실행
-            DoInteractionStart?.Invoke(ControlledPlayer.InteractionObject);
+            DoInteractionStart?.Invoke();
         }
         else
         {
-            DoInteractionEnd?.Invoke(ControlledPlayer.InteractionObject);
-        }    
+            DoInteractionEnd?.Invoke();
+        }
+
+        //DoInteractionStart?.Invoke(ControlledPlayer.InteractionObject);
     }
+
+    //protected void OnTest(InputValue value)
+    //{
+    //    if (ControlledPlayer.InteractionObject == null) return;
+
+    //    if (value.isPressed)
+    //    {
+    //        // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
+    //        // 업데이트 함수를 등록해서 뗄때까지 실행
+    //        DoInteractionStart?.Invoke(ControlledPlayer.InteractionObject);
+    //    }
+    //    else
+    //    {
+    //        DoInteractionEnd?.Invoke(ControlledPlayer.InteractionObject);
+    //    }    
+    //}
 }

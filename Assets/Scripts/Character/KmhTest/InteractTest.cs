@@ -26,9 +26,8 @@ public class InteractTest : MonoBehaviour ,IInteraction
 
     }
 
-    bool IInteraction.InteractionUpdate(float deltaTime, Interaction interaction)
+    float IInteraction.InteractionUpdate(float deltaTime, Interaction interaction)
     {
         return default;
     }
-
 }

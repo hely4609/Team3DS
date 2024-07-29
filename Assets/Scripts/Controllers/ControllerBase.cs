@@ -8,8 +8,8 @@ public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
 //public delegate bool DesignBuildingDelegate(BuildingEnum wantBuilding);
 public delegate bool DesignBuildingDelegate(ResourceEnum.Prefab wantBuilding);
 public delegate bool BuildDelegate();
-public delegate bool InteractionStartDelegate(IInteraction interactionTarget);
-public delegate bool InteractionEndDelegate(IInteraction interactionTarget);
+public delegate bool InteractionStartDelegate();
+public delegate bool InteractionEndDelegate();
 public delegate void WheelDelegate(Vector2 scrollDelta);
 
 

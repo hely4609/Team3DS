@@ -119,9 +119,13 @@ public abstract class Building : MyComponent
     {
         // 마우스를 누르고 있으면 점점 수치가 차오름.
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
-        if(completePercent< 1)
+        if (completePercent < 1)
         {
             buildingTimeCurrent += deltaTime;
+        }
+        else
+        {
+            
         }
 
         // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.

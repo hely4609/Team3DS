@@ -70,12 +70,12 @@
                 },
                 {
                     "name": "Interaction",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "68dd1740-def7-43e6-a3ea-6038de45b803",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "MouseWheel",
@@ -243,7 +243,7 @@
                 {
                     "name": "",
                     "id": "5d5ab422-d410-4e0a-8865-175376917ca6",
-                    "path": "<Keyboard>/f",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

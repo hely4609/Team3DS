@@ -11,7 +11,11 @@ public class Player : Character
     public Transform CameraOffset => cameraOffset;
    
     /////////////////////////////interaction 변수들
+    [SerializeField] protected Transform interactionUI; // 상호작용 UI
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
+
+    [SerializeField] protected GameObject interactionUpdateUI;
+    protected ImgsFillDynamic interactionUpdateProgress;
     protected GameObject mouseLeftUI;
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
@@ -151,7 +155,14 @@ public class Player : Character
         // 상호작용
         if (isInteracting && interactionObject != null)
         {
-            interactionObject.InteractionUpdate(deltaTime, interactionType);
+            float progress = interactionObject.InteractionUpdate(deltaTime, interactionType);
+
+            interactionUpdateProgress.SetValue(progress, true);
+
+            if (progress >= 1f)
+            {
+                InteractionEnd();
+            }
         }
         ////////////////////////////
     }
@@ -202,39 +213,57 @@ public class Player : Character
 
     public bool Repair(EnergyBarrierGenerator target) { return default; }
 
-    public bool InteractionStart<T> (T target) where T : IInteraction
+    public bool InteractionStart()
     {
-        if (target == null) return false;
+        if (interactionObject == null) return false;
         
-        isInteracting = true;
-        interactionType = target.InteractionStart(this);
+        interactionType = interactionObject.InteractionStart(this);
 
         switch (interactionType)
         {
             default: break;
-            case Interaction.Build: 
+            case Interaction.Build:
+                isInteracting = true;
                 AnimBool?.Invoke("isBuild", true);
+                interactionUI.gameObject.SetActive(false);
+                interactionUpdateUI.SetActive(true);
+                interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
+                buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
+                buttonText.text = $"Building...";
                 GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
                 break;
         }
 
-        Debug.Log($"{target} 과 상호작용");
+        Debug.Log($"{interactionObject} 과 상호작용");
         
         return default;
     }
 
-    public bool InteractionEnd<T>(T target) where T : IInteraction
+    //public bool InteractionUpdate<T>(T target, float deltaTime) where T : IInteraction
+    //{
+    //    if (target == null) return false;
+    //    if ((IInteraction)target != interactionObject) return false;
+    //    if (isInteracting && target != null)
+    //    {
+    //        target.InteractionUpdate(deltaTime, interactionType);
+    //    }
+    //}
+
+    public bool InteractionEnd()
     {
-        if (target == null) return false;
+        if (interactionObject == null) return false;
 
         isInteracting = false;
-        target.InteractionEnd();
+        interactionObject.InteractionEnd();
 
         switch (interactionType)
         {
             default: break;
             case Interaction.Build: 
                 AnimBool?.Invoke("isBuild", false);
+                interactionUI.gameObject.SetActive(true);
+                interactionUpdateUI.SetActive(false);
+                interactionUpdateProgress = null;
                 GameManager.Instance.PoolManager.Destroy(sockets.FindSocket("RightHand").gameObject.GetComponentInChildren<PoolingInfo>());
                 break;
         }
@@ -266,12 +295,11 @@ public class Player : Character
                 {
                     interactionIndex = 0;
                     interactionObject = target;
-                    mouseLeftUI = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, GetComponentInChildren<Canvas>().transform);
+                    mouseLeftUI = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
                     Canvas.ForceUpdateCanvases();
                 }
 
                 UpdateInteractionUI(interactionIndex);
-                
             }
         }
     }
@@ -290,7 +318,7 @@ public class Player : Character
                     interactionIndex = -1;
                     if (isInteracting)
                     {
-                        InteractionEnd(interactionObject);
+                        InteractionEnd();
                     }
                     interactionObject = null;
                     GameManager.Instance.PoolManager.Destroy(mouseLeftUI);
@@ -300,7 +328,7 @@ public class Player : Character
                     interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
                     if (isInteracting)
                     {
-                        InteractionEnd(interactionObject);
+                        InteractionEnd();
                     }
                     interactionObject = interactionObjectList[interactionIndex];
 
@@ -309,8 +337,6 @@ public class Player : Character
 
                 if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
                 {
-                    //interactionObjectDictionary.GetEnumerator();
-                    //Destroy(interactionObjectDictionary[target]);
                     GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
                     interactionObjectDictionary.Remove(target);
                 }
@@ -333,7 +359,6 @@ public class Player : Character
 
             if (interactionIndex < interactionObjectList.Count - 4)
             {
-                //scrollbar.value += 50 / interactionContent.rect.height;
                 interactionContent.anchoredPosition -= new Vector2(0, 50f);
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y,0, (interactionObjectList.Count - 6) * 50f));
             }
@@ -347,7 +372,6 @@ public class Player : Character
 
             if (interactionIndex > 4)
             {
-                //scrollbar.value -= 50 / interactionContent.rect.height;
                 interactionContent.anchoredPosition += new Vector2(0, 50f);
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionObjectList.Count - 6) * 50f));
             }
@@ -370,8 +394,6 @@ public class Player : Character
                 mouseLeftUI.transform.position = button.transform.position;
             } 
             else buttonImage.color = Color.white;
-
-            
         }
     }
 }

@@ -66,9 +66,9 @@ public class EnergyBarrierGenerator : InteractableBuilding
         }
     }
 
-    public override bool InteractionUpdate(float deltaTime, Interaction interaction)
+    public override float InteractionUpdate(float deltaTime, Interaction interaction)
     {
         RepairBarrier();
-        return true;    
+        return default;
     }
 }

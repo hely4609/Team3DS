@@ -21,12 +21,12 @@ public class CameraManager : Manager
         mainCamera = Camera.main;
         base.ManagerStart();
     }
-    
-    /*
+
+
     public override void ManagerUpdate(float deltaTime)
     {
         // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
-        if (observingPlayer == null) 
+        if (observingPlayer == null)
         {
             GameObject inst = GameObject.Find("LocalController");
             if (inst != null)
@@ -44,26 +44,26 @@ public class CameraManager : Manager
 
 
     }
-    */
-    public override void ManagerUpdate(float deltaTime)
-    {
-        // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
-        if (observingPlayer == null)
-        {
-            GameObject inst = GameObject.Find("PlayerPrefab(Clone)");
-            if (inst != null)
-            {
-                NetworkController controller = inst.GetComponent<NetworkController>();
-                observingPlayer = controller.ControlledPlayer;
-            }
-        }
-        
-        else
-        {
-            Vector3 offset = new Vector3(observingPlayer.transform.position.x, 1.1f, observingPlayer.transform.position.z);
-            mainCamera.transform.SetPositionAndRotation(offset, observingPlayer.transform.rotation);
-        }
-      
-    
-    }
+
+    //public override void ManagerUpdate(float deltaTime)
+    //{
+    //    // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
+    //    if (observingPlayer == null)
+    //    {
+    //        GameObject inst = GameObject.Find("PlayerPrefab(Clone)");
+    //        if (inst != null)
+    //        {
+    //            NetworkController controller = inst.GetComponent<NetworkController>();
+    //            observingPlayer = controller.ControlledPlayer;
+    //        }
+    //    }
+
+    //    else
+    //    {
+    //        Vector3 offset = new Vector3(observingPlayer.transform.position.x, 1.1f, observingPlayer.transform.position.z);
+    //        mainCamera.transform.SetPositionAndRotation(offset, observingPlayer.transform.rotation);
+    //    }
+
+
+    //}
 }

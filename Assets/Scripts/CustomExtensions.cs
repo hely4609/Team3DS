@@ -14,11 +14,12 @@ public interface IInteraction
     // 인터액션 enum 제작해야함. 
     public Interaction InteractionStart( Player player);
 
-    public bool InteractionUpdate(float deltaTime, Interaction interaction);
+    public float InteractionUpdate(float deltaTime, Interaction interaction);
 
     public bool InteractionEnd();
 
     public Collider[] GetInteractionColliders();
+
 }
 
 

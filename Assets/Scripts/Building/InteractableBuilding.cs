@@ -36,13 +36,13 @@ public class InteractableBuilding : Building, IInteraction
             return Interaction.None;
         }
     }
-    public virtual bool InteractionUpdate(float deltaTime, Interaction interaction) // 상호작용시 적용할 함수. 제작하라는 명령이 들어오면 제작을 진행함.
+    public virtual float InteractionUpdate(float deltaTime, Interaction interaction) // 상호작용시 적용할 함수. 제작하라는 명령이 들어오면 제작을 진행함.
     {
         if (interaction == Interaction.Build)
         {
             BuildBuilding(deltaTime);
         }
-        return true;
+        return CompletePercent;
     }
 
     public bool InteractionEnd()
