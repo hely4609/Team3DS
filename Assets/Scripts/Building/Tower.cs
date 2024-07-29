@@ -28,7 +28,7 @@ public class Tower : InteractableBuilding
         isNeedLine = true;
         AttackDamage = 1;
         AttackSpeed = 0.5f;
-        AttackRange = 10;
+        AttackRange = 50;
         buildingTimeMax = 10;
         size = new Vector2Int(4, 4);
         TurnOnOff(true);
@@ -137,7 +137,7 @@ public class Tower : InteractableBuilding
         if(gameObject.TryGetComponent<SphereCollider>(out SphereCollider col))
         {
             col.radius = attackRange;
-            col.center = new Vector3(0, col.radius * 0.5f, 0);
+            //col.center = new Vector3(0, col.radius * 0.5f, 0);
         }
         else
         {

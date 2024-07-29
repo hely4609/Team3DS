@@ -11,12 +11,12 @@ public class Player : Character
     public Transform CameraOffset => cameraOffset;
    
     /////////////////////////////interaction 변수들
-    [SerializeField] protected Transform interactionUI; // 상호작용 UI
+    [SerializeField] protected Transform interactionUI; // 상호작용 UI위치
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
-
-    [SerializeField] protected GameObject interactionUpdateUI;
-    protected ImgsFillDynamic interactionUpdateProgress;
-    protected GameObject mouseLeftUI;
+    [SerializeField] protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
+    [SerializeField] public  GameObject buildingSeletUI; // 빌딩 선택 UI
+    protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
+    protected GameObject mouseLeftImage; // 마우스좌클릭 Image
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
@@ -32,6 +32,8 @@ public class Player : Character
     protected GameObject bePicked;
     public GameObject BePicked => bePicked;
     // protected bool isHandFree;
+    [SerializeField] protected ResourceEnum.Prefab[,] buildableEnumArray = new ResourceEnum.Prefab[5, 5];
+    protected int buildableEnumPageIndex = 0;
     protected Building designingBuilding;
 
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
@@ -47,6 +49,7 @@ public class Player : Character
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
+        targetController.DoBuildingSelectUI -= BuildSelectUI;
         targetController.DoDesignBuilding -= DesignBuilding;
         targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
@@ -55,6 +58,7 @@ public class Player : Character
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
+        targetController.DoBuildingSelectUI += BuildSelectUI;
         targetController.DoDesignBuilding += DesignBuilding;
         targetController.DoBuild += Build;
         targetController.DoInteractionStart += InteractionStart;
@@ -66,6 +70,7 @@ public class Player : Character
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
+        targetController.DoBuildingSelectUI -= BuildSelectUI;
         targetController.DoDesignBuilding -= DesignBuilding;
         targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
@@ -108,6 +113,8 @@ public class Player : Character
             cameraOffset = transform.Find("CameraOffset");
         }
 
+        buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
+        //for (ResourceEnum.Prefab.)
     }
 
     protected override void MyUpdate(float deltaTime)
@@ -191,11 +198,14 @@ public class Player : Character
     public bool PutDown() { return default; }
 
     // 건설한 건물을 반투명(가건물) 상태로 만드는 함수
-    public bool DesignBuilding(ResourceEnum.Prefab wantBuilding)
+    public bool DesignBuilding(int index)
     {
-        designingBuilding = GameManager.Instance.PoolManager.Instantiate(wantBuilding).GetComponent<Building>();
-        //bePicked.transform.parent = gameObject.transform;
-        return default;
+        if (buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
+        //buildingSeletUI.SetActive(true);
+
+        designingBuilding = GameManager.Instance.PoolManager.Instantiate(buildableEnumArray[buildableEnumPageIndex,index]).GetComponent<Building>();
+        buildingSeletUI.SetActive(false);
+        return true;
     }
     
     public bool Build() 
@@ -295,7 +305,7 @@ public class Player : Character
                 {
                     interactionIndex = 0;
                     interactionObject = target;
-                    mouseLeftUI = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
+                    mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
                     Canvas.ForceUpdateCanvases();
                 }
 
@@ -321,7 +331,7 @@ public class Player : Character
                         InteractionEnd();
                     }
                     interactionObject = null;
-                    GameManager.Instance.PoolManager.Destroy(mouseLeftUI);
+                    GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
                 }
                 else
                 {
@@ -391,9 +401,14 @@ public class Player : Character
             {
                 buttonImage.color = Color.yellow;
                 // 활성화버튼 어떤키를 누르세요.
-                mouseLeftUI.transform.position = button.transform.position;
+                mouseLeftImage.transform.position = button.transform.position;
             } 
             else buttonImage.color = Color.white;
         }
+    }
+
+    protected void BuildSelectUI()
+    {
+        buildingSeletUI.SetActive(true);
     }
 }
