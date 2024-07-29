@@ -2,7 +2,8 @@ using ExitGames.Client.Photon.StructWrapping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Fusion;
+using ResourceEnum;
 
 public enum BuildingEnum
 {
@@ -26,7 +27,8 @@ public abstract class Building : MyComponent
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
 
-    [SerializeField] protected bool isBuildable; // 이 장소에 건설할 수 있나
+    [SerializeField, Networked] protected bool isBuildable{get; set; } // 이 장소에 건설할 수 있나
+    private ChangeDetector _changeDetector;
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
     [SerializeField] protected Vector2Int tiledBuildingPositionLast; // 건설하고자하는 마지막 위치.
     public Vector2Int TiledBuildingPos { get { return tiledBuildingPositionLast; } set { tiledBuildingPositionLast = value; } } // 임시 코드
@@ -38,6 +40,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
     protected override void MyStart()
     {
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         Initialize();
         //HeightCheck();
     }
@@ -46,7 +49,7 @@ public abstract class Building : MyComponent
     {
         isBuildable = CheckAlreadyBuild();
         
-        VisualizeBuildable();
+        //VisualizeBuildable();
         return isBuildable;
     }
     public virtual bool CheckAlreadyBuild() // 건설하려는 건물이 다른 건물에 겹쳤는지 체크.
@@ -178,6 +181,32 @@ public abstract class Building : MyComponent
             //Debug.Log(min);
             r.material.SetFloat("_HeightMax", max);
             //Debug.Log(max);
+        }
+    }
+
+    public override void Render()
+    {
+        foreach (var change in _changeDetector.DetectChanges(this))
+        {
+            switch (change)
+            {
+                case nameof(isBuildable):
+                    if (isBuildable)
+                    {
+                        foreach (MeshRenderer render in meshes)
+                        {
+                            render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+                        }
+                    }
+                    else
+                    {
+                        foreach (MeshRenderer render in meshes)
+                        {
+                            render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
+                        }
+                    }
+                    break;
+            }
         }
     }
 }
