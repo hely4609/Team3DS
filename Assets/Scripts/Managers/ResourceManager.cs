@@ -23,8 +23,8 @@ public class ResourceManager : Manager
         resourceAmount = 0;
         resourceLoadCompleted = 0;
 
-        resourceAmount += prefabDictionary.Count;
-        resourceAmount += materialDictionary.Count;
+        resourceAmount += ResourcesPath.prefabPathArray.Length;
+        resourceAmount += ResourcesPath.MaterialPathArray.Length;
 
         yield return Load<ResourceEnum.Prefab, GameObject>(prefabDictionary, ResourcesPath.prefabPathArray, "prefabs");
         yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.MaterialPathArray, "materials");
@@ -38,7 +38,7 @@ public class ResourceManager : Manager
         {
             if (Load(pathArray[i], dictionary))
             {
-                GameManager.ClaimLoadInfo(resourceType);
+                GameManager.ClaimLoadInfo(resourceType, resourceLoadCompleted, resourceAmount);
                 resourceLoadCompleted++;
             }
             else

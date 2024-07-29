@@ -9,16 +9,20 @@ public partial class NetworkPhotonCallbacks
     Vector3 moveDir;
     Vector2 mouseDelta;
     bool tryDesignBuilding, tryBuild, cancelDesignBuilding;
+    bool tryInteraction;
 
     [SerializeField] GameObject[] buildables;
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+        if (!GameManager.IsGameStart) return;
+
         var data = new NetworkInputData();
         data.moveDirection = moveDir;
         data.lookRotationDelta = mouseDelta;
         data.buttons.Set(MyButtons.DesignBuilding, tryDesignBuilding);
         data.buttons.Set(MyButtons.Build, tryBuild);
+        data.buttons.Set(MyButtons.Interaction, tryInteraction);
 
         input.Set(data);
 
@@ -43,5 +47,10 @@ public partial class NetworkPhotonCallbacks
     public void OnBuild()
     {
         tryBuild = true;
+    }
+
+    public void OnInteraction(InputValue value)
+    {
+        tryInteraction = value.isPressed;
     }
 }

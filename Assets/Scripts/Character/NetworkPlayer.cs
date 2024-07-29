@@ -40,16 +40,17 @@ public class NetworkPlayer : Player
             {
                 HoldingDesign();
                 if(data.buttons.IsSet(MyButtons.DesignBuilding)) DoDesignBuilding(buildables[0]);
-                if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
 
             }
+            if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
+            if (data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
+            else InteractionEnd();
         }
     }
 
     void DoMove(Vector3 direction)
     {
         //transform.position += (transform.forward * direction.z + transform.right * direction.x).normalized * Runner.DeltaTime * moveSpeed * 10f;
-        //rb.velocity = direction;
         _ncc.Move(direction, moveSpeed * 10);
         AnimFloat?.Invoke("Speed", direction.magnitude);
 
@@ -78,10 +79,9 @@ public class NetworkPlayer : Player
     NetworkObject designBuildingPrefab;
     bool DoDesignBuilding(GameObject buildingPrefab)
     {
-        //Debug.Log(HasStateAuthority);
         if (designBuildingPrefab == null)
         {
-            designBuildingPrefab = Runner.Spawn(buildingPrefab, transform.position + transform.forward * 5f);
+            designBuildingPrefab = Runner.Spawn(buildingPrefab, new Vector3 (transform.position.x, 0, transform.position.z) + transform.forward * 5f);
             designingBuilding = designBuildingPrefab.GetComponent<Building>();
             return true;
         }
@@ -118,7 +118,6 @@ public class NetworkPlayer : Player
     {
         if (designingBuilding != null)
         {
-            Debug.Log(designingBuilding);
             if (designingBuilding.FixPlace())
             {
                 designingBuilding = null;

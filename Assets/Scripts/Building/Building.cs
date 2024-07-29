@@ -40,6 +40,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
     protected override void MyStart()
     {
+        isBuildable = true;
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         Initialize();
         //HeightCheck();
@@ -56,7 +57,6 @@ public abstract class Building : MyComponent
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
-        Debug.Log($"{buildingList.Count}");
         if (buildingList.Count > 0)
         {
             foreach (Building building in buildingList)
@@ -82,18 +82,13 @@ public abstract class Building : MyComponent
     { 
         if (isBuildable)
         {
-            Debug.Log("OK");
-            
                 foreach(MeshRenderer render in meshes)
                 {
                     render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
                 }
-                
-            
         }
         else
         {
-            Debug.Log("안됨");
             foreach (MeshRenderer render in meshes)
             { 
                 render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
