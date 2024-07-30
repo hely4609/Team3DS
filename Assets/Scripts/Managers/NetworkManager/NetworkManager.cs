@@ -30,7 +30,7 @@ public partial class NetworkManager : Manager
     NetworkState currentNetworkState = NetworkState.Offline;
     public NetworkState CurrentNetworkState => currentNetworkState;
 
-    string gameVersion = "1";
+    //string gameVersion = "1";
 
     public class UserInfo
     {

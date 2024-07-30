@@ -27,7 +27,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
 
-    [SerializeField, Networked] protected bool isBuildable{get; set; } // 이 장소에 건설할 수 있나
+    [Networked] protected bool isBuildable{ get; set; } // 이 장소에 건설할 수 있나
     private ChangeDetector _changeDetector;
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
     [SerializeField] protected Vector2Int tiledBuildingPositionLast; // 건설하고자하는 마지막 위치.

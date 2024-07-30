@@ -7,8 +7,9 @@ public class NetworkPlayer : Player
 {
     NetworkCharacterController _ncc;
     [SerializeField] private GameObject[] buildables;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _ncc = GetComponent<NetworkCharacterController>();
     }
     [Networked] public NetworkButtons ButtonsPrevious { get; set; }

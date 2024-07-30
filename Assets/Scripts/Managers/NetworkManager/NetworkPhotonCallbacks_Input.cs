@@ -3,6 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+public enum MyButtons
+{
+    DesignBuilding = 0,
+    Build = 1,
+    CancelDesignBuilding = 2,
+    Interaction = 3,
+}
+public struct NetworkInputData : INetworkInput
+{
+    public Vector3 moveDirection;
+    public Vector2 lookRotationDelta;
+    public NetworkButtons buttons;
+}
 
 public partial class NetworkPhotonCallbacks
 {
