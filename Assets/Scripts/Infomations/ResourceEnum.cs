@@ -25,7 +25,7 @@ namespace ResourceEnum
         Hammer,
         Rope,
         // Monster
-        MonsterTest
+        EnemyTest
     }
 
     public enum Material

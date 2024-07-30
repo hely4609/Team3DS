@@ -113,7 +113,7 @@ public abstract class Building : MyComponent
             return false;
         }
     }
-    public void BuildBuilding(float deltaTime)
+    public virtual void BuildBuilding(float deltaTime)
     {
         // 마우스를 누르고 있으면 점점 수치가 차오름.
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
