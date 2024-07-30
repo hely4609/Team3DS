@@ -8,21 +8,22 @@ using UnityEngine.InputSystem;
 
 public class InteractionManager : Manager
 {
+    protected Socket.Container sockets = new Socket.Container();
     protected Player _controlledPlayer;
-    public Player ControlledPlayer 
+    public Player ControlledPlayer
     {
         get => _controlledPlayer;
         set
         {
             _controlledPlayer = value;
             detectingPoint = new Vector3(_controlledPlayer.transform.position.x, 0f, _controlledPlayer.transform.position.z + 0.5f);
-        }    
+        }
     }
 
     protected Vector3 detectingPoint; // 탐지 포인트
     protected float detectingRange = 0.5f; // 탐지 거리
 
-    protected float updateTimeMax = 0.1f; // 업데이트 주기
+    protected float updateTimeMax = 0.2f; // 업데이트 주기
     protected float updateTimeCurrent; // 업데이트 남은시간
 
     protected List<IInteraction> totalInteractionObjectList = new List<IInteraction>(); // 전체 리스트
@@ -33,23 +34,37 @@ public class InteractionManager : Manager
     public IInteraction InteractionObject => interactionObject;
     protected int interactionIndex = 0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
 
+    protected GameObject characterUICanvas;
     protected Transform interactionUI; // 상호작용 UI위치
     protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
-    protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
+
     //public GameObject buildingSeletUI; // 빌딩 선택 UI
+    protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
+
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
-    
+
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
 
     public override IEnumerator Initiate()
     {
-        return base.Initiate();
+        if (characterUICanvas != null) yield break;
+
+        characterUICanvas = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.CharacterUICanvas);
+        foreach (var socket in characterUICanvas.GetComponentsInChildren<Socket>())
+        {
+            sockets.AttachSocket(socket);
+        }
+
+        interactionContent = sockets.FindSocket("Content").GetComponent<RectTransform>();
+        interactionUI = sockets.FindSocket("InteractionUI").transform;
+
+        yield return null;
     }
 
     public override void ManagerStart()
     {
-        
+
     }
 
     public override void ManagerUpdate(float deltaTime)
@@ -57,6 +72,7 @@ public class InteractionManager : Manager
         if (updateTimeCurrent <= 0f)
         {
             UpdateInteractionList();
+            //Debug.Log(interactionObjectList.Count);
             updateTimeCurrent = updateTimeMax;
         }
         else
@@ -64,19 +80,14 @@ public class InteractionManager : Manager
             updateTimeCurrent -= deltaTime;
         }
     }
- 
+
     public void UpdateInteractionList()
     {
         // 범위밖에 나간 오브젝트 제거
-        var targetList = interactionObjectList.FindAll(target => detectingRange < target.GetInteractionBounds().SqrDistance(detectingPoint));
-        
-        foreach (var target in targetList) 
+        var targetList = interactionObjectList.FindAll(target => detectingRange < Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint));
+
+        foreach (var target in targetList)
         {
-            if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
-            {
-                GameManager.Instance.PoolManager.Destroy(result);
-                interactionObjectDictionary.Remove(target);
-            }
             interactionObjectList.Remove(target);
 
             if (interactionObjectList.Count == 0)
@@ -100,13 +111,20 @@ public class InteractionManager : Manager
 
                 UpdateInteractionUI(interactionIndex);
             }
+
+            if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
+            {
+                GameManager.Instance.PoolManager.Destroy(result);
+                interactionObjectDictionary.Remove(target);
+            }
         }
 
         // 범위안에 있는 오브젝트 리스트 갱신
         updatedInteractionObjectList.Clear();
         foreach (var target in totalInteractionObjectList)
         {
-            if (target.GetInteractionBounds().SqrDistance(detectingPoint) <= detectingRange)
+            Debug.Log(Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint));
+            if (Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint) <= detectingRange)
             {
                 updatedInteractionObjectList.Add(target);
 
@@ -191,4 +209,15 @@ public class InteractionManager : Manager
             else buttonImage.color = Color.white;
         }
     }
+
+    public void AddInteractionObject(IInteraction addInteractionObject)
+    {
+        totalInteractionObjectList.Add(addInteractionObject);
+    }
+
+    public void RemoveInteractionObject(IInteraction removeInteractionObject) 
+    {
+        totalInteractionObjectList.Remove(removeInteractionObject);
+    }
+        
 }

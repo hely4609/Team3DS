@@ -10,6 +10,7 @@ public class InteractableBuilding : Building, IInteraction
 
     protected override void Initialize()
     {
+        GameManager.Instance.InteractionManager.AddInteractionObject(this);
     }
     // 위치를 고정함.
 

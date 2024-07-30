@@ -66,11 +66,11 @@ public class GameManager : MonoBehaviour
     protected CameraManager cameraManager;
     public CameraManager CameraManager => cameraManager;
 
-    protected NetworkManager networkManager;
-    public NetworkManager NetworkManager => networkManager;
-
     protected InteractionManager interactionManager;
     public InteractionManager InteractionManager => interactionManager;
+
+    protected NetworkManager networkManager;
+    public NetworkManager NetworkManager => networkManager;
 
     protected WaveManager waveManager;
     public WaveManager WaveManager => waveManager;
@@ -106,10 +106,10 @@ public class GameManager : MonoBehaviour
         yield return buildingManager.Initiate();
         cameraManager = new CameraManager();
         yield return cameraManager.Initiate();
-        networkManager = new NetworkManager();
-        yield return networkManager.Initiate();
         interactionManager = new InteractionManager();
         yield return interactionManager.Initiate();
+        networkManager = new NetworkManager();
+        yield return networkManager.Initiate();
         waveManager = new WaveManager();
         yield return waveManager.Initiate();
 
@@ -124,6 +124,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += WaveManager.ManagerUpdate;
 
         ManagerUpdates += CameraManager.ManagerUpdate;
+        ManagerUpdates += InteractionManager.ManagerUpdate;
 
         CloseLoadInfo();
         

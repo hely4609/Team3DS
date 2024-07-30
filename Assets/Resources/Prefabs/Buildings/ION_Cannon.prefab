@@ -2028,6 +2028,7 @@ MonoBehaviour:
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   size: {x: 0, y: 0}
+  interactionMesh: {fileID: 4300000, guid: faa3716e10170472a8b2fa9fb6b646c7, type: 3}
   attackDamage: 0
   attackSpeed: 0
   target: {fileID: 0}
@@ -2050,7 +2051,7 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 400
   m_Height: 700
@@ -2106,7 +2107,7 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3

@@ -6,6 +6,11 @@ public class InteractTest : MonoBehaviour ,IInteraction
 {
     Mesh mesh;
 
+    public void Start()
+    {
+        GameManager.Instance.InteractionManager.AddInteractionObject(this);
+    }
+
     public Bounds GetInteractionBounds()
     {
         if (mesh == null)
