@@ -17,26 +17,30 @@ public class Monster : Character
     public override void Attack(Character target) { }
 
     bool isRelease = false;
+    bool isReady = false;
 
     public MonsterDestroyFunction destroyFunction;
     protected override void MyStart()
     {
+        Debug.Log("monster Mystart");
         hpMax = 5;
         hpCurrent = 5;
         roadsVector2 = GameManager.Instance.BuildingManager.roadData;
         roadDestination = roadsVector2.Count-1;
         monsterType = MonsterEnum.First;
+        isReady= true;
     }
 
     public override int TakeDamage(Tower attacker, int damage)
     {
-        hpCurrent -= damage;
-        if (hpCurrent <= 0)
-        {
-            destroyFunction.Invoke(this);
-            Destroy(gameObject);
-        }
-        Debug.Log($"{HpCurrent} / {gameObject.name}");
+            hpCurrent -= damage;
+            if (hpCurrent <= 0)
+            {
+                destroyFunction.Invoke(this);
+                Destroy(gameObject);
+            }
+            Debug.Log($"{HpCurrent} / {gameObject.name}");
+        
         return 0;
     }
 
@@ -48,13 +52,16 @@ public class Monster : Character
 
     protected override void MyUpdate(float deltaTime)
     {
-        MonsterMove(NextDestination(), deltaTime);
-        if (IsDestinationArrive(NextDestination()))
+        if (isReady)
         {
-            roadDestination--;
-            if(roadDestination <= 0)
+            MonsterMove(NextDestination(), deltaTime);
+            if (IsDestinationArrive(NextDestination()))
             {
-                roadDestination= 0;
+                roadDestination--;
+                if (roadDestination <= 0)
+                {
+                    roadDestination = 0;
+                }
             }
         }
     }

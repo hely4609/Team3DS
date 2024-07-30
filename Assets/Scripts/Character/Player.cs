@@ -103,6 +103,7 @@ public class Player : Character
 
     protected override void MyStart()
     {
+        Debug.Log("player mystart");
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();

@@ -2318,7 +2318,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshes: []
   cols: []
-  isBuildable: 0
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   size: {x: 0, y: 0}
@@ -4814,7 +4813,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2054335547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5258,7 +5257,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meshes: []
   cols: []
-  isBuildable: 0
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   size: {x: 4, y: 4}

@@ -72,6 +72,9 @@ public class GameManager : MonoBehaviour
     protected InteractionManager interactionManager;
     public InteractionManager InteractionManager => interactionManager;
 
+    protected WaveManager waveManager;
+    public WaveManager WaveManager => waveManager;
+
     bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
     public void GameStart() { isGameStart = true; }
@@ -107,6 +110,8 @@ public class GameManager : MonoBehaviour
         yield return networkManager.Initiate();
         interactionManager = new InteractionManager();
         yield return interactionManager.Initiate();
+        waveManager = new WaveManager();
+        yield return waveManager.Initiate();
 
 
         cameraManager = new CameraManager();
@@ -116,6 +121,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += UIManager.ManagerUpdate;
         ManagerUpdates += MiniMapManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
+        ManagerUpdates += WaveManager.ManagerUpdate;
 
         ManagerUpdates += CameraManager.ManagerUpdate;
 

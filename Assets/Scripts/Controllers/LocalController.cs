@@ -63,7 +63,7 @@ public class LocalController : ControllerBase
     ////////////////////////////////////////////
     protected void OnInteraction(InputValue value) 
     {
-        if (ControlledPlayer.InteractionObject == null) return;
+        if (ControlledPlayer?.InteractionObject == null) return;
 
         if (value.isPressed)
         {
