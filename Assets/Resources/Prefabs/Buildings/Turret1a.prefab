@@ -501,8 +501,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1.6, z: 3}
-  m_Center: {x: 0, y: 0.7, z: 4.2}
+  m_Size: {x: 3, y: 8, z: 3}
+  m_Center: {x: 0, y: 3, z: 4.2}
 --- !u!65 &6263576778540548452
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -522,8 +522,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1.6, z: 3}
-  m_Center: {x: 4.2, y: 0.7, z: 0}
+  m_Size: {x: 3, y: 8, z: 3}
+  m_Center: {x: 4.2, y: 3, z: 0}
 --- !u!65 &5364410524237927022
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -543,8 +543,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1.6, z: 3}
-  m_Center: {x: -4.2, y: 0.7, z: 0}
+  m_Size: {x: 3, y: 8, z: 3}
+  m_Center: {x: -4.2, y: 3, z: 0}
 --- !u!65 &217081395227794833
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -564,8 +564,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3, y: 1.6, z: 3}
-  m_Center: {x: 0, y: 0.7, z: -4.2}
+  m_Size: {x: 3, y: 8, z: 3}
+  m_Center: {x: 0, y: 3, z: -4.2}
 --- !u!114 &7630605579735506491
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -650,7 +650,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 3661579755
   ObjectInterest: 1
-  Flags: 1
+  Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 7630605579735506491}
