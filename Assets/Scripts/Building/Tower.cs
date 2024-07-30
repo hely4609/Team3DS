@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class Tower : InteractableBuilding
 {
+    protected const float rangeConst = 15f;
+
     protected int powerConsumption; // 타워가 진짜로 소모할 양.
     protected int currentPowerConsumption; // 현재 사용중인 전력 소모량
 
@@ -28,12 +30,15 @@ public class Tower : InteractableBuilding
         isNeedLine = true;
         AttackDamage = 1;
         AttackSpeed = 0.5f;
-        AttackRange = 50;
+        AttackRange = 1;
         buildingTimeMax = 10;
         size = new Vector2Int(4, 4);
         TurnOnOff(true);
 
     }
+
+    
+
     public override Interaction InteractionStart(Player player)
     {
         // 완성이 아직 안됨.
@@ -136,7 +141,8 @@ public class Tower : InteractableBuilding
     {
         if(gameObject.TryGetComponent<SphereCollider>(out SphereCollider col))
         {
-            col.radius = attackRange;
+            Debug.Log(transform.localScale.x);
+            col.radius = attackRange * rangeConst / transform.localScale.x;
             //col.center = new Vector3(0, col.radius * 0.5f, 0);
         }
         else

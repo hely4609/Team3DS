@@ -1847,6 +1847,7 @@ GameObject:
   - component: {fileID: 5371794395544762303}
   - component: {fileID: -2811553585201260352}
   - component: {fileID: -3519175632691191382}
+  - component: {fileID: 2571561083468149281}
   m_Layer: 0
   m_Name: ION_Cannon
   m_TagString: Untagged
@@ -2069,7 +2070,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SortKey: 847935710
   ObjectInterest: 1
-  Flags: 1
+  Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 3539466090241050540}
@@ -2090,6 +2091,27 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!135 &2571561083468149281
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537954391025513121}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 332.445
+  m_Center: {x: 0.000030517578, y: 34.81367, z: 0}
 --- !u!1 &2660080350082734642
 GameObject:
   m_ObjectHideFlags: 0
