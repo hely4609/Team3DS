@@ -8,8 +8,10 @@ using System;
 public class Player : Character
 {
     protected ControllerBase possessionController;
-    [SerializeField] protected Transform cameraOffset;
-    public Transform CameraOffset => cameraOffset;
+    [SerializeField] bool TPS_Mode;
+    [SerializeField] protected Transform cameraOffset_FPS;
+    [SerializeField] protected Transform cameraOffset_TPS;
+    public Transform CameraOffset => TPS_Mode ? cameraOffset_TPS : cameraOffset_FPS;
    
     /////////////////////////////interaction 변수들
     [SerializeField] protected Transform interactionUI; // 상호작용 UI위치
@@ -106,9 +108,9 @@ public class Player : Character
             rb = GetComponent<Rigidbody>();
         }
 
-        if (cameraOffset == null)
+        if (cameraOffset_FPS == null)
         {
-            cameraOffset = transform.Find("CameraOffset");
+            cameraOffset_FPS = transform.Find("CameraOffset");
         }
 
         for (ResourceEnum.Prefab index = ResourceEnum.Prefab.Turret1a; index <= ResourceEnum.Prefab.ION_Cannon; index++)
@@ -199,7 +201,7 @@ public class Player : Character
         rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
         
         // 상하회전은 카메라만 회전
-        cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
