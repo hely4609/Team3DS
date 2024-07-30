@@ -1,4 +1,3 @@
-using BackEnd.Tcp;
 using ResourceEnum;
 using System.Collections;
 using System.Collections.Generic;
@@ -93,14 +92,8 @@ public class UIManager : Manager
         }
     }
 
-    public void ClaimInviteWindow(string inviter, SessionId roomId, string roomToken)
+    public void ClaimInviteWindow()
     {
-        Canvas LobbyCanvas = GameObject.Find("LobbyCanvas").GetComponent<Canvas>();
-        if (prefabDictionary.TryGetValue(UIEnum.BeInvitedWindow, out GameObject prefab))
-        {
-            GameObject inviteWindow = GameObject.Instantiate(prefab, LobbyCanvas.transform);
-            inviteWindow.GetComponent<BeInvitedWindow>().SetInviteInfo(inviter, roomId, roomToken);
-        }
-
+        
     }
 }

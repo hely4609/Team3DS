@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BackEnd;
-using BackEnd.Tcp;
 using Fusion;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
@@ -37,15 +35,6 @@ public partial class NetworkManager : Manager
         public string gamerId;
         public string nickname;
     }
-
-    public class MatchCard
-    {
-        public string inDate;
-        public MatchType matchType;
-        public MatchModeType matchModeType;
-    }
-
-    public MatchCard[] matchCardArray;
 
     UserInfo myInfo;
     public string MyNickname
