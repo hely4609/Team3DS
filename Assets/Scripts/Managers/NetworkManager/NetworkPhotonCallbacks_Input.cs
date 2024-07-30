@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.Rendering.DebugUI;
 
 public enum MyButtons
 {
@@ -16,6 +15,7 @@ public struct NetworkInputData : INetworkInput
 {
     public Vector3 moveDirection;
     public Vector2 lookRotationDelta;
+    //public Vector2 scrollbarDelta;
     public int selectedBuildingIndex;
     public NetworkButtons buttons;
 }
@@ -24,8 +24,9 @@ public partial class NetworkPhotonCallbacks
 {
     Vector3 moveDir;
     Vector2 mouseDelta;
+    //Vector2 mouseWheelDelta;
     int buildingIndex = -1;
-    bool tryDesignBuilding, tryBuild, cancelDesignBuilding;
+    bool tryBuild, cancelDesignBuilding;
     bool tryInteraction;
 
     [SerializeField] GameObject[] buildables;
@@ -38,15 +39,14 @@ public partial class NetworkPhotonCallbacks
         data.moveDirection = moveDir;
         data.lookRotationDelta = mouseDelta;
         data.selectedBuildingIndex = buildingIndex;
+        //data.scrollbarDelta = mouseWheelDelta;
 
-        //data.buttons.Set(MyButtons.DesignBuilding, tryDesignBuilding);
         data.buttons.Set(MyButtons.Build, tryBuild);
         data.buttons.Set(MyButtons.Interaction, tryInteraction);
 
         input.Set(data);
 
         buildingIndex = -1;
-        tryDesignBuilding = false;
         tryBuild = false;
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
@@ -85,8 +85,6 @@ public partial class NetworkPhotonCallbacks
         {
             buildingIndex = 4;
         }
-
-        tryDesignBuilding = true;
     }
 
     public void OnBuild()
@@ -98,4 +96,8 @@ public partial class NetworkPhotonCallbacks
     {
         tryInteraction = value.isPressed;
     }
+    //public void OnMouseWheel(InputValue value)
+    //{
+    //    mouseWheelDelta = value.Get<Vector2>();
+    //}
 }

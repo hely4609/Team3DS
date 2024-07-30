@@ -66,4 +66,10 @@ public class CannonTower : Tower
     {
         base.LockOn();
     }
+
+    public override string GetName()
+    {
+        return "ConnonTower";
+    }
+    
 }

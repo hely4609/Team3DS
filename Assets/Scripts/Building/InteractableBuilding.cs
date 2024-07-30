@@ -6,6 +6,7 @@ using UnityEngine;
 public class InteractableBuilding : Building, IInteraction
 {
     //protected Collider[] interactionColliders;
+    [SerializeField] protected Mesh interactionMesh; // 상호작용 기준이될 Base Mesh 등록
 
     protected override void Initialize()
     {
@@ -56,47 +57,59 @@ public class InteractableBuilding : Building, IInteraction
         return cols;
     }
 
-//    protected override void HeightCheck()
-//    {
-//        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
-//        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
+    public Bounds GetInteractionBounds()
+    {
+        return interactionMesh.bounds;
+    }
 
-//        int i = 0;
-//        while (i < meshFilters.Length)
-//        {
-//            combine[i].mesh = meshFilters[i].sharedMesh;
-//            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
+    public virtual string GetName()
+    {
+        return "InteractableBuilding";
+    }
 
-//            i++;
-//        }
 
-//        MeshFilter inst = gameObject.AddComponent<MeshFilter>();
 
-//        Mesh mesh = inst.mesh;
-//        mesh.Clear();
-//        mesh.CombineMeshes(combine);
+    //    protected override void HeightCheck()
+    //    {
+    //        MeshFilter[] meshFilters = GetComponentsInChildren<MeshFilter>();
+    //        CombineInstance[] combine = new CombineInstance[meshFilters.Length];
 
-//        MeshCollider col = gameObject.AddComponent<MeshCollider>();
-//        col.sharedMesh = mesh;
+    //        int i = 0;
+    //        while (i < meshFilters.Length)
+    //        {
+    //            combine[i].mesh = meshFilters[i].sharedMesh;
+    //            combine[i].transform = meshFilters[i].transform.localToWorldMatrix;
 
-//#if UNITY_EDITOR
-//        { // Mesh 저장
-//            string path = "Assets/MyMesh.asset";
-//            AssetDatabase.CreateAsset(transform.GetComponent<MeshFilter>().mesh, AssetDatabase.GenerateUniqueAssetPath(path));
-//            AssetDatabase.SaveAssets();
-//        }
-//#endif
+    //            i++;
+    //        }
 
-//        float max = mesh.bounds.max.y;
-//        float min = mesh.bounds.min.y;
+    //        MeshFilter inst = gameObject.AddComponent<MeshFilter>();
 
-//        foreach (MeshRenderer r in meshes)
-//        {
-//            r.material.SetFloat("_HeightMin", min);
-//            Debug.Log(min);
-//            r.material.SetFloat("_HeightMax", max);
-//            Debug.Log(max);
-//        }
-//    }
+    //        Mesh mesh = inst.mesh;
+    //        mesh.Clear();
+    //        mesh.CombineMeshes(combine);
+
+    //        MeshCollider col = gameObject.AddComponent<MeshCollider>();
+    //        col.sharedMesh = mesh;
+
+    //#if UNITY_EDITOR
+    //        { // Mesh 저장
+    //            string path = "Assets/MyMesh.asset";
+    //            AssetDatabase.CreateAsset(transform.GetComponent<MeshFilter>().mesh, AssetDatabase.GenerateUniqueAssetPath(path));
+    //            AssetDatabase.SaveAssets();
+    //        }
+    //#endif
+
+    //        float max = mesh.bounds.max.y;
+    //        float min = mesh.bounds.min.y;
+
+    //        foreach (MeshRenderer r in meshes)
+    //        {
+    //            r.material.SetFloat("_HeightMin", min);
+    //            Debug.Log(min);
+    //            r.material.SetFloat("_HeightMax", max);
+    //            Debug.Log(max);
+    //        }
+    //    }
 
 }

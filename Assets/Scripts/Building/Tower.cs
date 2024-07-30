@@ -166,4 +166,9 @@ public class Tower : InteractableBuilding
             }
         }
     }
+
+    public override string GetName()
+    {
+        return "TurretTower";
+    }
 }

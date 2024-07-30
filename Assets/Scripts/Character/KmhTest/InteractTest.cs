@@ -4,15 +4,30 @@ using UnityEngine;
 
 public class InteractTest : MonoBehaviour ,IInteraction
 {
-    Collider[] colliders;
+    Mesh mesh;
+
+    public Bounds GetInteractionBounds()
+    {
+        if (mesh == null)
+        {
+            mesh = GetComponent<Mesh>();
+        }
+        return mesh.bounds;
+    }
+
     public Collider[] GetInteractionColliders()
     {
-        if (colliders == null)
-        {
-            colliders = GetComponentsInChildren<Collider>();
-        }
+        //if (colliders == null)
+        //{
+        //    colliders = GetComponentsInChildren<Collider>();
+        //}
+        return default;
+        //return colliders;
+    }
 
-        return colliders;
+    public string GetName()
+    {
+        return "InteractableObject";
     }
 
     bool IInteraction.InteractionEnd()

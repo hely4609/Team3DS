@@ -18,6 +18,10 @@ public interface IInteraction
 
     public bool InteractionEnd();
 
+    public Bounds GetInteractionBounds();
+
+    public abstract string GetName();
+
     public Collider[] GetInteractionColliders();
 
 }
