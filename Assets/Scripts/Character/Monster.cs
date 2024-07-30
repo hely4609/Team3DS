@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public enum MonsterEnum
-{ }
+{ First }
 
 public delegate void MonsterDestroyFunction(Monster monster);
 
@@ -13,6 +13,7 @@ public class Monster : Character
     protected int oreAmount;
     protected List<Vector2> roadsVector2; // 길 정보 배열
     [SerializeField]protected int roadDestination; // 지금 어디로 향하고 있는가.
+    protected MonsterEnum monsterType;
     public override void Attack(Character target) { }
 
     bool isRelease = false;
@@ -24,6 +25,7 @@ public class Monster : Character
         hpCurrent = 5;
         roadsVector2 = GameManager.Instance.BuildingManager.roadData;
         roadDestination = roadsVector2.Count-1;
+        monsterType = MonsterEnum.First;
     }
 
     public override int TakeDamage(Tower attacker, int damage)
