@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
 
 public delegate void StartFunction();
@@ -75,6 +74,7 @@ public class GameManager : MonoBehaviour
 
     bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
+    public void GameStart() { isGameStart = true; }
 
     LoadingCanvas loadingCanvas;
 
@@ -121,7 +121,7 @@ public class GameManager : MonoBehaviour
 
         CloseLoadInfo();
         
-        isGameStart = true;
+        //isGameStart = true;
     }
 
     
@@ -157,11 +157,11 @@ public class GameManager : MonoBehaviour
         ManagerDestroies = null;
     }
 
-    public static void ClaimLoadInfo(string info)
+    public static void ClaimLoadInfo(string info, int numerator = 0, int denominator = 1)
     {
         if(instance && instance.loadingCanvas)
         {
-            instance.loadingCanvas.SetLoadInfo(info);
+            instance.loadingCanvas.SetLoadInfo(info, numerator, denominator);
             instance.loadingCanvas.gameObject.SetActive(true);
         }
         else

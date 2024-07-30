@@ -27,7 +27,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
 
-    [SerializeField] protected bool isBuildable{get; set; } // 이 장소에 건설할 수 있나
+    [Networked] protected bool isBuildable{ get; set; } // 이 장소에 건설할 수 있나
     private ChangeDetector _changeDetector;
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
     [SerializeField] protected Vector2Int tiledBuildingPositionLast; // 건설하고자하는 마지막 위치.
@@ -40,7 +40,8 @@ public abstract class Building : MyComponent
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
     protected override void MyStart()
     {
-        //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        isBuildable = true;
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         Initialize();
         //HeightCheck();
     }
@@ -49,14 +50,13 @@ public abstract class Building : MyComponent
     {
         isBuildable = CheckAlreadyBuild();
         
-        VisualizeBuildable();
+        //VisualizeBuildable();
         return isBuildable;
     }
     public virtual bool CheckAlreadyBuild() // 건설하려는 건물이 다른 건물에 겹쳤는지 체크.
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
-        Debug.Log($"{buildingList.Count}");
         if (buildingList.Count > 0)
         {
             foreach (Building building in buildingList)
@@ -82,18 +82,13 @@ public abstract class Building : MyComponent
     { 
         if (isBuildable)
         {
-            Debug.Log("OK");
-            
                 foreach(MeshRenderer render in meshes)
                 {
                     render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
                 }
-                
-            
         }
         else
         {
-            Debug.Log("안됨");
             foreach (MeshRenderer render in meshes)
             { 
                 render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
@@ -118,7 +113,7 @@ public abstract class Building : MyComponent
             return false;
         }
     }
-    public virtual void BuildBuilding(float deltaTime)
+    public void BuildBuilding(float deltaTime)
     {
         // 마우스를 누르고 있으면 점점 수치가 차오름.
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
