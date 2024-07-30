@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5398990968178988966}
   - component: {fileID: 7058748826662107400}
   - component: {fileID: 5112656511851648211}
+  - component: {fileID: -3294657781394866977}
   m_Layer: 0
   m_Name: EnemyTest
   m_TagString: Untagged
@@ -147,6 +148,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 8009699938648516044}
+  - {fileID: -3294657781394866977}
 --- !u!135 &5112656511851648211
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -168,3 +170,19 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3294657781394866977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301895848370091378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
