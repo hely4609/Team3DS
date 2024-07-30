@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BackEnd.Tcp;
 using Fusion;
 using System.Threading.Tasks;
 
@@ -104,22 +103,22 @@ public partial class NetworkManager : Manager
         yield return null;
     }
 
-    public static void ClaimAcceptInvite(SessionId roomId, string roomToken)
+    public static void ClaimAcceptInvite()
     {
-        GameManager.Instance.StartCoroutine(AcceptInvite(roomId, roomToken));
+        GameManager.Instance.StartCoroutine(AcceptInvite());
     }
 
-    public static IEnumerator AcceptInvite(SessionId roomId, string roomToken)
+    public static IEnumerator AcceptInvite()
     {
         yield return null;
     }
 
-    public static void ClaimRejectInvite(SessionId roomId, string roomToken)
+    public static void ClaimRejectInvite()
     {
-        GameManager.Instance.StartCoroutine(RejectInvite(roomId, roomToken));
+        GameManager.Instance.StartCoroutine(RejectInvite());
     }
 
-    public static IEnumerator RejectInvite(SessionId roomId, string roomToken)
+    public static IEnumerator RejectInvite()
     {
         yield return null;
     }
