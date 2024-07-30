@@ -11,7 +11,7 @@ public class CannonTower : Tower
         isNeedLine = true;
         AttackDamage = 1;
         AttackSpeed = 0.5f;
-        AttackRange = 5;
+        AttackRange = 1;
         buildingTimeMax = 10;
         splashRadius = 10;
         size = new Vector2Int(4, 4);
