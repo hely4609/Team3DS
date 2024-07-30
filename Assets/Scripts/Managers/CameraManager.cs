@@ -41,8 +41,6 @@ public class CameraManager : Manager
             mainCamera.transform.position = observingPlayer.CameraOffset.position;
             mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
         }
-
-
     }
 
     //public override void ManagerUpdate(float deltaTime)

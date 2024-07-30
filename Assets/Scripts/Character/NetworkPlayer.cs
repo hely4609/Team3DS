@@ -67,12 +67,11 @@ public class NetworkPlayer : Player
         mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
         rotate_x += mouseDelta_y;
         rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        if (cameraOffset == null)
+        if (cameraOffset_FPS == null)
         {
-            cameraOffset = transform.Find("CameraOffset");
+            cameraOffset_FPS = transform.Find("CameraOffset");
         }
-        cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-
+        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
 
     NetworkObject designBuildingPrefab;
@@ -111,7 +110,6 @@ public class NetworkPlayer : Player
             designingBuilding.TiledBuildingPos = currentPos;
             designingBuilding.CheckBuild();
         }
-
     }
 
     bool DoBuild()
