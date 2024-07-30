@@ -13,11 +13,7 @@ public class InteractionManager : Manager
     public Player ControlledPlayer
     {
         get => _controlledPlayer;
-        set
-        {
-            _controlledPlayer = value;
-            detectingPoint = new Vector3(_controlledPlayer.transform.position.x, 0f, _controlledPlayer.transform.position.z + 0.5f);
-        }
+        set => _controlledPlayer = value;
     }
 
     protected Vector3 detectingPoint; // 탐지 포인트
@@ -83,8 +79,9 @@ public class InteractionManager : Manager
 
     public void UpdateInteractionList()
     {
+        detectingPoint = _controlledPlayer.transform.position + _controlledPlayer.transform.forward * 0.5f;
         // 범위밖에 나간 오브젝트 제거
-        var targetList = interactionObjectList.FindAll(target => detectingRange < Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint));
+        var targetList = interactionObjectList.FindAll(target => detectingRange < Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint) && Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint) != 0f);
 
         foreach (var target in targetList)
         {
@@ -123,11 +120,10 @@ public class InteractionManager : Manager
         updatedInteractionObjectList.Clear();
         foreach (var target in totalInteractionObjectList)
         {
-            Debug.Log(Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint));
-            if (Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint) <= detectingRange)
+            float distance = Vector3.Distance(target.GetInteractionBounds().ClosestPoint(detectingPoint), detectingPoint);
+            if (distance <= detectingRange && distance != 0f)
             {
                 updatedInteractionObjectList.Add(target);
-
             }
         }
 
