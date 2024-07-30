@@ -50,11 +50,12 @@ public class Monster : Character
     // 몬스터가 해당 위치에 있다면, 다음 위치를 지정한다.
     // 해당 위치에 정확히 도착할 가능성이 매우 낮으므로, 위치에서 오차범위를 일정 두어 해당 부근에 도착하면 도착한걸로 한다.
 
-    protected override void MyUpdate(float deltaTime)
+    
+    public override void FixedUpdateNetwork()
     {
         if (isReady)
         {
-            MonsterMove(NextDestination(), deltaTime);
+            MonsterMove(NextDestination(), Runner.DeltaTime);
             if (IsDestinationArrive(NextDestination()))
             {
                 roadDestination--;
@@ -65,7 +66,6 @@ public class Monster : Character
             }
         }
     }
-
     protected Vector3 NextDestination()
     {
         Vector2 dest = roadsVector2[roadDestination];
