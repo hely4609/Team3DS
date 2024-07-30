@@ -6076,6 +6076,37 @@ MonoBehaviour:
   ImgStartDot: {fileID: 1827279459827449733}
   ImgEndDot: {fileID: 1827279459800478616}
   ImgsFD: {fileID: 1827279460662525970}
+--- !u!1 &1841473113382333193
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7612556974094902810}
+  m_Layer: 0
+  m_Name: CameraOffset_TPS
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7612556974094902810
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1841473113382333193}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0.17364816, y: 0, z: 0, w: 0.9848078}
+  m_LocalPosition: {x: 0, y: 1.7, z: -2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 408242379978420250}
+  m_LocalEulerAnglesHint: {x: 20, y: 0, z: 0}
 --- !u!1 &1851173787059886077
 GameObject:
   m_ObjectHideFlags: 0
@@ -18739,6 +18770,7 @@ Transform:
   m_Children:
   - {fileID: 7893259931372818286}
   - {fileID: 3314105118029073812}
+  - {fileID: 7612556974094902810}
   - {fileID: 7115310305371902191}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18829,7 +18861,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4896616549607160579}
   moveSpeed: 5
-  cameraOffset: {fileID: 3314105118029073812}
+  TPS_Mode: 0
+  cameraOffset_FPS: {fileID: 3314105118029073812}
+  cameraOffset_TPS: {fileID: 7612556974094902810}
   interactionUI: {fileID: 2547933436839708052}
   interactionContent: {fileID: 4893239100565184931}
   interactionUpdateUI: {fileID: 1827279460662525975}
@@ -22166,7 +22200,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3314105118029073812}
   m_Layer: 0
-  m_Name: CameraOffset
+  m_Name: CameraOffset_FPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

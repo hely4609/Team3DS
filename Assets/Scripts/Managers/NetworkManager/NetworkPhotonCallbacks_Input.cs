@@ -3,22 +3,39 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+public enum MyButtons
+{
+    DesignBuilding = 0,
+    Build = 1,
+    CancelDesignBuilding = 2,
+    Interaction = 3,
+}
+public struct NetworkInputData : INetworkInput
+{
+    public Vector3 moveDirection;
+    public Vector2 lookRotationDelta;
+    public NetworkButtons buttons;
+}
 
 public partial class NetworkPhotonCallbacks
 {
     Vector3 moveDir;
     Vector2 mouseDelta;
     bool tryDesignBuilding, tryBuild, cancelDesignBuilding;
+    bool tryInteraction;
 
     [SerializeField] GameObject[] buildables;
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
+        if (!GameManager.IsGameStart) return;
+
         var data = new NetworkInputData();
         data.moveDirection = moveDir;
         data.lookRotationDelta = mouseDelta;
         data.buttons.Set(MyButtons.DesignBuilding, tryDesignBuilding);
         data.buttons.Set(MyButtons.Build, tryBuild);
+        data.buttons.Set(MyButtons.Interaction, tryInteraction);
 
         input.Set(data);
 
@@ -43,5 +60,10 @@ public partial class NetworkPhotonCallbacks
     public void OnBuild()
     {
         tryBuild = true;
+    }
+
+    public void OnInteraction(InputValue value)
+    {
+        tryInteraction = value.isPressed;
     }
 }

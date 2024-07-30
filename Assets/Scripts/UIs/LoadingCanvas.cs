@@ -9,11 +9,11 @@ public class LoadingCanvas : MonoBehaviour
     [SerializeField] protected Image loadingBar;
     [SerializeField] protected TextMeshProUGUI loadingProgressText;
 
-    public void SetLoadInfo(string info)
+    public void SetLoadInfo(string info, int numerator, int denominator)
     {
-        if (ResourceManager.resourceAmount == 0) return;
+        if (denominator == 0) return;
         
-        loadingBar.fillAmount = ResourceManager.resourceLoadCompleted / ResourceManager.resourceAmount;
-        loadingProgressText.text = $"{info}\n\n{ResourceManager.resourceLoadCompleted / ResourceManager.resourceAmount * 100} %";
+        loadingBar.fillAmount = (float)numerator / denominator;
+        loadingProgressText.text = $"{info}\n\n{(float)numerator / denominator * 100} %";
     }
 }

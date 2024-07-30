@@ -1,14 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using BackEnd;
-using LitJson;
 using BackEnd.Tcp;
-using UnityEngine.SceneManagement;
-using System;
-using Unity.VisualScripting;
 using Fusion;
-using UnityEngine.InputSystem;
 using System.Threading.Tasks;
 
 public enum GameType : int
@@ -75,24 +69,28 @@ public partial class NetworkManager : Manager
         customProps["map"] = (int)gameMap;
         customProps["type"] = (int)gameType;
 
-        GameManager.ClaimLoadInfo("Game scene");
+        GameManager.ClaimLoadInfo("Entering game");
         var result = await runner.StartGame(new StartGameArgs()
         {
             GameMode = GameMode.Host,
             SessionProperties = customProps,
             //CustomLobbyName = $"{GameManager.Instance.NetworkManager.MyNickname}'s lobby",
         });
-        GameManager.CloseLoadInfo();
+        GameManager.ClaimLoadInfo("Entering game", 1, 2);
 
         if (result.Ok)
         {
             // all good
+            await Task.Delay(3000);
             GameObject.Find("LobbyCanvas").SetActive(false);
+            GameManager.Instance.GameStart();
         }
         else
         {
             GameManager.Instance.UIManager.ClaimError("Failed to Start", result.ShutdownReason.ToString(), "OK");
         }
+        GameManager.ClaimLoadInfo("Entering game", 2, 2);
+        GameManager.CloseLoadInfo();
 
     }
 

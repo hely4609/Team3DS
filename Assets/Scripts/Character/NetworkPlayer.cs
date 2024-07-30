@@ -7,8 +7,9 @@ public class NetworkPlayer : Player
 {
     NetworkCharacterController _ncc;
     [SerializeField] private GameObject[] buildables;
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         _ncc = GetComponent<NetworkCharacterController>();
     }
     [Networked] public NetworkButtons ButtonsPrevious { get; set; }
@@ -40,16 +41,17 @@ public class NetworkPlayer : Player
             {
                 HoldingDesign();
                 if(data.buttons.IsSet(MyButtons.DesignBuilding)) DoDesignBuilding(buildables[0]);
-                if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
 
             }
+            if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
+            if (data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
+            else InteractionEnd();
         }
     }
 
     void DoMove(Vector3 direction)
     {
         //transform.position += (transform.forward * direction.z + transform.right * direction.x).normalized * Runner.DeltaTime * moveSpeed * 10f;
-        //rb.velocity = direction;
         _ncc.Move(direction, moveSpeed * 10);
         AnimFloat?.Invoke("Speed", direction.magnitude);
 
@@ -67,21 +69,19 @@ public class NetworkPlayer : Player
         mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
         rotate_x += mouseDelta_y;
         rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        if (cameraOffset == null)
+        if (cameraOffset_FPS == null)
         {
-            cameraOffset = transform.Find("CameraOffset");
+            cameraOffset_FPS = transform.Find("CameraOffset");
         }
-        cameraOffset.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-
+        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
 
     NetworkObject designBuildingPrefab;
     bool DoDesignBuilding(GameObject buildingPrefab)
     {
-        //Debug.Log(HasStateAuthority);
         if (designBuildingPrefab == null)
         {
-            designBuildingPrefab = Runner.Spawn(buildingPrefab, transform.position + transform.forward * 5f);
+            designBuildingPrefab = Runner.Spawn(buildingPrefab, new Vector3 (transform.position.x, 0, transform.position.z) + transform.forward * 5f);
             designingBuilding = designBuildingPrefab.GetComponent<Building>();
             return true;
         }
@@ -111,14 +111,12 @@ public class NetworkPlayer : Player
             designingBuilding.TiledBuildingPos = currentPos;
             designingBuilding.CheckBuild();
         }
-
     }
 
     bool DoBuild()
     {
         if (designingBuilding != null)
         {
-            Debug.Log(designingBuilding);
             if (designingBuilding.FixPlace())
             {
                 designingBuilding = null;

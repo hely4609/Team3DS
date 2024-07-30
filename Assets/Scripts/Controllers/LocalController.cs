@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static UnityEngine.Rendering.DebugUI;
 
 public class LocalController : ControllerBase
 {
@@ -76,12 +75,5 @@ public class LocalController : ControllerBase
         {
             DoInteractionEnd?.Invoke();
         }
-
-        //DoInteractionStart?.Invoke(ControlledPlayer.InteractionObject);
-    }
-
-    protected void OnBuildingSelectUI()
-    {
-        DoBuildingSelectUI?.Invoke();
     }
 }
