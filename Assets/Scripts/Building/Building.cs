@@ -20,7 +20,7 @@ public abstract class Building : MyComponent
 
     protected float buildingTimeMax; // 제작에 얼마나 걸리나
     protected float buildingTimeCurrent; // 얼마나 제작했나
-    protected float completePercent; //(0~1) 제작한 퍼센트
+    //protected float completePercent; //(0~1) 제작한 퍼센트
     public float CompletePercent { get { return buildingTimeCurrent / buildingTimeMax; } 
         set { buildingTimeCurrent = buildingTimeMax * value; } }
     // 10%로 하라. 라고 들어옴.
@@ -40,9 +40,23 @@ public abstract class Building : MyComponent
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
     protected override void MyStart()
     {
-        isBuildable = true;
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         Initialize();
+        CheckBuild();
+        if (isBuildable)
+        {
+            foreach (MeshRenderer render in meshes)
+            {
+                render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+            }
+        }
+        else
+        {
+            foreach (MeshRenderer render in meshes)
+            {
+                render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
+            }
+        }
         //HeightCheck();
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
@@ -117,7 +131,7 @@ public abstract class Building : MyComponent
     {
         // 마우스를 누르고 있으면 점점 수치가 차오름.
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
-        if (completePercent < 1)
+        if (CompletePercent < 1)
         {
             buildingTimeCurrent += deltaTime;
         }

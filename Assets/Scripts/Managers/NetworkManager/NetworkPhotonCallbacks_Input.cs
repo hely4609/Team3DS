@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
+
 public enum MyButtons
 {
     DesignBuilding = 0,
@@ -14,6 +16,7 @@ public struct NetworkInputData : INetworkInput
 {
     public Vector3 moveDirection;
     public Vector2 lookRotationDelta;
+    public int selectedBuildingIndex;
     public NetworkButtons buttons;
 }
 
@@ -21,6 +24,7 @@ public partial class NetworkPhotonCallbacks
 {
     Vector3 moveDir;
     Vector2 mouseDelta;
+    int buildingIndex = -1;
     bool tryDesignBuilding, tryBuild, cancelDesignBuilding;
     bool tryInteraction;
 
@@ -33,12 +37,15 @@ public partial class NetworkPhotonCallbacks
         var data = new NetworkInputData();
         data.moveDirection = moveDir;
         data.lookRotationDelta = mouseDelta;
-        data.buttons.Set(MyButtons.DesignBuilding, tryDesignBuilding);
+        data.selectedBuildingIndex = buildingIndex;
+
+        //data.buttons.Set(MyButtons.DesignBuilding, tryDesignBuilding);
         data.buttons.Set(MyButtons.Build, tryBuild);
         data.buttons.Set(MyButtons.Interaction, tryInteraction);
 
         input.Set(data);
 
+        buildingIndex = -1;
         tryDesignBuilding = false;
         tryBuild = false;
     }
@@ -52,8 +59,33 @@ public partial class NetworkPhotonCallbacks
         mouseDelta = value.Get<Vector2>();
     }
 
-    public void OnDesignBuilding()
+    public void OnDesignBuilding(InputValue value)
     {
+        Vector3 result = value.Get<Vector3>();
+
+        if (result.magnitude == 0f) return;
+
+        else if (result == Vector3.up)
+        {
+            buildingIndex = 0;
+        }
+        else if (result == Vector3.down)
+        {
+            buildingIndex = 1;
+        }
+        else if (result == Vector3.left)
+        {
+            buildingIndex = 2;
+        }
+        else if (result == Vector3.right)
+        {
+            buildingIndex = 3;
+        }
+        else if (result == Vector3.forward)
+        {
+            buildingIndex = 4;
+        }
+
         tryDesignBuilding = true;
     }
 

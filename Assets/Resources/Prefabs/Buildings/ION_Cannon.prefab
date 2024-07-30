@@ -1845,6 +1845,8 @@ GameObject:
   - component: {fileID: 2829039577149875135}
   - component: {fileID: 3539466090241050540}
   - component: {fileID: 5371794395544762303}
+  - component: {fileID: -2811553585201260352}
+  - component: {fileID: -3519175632691191382}
   m_Layer: 0
   m_Name: ION_Cannon
   m_TagString: Untagged
@@ -2053,6 +2055,41 @@ CapsuleCollider:
   m_Height: 700
   m_Direction: 1
   m_Center: {x: 0, y: 150, z: 0}
+--- !u!114 &-2811553585201260352
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537954391025513121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SortKey: 847935710
+  ObjectInterest: 1
+  Flags: 1
+  NestedObjects: []
+  NetworkedBehaviours:
+  - {fileID: 3539466090241050540}
+  - {fileID: -3519175632691191382}
+--- !u!114 &-3519175632691191382
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2537954391025513121}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &2660080350082734642
 GameObject:
   m_ObjectHideFlags: 0

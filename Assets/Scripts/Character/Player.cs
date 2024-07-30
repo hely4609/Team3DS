@@ -53,7 +53,7 @@ public class Player : Character
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuilding;
-        targetController.DoBuild -= Build;
+        //targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
         targetController.DoInteractionEnd -= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
@@ -61,7 +61,7 @@ public class Player : Character
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
         targetController.DoDesignBuilding += DesignBuilding;
-        targetController.DoBuild += Build;
+        //targetController.DoBuild += Build;
         targetController.DoInteractionStart += InteractionStart;
         targetController.DoInteractionEnd += InteractionEnd;
         targetController.DoMouseWheel += MouseWheel;
@@ -72,7 +72,7 @@ public class Player : Character
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuilding;
-        targetController.DoBuild -= Build;
+        //targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
         targetController.DoInteractionEnd-= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
@@ -217,24 +217,24 @@ public class Player : Character
         return true;
     }
     
-    public bool Build() 
-    {
-        if (designingBuilding == null)
-        {
-            buildingSeletUI.SetActive(true);
-            return true;
-        }
-        else
-        {
-            if (designingBuilding.FixPlace())
-            {
-                designingBuilding = null;
-                return true;
-            }
-        }
+    //public bool Build() 
+    //{
+    //    if (designingBuilding == null)
+    //    {
+    //        buildingSeletUI.SetActive(true);
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        if (designingBuilding.FixPlace())
+    //        {
+    //            designingBuilding = null;
+    //            return true;
+    //        }
+    //    }
 
-        return false; 
-    }
+    //    return false; 
+    //}
 
     public bool Repair(EnergyBarrierGenerator target) { return default; }
 
