@@ -154,6 +154,7 @@ public partial class NetworkManager : Manager
         {
             // all good
             GameObject.Find("LobbyCanvas").SetActive(false);
+            GameManager.Instance.GameStart();
         }
         else
         {
