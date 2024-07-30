@@ -5,7 +5,6 @@ using UnityEngine.InputSystem;
 
 public delegate void MoveDelegate(Vector3 dir);
 public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
-public delegate void BuildingSelectUIDelegate();
 public delegate bool DesignBuildingDelegate(int index);
 public delegate bool BuildDelegate();
 public delegate bool InteractionStartDelegate();
@@ -17,7 +16,6 @@ public class ControllerBase : MyComponent
 {
     public MoveDelegate             DoMove;
     public ScreenRotateDelegate     DoScreenRotate;
-    public BuildingSelectUIDelegate DoBuildingSelectUI;
     public DesignBuildingDelegate   DoDesignBuilding;
     public BuildDelegate            DoBuild;
     public InteractionStartDelegate DoInteractionStart;

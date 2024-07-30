@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using System;
 
 public class Player : Character
 {
@@ -49,7 +50,6 @@ public class Player : Character
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
-        targetController.DoBuildingSelectUI -= BuildSelectUI;
         targetController.DoDesignBuilding -= DesignBuilding;
         targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
@@ -58,7 +58,6 @@ public class Player : Character
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
-        targetController.DoBuildingSelectUI += BuildSelectUI;
         targetController.DoDesignBuilding += DesignBuilding;
         targetController.DoBuild += Build;
         targetController.DoInteractionStart += InteractionStart;
@@ -70,7 +69,6 @@ public class Player : Character
     {
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
-        targetController.DoBuildingSelectUI -= BuildSelectUI;
         targetController.DoDesignBuilding -= DesignBuilding;
         targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
@@ -113,9 +111,17 @@ public class Player : Character
             cameraOffset = transform.Find("CameraOffset");
         }
 
-        buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
-        buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
-        //for (ResourceEnum.Prefab.)
+        for (ResourceEnum.Prefab index = ResourceEnum.Prefab.Turret1a; index <= ResourceEnum.Prefab.ION_Cannon; index++)
+        {
+            int y = index - ResourceEnum.Prefab.Turret1a;
+            int x = y / 5;
+            y %= 5;
+            buildableEnumArray[x, y] = index;
+        }
+        
+        //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
+        //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
+        
     }
 
     protected override void MyUpdate(float deltaTime)
@@ -210,14 +216,20 @@ public class Player : Character
     
     public bool Build() 
     {
-        //if (designingBuilding != null)
-        //{
-        //    if (designingBuilding.FixPlace())
-        //    {
-        //        designingBuilding = null;
-        //        return true;
-        //    }
-        //}
+        if (designingBuilding == null)
+        {
+            buildingSeletUI.SetActive(true);
+            return true;
+        }
+        else
+        {
+            if (designingBuilding.FixPlace())
+            {
+                designingBuilding = null;
+                return true;
+            }
+        }
+
         return false; 
     }
 
@@ -337,7 +349,7 @@ public class Player : Character
                 else
                 {
                     interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
-                    if (isInteracting)
+                    if (isInteracting && target == interactionObject)
                     {
                         InteractionEnd();
                     }
@@ -401,25 +413,9 @@ public class Player : Character
             if (targetIndex == i)
             {
                 buttonImage.color = Color.yellow;
-                // 활성화버튼 어떤키를 누르세요.
                 mouseLeftImage.transform.position = button.transform.position;
             } 
             else buttonImage.color = Color.white;
-        }
-    }
-
-    protected void BuildSelectUI()
-    {
-        if (designingBuilding == null)
-        {
-            buildingSeletUI.SetActive(true);
-        }
-        else
-        {
-            if (designingBuilding.FixPlace())
-            {
-                designingBuilding = null;
-            }
         }
     }
 }
