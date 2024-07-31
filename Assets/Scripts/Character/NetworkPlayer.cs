@@ -44,10 +44,10 @@ public class NetworkPlayer : Player
                 HoldingDesign();
                 if(buildingSeletUI.activeInHierarchy) DoDesignBuilding(data.selectedBuildingIndex);
 
+                if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
+                if(data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
+                else InteractionEnd();
             }
-            if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
-            if(data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
-            else InteractionEnd();
         }
     }
 
@@ -81,6 +81,7 @@ public class NetworkPlayer : Player
     NetworkObject designBuildingPrefab;
     bool DoDesignBuilding(int index)
     {
+        Debug.Log("B");
         if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
 
         designingBuilding = Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index])).GetComponent<Building>();
@@ -124,6 +125,7 @@ public class NetworkPlayer : Player
 
     bool DoBuild()
     {
+        Debug.Log("1");
         if (designingBuilding == null)
         {
             buildingSeletUI.SetActive(true);

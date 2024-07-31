@@ -80,7 +80,7 @@ public partial class NetworkManager : Manager
         if (result.Ok)
         {
             // all good
-            await Task.Delay(3000);
+            //await Task.Delay(3000);
             GameObject.Find("LobbyCanvas").SetActive(false);
             GameManager.Instance.GameStart();
         }
