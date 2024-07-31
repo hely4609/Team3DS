@@ -21,10 +21,14 @@ public class WaveManager : Manager
 
     protected void MonsterInstantiate()
     {
-        //if(GameManager.Instance.NetworkManager.Runner.)
-        List<Vector2> roadData = GameManager.Instance.BuildingManager.roadData;
-        
-        //monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnemyTest), new Vector3(roadData[roadData.Count-1].x, 2.5f, roadData[roadData.Count-1].y)).GetComponent<Monster>());
+
+        if (GameManager.Instance.NetworkManager.Runner.IsServer)
+        {
+            List<Vector2> roadData = GameManager.Instance.BuildingManager.roadData;
+
+            monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnemyTest), new Vector3(roadData[roadData.Count - 1].x, 2.5f, roadData[roadData.Count - 1].y)).GetComponent<Monster>());
+        }
+
     }
     public override IEnumerator Initiate()
     {
