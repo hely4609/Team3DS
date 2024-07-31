@@ -57,7 +57,7 @@ public class ControllerBase : MyComponent
         else //없으면 
         {
             //만들기!
-            if (gameObject.GetComponent<NetworkObject>().InputAuthority == GameManager.Instance.NetworkManager.Runner.LocalPlayer)
+            if (gameObject.GetComponent<NetworkObject>().InputAuthority == GameManager.Instance.NetworkManager.Runner.LocalPlayer && HasStateAuthority)
             {
                 NetworkObject inst = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Player), new Vector3(dst_x, dst_y, dst_z));
                 //GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
