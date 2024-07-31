@@ -3872,7 +3872,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2612323204393501980}
   m_HandleRect: {fileID: 5691758629513887060}
   m_Direction: 2
-  m_Value: 0
+  m_Value: 1
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -18480,6 +18480,7 @@ MonoBehaviour:
   buildingSeletUI: {fileID: 3120704158857047704}
   buildables:
   - {fileID: 6860581916195568055, guid: b7a3e566405353949a47c6e995f78bd8, type: 3}
+  NameTag: {fileID: 2110180210208166243, guid: ba8f64152515a624c9de7aa9949bf5dc, type: 3}
 --- !u!114 &8127065621516109675
 MonoBehaviour:
   m_ObjectHideFlags: 0
