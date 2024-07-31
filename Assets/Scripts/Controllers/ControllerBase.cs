@@ -60,6 +60,7 @@ public class ControllerBase : MyComponent
             if (HasStateAuthority)
             {
                 NetworkObject inst = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Player), new Vector3(dst_x, dst_y, dst_z));
+                //var spawndCharacter = FindAnyObjectByType<NetworkPhotonCallbacks>().SpawnedCharacter;
                 //GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
                 controlledPlayer = inst.GetComponent<Player>();
                 GameManager.Instance.InteractionManager.ControlledPlayer = controlledPlayer;
