@@ -108,9 +108,6 @@ public class Player : Character
     {
         Debug.Log("player mystart");
 
-        // Possession(GameManager.Instance.NetworkManager.LocalController);
-        Debug.Log(possessionController);
-
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
@@ -187,6 +184,9 @@ public class Player : Character
             }
         }
         ////////////////////////////
+
+        Debug.Log(interactionObject);
+        
     }
 
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
@@ -269,15 +269,43 @@ public class Player : Character
 
     public bool Repair(EnergyBarrierGenerator target) { return default; }
 
-    public bool InteractionStart()
+    //public bool InteractionStart()
+    //{
+    //    if (interactionObject == null) return false;
+
+    //    interactionType = interactionObject.InteractionStart(this);
+
+    //    switch (interactionType)
+    //    {
+    //        default: InteractionEnd(); break;
+    //        case Interaction.Build:
+    //            isInteracting = true;
+    //            AnimBool?.Invoke("isBuild", true);
+    //            interactionUI.gameObject.SetActive(false);
+    //            interactionUpdateUI.SetActive(true);
+    //            interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
+    //            buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
+    //            buttonText.text = $"Building...";
+    //            GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
+    //            break;
+    //    }
+
+    //    Debug.Log($"{interactionObject} 과 상호작용");
+
+    //    return default;
+    //}
+
+    public bool InteractionStart<T>(T target) where T : IInteraction
     {
+        interactionObject = target;
+
         if (interactionObject == null) return false;
 
         interactionType = interactionObject.InteractionStart(this);
 
         switch (interactionType)
         {
-            default: break;
+            default: InteractionEnd(); break;
             case Interaction.Build:
                 isInteracting = true;
                 AnimBool?.Invoke("isBuild", true);

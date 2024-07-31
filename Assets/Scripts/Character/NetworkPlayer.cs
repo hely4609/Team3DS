@@ -23,43 +23,43 @@ public class NetworkPlayer : Player
         base.MyStart();
     }
 
-    public override void FixedUpdateNetwork()
-    {
-        // KeyCode.Return이 Enter임
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
-            else Cursor.lockState = CursorLockMode.Locked;
-        }
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            if(HasStateAuthority)
-            {
+    //public override void FixedUpdateNetwork()
+    //{
+    //    // KeyCode.Return이 Enter임
+    //    if(Input.GetKeyDown(KeyCode.Return))
+    //    {
+    //        if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+    //        else Cursor.lockState = CursorLockMode.Locked;
+    //    }
+    //    if(Input.GetKeyDown(KeyCode.P))
+    //    {
+    //        if(HasStateAuthority)
+    //        {
 
-                NetworkObject nameTag = Runner.Spawn(NameTag);
-                nameTag.transform.SetParent(transform);
-                nameTag.transform.position = new Vector3(0, 1, 2);
-                nameTag.GetComponent<KYH_Test>().whatyourname();
-            }
+    //            NetworkObject nameTag = Runner.Spawn(NameTag);
+    //            nameTag.transform.SetParent(transform);
+    //            nameTag.transform.position = new Vector3(0, 1, 2);
+    //            nameTag.GetComponent<KYH_Test>().whatyourname();
+    //        }
 
-        }
+    //    }
 
-        if (GetInput(out NetworkInputData data))
-        {
-            //DoMove(data.moveDirection);
-            //DoScreenRotate(data.lookRotationDelta);
+    //    if (GetInput(out NetworkInputData data))
+    //    {
+    //        //DoMove(data.moveDirection);
+    //        //DoScreenRotate(data.lookRotationDelta);
 
-            if(HasStateAuthority)
-            {
-                HoldingDesign();
-                //if(buildingSeletUI.activeInHierarchy) DoDesignBuilding(data.selectedBuildingIndex);
+    //        if(HasStateAuthority)
+    //        {
+    //            HoldingDesign();
+    //            //if(buildingSeletUI.activeInHierarchy) DoDesignBuilding(data.selectedBuildingIndex);
 
-                if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
-                if(data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
-                else InteractionEnd();
-            }
-        }
-    }
+    //            if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
+    //            if(data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
+    //            else InteractionEnd();
+    //        }
+    //    }
+    //}
 
     void DoMove(Vector3 direction)
     {

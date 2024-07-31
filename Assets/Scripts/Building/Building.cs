@@ -42,7 +42,6 @@ public abstract class Building : MyComponent
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        
     }
     protected override void MyStart()
     {

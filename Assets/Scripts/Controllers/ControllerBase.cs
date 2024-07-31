@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Fusion;
 
 public delegate void MoveDelegate(Vector3 dir);
 public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
 public delegate bool DesignBuildingDelegate(int index);
 public delegate bool BuildDelegate();
-public delegate bool InteractionStartDelegate();
+public delegate bool InteractionStartDelegate(IInteraction target);
 public delegate bool InteractionEndDelegate();
 public delegate void WheelDelegate(Vector2 scrollDelta);
 
@@ -56,12 +57,16 @@ public class ControllerBase : MyComponent
         else //없으면 
         {
             //만들기!
+            if (gameObject.GetComponent<NetworkObject>().InputAuthority == GameManager.Instance.NetworkManager.Runner.LocalPlayer)
+            {
+                NetworkObject inst = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Player), new Vector3(dst_x, dst_y, dst_z));
+                //GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
+                controlledPlayer = inst.GetComponent<Player>();
+                GameManager.Instance.InteractionManager.ControlledPlayer = controlledPlayer;
+                //이 친구의 손 발을 움직이려면, 빙의를 해야 해요!
+                controlledPlayer.Possession(this);
+            }
             
-            GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
-            controlledPlayer = inst.GetComponent<Player>();
-            //GameManager.Instance.InteractionManager.ControlledPlayer = controlledPlayer;
-            //이 친구의 손 발을 움직이려면, 빙의를 해야 해요!
-            controlledPlayer.Possession(this);
         };
     }
 
