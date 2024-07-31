@@ -11,7 +11,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     [SerializeField] private NetworkPrefabRef _playerPrefab;
 
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
-    public Dictionary<PlayerRef, NetworkObject> SpawndCharacter => _spawnedCharacters;
+    public Dictionary<PlayerRef, NetworkObject> SpawnedCharacter => _spawnedCharacters;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
         if (runner.IsServer)
