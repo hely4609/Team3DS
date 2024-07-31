@@ -8,6 +8,8 @@ public class NetworkPlayer : Player
 {
     //NetworkCharacterController _ncc;
     [SerializeField] private GameObject[] buildables;
+    [SerializeField] GameObject NameTag;
+
     protected override void Awake()
     {
         base.Awake();
@@ -29,6 +31,18 @@ public class NetworkPlayer : Player
             if(Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
             else Cursor.lockState = CursorLockMode.Locked;
         }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            if(HasStateAuthority)
+            {
+
+                NetworkObject nameTag = Runner.Spawn(NameTag);
+                nameTag.transform.SetParent(transform);
+                nameTag.transform.position = new Vector3(0, 1, 2);
+                nameTag.GetComponent<KYH_Test>().whatyourname();
+            }
+
+        }
 
         if (GetInput(out NetworkInputData data))
         {
@@ -40,10 +54,10 @@ public class NetworkPlayer : Player
                 HoldingDesign();
                 //if(buildingSeletUI.activeInHierarchy) DoDesignBuilding(data.selectedBuildingIndex);
 
+                if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
+                if(data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
+                else InteractionEnd();
             }
-            //if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
-            //if(data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
-            //else InteractionEnd();
         }
     }
 
@@ -77,6 +91,7 @@ public class NetworkPlayer : Player
     NetworkObject designBuildingPrefab;
     bool DoDesignBuilding(int index)
     {
+        Debug.Log("B");
         if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
 
         designingBuilding = Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index])).GetComponent<Building>();
@@ -120,6 +135,7 @@ public class NetworkPlayer : Player
 
     bool DoBuild()
     {
+        Debug.Log("1");
         if (designingBuilding == null)
         {
             buildingSeletUI.SetActive(true);
