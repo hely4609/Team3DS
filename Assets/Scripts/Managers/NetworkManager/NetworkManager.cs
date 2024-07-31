@@ -16,6 +16,8 @@ public enum NetworkState
 public partial class NetworkManager : Manager
 {
     private GameObject _runner;
+    private ControllerBase _controller;
+    public ControllerBase LocalController { get =>_controller; set => _controller = value; }
     public NetworkRunner Runner
     {
         get
@@ -71,6 +73,9 @@ public partial class NetworkManager : Manager
                 _runner.AddComponent<NetworkRunner>();
             }
         };
+        
+        //_controller = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LocalController")).GetComponent<ControllerBase>();
+        // 컨트롤러를 만든다. 입력받기용.
 
         yield return null;
     }

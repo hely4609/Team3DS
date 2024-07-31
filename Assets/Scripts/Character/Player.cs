@@ -4,9 +4,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using System;
+using Fusion;
 
 public class Player : Character
 {
+    protected NetworkCharacterController _ncc;
+
     protected ControllerBase possessionController;
     [SerializeField] bool TPS_Mode;
     [SerializeField] protected Transform cameraOffset_FPS;
@@ -35,7 +38,7 @@ public class Player : Character
     protected GameObject bePicked;
     public GameObject BePicked => bePicked;
     // protected bool isHandFree;
-    [SerializeField] protected ResourceEnum.Prefab[,] buildableEnumArray = new ResourceEnum.Prefab[5, 5];
+    protected ResourceEnum.Prefab[,] buildableEnumArray = new ResourceEnum.Prefab[5, 5];
     protected int buildableEnumPageIndex = 0;
     protected Building designingBuilding;
 
@@ -53,7 +56,7 @@ public class Player : Character
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuilding;
-        //targetController.DoBuild -= Build;
+        targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
         targetController.DoInteractionEnd -= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
@@ -61,7 +64,7 @@ public class Player : Character
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
         targetController.DoDesignBuilding += DesignBuilding;
-        //targetController.DoBuild += Build;
+        targetController.DoBuild += Build;
         targetController.DoInteractionStart += InteractionStart;
         targetController.DoInteractionEnd += InteractionEnd;
         targetController.DoMouseWheel += MouseWheel;
@@ -72,12 +75,12 @@ public class Player : Character
         targetController.DoMove -= Move;
         targetController.DoScreenRotate -= ScreenRotate;
         targetController.DoDesignBuilding -= DesignBuilding;
-        //targetController.DoBuild -= Build;
+        targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
         targetController.DoInteractionEnd-= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
     }
-
+   
     public virtual void Possession(ControllerBase targetController)
     {
         if (TryPossession() == false)
@@ -104,6 +107,10 @@ public class Player : Character
     protected override void MyStart()
     {
         Debug.Log("player mystart");
+
+        // Possession(GameManager.Instance.NetworkManager.LocalController);
+        Debug.Log(possessionController);
+
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
@@ -129,8 +136,8 @@ public class Player : Character
 
     protected override void MyUpdate(float deltaTime)
     {
-        ///////////////////////////// 
-        // 이동방향이 있을 시 해당 방향으로 움직임. + 애니메이션 설정
+        /////////////////////////// 
+        //이동방향이 있을 시 해당 방향으로 움직임. +애니메이션 설정
         if (moveDir.magnitude == 0)
         {
             float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
@@ -143,12 +150,10 @@ public class Player : Character
         }
 
         AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
-
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
-
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
-        //////////////////////////////
+        //////////////////////////
 
         ///////////////////////////// 
         // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
@@ -188,21 +193,41 @@ public class Player : Character
     public override void Move(Vector3 direction)
     {
         moveDir = direction.normalized;
+
+        //_ncc.Move(direction, moveSpeed * 10);
+        //AnimFloat?.Invoke("Speed", direction.magnitude);
+
+        ////currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
+
+        //AnimFloat?.Invoke("MoveForward", direction.z);
+        //AnimFloat?.Invoke("MoveRight", direction.x);
     }
 
     // 마우스를 움직임에 따라서 카메라를 회전시키는 함수.
     public virtual void ScreenRotate(Vector2 mouseDelta)
     {
-        // 좌우회전은 캐릭터를 회전
-        rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
+        //좌우회전은 캐릭터를 회전
+       rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
         transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
 
         mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
         rotate_x = rotate_x + mouseDelta_y;
         rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        
+
         // 상하회전은 카메라만 회전
         cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+
+        //rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+        //transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+        //mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
+        //rotate_x += mouseDelta_y;
+        //rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+        //if (cameraOffset_FPS == null)
+        //{
+        //    cameraOffset_FPS = transform.Find("CameraOffset");
+        //}
+        //cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
@@ -210,38 +235,44 @@ public class Player : Character
     // 건설한 건물을 반투명(가건물) 상태로 만드는 함수
     public bool DesignBuilding(int index)
     {
-        if (buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
+        //if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
 
-        designingBuilding = GameManager.Instance.PoolManager.Instantiate(buildableEnumArray[buildableEnumPageIndex,index]).GetComponent<Building>();
+        //designingBuilding = GameManager.Instance.PoolManager.Instantiate(buildableEnumArray[buildableEnumPageIndex, index]).GetComponent<Building>();
+        //buildingSeletUI.SetActive(false);
+        //return true;
+
+        if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
+        NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
+        designingBuilding = building.GetComponent<Building>();
         buildingSeletUI.SetActive(false);
         return true;
-    }
-    
-    //public bool Build() 
-    //{
-    //    if (designingBuilding == null)
-    //    {
-    //        buildingSeletUI.SetActive(true);
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        if (designingBuilding.FixPlace())
-    //        {
-    //            designingBuilding = null;
-    //            return true;
-    //        }
-    //    }
 
-    //    return false; 
-    //}
+    }
+
+    public bool Build()
+    {
+        if (designingBuilding == null)
+        {
+            buildingSeletUI.SetActive(true);
+            return true;
+        }
+        else
+        {
+            if (designingBuilding.FixPlace())
+            {
+                designingBuilding = null;
+                return true;
+            }
+        }
+        return false;
+    }
 
     public bool Repair(EnergyBarrierGenerator target) { return default; }
 
     public bool InteractionStart()
     {
         if (interactionObject == null) return false;
-        
+
         interactionType = interactionObject.InteractionStart(this);
 
         switch (interactionType)
@@ -260,7 +291,7 @@ public class Player : Character
         }
 
         Debug.Log($"{interactionObject} 과 상호작용");
-        
+
         return default;
     }
 
@@ -293,7 +324,7 @@ public class Player : Character
                 break;
         }
 
-        //interactionObject = null;
+        interactionObject = null;
         interactionType = Interaction.None;
 
         return default;

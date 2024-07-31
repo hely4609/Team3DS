@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class NetworkPlayer : Player
 {
-    NetworkCharacterController _ncc;
+    //NetworkCharacterController _ncc;
     [SerializeField] private GameObject[] buildables;
     protected override void Awake()
     {
@@ -20,10 +20,6 @@ public class NetworkPlayer : Player
         Cursor.lockState = CursorLockMode.Locked;
         base.MyStart();
     }
-    protected override void MyUpdate(float deltaTime)
-    {
-
-    }
 
     public override void FixedUpdateNetwork()
     {
@@ -36,18 +32,18 @@ public class NetworkPlayer : Player
 
         if (GetInput(out NetworkInputData data))
         {
-            DoMove(data.moveDirection);
-            DoScreenRotate(data.lookRotationDelta);
+            //DoMove(data.moveDirection);
+            //DoScreenRotate(data.lookRotationDelta);
 
             if(HasStateAuthority)
             {
                 HoldingDesign();
-                if(buildingSeletUI.activeInHierarchy) DoDesignBuilding(data.selectedBuildingIndex);
+                //if(buildingSeletUI.activeInHierarchy) DoDesignBuilding(data.selectedBuildingIndex);
 
             }
-            if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
-            if(data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
-            else InteractionEnd();
+            //if(data.buttons.IsSet(MyButtons.Build)) DoBuild();
+            //if(data.buttons.IsSet(MyButtons.Interaction)) InteractionStart();
+            //else InteractionEnd();
         }
     }
 

@@ -16,6 +16,7 @@ public class CannonTower : Tower
         splashRadius = 10;
         size = new Vector2Int(4, 4);
         TurnOnOff(true);
+        base.Initialize();
     }
 
     protected override void OnHit()
