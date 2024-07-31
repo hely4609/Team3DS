@@ -29,7 +29,7 @@ public class KYH_Test : NetworkBehaviour
         if (_name != string.Empty) return;
         if(HasStateAuthority)
         {
-            var spawndCharacter = FindAnyObjectByType<NetworkPhotonCallbacks>().SpawndCharacters;
+            var spawndCharacter = FindAnyObjectByType<NetworkPhotonCallbacks>().SpawnedCharacter;
 
             List<PlayerRef> activePlayers = Runner.ActivePlayers.ToList();
 
