@@ -29,6 +29,7 @@ public class ControllerBase : MyComponent
     {
         GameManager.ControllerStarts += MyStart;
         GameManager.ControllerUpdates += MyUpdate;
+        
     }
 
     protected override void OnDisable()
@@ -55,8 +56,10 @@ public class ControllerBase : MyComponent
         else //없으면 
         {
             //만들기!
+            
             GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
             controlledPlayer = inst.GetComponent<Player>();
+            //GameManager.Instance.InteractionManager.ControlledPlayer = controlledPlayer;
             //이 친구의 손 발을 움직이려면, 빙의를 해야 해요!
             controlledPlayer.Possession(this);
         };

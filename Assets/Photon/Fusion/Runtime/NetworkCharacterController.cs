@@ -85,7 +85,7 @@ namespace Fusion {
         moveVelocity.y = 0f;
       }
 
-      moveVelocity.y += gravity * Runner.DeltaTime;
+      moveVelocity.y += gravity * deltaTime;
 
       var horizontalVel = default(Vector3);
       horizontalVel.x = moveVelocity.x;
@@ -105,8 +105,10 @@ namespace Fusion {
             _controller.Move((new Vector3(0, moveVelocity.y, 0) + (transform.forward * direction.z + transform.right * direction.x).normalized) * deltaTime * moveSpeed);
 
 
-      Data.Velocity = (transform.position - previousPos) * Runner.TickRate;
+      Data.Velocity = (transform.position - previousPos) / Runner.TickRate;
       Data.Grounded = _controller.isGrounded;
+
+           
     }
     
     public override void Spawned() {

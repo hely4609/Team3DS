@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,46 +6,48 @@ using UnityEngine.InputSystem;
 
 public class LocalController : ControllerBase
 {
-    protected void OnMove(InputValue value)
+    
+    public override void FixedUpdateNetwork()
     {
-        DoMove?.Invoke(value.Get<Vector3>());
+        // KeyCode.Return이 Enter임
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+            else Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        if (GetInput(out NetworkInputData data))
+        {
+            OnMove(data.moveDirection);
+            OnScreenRotate(data.lookRotationDelta);
+            OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
+
+            if (HasStateAuthority)
+            {
+                //HoldingDesign();
+                OnDesignBuilding(data.selectedBuildingIndex);
+            }
+            if (data.buttons.IsSet(MyButtons.Build)) DoBuild();
+        }
     }
 
-    protected void OnScreenRotate(InputValue value)
+    protected void OnMove(Vector3 direaction)
     {
-        DoScreenRotate?.Invoke(value.Get<Vector2>());
+        DoMove?.Invoke(direaction);
+    }
+
+    protected void OnScreenRotate(Vector2 mouseDelta)
+    {
+        DoScreenRotate?.Invoke(mouseDelta);
     }
 
     protected void OnPickUp() { }
     protected void OnPutDown() { }
-    protected void OnDesignBuilding(InputValue value) 
+    protected void OnDesignBuilding(int index) 
     {
-        if (ControlledPlayer.buildingSeletUI.activeInHierarchy == false) return;
-
-        Vector3 result = value.Get<Vector3>();
-
-        if (result.magnitude == 0f) return;
-
-        else if (result == Vector3.up)
-        {
-            DoDesignBuilding?.Invoke(0);
-        }
-        else if (result == Vector3.down)
-        {
-            DoDesignBuilding?.Invoke(1);
-        }
-        else if (result == Vector3.left)
-        {
-            DoDesignBuilding?.Invoke(2);
-        }
-        else if (result == Vector3.right)
-        {
-            DoDesignBuilding?.Invoke(3);
-        }
-        else if (result == Vector3.forward)
-        {
-            DoDesignBuilding?.Invoke(4);
-        }
+        if (ControlledPlayer?.buildingSeletUI.activeInHierarchy == false) return;
+        
+        DoDesignBuilding?.Invoke(index);
 
         // 어떤 건물을 지을지 UI를 띄워준다.
         // 그리고 그 버튼을 누르면 거기서 플레이어의 건물짓기를 시도한다.
@@ -55,17 +58,17 @@ public class LocalController : ControllerBase
         DoBuild?.Invoke();
     }
 
-    protected void OnMouseWheel(InputValue value)
+    protected void OnMouseWheel(Vector2 scrollDelta)
     {
-        DoMouseWheel?.Invoke(value.Get<Vector2>());
+        DoMouseWheel?.Invoke(scrollDelta);
     }
     protected void OnRepair() { }
     ////////////////////////////////////////////
-    protected void OnInteraction(InputValue value) 
+    protected void OnInteraction(bool isPressed) 
     {
-        if (ControlledPlayer?.InteractionObject == null) return;
+        if (controlledPlayer?.InteractionObject == null) return;
 
-        if (value.isPressed)
+        if (isPressed)
         {
             // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
             // 업데이트 함수를 등록해서 뗄때까지 실행

@@ -8,7 +8,7 @@ public class InteractTest : MonoBehaviour ,IInteraction
 
     public void Start()
     {
-        GameManager.Instance.InteractionManager.AddInteractionObject(this);
+        //GameManager.Instance.InteractionManager.AddInteractionObject(this);
     }
 
     public Bounds GetInteractionBounds()

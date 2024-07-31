@@ -38,9 +38,15 @@ public abstract class Building : MyComponent
 
     [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 중앙값
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
-    protected override void MyStart()
+
+    public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        
+    }
+    protected override void MyStart()
+    {
+        //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         Initialize();
         CheckBuild();
         if (isBuildable)

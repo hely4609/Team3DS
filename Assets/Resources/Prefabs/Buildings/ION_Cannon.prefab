@@ -2028,7 +2028,7 @@ MonoBehaviour:
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   size: {x: 0, y: 0}
-  interactionMesh: {fileID: 4300000, guid: faa3716e10170472a8b2fa9fb6b646c7, type: 3}
+  interactionRenderer: {fileID: 2829039577149875135}
   attackDamage: 0
   attackSpeed: 0
   target: {fileID: 0}

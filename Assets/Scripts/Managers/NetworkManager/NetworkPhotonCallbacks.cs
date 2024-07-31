@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem.XR;
 
 public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -18,7 +19,8 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
             //Vector3 spawnPosition = new Vector3((player.RawEncoded % runner.Config.Simulation.PlayerCount) * 3, 1, 0);
             Vector3 spawnPosition = new Vector3(0, 1, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
-            GameManager.Instance.InteractionManager.ControlledPlayer = networkPlayerObject.gameObject.GetComponent<Player>();
+            GameManager.Instance.NetworkManager.LocalController = networkPlayerObject.GetComponent<ControllerBase>();
+
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
             
