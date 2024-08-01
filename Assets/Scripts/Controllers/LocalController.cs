@@ -74,13 +74,13 @@ public class LocalController : ControllerBase
     ////////////////////////////////////////////
     protected void OnInteraction(bool isPressed) 
     {
-        if (GameManager.Instance.InteractionManager.InteractionObject == null) return;
+        if (controlledPlayer) return;
 
         if (isPressed)
         {
             // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
             // 업데이트 함수를 등록해서 뗄때까지 실행
-            DoInteractionStart?.Invoke(GameManager.Instance.InteractionManager.InteractionObject);
+            DoInteractionStart?.Invoke();
         }
         else
         {
