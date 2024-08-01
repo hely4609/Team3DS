@@ -26,7 +26,6 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
 
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
-            
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)

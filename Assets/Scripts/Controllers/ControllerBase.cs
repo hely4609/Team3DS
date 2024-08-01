@@ -8,7 +8,7 @@ public delegate void MoveDelegate(Vector3 dir);
 public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
 public delegate bool DesignBuildingDelegate(int index);
 public delegate bool BuildDelegate();
-public delegate bool InteractionStartDelegate(IInteraction target);
+public delegate bool InteractionStartDelegate();
 public delegate bool InteractionEndDelegate();
 public delegate void WheelDelegate(Vector2 scrollDelta);
 
@@ -45,6 +45,11 @@ public class ControllerBase : MyComponent
 
     protected override void MyStart()
     {
+        if (GameManager.Instance.NetworkManager.LocalController == null)
+        {
+            LocalController[] controllers = GameObject.FindObjectsByType<LocalController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            GameManager.Instance.NetworkManager.LocalController = System.Array.Find(controllers, target => target.GetComponent<NetworkObject>().HasInputAuthority == true);
+        }
         myAuthority = GetComponent<NetworkObject>().InputAuthority;
         // 테스트  
         Spawn(0, 0, 0);
@@ -55,25 +60,34 @@ public class ControllerBase : MyComponent
         if (controlledPlayer)
         {
             //여기로 이동 시키고
-            controlledPlayer.transform.position = new Vector3(dst_x, dst_y, dst_z);
+            //controlledPlayer.transform.position = new Vector3(dst_x, dst_y, dst_z);
         }
         else //없으면 
         {
-            
+
             //만들기!
             if (HasStateAuthority)
             {
                 NetworkObject inst = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Player), new Vector3(dst_x, dst_y, dst_z), Quaternion.identity, myAuthority);
-                
                 //var spawndCharacter = FindAnyObjectByType<NetworkPhotonCallbacks>().SpawnedCharacter;
                 //GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
-                controlledPlayer = inst.GetComponent<Player>();
-                GameManager.Instance.InteractionManager.ControlledPlayer = controlledPlayer;
+                if (inst.InputAuthority == GameManager.Instance.NetworkManager.LocalController.myAuthority)
+                {
+                    controlledPlayer = inst.GetComponent<Player>();
+                    controlledPlayer.Possession(this);
+                }
+                
+                //GameManager.Instance.InteractionManager.ControlledPlayer = controlledPlayer;
                 //이 친구의 손 발을 움직이려면, 빙의를 해야 해요!
+                //controlledPlayer.Possession(this);
+            }
+            else
+            {
+                Player[] players = GameObject.FindObjectsByType<Player>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                controlledPlayer = System.Array.Find(players, target => target.GetComponent<NetworkObject>().InputAuthority == GameManager.Instance.NetworkManager.LocalController.myAuthority);
                 controlledPlayer.Possession(this);
             }
-            
-        };
+        }
     }
 
     public virtual void OnUnPossessionComplete(Player target) { }
