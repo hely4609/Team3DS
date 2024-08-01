@@ -49,6 +49,7 @@ public class ControllerBase : MyComponent
         {
             LocalController[] controllers = GameObject.FindObjectsByType<LocalController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
             GameManager.Instance.NetworkManager.LocalController = System.Array.Find(controllers, target => target.GetComponent<NetworkObject>().HasInputAuthority == true);
+            Debug.Log(GameManager.Instance.NetworkManager.LocalController.GetComponent<NetworkObject>().InputAuthority);
         }
         myAuthority = GetComponent<NetworkObject>().InputAuthority;
         // Å×½ºÆ®  
@@ -71,7 +72,7 @@ public class ControllerBase : MyComponent
                 NetworkObject inst = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Player), new Vector3(dst_x, dst_y, dst_z), Quaternion.identity, myAuthority);
                 //var spawndCharacter = FindAnyObjectByType<NetworkPhotonCallbacks>().SpawnedCharacter;
                 //GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
-                if (inst.InputAuthority == GameManager.Instance.NetworkManager.LocalController.myAuthority)
+                if (inst.HasInputAuthority)
                 {
                     controlledPlayer = inst.GetComponent<Player>();
                     controlledPlayer.Possession(this);
