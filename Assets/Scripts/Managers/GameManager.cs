@@ -131,9 +131,9 @@ public class GameManager : MonoBehaviour
         //isGameStart = true;
     }
 
-    void Update()
+    void FixedUpdate()
     {
-        NetworkUpdates?.Invoke(Time.deltaTime);
+        NetworkUpdates?.Invoke(Time.fixedDeltaTime);
         if (!isGameStart) return;
 
         // 매니저 먼저
@@ -149,9 +149,9 @@ public class GameManager : MonoBehaviour
             ControllerStarts?.Invoke();
             ControllerStarts = null;
 
-            ManagerUpdates?.Invoke(Time.deltaTime);
-            ControllerUpdates?.Invoke(Time.deltaTime);
-            ObjectUpdates?.Invoke(Time.deltaTime);
+            ManagerUpdates?.Invoke(Time.fixedDeltaTime);
+            ControllerUpdates?.Invoke(Time.fixedDeltaTime);
+            ObjectUpdates?.Invoke(Time.fixedDeltaTime);
             
         }
 
