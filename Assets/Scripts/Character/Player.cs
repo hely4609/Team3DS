@@ -131,7 +131,7 @@ public class Player : Character
         
     }
 
-    protected override void MyUpdate(float deltaTime)
+    public override void FixedUpdateNetwork()
     {
         /////////////////////////// 
         //이동방향이 있을 시 해당 방향으로 움직임. +애니메이션 설정
@@ -169,6 +169,10 @@ public class Player : Character
                 designingBuilding.CheckBuild();
             }
         }
+    }
+
+    protected override void MyUpdate(float deltaTime)
+    {
 
         /////////////////////////////
         // 상호작용

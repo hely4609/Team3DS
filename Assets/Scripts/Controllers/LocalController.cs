@@ -27,7 +27,15 @@ public class LocalController : ControllerBase
                 //HoldingDesign();
                 OnDesignBuilding(data.selectedBuildingIndex);
             }
-            if (data.buttons.IsSet(MyButtons.Build)) DoBuild();
+            //if (data.buttons.IsSet(MyButtons.Build)) DoBuild();
+        }
+    }
+
+    void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.B)) 
+        { 
+            DoBuild();
         }
     }
 
