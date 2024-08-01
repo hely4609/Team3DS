@@ -72,22 +72,21 @@ public class ControllerBase : MyComponent
                 NetworkObject inst = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Player), new Vector3(dst_x, dst_y, dst_z), Quaternion.identity, myAuthority);
                 //var spawndCharacter = FindAnyObjectByType<NetworkPhotonCallbacks>().SpawnedCharacter;
                 //GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
-                if (inst.HasInputAuthority)
-                {
-                    controlledPlayer = inst.GetComponent<Player>();
-                    controlledPlayer.Possession(this);
-                }
-                
+               
                 //GameManager.Instance.InteractionManager.ControlledPlayer = controlledPlayer;
                 //이 친구의 손 발을 움직이려면, 빙의를 해야 해요!
                 //controlledPlayer.Possession(this);
             }
-            else
-            {
+            
                 Player[] players = GameObject.FindObjectsByType<Player>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-                controlledPlayer = System.Array.Find(players, target => target.GetComponent<NetworkObject>().InputAuthority == GameManager.Instance.NetworkManager.LocalController.myAuthority);
+                controlledPlayer = System.Array.Find(players, target => target.GetComponent<NetworkObject>().InputAuthority == myAuthority);
+                Debug.Log($"myauth : {GameManager.Instance.NetworkManager.LocalController.myAuthority}");
+                foreach (Player p in players) 
+                {
+                    Debug.Log($"Player : {p.GetComponent<NetworkObject>().InputAuthority}");
+                }
                 controlledPlayer.Possession(this);
-            }
+            
         }
     }
 
