@@ -43,7 +43,6 @@ public class Tower : InteractableBuilding
         if (CompletePercent < 1)
         {
             buildingTimeCurrent += deltaTime;
-            Test = !Test;
         }
         else
         {
