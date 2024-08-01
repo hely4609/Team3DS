@@ -21,6 +21,7 @@ public abstract class Building : MyComponent
     protected float buildingTimeMax; // 제작에 얼마나 걸리나
     protected float buildingTimeCurrent; // 얼마나 제작했나
     //protected float completePercent; //(0~1) 제작한 퍼센트
+    [Networked] protected bool Test { get; set; }
     public float CompletePercent { get { return buildingTimeCurrent / buildingTimeMax; } 
         set { buildingTimeCurrent = buildingTimeMax * value; } }
     // 10%로 하라. 라고 들어옴.
@@ -139,6 +140,7 @@ public abstract class Building : MyComponent
         if (CompletePercent < 1)
         {
             buildingTimeCurrent += deltaTime;
+            Test = !Test;
         }
         else
         {
@@ -218,6 +220,18 @@ public abstract class Building : MyComponent
                         {
                             render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
                         }
+                    }
+                    break;
+                case nameof(Test):
+                    foreach (MeshRenderer r in meshes)
+                    {
+                        r.material.SetFloat("_CompletePercent", CompletePercent);
+                    }
+
+                    if (CompletePercent >= 1)
+                    {
+                        foreach (MeshRenderer r in meshes)
+                            r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
                     }
                     break;
             }

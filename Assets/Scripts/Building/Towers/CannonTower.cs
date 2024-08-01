@@ -39,6 +39,7 @@ public class CannonTower : Tower
         if (CompletePercent < 1)
         {
             buildingTimeCurrent += deltaTime;
+            Test = !Test;
         }
         else
         {
