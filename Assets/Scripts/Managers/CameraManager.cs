@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Fusion;
 
 public class CameraManager : Manager
 {
@@ -24,16 +25,25 @@ public class CameraManager : Manager
 
     public override void ManagerUpdate(float deltaTime)
     {
-        // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
-        if (observingPlayer == null)
+        if (GameManager.Instance.NetworkManager.LocalController == null)
         {
-            observingPlayer = GameManager.Instance.NetworkManager.LocalController?.ControlledPlayer;
+            LocalController[] controllers = GameObject.FindObjectsByType<LocalController>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            GameManager.Instance.NetworkManager.LocalController = System.Array.Find(controllers, target => target.GetComponent<NetworkObject>().HasInputAuthority == true);
         }
         else
         {
-            mainCamera.transform.position = observingPlayer.CameraOffset.position;
-            mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
+            // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
+            if (observingPlayer == null)
+            {
+                observingPlayer = GameManager.Instance.NetworkManager.LocalController?.ControlledPlayer;
+            }
+            else
+            {
+                mainCamera.transform.position = observingPlayer.CameraOffset.position;
+                mainCamera.transform.rotation = observingPlayer.CameraOffset.rotation;
+            }
         }
+        
     
     }
 
