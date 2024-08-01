@@ -35,7 +35,8 @@ public class CameraManager : Manager
             // 인게임중에만 LocalPlayer의 CameraOffset을 쫓아가야함.
             if (observingPlayer == null)
             {
-                observingPlayer = GameManager.Instance.NetworkManager.LocalController?.ControlledPlayer;
+                Player[] players = GameObject.FindObjectsByType<Player>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+                observingPlayer = System.Array.Find(players, target => target.GetComponent<NetworkObject>().InputAuthority == GameManager.Instance.NetworkManager.LocalController.myAuthority);
             }
             else
             {

@@ -26,6 +26,8 @@ public class ControllerBase : MyComponent
     protected Player controlledPlayer;
     public Player ControlledPlayer => controlledPlayer;
 
+    public PlayerRef myAuthority;
+
     protected override void OnEnable()
     {
         GameManager.ControllerStarts += MyStart;
@@ -43,6 +45,7 @@ public class ControllerBase : MyComponent
 
     protected override void MyStart()
     {
+        myAuthority = GetComponent<NetworkObject>().InputAuthority;
         // 테스트  
         Spawn(0, 0, 0);
     }
@@ -56,10 +59,11 @@ public class ControllerBase : MyComponent
         }
         else //없으면 
         {
+            
             //만들기!
             if (HasStateAuthority)
             {
-                NetworkObject inst = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Player), new Vector3(dst_x, dst_y, dst_z), Quaternion.identity, Runner.LocalPlayer);
+                NetworkObject inst = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Player), new Vector3(dst_x, dst_y, dst_z), Quaternion.identity, myAuthority);
                 
                 //var spawndCharacter = FindAnyObjectByType<NetworkPhotonCallbacks>().SpawnedCharacter;
                 //GameObject inst = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Player, new Vector3(dst_x, dst_y, dst_z));
