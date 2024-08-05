@@ -23,6 +23,9 @@ public class ResourcesPath
         "Prefabs/Buildings/ION_Cannon",
         "Prefabs/Buildings/CornerWithBarrier",
         "Prefabs/Buildings/RoadWithBarrier",
+        "Prefabs/Buildings/PowerSupply",
+        "Prefabs/Buildings/EnergyBarrierGenerator",
+        "Prefabs/Buildings/Bridge",
         // Enemy
         "Prefabs/Characters/EnemyTest",
 

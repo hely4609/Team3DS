@@ -42,12 +42,6 @@ public abstract class Building : MyComponent
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-    }
-    protected override void MyStart()
-    {
-        //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        Initialize();
-        CheckBuild();
         if (isBuildable)
         {
             foreach (MeshRenderer render in meshes)
@@ -62,13 +56,19 @@ public abstract class Building : MyComponent
                 render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
             }
         }
+    }
+    protected override void MyStart()
+    {
+        //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        Initialize();
+        CheckBuild();
         //HeightCheck();
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
         isBuildable = CheckAlreadyBuild();
-        
+        Debug.Log(isBuildable);
         //VisualizeBuildable();
         return isBuildable;
     }
