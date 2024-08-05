@@ -12,7 +12,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
     protected GameObject[] energyBarrierArray;
 
     protected bool onOff; // on/off시 올라오고 내려가는 연출 like 경찰바리게이트 
-
+    public bool OnOff { get { return onOff; } }
     public void SetActiveEnergyBarrier()  // 현재 On인지 Off인제 
     {
         for (int i = 0; i < energyBarrierArray.Length; i++)
@@ -36,6 +36,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
         {
             TakeDamage(1);
             Debug.Log("아야");
+            Destroy(collision.gameObject);
         }
     }
     public void RepairBarrier()

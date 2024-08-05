@@ -12,6 +12,8 @@ public class BuildingManager : Manager
     protected List<GameObject> corners = new List<GameObject>();
     protected List<GameObject> roads = new List<GameObject>();
 
+    public EnergyBarrierGenerator generator;
+
     public override IEnumerator Initiate()
     {
         // 리스트로 만들고, 순서를 역순으로 변경.
@@ -59,8 +61,15 @@ public class BuildingManager : Manager
                 roads[j].transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
+        GameManager.ManagerStarts += ManagerStart;
 
         yield return null;
+    }
+
+    public override void ManagerStart()
+    {
+        generator = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(-80,5,0)).GetComponent<EnergyBarrierGenerator>();
+         
     }
 
     public Vector3 RoadScale(Vector2 start, Vector2 end)
