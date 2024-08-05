@@ -6,6 +6,10 @@ TagManager:
   tags:
   - EnergyBarrier
   - Road
+  - InteractionScrollView
+  - InteractionContent
+  - BuildingSelectUI
+  - InteractionUpdateUI
   layers:
   - Default
   - TransparentFX

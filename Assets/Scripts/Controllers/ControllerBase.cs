@@ -23,7 +23,7 @@ public class ControllerBase : MyComponent
     public InteractionEndDelegate   DoInteractionEnd;
     public WheelDelegate            DoMouseWheel;
 
-    protected Player controlledPlayer;
+    [SerializeField]protected Player controlledPlayer;
     public Player ControlledPlayer => controlledPlayer;
 
     public PlayerRef myAuthority;

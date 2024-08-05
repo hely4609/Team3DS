@@ -40,7 +40,7 @@ public class Player : Character
     // protected bool isHandFree;
     protected ResourceEnum.Prefab[,] buildableEnumArray = new ResourceEnum.Prefab[5, 5];
     protected int buildableEnumPageIndex = 0;
-    protected Building designingBuilding;
+    [SerializeField]protected Building designingBuilding;
 
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
@@ -95,6 +95,8 @@ public class Player : Character
         //내 함수를 대신 실행해줘!
         RegistrationFunctions(possessionController);
         targetController.OnPossessionComplete(this);
+
+
     }
     public virtual void UnPossess()
     {
@@ -125,13 +127,23 @@ public class Player : Character
             y %= 5;
             buildableEnumArray[x, y] = index;
         }
-        
+
         //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
         //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
-        
+
+        // CharacterUICanvas
+
+
+        interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
+        interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
+        interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
+        buildingSeletUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
+
+        interactionUpdateUI.SetActive(false);
+        buildingSeletUI.SetActive(false);
     }
 
-    protected override void MyUpdate(float deltaTime)
+    public override void FixedUpdateNetwork()
     {
         /////////////////////////// 
         //이동방향이 있을 시 해당 방향으로 움직임. +애니메이션 설정
@@ -169,6 +181,10 @@ public class Player : Character
                 designingBuilding.CheckBuild();
             }
         }
+    }
+
+    protected override void MyUpdate(float deltaTime)
+    {
 
         /////////////////////////////
         // 상호작용
@@ -185,7 +201,6 @@ public class Player : Character
         }
         ////////////////////////////
 
-        Debug.Log(interactionObject);
         
     }
 
@@ -242,9 +257,13 @@ public class Player : Character
         //return true;
 
         if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
-        NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
-        designingBuilding = building.GetComponent<Building>();
-        buildingSeletUI.SetActive(false);
+        Debug.Log(buildableEnumArray[buildableEnumPageIndex, index]);
+        if(HasStateAuthority)
+        {
+            NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
+            designingBuilding = building.GetComponent<Building>();
+
+        }
         return true;
 
     }

@@ -9,6 +9,27 @@ public class LocalController : ControllerBase
     
     public override void FixedUpdateNetwork()
     {
+        if (GetInput(out NetworkInputData data))
+        {
+            OnMove(data.moveDirection);
+            OnScreenRotate(data.lookRotationDelta);
+            OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
+
+            OnDesignBuilding(data.selectedBuildingIndex);
+            
+            Debug.Log($"myAuth : {myAuthority}, InputAuth : {Runner.LocalPlayer}");
+            Debug.Log($"selectedBuilding : {data.selectedBuildingIndex}");
+            if(data.selectedBuildingIndex != -1 && myAuthority == Runner.LocalPlayer)
+            {
+                Debug.Log("gd");
+                controlledPlayer.buildingSeletUI.SetActive(false);
+            }
+            //if (data.buttons.IsSet(MyButtons.Build)) DoBuild();
+        }
+    }
+
+    void Update()
+    {
         // KeyCode.Return이 Enter임
         if (Input.GetKeyDown(KeyCode.Return))
         {
@@ -16,18 +37,9 @@ public class LocalController : ControllerBase
             else Cursor.lockState = CursorLockMode.Locked;
         }
 
-        if (GetInput(out NetworkInputData data))
-        {
-            OnMove(data.moveDirection);
-            OnScreenRotate(data.lookRotationDelta);
-            OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
-
-            if (HasStateAuthority)
-            {
-                //HoldingDesign();
-                OnDesignBuilding(data.selectedBuildingIndex);
-            }
-            if (data.buttons.IsSet(MyButtons.Build)) OnBuild();
+        if (Input.GetKeyDown(KeyCode.B)) 
+        { 
+            DoBuild();
         }
     }
 
@@ -45,8 +57,8 @@ public class LocalController : ControllerBase
     protected void OnPutDown() { }
     protected void OnDesignBuilding(int index) 
     {
-        if (ControlledPlayer?.buildingSeletUI.activeInHierarchy == false) return;
-        
+        if (ControlledPlayer == null || ControlledPlayer.buildingSeletUI == null || ControlledPlayer.buildingSeletUI.activeInHierarchy == false) return;
+        Debug.Log("여긴가?");
         DoDesignBuilding?.Invoke(index);
 
         // 어떤 건물을 지을지 UI를 띄워준다.
@@ -66,7 +78,7 @@ public class LocalController : ControllerBase
     ////////////////////////////////////////////
     protected void OnInteraction(bool isPressed) 
     {
-        if (controlledPlayer == null) return;
+        if (controlledPlayer) return;
 
         if (isPressed)
         {
