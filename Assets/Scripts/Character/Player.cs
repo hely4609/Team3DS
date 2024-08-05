@@ -10,7 +10,7 @@ public class Player : Character
 {
     protected NetworkCharacterController _ncc;
 
-    protected ControllerBase possessionController;
+    [SerializeField]protected ControllerBase possessionController;
     [SerializeField] bool TPS_Mode;
     [SerializeField] protected Transform cameraOffset_FPS;
     [SerializeField] protected Transform cameraOffset_TPS;
@@ -131,16 +131,6 @@ public class Player : Character
         //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
         //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
 
-        // CharacterUICanvas
-
-
-        interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
-        interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
-        interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
-        buildingSeletUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
-
-        interactionUpdateUI.SetActive(false);
-        buildingSeletUI.SetActive(false);
     }
 
     public override void FixedUpdateNetwork()
@@ -185,6 +175,22 @@ public class Player : Character
 
     protected override void MyUpdate(float deltaTime)
     {
+        // CharacterUICanvas
+        if(buildingSeletUI == null)
+        {
+            if(possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
+            {
+                interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
+                interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
+                interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
+                buildingSeletUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
+
+                interactionUpdateUI.SetActive(false);
+                buildingSeletUI.SetActive(false);
+
+            }
+
+        }
 
         /////////////////////////////
         // 상호작용
@@ -272,8 +278,11 @@ public class Player : Character
     {
         if (designingBuilding == null)
         {
-            buildingSeletUI.SetActive(true);
-            return true;
+            if(buildingSeletUI != null)
+            {
+                buildingSeletUI.SetActive(true);
+                return true;
+            }
         }
         else
         {
