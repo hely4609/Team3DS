@@ -24,6 +24,9 @@ namespace ResourceEnum
         // Object
         Hammer,
         Rope,
+        PowerSupply,
+        EnergyBarrierGenerator,
+        Bridge,
         // Monster
         EnemyTest
     }
