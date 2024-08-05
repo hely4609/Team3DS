@@ -9,23 +9,20 @@ public class LocalController : ControllerBase
     
     public override void FixedUpdateNetwork()
     {
-        // KeyCode.Return이 Enter임
-        if (Input.GetKeyDown(KeyCode.Return))
-        {
-            if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
-            else Cursor.lockState = CursorLockMode.Locked;
-        }
-
         if (GetInput(out NetworkInputData data))
         {
             OnMove(data.moveDirection);
             OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
 
-            if (HasStateAuthority)
+            OnDesignBuilding(data.selectedBuildingIndex);
+            
+            Debug.Log($"myAuth : {myAuthority}, InputAuth : {Runner.LocalPlayer}");
+            Debug.Log($"selectedBuilding : {data.selectedBuildingIndex}");
+            if(data.selectedBuildingIndex != -1 && myAuthority == Runner.LocalPlayer)
             {
-                //HoldingDesign();
-                OnDesignBuilding(data.selectedBuildingIndex);
+                Debug.Log("gd");
+                controlledPlayer.buildingSeletUI.SetActive(false);
             }
             //if (data.buttons.IsSet(MyButtons.Build)) DoBuild();
         }
@@ -33,7 +30,14 @@ public class LocalController : ControllerBase
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.B)) 
+        // KeyCode.Return이 Enter임
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+            else Cursor.lockState = CursorLockMode.Locked;
+        }
+
+        if (Input.GetKeyDown(KeyCode.B)) 
         { 
             DoBuild();
         }
@@ -53,8 +57,8 @@ public class LocalController : ControllerBase
     protected void OnPutDown() { }
     protected void OnDesignBuilding(int index) 
     {
-        if (ControlledPlayer?.buildingSeletUI.activeInHierarchy == false) return;
-        
+        if (ControlledPlayer == null || ControlledPlayer.buildingSeletUI == null || ControlledPlayer.buildingSeletUI.activeInHierarchy == false) return;
+        Debug.Log("여긴가?");
         DoDesignBuilding?.Invoke(index);
 
         // 어떤 건물을 지을지 UI를 띄워준다.

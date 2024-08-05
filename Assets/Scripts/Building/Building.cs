@@ -68,7 +68,7 @@ public abstract class Building : MyComponent
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
         isBuildable = CheckAlreadyBuild();
-        
+        Debug.Log(isBuildable);
         //VisualizeBuildable();
         return isBuildable;
     }
