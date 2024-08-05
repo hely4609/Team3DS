@@ -30,7 +30,14 @@ public class EnergyBarrierGenerator : InteractableBuilding
         }
         Debug.Log($"{HpCurrent} / {gameObject.name}");
     }
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.TryGetComponent(out Monster enemy))
+        {
+            TakeDamage(1);
+            Debug.Log("¾Æ¾ß");
+        }
+    }
     public void RepairBarrier()
     {
         hpCurrent += 1;
