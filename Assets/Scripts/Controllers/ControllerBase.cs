@@ -43,7 +43,7 @@ public class ControllerBase : MyComponent
         GameManager.ControllerStarts -= MyStart;
     }
 
-    protected override void MyStart()
+    public override void Spawned()
     {
         if (GameManager.Instance.NetworkManager.LocalController == null)
         {
@@ -53,6 +53,10 @@ public class ControllerBase : MyComponent
         }
         myAuthority = GetComponent<NetworkObject>().InputAuthority;
         // Å×½ºÆ®  
+        if(!GameObject.Find("CharacterUICanvas"))
+        {
+            GameManager.Instance.UIManager.GetUI(UIEnum.CharacterUICanvas);
+        }
         Spawn(0, 0, 0);
     }
 
@@ -78,14 +82,14 @@ public class ControllerBase : MyComponent
                 //controlledPlayer.Possession(this);
             }
             
-                Player[] players = GameObject.FindObjectsByType<Player>(FindObjectsInactive.Include, FindObjectsSortMode.None);
-                controlledPlayer = System.Array.Find(players, target => target.GetComponent<NetworkObject>().InputAuthority == myAuthority);
-                Debug.Log($"myauth : {GameManager.Instance.NetworkManager.LocalController.myAuthority}");
-                foreach (Player p in players) 
-                {
-                    Debug.Log($"Player : {p.GetComponent<NetworkObject>().InputAuthority}");
-                }
-                controlledPlayer.Possession(this);
+            Player[] players = GameObject.FindObjectsByType<Player>(FindObjectsInactive.Include, FindObjectsSortMode.None);
+            controlledPlayer = System.Array.Find(players, target => target.GetComponent<NetworkObject>().InputAuthority == myAuthority);
+            Debug.Log($"myauth : {GameManager.Instance.NetworkManager.LocalController.myAuthority}");
+            foreach (Player p in players) 
+            {
+                Debug.Log($"Player : {p.GetComponent<NetworkObject>().InputAuthority}");
+            }
+            controlledPlayer.Possession(this);
             
         }
     }

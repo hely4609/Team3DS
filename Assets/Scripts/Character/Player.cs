@@ -10,17 +10,18 @@ public class Player : Character
 {
     protected NetworkCharacterController _ncc;
 
-    protected ControllerBase possessionController;
+    [SerializeField]protected ControllerBase possessionController;
     [SerializeField] bool TPS_Mode;
     [SerializeField] protected Transform cameraOffset_FPS;
     [SerializeField] protected Transform cameraOffset_TPS;
     public Transform CameraOffset => TPS_Mode ? cameraOffset_TPS : cameraOffset_FPS;
-   
+
+    private ChangeDetector _changeDetector;
     /////////////////////////////interaction 변수들
     [SerializeField] protected Transform interactionUI; // 상호작용 UI위치
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
     [SerializeField] protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
-    [SerializeField] public  GameObject buildingSeletUI; // 빌딩 선택 UI
+    [SerializeField] public  GameObject buildingSelectUI; // 빌딩 선택 UI
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
@@ -40,7 +41,8 @@ public class Player : Character
     // protected bool isHandFree;
     protected ResourceEnum.Prefab[,] buildableEnumArray = new ResourceEnum.Prefab[5, 5];
     protected int buildableEnumPageIndex = 0;
-    [SerializeField]protected Building designingBuilding;
+    [Networked] public Building DesigningBuilding { get; set; }
+    [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
 
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
@@ -131,16 +133,11 @@ public class Player : Character
         //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
         //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
 
-        // CharacterUICanvas
+    }
 
-
-        interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
-        interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
-        interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
-        buildingSeletUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
-
-        interactionUpdateUI.SetActive(false);
-        buildingSeletUI.SetActive(false);
+    public override void Spawned()
+    {
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
     }
 
     public override void FixedUpdateNetwork()
@@ -155,36 +152,54 @@ public class Player : Character
         }
         else
         {
+            
+            //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
             rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
         }
 
-        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
+        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
         //////////////////////////
 
         ///////////////////////////// 
         // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
-        if (designingBuilding != null)
+        if (DesigningBuilding != null)
         {
             Vector3 pickPos = transform.position + transform.forward * 5f;
             int x = (int)pickPos.x;
             int z = (int)pickPos.z;
-            designingBuilding.transform.position = new Vector3(x, designingBuilding.gameObject.transform.position.y, z);
+            DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
             Vector2Int currentPos = new Vector2Int(x, z);
 
             // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
-            if (designingBuilding.TiledBuildingPos != currentPos)
+            if (DesigningBuilding.TiledBuildingPos != currentPos)
             {
-                designingBuilding.TiledBuildingPos = currentPos;
-                designingBuilding.CheckBuild();
+                DesigningBuilding.TiledBuildingPos = currentPos;
+                DesigningBuilding.CheckBuild();
             }
         }
     }
 
     protected override void MyUpdate(float deltaTime)
     {
+        // CharacterUICanvas
+        if(buildingSelectUI == null)
+        {
+            if(possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
+            {
+                interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
+                interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
+                interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
+                buildingSelectUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
+
+                interactionUpdateUI.SetActive(false);
+                buildingSelectUI.SetActive(false);
+
+            }
+
+        }
 
         /////////////////////////////
         // 상호작용
@@ -192,11 +207,13 @@ public class Player : Character
         {
             float progress = interactionObject.InteractionUpdate(deltaTime, interactionType);
 
-            interactionUpdateProgress.SetValue(progress, true);
+            if (possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
+                interactionUpdateProgress.SetValue(progress, true);
 
             if (progress >= 1f)
             {
                 InteractionEnd();
+                //interactionObject = null;
             }
         }
         ////////////////////////////
@@ -221,28 +238,28 @@ public class Player : Character
     // 마우스를 움직임에 따라서 카메라를 회전시키는 함수.
     public virtual void ScreenRotate(Vector2 mouseDelta)
     {
-        //좌우회전은 캐릭터를 회전
-       rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
-        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
-
-        mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
-        rotate_x = rotate_x + mouseDelta_y;
-        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-
-        // 상하회전은 카메라만 회전
-        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-
-        //rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+        ////좌우회전은 캐릭터를 회전
+        //rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
         //transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
 
-        //mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
-        //rotate_x += mouseDelta_y;
+        //mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
+        //rotate_x = rotate_x + mouseDelta_y;
         //rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        //if (cameraOffset_FPS == null)
-        //{
-        //    cameraOffset_FPS = transform.Find("CameraOffset");
-        //}
+
+        //// 상하회전은 카메라만 회전
         //cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+
+        rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+        mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
+        rotate_x += mouseDelta_y;
+        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+        if (cameraOffset_FPS == null)
+        {
+            cameraOffset_FPS = transform.Find("CameraOffset");
+        }
+        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
@@ -253,35 +270,26 @@ public class Player : Character
         //if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
 
         //designingBuilding = GameManager.Instance.PoolManager.Instantiate(buildableEnumArray[buildableEnumPageIndex, index]).GetComponent<Building>();
-        //buildingSeletUI.SetActive(false);
+        //buildingSelectUI.SetActive(false);
         //return true;
 
         if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
         Debug.Log(buildableEnumArray[buildableEnumPageIndex, index]);
-        if(HasStateAuthority)
-        {
-            NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
-            designingBuilding = building.GetComponent<Building>();
+        
+        NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
+        DesigningBuilding = building.GetComponent<Building>();
 
-        }
         return true;
 
     }
 
     public bool Build()
     {
-        if (designingBuilding == null)
+        if (DesigningBuilding == null)
         {
-            buildingSeletUI.SetActive(true);
+            IsThisPlayerCharacterUICanvasActivated = true;
+            Debug.Log($"IsThisPCUICA : {IsThisPlayerCharacterUICanvasActivated}");
             return true;
-        }
-        else
-        {
-            if (designingBuilding.FixPlace())
-            {
-                designingBuilding = null;
-                return true;
-            }
         }
         return false;
     }
@@ -290,6 +298,16 @@ public class Player : Character
 
     public bool InteractionStart()
     {
+        if(DesigningBuilding != null)
+        {
+            if (DesigningBuilding.FixPlace())
+            {
+                DesigningBuilding = null;
+                return true;
+            }
+
+            return default;
+        }
         if (interactionObject == null) return false;
 
         interactionType = interactionObject.InteractionStart(this);
@@ -300,11 +318,16 @@ public class Player : Character
             case Interaction.Build:
                 isInteracting = true;
                 AnimBool?.Invoke("isBuild", true);
-                interactionUI.gameObject.SetActive(false);
-                interactionUpdateUI.SetActive(true);
-                interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
-                buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = $"Building...";
+
+                if (possessionController.myAuthority == Runner.LocalPlayer)
+                {
+                    interactionUI.gameObject.SetActive(false);
+                    interactionUpdateUI.SetActive(true);
+                    interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
+                    buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
+                    buttonText.text = $"Building...";
+                }
+                
                 GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
                 break;
         }
@@ -364,9 +387,12 @@ public class Player : Character
             default: break;
             case Interaction.Build: 
                 AnimBool?.Invoke("isBuild", false);
-                interactionUI.gameObject.SetActive(true);
-                interactionUpdateUI.SetActive(false);
-                interactionUpdateProgress = null;
+                if(possessionController.myAuthority == Runner.LocalPlayer)
+                {
+                    interactionUI.gameObject.SetActive(true);
+                    interactionUpdateUI.SetActive(false);
+                    interactionUpdateProgress = null;
+                }
                 GameManager.Instance.PoolManager.Destroy(sockets.FindSocket("RightHand").gameObject.GetComponentInChildren<PoolingInfo>());
                 break;
         }

@@ -116,6 +116,7 @@ public abstract class Building : MyComponent
     }
     public virtual bool FixPlace() // 건설완료
     {
+        Debug.Log("hey");
         startPos = tiledBuildingPositionLast;
         if (CheckBuild())
         {
@@ -205,20 +206,7 @@ public abstract class Building : MyComponent
             switch (change)
             {
                 case nameof(isBuildable):
-                    if (isBuildable)
-                    {
-                        foreach (MeshRenderer render in meshes)
-                        {
-                            render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
-                        }
-                    }
-                    else
-                    {
-                        foreach (MeshRenderer render in meshes)
-                        {
-                            render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
-                        }
-                    }
+                    VisualizeBuildable();
                     break;
                 case nameof(buildingTimeCurrent):
                     foreach (MeshRenderer r in meshes)

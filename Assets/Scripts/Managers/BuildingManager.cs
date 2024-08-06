@@ -12,25 +12,31 @@ public class BuildingManager : Manager
     protected List<GameObject> corners = new List<GameObject>();
     protected List<GameObject> roads = new List<GameObject>();
 
+    public EnergyBarrierGenerator generator;
+
     public override IEnumerator Initiate()
     {
         // 리스트로 만들고, 순서를 역순으로 변경.
         // 길을 만든 뒤에도 계속 길이 확장될 예정이라 추가되기 위해서는 이 구조가 편할것으로 예상.
-        roadData.Add(new Vector2(-75, 0)); // 마지막점. 에너지 베리어 생성기 지점부터 제작.
-        roadData.Add(new Vector2(-30, 0));
-        roadData.Add(new Vector2(-30, -50));
-        roadData.Add(new Vector2(10, -50));
-        roadData.Add(new Vector2(10, 40)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
-        roadData.Add(new Vector2(50, 40)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
-        roadData.Add(new Vector2(50, 0)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
-        roadData.Add(new Vector2(95, 0)); // 시작점
+        roadData.Add(new Vector2(-75, 75)); // 마지막점. 에너지 베리어 생성기 지점부터 제작.
+        roadData.Add(new Vector2(75, 75));
+        roadData.Add(new Vector2(75, -75));
+        roadData.Add(new Vector2(-75, -75));
+        roadData.Add(new Vector2(-75, 50)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
+        roadData.Add(new Vector2(40, 50)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
+        roadData.Add(new Vector2(40, -40)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
+        roadData.Add(new Vector2(-40, -40)); // 시작점
+        roadData.Add(new Vector2(-40, 10)); // 시작점
+        roadData.Add(new Vector2(-20, 10));
+
 
         for (int i = 0; i < roadData.Count; i++)
         {
-            if (i == 0 || i == roadData.Count - 1)
+            if (i == 0 ||i == roadData.Count - 1)
             {
                 corners.Add(RoadInstantiate());
                 corners[i].transform.position = new Vector3(roadData[i].x, 0.1f, roadData[i].y);
+                //corners[i].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
             else
             {
@@ -49,7 +55,6 @@ public class BuildingManager : Manager
                 roads[j].transform.position = RoadPosition(roadData[j], roadData[j + 1]);
                 roads[j].transform.localScale = RoadScale(roadData[j], roadData[j + 1]);
                 roads[j].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-
             }
             else if (Mathf.Abs(roadVector.x) > 0)
             {
@@ -59,8 +64,16 @@ public class BuildingManager : Manager
                 roads[j].transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
+        GameManager.ManagerStarts += ManagerStart;
 
         yield return null;
+    }
+
+    public override void ManagerStart()
+    {
+        if(GameManager.Instance.NetworkManager.LocalController.HasStateAuthority)
+        generator = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(-80,5,0)).GetComponent<EnergyBarrierGenerator>();
+         
     }
 
     public Vector3 RoadScale(Vector2 start, Vector2 end)
