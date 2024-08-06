@@ -21,12 +21,16 @@ public abstract class Building : MyComponent
     protected float buildingTimeMax; // 제작에 얼마나 걸리나
     protected float buildingTimeCurrent; // 얼마나 제작했나
     //protected float completePercent; //(0~1) 제작한 퍼센트
-    public float CompletePercent { get { return buildingTimeCurrent / buildingTimeMax; } 
+
+    [Networked] protected float HeightMax { get; set; }
+    [Networked] protected float HeightMin { get; set; }
+    [Networked] public float CompletePercent { get { return buildingTimeCurrent / buildingTimeMax; } 
         set { buildingTimeCurrent = buildingTimeMax * value; } }
     // 10%로 하라. 라고 들어옴.
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
 
+    [Networked] protected bool IsFixed { get; set; } = false;
     [Networked] protected bool isBuildable{ get; set; } // 이 장소에 건설할 수 있나
     private ChangeDetector _changeDetector;
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
@@ -42,33 +46,21 @@ public abstract class Building : MyComponent
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        if (isBuildable)
-        {
-            foreach (MeshRenderer render in meshes)
-            {
-                render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
-            }
-        }
-        else
-        {
-            foreach (MeshRenderer render in meshes)
-            {
-                render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
-            }
-        }
-    }
+        CheckBuild();
+    }   
+    
     protected override void MyStart()
     {
         //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         Initialize();
-        CheckBuild();
+        
         //HeightCheck();
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
         isBuildable = CheckAlreadyBuild();
-        Debug.Log(isBuildable);
+        //Debug.Log(isBuildable);
         //VisualizeBuildable();
         return isBuildable;
     }
@@ -122,10 +114,8 @@ public abstract class Building : MyComponent
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
             HeightCheck();
-            foreach (Collider col in cols)
-            {
-                col.enabled = true;
-            }
+            IsFixed = true;
+           
             return true;
         }
         else
@@ -151,17 +141,17 @@ public abstract class Building : MyComponent
         // 완성되면 완성본 Material로 한다.
 
         // 건설 완료시 
-        foreach (MeshRenderer r in meshes)
-        {
-            r.material.SetFloat("_CompletePercent", CompletePercent);
-        }
+        //foreach (MeshRenderer r in meshes)
+        //{
+        //    r.material.SetFloat("_CompletePercent", CompletePercent);
+        //}
 
-        if (CompletePercent >= 1)
-        {
-            foreach (MeshRenderer r in meshes)
-                r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+        //if (CompletePercent >= 1)
+        //{
+        //    foreach (MeshRenderer r in meshes)
+        //        r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
 
-        }
+        //}
     }
 
     // 건물의 높이를 측정하는 함수.
@@ -183,20 +173,13 @@ public abstract class Building : MyComponent
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
         
-        float max = mesh.bounds.max.y;
-        float min = mesh.bounds.min.y;
+        HeightMax = mesh.bounds.max.y;
+        HeightMin = mesh.bounds.min.y;
         //Debug.Log(mesh.bounds.max.y);
         //Debug.Log(mesh.bounds.min.y);
 
         //Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));
 
-        foreach (MeshRenderer r in meshes)
-        {
-            r.material.SetFloat("_HeightMin", min);
-            //Debug.Log(min);
-            r.material.SetFloat("_HeightMax", max);
-            //Debug.Log(max);
-        }
     }
 
     public override void Render()
@@ -208,7 +191,45 @@ public abstract class Building : MyComponent
                 case nameof(isBuildable):
                     VisualizeBuildable();
                     break;
+
+                case nameof(IsFixed):
+                    foreach (Collider col in cols)
+                    {
+                        col.enabled = true;
+                    }
+                    break;
+
+                case nameof(HeightMax):
+                    foreach (MeshRenderer r in meshes)
+                    {
+                        r.material.SetFloat("_HeightMax", HeightMax);
+                    }
+                    break;
+
+                case nameof(HeightMin):
+                    foreach (MeshRenderer r in meshes)
+                    {
+                        r.material.SetFloat("_HeightMin", HeightMin);
+                    }
+                break;
+
+                case nameof(CompletePercent):
+                    {
+                        foreach (MeshRenderer r in meshes)
+                        {
+                            r.material.SetFloat("_CompletePercent", CompletePercent);
+                        }
+
+                        if (CompletePercent >= 1)
+                        {
+                            foreach (MeshRenderer r in meshes)
+                                r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+                        }
+                    }
+                    break;
+
             }
+
         }
     }
 }
