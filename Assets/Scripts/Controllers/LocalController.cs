@@ -15,19 +15,32 @@ public class LocalController : ControllerBase
             OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
 
-            OnDesignBuilding(data.selectedBuildingIndex);
-            
-            Debug.Log($"myAuth : {myAuthority}, InputAuth : {Runner.LocalPlayer}");
-            Debug.Log($"selectedBuilding : {data.selectedBuildingIndex}");
-            if(data.selectedBuildingIndex != -1 && myAuthority == Runner.LocalPlayer)
+            // DesignBuilding
+            // 호스트는 OnDesignBuilding을 한다.
+            if(HasStateAuthority)
             {
-                Debug.Log("gd");
-                controlledPlayer.buildingSeletUI.SetActive(false);
+                if(data.buttons.IsSet(MyButtons.Build)) OnBuild();
+                OnDesignBuilding(data.selectedBuildingIndex);
+
             }
+            
+            // 로컬은 UI를 끈다
+            if(data.selectedBuildingIndex != -1)
+            {
+                controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
+                Debug.Log($"IsThisPCUICA : {controlledPlayer.IsThisPlayerCharacterUICanvasActivated}");
+                if(myAuthority == Runner.LocalPlayer)
+                {
+                    controlledPlayer.buildingSelectUI.SetActive(false);
+
+                }
+            }
+
             //if (data.buttons.IsSet(MyButtons.Build)) DoBuild();
         }
     }
 
+    // 로컬 인풋
     void Update()
     {
         // KeyCode.Return이 Enter임
@@ -37,9 +50,11 @@ public class LocalController : ControllerBase
             else Cursor.lockState = CursorLockMode.Locked;
         }
 
-        if (Input.GetKeyDown(KeyCode.B)) 
-        { 
-            DoBuild();
+        if (Input.GetKeyDown(KeyCode.B))
+        {
+            Debug.Log($"DesiningBuilding : {controlledPlayer.DesigningBuilding}");
+            if (controlledPlayer.DesigningBuilding == null && myAuthority == Runner.LocalPlayer)
+                controlledPlayer.buildingSelectUI.SetActive(true);
         }
     }
 
@@ -57,8 +72,7 @@ public class LocalController : ControllerBase
     protected void OnPutDown() { }
     protected void OnDesignBuilding(int index) 
     {
-        if (ControlledPlayer == null || ControlledPlayer.buildingSeletUI == null || ControlledPlayer.buildingSeletUI.activeInHierarchy == false) return;
-        Debug.Log("여긴가?");
+        if (controlledPlayer == null || controlledPlayer.DesigningBuilding != null || !controlledPlayer.IsThisPlayerCharacterUICanvasActivated) return;
         DoDesignBuilding?.Invoke(index);
 
         // 어떤 건물을 지을지 UI를 띄워준다.
@@ -78,7 +92,7 @@ public class LocalController : ControllerBase
     ////////////////////////////////////////////
     protected void OnInteraction(bool isPressed) 
     {
-        if (controlledPlayer) return;
+        if (controlledPlayer == null) return;
 
         if (isPressed)
         {

@@ -116,6 +116,7 @@ public abstract class Building : MyComponent
     }
     public virtual bool FixPlace() // 건설완료
     {
+        Debug.Log("hey");
         startPos = tiledBuildingPositionLast;
         if (CheckBuild())
         {
