@@ -403,12 +403,16 @@ public class Player : Character
     // 상호작용 가능한 대상이 감지되었을 때 처리
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("트리거호출");
         if (other.TryGetComponent(out IInteraction target))
         {
+            Debug.Log(interactionObjectList.Count);
             // 이미 있다면 추가하지않음
             if (interactionObjectList.Exists(inst => inst == target)) return;
+            Debug.Log("hi");
             if (System.Array.Find(target.GetInteractionColliders(), col => other == col)) 
             {
+                Debug.Log("hihi");
                 interactionObjectList.Add(target);
 
                 //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
@@ -434,6 +438,7 @@ public class Player : Character
     // 상호작용 가능한 대상 리스트에 있는 대상이 감지범위에서 나갔을 때 처리
     private void OnTriggerExit(Collider other)
     {
+
         if (other.TryGetComponent(out IInteraction target))
         {
             if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
