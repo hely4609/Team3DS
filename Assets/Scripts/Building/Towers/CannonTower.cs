@@ -24,7 +24,7 @@ public class CannonTower : Tower
         RaycastHit[] targets = Physics.SphereCastAll(target.transform.position, splashRadius, Vector3.up);
         foreach (RaycastHit targetRay in targets)
         {
-            if(targetRay.collider.TryGetComponent<TestMonster>(out TestMonster targetData))
+            if(targetRay.collider.TryGetComponent<Monster>(out Monster targetData))
             {
                 targetData.TakeDamage(this, attackDamage);
             }
