@@ -40,7 +40,7 @@ public class BuildingManager : Manager
 
     public override void ManagerStart()
     {
-        if (corners[0].gameObject.GetComponent<NetworkObject>().HasStateAuthority)
+        if (GameObject.Find("CornerWithBarrier(Clone)").GetComponent<NetworkObject>().HasStateAuthority)
             
         generator = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 5, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
         
