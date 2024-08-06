@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -18,21 +19,55 @@ public class BuildingManager : Manager
     {
         // 리스트로 만들고, 순서를 역순으로 변경.
         // 길을 만든 뒤에도 계속 길이 확장될 예정이라 추가되기 위해서는 이 구조가 편할것으로 예상.
-        roadData.Add(new Vector2(-75, 75)); // 마지막점. 에너지 베리어 생성기 지점부터 제작.
-        roadData.Add(new Vector2(75, 75));
-        roadData.Add(new Vector2(75, -75));
-        roadData.Add(new Vector2(-75, -75));
-        roadData.Add(new Vector2(-75, 50)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
-        roadData.Add(new Vector2(40, 50)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
-        roadData.Add(new Vector2(40, -40)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
-        roadData.Add(new Vector2(-40, -40)); // 시작점
-        roadData.Add(new Vector2(-40, 10)); // 시작점
         roadData.Add(new Vector2(-20, 10));
+        roadData.Add(new Vector2(-40, 10)); // 시작점
+        roadData.Add(new Vector2(-40, -40)); // 시작점
+        roadData.Add(new Vector2(40, -40)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
+        roadData.Add(new Vector2(40, 50)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
+        roadData.Add(new Vector2(-75, 50)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
+        roadData.Add(new Vector2(-75, -75));
+        roadData.Add(new Vector2(75, -75));
+        roadData.Add(new Vector2(75, 75));
+        roadData.Add(new Vector2(-75, 75)); // 마지막점.
 
+        // 이걸 어디에 
+        CreateRoad();
+        
+        GameManager.ManagerStarts += ManagerStart;
 
+        yield return null;
+    }
+
+    public override void ManagerStart()
+    {
+        NetworkRunner runner = GameManager.Instance.NetworkManager.Runner;
+        if (runner.IsServer)
+        {
+            generator = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 5, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
+        }
+    }
+
+    public Vector3 RoadScale(Vector2 start, Vector2 end)
+    {
+        Vector3 result;
+        Vector2 delta = end - start;
+        float deltaScale = (Mathf.Abs(delta.x + delta.y) - 10) / 10;
+        
+        result = new Vector3(deltaScale, 1, 1);
+        
+        return result;
+    }
+    public Vector3 RoadPosition(Vector2 start, Vector2 end)
+    {
+        Vector2 lengthSize = (end - start)*0.5f;
+        
+        return new Vector3(start.x + lengthSize.x, 0.1f, start.y + lengthSize.y);
+    }
+    protected void CreateRoad()
+    {
         for (int i = 0; i < roadData.Count; i++)
         {
-            if (i == 0 ||i == roadData.Count - 1)
+            if (i == 0 || i == roadData.Count - 1)
             {
                 corners.Add(RoadInstantiate());
                 corners[i].transform.position = new Vector3(roadData[i].x, 0.1f, roadData[i].y);
@@ -60,37 +95,11 @@ public class BuildingManager : Manager
             {
                 roads.Add(RoadInstantiate());
                 roads[j].transform.position = RoadPosition(roadData[j], roadData[j + 1]);
-                roads[j].transform.localScale = RoadScale(roadData[j], roadData[j+1]);
+                roads[j].transform.localScale = RoadScale(roadData[j], roadData[j + 1]);
                 roads[j].transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
-        GameManager.ManagerStarts += ManagerStart;
-
-        yield return null;
-    }
-
-    public override void ManagerStart()
-    {
-        if(GameManager.Instance.NetworkManager.LocalController.HasStateAuthority)
-        generator = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(-80,5,0)).GetComponent<EnergyBarrierGenerator>();
-         
-    }
-
-    public Vector3 RoadScale(Vector2 start, Vector2 end)
-    {
-        Vector3 result;
-        Vector2 delta = end - start;
-        float deltaScale = (Mathf.Abs(delta.x + delta.y) - 10) / 10;
-        
-        result = new Vector3(deltaScale, 1, 1);
-        
-        return result;
-    }
-    public Vector3 RoadPosition(Vector2 start, Vector2 end)
-    {
-        Vector2 lengthSize = (end - start)*0.5f;
-        
-        return new Vector3(start.x + lengthSize.x, 0.1f, start.y + lengthSize.y);
+        corners[0].gameObject.SetActive(false);
     }
     protected GameObject CornerInstantiate()
     {

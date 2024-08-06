@@ -4,6 +4,7 @@ using UnityEngine;
 using Fusion;
 using UnityEngine.SceneManagement;
 using Unity.VisualScripting;
+using Palmmedia.ReportGenerator.Core;
 
 // 네트워크 백엔드 : 뒤끝 -> 포톤
 public enum NetworkState
@@ -73,10 +74,10 @@ public partial class NetworkManager : Manager
                 _runner.AddComponent<NetworkRunner>();
             }
         };
-        
+
         //_controller = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LocalController")).GetComponent<ControllerBase>();
         // 컨트롤러를 만든다. 입력받기용.
-
+        
         yield return null;
     }
 
