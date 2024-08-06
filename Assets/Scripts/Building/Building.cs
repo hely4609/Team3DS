@@ -18,8 +18,8 @@ public abstract class Building : MyComponent
     protected BuildingEnum type; // 타워 종류
     protected bool isNeedLine; // 전선이 필요한가?
 
-    protected float buildingTimeMax; // 제작에 얼마나 걸리나
-    protected float buildingTimeCurrent; // 얼마나 제작했나
+    [SerializeField]protected float buildingTimeMax; // 제작에 얼마나 걸리나
+    [SerializeField]protected float buildingTimeCurrent; // 얼마나 제작했나
     //protected float completePercent; //(0~1) 제작한 퍼센트
 
     [Networked] protected float HeightMax { get; set; }
