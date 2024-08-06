@@ -56,6 +56,8 @@ public class LocalController : ControllerBase
             if (controlledPlayer.DesigningBuilding == null && myAuthority == Runner.LocalPlayer)
                 controlledPlayer.buildingSelectUI.SetActive(true);
         }
+
+        OnMouseWheel(Input.mouseScrollDelta);
     }
 
     protected void OnMove(Vector3 direaction)

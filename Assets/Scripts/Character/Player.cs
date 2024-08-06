@@ -158,9 +158,6 @@ public class Player : Character
         }
 
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
-        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
-        AnimFloat?.Invoke("MoveForward", currentDir.z);
-        AnimFloat?.Invoke("MoveRight", currentDir.x);
         //////////////////////////
 
         ///////////////////////////// 
@@ -524,5 +521,13 @@ public class Player : Character
             } 
             else buttonImage.color = Color.white;
         }
+    }
+
+    public override void Render()
+    {
+        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
+        AnimFloat?.Invoke("MoveForward", currentDir.z);
+        AnimFloat?.Invoke("MoveRight", currentDir.x);
+
     }
 }
