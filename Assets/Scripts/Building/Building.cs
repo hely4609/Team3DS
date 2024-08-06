@@ -19,13 +19,13 @@ public abstract class Building : MyComponent
     protected bool isNeedLine; // 전선이 필요한가?
 
     protected float buildingTimeMax; // 제작에 얼마나 걸리나
-    protected float buildingTimeCurrent; // 얼마나 제작했나
+    [Networked] protected float BuildingTimeCurrent { get; set; } // 얼마나 제작했나
     //protected float completePercent; //(0~1) 제작한 퍼센트
 
     [Networked] protected float HeightMax { get; set; }
     [Networked] protected float HeightMin { get; set; }
-    [Networked] public float CompletePercent { get { return buildingTimeCurrent / buildingTimeMax; } 
-        set { buildingTimeCurrent = buildingTimeMax * value; } }
+    public float CompletePercent { get { return BuildingTimeCurrent / buildingTimeMax; } 
+        set { BuildingTimeCurrent = buildingTimeMax * value; } }
     // 10%로 하라. 라고 들어옴.
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
@@ -129,7 +129,7 @@ public abstract class Building : MyComponent
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
         if (CompletePercent < 1)
         {
-            buildingTimeCurrent += deltaTime;
+            BuildingTimeCurrent += deltaTime;
         }
         else
         {
@@ -221,7 +221,7 @@ public abstract class Building : MyComponent
                 //    }
                 //break;
 
-                case nameof(CompletePercent):
+                case nameof(BuildingTimeCurrent):
                     {
                         foreach (MeshRenderer r in meshes)
                         {
