@@ -113,8 +113,8 @@ public abstract class Building : MyComponent
         if (CheckBuild())
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
-            HeightCheck();
             IsFixed = true;
+            //HeightCheck();
            
             return true;
         }
@@ -173,12 +173,18 @@ public abstract class Building : MyComponent
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
         
-        HeightMax = mesh.bounds.max.y;
-        HeightMin = mesh.bounds.min.y;
+        float max = mesh.bounds.max.y;
+        float min = mesh.bounds.min.y;
         //Debug.Log(mesh.bounds.max.y);
         //Debug.Log(mesh.bounds.min.y);
 
         //Debug.Log(mesh.bounds.max.y + Mathf.Abs(mesh.bounds.min.y));
+
+        foreach (MeshRenderer r in meshes)
+        {
+            r.material.SetFloat("_HeightMax", max);
+            r.material.SetFloat("_HeightMin", min);
+        }
 
     }
 
@@ -193,25 +199,27 @@ public abstract class Building : MyComponent
                     break;
 
                 case nameof(IsFixed):
+                    Debug.Log(cols.Length);
                     foreach (Collider col in cols)
                     {
                         col.enabled = true;
                     }
+                    HeightCheck();
                     break;
 
-                case nameof(HeightMax):
-                    foreach (MeshRenderer r in meshes)
-                    {
-                        r.material.SetFloat("_HeightMax", HeightMax);
-                    }
-                    break;
+                //case nameof(HeightMax):
+                //    foreach (MeshRenderer r in meshes)
+                //    {
+                //        r.material.SetFloat("_HeightMax", HeightMax);
+                //    }
+                //    break;
 
-                case nameof(HeightMin):
-                    foreach (MeshRenderer r in meshes)
-                    {
-                        r.material.SetFloat("_HeightMin", HeightMin);
-                    }
-                break;
+                //case nameof(HeightMin):
+                //    foreach (MeshRenderer r in meshes)
+                //    {
+                //        r.material.SetFloat("_HeightMin", HeightMin);
+                //    }
+                //break;
 
                 case nameof(CompletePercent):
                     {

@@ -28,7 +28,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
             onOff = false;
             SetActiveEnergyBarrier();
         }
-        Debug.Log($"{HpCurrent} / {gameObject.name}");
+        //Debug.Log($"{HpCurrent} / {gameObject.name}");
     }
     private void OnCollisionEnter(Collision collision)
     {
