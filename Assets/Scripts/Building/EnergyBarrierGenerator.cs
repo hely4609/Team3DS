@@ -28,7 +28,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
             onOff = false;
             SetActiveEnergyBarrier();
         }
-        Debug.Log($"{HpCurrent} / {gameObject.name}");
+        //Debug.Log($"{HpCurrent} / {gameObject.name}");
     }
     private void OnCollisionEnter(Collision collision)
     {
@@ -55,7 +55,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
     protected override void Initialize()
     {
         onOff = true;
-        hpMax = 3;
+        hpMax = 30000;
         hpCurrent = hpMax;
         energyBarrierArray = GameObject.FindGameObjectsWithTag("EnergyBarrier");
 
