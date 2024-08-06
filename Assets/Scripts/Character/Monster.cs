@@ -20,6 +20,7 @@ public class Monster : Character
     bool isReady = false;
 
     public MonsterDestroyFunction destroyFunction;
+    protected EnergyBarrierGenerator generator;
     protected override void MyStart()
     {
         Debug.Log("monster Mystart");
@@ -29,6 +30,8 @@ public class Monster : Character
         roadDestination = roadsVector2.Count-1;
         monsterType = MonsterEnum.First;
         isReady= true;
+
+        generator = GameManager.Instance.BuildingManager.generator;
     }
 
     public override int TakeDamage(Tower attacker, int damage)
@@ -64,12 +67,26 @@ public class Monster : Character
                     roadDestination = 0;
                 }
             }
+            if (!generator.OnOff)
+            {
+                isRelease = true;
+            }
+
         }
     }
     protected Vector3 NextDestination()
     {
-        Vector2 dest = roadsVector2[roadDestination];
-        return new Vector3(dest.x, transform.position.y, dest.y);
+        Vector3 destVector3;
+        if (!isRelease)
+        { 
+            Vector2 dest = roadsVector2[roadDestination];
+            destVector3 = new Vector3(dest.x, transform.position.y, dest.y);
+        }
+        else
+        {
+            destVector3 = Vector3.zero;
+        }
+        return destVector3;
     }
 
     protected virtual void MonsterMove(Vector3 destination, float deltaTime)
@@ -102,5 +119,6 @@ public class Monster : Character
             }
         }
         return false;
+        
     }
 }
