@@ -206,20 +206,7 @@ public abstract class Building : MyComponent
             switch (change)
             {
                 case nameof(isBuildable):
-                    if (isBuildable)
-                    {
-                        foreach (MeshRenderer render in meshes)
-                        {
-                            render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
-                        }
-                    }
-                    else
-                    {
-                        foreach (MeshRenderer render in meshes)
-                        {
-                            render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
-                        }
-                    }
+                    VisualizeBuildable();
                     break;
             }
         }

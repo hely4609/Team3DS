@@ -43,7 +43,7 @@ public class ControllerBase : MyComponent
         GameManager.ControllerStarts -= MyStart;
     }
 
-    protected override void MyStart()
+    public override void Spawned()
     {
         if (GameManager.Instance.NetworkManager.LocalController == null)
         {

@@ -152,11 +152,13 @@ public class Player : Character
         }
         else
         {
+            
+            //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
             rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
         }
 
-        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
+        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
         //////////////////////////
@@ -211,6 +213,7 @@ public class Player : Character
             if (progress >= 1f)
             {
                 InteractionEnd();
+                //interactionObject = null;
             }
         }
         ////////////////////////////
@@ -235,28 +238,28 @@ public class Player : Character
     // 마우스를 움직임에 따라서 카메라를 회전시키는 함수.
     public virtual void ScreenRotate(Vector2 mouseDelta)
     {
-        //좌우회전은 캐릭터를 회전
-        rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
-        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
-
-        mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
-        rotate_x = rotate_x + mouseDelta_y;
-        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-
-        // 상하회전은 카메라만 회전
-        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-
-        //rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+        ////좌우회전은 캐릭터를 회전
+        //rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
         //transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
 
-        //mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
-        //rotate_x += mouseDelta_y;
+        //mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
+        //rotate_x = rotate_x + mouseDelta_y;
         //rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        //if (cameraOffset_FPS == null)
-        //{
-        //    cameraOffset_FPS = transform.Find("CameraOffset");
-        //}
+
+        //// 상하회전은 카메라만 회전
         //cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+
+        rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+        mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
+        rotate_x += mouseDelta_y;
+        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+        if (cameraOffset_FPS == null)
+        {
+            cameraOffset_FPS = transform.Find("CameraOffset");
+        }
+        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
@@ -522,4 +525,4 @@ public class Player : Character
             else buttonImage.color = Color.white;
         }
     }
-    }
+}

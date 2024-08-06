@@ -71,6 +71,7 @@ public class BuildingManager : Manager
 
     public override void ManagerStart()
     {
+        if(GameManager.Instance.NetworkManager.LocalController.HasStateAuthority)
         generator = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(-80,5,0)).GetComponent<EnergyBarrierGenerator>();
          
     }
