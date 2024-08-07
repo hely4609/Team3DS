@@ -3473,6 +3473,7 @@ GameObject:
   - component: {fileID: 5314609561174821285}
   - component: {fileID: 7972636452116571196}
   - component: {fileID: 5381320239018996121}
+  - component: {fileID: 2539520212610996372}
   m_Layer: 0
   m_Name: MANUKA_Obsidian
   m_TagString: Untagged
@@ -3555,6 +3556,22 @@ MonoBehaviour:
   SyncSettings: 79
   StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9dfdd617c0812b98afe96ff1d9314e52e
   TriggerHashes: 00000000
+--- !u!114 &2539520212610996372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129097313062114863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &1130949967770251426
 GameObject:
   m_ObjectHideFlags: 0
@@ -16457,8 +16474,7 @@ GameObject:
   - component: {fileID: 5317811880070004779}
   - component: {fileID: 3063893609680588044}
   - component: {fileID: 748615415056933878}
-  - component: {fileID: -3966098195265333311}
-  - component: {fileID: -8864765734439977196}
+  - component: {fileID: 5720312440598279769}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -16508,7 +16524,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &5317811880070004779
@@ -16581,7 +16597,7 @@ MonoBehaviour:
   buildingSelectUI: {fileID: 0}
   _DesigningBuilding: {fileID: 0}
   _IsThisPlayerCharacterUICanvasActivated: 0
---- !u!114 &-3966098195265333311
+--- !u!114 &5720312440598279769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16593,30 +16609,14 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 3106649276
+  SortKey: 2092332022
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 748615415056933878}
-  - {fileID: -8864765734439977196}
   - {fileID: 5381320239018996121}
---- !u!114 &-8864765734439977196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6900007637909447916}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  SyncScale: 0
-  SyncParent: 0
-  _autoAOIOverride: 1
-  DisableSharedModeInterpolation: 0
+  - {fileID: 2539520212610996372}
 --- !u!1 &6902586972774711075
 GameObject:
   m_ObjectHideFlags: 0
