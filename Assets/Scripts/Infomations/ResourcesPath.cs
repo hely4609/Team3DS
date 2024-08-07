@@ -11,6 +11,7 @@ public class ResourcesPath
         "Prefabs/UIs/CharacterUI/InteractableObjButton",
         "Prefabs/UIs/CharacterUI/MouseLeftUI",
         "Prefabs/UIs/CharacterUI/CharacterUICanvas",
+        "Prefabs/UIs/RoomButton",
         // Character
         "Prefabs/Characters/Player",
         "Prefabs/Characters/Rope",
