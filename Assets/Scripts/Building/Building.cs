@@ -1,9 +1,7 @@
-using ExitGames.Client.Photon.StructWrapping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
-using ResourceEnum;
 
 public enum BuildingEnum
 {
@@ -18,20 +16,26 @@ public abstract class Building : MyComponent
     protected BuildingEnum type; // 타워 종류
     protected bool isNeedLine; // 전선이 필요한가?
 
-    [SerializeField]protected float buildingTimeMax; // 제작에 얼마나 걸리나
-    [SerializeField]protected float buildingTimeCurrent; // 얼마나 제작했나
+    protected float buildingTimeMax; // 제작에 얼마나 걸리나
+
+    [Networked] protected float BuildingTimeCurrent { get; set; } // 얼마나 제작했나
+
     //protected float completePercent; //(0~1) 제작한 퍼센트
 
-    [Networked] protected float HeightMax { get; set; }
-    [Networked] protected float HeightMin { get; set; }
-    [Networked] public float CompletePercent { get { return buildingTimeCurrent / buildingTimeMax; } 
-        set { buildingTimeCurrent = buildingTimeMax * value; } }
+    protected float heightMax;
+    protected float heightMin;
+    public float CompletePercent
+    {
+        get { return BuildingTimeCurrent / buildingTimeMax; }
+        set { BuildingTimeCurrent = buildingTimeMax * value; }
+    }
     // 10%로 하라. 라고 들어옴.
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
 
     [Networked] protected bool IsFixed { get; set; } = false;
-    [Networked] protected bool isBuildable{ get; set; } // 이 장소에 건설할 수 있나
+    [Networked] float Buildable { get; set; }
+    [Networked] protected bool isBuildable { get; set; } = true; // 이 장소에 건설할 수 있나
     private ChangeDetector _changeDetector;
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
     [SerializeField] protected Vector2Int tiledBuildingPositionLast; // 건설하고자하는 마지막 위치.
@@ -46,19 +50,25 @@ public abstract class Building : MyComponent
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        foreach (var r in meshes)
+        {
+            r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+        }
         CheckBuild();
-    }   
-    
+        VisualizeBuildable();
+    }
+
     protected override void MyStart()
     {
         //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         Initialize();
-        
+
         //HeightCheck();
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
     {
+        //if (!Runner.IsServer) return false;
         isBuildable = CheckAlreadyBuild();
         //Debug.Log(isBuildable);
         //VisualizeBuildable();
@@ -90,32 +100,33 @@ public abstract class Building : MyComponent
     }
 
     public void VisualizeBuildable() // 건설 가능한지 화면에 표시함.
-    { 
+    {
         if (isBuildable)
         {
-                foreach(MeshRenderer render in meshes)
-                {
-                    render.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
-                }
+            foreach (var r in meshes)
+            {
+                r.material.SetFloat("_Buildable", 1f);
+            }
         }
         else
         {
-            foreach (MeshRenderer render in meshes)
-            { 
-                render.material = ResourceManager.Get(ResourceEnum.Material.Buildunable);
+            foreach (var r in meshes)
+            {
+                r.material.SetFloat("_Buildable", 0f);
             }
         }
+
     }
     public virtual bool FixPlace() // 건설완료
     {
         Debug.Log("hey");
         startPos = tiledBuildingPositionLast;
-        if (CheckBuild())
+        if (isBuildable)
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
             IsFixed = true;
-            //HeightCheck();
-           
+            HeightCheck();
+
             return true;
         }
         else
@@ -129,11 +140,11 @@ public abstract class Building : MyComponent
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
         if (CompletePercent < 1)
         {
-            buildingTimeCurrent += deltaTime;
+            BuildingTimeCurrent += deltaTime;
         }
         else
         {
-            
+
         }
 
         // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.
@@ -172,9 +183,9 @@ public abstract class Building : MyComponent
 
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
-        
-        float max = mesh.bounds.max.y;
-        float min = mesh.bounds.min.y;
+
+        heightMax = mesh.bounds.max.y;
+        heightMin = mesh.bounds.min.y;
         //Debug.Log(mesh.bounds.max.y);
         //Debug.Log(mesh.bounds.min.y);
 
@@ -182,8 +193,8 @@ public abstract class Building : MyComponent
 
         foreach (MeshRenderer r in meshes)
         {
-            r.material.SetFloat("_HeightMax", max);
-            r.material.SetFloat("_HeightMin", min);
+            r.material.SetFloat("_HeightMax", heightMax);
+            r.material.SetFloat("_HeightMin", heightMin);
         }
 
     }
@@ -198,30 +209,16 @@ public abstract class Building : MyComponent
                     VisualizeBuildable();
                     break;
 
+
                 case nameof(IsFixed):
                     Debug.Log(cols.Length);
                     foreach (Collider col in cols)
                     {
                         col.enabled = true;
                     }
-                    HeightCheck();
                     break;
 
-                //case nameof(HeightMax):
-                //    foreach (MeshRenderer r in meshes)
-                //    {
-                //        r.material.SetFloat("_HeightMax", HeightMax);
-                //    }
-                //    break;
-
-                //case nameof(HeightMin):
-                //    foreach (MeshRenderer r in meshes)
-                //    {
-                //        r.material.SetFloat("_HeightMin", HeightMin);
-                //    }
-                //break;
-
-                case nameof(CompletePercent):
+                case nameof(BuildingTimeCurrent):
                     {
                         foreach (MeshRenderer r in meshes)
                         {
