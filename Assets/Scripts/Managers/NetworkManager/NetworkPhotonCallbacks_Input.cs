@@ -13,6 +13,9 @@ public enum MyButtons
 }
 public struct NetworkInputData : INetworkInput
 {
+    public Vector3 currentPosition;
+    public Quaternion currentRotation;
+
     public Vector3 moveDirection;
     public Vector2 lookRotationDelta;
     public Vector2 scrollbarDelta;
@@ -29,13 +32,18 @@ public partial class NetworkPhotonCallbacks
     bool tryBuild, cancelDesignBuilding;
     bool tryInteraction;
 
-    [SerializeField] GameObject[] buildables;
-
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
         if (!GameManager.IsGameStart) return;
 
         var data = new NetworkInputData();
+        Player inputPlayer = GameManager.Instance.NetworkManager.LocalController?.ControlledPlayer;
+        if (inputPlayer != null)
+        {
+            data.currentPosition = inputPlayer.transform.position;
+            data.currentRotation = inputPlayer.transform.rotation;
+        }
+
         data.moveDirection = moveDir;
         data.lookRotationDelta = mouseDelta;
         data.selectedBuildingIndex = buildingIndex;
