@@ -88,7 +88,11 @@ public class UIManager : Manager
         if (prefabDictionary.TryGetValue(UIEnum.ErrorWindow, out GameObject prefab))
         {
             GameObject errorWindow = GameObject.Instantiate(prefab, errorCanvas.transform);
-            errorWindow.GetComponent<ErrorWindow>().SetText(bar, context, confirm, confirmAction + (() => { GameObject.Destroy(errorWindow); Cursor.lockState = CursorLockMode.Locked; }));
+            errorWindow.GetComponent<ErrorWindow>().SetText(bar, context, confirm, confirmAction + (() => 
+            { 
+                GameObject.Destroy(errorWindow); 
+                if(GameManager.IsGameStart) Cursor.lockState = CursorLockMode.Locked; 
+            }));
             Cursor.lockState = CursorLockMode.None;
         }
     }
