@@ -541,18 +541,7 @@ public class Player : Character
             switch (change) 
             {
                 case nameof(MoveDir):
-                    //if (MoveDir.magnitude == 0)
-                    //{
-                    //    float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
-                    //    float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
-                    //    rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
-                    //}
-                    //else
-                    //{
-                    //    //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
-                    //    rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
-                    //}
-                    transform.position += (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed * Runner.DeltaTime;
+                    rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
                     break;
             }
         }
