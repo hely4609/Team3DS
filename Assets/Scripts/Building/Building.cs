@@ -54,6 +54,7 @@ public abstract class Building : MyComponent
         {
             r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
         }
+        HeightCheck();
         CheckBuild();
         VisualizeBuildable();
     }
@@ -125,7 +126,7 @@ public abstract class Building : MyComponent
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
             IsFixed = true;
-            HeightCheck();
+            //HeightCheck();
 
             return true;
         }

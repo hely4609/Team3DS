@@ -48,8 +48,15 @@ public class Player : Character
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
     protected float mouseDelta_y; // 마우스 이동 변화량 y값
 
-    protected Vector3 moveDir;
+    [Networked] public Vector3 MoveDir { get; set; }
     protected Vector3 currentDir = Vector3.zero;
+
+    public Vector3 previousPosition;
+    public Quaternion previousRotation;
+
+    [SerializeField] float updateTime;
+    public Vector3 interpolatedPosition;
+
 
     public bool TryPossession() => possessionController == null;
 
@@ -142,22 +149,41 @@ public class Player : Character
 
     public override void FixedUpdateNetwork()
     {
-        /////////////////////////// 
-        //이동방향이 있을 시 해당 방향으로 움직임. +애니메이션 설정
-        if (moveDir.magnitude == 0)
+        if (GetInput(out NetworkInputData data))
         {
-            float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
-            float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
-            rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
+            previousPosition = data.currentPosition;
+            previousRotation = data.currentRotation;
+            updateTime = 0f;
         }
-        else
-        {
-            
-            //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
-            rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
-        }
+    }
 
-        currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
+    protected override void MyUpdate(float deltaTime)
+    {
+        /////////////////////////// 
+        //이동방향이 있을 시 해당 방향으로 움직임. + 애니메이션 설정
+        //if (MoveDir.magnitude == 0)
+        //{
+        //    float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
+        //    float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
+        //    rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
+        //}
+        //else
+        //{
+
+        //    rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
+        //}
+
+        //currentVelocity = rb.velocity;
+        //rb.MovePosition(transform.position + MoveDirCalculrate(MoveDir) * deltaTime);
+        //transform.position += MoveDirCalculrate(MoveDir) * deltaTime;
+        updateTime += Time.deltaTime;
+        interpolatedPosition = previousPosition + MoveDirCalculrate(MoveDir) * updateTime;
+        rb.MovePosition(interpolatedPosition);
+        currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, 0.1f));
+
+        AnimFloat?.Invoke("Speed", MoveDir.magnitude);
+        AnimFloat?.Invoke("MoveForward", currentDir.z);
+        AnimFloat?.Invoke("MoveRight", currentDir.x);
         //////////////////////////
 
         ///////////////////////////// 
@@ -177,12 +203,9 @@ public class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
-    }
 
-    protected override void MyUpdate(float deltaTime)
-    {
         // CharacterUICanvas
-        if(buildingSelectUI == null)
+        if (buildingSelectUI == null)
         {
             if(possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
             {
@@ -193,9 +216,7 @@ public class Player : Character
 
                 interactionUpdateUI.SetActive(false);
                 buildingSelectUI.SetActive(false);
-
             }
-
         }
 
         /////////////////////////////
@@ -218,18 +239,15 @@ public class Player : Character
         
     }
 
+    public Vector3 MoveDirCalculrate(Vector3 input)
+    {
+        return (transform.forward * input.z + transform.right * input.x).normalized * moveSpeed;
+    }
+
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
     public override void Move(Vector3 direction)
     {
-        moveDir = direction.normalized;
-
-        //_ncc.Move(direction, moveSpeed * 10);
-        //AnimFloat?.Invoke("Speed", direction.magnitude);
-
-        ////currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
-
-        //AnimFloat?.Invoke("MoveForward", direction.z);
-        //AnimFloat?.Invoke("MoveRight", direction.x);
+        MoveDir = direction.normalized;
     }
 
     // 마우스를 움직임에 따라서 카메라를 회전시키는 함수.
@@ -245,18 +263,25 @@ public class Player : Character
 
         //// 상하회전은 카메라만 회전
         //cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-
-        rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
-        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
-
-        mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
-        rotate_x += mouseDelta_y;
-        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        if (cameraOffset_FPS == null)
+        if (possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
         {
-            cameraOffset_FPS = transform.Find("CameraOffset");
+            rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+            transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+            mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
+            rotate_x += mouseDelta_y;
+            rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+            if (cameraOffset_FPS == null)
+            {
+                cameraOffset_FPS = transform.Find("CameraOffset");
+            }
+            cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
         }
-        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+        else
+        {
+            transform.rotation = previousRotation;
+        }
+        
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
@@ -426,8 +451,11 @@ public class Player : Character
                 {
                     interactionIndex = 0;
                     interactionObject = target;
-                    mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
-                    Canvas.ForceUpdateCanvases();
+                    if (possessionController.myAuthority == Runner.LocalPlayer)
+                    {
+                        mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
+                        Canvas.ForceUpdateCanvases();
+                    }
                 }
 
                 UpdateInteractionUI(interactionIndex);
@@ -453,7 +481,11 @@ public class Player : Character
                         InteractionEnd();
                     }
                     interactionObject = null;
-                    GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
+
+                    if (possessionController.myAuthority == Runner.LocalPlayer)
+                    {
+                        GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
+                    }
                 }
                 else
                 {
@@ -522,7 +554,10 @@ public class Player : Character
             if (targetIndex == i)
             {
                 buttonImage.color = Color.yellow;
-                mouseLeftImage.transform.position = button.transform.position;
+                if (possessionController.myAuthority == Runner.LocalPlayer)
+                {
+                    mouseLeftImage.transform.position = button.transform.position;
+                }
             } 
             else buttonImage.color = Color.white;
         }
@@ -530,9 +565,16 @@ public class Player : Character
 
     public override void Render()
     {
-        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
-        AnimFloat?.Invoke("MoveForward", currentDir.z);
-        AnimFloat?.Invoke("MoveRight", currentDir.x);
+        //foreach (var change in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+        //{
+            
+        //    switch (change) 
+        //    {
+        //        case nameof(MoveDir):
+        //            rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
+        //            break;
+        //    }
+        //}
 
     }
 }

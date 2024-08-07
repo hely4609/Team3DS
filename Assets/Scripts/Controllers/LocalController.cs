@@ -6,7 +6,6 @@ using UnityEngine.InputSystem;
 
 public class LocalController : ControllerBase
 {
-    
     public override void FixedUpdateNetwork()
     {
         if (GetInput(out NetworkInputData data))
@@ -39,9 +38,13 @@ public class LocalController : ControllerBase
             //if (data.buttons.IsSet(MyButtons.Build)) DoBuild();
         }
     }
+    protected override void MyStart()
+    {
+
+    }
 
     // 로컬 인풋
-    void Update()
+    void FixedUpdate()
     {
         // KeyCode.Return이 Enter임
         if (Input.GetKeyDown(KeyCode.Return))
