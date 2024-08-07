@@ -51,7 +51,6 @@ public class Player : Character
     protected Vector3 moveDir;
     protected Vector3 currentDir = Vector3.zero;
     
-
     public bool TryPossession() => possessionController == null;
 
     protected void RegistrationFunctions(ControllerBase targetController)
@@ -162,8 +161,6 @@ public class Player : Character
             //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
             rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
         }
-
-        
 
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
 
@@ -539,5 +536,6 @@ public class Player : Character
 
     public override void Render()
     {
+        
     }
 }

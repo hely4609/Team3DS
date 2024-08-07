@@ -16457,8 +16457,8 @@ GameObject:
   - component: {fileID: 5317811880070004779}
   - component: {fileID: 3063893609680588044}
   - component: {fileID: 748615415056933878}
-  - component: {fileID: 636115562514479030}
-  - component: {fileID: 8249678061231178494}
+  - component: {fileID: 5720312440598279769}
+  - component: {fileID: 2848954006510884495}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -16508,7 +16508,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 0
+  m_Interpolate: 1
   m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!136 &5317811880070004779
@@ -16581,7 +16581,7 @@ MonoBehaviour:
   buildingSelectUI: {fileID: 0}
   _DesigningBuilding: {fileID: 0}
   _IsThisPlayerCharacterUICanvasActivated: 0
---- !u!114 &636115562514479030
+--- !u!114 &5720312440598279769
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16593,15 +16593,15 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 760842063
+  SortKey: 2092332022
   ObjectInterest: 1
-  Flags: 262145
+  Flags: 786433
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 748615415056933878}
-  - {fileID: 8249678061231178494}
+  - {fileID: 2848954006510884495}
   - {fileID: 5381320239018996121}
---- !u!114 &8249678061231178494
+--- !u!114 &2848954006510884495
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
