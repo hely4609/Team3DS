@@ -44,7 +44,7 @@ public class LocalController : ControllerBase
     }
 
     // 로컬 인풋
-    void FixedUpdate()
+    void Update()
     {
         // KeyCode.Return이 Enter임
         if (Input.GetKeyDown(KeyCode.Return))
