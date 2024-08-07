@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class WaveManager : Manager
 {
-    private List< ResourceEnum.Prefab> waveMonsterList = new List<ResourceEnum.Prefab>(); //몇 웨이브에 어떤 몬스터가.
+    private List<ResourceEnum.Prefab> waveMonsterList = new List<ResourceEnum.Prefab>(); //몇 웨이브에 어떤 몬스터가.
     private int monsterNumber = 3; // 몬스터의 수
 
 
@@ -37,22 +37,28 @@ public class WaveManager : Manager
     }
     public override void ManagerUpdate(float deltaTime)
     {
-        nowMonsterTime += deltaTime;
-        nowWaveTime+= deltaTime;
-        if (currentMonsterIndex < monsterNumber)
-        {
-            if (nowMonsterTime >= monsterInterval)
-            {
-                MonsterInstantiate();
-                currentMonsterIndex++;
-                nowMonsterTime= 0;
-            }
-        }
-        if(nowWaveTime >= waveInterval)
-        {
-            nowWaveTime = 0;
-            currentMonsterIndex = 0;
 
+        if (GameManager.IsGameStart)
+        {
+
+
+            nowMonsterTime += deltaTime;
+            nowWaveTime += deltaTime;
+            if (currentMonsterIndex < monsterNumber)
+            {
+                if (nowMonsterTime >= monsterInterval)
+                {
+                    MonsterInstantiate();
+                    currentMonsterIndex++;
+                    nowMonsterTime = 0;
+                }
+            }
+            if (nowWaveTime >= waveInterval)
+            {
+                nowWaveTime = 0;
+                currentMonsterIndex = 0;
+
+            }
         }
     }
 }

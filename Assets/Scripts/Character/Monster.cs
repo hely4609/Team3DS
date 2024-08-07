@@ -46,7 +46,7 @@ public class Monster : Character
         
         return 0;
     }
-
+        
     // 몬스터가 이동하는 방법.
     // 어디를 갈지 지정한다.
     // 지정된 위치를 갈 때 까지 계속해서 이동한다.
