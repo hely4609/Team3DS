@@ -176,7 +176,7 @@ public class Player : Character
         //currentVelocity = rb.velocity;
         //rb.MovePosition(transform.position + MoveDirCalculrate(MoveDir) * deltaTime);
         //transform.position += MoveDirCalculrate(MoveDir) * deltaTime;
-        updateTime += Time.deltaTime;
+        updateTime += deltaTime;
         interpolatedPosition = previousPosition + MoveDirCalculrate(MoveDir) * updateTime;
         rb.MovePosition(interpolatedPosition);
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, 0.1f));
@@ -263,24 +263,18 @@ public class Player : Character
 
         //// 상하회전은 카메라만 회전
         //cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-        if (possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
-        {
-            rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
-            transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+        
+        rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
 
-            mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
-            rotate_x += mouseDelta_y;
-            rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-            if (cameraOffset_FPS == null)
-            {
-                cameraOffset_FPS = transform.Find("CameraOffset");
-            }
-            cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-        }
-        else
+        mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
+        rotate_x += mouseDelta_y;
+        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+        if (cameraOffset_FPS == null)
         {
-            transform.rotation = previousRotation;
+            cameraOffset_FPS = transform.Find("CameraOffset");
         }
+        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
         
     }
     public bool PickUp(GameObject target) { return default; }

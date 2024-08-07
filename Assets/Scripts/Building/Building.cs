@@ -18,7 +18,7 @@ public abstract class Building : MyComponent
 
     protected float buildingTimeMax; // 제작에 얼마나 걸리나
 
-    [Networked] protected float BuildingTimeCurrent { get; set; } // 얼마나 제작했나
+    [Networked] public float BuildingTimeCurrent { get; set; } // 얼마나 제작했나
 
     //protected float completePercent; //(0~1) 제작한 퍼센트
 
@@ -50,11 +50,17 @@ public abstract class Building : MyComponent
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        foreach (var r in meshes)
+        if (!IsFixed)
         {
-            r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+            Debug.Log("흠");
+            foreach (var r in meshes)
+            {
+                r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+            }
         }
+        
         HeightCheck();
+        
         CheckBuild();
         VisualizeBuildable();
     }

@@ -26,6 +26,11 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
 
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);
+
+            //foreach (var building in GameManager.Instance.BuildingManager.Buildings)
+            //{
+            //    building.BuildingTimeCurrent += 0.001f;
+            //}
         }
     }
     public void OnPlayerLeft(NetworkRunner runner, PlayerRef player)
