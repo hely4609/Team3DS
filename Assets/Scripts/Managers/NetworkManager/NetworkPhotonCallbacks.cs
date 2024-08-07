@@ -4,7 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem.XR;
+using UnityEngine.SceneManagement;
 
 public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
@@ -38,7 +38,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
-        GameManager.Instance.UIManager.ClaimError("Shutdowned", shutdownReason.ToString(), "OK");
+        GameManager.Instance.UIManager.ClaimError("Shutdowned", shutdownReason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
     }
     public void OnConnectedToServer(NetworkRunner runner) 
     {
@@ -46,12 +46,12 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     }
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) 
     { 
-        GameManager.Instance.UIManager.ClaimError("Disconneccted", reason.ToString(), "OK");
+        GameManager.Instance.UIManager.ClaimError("Disconneccted", reason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
     }
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) 
     { 
-        GameManager.Instance.UIManager.ClaimError("Connect failed", reason.ToString(), "OK");
+        GameManager.Instance.UIManager.ClaimError("Connect failed", reason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
 
     }
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }

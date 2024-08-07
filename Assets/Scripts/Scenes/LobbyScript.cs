@@ -22,7 +22,7 @@ public class LobbyScript : MonoBehaviour
         
         GameManager.ManagerStarts += (() =>
         {
-            //GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
+            GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
         });
         
     }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using System.Threading.Tasks;
+using UnityEngine.SceneManagement;
 
 public enum GameType : int
 {
@@ -86,7 +87,7 @@ public partial class NetworkManager : Manager
         }
         else
         {
-            GameManager.Instance.UIManager.ClaimError("Failed to Start", result.ShutdownReason.ToString(), "OK");
+            GameManager.Instance.UIManager.ClaimError("Failed to Start", result.ShutdownReason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
         GameManager.ClaimLoadInfo("Entering game", 2, 2);
         GameManager.CloseLoadInfo();
@@ -144,12 +145,14 @@ public partial class NetworkManager : Manager
         customProps["map"] = (int)gameMap;
         customProps["type"] = (int)gameType;
 
+        GameManager.ClaimLoadInfo("Entering game");
         var result = await runner.StartGame(new StartGameArgs()
         {
-            GameMode = GameMode.Client,
+            GameMode = GameMode.AutoHostOrClient,
             SessionProperties = customProps,
         });
 
+        GameManager.ClaimLoadInfo("Entering game", 1, 2);
         if (result.Ok)
         {
             // all good
@@ -158,8 +161,10 @@ public partial class NetworkManager : Manager
         }
         else
         {
-            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), result.ErrorMessage, "OK");
+            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), result.ErrorMessage, "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
+        GameManager.ClaimLoadInfo("Entering game", 2, 2);
+        GameManager.CloseLoadInfo();
     }
 
     public static void ClaimJoinRoom(string roomName)
