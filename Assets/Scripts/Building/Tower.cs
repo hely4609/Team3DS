@@ -42,7 +42,7 @@ public class Tower : InteractableBuilding
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
         if (CompletePercent < 1)
         {
-            buildingTimeCurrent += deltaTime;
+            BuildingTimeCurrent += deltaTime;
         }
         else
         {
