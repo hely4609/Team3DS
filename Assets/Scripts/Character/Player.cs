@@ -176,7 +176,7 @@ public class Player : Character
         //currentVelocity = rb.velocity;
         //rb.MovePosition(transform.position + MoveDirCalculrate(MoveDir) * deltaTime);
         //transform.position += MoveDirCalculrate(MoveDir) * deltaTime;
-        updateTime += Time.deltaTime;
+        updateTime += deltaTime;
         interpolatedPosition = previousPosition + MoveDirCalculrate(MoveDir) * updateTime;
         rb.MovePosition(interpolatedPosition);
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, 0.1f));
