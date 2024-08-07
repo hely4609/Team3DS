@@ -48,7 +48,7 @@ public class Player : Character
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
     protected float mouseDelta_y; // 마우스 이동 변화량 y값
 
-    protected Vector3 moveDir;
+    [Networked] protected Vector3 MoveDir { get; set; }
     protected Vector3 currentDir = Vector3.zero;
     
     public bool TryPossession() => possessionController == null;
@@ -149,20 +149,20 @@ public class Player : Character
     {
         /////////////////////////// 
         //이동방향이 있을 시 해당 방향으로 움직임. +애니메이션 설정
-        if (moveDir.magnitude == 0)
-        {
-            float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
-            float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
-            rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
-        }
-        else
-        {
+        //if (MoveDir.magnitude == 0)
+        //{
+        //    float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
+        //    float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
+        //    rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
+        //}
+        //else
+        //{
 
-            //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
-            rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
-        }
+        //    //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
+        //    rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
+        //}
 
-        currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
+        currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, 0.1f));
 
         AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
         AnimFloat?.Invoke("MoveForward", currentDir.z);
@@ -227,7 +227,7 @@ public class Player : Character
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
     public override void Move(Vector3 direction)
     {
-        moveDir = direction.normalized;
+        MoveDir = direction.normalized;
 
         //_ncc.Move(direction, moveSpeed * 10);
         //AnimFloat?.Invoke("Speed", direction.magnitude);
@@ -536,6 +536,25 @@ public class Player : Character
 
     public override void Render()
     {
-        
+        foreach (var change in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+        {
+            switch (change) 
+            {
+                case nameof(MoveDir):
+                    //if (MoveDir.magnitude == 0)
+                    //{
+                    //    float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
+                    //    float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
+                    //    rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
+                    //}
+                    //else
+                    //{
+                    //    //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
+                    //    rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
+                    //}
+                    transform.position += (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed * Runner.DeltaTime;
+                    break;
+            }
+        }
     }
 }
