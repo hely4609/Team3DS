@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1177763971216577770}
+  - component: {fileID: 2509374547561401126}
   m_Layer: 0
   m_Name: RoadWithBarrier
   m_TagString: Untagged
@@ -34,6 +35,23 @@ Transform:
   - {fileID: 1499579456769274933}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2509374547561401126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1880825259504440168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d4ff34a659015d4ab69222359d7504b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshes: []
+  cols: []
+  tiledBuildingPositionLast: {x: 0, y: 0}
+  startPos: {x: 0, y: 0}
+  size: {x: 0, y: 0}
 --- !u!1 &4002175124257899480
 GameObject:
   m_ObjectHideFlags: 0

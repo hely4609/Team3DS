@@ -54,7 +54,7 @@ public class BuildingManager : Manager
         float deltaScale = (Mathf.Abs(delta.x + delta.y) - 10) / 10;
         
         result = new Vector3(deltaScale, 1, 1);
-        
+       
         return result;
     }
     public Vector3 RoadPosition(Vector2 start, Vector2 end)
@@ -71,6 +71,7 @@ public class BuildingManager : Manager
             {
                 corners.Add(RoadInstantiate());
                 corners[i].transform.position = new Vector3(roadData[i].x, 0.1f, roadData[i].y);
+                corners[i].GetComponent<Road>().Size = new Vector2Int(10, 10);
                 //corners[i].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
             else
@@ -78,6 +79,7 @@ public class BuildingManager : Manager
                 corners.Add(CornerInstantiate());
                 corners[i].transform.position = new Vector3(roadData[i].x, 0.1f, roadData[i].y);
                 corners[i].transform.rotation = Quaternion.Euler(CornerRotation(roadData[i - 1], roadData[i], roadData[i + 1]));
+                corners[i].GetComponent<Road>().Size = new Vector2Int(10, 10);
             }
         }
 
@@ -89,6 +91,12 @@ public class BuildingManager : Manager
                 roads.Add(RoadInstantiate());
                 roads[j].transform.position = RoadPosition(roadData[j], roadData[j + 1]);
                 roads[j].transform.localScale = RoadScale(roadData[j], roadData[j + 1]);
+                if (roads[j].TryGetComponent(out Road data))
+                {
+                    // 10 곱하는 이유는 기본단위가 현재 1로 설정되어있는데, 이게 타워 기준으로 딱 10의 크기이기 때문.
+                    // 밑에서 90도 돌리기 때문에 여기도 z와 x를 변경해주어야함.
+                    data.Size = new Vector2Int((int)(roads[j].transform.localScale.z * 10), (int)(roads[j].transform.localScale.x * 10));
+                }
                 roads[j].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
             else if (Mathf.Abs(roadVector.x) > 0)
@@ -96,6 +104,10 @@ public class BuildingManager : Manager
                 roads.Add(RoadInstantiate());
                 roads[j].transform.position = RoadPosition(roadData[j], roadData[j + 1]);
                 roads[j].transform.localScale = RoadScale(roadData[j], roadData[j + 1]);
+                if (roads[j].TryGetComponent(out Road data))
+                {
+                    data.Size = new Vector2Int((int)(roads[j].transform.localScale.x * 10), (int)(roads[j].transform.localScale.z * 10));
+                }
                 roads[j].transform.rotation = Quaternion.Euler(new Vector3(0, 0, 0));
             }
         }
@@ -189,5 +201,5 @@ public class BuildingManager : Manager
     {
         buildings = newBuildingList;
     }
-
+    
 }

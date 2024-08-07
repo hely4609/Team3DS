@@ -46,11 +46,13 @@ public class TestControl : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            gen.TakeDamage(1);
-        }
-        if(Input.GetKeyDown(KeyCode.S)) 
-        {
-            gen.RepairBarrier();
+            List<Building> buildinglist = GameManager.Instance.BuildingManager.Buildings;
+            for (int i = 0; i < buildinglist.Count; i++)
+            {
+                Debug.Log($"{GameManager.Instance.BuildingManager.Buildings[i].name} : {GameManager.Instance.BuildingManager.Buildings[i].transform.position}, {GameManager.Instance.BuildingManager.Buildings[i].transform.localScale}");
+            
+            }
+
         }
     }
 
