@@ -11,6 +11,7 @@ namespace ResourceEnum
         InteractableObjButton,
         CharacterUICanvas,
         MouseLeftUI,
+        RoomButton,
         // Character
         Player,
         // Building
