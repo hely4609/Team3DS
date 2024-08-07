@@ -1,9 +1,7 @@
-using ExitGames.Client.Photon.StructWrapping;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
-using ResourceEnum;
 
 public enum BuildingEnum
 {
@@ -24,12 +22,13 @@ public abstract class Building : MyComponent
 
     //protected float completePercent; //(0~1) 제작한 퍼센트
 
-    //[Networked] 
-    protected float HeightMax { get; set; }
-    //[Networked] 
-    protected float HeightMin { get; set; }
-    public float CompletePercent { get { return BuildingTimeCurrent / buildingTimeMax; } 
-        set { BuildingTimeCurrent = buildingTimeMax * value; } }
+    protected float heightMax;
+    protected float heightMin;
+    public float CompletePercent
+    {
+        get { return BuildingTimeCurrent / buildingTimeMax; }
+        set { BuildingTimeCurrent = buildingTimeMax * value; }
+    }
     // 10%로 하라. 라고 들어옴.
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
@@ -57,13 +56,13 @@ public abstract class Building : MyComponent
         }
         CheckBuild();
         VisualizeBuildable();
-    }   
-    
+    }
+
     protected override void MyStart()
     {
         //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
         Initialize();
-        
+
         //HeightCheck();
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
@@ -116,7 +115,7 @@ public abstract class Building : MyComponent
                 r.material.SetFloat("_Buildable", 0f);
             }
         }
-       
+
     }
     public virtual bool FixPlace() // 건설완료
     {
@@ -127,7 +126,7 @@ public abstract class Building : MyComponent
             GameManager.Instance.BuildingManager.AddBuilding(this);
             IsFixed = true;
             HeightCheck();
-           
+
             return true;
         }
         else
@@ -145,7 +144,7 @@ public abstract class Building : MyComponent
         }
         else
         {
-            
+
         }
 
         // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.
@@ -184,9 +183,9 @@ public abstract class Building : MyComponent
 
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
-        
-        HeightMax = mesh.bounds.max.y;
-        HeightMin = mesh.bounds.min.y;
+
+        heightMax = mesh.bounds.max.y;
+        heightMin = mesh.bounds.min.y;
         //Debug.Log(mesh.bounds.max.y);
         //Debug.Log(mesh.bounds.min.y);
 
@@ -194,8 +193,8 @@ public abstract class Building : MyComponent
 
         foreach (MeshRenderer r in meshes)
         {
-            r.material.SetFloat("_HeightMax", HeightMax);
-            r.material.SetFloat("_HeightMin", HeightMin);
+            r.material.SetFloat("_HeightMax", heightMax);
+            r.material.SetFloat("_HeightMin", heightMin);
         }
 
     }
@@ -219,20 +218,6 @@ public abstract class Building : MyComponent
                     }
                     break;
 
-                //case nameof(HeightMax):
-                //    foreach (MeshRenderer r in meshes)
-                //    {
-                //        r.material.SetFloat("_HeightMax", HeightMax);
-                //    }
-                //    break;
-
-                //case nameof(HeightMin):
-                //    foreach (MeshRenderer r in meshes)
-                //    {
-                //        r.material.SetFloat("_HeightMin", HeightMin);
-                //    }
-                //break;
-
                 case nameof(BuildingTimeCurrent):
                     {
                         foreach (MeshRenderer r in meshes)
@@ -247,7 +232,6 @@ public abstract class Building : MyComponent
                         }
                     }
                     break;
-
 
             }
 
