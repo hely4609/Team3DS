@@ -50,6 +50,7 @@ public class Player : Character
 
     protected Vector3 moveDir;
     protected Vector3 currentDir = Vector3.zero;
+    [Networked] protected Vector3 CurrentPosition { get; set; }
 
     public bool TryPossession() => possessionController == null;
 
@@ -142,6 +143,11 @@ public class Player : Character
 
     public override void FixedUpdateNetwork()
     {
+        
+    }
+
+    protected override void MyUpdate(float deltaTime)
+    {
         /////////////////////////// 
         //이동방향이 있을 시 해당 방향으로 움직임. +애니메이션 설정
         if (moveDir.magnitude == 0)
@@ -152,12 +158,18 @@ public class Player : Character
         }
         else
         {
-            
+
             //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
             rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
         }
 
+        CurrentPosition = transform.position;
+
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
+
+        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
+        AnimFloat?.Invoke("MoveForward", currentDir.z);
+        AnimFloat?.Invoke("MoveRight", currentDir.x);
         //////////////////////////
 
         ///////////////////////////// 
@@ -177,12 +189,9 @@ public class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
-    }
 
-    protected override void MyUpdate(float deltaTime)
-    {
         // CharacterUICanvas
-        if(buildingSelectUI == null)
+        if (buildingSelectUI == null)
         {
             if(possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
             {
@@ -530,9 +539,18 @@ public class Player : Character
 
     public override void Render()
     {
-        AnimFloat?.Invoke("Speed", rb.velocity.magnitude);
-        AnimFloat?.Invoke("MoveForward", currentDir.z);
-        AnimFloat?.Invoke("MoveRight", currentDir.x);
-
+        foreach (var change in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+        {
+            switch (change) 
+            {
+                case nameof(CurrentPosition):
+                    {
+                        var reader = GetPropertyReader<Vector3>(nameof(CurrentPosition));
+                        var (previous, current) = reader.Read(previousBuffer, currentBuffer);
+                        transform.position = Vector3.Lerp(previous, current, 0.2f);
+                    }
+                    break;
+            }
+        }
     }
 }

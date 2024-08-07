@@ -3472,6 +3472,7 @@ GameObject:
   - component: {fileID: 7115310305371902191}
   - component: {fileID: 5314609561174821285}
   - component: {fileID: 7972636452116571196}
+  - component: {fileID: 5381320239018996121}
   m_Layer: 0
   m_Name: MANUKA_Obsidian
   m_TagString: Untagged
@@ -3536,6 +3537,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 5314609561174821285}
   owner: {fileID: 0}
+--- !u!114 &5381320239018996121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1129097313062114863}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 5314609561174821285}
+  TotalWords: 5
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9dfdd617c0812b98afe96ff1d9314e52e
+  TriggerHashes: 00000000
 --- !u!1 &1130949967770251426
 GameObject:
   m_ObjectHideFlags: 0
@@ -16552,14 +16571,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rb: {fileID: 4896616549607160579}
   moveSpeed: 5
+  possessionController: {fileID: 0}
   TPS_Mode: 0
   cameraOffset_FPS: {fileID: 3314105118029073812}
   cameraOffset_TPS: {fileID: 7612556974094902810}
   interactionUI: {fileID: 0}
   interactionContent: {fileID: 0}
   interactionUpdateUI: {fileID: 0}
-  buildingSeletUI: {fileID: 0}
-  designingBuilding: {fileID: 0}
+  buildingSelectUI: {fileID: 0}
+  _DesigningBuilding: {fileID: 0}
+  _IsThisPlayerCharacterUICanvasActivated: 0
 --- !u!114 &-3966098195265333311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16579,6 +16600,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 748615415056933878}
   - {fileID: -8864765734439977196}
+  - {fileID: 5381320239018996121}
 --- !u!114 &-8864765734439977196
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16586,7 +16608,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6900007637909447916}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
