@@ -163,7 +163,7 @@ public class Player : Character
             rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
         }
 
-        CurrentPosition = transform.position;
+        
 
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
 
@@ -539,6 +539,8 @@ public class Player : Character
 
     public override void Render()
     {
+        CurrentPosition = transform.position;
+
         foreach (var change in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
         {
             switch (change) 
