@@ -50,8 +50,7 @@ public class Player : Character
 
     protected Vector3 moveDir;
     protected Vector3 currentDir = Vector3.zero;
-    [Networked] protected Vector3 CurrentPosition { get; set; }
-
+    
     public bool TryPossession() => possessionController == null;
 
     protected void RegistrationFunctions(ControllerBase targetController)
@@ -162,8 +161,6 @@ public class Player : Character
             //transform.position += (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed * Runner.DeltaTime;
             rb.velocity = (transform.forward * moveDir.z + transform.right * moveDir.x).normalized * moveSpeed;
         }
-
-        
 
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, moveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, moveDir.z, 0.1f));
 
@@ -539,20 +536,6 @@ public class Player : Character
 
     public override void Render()
     {
-        CurrentPosition = transform.position;
-
-        foreach (var change in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
-        {
-            switch (change) 
-            {
-                case nameof(CurrentPosition):
-                    {
-                        var reader = GetPropertyReader<Vector3>(nameof(CurrentPosition));
-                        var (previous, current) = reader.Read(previousBuffer, currentBuffer);
-                        transform.position = Vector3.Lerp(previous, current, 0.2f);
-                    }
-                    break;
-            }
-        }
+        
     }
 }
