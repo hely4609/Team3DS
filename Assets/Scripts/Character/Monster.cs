@@ -56,22 +56,27 @@ public class Monster : Character
     
     public override void FixedUpdateNetwork()
     {
-        if (isReady)
+        if (GameManager.IsGameStart)
         {
-            MonsterMove(NextDestination(), Runner.DeltaTime);
-            if (IsDestinationArrive(NextDestination()))
-            {
-                roadDestination--;
-                if (roadDestination <= 0)
-                {
-                    roadDestination = 0;
-                }
-            }
-            if (!generator.OnOff)
-            {
-                isRelease = true;
-            }
 
+
+            if (isReady)
+            {
+                MonsterMove(NextDestination(), Runner.DeltaTime);
+                if (IsDestinationArrive(NextDestination()))
+                {
+                    roadDestination--;
+                    if (roadDestination <= 0)
+                    {
+                        roadDestination = 0;
+                    }
+                }
+                if (!generator.OnOff)
+                {
+                    isRelease = true;
+                }
+
+            }
         }
     }
     protected Vector3 NextDestination()

@@ -45,6 +45,10 @@ public class BuildingManager : Manager
         {
             generator = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 5, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
         }
+        else
+        {
+            generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
+        }
     }
 
     public Vector3 RoadScale(Vector2 start, Vector2 end)
