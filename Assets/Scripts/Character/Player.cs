@@ -275,6 +275,7 @@ public class Player : Character
             cameraOffset_FPS = transform.Find("CameraOffset");
         }
         cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+
         
     }
     public bool PickUp(GameObject target) { return default; }
