@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -19,11 +20,6 @@ public class LobbyScript : MonoBehaviour
             playerNicknames[i] = players[i].GetComponentInChildren<TextMeshProUGUI>();
             SetPlayerName(i, "");
         }
-        
-        GameManager.ManagerStarts += (() =>
-        {
-            GameManager.Instance.UIManager.Open(UIEnum.SetNicknameCanvas);
-        });
         
     }
     public void StartHost()

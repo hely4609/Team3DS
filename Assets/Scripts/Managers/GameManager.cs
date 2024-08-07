@@ -36,6 +36,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    #region Managers
     protected ControllerManager controllerManager;
     public ControllerManager ControllerManager => controllerManager;
 
@@ -74,6 +75,7 @@ public class GameManager : MonoBehaviour
 
     protected WaveManager waveManager;
     public WaveManager WaveManager => waveManager;
+    #endregion
 
     bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
@@ -127,8 +129,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += InteractionManager.ManagerUpdate;
 
         CloseLoadInfo();
-        
-        //isGameStart = true;
+
     }
 
     void FixedUpdate()

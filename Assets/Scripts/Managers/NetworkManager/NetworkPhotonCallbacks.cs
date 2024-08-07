@@ -55,49 +55,11 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
 
     }
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }
+
+    public static List<SessionInfo> sessionList = new List<SessionInfo>();
     public void OnSessionListUpdated(NetworkRunner runner, List<SessionInfo> sessionList)
     {
         Debug.Log($"Session List Updated with {sessionList.Count} session(s)");
-
-        // Example
-        // Search the list for a Session with a specific Property
-
-        // Store the target session
-        SessionInfo session = null;
-
-        foreach (var sessionItem in sessionList)
-        {
-
-            // Check for a specific Custom Property
-            if (sessionItem.Properties.TryGetValue("type", out var propertyType) && propertyType.IsInt)
-            {
-
-                var gameType = (int)propertyType.PropertyValue;
-                Debug.Log($"gameType : {gameType}");
-                // Check for the desired Game Type
-                if (gameType == 1)
-                {
-
-                    // Store the session info
-                    session = sessionItem;
-                    break;
-                }
-            }
-        }
-
-        // Check if there is any valid session
-        if (session != null)
-        {
-            Debug.Log($"Joining {session.Name}");
-
-            // Join
-            runner.StartGame(new StartGameArgs()
-            {
-                GameMode = GameMode.Client, // Client GameMode, could be Shared as well
-                SessionName = session.Name, // Session to Join
-                                            // ...
-            });
-        }
     }
     public void OnCustomAuthenticationResponse(NetworkRunner runner, Dictionary<string, object> data) { }
     public void OnHostMigration(NetworkRunner runner, HostMigrationToken hostMigrationToken) { }
