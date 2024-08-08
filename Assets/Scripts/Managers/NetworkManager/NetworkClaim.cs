@@ -90,8 +90,7 @@ public partial class NetworkManager : Manager
             GameManager.Instance.UIManager.ClaimError("Failed to Start", result.ShutdownReason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
         GameManager.ClaimLoadInfo("Entering game", 2, 2);
-        GameManager.CloseLoadInfo();
-
+        
     }
 
     public static void ClaimInvite(string nickname)
@@ -164,7 +163,6 @@ public partial class NetworkManager : Manager
             GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), result.ErrorMessage, "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
         GameManager.ClaimLoadInfo("Entering game", 2, 2);
-        GameManager.CloseLoadInfo();
     }
 
     public static void ClaimJoinRoom(string roomName)

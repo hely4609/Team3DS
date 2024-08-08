@@ -14,6 +14,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public Dictionary<PlayerRef, NetworkObject> SpawnedCharacter => _spawnedCharacters;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
+        if (player == runner.LocalPlayer) GameManager.ClaimLoadInfo("Joining room");
         if (runner.IsServer)
         {
             // Create a unique position for the player

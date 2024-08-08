@@ -217,6 +217,7 @@ public class Player : Character
                 interactionUpdateUI.SetActive(false);
                 buildingSelectUI.SetActive(false);
             }
+            GameManager.CloseLoadInfo();
         }
 
         /////////////////////////////
