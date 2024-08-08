@@ -3511,7 +3511,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129097313062114863}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: e6b3fb3160346e6429c0c3b0fe8f5b59, type: 2}
+  m_Avatar: {fileID: 9000000, guid: 4f8302846a9f6f24c8379f52600285e8, type: 2}
   m_Controller: {fileID: 9100000, guid: c51b68bdbb26bac4c847bd08000c3830, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -16458,7 +16458,7 @@ GameObject:
   - component: {fileID: 3063893609680588044}
   - component: {fileID: 748615415056933878}
   - component: {fileID: -3966098195265333311}
-  - component: {fileID: 3131898385003827619}
+  - component: {fileID: 4485169977118929429}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -16510,7 +16510,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
 --- !u!136 &5317811880070004779
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16604,9 +16604,9 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: 748615415056933878}
-  - {fileID: 3131898385003827619}
+  - {fileID: 4485169977118929429}
   - {fileID: 3751669480913735530}
---- !u!114 &3131898385003827619
+--- !u!114 &4485169977118929429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -16621,7 +16621,7 @@ MonoBehaviour:
   SyncScale: 0
   SyncParent: 1
   _interpolationTarget: {fileID: 0}
-  UsePreciseRotation: 1
+  UsePreciseRotation: 0
   UseRenderSleepThresholds: 1
   RenderThresholds:
     UseEnergy: 1

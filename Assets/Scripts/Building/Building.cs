@@ -50,6 +50,7 @@ public abstract class Building : MyComponent
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+        
         if (!IsFixed)
         {
             Debug.Log("»Ï");

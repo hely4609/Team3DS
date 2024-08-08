@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4526269169611086416}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.497665, y: 2.1274407, z: 28.88142}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -49,8 +49,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab:
     RawGuidValue: 3d35fff2bddf2d442a912a5d3b48aeab
-  buildables:
-  - {fileID: 6860581916195568055, guid: b7a3e566405353949a47c6e995f78bd8, type: 3}
 --- !u!114 &6693131604893588327
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -166,4 +164,4 @@ MonoBehaviour:
   _physicsTiming: 0
   ClientPhysicsSimulation: 0
   DeltaTimeMultiplier: 1
-  SetUnityFixedTimestep: 0
+  SetUnityFixedTimestep: 1
