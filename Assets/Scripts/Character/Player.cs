@@ -368,7 +368,7 @@ public class Player : Character
                     buttonText.text = $"Building...";
                 }
                 
-                GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
+                //GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
                 break;
         }
 
@@ -433,7 +433,7 @@ public class Player : Character
                     interactionUpdateUI.SetActive(false);
                     interactionUpdateProgress = null;
                 }
-                GameManager.Instance.PoolManager.Destroy(sockets.FindSocket("RightHand").gameObject.GetComponentInChildren<PoolingInfo>());
+                //GameManager.Instance.PoolManager.Destroy(sockets.FindSocket("RightHand").gameObject.GetComponentInChildren<PoolingInfo>());
                 break;
         }
 
