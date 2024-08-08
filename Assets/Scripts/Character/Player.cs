@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
-using System;
 using Fusion;
 
 public class Player : Character
 {
-    protected NetworkCharacterController _ncc;
-
-    [SerializeField]protected ControllerBase possessionController;
+    [SerializeField] protected ControllerBase possessionController;
     [SerializeField] bool TPS_Mode;
     [SerializeField] protected Transform cameraOffset_FPS;
     [SerializeField] protected Transform cameraOffset_TPS;
@@ -21,7 +18,7 @@ public class Player : Character
     [SerializeField] protected Transform interactionUI; // 상호작용 UI위치
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
     [SerializeField] protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
-    [SerializeField] public  GameObject buildingSelectUI; // 빌딩 선택 UI
+    [SerializeField] public GameObject buildingSelectUI; // 빌딩 선택 UI
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
@@ -300,6 +297,8 @@ public class Player : Character
         {
             transform.rotation = previousRotation;
         }
+
+        
 
     }
     public bool PickUp(GameObject target) { return default; }

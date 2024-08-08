@@ -34,8 +34,6 @@ public class LocalController : ControllerBase
 
                 }
             }
-
-            //if (data.buttons.IsSet(MyButtons.Build)) DoBuild();
         }
     }
     protected override void MyStart()
