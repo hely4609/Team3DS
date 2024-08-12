@@ -16,9 +16,9 @@ public abstract class Building : MyComponent
     protected BuildingEnum type; // 타워 종류
     protected bool isNeedLine; // 전선이 필요한가?
 
-    protected float buildingTimeMax; // 제작에 얼마나 걸리나
+    [SerializeField]protected float buildingTimeMax; // 제작에 얼마나 걸리나
 
-    [Networked] public float BuildingTimeCurrent { get; set; } // 얼마나 제작했나
+    [Networked, SerializeField] public float BuildingTimeCurrent { get; set; } // 얼마나 제작했나
 
     //protected float completePercent; //(0~1) 제작한 퍼센트
 
@@ -33,7 +33,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
 
-    [Networked] protected bool IsFixed { get; set; } = false;
+    [Networked, SerializeField] protected bool IsFixed { get; set; } = false;
     [Networked] float Buildable { get; set; }
     [Networked] protected bool isBuildable { get; set; } = true; // 이 장소에 건설할 수 있나
     private ChangeDetector _changeDetector;
@@ -50,28 +50,36 @@ public abstract class Building : MyComponent
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        
-        if (!IsFixed)
+
+        Initialize();
+        Debug.Log($"BTC {BuildingTimeCurrent}, btm : {buildingTimeMax}, cp : {CompletePercent}");
+        if (CompletePercent < 1)
         {
-            Debug.Log("흠");
             foreach (var r in meshes)
             {
                 r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
+                r.material.SetFloat("_CompletePercent", CompletePercent);
             }
+            if (IsFixed)
+            {
+                foreach (var col in cols)
+                {
+                    col.enabled = true;
+                }
+            }
+
         }
-        
         HeightCheck();
-        
+
         CheckBuild();
         VisualizeBuildable();
     }
 
     protected override void MyStart()
     {
-        //_changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
-        Initialize();
 
-        //HeightCheck();
+
+
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
