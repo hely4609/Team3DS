@@ -449,13 +449,10 @@ public class Player : Character
         Debug.Log("트리거호출");
         if (other.TryGetComponent(out IInteraction target))
         {
-            Debug.Log(interactionObjectList.Count);
             // 이미 있다면 추가하지않음
             if (interactionObjectList.Exists(inst => inst == target)) return;
-            Debug.Log("hi");
             if (System.Array.Find(target.GetInteractionColliders(), col => other == col)) 
             {
-                Debug.Log("hihi");
                 interactionObjectList.Add(target);
 
                 //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
