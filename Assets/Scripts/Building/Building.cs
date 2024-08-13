@@ -30,6 +30,7 @@ public abstract class Building : MyComponent
         set { BuildingTimeCurrent = buildingTimeMax * value; }
     }
     // 10%로 하라. 라고 들어옴.
+    [SerializeField] protected Material completeMat;
     [SerializeField] protected MeshRenderer[] meshes;
     [SerializeField] protected Collider[] cols;
 
@@ -236,7 +237,7 @@ public abstract class Building : MyComponent
                         if (CompletePercent >= 1)
                         {
                             foreach (MeshRenderer r in meshes)
-                                r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
+                                r.material = completeMat;
                         }
                     }
                     break;
