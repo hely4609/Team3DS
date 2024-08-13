@@ -183,24 +183,6 @@ public class Player : Character
         AnimFloat?.Invoke("MoveRight", currentDir.x);
         //////////////////////////
 
-        ///////////////////////////// 
-        // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
-        if (DesigningBuilding != null)
-        {
-            Vector3 pickPos = transform.position + transform.forward * 5f;
-            int x = (int)pickPos.x;
-            int z = (int)pickPos.z;
-            DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
-            Vector2Int currentPos = new Vector2Int(x, z);
-
-            // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
-            if (DesigningBuilding.TiledBuildingPos != currentPos)
-            {
-                DesigningBuilding.TiledBuildingPos = currentPos;
-                DesigningBuilding.CheckBuild();
-            }
-        }
-
         // CharacterUICanvas
         if (buildingSelectUI == null)
         {
@@ -263,7 +245,25 @@ public class Player : Character
         {
             rb.position = previousPosition;
         }
-        
+
+        ///////////////////////////// 
+        // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
+        if (DesigningBuilding != null && HasStateAuthority)
+        {
+            Vector3 pickPos = transform.position + transform.forward * 5f;
+            int x = (int)pickPos.x;
+            int z = (int)pickPos.z;
+            DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
+            Vector2Int currentPos = new Vector2Int(x, z);
+
+            // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
+            if (DesigningBuilding.TiledBuildingPos != currentPos)
+            {
+                DesigningBuilding.TiledBuildingPos = currentPos;
+                DesigningBuilding.CheckBuild();
+            }
+        }
+
     }
 
     // 마우스를 움직임에 따라서 카메라를 회전시키는 함수.

@@ -53,19 +53,19 @@ public abstract class Building : MyComponent
 
         Initialize();
         Debug.Log($"BTC {BuildingTimeCurrent}, btm : {buildingTimeMax}, cp : {CompletePercent}");
+        if (IsFixed)
+        {
+            foreach (var col in cols)
+            {
+                col.enabled = true;
+            }
+        }
         if (CompletePercent < 1)
         {
             foreach (var r in meshes)
             {
                 r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
                 r.material.SetFloat("_CompletePercent", CompletePercent);
-            }
-            if (IsFixed)
-            {
-                foreach (var col in cols)
-                {
-                    col.enabled = true;
-                }
             }
 
         }
@@ -83,14 +83,6 @@ public abstract class Building : MyComponent
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 왼쪽아래
-    {
-        //if (!Runner.IsServer) return false;
-        isBuildable = CheckAlreadyBuild();
-        //Debug.Log(isBuildable);
-        //VisualizeBuildable();
-        return isBuildable;
-    }
-    public virtual bool CheckAlreadyBuild() // 건설하려는 건물이 다른 건물에 겹쳤는지 체크.
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
