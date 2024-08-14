@@ -53,7 +53,7 @@ public class LocalController : ControllerBase
     void Update()
     {
         // KeyCode.Return¿Ã Enter¿”
-        if (Input.GetKeyDown(KeyCode.Return))
+        if (Input.GetKeyDown(KeyCode.Return) && HasInputAuthority)
         {
             if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
             else Cursor.lockState = CursorLockMode.Locked;

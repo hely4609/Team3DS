@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
@@ -21,7 +22,7 @@ public class Tower : InteractableBuilding
 
     [SerializeField] protected Monster target = null; // 타겟 지정된 몬스터
     [SerializeField] protected List<Monster> targetList = new List<Monster>();
-    [SerializeField] protected bool onOff ; // 꺼졌는지 켜졌는지.
+    [SerializeField, Networked] protected bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
     
     protected override void Initialize()
     {
@@ -34,6 +35,16 @@ public class Tower : InteractableBuilding
         buildingTimeMax = 10;
         size = new Vector2Int(4, 4);
         TurnOnOff(false);
+    }
+
+    public override void Spawned()
+    {
+        base.Spawned();
+        if (CompletePercent >= 1)
+        {
+            marker_on.SetActive(OnOff);
+            marker_off.SetActive(!OnOff);
+        }
     }
 
     public override void BuildBuilding(float deltaTime)
@@ -78,13 +89,13 @@ public class Tower : InteractableBuilding
         else
         {
             // 전원 끄기. 반대 상태로 토글합니다.
-            TurnOnOff(!onOff);
+            TurnOnOff(!OnOff);
             return Interaction.OnOff;
         }
     }
     protected override void MyUpdate(float deltaTime)
     {
-        if(onOff)
+        if(OnOff)
         {
             Attack();
         }
@@ -182,10 +193,11 @@ public class Tower : InteractableBuilding
 
     public void TurnOnOff(bool power) //전원을 키고 끄는 함수
     {
-        if (power != onOff)
+        Debug.Log($"{HasStateAuthority}, {power}, {OnOff}");
+        if (HasStateAuthority && power != OnOff)
         {
-            onOff = power;
-            if (onOff)
+            OnOff = power;
+            if (OnOff)
             {
                 currentPowerConsumption = powerConsumption;
             }
@@ -194,10 +206,13 @@ public class Tower : InteractableBuilding
                 currentPowerConsumption = 0;
             }
         }
+        marker_on.SetActive(OnOff);
+        marker_off.SetActive(!OnOff);
     }
 
     public override string GetName()
     {
         return "TurretTower";
     }
+
 }
