@@ -139,8 +139,8 @@ public class Player : Character
         //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
         //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
 
-        if(possessionController.myAuthority == Runner.LocalPlayer) myMarker.SetActive(true);
-        else otherMarker.SetActive(true);
+        if(possessionController.myAuthority == Runner.LocalPlayer) otherMarker.SetActive(false);
+        else myMarker.SetActive(false);
 
     }
 

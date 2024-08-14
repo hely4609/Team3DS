@@ -37,7 +37,7 @@ public abstract class Building : MyComponent
     [Networked, SerializeField] protected bool IsFixed { get; set; } = false;
     [Networked] float Buildable { get; set; }
     [Networked] protected bool isBuildable { get; set; } = true; // 이 장소에 건설할 수 있나
-    private ChangeDetector _changeDetector;
+    protected ChangeDetector _changeDetector;
     protected Vector2Int tiledBuildingPositionCurrent; // 건설하고싶은 현재 위치. 
     [SerializeField] protected Vector2Int tiledBuildingPositionLast; // 건설하고자하는 마지막 위치.
     public Vector2Int TiledBuildingPos { get { return tiledBuildingPositionLast; } set { tiledBuildingPositionLast = value; } } // 임시 코드
@@ -48,11 +48,19 @@ public abstract class Building : MyComponent
     [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 중앙값
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
 
+    [SerializeField] protected GameObject marker_designed;
+    [SerializeField] protected GameObject marker_on;
+    [SerializeField] protected GameObject marker_off;
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
         Initialize();
+
+        marker_designed.SetActive(false);
+        marker_on.SetActive(false);
+        marker_off.SetActive(false);
+
         Debug.Log($"BTC {BuildingTimeCurrent}, btm : {buildingTimeMax}, cp : {CompletePercent}");
         if (IsFixed)
         {
@@ -68,7 +76,11 @@ public abstract class Building : MyComponent
                 r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
                 r.material.SetFloat("_CompletePercent", CompletePercent);
             }
-
+            marker_designed.SetActive(true);
+        }
+        else
+        {
+            marker_on.SetActive(true);
         }
         HeightCheck();
 
@@ -238,6 +250,8 @@ public abstract class Building : MyComponent
                         {
                             foreach (MeshRenderer r in meshes)
                                 r.material = completeMat;
+                            marker_designed.SetActive(false);
+                            marker_on.SetActive(true);
                         }
                     }
                     break;
