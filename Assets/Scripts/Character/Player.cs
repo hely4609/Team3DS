@@ -32,6 +32,8 @@ public class Player : Character
     public bool IsInteracting => isInteracting;
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
     /////////////////////////////
+    [SerializeField] protected GameObject myMarker;
+    [SerializeField] protected GameObject otherMarker;
 
     protected GameObject bePicked;
     public GameObject BePicked => bePicked;
@@ -136,6 +138,9 @@ public class Player : Character
 
         //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
         //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
+
+        if(possessionController.myAuthority == Runner.LocalPlayer) myMarker.SetActive(true);
+        else otherMarker.SetActive(true);
 
     }
 
