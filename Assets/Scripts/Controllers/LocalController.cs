@@ -41,6 +41,14 @@ public class LocalController : ControllerBase
 
     }
 
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        if(HasStateAuthority)
+        {
+            runner.Despawn(controlledPlayer.GetComponent<NetworkObject>());
+        }
+    }
+
     // ╥ндц юнг╡
     void Update()
     {
