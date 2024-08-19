@@ -416,8 +416,6 @@ public class Player : Character
                 break;
         }
 
-        Debug.Log($"{interactionObject} 과 상호작용");
-
         return default;
     }
 
@@ -490,7 +488,6 @@ public class Player : Character
     // 상호작용 가능한 대상이 감지되었을 때 처리
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("트리거호출");
         if (other.TryGetComponent(out IInteraction target))
         {
             // 이미 있다면 추가하지않음

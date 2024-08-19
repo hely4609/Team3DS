@@ -81,6 +81,7 @@ public class Tower : InteractableBuilding
 
     public override Interaction InteractionStart(Player player)
     {
+        Debug.Log($"gd1");
         // 완성이 아직 안됨.
         if (CompletePercent < 1)
         {
@@ -206,13 +207,54 @@ public class Tower : InteractableBuilding
                 currentPowerConsumption = 0;
             }
         }
-        marker_on.SetActive(OnOff);
-        marker_off.SetActive(!OnOff);
     }
 
     public override string GetName()
     {
         return "TurretTower";
+    }
+
+    public override void Render()
+    {
+        foreach(var chage in _changeDetector.DetectChanges(this))
+        {
+            switch(chage)
+            {
+                case nameof(isBuildable):
+                    VisualizeBuildable();
+                    break;
+
+
+                case nameof(IsFixed):
+                    Debug.Log(cols.Length);
+                    foreach (Collider col in cols)
+                    {
+                        col.enabled = true;
+                    }
+                    break;
+
+                case nameof(BuildingTimeCurrent):
+                    {
+                        foreach (MeshRenderer r in meshes)
+                        {
+                            r.material.SetFloat("_CompletePercent", CompletePercent);
+                        }
+
+                        if (CompletePercent >= 1)
+                        {
+                            foreach (MeshRenderer r in meshes)
+                                r.material = completeMat;
+                            marker_designed.SetActive(false);
+                            marker_on.SetActive(true);
+                        }
+                    }
+                    break;
+                case nameof(OnOff):
+                    marker_on.SetActive(OnOff);
+                    marker_off.SetActive(!OnOff);
+                    break;
+            }
+        }
     }
 
 }
