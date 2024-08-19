@@ -44,7 +44,7 @@ public partial class NetworkPhotonCallbacks
             data.currentRotation = inputPlayer.transform.rotation;
         }
 
-        //data.moveDirection = moveDir;
+        data.moveDirection = moveDir;
         //data.lookRotationDelta = mouseDelta;
         data.selectedBuildingIndex = buildingIndex;
         data.scrollbarDelta = mouseWheelDelta;
