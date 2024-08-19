@@ -14,6 +14,7 @@ public class LocalController : ControllerBase
             //OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
 
+            if(data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
             // DesignBuilding
             // 호스트는 OnDesignBuilding을 한다.
             if(HasStateAuthority)
@@ -151,5 +152,10 @@ public class LocalController : ControllerBase
             }
         
         }
+    }
+
+    protected void OnCancel()
+    {
+        DoCancel?.Invoke();
     }
 }

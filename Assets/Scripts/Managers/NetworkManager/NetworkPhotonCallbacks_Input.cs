@@ -8,7 +8,7 @@ public enum MyButtons
 {
     DesignBuilding = 0,
     Build = 1,
-    CancelDesignBuilding = 2,
+    Cancel= 2,
     Interaction = 3,
 }
 public struct NetworkInputData : INetworkInput
@@ -18,7 +18,7 @@ public struct NetworkInputData : INetworkInput
 
     public Vector3 moveDirection;
     //public Vector2 lookRotationDelta;
-    public Vector2 scrollbarDelta;
+    //public Vector2 scrollbarDelta;
     public int selectedBuildingIndex;
     public NetworkButtons buttons;
 }
@@ -27,9 +27,10 @@ public partial class NetworkPhotonCallbacks
 {
     Vector3 moveDir;
     //Vector2 mouseDelta;
-    Vector2 mouseWheelDelta;
+    //Vector2 mouseWheelDelta;
     int buildingIndex = -1;
-    bool tryBuild, cancelDesignBuilding;
+    bool tryBuild;
+    bool tryCancel;
     bool tryInteraction;
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
@@ -47,15 +48,17 @@ public partial class NetworkPhotonCallbacks
         data.moveDirection = moveDir;
         //data.lookRotationDelta = mouseDelta;
         data.selectedBuildingIndex = buildingIndex;
-        data.scrollbarDelta = mouseWheelDelta;
+        //data.scrollbarDelta = mouseWheelDelta;
 
         data.buttons.Set(MyButtons.Build, tryBuild);
+        data.buttons.Set(MyButtons.Cancel, tryCancel);
         data.buttons.Set(MyButtons.Interaction, tryInteraction);
 
         input.Set(data);
 
         buildingIndex = -1;
         tryBuild = false;
+        tryCancel = false;
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
 
@@ -100,13 +103,17 @@ public partial class NetworkPhotonCallbacks
     {
         tryBuild = true;
     }
+    public void OnCancel()
+    {
+        tryCancel = true;
+    }
 
     public void OnInteraction(InputValue value)
     {
         tryInteraction = value.isPressed;
     }
-    public void OnMouseWheel(InputValue value)
-    {
-        mouseWheelDelta = value.Get<Vector2>();
-    }
+    //public void OnMouseWheel(InputValue value)
+    //{
+    //    mouseWheelDelta = value.Get<Vector2>();
+    //}
 }

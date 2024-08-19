@@ -69,6 +69,7 @@ public class Player : Character
         targetController.DoInteractionStart -= InteractionStart;
         targetController.DoInteractionEnd -= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
+        targetController.DoCancel -= Cancel;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
@@ -77,6 +78,7 @@ public class Player : Character
         targetController.DoInteractionStart += InteractionStart;
         targetController.DoInteractionEnd += InteractionEnd;
         targetController.DoMouseWheel += MouseWheel;
+        targetController.DoCancel += Cancel;
     }
     
     protected void UnRegistrationFunction(ControllerBase targetController)
@@ -88,6 +90,7 @@ public class Player : Character
         targetController.DoInteractionStart -= InteractionStart;
         targetController.DoInteractionEnd-= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
+        targetController.DoCancel -= Cancel;
     }
    
     public virtual void Possession(ControllerBase targetController)
@@ -379,6 +382,21 @@ public class Player : Character
     }
 
     public bool Repair(EnergyBarrierGenerator target) { return default; }
+
+    public void Cancel()
+    {
+        if (HasInputAuthority && buildingSelectUI.activeSelf)
+        {
+            buildingSelectUI.SetActive(false);
+        }
+
+        if (DesigningBuilding != null)
+        {
+            Runner.Despawn(DesigningBuilding.GetComponent<NetworkObject>());
+        }
+        
+    }
+
 
     public bool InteractionStart()
     {
