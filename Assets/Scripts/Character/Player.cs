@@ -54,7 +54,6 @@ public class Player : Character
     [Networked] public Vector3 PreviousPosition { get; set; }
     [Networked] public Quaternion PreviousRotation { get; set; }
 
-    [SerializeField] float updateTime;
     public Vector3 interpolatedPosition;
 
 
@@ -159,7 +158,6 @@ public class Player : Character
         {
             PreviousPosition = data.currentPosition;
             PreviousRotation = data.currentRotation;
-            updateTime = 0f;
         }
     }
 
