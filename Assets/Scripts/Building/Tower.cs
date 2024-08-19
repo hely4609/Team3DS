@@ -81,7 +81,6 @@ public class Tower : InteractableBuilding
 
     public override Interaction InteractionStart(Player player)
     {
-        Debug.Log($"gd1");
         // 완성이 아직 안됨.
         if (CompletePercent < 1)
         {
@@ -194,7 +193,6 @@ public class Tower : InteractableBuilding
 
     public void TurnOnOff(bool power) //전원을 키고 끄는 함수
     {
-        Debug.Log($"{HasStateAuthority}, {power}, {OnOff}");
         if (HasStateAuthority && power != OnOff)
         {
             OnOff = power;
@@ -226,7 +224,6 @@ public class Tower : InteractableBuilding
 
 
                 case nameof(IsFixed):
-                    Debug.Log(cols.Length);
                     foreach (Collider col in cols)
                     {
                         col.enabled = true;
@@ -252,6 +249,10 @@ public class Tower : InteractableBuilding
                 case nameof(OnOff):
                     marker_on.SetActive(OnOff);
                     marker_off.SetActive(!OnOff);
+                    foreach (MeshRenderer r in meshes)
+                    {
+                        r.material.SetFloat("_OnOff", OnOff? 1f : 0f);
+                    }
                     break;
             }
         }

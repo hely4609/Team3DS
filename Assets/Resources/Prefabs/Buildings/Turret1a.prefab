@@ -751,7 +751,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 0
   _BuildingTimeCurrent: 0
-  completeMat: {fileID: 2100000, guid: 488c1d89c8179504eacc5b53c72dd6f3, type: 2}
+  completeMat: {fileID: 2100000, guid: b565054db67ecb14f9ab60105c33c717, type: 2}
   meshes:
   - {fileID: 1213593497623742753}
   - {fileID: 5990246788191409780}
