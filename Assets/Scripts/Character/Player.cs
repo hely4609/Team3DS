@@ -132,9 +132,9 @@ public class Player : Character
             cameraOffset_FPS = transform.Find("CameraOffset");
         }
 
-        for (ResourceEnum.Prefab index = ResourceEnum.Prefab.Turret1a; index <= ResourceEnum.Prefab.ION_Cannon; index++)
+        for (ResourceEnum.Prefab index = ResourceEnum.Prefab.buildingStart+1; index < ResourceEnum.Prefab.buildingEnd; index++)
         {
-            int y = index - ResourceEnum.Prefab.Turret1a;
+            int y = index - (ResourceEnum.Prefab.buildingStart+1);
             int x = y / 5;
             y %= 5;
             buildableEnumArray[x, y] = index;
