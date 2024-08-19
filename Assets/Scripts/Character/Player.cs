@@ -5,6 +5,7 @@ using TMPro;
 using UnityEngine.UI;
 using Fusion;
 
+
 public class Player : Character
 {
     [SerializeField] protected ControllerBase possessionController;
@@ -50,8 +51,8 @@ public class Player : Character
     [Networked] public Vector3 MoveDir { get; set; }
     protected Vector3 currentDir = Vector3.zero;
 
-    public Vector3 previousPosition;
-    public Quaternion previousRotation;
+    [Networked] public Vector3 PreviousPosition { get; set; }
+    [Networked] public Quaternion PreviousRotation { get; set; }
 
     [SerializeField] float updateTime;
     public Vector3 interpolatedPosition;
@@ -139,7 +140,7 @@ public class Player : Character
         //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
         //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
 
-        if(possessionController.myAuthority == Runner.LocalPlayer) otherMarker.SetActive(false);
+        if(HasInputAuthority) otherMarker.SetActive(false);
         else myMarker.SetActive(false);
 
     }
@@ -153,8 +154,8 @@ public class Player : Character
     {
         if (GetInput(out NetworkInputData data))
         {
-            previousPosition = data.currentPosition;
-            previousRotation = data.currentRotation;
+            PreviousPosition = data.currentPosition;
+            PreviousRotation = data.currentRotation;
             updateTime = 0f;
         }
     }
@@ -191,7 +192,7 @@ public class Player : Character
         // CharacterUICanvas
         if (buildingSelectUI == null)
         {
-            if(possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
+            if(possessionController != null && HasInputAuthority)
             {
                 interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
                 interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
@@ -210,7 +211,7 @@ public class Player : Character
         {
             float progress = interactionObject.InteractionUpdate(deltaTime, interactionType);
 
-            if (possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
+            if (possessionController != null && HasInputAuthority)
                 interactionUpdateProgress.SetValue(progress, true);
 
             if (progress >= 1f)
@@ -233,7 +234,7 @@ public class Player : Character
     public override void Move(Vector3 direction)
     {
         MoveDir = direction.normalized;
-        if (possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
+        if (possessionController != null && HasInputAuthority)
         {
             if (MoveDir.magnitude == 0)
             {
@@ -246,10 +247,10 @@ public class Player : Character
                 rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
             }
         }
-        else
-        {
-            rb.position = previousPosition;
-        }
+        //else
+        //{
+        //    rb.position = PreviousPosition;
+        //}
 
         ///////////////////////////// 
         // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
@@ -272,39 +273,77 @@ public class Player : Character
     }
 
     // 마우스를 움직임에 따라서 카메라를 회전시키는 함수.
+    //public virtual void ScreenRotate(Vector2 mouseDelta)
+    //{
+    //    ////좌우회전은 캐릭터를 회전
+    //    //rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
+    //    //transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+    //    //mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
+    //    //rotate_x = rotate_x + mouseDelta_y;
+    //    //rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+
+    //    //// 상하회전은 카메라만 회전
+    //    //cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+    //    if (possessionController != null && HasInputAuthority)
+    //    {
+    //        rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+    //        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+    //        mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
+    //        rotate_x += mouseDelta_y;
+    //        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+    //        if (cameraOffset_FPS == null)
+    //        {
+    //            cameraOffset_FPS = transform.Find("CameraOffset");
+    //        }
+    //        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+    //    }
+    //    else
+    //    {
+    //        transform.rotation = previousRotation;
+    //    }
+    //}
+
     public virtual void ScreenRotate(Vector2 mouseDelta)
     {
-        ////좌우회전은 캐릭터를 회전
-        //rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
-        //transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
-
-        //mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
-        //rotate_x = rotate_x + mouseDelta_y;
-        //rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-
-        //// 상하회전은 카메라만 회전
-        //cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-        if (possessionController != null && possessionController.myAuthority == Runner.LocalPlayer)
+        if (HasInputAuthority)
         {
-            rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+            //좌우회전은 캐릭터를 회전
+            rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
             transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
 
-            mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
-            rotate_x += mouseDelta_y;
+            mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
+            rotate_x = rotate_x + mouseDelta_y;
             rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-            if (cameraOffset_FPS == null)
-            {
-                cameraOffset_FPS = transform.Find("CameraOffset");
-            }
+
+            // 상하회전은 카메라만 회전
             cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
         }
-        else
-        {
-            transform.rotation = previousRotation;
-        }
-
+        //else
+        //{
+        //    transform.rotation = PreviousRotation;
+        //}
         
 
+        //if (possessionController != null && HasInputAuthority)
+        //{
+        //    rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
+        //    transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
+
+        //    mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
+        //    rotate_x += mouseDelta_y;
+        //    rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+        //    if (cameraOffset_FPS == null)
+        //    {
+        //        cameraOffset_FPS = transform.Find("CameraOffset");
+        //    }
+        //    cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+        //}
+        //else
+        //{
+        //    transform.rotation = previousRotation;
+        //}
     }
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
@@ -364,7 +403,7 @@ public class Player : Character
                 isInteracting = true;
                 AnimBool?.Invoke("isBuild", true);
 
-                if (possessionController.myAuthority == Runner.LocalPlayer)
+                if (HasInputAuthority)
                 {
                     interactionUI.gameObject.SetActive(false);
                     interactionUpdateUI.SetActive(true);
@@ -432,7 +471,7 @@ public class Player : Character
             default: break;
             case Interaction.Build: 
                 AnimBool?.Invoke("isBuild", false);
-                if(possessionController.myAuthority == Runner.LocalPlayer)
+                if(HasInputAuthority)
                 {
                     interactionUI.gameObject.SetActive(true);
                     interactionUpdateUI.SetActive(false);
@@ -471,7 +510,7 @@ public class Player : Character
                 {
                     interactionIndex = 0;
                     interactionObject = target;
-                    if (possessionController.myAuthority == Runner.LocalPlayer)
+                    if (HasInputAuthority)
                     {
                         mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
                         Canvas.ForceUpdateCanvases();
@@ -502,7 +541,7 @@ public class Player : Character
                     }
                     interactionObject = null;
 
-                    if (possessionController.myAuthority == Runner.LocalPlayer)
+                    if (HasInputAuthority)
                     {
                         GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
                     }
@@ -574,7 +613,7 @@ public class Player : Character
             if (targetIndex == i)
             {
                 buttonImage.color = Color.yellow;
-                if (possessionController.myAuthority == Runner.LocalPlayer)
+                if (HasInputAuthority)
                 {
                     mouseLeftImage.transform.position = button.transform.position;
                 }
@@ -585,16 +624,19 @@ public class Player : Character
 
     public override void Render()
     {
-        //foreach (var change in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
-        //{
-            
-        //    switch (change) 
-        //    {
-        //        case nameof(MoveDir):
-        //            rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
-        //            break;
-        //    }
-        //}
+        foreach (var change in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+        {
+
+            switch (change)
+            {
+                case nameof(PreviousPosition):
+                    rb.position = PreviousPosition;
+                    break;
+                case nameof(PreviousRotation):
+                    rb.rotation = PreviousRotation;
+                    break;
+            }
+        }
 
     }
 }

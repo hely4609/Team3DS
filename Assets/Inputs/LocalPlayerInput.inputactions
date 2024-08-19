@@ -1,0 +1,74 @@
+{
+    "name": "LocalPlayerInput",
+    "maps": [
+        {
+            "name": "Normal",
+            "id": "2a576e59-e4ef-48a3-8fdd-1e0a19b7a8f2",
+            "actions": [
+                {
+                    "name": "CursorLockTogle",
+                    "type": "Button",
+                    "id": "a6f1a1c7-e439-4a2f-8f02-391f25508330",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "OpenDesignBuildingUI",
+                    "type": "Button",
+                    "id": "ba091912-c6f7-4c63-80a9-38869ff7f96c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ScreenRotate",
+                    "type": "Value",
+                    "id": "1bbad96b-ff6a-41e7-ad75-e9f0fdea5311",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "de9a1de3-6a34-4f6c-915d-778232b890bb",
+                    "path": "<Keyboard>/enter",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CursorLockTogle",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4e5a2886-adda-40b1-94c1-040f415958ee",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "OpenDesignBuildingUI",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "28a6f500-cf2a-4cdc-9678-37b2aa85f921",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ScreenRotate",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -11,7 +11,7 @@ public class LocalController : ControllerBase
         if (GetInput(out NetworkInputData data))
         {
             OnMove(data.moveDirection);
-            OnScreenRotate(data.lookRotationDelta);
+            //OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
 
             // DesignBuilding
@@ -52,19 +52,36 @@ public class LocalController : ControllerBase
     // 로컬 인풋
     void Update()
     {
+        
         // KeyCode.Return이 Enter임
-        if (Input.GetKeyDown(KeyCode.Return) && HasInputAuthority)
-        {
-            if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
-            else Cursor.lockState = CursorLockMode.Locked;
-        }
+        // OnCursorLockTogle
+        //if (Input.GetKeyDown(KeyCode.Return) && HasInputAuthority)
+        //{
+        //    if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+        //    else Cursor.lockState = CursorLockMode.Locked;
+        //}
 
-        if (Input.GetKeyDown(KeyCode.B))
-        {
-            Debug.Log($"DesiningBuilding : {controlledPlayer.DesigningBuilding}");
-            if (controlledPlayer.DesigningBuilding == null && myAuthority == Runner.LocalPlayer)
-                controlledPlayer.buildingSelectUI.SetActive(true);
-        }
+        // OnOpenDesignBuildingUI
+        //if (Input.GetKeyDown(KeyCode.B))
+        //{
+        //    Debug.Log($"DesiningBuilding : {controlledPlayer.DesigningBuilding}");
+        //    if (controlledPlayer.DesigningBuilding == null && myAuthority == Runner.LocalPlayer)
+        //        controlledPlayer.buildingSelectUI.SetActive(true);
+        //}
+    }
+
+    protected void OnCursorLockTogle()
+    {
+        if (HasInputAuthority)
+
+        if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+        else Cursor.lockState = CursorLockMode.Locked;
+    }
+
+    protected void OnOpenDesignBuildingUI()
+    {
+        if (controlledPlayer.DesigningBuilding == null && HasInputAuthority)
+            controlledPlayer.buildingSelectUI.SetActive(true);
     }
 
     protected void OnMove(Vector3 direaction)
@@ -72,9 +89,20 @@ public class LocalController : ControllerBase
         DoMove?.Invoke(direaction);
     }
 
+    //protected void OnMove(InputValue value)
+    //{
+    //    DoMove?.Invoke(value.Get<Vector3>());
+    //}
+
     protected void OnScreenRotate(Vector2 mouseDelta)
     {
+        
         DoScreenRotate?.Invoke(mouseDelta);
+    }
+
+    protected void OnScreenRotate(InputValue value)
+    {
+        DoScreenRotate?.Invoke(value.Get<Vector2>());
     }
 
     protected void OnPickUp() { }

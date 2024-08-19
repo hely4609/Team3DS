@@ -17,7 +17,7 @@ public struct NetworkInputData : INetworkInput
     public Quaternion currentRotation;
 
     public Vector3 moveDirection;
-    public Vector2 lookRotationDelta;
+    //public Vector2 lookRotationDelta;
     public Vector2 scrollbarDelta;
     public int selectedBuildingIndex;
     public NetworkButtons buttons;
@@ -26,7 +26,7 @@ public struct NetworkInputData : INetworkInput
 public partial class NetworkPhotonCallbacks
 {
     Vector3 moveDir;
-    Vector2 mouseDelta;
+    //Vector2 mouseDelta;
     Vector2 mouseWheelDelta;
     int buildingIndex = -1;
     bool tryBuild, cancelDesignBuilding;
@@ -44,8 +44,8 @@ public partial class NetworkPhotonCallbacks
             data.currentRotation = inputPlayer.transform.rotation;
         }
 
-        data.moveDirection = moveDir;
-        data.lookRotationDelta = mouseDelta;
+        //data.moveDirection = moveDir;
+        //data.lookRotationDelta = mouseDelta;
         data.selectedBuildingIndex = buildingIndex;
         data.scrollbarDelta = mouseWheelDelta;
 
@@ -58,14 +58,15 @@ public partial class NetworkPhotonCallbacks
         tryBuild = false;
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
+
     public void OnMove(InputValue value)
     {
         moveDir = value.Get<Vector3>();
     }
-    public void OnScreenRotate(InputValue value)
-    {
-        mouseDelta = value.Get<Vector2>();
-    }
+    //public void OnScreenRotate(InputValue value)
+    //{
+    //    mouseDelta = value.Get<Vector2>();
+    //}
 
     public void OnDesignBuilding(InputValue value)
     {
