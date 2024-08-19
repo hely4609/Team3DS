@@ -15,11 +15,8 @@ namespace ResourceEnum
         // Character
         Player,
         // Building
-        Tower,
         Road,
         EnergyBarrier,
-        Turret1a,
-        ION_Cannon,
         CornerWithBarrier,
         RoadWithBarrier,
         // Object
@@ -27,9 +24,15 @@ namespace ResourceEnum
         Rope,
         PowerSupply,
         EnergyBarrierGenerator,
-        Bridge,
         // Monster
-        EnemyTest
+        EnemyTest,
+
+        // 지을 수 있는것
+        buildingStart,
+        Turret1a,
+        ION_Cannon,
+        Bridge,
+        buildingEnd
     }
 
     public enum Material
