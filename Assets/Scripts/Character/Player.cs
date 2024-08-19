@@ -247,10 +247,10 @@ public class Player : Character
                 rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
             }
         }
-        //else
-        //{
-        //    rb.position = PreviousPosition;
-        //}
+        else
+        {
+            rb.position = PreviousPosition;
+        }
 
         ///////////////////////////// 
         // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
@@ -629,9 +629,6 @@ public class Player : Character
 
             switch (change)
             {
-                case nameof(PreviousPosition):
-                    rb.position = PreviousPosition;
-                    break;
                 case nameof(PreviousRotation):
                     rb.rotation = PreviousRotation;
                     break;
