@@ -460,7 +460,6 @@ public class Player : Character
                 break;
         }
 
-        Debug.Log($"{interactionObject} 과 상호작용");
 
         return default;
     }
