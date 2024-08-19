@@ -503,6 +503,17 @@ public class Player : Character
     // 상호작용 가능한 대상이 감지되었을 때 처리
     private void OnTriggerEnter(Collider other)
     {
+        //IInteraction interaction;
+
+        //if (other.TryGetComponent(out Socket socket))
+        //{
+        //    GameObject inst = socket.GetOwner();
+        //    if (inst.TryGetComponent(out IInteraction result))
+        //    {
+        //        interaction = result;
+        //    }
+        //}
+
         if (other.TryGetComponent(out IInteraction target))
         {
             // 이미 있다면 추가하지않음
@@ -537,7 +548,6 @@ public class Player : Character
     // 상호작용 가능한 대상 리스트에 있는 대상이 감지범위에서 나갔을 때 처리
     private void OnTriggerExit(Collider other)
     {
-
         if (other.TryGetComponent(out IInteraction target))
         {
             if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
@@ -567,7 +577,6 @@ public class Player : Character
                     }
                     interactionObject = interactionObjectList[interactionIndex];
 
-                    UpdateInteractionUI(interactionIndex);
                 }
 
                 if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
@@ -575,6 +584,8 @@ public class Player : Character
                     GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
                     interactionObjectDictionary.Remove(target);
                 }
+
+                UpdateInteractionUI(interactionIndex);
             }
         }
     }
@@ -618,6 +629,8 @@ public class Player : Character
     // 상호작용 UI를 최신화하는 함수
     private void UpdateInteractionUI(int targetIndex)
     {
+        Canvas.ForceUpdateCanvases();
+
         for (int i = 0; i < interactionObjectList.Count; i++)
         {
             GameObject button = interactionObjectDictionary[interactionObjectList[i]];
