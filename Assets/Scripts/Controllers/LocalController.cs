@@ -73,9 +73,10 @@ public class LocalController : ControllerBase
     protected void OnCursorLockTogle()
     {
         if (HasInputAuthority)
-
-        if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
-        else Cursor.lockState = CursorLockMode.Locked;
+        {
+            if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
+            else Cursor.lockState = CursorLockMode.Locked;
+        }
     }
 
     protected void OnOpenDesignBuildingUI()
@@ -121,9 +122,10 @@ public class LocalController : ControllerBase
         DoBuild?.Invoke();
     }
 
-    protected void OnMouseWheel(Vector2 scrollDelta)
+    protected void OnMouseWheel(InputValue value)
     {
-        DoMouseWheel?.Invoke(scrollDelta);
+        if (HasInputAuthority)
+        DoMouseWheel?.Invoke(value.Get<Vector2>());
     }
     protected void OnRepair() { }
     ////////////////////////////////////////////

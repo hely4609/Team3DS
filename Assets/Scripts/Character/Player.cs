@@ -244,7 +244,7 @@ public class Player : Character
             }
             else
             {
-                rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
+                rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed + Vector3.up * rb.velocity.y;
             }
         }
         else
