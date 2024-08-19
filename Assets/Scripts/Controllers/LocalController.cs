@@ -28,7 +28,7 @@ public class LocalController : ControllerBase
             {
                 controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
                 Debug.Log($"IsThisPCUICA : {controlledPlayer.IsThisPlayerCharacterUICanvasActivated}");
-                if(myAuthority == Runner.LocalPlayer)
+                if(HasInputAuthority)
                 {
                     controlledPlayer.buildingSelectUI.SetActive(false);
 
@@ -127,19 +127,27 @@ public class LocalController : ControllerBase
     }
     protected void OnRepair() { }
     ////////////////////////////////////////////
+
+    bool alreadyPressed = false;
     protected void OnInteraction(bool isPressed) 
     {
         if (controlledPlayer == null) return;
 
-        if (isPressed)
-        {
-            // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
-            // 업데이트 함수를 등록해서 뗄때까지 실행
-            DoInteractionStart?.Invoke();
-        }
-        else
-        {
-            DoInteractionEnd?.Invoke();
+        if (isPressed ^ alreadyPressed)
+        { 
+            if(isPressed)
+            {
+                // 플레이어가 지금 자기가 하고있는 상호작용이 뭔지 알아야함.
+                // 업데이트 함수를 등록해서 뗄때까지 실행
+                DoInteractionStart?.Invoke();
+                alreadyPressed = true;
+            }
+            else
+            {
+                DoInteractionEnd?.Invoke();
+                alreadyPressed = false;
+            }
+        
         }
     }
 }
