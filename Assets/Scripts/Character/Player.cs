@@ -269,7 +269,7 @@ public class Player : Character
             if (DesigningBuilding.TiledBuildingPos != currentPos)
             {
                 DesigningBuilding.TiledBuildingPos = currentPos;
-                DesigningBuilding.CheckBuild(DesigningBuilding.TiledBuildingPos, DesigningBuilding.buildingSize);
+                DesigningBuilding.CheckBuild();
             }
         }
 

@@ -46,6 +46,7 @@ public abstract class Building : MyComponent
     // 그러다가 움직이면, float형을 받아오고, 반올림을 했을 때, tiledBuildingPosiotionLast 와 다르면 그때 CheckBuild를 실행
 
     [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 중앙값
+    public Vector2Int StartPos { get { return startPos; } }
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
     public Vector2Int buildingSize { get { return size; } }
 
@@ -85,7 +86,7 @@ public abstract class Building : MyComponent
         }
         HeightCheck();
 
-        CheckBuild(tiledBuildingPositionLast, size);
+        CheckBuild();
         VisualizeBuildable();
     }
 
@@ -96,7 +97,7 @@ public abstract class Building : MyComponent
 
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
-    public virtual bool CheckBuild(Vector2Int lastPos, Vector2Int size)  // buildPos는 건설하는 타워의 중앙값
+    public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 중앙값
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
@@ -104,7 +105,7 @@ public abstract class Building : MyComponent
         {
             foreach (Building building in buildingList)
             {
-                Vector2Int distance = building.startPos - lastPos;
+                Vector2Int distance = building.startPos - tiledBuildingPositionLast;
                 Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
                 if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
                 {
