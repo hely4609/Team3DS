@@ -53,15 +53,20 @@ public abstract class Building : MyComponent
     public Vector2Int BuildingSize { get { return size; } }
 
     [SerializeField] protected GameObject marker_designed;
-    [SerializeField] protected GameObject marker_on;
-    [SerializeField] protected GameObject marker_off;
+    //[SerializeField] protected GameObject marker_on;
+    //[SerializeField] protected GameObject marker_off;
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
         Initialize();
 
-        //marker_designed.SetActive(false);
+        if(marker_designed == null)
+        {
+            marker_designed = ResourceManager.Get(ResourceEnum.Prefab.Building_Designed);
+            //marker_designed.transform.SetParent(transform);
+        }
+        marker_designed.SetActive(false);
         //marker_on.SetActive(false);
         //marker_off.SetActive(false);
 

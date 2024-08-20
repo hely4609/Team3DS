@@ -13,12 +13,12 @@ namespace ResourceEnum
         MouseLeftUI,
         RoomButton,
         Minimap,
-        Marker_Player_Me,
-        Marker_Player_Other,
-        Marker_Building_Designed,
-        Marker_Building_On,
-        Marker_Building_Off,
-        Marker_Enemy,
+        Character_Marker_Me,
+        Character_Marker_Other,
+        Building_Designed,
+        Building_On,
+        Building_Off,
+        Enemy_Marker,
         // Character
         Player,
         // Building
