@@ -40,9 +40,6 @@ public class GameManager : MonoBehaviour
     protected ControllerManager controllerManager;
     public ControllerManager ControllerManager => controllerManager;
 
-    protected MiniMapManager miniMapManager;
-    public MiniMapManager MiniMapManager => miniMapManager;
-
     protected OptionManager optionManager;
     public OptionManager OptionManager => optionManager;
 
@@ -102,8 +99,6 @@ public class GameManager : MonoBehaviour
         yield return poolManager.Initiate();
         uiManager = new UIManager();
         yield return uiManager.Initiate();
-        miniMapManager = new MiniMapManager();
-        yield return miniMapManager.Initiate();
         buildingManager = new BuildingManager();
         yield return buildingManager.Initiate();
         cameraManager = new CameraManager();
@@ -121,7 +116,6 @@ public class GameManager : MonoBehaviour
 
         ManagerUpdates += SoundManager.ManagerUpdate;
         ManagerUpdates += UIManager.ManagerUpdate;
-        ManagerUpdates += MiniMapManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
         ManagerUpdates += WaveManager.ManagerUpdate;
 
