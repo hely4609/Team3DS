@@ -71,6 +71,13 @@ public abstract class Building : MyComponent
                 col.enabled = true;
             }
         }
+        else
+        {
+            foreach (var col in cols)
+            {
+                col.enabled = false;
+            }
+        }
         if (CompletePercent < 1)
         {
             foreach (var r in meshes)
