@@ -50,7 +50,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 중앙값
     public Vector2Int StartPos { get { return startPos; } }
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
-    public Vector2Int buildingSize { get { return size; } }
+    public Vector2Int BuildingSize { get { return size; } }
 
     [SerializeField] protected GameObject marker_designed;
     [SerializeField] protected GameObject marker_on;

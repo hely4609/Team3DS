@@ -29,7 +29,7 @@ public class Bridge : InteractableBuilding
             foreach (Building building in buildingList)
             {
                 Vector2Int distance = building.StartPos - stairPosRight;
-                Vector2Int sizeSum = (building.buildingSize + size + Vector2Int.one) / 2;
+                Vector2Int sizeSum = (building.BuildingSize + size + Vector2Int.one) / 2;
                 if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
                 {
                     isBuildable = true;
