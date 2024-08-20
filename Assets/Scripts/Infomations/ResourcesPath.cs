@@ -18,7 +18,6 @@ public class ResourcesPath
         "Prefabs/Characters/Rope",
         "Prefabs/Characters/Hammer",
         // Tower
-        "Prefabs/Buildings/Tower",
         "Prefabs/Buildings/Road",
         "Prefabs/Buildings/EnergyBarrier",
         "Prefabs/Buildings/Turret1a",
