@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Fusion;
 
 
-public class Player : Character
+public partial class Player : Character
 {
     [SerializeField] protected ControllerBase possessionController;
     [SerializeField] bool TPS_Mode;
@@ -150,6 +150,9 @@ public class Player : Character
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+
+        capsule = GetComponent<CapsuleCollider>();
+        moveRay = new();
     }
 
     public override void FixedUpdateNetwork()
@@ -235,6 +238,7 @@ public class Player : Character
     public override void Move(Vector3 direction)
     {
         MoveDir = direction.normalized;
+
         if (possessionController != null && HasInputAuthority)
         {
             if (MoveDir.magnitude == 0)
@@ -245,8 +249,9 @@ public class Player : Character
             }
             else
             {
-                rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed + Vector3.up * rb.velocity.y;
+                rb.velocity = Vector3.ProjectOnPlane((transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed, GroundNormal);
             }
+
         }
         else
         {
@@ -662,4 +667,117 @@ public class Player : Character
         }
 
     }
+
+    CapsuleCollider capsule;
+    //땅이 무엇인지 저장해둘 거예요!
+    public GameObject ground;
+
+    //움직이기 위해 레이를 발사할 거예요!
+    Ray moveRay;
+
+    //이 캐릭터와 닿아있는 대상을 저장해둘게요!
+    Dictionary<GameObject, Vector3> attachedCollision = new();
+
+    //방향키 방향을 토대로 월드 방향을 구해봤어요!
+    Vector3 prefferedMoveDirection;
+
+    //지금 제가 딛고 있는 땅의 노말을 저장해둡시다!
+    Vector3 _groundNormal = Vector3.down;
+    Vector3 GroundNormal
+    {
+        get => _groundNormal;
+        set
+        {
+            _groundNormal = value;
+        }
+    }
+
+    //공중에는 평소의 몇%의 속도로 움직일 수 있는지 확인해봅시다!
+    public float moveAirMultiplier = 0.01f;
+    
+    public bool moveWorldDirection = true;
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //그래서 부딪힌 대상을 저장할 거예요! 상대와  닿은 노말!
+        attachedCollision.Add(collision.gameObject, collision.GetContact(0).normal);
+        //그리고 변경되었으니 땅을 체크해봅시다!
+        Calculate_Ground();
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        //일단 닿은 바닥의 방향을 확인해볼게요!
+        Vector3 normal = collision.GetContact(0).normal;
+        //닿은 바닥의 방향이 옛날과 다르면
+        if (attachedCollision[collision.gameObject] != normal)
+        {
+            //값을 변경해줍니다!
+            attachedCollision[collision.gameObject] = normal;
+            //값이 변화되었으니 계산해볼거예요!
+            Calculate_Ground();
+        }
+    }
+
+    private void OnCollisionExit(Collision collision)
+    {
+        //대상이 나갔으니 그냥 지웁시다!
+        attachedCollision.Remove(collision.gameObject);
+        //나갔는데 이게 땅이었네요?
+        if (collision.gameObject == ground)
+        {
+            //그러면 땅을 초기화하고
+            ground = null;
+            GroundNormal = Vector3.down;
+            //다시 계산해봅시다!
+            Calculate_Ground();
+        }
+    }
+
+    void Calculate_Ground()
+    {
+        //닿은게 없으면 땅이 아니죠!
+        if (attachedCollision.Count == 0)
+        {
+            //땅이 아직 초기화가 안되었다면
+            if (ground != null)
+            {
+                //땅 지워버리고
+                ground = null;
+                //노말도 아래로 바꿔버립시다!
+                GroundNormal = Vector3.down;
+            }
+            //끝
+            return;
+        }
+        else //아니면 계산해봐야해요
+        {
+            //가장 땅 같은 친구 찾기!
+            GameObject mostGroundObject = ground; //일단 지금 땅의 정보로 시작!
+            //이거는 땅의 노말을 확인할 거예요!
+            Vector3 mostGroundNormal;
+
+            //노말은 만약, 가장 땅같은 친구가 있으면 그 친구를 기준으로!
+            if (ground) mostGroundNormal = GroundNormal;
+            else mostGroundNormal = Vector3.down;
+            //아니면 땅이 없다고 생각해서 노말을 초기화해줄 거예요!
+
+            foreach (var currentTarget in attachedCollision)
+            {
+                //가장 땅 같다는 건 가장 위를 보고 있다는 것!
+                if (mostGroundNormal.y < currentTarget.Value.y)
+                {
+                    //그래서 1등 자리를 이 친구한테 줍시다!
+                    mostGroundNormal = currentTarget.Value;
+                    mostGroundObject = currentTarget.Key;
+                }
+            };
+
+            //나온 결과를 저장하고
+            ground = mostGroundObject;
+            GroundNormal = mostGroundNormal;
+        }
+
+    }
+
 }

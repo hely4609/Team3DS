@@ -56,6 +56,7 @@ public partial class NetworkPhotonCallbacks
 
         input.Set(data);
 
+        //moveDir = Vector3.zero;
         buildingIndex = -1;
         tryBuild = false;
         tryCancel = false;
