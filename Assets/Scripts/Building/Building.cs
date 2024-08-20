@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using Unity.VisualScripting;
 
 public enum BuildingEnum
 {
@@ -18,7 +19,7 @@ public abstract class Building : MyComponent
 
     protected bool isNeedLine; // 전선이 필요한가?
 
-    [SerializeField]protected float buildingTimeMax; // 제작에 얼마나 걸리나
+    [SerializeField] protected float buildingTimeMax; // 제작에 얼마나 걸리나
 
     [Networked, SerializeField] public float BuildingTimeCurrent { get; set; } // 얼마나 제작했나
 
@@ -111,6 +112,7 @@ public abstract class Building : MyComponent
 
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
+
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 중앙값
     {
         isBuildable = true;
@@ -121,18 +123,55 @@ public abstract class Building : MyComponent
             {
                 Vector2Int distance = building.startPos - tiledBuildingPositionLast;
                 Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
-                if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+
+                if (building.Type == BuildingEnum.Bridge)
                 {
-                    isBuildable = true;
+                    isBuildable= BridgeCheck(building, tiledBuildingPositionLast);
                 }
                 else
                 {
-                    isBuildable = false;
-                    break;
+                    if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+                    {
+                        isBuildable = true;
+                    }
+                    else
+                    {
+                        isBuildable = false;
+                        break;
+                    }
                 }
-
             }
         }
+        return isBuildable;
+    }
+
+    protected virtual bool BridgeCheck(Building building, Vector2Int thisBuildingPos)
+    {
+        bool isBuildable;
+        Vector2Int buildingPosRight = building.StartPos + Vector2Int.down * 2;
+        Vector2Int buildingPosLeft = building.StartPos + new Vector2Int(0, 12);
+        Vector2Int distance = buildingPosRight - thisBuildingPos;
+        Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
+        
+        if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+        {
+            isBuildable = true;
+        }
+        else
+        {
+            return false;
+        }
+
+        distance = buildingPosLeft - thisBuildingPos;
+        if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+        {
+            isBuildable = true;
+        }
+        else
+        {
+            return false;
+        }
+
         return isBuildable;
     }
 
