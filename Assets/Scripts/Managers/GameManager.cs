@@ -114,6 +114,8 @@ public class GameManager : MonoBehaviour
         yield return networkManager.Initiate();
         waveManager = new WaveManager();
         yield return waveManager.Initiate();
+        miniMapManager = new MiniMapManager();
+        yield return miniMapManager.Initiate();
 
 
         cameraManager = new CameraManager();
@@ -124,6 +126,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += MiniMapManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
         ManagerUpdates += WaveManager.ManagerUpdate;
+        ManagerUpdates += MiniMapManager.ManagerUpdate;
 
         ManagerUpdates += CameraManager.ManagerUpdate;
         ManagerUpdates += InteractionManager.ManagerUpdate;
