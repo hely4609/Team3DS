@@ -12,6 +12,7 @@ namespace ResourceEnum
         CharacterUICanvas,
         MouseLeftUI,
         RoomButton,
+        Minimap,
         // Character
         Player,
         // Building

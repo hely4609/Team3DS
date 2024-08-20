@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public enum UIEnum
 {
-    ErrorWindow, SignInCanvas, SetNicknameCanvas, BeInvitedWindow, CharacterUICanvas, RoomButton,
+    ErrorWindow, SignInCanvas, SetNicknameCanvas, BeInvitedWindow, CharacterUICanvas, RoomButton, Minimap
 }
 
 public class UIManager : Manager
@@ -30,6 +30,7 @@ public class UIManager : Manager
         prefabDictionary.Add(UIEnum.BeInvitedWindow, ResourceManager.Get(ResourceEnum.Prefab.BeInvitedWindow));
         prefabDictionary.Add(UIEnum.CharacterUICanvas, ResourceManager.Get(ResourceEnum.Prefab.CharacterUICanvas));
         prefabDictionary.Add(UIEnum.RoomButton, ResourceManager.Get(ResourceEnum.Prefab.RoomButton));
+        prefabDictionary.Add(UIEnum.Minimap, ResourceManager.Get(ResourceEnum.Prefab.Minimap));
 
         GameObject errorCanvasObject = new GameObject("ErrorCanvas", typeof(Canvas), typeof(CanvasScaler), typeof(GraphicRaycaster));
         errorCanvas = errorCanvasObject.GetComponent<Canvas>();
