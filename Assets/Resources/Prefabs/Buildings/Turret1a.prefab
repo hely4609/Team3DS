@@ -600,8 +600,8 @@ GameObject:
   - component: {fileID: 6263576778540548452}
   - component: {fileID: 5364410524237927022}
   - component: {fileID: 217081395227794833}
-  - component: {fileID: 7630605579735506491}
   - component: {fileID: -7105231291510333394}
+  - component: {fileID: 5823091311693353805}
   - component: {fileID: -4987246587671253148}
   - component: {fileID: -8626605937255627563}
   m_Layer: 0
@@ -737,47 +737,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 3, y: 8, z: 3}
   m_Center: {x: 0, y: 3, z: -4.2}
---- !u!114 &7630605579735506491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6860581916195568055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 61af0b388c34bd94f80d66d6f6d6f32f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingTimeMax: 0
-  _BuildingTimeCurrent: 0
-  completeMat: {fileID: 2100000, guid: b565054db67ecb14f9ab60105c33c717, type: 2}
-  meshes:
-  - {fileID: 1213593497623742753}
-  - {fileID: 5990246788191409780}
-  - {fileID: 3317812685788943892}
-  - {fileID: 8239844606282766427}
-  - {fileID: 4267604265090691170}
-  - {fileID: 928844447124107611}
-  cols:
-  - {fileID: -2922652224087554815}
-  - {fileID: 7303631373543993669}
-  - {fileID: 6263576778540548452}
-  - {fileID: 5364410524237927022}
-  - {fileID: 217081395227794833}
-  _IsFixed: 0
-  tiledBuildingPositionLast: {x: 0, y: 0}
-  startPos: {x: 0, y: 0}
-  size: {x: 0, y: 0}
-  marker_designed: {fileID: 7426378149561780533}
-  marker_on: {fileID: 4019633112572572318}
-  marker_off: {fileID: 4702220207956621170}
-  interactionRenderer: {fileID: 1213593497623742753}
-  attackDamage: 0
-  attackSpeed: 0
-  target: {fileID: 0}
-  targetList: []
-  _OnOff: 0
 --- !u!135 &-7105231291510333394
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -799,6 +758,47 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 10
   m_Center: {x: 0, y: 5, z: 0}
+--- !u!114 &5823091311693353805
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860581916195568055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 765d09137a36e354b913391ca05ebfe5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingTimeMax: 10
+  _BuildingTimeCurrent: 0
+  completeMat: {fileID: 2100000, guid: b565054db67ecb14f9ab60105c33c717, type: 2}
+  meshes:
+  - {fileID: 1213593497623742753}
+  - {fileID: 928844447124107611}
+  - {fileID: 5990246788191409780}
+  - {fileID: 3317812685788943892}
+  - {fileID: 8239844606282766427}
+  - {fileID: 4267604265090691170}
+  cols:
+  - {fileID: -2922652224087554815}
+  - {fileID: 7303631373543993669}
+  - {fileID: 6263576778540548452}
+  - {fileID: 5364410524237927022}
+  - {fileID: 217081395227794833}
+  _IsFixed: 0
+  tiledBuildingPositionLast: {x: 0, y: 0}
+  startPos: {x: 0, y: 0}
+  size: {x: 4, y: 4}
+  marker_designed: {fileID: 7426378149561780533}
+  marker_on: {fileID: 4019633112572572318}
+  marker_off: {fileID: 4702220207956621170}
+  attackDamage: 1
+  attackSpeed: 0.5
+  attackRange: 1
+  target: {fileID: 0}
+  targetList: []
+  _OnOff: 0
 --- !u!114 &-4987246587671253148
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -832,7 +832,7 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 7630605579735506491}
+  - {fileID: 5823091311693353805}
   - {fileID: -4987246587671253148}
 --- !u!1 &7426378149561780533
 GameObject:

@@ -769,7 +769,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b327144b28c5f4ebc3b6e96b91011b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buildingTimeMax: 0
+  buildingTimeMax: 10
   _BuildingTimeCurrent: 0
   completeMat: {fileID: 2100000, guid: 587975ea18233454787ee4ff0cd3bf43, type: 2}
   meshes:
@@ -809,16 +809,17 @@ MonoBehaviour:
   _IsFixed: 0
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
-  size: {x: 0, y: 0}
+  size: {x: 4, y: 4}
   marker_designed: {fileID: 7186215564637572337}
   marker_on: {fileID: 5057120298124022472}
   marker_off: {fileID: 2086794725121578148}
-  interactionRenderer: {fileID: 2829039577149875135}
-  attackDamage: 0
-  attackSpeed: 0
+  attackDamage: 1
+  attackSpeed: 0.5
+  attackRange: 1
   target: {fileID: 0}
   targetList: []
   _OnOff: 0
+  splashRadius: 10
 --- !u!136 &5371794395544762303
 CapsuleCollider:
   m_ObjectHideFlags: 0
