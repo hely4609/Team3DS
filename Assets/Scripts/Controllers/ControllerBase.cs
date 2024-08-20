@@ -58,7 +58,7 @@ public class ControllerBase : MyComponent
         if(HasInputAuthority)
         {
             GameManager.Instance.UIManager.GetUI(UIEnum.CharacterUICanvas);
-            GameManager.Instance.MiniMapManager.miniMapCamera = GameManager.Instance.UIManager.GetUI(UIEnum.Minimap).GetComponentInChildren<Camera>();
+            GameManager.Instance.UIManager.GetUI(UIEnum.Minimap).GetComponentInChildren<Camera>();
         }
         Spawn(0, 0, 0);
     }
