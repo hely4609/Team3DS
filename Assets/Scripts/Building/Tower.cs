@@ -42,8 +42,8 @@ public class Tower : InteractableBuilding
         base.Spawned();
         if (CompletePercent >= 1)
         {
-            marker_on.SetActive(OnOff);
-            marker_off.SetActive(!OnOff);
+            //marker_on.SetActive(OnOff);
+            //marker_off.SetActive(!OnOff);
         }
     }
 
@@ -241,14 +241,14 @@ public class Tower : InteractableBuilding
                         {
                             foreach (MeshRenderer r in meshes)
                                 r.material = completeMat;
-                            marker_designed.SetActive(false);
-                            marker_on.SetActive(true);
+                            //marker_designed.SetActive(false);
+                            //marker_on.SetActive(true);
                         }
                     }
                     break;
                 case nameof(OnOff):
-                    marker_on.SetActive(OnOff);
-                    marker_off.SetActive(!OnOff);
+                    //marker_on.SetActive(OnOff);
+                    //marker_off.SetActive(!OnOff);
                     foreach (MeshRenderer r in meshes)
                     {
                         r.material.SetFloat("_OnOff", OnOff? 1f : 0f);

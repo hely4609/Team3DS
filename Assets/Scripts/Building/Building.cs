@@ -59,9 +59,9 @@ public abstract class Building : MyComponent
 
         Initialize();
 
-        marker_designed.SetActive(false);
-        marker_on.SetActive(false);
-        marker_off.SetActive(false);
+        //marker_designed.SetActive(false);
+        //marker_on.SetActive(false);
+        //marker_off.SetActive(false);
 
         Debug.Log($"BTC {BuildingTimeCurrent}, btm : {buildingTimeMax}, cp : {CompletePercent}");
         if (IsFixed)
@@ -85,11 +85,11 @@ public abstract class Building : MyComponent
                 r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
                 r.material.SetFloat("_CompletePercent", CompletePercent);
             }
-            marker_designed.SetActive(true);
+            //marker_designed.SetActive(true);
         }
         else
         {
-            marker_on.SetActive(true);
+            //marker_on.SetActive(true);
         }
         HeightCheck();
 
@@ -259,8 +259,8 @@ public abstract class Building : MyComponent
                         {
                             foreach (MeshRenderer r in meshes)
                                 r.material = completeMat;
-                            marker_designed.SetActive(false);
-                            marker_on.SetActive(true);
+                            //marker_designed.SetActive(false);
+                            //marker_on.SetActive(true);
                         }
                     }
                     break;
