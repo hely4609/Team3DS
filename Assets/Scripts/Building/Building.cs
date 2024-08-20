@@ -14,6 +14,8 @@ public enum BuildingEnum
 public abstract class Building : MyComponent
 {
     protected BuildingEnum type; // 타워 종류
+    public BuildingEnum Type { get { return type; } }
+
     protected bool isNeedLine; // 전선이 필요한가?
 
     [SerializeField]protected float buildingTimeMax; // 제작에 얼마나 걸리나
@@ -149,7 +151,6 @@ public abstract class Building : MyComponent
     }
     public virtual bool FixPlace() // 건설완료
     {
-        Debug.Log("hey");
         startPos = tiledBuildingPositionLast;
         if (isBuildable)
         {
