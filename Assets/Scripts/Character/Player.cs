@@ -503,55 +503,56 @@ public class Player : Character
     // 상호작용 가능한 대상이 감지되었을 때 처리
     private void OnTriggerEnter(Collider other)
     {
-        //IInteraction interaction;
+        IInteraction target;
 
-        //if (other.TryGetComponent(out Socket socket))
-        //{
-        //    GameObject inst = socket.GetOwner();
-        //    if (inst.TryGetComponent(out IInteraction result))
-        //    {
-        //        interaction = result;
-        //    }
-        //}
-
-        if (other.TryGetComponent(out IInteraction target))
+        if (!other.TryGetComponent(out target))
         {
-            // 이미 있다면 추가하지않음
-            if (interactionObjectList.Exists(inst => inst == target)) return;
-            if (System.Array.Find(target.GetInteractionColliders(), col => other == col)) 
-            {
-                interactionObjectList.Add(target);
-
-                //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
-                GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
-                button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
-                buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = $"{other.name}";
-                interactionObjectDictionary.Add(target, button);
-
-                if (interactionObjectList.Count == 1)
-                {
-                    interactionIndex = 0;
-                    interactionObject = target;
-                    if (HasInputAuthority)
-                    {
-                        mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
-                        Canvas.ForceUpdateCanvases();
-                    }
-                }
-
-                UpdateInteractionUI(interactionIndex);
-            }
+            target = other.GetComponentInParent<IInteraction>();
+            if (target == null) return;
         }
+
+        // 이미 있다면 추가하지않음
+        if (interactionObjectList.Exists(inst => inst == target)) return;
+        if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
+        {
+            interactionObjectList.Add(target);
+
+            //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
+            GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+            button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
+            buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            buttonText.text = $"{target.GetName()}";
+            interactionObjectDictionary.Add(target, button);
+
+            if (interactionObjectList.Count == 1)
+            {
+                interactionIndex = 0;
+                interactionObject = target;
+                if (HasInputAuthority)
+                {
+                    mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
+                    Canvas.ForceUpdateCanvases();
+                }
+            }
+
+            UpdateInteractionUI(interactionIndex);
+        }
+        
     }
 
     // 상호작용 가능한 대상 리스트에 있는 대상이 감지범위에서 나갔을 때 처리
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out IInteraction target))
+        IInteraction target;
+
+        if (!other.TryGetComponent(out target))
         {
-            if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
-            { 
+            target = other.GetComponentInParent<IInteraction>();
+            if (target == null) return;
+        }
+
+        if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
+        { 
                 interactionObjectList.Remove(target);
 
                 if (interactionObjectList.Count == 0)
@@ -586,8 +587,8 @@ public class Player : Character
                 }
 
                 UpdateInteractionUI(interactionIndex);
-            }
         }
+        
     }
 
     // 마우스 휠을 굴려서 상호작용할 대상을 정함.

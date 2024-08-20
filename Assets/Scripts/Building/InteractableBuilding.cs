@@ -6,12 +6,12 @@ using UnityEngine;
 public class InteractableBuilding : Building, IInteraction
 {
     //protected Collider[] interactionColliders;
-    [SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
+    //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
 
     protected override void Initialize()
     {
         //GameManager.Instance.InteractionManager.AddInteractionObject(this);
-        interactionRenderer = meshes[0];
+        //interactionRenderer = meshes[0];
     }
     // 위치를 고정함.
 
@@ -60,7 +60,7 @@ public class InteractableBuilding : Building, IInteraction
 
     public Bounds GetInteractionBounds()
     {
-        return interactionRenderer.bounds;
+        return default;
     }
 
     public virtual string GetName()
