@@ -13,12 +13,6 @@ public class ResourcesPath
         "Prefabs/UIs/CharacterUI/CharacterUICanvas",
         "Prefabs/UIs/RoomButton",
         "Prefabs/UIs/CharacterUI/Minimap",
-        "Prefabs/UIs/Markers/Character_Marker_Me",
-        "Prefabs/UIs/Markers/Character_Marker_Other",
-        "Prefabs/UIs/Markers/Building_Designed",
-        "Prefabs/UIs/Markers/Building_On",
-        "Prefabs/UIs/Markers/Building_Off",
-        "Prefabs/UIs/Markers/Enemy_Marker",
         // Character
         "Prefabs/Characters/Player",
         "Prefabs/Characters/Rope",
