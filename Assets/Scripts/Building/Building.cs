@@ -100,6 +100,7 @@ public abstract class Building : MyComponent
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
 
+
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 중앙값
     {
         isBuildable = true;
@@ -113,7 +114,7 @@ public abstract class Building : MyComponent
 
                 if (building.Type == BuildingEnum.Bridge)
                 {
-                    isBuildable= BridgeCheck(building, tiledBuildingPositionLast);
+                    isBuildable = BridgeCheck(building, tiledBuildingPositionLast);
                 }
                 else
                 {
@@ -139,7 +140,7 @@ public abstract class Building : MyComponent
         Vector2Int buildingPosLeft = building.StartPos + new Vector2Int(0, 12);
         Vector2Int distance = buildingPosRight - thisBuildingPos;
         Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
-        
+
         if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
         {
             isBuildable = true;
@@ -161,6 +162,7 @@ public abstract class Building : MyComponent
 
         return isBuildable;
     }
+
 
     public void VisualizeBuildable() // 건설 가능한지 화면에 표시함.
     {
