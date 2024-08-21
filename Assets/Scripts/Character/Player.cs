@@ -32,6 +32,9 @@ public partial class Player : Character
     protected bool isInteracting; // 나는 지금 상호작용 중인가?
     public bool IsInteracting => isInteracting;
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
+
+    protected int oreAmount;
+    public int OreAmount { get { return oreAmount; } set { oreAmount = value; } }
     /////////////////////////////
     [SerializeField] protected GameObject myMarker;
     [SerializeField] protected GameObject otherMarker;
@@ -254,7 +257,7 @@ public partial class Player : Character
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
             }
 
-            if (!IsGround) velocity *= 0.05f;
+            if (!IsGround) velocity *= 0.1f;
             rb.velocity = velocity * moveSpeed + gravity;
 
 

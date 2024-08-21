@@ -55,9 +55,10 @@ public class ControllerBase : MyComponent
         }
         myAuthority = GetComponent<NetworkObject>().InputAuthority;
         // Å×½ºÆ®  
-        if(!GameObject.Find("CharacterUICanvas"))
+        if(HasInputAuthority)
         {
             GameManager.Instance.UIManager.GetUI(UIEnum.CharacterUICanvas);
+            GameManager.Instance.UIManager.GetUI(UIEnum.Minimap).GetComponentInChildren<Camera>();
         }
         Spawn(0, 0, 0);
     }

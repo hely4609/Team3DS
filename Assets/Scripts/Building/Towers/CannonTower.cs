@@ -4,19 +4,12 @@ using UnityEngine;
 
 public class CannonTower : Tower
 {
-    protected float splashRadius;
+    [SerializeField]protected float splashRadius;
     protected override void Initialize()
     {
         type = BuildingEnum.Tower;
         isNeedLine = true;
-        AttackDamage = 1;
-        AttackSpeed = 0.5f;
-        AttackRange = 1;
-        buildingTimeMax = 10;
-        splashRadius = 10;
-        size = new Vector2Int(4, 4);
-        TurnOnOff(true);
-        base.Initialize();
+        TurnOnOff(false);
     }
 
     protected override void OnHit()
