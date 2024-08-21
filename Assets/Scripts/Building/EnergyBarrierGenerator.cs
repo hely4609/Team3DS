@@ -6,7 +6,7 @@ using UnityEngine.AI;
 public class EnergyBarrierGenerator : InteractableBuilding
 {
     protected int hpMax;
-    protected int hpCurrent;
+    [SerializeField]protected int hpCurrent;
     public int HpCurrent { get { return hpCurrent; } }
 
     protected GameObject[] energyBarrierArray;
