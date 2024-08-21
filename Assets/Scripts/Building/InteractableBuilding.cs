@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class InteractableBuilding : Building, IInteraction
 {
+    [SerializeField] protected string name;
     //protected Collider[] interactionColliders;
     //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
 
@@ -66,7 +67,7 @@ public class InteractableBuilding : Building, IInteraction
 
     public virtual string GetName()
     {
-        return "InteractableBuilding";
+        return name;
     }
 
 

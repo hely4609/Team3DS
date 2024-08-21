@@ -687,7 +687,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 10
   _BuildingTimeCurrent: 0
-  completeMat: {fileID: 2100000, guid: 587975ea18233454787ee4ff0cd3bf43, type: 2}
+  completeMat: {fileID: 2100000, guid: 454b1227bcbb4594bad3f45b2914b825, type: 2}
   meshes:
   - {fileID: 2829039577149875135}
   - {fileID: 2718717630978899346}
@@ -729,6 +729,7 @@ MonoBehaviour:
   marker_designed: {fileID: 3231269781303809827}
   marker_on: {fileID: 3801119828751985946}
   marker_off: {fileID: 6891789838605177302}
+  name: 
   attackDamage: 1
   attackSpeed: 0.5
   attackRange: 1

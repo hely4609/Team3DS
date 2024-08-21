@@ -449,7 +449,7 @@ public partial class Player : Character
                     interactionUpdateUI.SetActive(true);
                     interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
                     buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
-                    buttonText.text = $"Building...";
+                    buttonText.text = $"건설중...";
                 }
                 
                 //GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
@@ -459,32 +459,32 @@ public partial class Player : Character
         return default;
     }
 
-    public bool InteractionStart<T>(T target) where T : IInteraction
-    {
-        interactionObject = target;
+    //public bool InteractionStart<T>(T target) where T : IInteraction
+    //{
+    //    interactionObject = target;
 
-        if (interactionObject == null) return false;
+    //    if (interactionObject == null) return false;
 
-        interactionType = interactionObject.InteractionStart(this);
+    //    interactionType = interactionObject.InteractionStart(this);
 
-        switch (interactionType)
-        {
-            default: InteractionEnd(); break;
-            case Interaction.Build:
-                isInteracting = true;
-                AnimBool?.Invoke("isBuild", true);
-                interactionUI.gameObject.SetActive(false);
-                interactionUpdateUI.SetActive(true);
-                interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
-                buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = $"Building...";
-                GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
-                break;
-        }
+    //    switch (interactionType)
+    //    {
+    //        default: InteractionEnd(); break;
+    //        case Interaction.Build:
+    //            isInteracting = true;
+    //            AnimBool?.Invoke("isBuild", true);
+    //            interactionUI.gameObject.SetActive(false);
+    //            interactionUpdateUI.SetActive(true);
+    //            interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
+    //            buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
+    //            buttonText.text = $"건설중...";
+    //            GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
+    //            break;
+    //    }
 
 
-        return default;
-    }
+    //    return default;
+    //}
 
     //public bool InteractionUpdate<T>(T target, float deltaTime) where T : IInteraction
     //{

@@ -15,6 +15,7 @@ public class Bridge : InteractableBuilding
         isNeedLine = false;
         size = new Vector2Int(2, 4);
         buildingTimeMax = 10;
+        name = "´Ù¸®";
 
     }
 
@@ -22,8 +23,8 @@ public class Bridge : InteractableBuilding
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
-        Vector2Int stairPosRight = tiledBuildingPositionLast + Vector2Int.down*2;
-        Vector2Int stairPosLeft = tiledBuildingPositionLast +new Vector2Int(0, 12);
+        Vector2Int stairPosRight = tiledBuildingPositionLast + Vector2Int.down * 2;
+        Vector2Int stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, 12);
 
         if (buildingList.Count > 0)
         {
@@ -34,17 +35,17 @@ public class Bridge : InteractableBuilding
                 if (building.Type == BuildingEnum.Bridge)
                 {
                     isBuildable = BridgeCheck(building, stairPosRight);
-                    if(!isBuildable)
+                    if (!isBuildable)
                     {
                         return false;
                     }
                     isBuildable = BridgeCheck(building, stairPosLeft);
-                    if(!isBuildable)
+                    if (!isBuildable)
                     {
                         return false;
                     }
 
-                    Vector2Int buildingPosMid = building.StartPos + new Vector2Int(0,7);
+                    Vector2Int buildingPosMid = building.StartPos + new Vector2Int(0, 7);
                     Vector2Int thisPosMid = tiledBuildingPositionLast + new Vector2Int(0, 7);
                     Vector2Int fullSize = new Vector2Int(2, 20);
                     distance = buildingPosMid - thisPosMid;
@@ -132,6 +133,50 @@ public class Bridge : InteractableBuilding
         else
         {
             return false;
+        }
+    }
+
+
+    public override void Render()
+    {
+        foreach (var change in _changeDetector.DetectChanges(this))
+        {
+            switch (change)
+            {
+                case nameof(isBuildable):
+                    VisualizeBuildable();
+                    break;
+
+
+                case nameof(IsFixed):
+                    Debug.Log(cols.Length);
+                    foreach (Collider col in cols)
+                    {
+                        col.enabled = true;
+                    }
+                    break;
+
+                case nameof(BuildingTimeCurrent):
+                    {
+                        foreach (MeshRenderer r in meshes)
+                        {
+                            r.material.SetFloat("_CompletePercent", CompletePercent);
+                        }
+
+                        if (CompletePercent >= 1)
+                        {
+                            foreach (MeshRenderer r in meshes)
+                                r.material = completeMat;
+                            foreach (Collider col in cols)
+                                col.isTrigger = false;
+
+                            //System.Array.Clear(cols, 0, cols.Length);
+                        }
+                    }
+                    break;
+
+            }
+
         }
     }
 }

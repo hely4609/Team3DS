@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
-using UnityEditor;
+using Unity.VisualScripting;
 
 public enum BuildingEnum
 {
@@ -16,9 +16,10 @@ public abstract class Building : MyComponent
 {
     protected BuildingEnum type; // 타워 종류
     public BuildingEnum Type { get { return type; } }
+
     protected bool isNeedLine; // 전선이 필요한가?
 
-    [SerializeField]protected float buildingTimeMax; // 제작에 얼마나 걸리나
+    [SerializeField] protected float buildingTimeMax; // 제작에 얼마나 걸리나
 
     [Networked, SerializeField] public float BuildingTimeCurrent { get; set; } // 얼마나 제작했나
 
@@ -55,6 +56,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected GameObject marker_designed;
     [SerializeField] protected GameObject marker_on;
     [SerializeField] protected GameObject marker_off;
+
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
@@ -106,6 +108,8 @@ public abstract class Building : MyComponent
 
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
+
+
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 중앙값
     {
         isBuildable = true;
@@ -116,16 +120,26 @@ public abstract class Building : MyComponent
             {
                 Vector2Int distance = building.startPos - tiledBuildingPositionLast;
                 Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
-                if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+
+                if (building.Type == BuildingEnum.Bridge)
                 {
-                    isBuildable = true;
+                    if(!(isBuildable = BridgeCheck(building, tiledBuildingPositionLast)))
+                    {
+                        break;
+                    }
                 }
                 else
                 {
-                    isBuildable = false;
-                    break;
+                    if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+                    {
+                        isBuildable = true;
+                    }
+                    else
+                    {
+                        isBuildable = false;
+                        break;
+                    }
                 }
-
             }
         }
         return isBuildable;
@@ -160,6 +174,8 @@ public abstract class Building : MyComponent
 
         return isBuildable;
     }
+
+
     public void VisualizeBuildable() // 건설 가능한지 화면에 표시함.
     {
         if (isBuildable)
@@ -180,7 +196,6 @@ public abstract class Building : MyComponent
     }
     public virtual bool FixPlace() // 건설완료
     {
-        Debug.Log("hey");
         startPos = tiledBuildingPositionLast;
         if (isBuildable)
         {
@@ -244,9 +259,6 @@ public abstract class Building : MyComponent
 
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
-        
-        
-
 
         heightMax = mesh.bounds.max.y;
         heightMin = mesh.bounds.min.y;
@@ -260,22 +272,6 @@ public abstract class Building : MyComponent
             r.material.SetFloat("_HeightMax", heightMax);
             r.material.SetFloat("_HeightMin", heightMin);
         }
-
-//#if UNITY_EDITOR
-//        { // Mesh 저장
-//            if (TryGetComponent<MeshFilter>(out MeshFilter filter))
-//            {
-//                filter.mesh = mesh;
-//            }
-//            else
-//            {
-//                gameObject.AddComponent<MeshFilter>().mesh = mesh;
-//            }
-//            string path = "Assets/MyMesh.asset";
-//            AssetDatabase.CreateAsset(transform.GetComponent<MeshFilter>().mesh, AssetDatabase.GenerateUniqueAssetPath(path));
-//            AssetDatabase.SaveAssets();
-//        }
-//#endif
 
     }
 
