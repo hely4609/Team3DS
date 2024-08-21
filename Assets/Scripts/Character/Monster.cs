@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,7 +41,8 @@ public class Monster : Character
             if (hpCurrent <= 0)
             {
                 destroyFunction.Invoke(this);
-                Destroy(gameObject);
+                Runner.Despawn(GetComponent<NetworkObject>());
+                //Destroy(gameObject);
             }
             Debug.Log($"{HpCurrent} / {gameObject.name}");
         
