@@ -169,6 +169,8 @@ public class Bridge : InteractableBuilding
                                 r.material = completeMat;
                             foreach (Collider col in cols)
                                 col.isTrigger = false;
+
+                            //System.Array.Clear(cols, 0, cols.Length);
                         }
                     }
                     break;
