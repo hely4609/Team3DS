@@ -14,11 +14,6 @@ public class Bridge : InteractableBuilding
         base.Spawned();
         if (CompletePercent >= 1)
         {
-            foreach (MeshRenderer r in meshes)
-            {
-                r.material = completeMat;
-            }
-
             foreach (Collider col in cols)
             {
                 col.isTrigger = false;

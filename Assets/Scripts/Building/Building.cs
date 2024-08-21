@@ -93,6 +93,10 @@ public abstract class Building : MyComponent
         }
         else
         {
+            foreach (MeshRenderer r in meshes)
+            {
+                r.material = completeMat;
+            }
             marker_on.SetActive(true);
         }
         HeightCheck();
