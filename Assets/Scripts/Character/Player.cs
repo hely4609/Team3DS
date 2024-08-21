@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using Fusion;
 
 
-public class Player : Character
+public partial class Player : Character
 {
     [SerializeField] protected ControllerBase possessionController;
     [SerializeField] bool TPS_Mode;
@@ -55,6 +55,13 @@ public class Player : Character
     [Networked] public Quaternion PreviousRotation { get; set; }
 
     public Vector3 interpolatedPosition;
+
+    //방향키 방향을 토대로 월드 방향을 구해봤어요!
+    Vector3 prefferedMoveDirection;
+    //평지 기준으로 움직이는 벡터입니다!
+    public Vector3 planeMovementVector;
+    //바닥 노말을 기준으로 움직이는 벡터입니다!
+    public Vector3 groundMovementVelocity;
 
 
     public bool TryPossession() => possessionController == null;
@@ -235,18 +242,32 @@ public class Player : Character
     public override void Move(Vector3 direction)
     {
         MoveDir = direction.normalized;
+
         if (possessionController != null && HasInputAuthority)
         {
-            if (MoveDir.magnitude == 0)
+            Vector3 wantMoveDir = transform.forward * MoveDir.z + transform.right * MoveDir.x;
+            Vector3 velocity = CalculrateNextFrameGroundAngle() < 85f ? wantMoveDir : Vector3.zero;
+            Vector3 gravity = IsGround? Vector3.zero : Vector3.down * Mathf.Abs(rb.velocity.y);
+
+            if (IsGround)
             {
-                float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
-                float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
-                rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
+                velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
             }
-            else
-            {
-                rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed + Vector3.up * rb.velocity.y;
-            }
+
+            if (!IsGround) velocity *= 0.05f;
+            rb.velocity = velocity * moveSpeed + gravity;
+
+
+            //if (MoveDir.magnitude == 0)
+            //{
+            //    float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
+            //    float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
+            //    rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
+            //}
+            //else
+            //{
+            //    //rb.velocity = Vector3.ProjectOnPlane((transform.forward * MoveDir.z + transform.right * MoveDir.x), GroundNormal).normalized * moveSpeed + Vector3.up * rb.velocity.y;
+            //}
         }
         else
         {
@@ -658,8 +679,149 @@ public class Player : Character
                 case nameof(PreviousRotation):
                     rb.rotation = PreviousRotation;
                     break;
+                case nameof(IsGround):
+                    bool isUseGravity;
+                    isUseGravity = IsGround ? false : true;
+                    rb.useGravity = isUseGravity;
+                    break;
             }
+            
         }
 
+    }
+
+    //땅이 무엇인지 저장해둘 거예요!
+    [SerializeField] protected Collider ground;
+
+    //움직이기 위해 레이를 발사할 거예요!
+
+    //이 캐릭터와 닿아있는 대상을 저장해둘게요!
+    protected Dictionary<Collider, Vector3> attachedCollision = new();
+
+    //지금 제가 딛고 있는 땅의 노말을 저장해둡시다!
+    Vector3 _groundNormal = Vector3.down;
+    Vector3 GroundNormal
+    {
+        get => _groundNormal;
+        set
+        {
+            _groundNormal = value;
+            Debug.Log(Vector3.Angle(Vector3.up, value));
+            IsGround = (value.y > 0 && Vector3.Angle(Vector3.up, value) < 90f);
+        }
+    }
+
+    //땅에 있는지 여부는 계산하는 거니까, isGround는 get만 열어줄 거예요! 땅이 있으면 땅에 있는 거예요!
+    [Networked] public bool IsGround { get; set; }
+
+    
+    private void OnCollisionEnter(Collision collision)
+    {
+        //일단 닿은 바닥의 방향을 확인해볼게요!
+        Vector3 normal = collision.GetContact(0).normal;
+
+        if (normal.y <= 0.3f) return;
+
+
+        Debug.Log(normal.y);
+
+        //그래서 부딪힌 대상을 저장할 거예요! 상대와  닿은 노말!
+        if (attachedCollision.ContainsKey(collision.collider))
+        {    
+            //닿은 바닥의 방향이 옛날과 다르면
+            if (attachedCollision[collision.collider] != normal)
+            {
+                //값을 변경해줍니다!
+                attachedCollision[collision.collider] = normal;
+            }
+        }
+        else
+        {
+            attachedCollision.Add(collision.collider, normal);
+        }
+
+        ground = collision.collider;
+        GroundNormal = normal;
+        
+
+        //그리고 변경되었으니 땅을 체크해봅시다!
+        //Calculate_Ground();
+    }
+
+
+    private void OnCollisionExit(Collision collision)
+    { 
+        //대상이 나갔으니 그냥 지웁시다!
+        if (attachedCollision.Remove(collision.collider))
+        {
+            //나갔는데 이게 땅이었네요?
+            if (collision.collider == ground)
+            {
+                //그러면 땅을 초기화하고
+                ground = null;
+                GroundNormal = Vector3.down;
+            }
+        }
+        //다시 계산해봅시다!
+        //Calculate_Ground();
+
+    }
+
+    void Calculate_Ground()
+    {
+        //닿은게 없으면 땅이 아니죠!
+        if (attachedCollision.Count == 0)
+        {
+            //땅이 아직 초기화가 안되었다면
+            if (ground != null)
+            {
+                //땅 지워버리고
+                ground = null;
+            }
+            //노말도 아래로 바꿔버립시다!
+            GroundNormal = Vector3.down;
+            //끝
+            return;
+        }
+        else //아니면 계산해봐야해요
+        {
+            ////가장 땅 같은 친구 찾기!
+            //GameObject mostGroundObject = ground; //일단 지금 땅의 정보로 시작!
+            ////이거는 땅의 노말을 확인할 거예요!
+            //Vector3 mostGroundNormal;
+
+            ////노말은 만약, 가장 땅같은 친구가 있으면 그 친구를 기준으로!
+            //if (ground) mostGroundNormal = GroundNormal;
+            //else mostGroundNormal = Vector3.down;
+            ////아니면 땅이 없다고 생각해서 노말을 초기화해줄 거예요!
+
+            //foreach (var currentTarget in attachedCollision)
+            //{
+            //    //가장 땅 같다는 건 가장 위를 보고 있다는 것!
+            //    if (mostGroundNormal.y < currentTarget.Value.y)
+            //    {
+            //        //그래서 1등 자리를 이 친구한테 줍시다!
+            //        mostGroundNormal = currentTarget.Value;
+            //        mostGroundObject = currentTarget.Key;
+            //    }
+            //};
+
+            ////나온 결과를 저장하고
+            //ground = mostGroundObject;
+            //GroundNormal = mostGroundNormal;
+        }
+
+    }
+
+    private float CalculrateNextFrameGroundAngle()
+    {
+        var nextFramePlayerPosition = transform.position + transform.forward * 1.25f + (transform.forward * MoveDir.z  + transform.right * MoveDir.x) * Runner.DeltaTime * moveSpeed ;
+
+        if (Physics.Raycast(nextFramePlayerPosition, Vector3.down, out RaycastHit hitInfo, 1f))
+        { 
+            return Vector3.Angle(Vector3.up, hitInfo.normal);
+        }
+        
+        return 0f;
     }
 }

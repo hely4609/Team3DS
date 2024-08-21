@@ -44,6 +44,7 @@ public class InteractableBuilding : Building, IInteraction
         if (interaction == Interaction.Build)
         {
             BuildBuilding(deltaTime);
+            
         }
         return CompletePercent;
     }
