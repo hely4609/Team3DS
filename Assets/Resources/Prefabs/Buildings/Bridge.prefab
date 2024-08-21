@@ -642,8 +642,8 @@ Transform:
   - {fileID: 1103920439723887378}
   - {fileID: 2806275083164177508}
   - {fileID: 7317009068644551685}
-  - {fileID: 1545171134549531898}
   - {fileID: 5663616574335562192}
+  - {fileID: 1545171134549531898}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-67314859631595897
@@ -719,6 +719,10 @@ MonoBehaviour:
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   size: {x: 0, y: 0}
+  marker_designed: {fileID: 8169121832770783251}
+  marker_on: {fileID: 1599304531342413080}
+  marker_off: {fileID: 5821939677139028513}
+  name: 
 --- !u!65 &1040792674167551540
 BoxCollider:
   m_ObjectHideFlags: 0
