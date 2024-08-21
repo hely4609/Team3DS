@@ -54,22 +54,17 @@ public abstract class Building : MyComponent
     public Vector2Int BuildingSize { get { return size; } }
 
     [SerializeField] protected GameObject marker_designed;
-    //[SerializeField] protected GameObject marker_on;
-    //[SerializeField] protected GameObject marker_off;
+    [SerializeField] protected GameObject marker_on;
+    [SerializeField] protected GameObject marker_off;
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
         Initialize();
 
-        if(marker_designed == null)
-        {
-            marker_designed = ResourceManager.Get(ResourceEnum.Prefab.Building_Designed);
-            //marker_designed.transform.SetParent(transform);
-        }
         marker_designed.SetActive(false);
-        //marker_on.SetActive(false);
-        //marker_off.SetActive(false);
+        marker_on.SetActive(false);
+        marker_off.SetActive(false);
 
         Debug.Log($"BTC {BuildingTimeCurrent}, btm : {buildingTimeMax}, cp : {CompletePercent}");
         if (IsFixed)
@@ -93,11 +88,11 @@ public abstract class Building : MyComponent
                 r.material = ResourceManager.Get(ResourceEnum.Material.Buildable);
                 r.material.SetFloat("_CompletePercent", CompletePercent);
             }
-            //marker_designed.SetActive(true);
+            marker_designed.SetActive(true);
         }
         else
         {
-            //marker_on.SetActive(true);
+            marker_on.SetActive(true);
         }
         HeightCheck();
 
@@ -304,8 +299,8 @@ public abstract class Building : MyComponent
                         {
                             foreach (MeshRenderer r in meshes)
                                 r.material = completeMat;
-                            //marker_designed.SetActive(false);
-                            //marker_on.SetActive(true);
+                            marker_designed.SetActive(false);
+                            marker_on.SetActive(true);
                         }
                     }
                     break;

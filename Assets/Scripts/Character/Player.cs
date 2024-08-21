@@ -142,8 +142,8 @@ public class Player : Character
         //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
         //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
 
-        //if(HasInputAuthority) otherMarker.SetActive(false);
-        //else myMarker.SetActive(false);
+        if(HasInputAuthority) otherMarker.SetActive(false);
+        else myMarker.SetActive(false);
 
     }
 
