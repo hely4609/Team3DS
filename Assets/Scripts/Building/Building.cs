@@ -15,6 +15,7 @@ public enum BuildingEnum
 public abstract class Building : MyComponent
 {
     protected BuildingEnum type; // 타워 종류
+    public BuildingEnum Type { get { return type; } }
     protected bool isNeedLine; // 전선이 필요한가?
 
     [SerializeField]protected float buildingTimeMax; // 제작에 얼마나 걸리나
@@ -49,7 +50,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected Vector2Int startPos; // 시작될 포지션. 건물의 중앙값
     public Vector2Int StartPos { get { return startPos; } }
     [SerializeField] protected Vector2Int size; // 사이즈. 건물의 xy 크기
-    public Vector2Int buildingSize { get { return size; } }
+    public Vector2Int BuildingSize { get { return size; } }
 
     [SerializeField] protected GameObject marker_designed;
     [SerializeField] protected GameObject marker_on;
@@ -130,6 +131,35 @@ public abstract class Building : MyComponent
         return isBuildable;
     }
 
+    protected virtual bool BridgeCheck(Building building, Vector2Int thisBuildingPos)
+    {
+        bool isBuildable;
+        Vector2Int buildingPosRight = building.StartPos + Vector2Int.down * 2;
+        Vector2Int buildingPosLeft = building.StartPos + new Vector2Int(0, 12);
+        Vector2Int distance = buildingPosRight - thisBuildingPos;
+        Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
+
+        if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+        {
+            isBuildable = true;
+        }
+        else
+        {
+            return false;
+        }
+
+        distance = buildingPosLeft - thisBuildingPos;
+        if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+        {
+            isBuildable = true;
+        }
+        else
+        {
+            return false;
+        }
+
+        return isBuildable;
+    }
     public void VisualizeBuildable() // 건설 가능한지 화면에 표시함.
     {
         if (isBuildable)
