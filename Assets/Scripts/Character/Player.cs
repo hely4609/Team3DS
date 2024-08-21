@@ -4,6 +4,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Fusion;
+using static UnityEngine.GraphicsBuffer;
 
 
 public partial class Player : Character
@@ -227,8 +228,34 @@ public partial class Player : Character
 
             if (progress >= 1f)
             {
-                InteractionEnd();
-                //interactionObject = null;
+                if (InteractionEnd())
+                {
+                    interactionObjectList.Remove(interactionObject);
+
+                    if (interactionObjectDictionary.TryGetValue(interactionObject, out GameObject result))
+                    {
+                        GameManager.Instance.PoolManager.Destroy(result);
+                        interactionObjectDictionary.Remove(interactionObject);
+                    }
+
+                    if (interactionObjectList.Count == 0)
+                    {
+                        interactionIndex = -1;
+                        interactionObject = null;
+
+                        if (HasInputAuthority)
+                        {
+                            GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
+                        }
+                    }
+                    else
+                    {
+                        interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                        interactionObject = interactionObjectList[interactionIndex];
+                    }
+
+                    UpdateInteractionUI(interactionIndex);
+                }
             }
         }
         ////////////////////////////
@@ -501,7 +528,7 @@ public partial class Player : Character
         if (interactionObject == null) return false;
 
         isInteracting = false;
-        interactionObject.InteractionEnd();
+        bool result = interactionObject.InteractionEnd();
 
         switch (interactionType)
         {
@@ -521,7 +548,7 @@ public partial class Player : Character
         //interactionObject = null;
         interactionType = Interaction.None;
 
-        return default;
+        return result;
     }
 
     // 상호작용 가능한 대상이 감지되었을 때 처리
@@ -577,40 +604,40 @@ public partial class Player : Character
 
         if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
         { 
-                interactionObjectList.Remove(target);
+            interactionObjectList.Remove(target);
 
-                if (interactionObjectList.Count == 0)
+            if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
+            {
+                GameManager.Instance.PoolManager.Destroy(result);
+                interactionObjectDictionary.Remove(target);
+            }
+
+            if (interactionObjectList.Count == 0)
+            {
+                interactionIndex = -1;
+                if (isInteracting)
                 {
-                    interactionIndex = -1;
-                    if (isInteracting)
-                    {
-                        InteractionEnd();
-                    }
-                    interactionObject = null;
-
-                    if (HasInputAuthority)
-                    {
-                        GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
-                    }
+                    InteractionEnd();
                 }
-                else
+                interactionObject = null;
+
+                if (HasInputAuthority)
                 {
-                    interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
-                    if (isInteracting && target == interactionObject)
-                    {
-                        InteractionEnd();
-                    }
-                    interactionObject = interactionObjectList[interactionIndex];
-
+                    GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
                 }
-
-                if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
+            }
+            else
+            {
+                interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                if (isInteracting && target == interactionObject)
                 {
-                    GameManager.Instance.PoolManager.Destroy(interactionObjectDictionary[target]);
-                    interactionObjectDictionary.Remove(target);
+                    InteractionEnd();
                 }
+                interactionObject = interactionObjectList[interactionIndex];
 
-                UpdateInteractionUI(interactionIndex);
+            }
+
+            UpdateInteractionUI(interactionIndex);
         }
         
     }

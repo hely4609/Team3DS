@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class InteractableBuilding : Building, IInteraction
 {
-    [SerializeField] protected string name;
+    [SerializeField] protected string objectName;
     //protected Collider[] interactionColliders;
     //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
 
@@ -50,9 +50,9 @@ public class InteractableBuilding : Building, IInteraction
         return CompletePercent;
     }
 
-    public bool InteractionEnd()
+    public virtual bool InteractionEnd()
     { 
-        return true;
+        return false;
     }
 
     public Collider[] GetInteractionColliders()
@@ -67,7 +67,7 @@ public class InteractableBuilding : Building, IInteraction
 
     public virtual string GetName()
     {
-        return name;
+        return objectName;
     }
 
 

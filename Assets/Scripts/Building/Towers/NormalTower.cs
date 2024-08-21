@@ -10,7 +10,7 @@ public class NormalTower : Tower
         type = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
-        name = "기본 타워";
+        objectName = "기본 타워";
 
         AttackRangeSetting();
     }

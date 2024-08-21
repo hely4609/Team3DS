@@ -15,7 +15,7 @@ public class Bridge : InteractableBuilding
         isNeedLine = false;
         size = new Vector2Int(2, 4);
         buildingTimeMax = 10;
-        name = "다리";
+        objectName = "다리";
 
     }
 
@@ -136,6 +136,11 @@ public class Bridge : InteractableBuilding
         }
     }
 
+    public override bool InteractionEnd()
+    {
+        return true;
+    }
+
 
     public override void Render()
     {
@@ -170,7 +175,7 @@ public class Bridge : InteractableBuilding
                             foreach (Collider col in cols)
                                 col.isTrigger = false;
 
-                            //System.Array.Clear(cols, 0, cols.Length);
+                            System.Array.Clear(cols, 0, cols.Length);
                         }
                     }
                     break;
