@@ -1,18 +1,24 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ore : MonoBehaviour
+public class Ore : MyComponent
 {
-    // Start is called before the first frame update
-    void Start()
+    protected int amount;
+
+    public void Initialize()
     {
-        
+        amount = 1;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.gameObject.TryGetComponent(out Player player))
+        {
+            player.OreAmount += amount;
+            Runner.Despawn(GetComponent<NetworkObject>());
+        }
+       
     }
 }
