@@ -114,7 +114,10 @@ public abstract class Building : MyComponent
 
                 if (building.Type == BuildingEnum.Bridge)
                 {
-                    isBuildable = BridgeCheck(building, tiledBuildingPositionLast);
+                    if(!(isBuildable = BridgeCheck(building, tiledBuildingPositionLast)))
+                    {
+                        break;
+                    }
                 }
                 else
                 {
