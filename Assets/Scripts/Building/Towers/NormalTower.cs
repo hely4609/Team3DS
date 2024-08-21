@@ -6,12 +6,10 @@ public class NormalTower : Tower
 {
     protected override void Initialize()
     {
+        // 디폴트 값.
         type = BuildingEnum.Tower;
-        AttackDamage = 1;
-        AttackSpeed = 1;
-        AttackRange = 50;
-        buildingTimeMax = 10;
-        size = new Vector2Int(10, 10);
+        isNeedLine = true;
+        TurnOnOff(false);
     }
     protected override void OnHit()
     {

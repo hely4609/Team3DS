@@ -17,25 +17,13 @@ public class Tower : InteractableBuilding
     protected float nowTime;
     [SerializeField]protected float attackSpeed; // 공격 스피드
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
-    protected float attackRange; // 공격 범위
+    [SerializeField]protected float attackRange; // 공격 범위
     public float AttackRange { get { return attackRange; } set { attackRange = value; AttackRangeSetting(); } }
 
     [SerializeField] protected Monster target = null; // 타겟 지정된 몬스터
     [SerializeField] protected List<Monster> targetList = new List<Monster>();
     [SerializeField, Networked] protected bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
     
-    protected override void Initialize()
-    {
-        // 디폴트 값.
-        type = BuildingEnum.Tower;
-        isNeedLine = true;
-        AttackDamage = 1;
-        AttackSpeed = 0.5f;
-        AttackRange = 1;
-        buildingTimeMax = 10;
-        size = new Vector2Int(4, 4);
-        TurnOnOff(false);
-    }
 
     public override void Spawned()
     {
@@ -44,6 +32,10 @@ public class Tower : InteractableBuilding
         {
             marker_on.SetActive(OnOff);
             marker_off.SetActive(!OnOff);
+            foreach (MeshRenderer r in meshes)
+            {
+                r.material.SetFloat("_OnOff", OnOff ? 1f : 0f);
+            }
         }
     }
 
@@ -240,7 +232,9 @@ public class Tower : InteractableBuilding
                         if (CompletePercent >= 1)
                         {
                             foreach (MeshRenderer r in meshes)
+                            {
                                 r.material = completeMat;
+                            }
                             marker_designed.SetActive(false);
                             marker_on.SetActive(true);
                         }

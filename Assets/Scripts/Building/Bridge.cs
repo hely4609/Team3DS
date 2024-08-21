@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.AI;
 
 public class Bridge : InteractableBuilding
 {
@@ -12,7 +13,7 @@ public class Bridge : InteractableBuilding
     {
         type = BuildingEnum.Bridge;
         isNeedLine = false;
-        size = new Vector2Int(4, 2);
+        size = new Vector2Int(2, 4);
         buildingTimeMax = 10;
 
     }
@@ -21,37 +22,116 @@ public class Bridge : InteractableBuilding
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
-        Vector2Int stairPosRight = tiledBuildingPositionLast+size/2+ new Vector2Int(5,2);
-        Vector2Int stairPosLeft = tiledBuildingPositionLast - size / 2 - new Vector2Int(5, 2);
+        Vector2Int stairPosRight = tiledBuildingPositionLast + Vector2Int.down*2;
+        Vector2Int stairPosLeft = tiledBuildingPositionLast +new Vector2Int(0, 12);
 
         if (buildingList.Count > 0)
         {
             foreach (Building building in buildingList)
             {
                 Vector2Int distance = building.StartPos - stairPosRight;
-                Vector2Int sizeSum = (building.buildingSize + size + Vector2Int.one) / 2;
-                if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+                Vector2Int sizeSum = (building.BuildingSize + size) / 2;
+                if (building.Type == BuildingEnum.Bridge)
                 {
-                    isBuildable = true;
+                    isBuildable = BridgeCheck(building, stairPosRight);
+                    if(!isBuildable)
+                    {
+                        return false;
+                    }
+                    isBuildable = BridgeCheck(building, stairPosLeft);
+                    if(!isBuildable)
+                    {
+                        return false;
+                    }
+
+                    Vector2Int buildingPosMid = building.StartPos + new Vector2Int(0,7);
+                    Vector2Int thisPosMid = tiledBuildingPositionLast + new Vector2Int(0, 7);
+                    Vector2Int fullSize = new Vector2Int(2, 20);
+                    distance = buildingPosMid - thisPosMid;
+
+                    sizeSum = (building.BuildingSize + fullSize) / 2;
+                    if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+                    {
+                        isBuildable = true;
+                    }
+                    else
+                    {
+                        isBuildable = false;
+                        break;
+                    }
                 }
                 else
                 {
-                    isBuildable = false;
-                    break;
+                    if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+                    {
+                        isBuildable = true;
+                    }
+                    else
+                    {
+                        isBuildable = false;
+                        break;
+                    }
+
+                    distance = building.StartPos - stairPosLeft;
+                    if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+                    {
+                        isBuildable = true;
+                    }
+                    else
+                    {
+                        isBuildable = false;
+                        break;
+                    }
                 }
 
-                distance = building.StartPos - stairPosLeft;
-                if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
-                {
-                    isBuildable = true;
-                }
-                else
-                {
-                    isBuildable = false;
-                    break;
-                }
             }
         }
         return isBuildable;
+    }
+
+    protected override bool BridgeCheck(Building building, Vector2Int thisBuildingPos)
+    {
+        bool isBuildable;
+        Vector2Int buildingPosRight = building.StartPos + Vector2Int.down * 2;
+        Vector2Int buildingPosLeft = building.StartPos + new Vector2Int(0, 12);
+        Vector2Int distance = buildingPosRight - thisBuildingPos;
+        Vector2Int sizeSum = (building.BuildingSize + size + Vector2Int.one) / 2;
+
+        if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+        {
+            isBuildable = true;
+        }
+        else
+        {
+            return false;
+        }
+
+        distance = buildingPosLeft - thisBuildingPos;
+        if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
+        {
+            isBuildable = true;
+        }
+        else
+        {
+            return false;
+        }
+
+        return isBuildable;
+    }
+    public override bool FixPlace() // 건설완료
+    {
+        startPos = tiledBuildingPositionLast;
+        if (isBuildable)
+        {
+            GameManager.Instance.BuildingManager.AddBuilding(this);
+            IsFixed = true;
+            //HeightCheck();
+
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
