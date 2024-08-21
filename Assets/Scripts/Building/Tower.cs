@@ -34,6 +34,7 @@ public class Tower : InteractableBuilding
             marker_off.SetActive(!OnOff);
             foreach (MeshRenderer r in meshes)
             {
+                r.material = completeMat;
                 r.material.SetFloat("_OnOff", OnOff ? 1f : 0f);
             }
         }

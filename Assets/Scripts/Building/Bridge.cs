@@ -9,6 +9,25 @@ public class Bridge : InteractableBuilding
     // tiledBuildingPositionLast = 알아서 정해짐.
     // 사다리의 위치 = float 형. 플로트로 계산이 될것.
 
+    public override void Spawned()
+    {
+        base.Spawned();
+        if (CompletePercent >= 1)
+        {
+            foreach (MeshRenderer r in meshes)
+            {
+                r.material = completeMat;
+            }
+
+            foreach (Collider col in cols)
+            {
+                col.isTrigger = false;
+            }
+
+            System.Array.Clear(cols, 0, cols.Length);
+        }
+    }
+
     protected override void Initialize()
     {
         type = BuildingEnum.Bridge;
@@ -174,6 +193,9 @@ public class Bridge : InteractableBuilding
                                 r.material = completeMat;
                             foreach (Collider col in cols)
                                 col.isTrigger = false;
+
+                            marker_designed.SetActive(false);
+                            marker_on.SetActive(true);
 
                             System.Array.Clear(cols, 0, cols.Length);
                         }

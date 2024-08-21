@@ -5,6 +5,8 @@ using UnityEngine;
 public class CannonTower : Tower
 {
     [SerializeField]protected float splashRadius;
+
+    
     protected override void Initialize()
     {
         type = BuildingEnum.Tower;
