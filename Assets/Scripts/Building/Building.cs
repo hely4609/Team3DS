@@ -218,27 +218,7 @@ public abstract class Building : MyComponent
         {
             BuildingTimeCurrent += deltaTime;
         }
-        else
-        {
-
-        }
-
-        // 마우스를 떼면 정지. 다른 곳으로 돌려도 정지.
-
-        // 완성되면 완성본 Material로 한다.
-
-        // 건설 완료시 
-        //foreach (MeshRenderer r in meshes)
-        //{
-        //    r.material.SetFloat("_CompletePercent", CompletePercent);
-        //}
-
-        //if (CompletePercent >= 1)
-        //{
-        //    foreach (MeshRenderer r in meshes)
-        //        r.material = ResourceManager.Get(ResourceEnum.Material.Turret1a);
-
-        //}
+      
     }
 
     // 건물의 높이를 측정하는 함수.
