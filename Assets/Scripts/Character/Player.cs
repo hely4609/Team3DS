@@ -254,7 +254,7 @@ public partial class Player : Character
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
             }
 
-            if (!IsGround) velocity *= 0.05f;
+            if (!IsGround) velocity *= 0.1f;
             rb.velocity = velocity * moveSpeed + gravity;
 
 
