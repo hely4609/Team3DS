@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
+using UnityEditor;
 
 public enum BuildingEnum
 {
@@ -213,6 +214,9 @@ public abstract class Building : MyComponent
 
         Mesh mesh = new Mesh();
         mesh.CombineMeshes(combine);
+        
+        
+
 
         heightMax = mesh.bounds.max.y;
         heightMin = mesh.bounds.min.y;
@@ -226,6 +230,22 @@ public abstract class Building : MyComponent
             r.material.SetFloat("_HeightMax", heightMax);
             r.material.SetFloat("_HeightMin", heightMin);
         }
+
+//#if UNITY_EDITOR
+//        { // Mesh ¿˙¿Â
+//            if (TryGetComponent<MeshFilter>(out MeshFilter filter))
+//            {
+//                filter.mesh = mesh;
+//            }
+//            else
+//            {
+//                gameObject.AddComponent<MeshFilter>().mesh = mesh;
+//            }
+//            string path = "Assets/MyMesh.asset";
+//            AssetDatabase.CreateAsset(transform.GetComponent<MeshFilter>().mesh, AssetDatabase.GenerateUniqueAssetPath(path));
+//            AssetDatabase.SaveAssets();
+//        }
+//#endif
 
     }
 
