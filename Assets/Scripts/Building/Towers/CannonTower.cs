@@ -10,6 +10,9 @@ public class CannonTower : Tower
         type = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
+        name = "캐논 타워";
+
+        AttackRangeSetting();
     }
 
     protected override void OnHit()
@@ -61,9 +64,4 @@ public class CannonTower : Tower
         base.LockOn();
     }
 
-    public override string GetName()
-    {
-        return "ConnonTower";
-    }
-    
 }

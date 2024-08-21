@@ -15,6 +15,7 @@ public class Bridge : InteractableBuilding
         isNeedLine = false;
         size = new Vector2Int(2, 4);
         buildingTimeMax = 10;
+        name = "´Ù¸®";
 
     }
 
@@ -132,6 +133,48 @@ public class Bridge : InteractableBuilding
         else
         {
             return false;
+        }
+    }
+
+
+    public override void Render()
+    {
+        foreach (var change in _changeDetector.DetectChanges(this))
+        {
+            switch (change)
+            {
+                case nameof(isBuildable):
+                    VisualizeBuildable();
+                    break;
+
+
+                case nameof(IsFixed):
+                    Debug.Log(cols.Length);
+                    foreach (Collider col in cols)
+                    {
+                        col.enabled = true;
+                    }
+                    break;
+
+                case nameof(BuildingTimeCurrent):
+                    {
+                        foreach (MeshRenderer r in meshes)
+                        {
+                            r.material.SetFloat("_CompletePercent", CompletePercent);
+                        }
+
+                        if (CompletePercent >= 1)
+                        {
+                            foreach (MeshRenderer r in meshes)
+                                r.material = completeMat;
+                            foreach (Collider col in cols)
+                                col.isTrigger = false;
+                        }
+                    }
+                    break;
+
+            }
+
         }
     }
 }

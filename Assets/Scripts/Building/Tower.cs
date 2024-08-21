@@ -197,11 +197,6 @@ public class Tower : InteractableBuilding
         }
     }
 
-    public override string GetName()
-    {
-        return "TurretTower";
-    }
-
     public override void Render()
     {
         foreach(var chage in _changeDetector.DetectChanges(this))

@@ -477,7 +477,7 @@ public partial class Player : Character
                 interactionUpdateUI.SetActive(true);
                 interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
                 buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
-                buttonText.text = $"Building...";
+                buttonText.text = $"건설중...";
                 GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
                 break;
         }
@@ -766,7 +766,7 @@ public partial class Player : Character
             }
         }
         //다시 계산해봅시다!
-        //Calculate_Ground();
+        Calculate_Ground();
 
     }
 
@@ -788,30 +788,30 @@ public partial class Player : Character
         }
         else //아니면 계산해봐야해요
         {
-            ////가장 땅 같은 친구 찾기!
-            //GameObject mostGroundObject = ground; //일단 지금 땅의 정보로 시작!
-            ////이거는 땅의 노말을 확인할 거예요!
-            //Vector3 mostGroundNormal;
+            //가장 땅 같은 친구 찾기!
+            Collider mostGroundObject = ground; //일단 지금 땅의 정보로 시작!
+            //이거는 땅의 노말을 확인할 거예요!
+            Vector3 mostGroundNormal;
 
-            ////노말은 만약, 가장 땅같은 친구가 있으면 그 친구를 기준으로!
-            //if (ground) mostGroundNormal = GroundNormal;
-            //else mostGroundNormal = Vector3.down;
-            ////아니면 땅이 없다고 생각해서 노말을 초기화해줄 거예요!
+            //노말은 만약, 가장 땅같은 친구가 있으면 그 친구를 기준으로!
+            if (ground) mostGroundNormal = GroundNormal;
+            else mostGroundNormal = Vector3.down;
+            //아니면 땅이 없다고 생각해서 노말을 초기화해줄 거예요!
 
-            //foreach (var currentTarget in attachedCollision)
-            //{
-            //    //가장 땅 같다는 건 가장 위를 보고 있다는 것!
-            //    if (mostGroundNormal.y < currentTarget.Value.y)
-            //    {
-            //        //그래서 1등 자리를 이 친구한테 줍시다!
-            //        mostGroundNormal = currentTarget.Value;
-            //        mostGroundObject = currentTarget.Key;
-            //    }
-            //};
+            foreach (var currentTarget in attachedCollision)
+            {
+                //가장 땅 같다는 건 가장 위를 보고 있다는 것!
+                if (mostGroundNormal.y < currentTarget.Value.y)
+                {
+                    //그래서 1등 자리를 이 친구한테 줍시다!
+                    mostGroundNormal = currentTarget.Value;
+                    mostGroundObject = currentTarget.Key;
+                }
+            };
 
-            ////나온 결과를 저장하고
-            //ground = mostGroundObject;
-            //GroundNormal = mostGroundNormal;
+            //나온 결과를 저장하고
+            ground = mostGroundObject;
+            GroundNormal = mostGroundNormal;
         }
 
     }
