@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 
 public class ResourceManager : Manager
@@ -11,6 +12,9 @@ public class ResourceManager : Manager
     static Dictionary<ResourceEnum.Material, UnityEngine.Material> materialDictionary;
     static Dictionary<ResourceEnum.BGM, AudioClip> bgmDictionary;
     static Dictionary<ResourceEnum.SFX, AudioClip> sfxDictionary;
+
+    static AudioMixer audioMixer;
+    public static AudioMixer Mixer => audioMixer;
 
     public static int resourceAmount = 0;
     public static int resourceLoadCompleted = 0;
@@ -31,6 +35,8 @@ public class ResourceManager : Manager
         resourceAmount += ResourcesPath.MaterialPathArray.Length;
         resourceAmount += ResourcesPath.BGMPathArray.Length;
         resourceAmount += ResourcesPath.SFXPathArray.Length;
+
+        audioMixer = Load<AudioMixer>($"{ResourcesPath.AudioMixerPath}");
 
         yield return Load<ResourceEnum.Prefab, GameObject>(prefabDictionary, ResourcesPath.prefabPathArray, "prefabs");
         yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.MaterialPathArray, "materials");

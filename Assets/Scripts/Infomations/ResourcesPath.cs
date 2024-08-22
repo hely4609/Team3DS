@@ -50,4 +50,6 @@ public class ResourcesPath
     {
 
     };
+
+    public const string AudioMixerPath = "Sounds/AudioMixer";
 }
