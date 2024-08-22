@@ -11159,7 +11159,7 @@ Transform:
   m_GameObject: {fileID: 4886176525193278536}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5, z: 0}
+  m_LocalPosition: {x: 0, y: 7.9, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16740,6 +16740,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 4896616549607160579}
+  hpMax: 0
+  hpCurrent: 0
   moveSpeed: 5
   possessionController: {fileID: 0}
   TPS_Mode: 0
@@ -16757,6 +16759,10 @@ MonoBehaviour:
   _PreviousPosition: {x: 0, y: 0, z: 0}
   _PreviousRotation: {x: 0, y: 0, z: 0, w: 0}
   interpolatedPosition: {x: 0, y: 0, z: 0}
+  planeMovementVector: {x: 0, y: 0, z: 0}
+  groundMovementVelocity: {x: 0, y: 0, z: 0}
+  ground: {fileID: 0}
+  _IsGround: 0
 --- !u!114 &-3966098195265333311
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -20309,7 +20315,7 @@ Transform:
   m_GameObject: {fileID: 8035184359376342701}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 5.1, z: 0}
+  m_LocalPosition: {x: 0, y: 8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

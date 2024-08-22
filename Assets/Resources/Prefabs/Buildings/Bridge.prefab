@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 1599304531342413080}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 5}
+  m_LocalScale: {x: 1, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3132128114241054782}
@@ -540,8 +540,8 @@ Transform:
   m_GameObject: {fileID: 5821939677139028513}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 5}
+  m_LocalScale: {x: 1, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3132128114241054782}
@@ -722,7 +722,7 @@ MonoBehaviour:
   marker_designed: {fileID: 8169121832770783251}
   marker_on: {fileID: 1599304531342413080}
   marker_off: {fileID: 5821939677139028513}
-  name: 
+  objectName: 
 --- !u!65 &1040792674167551540
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1062,8 +1062,8 @@ Transform:
   m_GameObject: {fileID: 8169121832770783251}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 2, z: 5}
+  m_LocalScale: {x: 1, y: 3.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 3132128114241054782}

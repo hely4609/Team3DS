@@ -729,7 +729,7 @@ MonoBehaviour:
   marker_designed: {fileID: 3231269781303809827}
   marker_on: {fileID: 3801119828751985946}
   marker_off: {fileID: 6891789838605177302}
-  name: 
+  objectName: 
   attackDamage: 1
   attackSpeed: 0.5
   attackRange: 1
@@ -1009,7 +1009,7 @@ Transform:
   m_GameObject: {fileID: 3231269781303809827}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 640, z: 0}
+  m_LocalPosition: {x: 0, y: 1400, z: 0}
   m_LocalScale: {x: 160, y: 160, z: 160}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -1093,7 +1093,7 @@ Transform:
   m_GameObject: {fileID: 3801119828751985946}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 640, z: 0}
+  m_LocalPosition: {x: 0, y: 1400, z: 0}
   m_LocalScale: {x: 160, y: 160, z: 160}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -2007,7 +2007,7 @@ Transform:
   m_GameObject: {fileID: 6891789838605177302}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 640, z: 0}
+  m_LocalPosition: {x: 0, y: 1400, z: 0}
   m_LocalScale: {x: 160, y: 160, z: 160}
   m_ConstrainProportionsScale: 1
   m_Children: []
