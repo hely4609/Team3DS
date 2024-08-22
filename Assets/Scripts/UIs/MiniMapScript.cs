@@ -8,7 +8,7 @@ public class MiniMapScript : MyComponent
     //Layer설정으로관리
     //MiniMapCamera의 CullingMask로 보고싶은 Layer조정가능
     //RenderTexture필요
-    public Camera miniMapCamera;
+    Camera miniMapCamera;
     Player controlledPlayer;
     Vector3 pos;
     Vector3 rot;

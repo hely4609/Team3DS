@@ -49,4 +49,14 @@ namespace ResourceEnum
         Turret1a,
         ION_Cannon,
     }
+
+    public enum BGM
+    {
+
+    }
+
+    public enum SFX
+    {
+
+    }
 }

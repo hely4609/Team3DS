@@ -40,4 +40,14 @@ public class ResourcesPath
         "Materials/Temporary/Turret1a",
         "Materials/Temporary/ION_Cannon",
     };
+
+    public static string[] BGMPathArray =
+    {
+
+    };
+
+    public static string[] SFXPathArray =
+    {
+
+    };
 }
