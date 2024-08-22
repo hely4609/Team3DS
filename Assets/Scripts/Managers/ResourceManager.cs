@@ -9,6 +9,8 @@ public class ResourceManager : Manager
 {
     static Dictionary<ResourceEnum.Prefab, GameObject> prefabDictionary;
     static Dictionary<ResourceEnum.Material, UnityEngine.Material> materialDictionary;
+    static Dictionary<ResourceEnum.BGM, AudioClip> bgmDictionary;
+    static Dictionary<ResourceEnum.SFX, AudioClip> sfxDictionary;
 
     public static int resourceAmount = 0;
     public static int resourceLoadCompleted = 0;
@@ -17,17 +19,23 @@ public class ResourceManager : Manager
         if (prefabDictionary != null) yield break;
         if (materialDictionary != null) yield break;
 
-        prefabDictionary = new Dictionary<ResourceEnum.Prefab, GameObject>();
-        materialDictionary = new Dictionary<ResourceEnum.Material, UnityEngine.Material>();
+        prefabDictionary = new();
+        materialDictionary = new();
+        bgmDictionary = new();
+        sfxDictionary = new();
 
         resourceAmount = 0;
         resourceLoadCompleted = 0;
 
         resourceAmount += ResourcesPath.prefabPathArray.Length;
         resourceAmount += ResourcesPath.MaterialPathArray.Length;
+        resourceAmount += ResourcesPath.BGMPathArray.Length;
+        resourceAmount += ResourcesPath.SFXPathArray.Length;
 
         yield return Load<ResourceEnum.Prefab, GameObject>(prefabDictionary, ResourcesPath.prefabPathArray, "prefabs");
         yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.MaterialPathArray, "materials");
+        yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.BGMPathArray, "BGMs");
+        yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.SFXPathArray, "SFXs");
     }
 
 
@@ -105,6 +113,23 @@ public class ResourceManager : Manager
     public static UnityEngine.Material Get(ResourceEnum.Material material)
     {
         if (materialDictionary.TryGetValue(material, out UnityEngine.Material result))
+        {
+            return result;
+        }
+        return null;
+    }
+
+    public static AudioClip Get(ResourceEnum.BGM bgm)
+    {
+        if(bgmDictionary.TryGetValue(bgm, out AudioClip result))
+        {
+            return result;
+        }
+        return null;
+    }
+    public static AudioClip Get(ResourceEnum.SFX sfx)
+    {
+        if(sfxDictionary.TryGetValue(sfx, out AudioClip result))
         {
             return result;
         }
