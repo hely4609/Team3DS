@@ -46,6 +46,9 @@ public class LocalController : ControllerBase
     {
         if(HasStateAuthority)
         {
+            if (controlledPlayer.DesigningBuilding != null)
+            runner.Despawn(controlledPlayer.DesigningBuilding.GetComponent<NetworkObject>());
+
             runner.Despawn(controlledPlayer.GetComponent<NetworkObject>());
         }
     }

@@ -37,8 +37,37 @@ public class Bridge : InteractableBuilding
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
-        Vector2Int stairPosRight = tiledBuildingPositionLast + Vector2Int.down * 2;
-        Vector2Int stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, 12);
+
+        Vector2Int stairPosRight = Vector2Int.zero;
+        Vector2Int stairPosLeft = Vector2Int.zero;
+
+        if (transform.rotation.eulerAngles.y == 0f)
+        {
+            stairPosRight = tiledBuildingPositionLast + Vector2Int.down * 2;
+            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, 12);
+            size = new Vector2Int(2,4);
+
+        }
+        else if (transform.rotation.eulerAngles.y == 90f)
+        {
+            stairPosRight = tiledBuildingPositionLast + Vector2Int.left * 2;
+            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(12, 0);
+            size = new Vector2Int(4,2);
+        }
+        else if (transform.rotation.eulerAngles.y == 180f)
+        {
+            stairPosRight = tiledBuildingPositionLast + Vector2Int.up * 2;
+            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, -12);
+            size = new Vector2Int(2, 4);
+
+        }
+        else if (transform.rotation.eulerAngles.y == 270f)
+        {
+            stairPosRight = tiledBuildingPositionLast + Vector2Int.right * 2;
+            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(-12, 0);
+            size = new Vector2Int(4,2);
+        }
+        
 
         if (buildingList.Count > 0)
         {

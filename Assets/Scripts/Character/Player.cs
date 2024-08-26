@@ -26,7 +26,7 @@ public partial class Player : Character
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
-    protected int interactionIndex = 0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
+    [Networked] protected int InteractionIndex { get; set; } =0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
 
@@ -240,7 +240,7 @@ public partial class Player : Character
 
                     if (interactionObjectList.Count == 0)
                     {
-                        interactionIndex = -1;
+                        InteractionIndex = -1;
                         interactionObject = null;
 
                         if (HasInputAuthority)
@@ -250,11 +250,11 @@ public partial class Player : Character
                     }
                     else
                     {
-                        interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
-                        interactionObject = interactionObjectList[interactionIndex];
+                        InteractionIndex = Mathf.Min(InteractionIndex, interactionObjectList.Count - 1);
+                        interactionObject = interactionObjectList[InteractionIndex];
                     }
 
-                    UpdateInteractionUI(interactionIndex);
+                    UpdateInteractionUI(InteractionIndex);
                 }
             }
         }
@@ -645,7 +645,7 @@ public partial class Player : Character
 
             if (interactionObjectList.Count == 1)
             {
-                interactionIndex = 0;
+                InteractionIndex = 0;
                 interactionObject = target;
                 if (HasInputAuthority)
                 {
@@ -654,7 +654,7 @@ public partial class Player : Character
                 }
             }
 
-            UpdateInteractionUI(interactionIndex);
+            UpdateInteractionUI(InteractionIndex);
         }
         
     }
@@ -682,7 +682,7 @@ public partial class Player : Character
 
             if (interactionObjectList.Count == 0)
             {
-                interactionIndex = -1;
+                InteractionIndex = -1;
                 if (isInteracting)
                 {
                     InteractionEnd();
@@ -696,16 +696,16 @@ public partial class Player : Character
             }
             else
             {
-                interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                InteractionIndex = Mathf.Min(InteractionIndex, interactionObjectList.Count - 1);
                 if (isInteracting && target == interactionObject)
                 {
                     InteractionEnd();
                 }
-                interactionObject = interactionObjectList[interactionIndex];
+                interactionObject = interactionObjectList[InteractionIndex];
 
             }
 
-            UpdateInteractionUI(interactionIndex);
+            UpdateInteractionUI(InteractionIndex);
         }
         
     }
@@ -719,11 +719,11 @@ public partial class Player : Character
         // 휠을 위로 굴렸을 때
         else if (scrollDelta.y > 0)
         {
-            interactionIndex--;
-            interactionIndex = Mathf.Max(interactionIndex, 0);
-            interactionObject = interactionObjectList[interactionIndex];
+            InteractionIndex--;
+            InteractionIndex = Mathf.Max(InteractionIndex, 0);
+            interactionObject = interactionObjectList[InteractionIndex];
 
-            if (interactionIndex < interactionObjectList.Count - 4)
+            if (InteractionIndex < interactionObjectList.Count - 4)
             {
                 interactionContent.anchoredPosition -= new Vector2(0, 50f);
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y,0, (interactionObjectList.Count - 6) * 50f));
@@ -732,18 +732,18 @@ public partial class Player : Character
         // 휠을 아래로 굴렸을 때
         else if (scrollDelta.y < 0)
         {
-            interactionIndex++;
-            interactionIndex = Mathf.Min(interactionObjectList.Count - 1, interactionIndex);
-            interactionObject = interactionObjectList[interactionIndex];
+            InteractionIndex++;
+            InteractionIndex = Mathf.Min(interactionObjectList.Count - 1, InteractionIndex);
+            interactionObject = interactionObjectList[InteractionIndex];
 
-            if (interactionIndex > 4)
+            if (InteractionIndex > 4)
             {
                 interactionContent.anchoredPosition += new Vector2(0, 50f);
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionObjectList.Count - 6) * 50f));
             }
         }
 
-        UpdateInteractionUI(interactionIndex);
+        UpdateInteractionUI(InteractionIndex);
     }
 
     // 상호작용 UI를 최신화하는 함수
