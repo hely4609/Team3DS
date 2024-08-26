@@ -25,6 +25,7 @@ namespace ResourceEnum
         Rope,
         PowerSupply,
         EnergyBarrierGenerator,
+        Ore,
         // Monster
         EnemyTest,
 
