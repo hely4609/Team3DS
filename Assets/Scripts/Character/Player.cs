@@ -26,7 +26,7 @@ public partial class Player : Character
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
-    [Networked] protected int InteractionIndex { get; set; } =0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
+    [Networked, SerializeField] protected int InteractionIndex { get; set; } =0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
 
@@ -723,7 +723,7 @@ public partial class Player : Character
             InteractionIndex = Mathf.Max(InteractionIndex, 0);
             interactionObject = interactionObjectList[InteractionIndex];
 
-            if (InteractionIndex < interactionObjectList.Count - 4)
+            if (InteractionIndex < interactionObjectList.Count - 4 && HasInputAuthority)
             {
                 interactionContent.anchoredPosition -= new Vector2(0, 50f);
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y,0, (interactionObjectList.Count - 6) * 50f));
@@ -736,13 +736,12 @@ public partial class Player : Character
             InteractionIndex = Mathf.Min(interactionObjectList.Count - 1, InteractionIndex);
             interactionObject = interactionObjectList[InteractionIndex];
 
-            if (InteractionIndex > 4)
+            if (InteractionIndex > 4 && HasInputAuthority)
             {
                 interactionContent.anchoredPosition += new Vector2(0, 50f);
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionObjectList.Count - 6) * 50f));
             }
         }
-
         UpdateInteractionUI(InteractionIndex);
     }
 
@@ -804,7 +803,6 @@ public partial class Player : Character
         set
         {
             _groundNormal = value;
-            Debug.Log(Vector3.Angle(Vector3.up, value));
             IsGround = (value.y > 0 && Vector3.Angle(Vector3.up, value) < 90f);
         }
     }
