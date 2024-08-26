@@ -31,6 +31,7 @@ public class Monster : Character
         roadDestination = roadsVector2.Count-1;
         monsterType = MonsterEnum.First;
         isReady= true;
+        destroyFunction = (monster)=>{ GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore)); };
 
         generator = GameManager.Instance.BuildingManager.generator;
     }
