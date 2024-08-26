@@ -33,41 +33,46 @@ public class Bridge : InteractableBuilding
 
     }
 
-    public override bool CheckBuild()  // buildPos는 건설하는 타워의 중앙값
+    public override bool CheckBuild()
     {
         isBuildable = true;
         List<Building> buildingList = GameManager.Instance.BuildingManager.Buildings;
+        Vector2Int stairPosRight = tiledBuildingPositionLast + Vector2Int.down * 2;
+        Vector2Int railLength = new Vector2Int(0, 12); // 다리의 걷는부분 길이
+        Vector2Int stairPosLeft = tiledBuildingPositionLast + railLength; // 왼쪽 계단의 위치
+        Vector2Int originToMid = new Vector2Int(0, 7); // 원점(한쪽 다리에서) 중앙까지의 거리
 
-        Vector2Int stairPosRight = Vector2Int.zero;
-        Vector2Int stairPosLeft = Vector2Int.zero;
+        Vector2Int fullSize = railLength + new Vector2Int(0, size.y * 2); // 이 다리의 전체 크기
+        Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLeft : {stairPosLeft}, railLength : {railLength}, originToMid = {originToMid}, fullSize : {fullSize}");
 
-        if (transform.rotation.eulerAngles.y == 0f)
+        //if(90도 돌면, 반전되어야할것)
+        if (transform.rotation.eulerAngles.y == 90)
         {
-            stairPosRight = tiledBuildingPositionLast + Vector2Int.down * 2;
-            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, 12);
-            size = new Vector2Int(2,4);
-
-        }
-        else if (transform.rotation.eulerAngles.y == 90f)
-        {
+            size = new Vector2Int(size.y, size.x);
             stairPosRight = tiledBuildingPositionLast + Vector2Int.left * 2;
-            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(12, 0);
-            size = new Vector2Int(4,2);
+            railLength = new Vector2Int(railLength.y, railLength.x);
+            stairPosLeft = tiledBuildingPositionLast + railLength;
+            originToMid = new Vector2Int(originToMid.y, originToMid.x);
+            fullSize = railLength + new Vector2Int(size.x * 2, 0); // 이 다리의 전체 크기
+            //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLeft : {stairPosLeft}, railLength : {railLength}, originToMid = {originToMid}, fullSize : {fullSize}");
         }
-        else if (transform.rotation.eulerAngles.y == 180f)
+        else if (transform.rotation.eulerAngles.y == 180)
         {
             stairPosRight = tiledBuildingPositionLast + Vector2Int.up * 2;
-            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, -12);
-            size = new Vector2Int(2, 4);
-
+            fullSize = railLength + new Vector2Int(0, size.y*2); // 이 다리의 전체 크기
+            //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLef
         }
-        else if (transform.rotation.eulerAngles.y == 270f)
+        else if (transform.rotation.eulerAngles.y == 270)
         {
+            size = new Vector2Int(size.y, size.x);
             stairPosRight = tiledBuildingPositionLast + Vector2Int.right * 2;
-            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(-12, 0);
-            size = new Vector2Int(4,2);
+            railLength = new Vector2Int(railLength.y, railLength.x);
+            stairPosLeft = tiledBuildingPositionLast + railLength;
+            originToMid = new Vector2Int(originToMid.y, originToMid.x);
+            fullSize = railLength + new Vector2Int(size.x * 2, 0); // 이 다리의 전체 크기
+            //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLef
         }
-        
+
 
         if (buildingList.Count > 0)
         {
@@ -88,9 +93,13 @@ public class Bridge : InteractableBuilding
                         return false;
                     }
 
-                    Vector2Int buildingPosMid = building.StartPos + new Vector2Int(0, 7);
-                    Vector2Int thisPosMid = tiledBuildingPositionLast + new Vector2Int(0, 7);
-                    Vector2Int fullSize = new Vector2Int(2, 20);
+                    Vector2Int bridgeOriginToMid = new Vector2Int(0, 7);
+                    if (building.transform.rotation.eulerAngles.y == 90)
+                    {
+                        bridgeOriginToMid = new Vector2Int(bridgeOriginToMid.y, bridgeOriginToMid.x);
+                    }
+                    Vector2Int buildingPosMid = building.StartPos + bridgeOriginToMid;
+                    Vector2Int thisPosMid = tiledBuildingPositionLast + originToMid;
                     distance = buildingPosMid - thisPosMid;
 
                     sizeSum = (building.BuildingSize + fullSize) / 2;
@@ -136,11 +145,21 @@ public class Bridge : InteractableBuilding
     protected override bool BridgeCheck(Building building, Vector2Int thisBuildingPos)
     {
         bool isBuildable;
+        Vector2Int railLength = new Vector2Int(0, 12);
         Vector2Int buildingPosRight = building.StartPos + Vector2Int.down * 2;
-        Vector2Int buildingPosLeft = building.StartPos + new Vector2Int(0, 12);
+        Vector2Int buildingPosLeft = building.StartPos + railLength; //여길 고쳐야함.
+
+
+        if (building.transform.rotation.eulerAngles.y == 90)
+        {
+            size = new Vector2Int(size.y, size.x);
+            railLength = new Vector2Int(railLength.y, railLength.x);
+            buildingPosRight = building.StartPos + Vector2Int.left;
+            buildingPosLeft = building.StartPos + railLength;
+        }
+
         Vector2Int distance = buildingPosRight - thisBuildingPos;
         Vector2Int sizeSum = (building.BuildingSize + size + Vector2Int.one) / 2;
-
         if (Mathf.Abs(distance.x) >= sizeSum.x || Mathf.Abs(distance.y) >= sizeSum.y)
         {
             isBuildable = true;
