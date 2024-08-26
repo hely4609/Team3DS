@@ -13,6 +13,7 @@ public class LocalController : ControllerBase
             OnMove(data.moveDirection);
             //OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
+            OnMouseWheel(data.scrollbarDelta);
 
             if(data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
             // DesignBuilding
@@ -126,10 +127,14 @@ public class LocalController : ControllerBase
         DoBuild?.Invoke();
     }
 
+    protected void OnMouseWheel(Vector2 value)
+    {
+        DoMouseWheel?.Invoke(value);
+    }
+
     protected void OnMouseWheel(InputValue value)
     {
-        if (HasInputAuthority)
-        DoMouseWheel?.Invoke(value.Get<Vector2>());
+        return;
     }
     protected void OnRepair() { }
     ////////////////////////////////////////////
