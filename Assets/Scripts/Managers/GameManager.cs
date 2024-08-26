@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Destroy(this);
+            Destroy(gameObject);
         }
     }
 
@@ -74,9 +74,19 @@ public class GameManager : MonoBehaviour
     public WaveManager WaveManager => waveManager;
     #endregion
 
-    bool isGameStart;
+    [SerializeField]bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
-    public void GameStart() { isGameStart = true; }
+    public IEnumerator GameStart()
+    {
+        yield return BuildingManager.Initiate();
+        yield return CameraManager.Initiate();
+        isGameStart = true; 
+    }
+    public void GameOver() 
+    { 
+        isGameStart = false;
+        NetworkManager.LocalController = null;
+    }
 
     LoadingCanvas loadingCanvas;
 
@@ -100,9 +110,9 @@ public class GameManager : MonoBehaviour
         uiManager = new UIManager();
         yield return uiManager.Initiate();
         buildingManager = new BuildingManager();
-        yield return buildingManager.Initiate();
+        //yield return buildingManager.Initiate();
         cameraManager = new CameraManager();
-        yield return cameraManager.Initiate();
+        //yield return cameraManager.Initiate();
         interactionManager = new InteractionManager();
         yield return interactionManager.Initiate();
         networkManager = new NetworkManager();

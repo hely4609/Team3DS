@@ -14,7 +14,11 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public Dictionary<PlayerRef, NetworkObject> SpawnedCharacter => _spawnedCharacters;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        if (player == runner.LocalPlayer) GameManager.ClaimLoadInfo("Joining room");
+        if (player == runner.LocalPlayer)
+        {
+            StartCoroutine(GameManager.Instance.GameStart());
+            GameManager.ClaimLoadInfo("Joining room");
+        }
         if (runner.IsServer)
         {
             // Create a unique position for the player
@@ -44,7 +48,10 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
-        GameManager.Instance.UIManager.ClaimError("Shutdowned", shutdownReason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+        GameManager.Instance.GameOver();
+        GameManager.Instance.UIManager.ClaimError("Shutdowned", shutdownReason.ToString(), "OK", () => { 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        });
     }
     public void OnConnectedToServer(NetworkRunner runner) 
     {
@@ -52,12 +59,18 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     }
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) 
     { 
-        GameManager.Instance.UIManager.ClaimError("Disconneccted", reason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+        GameManager.Instance.GameOver();
+        GameManager.Instance.UIManager.ClaimError("Disconneccted", reason.ToString(), "OK", () => { 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+        });
     }
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) 
     { 
-        GameManager.Instance.UIManager.ClaimError("Connect failed", reason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+        GameManager.Instance.GameOver();
+        GameManager.Instance.UIManager.ClaimError("Connect failed", reason.ToString(), "OK", () => { 
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        });
 
     }
     public void OnUserSimulationMessage(NetworkRunner runner, SimulationMessagePtr message) { }

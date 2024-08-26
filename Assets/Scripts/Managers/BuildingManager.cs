@@ -6,17 +6,21 @@ using UnityEngine;
 
 public class BuildingManager : Manager
 {
-    protected List<Building> buildings = new List<Building>();
+    protected List<Building> buildings;
     public List<Building> Buildings => buildings;
-    public List<Vector2> roadData = new List<Vector2>(); // 시작점 리스트
+    public List<Vector2> roadData; // 시작점 리스트
     // 시작점만 알면 하나의 시작점과 다음 시작점을 이으면 해당 길이 됨.
-    protected List<GameObject> corners = new List<GameObject>();
-    protected List<GameObject> roads = new List<GameObject>();
+    protected List<GameObject> corners;
+    protected List<GameObject> roads;
 
     public EnergyBarrierGenerator generator;
 
     public override IEnumerator Initiate()
     {
+        buildings = new();
+        roadData = new();
+        corners = new();
+        roads = new();
         // 리스트로 만들고, 순서를 역순으로 변경.
         // 길을 만든 뒤에도 계속 길이 확장될 예정이라 추가되기 위해서는 이 구조가 편할것으로 예상.
         roadData.Add(new Vector2(-20, 10));

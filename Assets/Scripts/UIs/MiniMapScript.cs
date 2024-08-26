@@ -21,7 +21,7 @@ public class MiniMapScript : MyComponent
     }
     protected override void MyUpdate(float deltaTime)
     {
-        if (miniMapCamera == null) return;
+        if (miniMapCamera == null || !GameManager.IsGameStart) return;
         pos = controlledPlayer.transform.localPosition;
         miniMapCamera.transform.localPosition = new Vector3(pos.x, miniMapCamera.transform.localPosition.y, pos.z);
         if (!isMiniMapLocked)
