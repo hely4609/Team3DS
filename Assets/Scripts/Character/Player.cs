@@ -258,9 +258,43 @@ public partial class Player : Character
                 }
             }
         }
-        ////////////////////////////
 
-        
+        ////////////////////////////
+        if (DesigningBuilding != null && HasStateAuthority)
+        {
+            if (transform.rotation.eulerAngles.y < 45f || transform.rotation.eulerAngles.y >= 315f)
+            {
+                DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+            }
+            else if (transform.rotation.eulerAngles.y < 135f)
+            {
+                DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+            }
+            else if (transform.rotation.eulerAngles.y < 225f)
+            {
+                DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+            }
+            else if (transform.rotation.eulerAngles.y < 315f)
+            {
+                DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 270f, 0f);
+            }
+
+            Vector3 pickPos = transform.position + transform.forward * 5f;
+            int x = (int)pickPos.x;
+            int z = (int)pickPos.z;
+            DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
+            Vector2Int currentPos = new Vector2Int(x, z);
+
+            // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
+            if (DesigningBuilding.TiledBuildingPos != currentPos)
+            {
+                DesigningBuilding.TiledBuildingPos = currentPos;
+                DesigningBuilding.CheckBuild();
+            }
+        }
+
+
+
     }
 
     public Vector3 MoveDirCalculrate(Vector3 input)
@@ -306,21 +340,21 @@ public partial class Player : Character
 
         ///////////////////////////// 
         // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
-        if (DesigningBuilding != null && HasStateAuthority)
-        {
-            Vector3 pickPos = transform.position + transform.forward * 5f;
-            int x = (int)pickPos.x;
-            int z = (int)pickPos.z;
-            DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
-            Vector2Int currentPos = new Vector2Int(x, z);
+        //if (DesigningBuilding != null && HasStateAuthority)
+        //{
+        //    Vector3 pickPos = transform.position + transform.forward * 5f;
+        //    int x = (int)pickPos.x;
+        //    int z = (int)pickPos.z;
+        //    DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
+        //    Vector2Int currentPos = new Vector2Int(x, z);
 
-            // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
-            if (DesigningBuilding.TiledBuildingPos != currentPos)
-            {
-                DesigningBuilding.TiledBuildingPos = currentPos;
-                DesigningBuilding.CheckBuild();
-            }
-        }
+        //    // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
+        //    if (DesigningBuilding.TiledBuildingPos != currentPos)
+        //    {
+        //        DesigningBuilding.TiledBuildingPos = currentPos;
+        //        DesigningBuilding.CheckBuild();
+        //    }
+        //}
 
     }
 
@@ -366,17 +400,51 @@ public partial class Player : Character
             transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
 
             mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
-            rotate_x = rotate_x + mouseDelta_y;
+            rotate_x += mouseDelta_y;
             rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
 
             // 상하회전은 카메라만 회전
             cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
         }
+
+        //////////////////////////////////////////////////////////////////////
+        //if (DesigningBuilding != null && HasStateAuthority)
+        //{
+        //    if (transform.rotation.y < 45f || transform.rotation.y >= 315f)
+        //    {
+        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
+        //    }
+        //    else if (transform.rotation.y < 135f)
+        //    {
+        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
+        //    }
+        //    else if (transform.rotation.y < 225f)
+        //    {
+        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
+        //    }
+        //    else if (transform.rotation.y < 315f)
+        //    {
+        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 270f, 0f);
+        //    }
+
+        //    Vector3 pickPos = transform.position + transform.forward * 5f;
+        //    int x = (int)pickPos.x;
+        //    int z = (int)pickPos.z;
+        //    DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
+        //    Vector2Int currentPos = new Vector2Int(x, z);
+
+        //    // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
+        //    if (DesigningBuilding.TiledBuildingPos != currentPos)
+        //    {
+        //        DesigningBuilding.TiledBuildingPos = currentPos;
+        //        DesigningBuilding.CheckBuild();
+        //    }
+        //}
         //else
         //{
         //    transform.rotation = PreviousRotation;
         //}
-        
+
 
         //if (possessionController != null && HasInputAuthority)
         //{
