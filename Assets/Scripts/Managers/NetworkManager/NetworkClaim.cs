@@ -83,7 +83,6 @@ public partial class NetworkManager : Manager
             // all good
             //await Task.Delay(3000);
             GameObject.Find("LobbyCanvas").SetActive(false);
-            GameManager.Instance.GameStart();
         }
         else
         {
@@ -156,7 +155,6 @@ public partial class NetworkManager : Manager
         {
             // all good
             GameObject.Find("LobbyCanvas").SetActive(false);
-            GameManager.Instance.GameStart();
         }
         else
         {
