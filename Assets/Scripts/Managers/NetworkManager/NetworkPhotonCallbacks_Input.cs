@@ -18,7 +18,7 @@ public struct NetworkInputData : INetworkInput
 
     public Vector3 moveDirection;
     //public Vector2 lookRotationDelta;
-    //public Vector2 scrollbarDelta;
+    public Vector2 scrollbarDelta;
     public int selectedBuildingIndex;
     public NetworkButtons buttons;
 }
@@ -27,7 +27,7 @@ public partial class NetworkPhotonCallbacks
 {
     Vector3 moveDir;
     //Vector2 mouseDelta;
-    //Vector2 mouseWheelDelta;
+    Vector2 mouseWheelDelta;
     int buildingIndex = -1;
     bool tryBuild;
     bool tryCancel;
@@ -48,7 +48,7 @@ public partial class NetworkPhotonCallbacks
         data.moveDirection = moveDir;
         //data.lookRotationDelta = mouseDelta;
         data.selectedBuildingIndex = buildingIndex;
-        //data.scrollbarDelta = mouseWheelDelta;
+        data.scrollbarDelta = mouseWheelDelta;
 
         data.buttons.Set(MyButtons.Build, tryBuild);
         data.buttons.Set(MyButtons.Cancel, tryCancel);
@@ -112,8 +112,8 @@ public partial class NetworkPhotonCallbacks
     {
         tryInteraction = value.isPressed;
     }
-    //public void OnMouseWheel(InputValue value)
-    //{
-    //    mouseWheelDelta = value.Get<Vector2>();
-    //}
+    public void OnMouseWheel(InputValue value)
+    {
+        mouseWheelDelta = value.Get<Vector2>();
+    }
 }
