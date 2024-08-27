@@ -56,7 +56,8 @@ public class Tower : InteractableBuilding
     {
         if(OnOff)
         {
-            Attack();
+            if(HasStateAuthority)
+                Attack();
         }
         
     }
