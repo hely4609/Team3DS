@@ -22,12 +22,13 @@ public partial class Player : Character
     [SerializeField] public GameObject buildingSelectUI; // 빌딩 선택 UI
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
+    protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
+
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
-    [Networked, SerializeField] protected int InteractionIndex { get; set; } =0; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
+    [SerializeField] protected int interactionIndex = -1; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
-    protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
 
     protected bool isInteracting; // 나는 지금 상호작용 중인가?
     public bool IsInteracting => isInteracting;
@@ -57,14 +58,13 @@ public partial class Player : Character
     [Networked] public Vector3 PreviousPosition { get; set; }
     [Networked] public Quaternion PreviousRotation { get; set; }
 
-    public Vector3 interpolatedPosition;
-
-    //방향키 방향을 토대로 월드 방향을 구해봤어요!
-    Vector3 prefferedMoveDirection;
-    //평지 기준으로 움직이는 벡터입니다!
-    public Vector3 planeMovementVector;
-    //바닥 노말을 기준으로 움직이는 벡터입니다!
-    public Vector3 groundMovementVelocity;
+    //public Vector3 interpolatedPosition;
+    ////방향키 방향을 토대로 월드 방향을 구해봤어요!
+    //Vector3 prefferedMoveDirection;
+    ////평지 기준으로 움직이는 벡터입니다!
+    //public Vector3 planeMovementVector;
+    ////바닥 노말을 기준으로 움직이는 벡터입니다!
+    //public Vector3 groundMovementVelocity;
 
 
     public bool TryPossession() => possessionController == null;
@@ -239,7 +239,7 @@ public partial class Player : Character
 
                     if (interactionObjectList.Count == 0)
                     {
-                        InteractionIndex = -1;
+                        interactionIndex = -1;
                         interactionObject = null;
 
                         if (HasInputAuthority)
@@ -249,11 +249,11 @@ public partial class Player : Character
                     }
                     else
                     {
-                        InteractionIndex = Mathf.Min(InteractionIndex, interactionObjectList.Count - 1);
-                        interactionObject = interactionObjectList[InteractionIndex];
+                        interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                        interactionObject = interactionObjectList[interactionIndex];
                     }
 
-                    UpdateInteractionUI(InteractionIndex);
+                    UpdateInteractionUI(interactionIndex);
                 }
             }
         }
@@ -644,7 +644,7 @@ public partial class Player : Character
 
             if (interactionObjectList.Count == 1)
             {
-                InteractionIndex = 0;
+                interactionIndex = 0;
                 interactionObject = target;
                 if (HasInputAuthority)
                 {
@@ -653,7 +653,7 @@ public partial class Player : Character
                 }
             }
 
-            UpdateInteractionUI(InteractionIndex);
+            UpdateInteractionUI(interactionIndex);
         }
         
     }
@@ -681,7 +681,7 @@ public partial class Player : Character
 
             if (interactionObjectList.Count == 0)
             {
-                InteractionIndex = -1;
+                interactionIndex = -1;
                 if (isInteracting)
                 {
                     InteractionEnd();
@@ -695,16 +695,16 @@ public partial class Player : Character
             }
             else
             {
-                InteractionIndex = Mathf.Min(InteractionIndex, interactionObjectList.Count - 1);
+                interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
                 if (isInteracting && target == interactionObject)
                 {
                     InteractionEnd();
                 }
-                interactionObject = interactionObjectList[InteractionIndex];
+                interactionObject = interactionObjectList[interactionIndex];
 
             }
 
-            UpdateInteractionUI(InteractionIndex);
+            UpdateInteractionUI(interactionIndex);
         }
         
     }
@@ -718,11 +718,11 @@ public partial class Player : Character
         // 휠을 위로 굴렸을 때
         else if (scrollDelta.y > 0)
         {
-            InteractionIndex--;
-            InteractionIndex = Mathf.Max(InteractionIndex, 0);
-            interactionObject = interactionObjectList[InteractionIndex];
+            interactionIndex--;
+            interactionIndex = Mathf.Max(interactionIndex, 0);
+            interactionObject = interactionObjectList[interactionIndex];
 
-            if (InteractionIndex < interactionObjectList.Count - 4 && HasInputAuthority)
+            if (interactionIndex < interactionObjectList.Count - 4 && HasInputAuthority)
             {
                 interactionContent.anchoredPosition -= new Vector2(0, 50f);
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y,0, (interactionObjectList.Count - 6) * 50f));
@@ -731,17 +731,17 @@ public partial class Player : Character
         // 휠을 아래로 굴렸을 때
         else if (scrollDelta.y < 0)
         {
-            InteractionIndex++;
-            InteractionIndex = Mathf.Min(interactionObjectList.Count - 1, InteractionIndex);
-            interactionObject = interactionObjectList[InteractionIndex];
+            interactionIndex++;
+            interactionIndex = Mathf.Min(interactionObjectList.Count - 1, interactionIndex);
+            interactionObject = interactionObjectList[interactionIndex];
 
-            if (InteractionIndex > 4 && HasInputAuthority)
+            if (interactionIndex > 4 && HasInputAuthority)
             {
                 interactionContent.anchoredPosition += new Vector2(0, 50f);
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionObjectList.Count - 6) * 50f));
             }
         }
-        UpdateInteractionUI(InteractionIndex);
+        UpdateInteractionUI(interactionIndex);
     }
 
     // 상호작용 UI를 최신화하는 함수
@@ -839,7 +839,7 @@ public partial class Player : Character
         GroundNormal = normal;
         
 
-        //그리고 변경되었으니 땅을 체크해봅시다!
+        //그리고 변경되었으니 땅을 체크해봅시다! 
         //Calculate_Ground();
     }
 
