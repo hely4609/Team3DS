@@ -4,7 +4,6 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
 using Fusion;
-using static UnityEngine.GraphicsBuffer;
 
 
 public partial class Player : Character

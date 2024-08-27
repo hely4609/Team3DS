@@ -25,4 +25,9 @@ public class MyComponent : NetworkBehaviour
         GameManager.ObjectUpdates -= MyUpdate;
         GameManager.ObjectStarts -= MyStart;
     }
+
+    protected virtual void PlaySFX(int sfxEnum)
+    {
+        SoundManager.Play((ResourceEnum.SFX)sfxEnum, transform.position);
+    }
 }
