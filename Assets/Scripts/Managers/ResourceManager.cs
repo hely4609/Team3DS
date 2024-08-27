@@ -40,8 +40,8 @@ public class ResourceManager : Manager
 
         yield return Load<ResourceEnum.Prefab, GameObject>(prefabDictionary, ResourcesPath.prefabPathArray, "prefabs");
         yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.MaterialPathArray, "materials");
-        yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.BGMPathArray, "BGMs");
-        yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.SFXPathArray, "SFXs");
+        yield return Load<ResourceEnum.BGM, AudioClip>(bgmDictionary, ResourcesPath.BGMPathArray, "BGMs");
+        yield return Load<ResourceEnum.SFX, AudioClip>(sfxDictionary, ResourcesPath.SFXPathArray, "SFXs");
     }
 
 

@@ -50,7 +50,7 @@ public class ResourcesPath
 
     public static string[] SFXPathArray =
     {
-
+        "Sounds/SFX/Cannon_1",
     };
 
     public const string AudioMixerPath = "Sounds/AudioMixer";

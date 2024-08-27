@@ -52,6 +52,7 @@ namespace ResourceEnum
 
     public enum SFX
     {
-        None,
+        None = 0,
+        Cannon_1 = 1,
     }
 }

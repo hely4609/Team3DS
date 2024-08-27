@@ -21,8 +21,8 @@ public class Tower : InteractableBuilding
     [SerializeField] protected Monster target = null; // 타겟 지정된 몬스터
     [SerializeField] protected List<Monster> targetList = new List<Monster>();
     [SerializeField, Networked] protected bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
-    
 
+    [SerializeField] protected Animator animator;
     public override void Spawned()
     {
         base.Spawned();
@@ -76,6 +76,7 @@ public class Tower : InteractableBuilding
 
                 // 공격
                 // *애니메이션 재생*
+                animator.SetTrigger("Attack");
                 OnHit();
                 nowTime = attackSpeed;
             }
@@ -197,6 +198,7 @@ public class Tower : InteractableBuilding
                             {
                                 r.material = completeMat;
                             }
+                            TurnOnOff(true);
                             marker_designed.SetActive(false);
                             marker_on.SetActive(true);
                         }
