@@ -21,7 +21,6 @@ namespace ResourceEnum
         CornerWithBarrier,
         RoadWithBarrier,
         // Object
-        Hammer,
         Rope,
         PowerSupply,
         EnergyBarrierGenerator,
@@ -54,5 +53,6 @@ namespace ResourceEnum
     {
         None = 0,
         Cannon_1 = 1,
+        Cannon_2 = 2,
     }
 }

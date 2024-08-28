@@ -24,6 +24,7 @@ public class Tower : InteractableBuilding
 
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject gunBarrel;
+    [SerializeField] protected float gunBarrelRotateCorrection;
     public override void Spawned()
     {
         base.Spawned();
@@ -73,7 +74,7 @@ public class Tower : InteractableBuilding
         {
             // 타워포대를 그 대상을 향해서 옮김.
             gunBarrel.transform.LookAt(target.transform);
-            gunBarrel.transform.eulerAngles = new Vector3(0, gunBarrel.transform.eulerAngles.y - 90, 0);
+            gunBarrel.transform.eulerAngles = new Vector3(0, gunBarrel.transform.eulerAngles.y + gunBarrelRotateCorrection, 0);
             if (nowTime <= 0)
             {
                 // 공격 대상을 선택. 이미 공격 대상이 정해져있다면 계속 공격.
