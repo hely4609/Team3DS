@@ -112,7 +112,12 @@ public abstract class Building : MyComponent
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
 
-
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(new Vector3(startPos.x, 0, startPos.y), new Vector3(size.x, 0, size.y));
+        
+    }
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 중앙값
     {
         isBuildable = true;
@@ -161,27 +166,27 @@ public abstract class Building : MyComponent
         {
             buildingPosRight = building.startPos + Vector2Int.down * 2;
             buildingPosLeft = building.startPos + new Vector2Int(0, 12);
-            size = new Vector2Int(2, 4);
+            building.size = new Vector2Int(2, 4);
 
         }
         else if (building.transform.rotation.eulerAngles.y == 90f)
         {
             buildingPosRight = building.startPos + Vector2Int.left * 2;
             buildingPosLeft = building.startPos + new Vector2Int(12, 0);
-            size = new Vector2Int(4, 2);
+            building.size = new Vector2Int(4, 2);
         }
         else if (building.transform.rotation.eulerAngles.y == 180f)
         {
             buildingPosRight = building.startPos + Vector2Int.up * 2;
             buildingPosLeft = building.startPos + new Vector2Int(0, -12);
-            size = new Vector2Int(2, 4);
+            building.size = new Vector2Int(2, 4);
 
         }
         else if (building.transform.rotation.eulerAngles.y == 270f)
         {
             buildingPosRight = building.startPos + Vector2Int.right * 2;
             buildingPosLeft = building.startPos + new Vector2Int(-12, 0);
-            size = new Vector2Int(4, 2);
+            building.size = new Vector2Int(4, 2);
         }
 
         Vector2Int distance = buildingPosRight - thisBuildingPos;
@@ -231,6 +236,7 @@ public abstract class Building : MyComponent
     public virtual bool FixPlace() // 건설완료
     {
         startPos = tiledBuildingPositionLast;
+        Debug.Log($"startPos : {startPos}, transform.position : {transform.position}");
         if (isBuildable)
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);

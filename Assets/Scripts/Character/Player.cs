@@ -711,7 +711,7 @@ public partial class Player : Character
     // 마우스 휠을 굴려서 상호작용할 대상을 정함.
     public void MouseWheel(Vector2 scrollDelta)
     {
-        if (interactionContent.gameObject.activeInHierarchy == false) return;
+        if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
         if (interactionObjectList.Count == 0) return;
         if (scrollDelta.y == 0f) return;
 
