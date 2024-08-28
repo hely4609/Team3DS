@@ -11,6 +11,7 @@ public enum MyButtons
     Cancel= 2,
     Interaction = 3,
     Farming = 4,
+    Rope = 5,
 }
 public struct NetworkInputData : INetworkInput
 {
@@ -34,6 +35,7 @@ public partial class NetworkPhotonCallbacks
     bool tryBuild;
     bool tryCancel;
     bool tryInteraction;
+    bool tryRope;
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
@@ -56,13 +58,14 @@ public partial class NetworkPhotonCallbacks
         data.buttons.Set(MyButtons.Cancel, tryCancel);
         data.buttons.Set(MyButtons.Interaction, tryInteraction);
         data.buttons.Set(MyButtons.Farming, tryFarming);
-
+        data.buttons.Set(MyButtons.Rope, tryRope);  
         input.Set(data);
 
         buildingIndex = -1;
         tryBuild = false;
         tryCancel = false;
         tryFarming = false;
+        tryRope= false;
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
 
@@ -111,7 +114,10 @@ public partial class NetworkPhotonCallbacks
     {
         tryCancel = true;
     }
-
+    public void OnRope()
+    {
+        tryRope= true;
+    }
     public void OnInteraction(InputValue value)
     {
         tryInteraction = value.isPressed;

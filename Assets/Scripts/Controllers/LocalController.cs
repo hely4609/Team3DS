@@ -1,6 +1,7 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -17,6 +18,8 @@ public class LocalController : ControllerBase
             OnMouseWheel(data.scrollbarDelta);
 
             if(data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
+            if (data.buttons.IsSet(MyButtons.Rope)) OnRope();
+
             if (data.buttons.IsSet(MyButtons.Farming)) OnFarming();
             // DesignBuilding
             // 호스트는 OnDesignBuilding을 한다.
@@ -101,6 +104,10 @@ public class LocalController : ControllerBase
     //{
     //    DoMove?.Invoke(value.Get<Vector3>());
     //}
+    protected void OnRope()
+    {
+        
+    }
 
     protected void OnScreenRotate(Vector2 mouseDelta)
     {
