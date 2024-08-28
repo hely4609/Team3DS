@@ -10,6 +10,7 @@ public enum MyButtons
     Build = 1,
     Cancel= 2,
     Interaction = 3,
+    Farming = 4,
 }
 public struct NetworkInputData : INetworkInput
 {
@@ -29,6 +30,7 @@ public partial class NetworkPhotonCallbacks
     //Vector2 mouseDelta;
     Vector2 mouseWheelDelta;
     int buildingIndex = -1;
+    bool tryFarming;
     bool tryBuild;
     bool tryCancel;
     bool tryInteraction;
@@ -53,6 +55,7 @@ public partial class NetworkPhotonCallbacks
         data.buttons.Set(MyButtons.Build, tryBuild);
         data.buttons.Set(MyButtons.Cancel, tryCancel);
         data.buttons.Set(MyButtons.Interaction, tryInteraction);
+        data.buttons.Set(MyButtons.Farming, tryFarming);
 
         input.Set(data);
 
@@ -115,5 +118,10 @@ public partial class NetworkPhotonCallbacks
     public void OnMouseWheel(InputValue value)
     {
         mouseWheelDelta = value.Get<Vector2>();
+    }
+
+    public void OnFarming(InputValue value)
+    {
+        tryFarming = value.isPressed;
     }
 }

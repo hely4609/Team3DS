@@ -13,6 +13,7 @@ public class LocalController : ControllerBase
             OnMove(data.moveDirection);
             //OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
+            OnFarming(data.buttons.IsSet(MyButtons.Farming));
             OnMouseWheel(data.scrollbarDelta);
 
             if(data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
@@ -165,5 +166,10 @@ public class LocalController : ControllerBase
     protected void OnCancel()
     {
         DoCancel?.Invoke();
+    }
+
+    protected void OnFarming(bool isPressed)
+    {
+        DoFarming?.Invoke(isPressed);
     }
 }

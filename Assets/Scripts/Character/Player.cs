@@ -513,7 +513,6 @@ public partial class Player : Character
         
     }
 
-
     public bool InteractionStart()
     {
         if(DesigningBuilding != null)
