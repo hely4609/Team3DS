@@ -736,6 +736,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetList: []
   _OnOff: 0
+  animator: {fileID: 0}
   splashRadius: 10
 --- !u!136 &5371794395544762303
 CapsuleCollider:

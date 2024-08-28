@@ -23,6 +23,7 @@ public class Tower : InteractableBuilding
     [SerializeField, Networked] protected bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
 
     [SerializeField] protected Animator animator;
+    [SerializeField] protected GameObject gunBarrel;
     public override void Spawned()
     {
         base.Spawned();
@@ -71,6 +72,8 @@ public class Tower : InteractableBuilding
         else
         {
             // 타워포대를 그 대상을 향해서 옮김.
+            gunBarrel.transform.LookAt(target.transform);
+            gunBarrel.transform.eulerAngles = new Vector3(0, gunBarrel.transform.eulerAngles.y - 90, 0);
             if (nowTime <= 0)
             {
                 // 공격 대상을 선택. 이미 공격 대상이 정해져있다면 계속 공격.

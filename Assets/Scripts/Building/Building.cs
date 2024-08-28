@@ -250,7 +250,7 @@ public abstract class Building : MyComponent
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
         if (CompletePercent < 1)
         {
-            BuildingTimeCurrent += deltaTime;
+            BuildingTimeCurrent += deltaTime * 100;
         }
       
     }
