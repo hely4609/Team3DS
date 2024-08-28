@@ -51,6 +51,7 @@ public class SoundManager : Manager
             AudioSource currentSource = sfxCarrier.GetComponent<AudioSource>();
             currentSource.outputAudioMixerGroup = AMGsfx;
             currentSource.playOnAwake = false;
+            currentSource.spatialBlend = 1;
             sfxQueue.Enqueue(currentSource);
         }
 

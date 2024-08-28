@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3317812685788943892}
   - component: {fileID: 3803933175711257711}
   - component: {fileID: 9024403582529899378}
+  - component: {fileID: 3616456972517454780}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -119,6 +120,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3805c92fad61ca94b8b301d87675f9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &3616456972517454780
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294221631397181880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 506319458, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Animator: {fileID: 3803933175711257711}
+  TotalWords: 1
+  ApplyTiming: 2
+  SyncSettings: 79
+  StateHashes: 000000007d530e6c67c23486d0f79677cdf05130
+  TriggerHashes: 000000000d286c40
 --- !u!1 &1605638871560030290
 GameObject:
   m_ObjectHideFlags: 0
@@ -744,6 +763,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: -4987246587671253148}
   - {fileID: 2629911216346672159}
+  - {fileID: 3616456972517454780}
 --- !u!114 &2629911216346672159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -787,6 +807,7 @@ MonoBehaviour:
   targetList: []
   _OnOff: 0
   animator: {fileID: 3803933175711257711}
+  gunBarrel: {fileID: 8177992274299104779}
 --- !u!1 &8177992274299104779
 GameObject:
   m_ObjectHideFlags: 0
