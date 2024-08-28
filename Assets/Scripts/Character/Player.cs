@@ -34,7 +34,7 @@ public partial class Player : Character
     public bool IsInteracting => isInteracting;
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
 
-    protected int oreAmount;
+    [SerializeField]protected int oreAmount;
     public int OreAmount { get { return oreAmount; } set { oreAmount = value; } }
     /////////////////////////////
     [SerializeField] protected GameObject myMarker;
@@ -712,6 +712,7 @@ public partial class Player : Character
     // 마우스 휠을 굴려서 상호작용할 대상을 정함.
     public void MouseWheel(Vector2 scrollDelta)
     {
+        if (interactionContent.gameObject.activeInHierarchy == false) return;
         if (interactionObjectList.Count == 0) return;
         if (scrollDelta.y == 0f) return;
 
