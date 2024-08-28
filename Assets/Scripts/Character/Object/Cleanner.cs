@@ -32,13 +32,6 @@ public class Cleanner : MyComponent
         }
     }
 
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.TryGetComponent(out Ore target))
-        {
-            targets.Remove(target);
-        }
-    }
     private void Suction()
     {
         if (targets.Count == 0) return;

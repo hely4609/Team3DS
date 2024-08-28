@@ -3473,7 +3473,6 @@ GameObject:
   - component: {fileID: 5314609561174821285}
   - component: {fileID: 7972636452116571196}
   - component: {fileID: 3751669480913735530}
-  - component: {fileID: 845192610471086484}
   m_Layer: 0
   m_Name: MANUKA_Obsidian
   m_TagString: Untagged
@@ -3539,6 +3538,7 @@ MonoBehaviour:
   anim: {fileID: 5314609561174821285}
   owner: {fileID: 0}
   ikActive: 0
+  ikTarget: {fileID: 1569465589582014497}
   rightHand: {fileID: 2425715002569380131}
   leftHand: {fileID: 2619771667246722625}
   rightElbow: {fileID: 3398462723814385658}
@@ -3561,23 +3561,6 @@ MonoBehaviour:
   SyncSettings: 79
   StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9dfdd617c0812b98afe96ff1d9314e52e
   TriggerHashes: 00000000
---- !u!114 &845192610471086484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1129097313062114863}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ac61d663146dab14e947b0835f02c4fa, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ikActive: 1
-  rightHand: {fileID: 2425715002569380131}
-  leftHand: {fileID: 2619771667246722625}
-  rightElbow: {fileID: 3398462723814385658}
-  leftElbow: {fileID: 8846728191163224280}
 --- !u!1 &1130949967770251426
 GameObject:
   m_ObjectHideFlags: 0

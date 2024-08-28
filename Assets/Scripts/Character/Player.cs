@@ -79,6 +79,7 @@ public partial class Player : Character
         targetController.DoInteractionEnd -= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
         targetController.DoCancel -= Cancel;
+        targetController.DoFarming -= Farming;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
@@ -88,6 +89,7 @@ public partial class Player : Character
         targetController.DoInteractionEnd += InteractionEnd;
         targetController.DoMouseWheel += MouseWheel;
         targetController.DoCancel += Cancel;
+        targetController.DoFarming += Farming;
     }
     
     protected void UnRegistrationFunction(ControllerBase targetController)
@@ -100,6 +102,7 @@ public partial class Player : Character
         targetController.DoInteractionEnd-= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
         targetController.DoCancel -= Cancel;
+        targetController.DoFarming-= Farming;
     }
    
     public virtual void Possession(ControllerBase targetController)
@@ -291,9 +294,6 @@ public partial class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
-
-
-
     }
 
     public Vector3 MoveDirCalculrate(Vector3 input)
@@ -319,77 +319,13 @@ public partial class Player : Character
 
             if (!IsGround) velocity *= 0.1f;
             rb.velocity = velocity * moveSpeed + gravity;
-
-
-            //if (MoveDir.magnitude == 0)
-            //{
-            //    float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
-            //    float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
-            //    rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
-            //}
-            //else
-            //{
-            //    //rb.velocity = Vector3.ProjectOnPlane((transform.forward * MoveDir.z + transform.right * MoveDir.x), GroundNormal).normalized * moveSpeed + Vector3.up * rb.velocity.y;
-            //}
         }
         else
         {
             rb.position = PreviousPosition;
         }
-
-        ///////////////////////////// 
-        // 가건물을 들고있을때 해당 가건물의 위치를 int단위로 맞춰주는 부분.
-        //if (DesigningBuilding != null && HasStateAuthority)
-        //{
-        //    Vector3 pickPos = transform.position + transform.forward * 5f;
-        //    int x = (int)pickPos.x;
-        //    int z = (int)pickPos.z;
-        //    DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
-        //    Vector2Int currentPos = new Vector2Int(x, z);
-
-        //    // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
-        //    if (DesigningBuilding.TiledBuildingPos != currentPos)
-        //    {
-        //        DesigningBuilding.TiledBuildingPos = currentPos;
-        //        DesigningBuilding.CheckBuild();
-        //    }
-        //}
-
     }
-
-    // 마우스를 움직임에 따라서 카메라를 회전시키는 함수.
-    //public virtual void ScreenRotate(Vector2 mouseDelta)
-    //{
-    //    ////좌우회전은 캐릭터를 회전
-    //    //rotate_y = transform.eulerAngles.y + mouseDelta.x * 0.02f * 10f;
-    //    //transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
-
-    //    //mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
-    //    //rotate_x = rotate_x + mouseDelta_y;
-    //    //rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-
-    //    //// 상하회전은 카메라만 회전
-    //    //cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-    //    if (possessionController != null && HasInputAuthority)
-    //    {
-    //        rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
-    //        transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
-
-    //        mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
-    //        rotate_x += mouseDelta_y;
-    //        rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-    //        if (cameraOffset_FPS == null)
-    //        {
-    //            cameraOffset_FPS = transform.Find("CameraOffset");
-    //        }
-    //        cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-    //    }
-    //    else
-    //    {
-    //        transform.rotation = previousRotation;
-    //    }
-    //}
-
+    
     public virtual void ScreenRotate(Vector2 mouseDelta)
     {
         if (HasInputAuthority)
@@ -405,65 +341,8 @@ public partial class Player : Character
             // 상하회전은 카메라만 회전
             cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
         }
-
-        //////////////////////////////////////////////////////////////////////
-        //if (DesigningBuilding != null && HasStateAuthority)
-        //{
-        //    if (transform.rotation.y < 45f || transform.rotation.y >= 315f)
-        //    {
-        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        //    }
-        //    else if (transform.rotation.y < 135f)
-        //    {
-        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        //    }
-        //    else if (transform.rotation.y < 225f)
-        //    {
-        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-        //    }
-        //    else if (transform.rotation.y < 315f)
-        //    {
-        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 270f, 0f);
-        //    }
-
-        //    Vector3 pickPos = transform.position + transform.forward * 5f;
-        //    int x = (int)pickPos.x;
-        //    int z = (int)pickPos.z;
-        //    DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
-        //    Vector2Int currentPos = new Vector2Int(x, z);
-
-        //    // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
-        //    if (DesigningBuilding.TiledBuildingPos != currentPos)
-        //    {
-        //        DesigningBuilding.TiledBuildingPos = currentPos;
-        //        DesigningBuilding.CheckBuild();
-        //    }
-        //}
-        //else
-        //{
-        //    transform.rotation = PreviousRotation;
-        //}
-
-
-        //if (possessionController != null && HasInputAuthority)
-        //{
-        //    rotate_y = transform.eulerAngles.y + mouseDelta.x * Runner.DeltaTime * 10f;
-        //    transform.localEulerAngles = new Vector3(0f, rotate_y, 0f);
-
-        //    mouseDelta_y = -mouseDelta.y * Runner.DeltaTime * 10f;
-        //    rotate_x += mouseDelta_y;
-        //    rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
-        //    if (cameraOffset_FPS == null)
-        //    {
-        //        cameraOffset_FPS = transform.Find("CameraOffset");
-        //    }
-        //    cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
-        //}
-        //else
-        //{
-        //    transform.rotation = previousRotation;
-        //}
     }
+
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
 
@@ -513,6 +392,11 @@ public partial class Player : Character
         
     }
 
+    public void Farming()
+    {
+        AnimIK?.Invoke();
+    }
+
     public bool InteractionStart()
     {
         if(DesigningBuilding != null)
@@ -551,43 +435,6 @@ public partial class Player : Character
 
         return default;
     }
-
-    //public bool InteractionStart<T>(T target) where T : IInteraction
-    //{
-    //    interactionObject = target;
-
-    //    if (interactionObject == null) return false;
-
-    //    interactionType = interactionObject.InteractionStart(this);
-
-    //    switch (interactionType)
-    //    {
-    //        default: InteractionEnd(); break;
-    //        case Interaction.Build:
-    //            isInteracting = true;
-    //            AnimBool?.Invoke("isBuild", true);
-    //            interactionUI.gameObject.SetActive(false);
-    //            interactionUpdateUI.SetActive(true);
-    //            interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
-    //            buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
-    //            buttonText.text = $"건설중...";
-    //            GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
-    //            break;
-    //    }
-
-
-    //    return default;
-    //}
-
-    //public bool InteractionUpdate<T>(T target, float deltaTime) where T : IInteraction
-    //{
-    //    if (target == null) return false;
-    //    if ((IInteraction)target != interactionObject) return false;
-    //    if (isInteracting && target != null)
-    //    {
-    //        target.InteractionUpdate(deltaTime, interactionType);
-    //    }
-    //}
 
     public bool InteractionEnd()
     {

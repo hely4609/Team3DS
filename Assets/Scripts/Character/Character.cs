@@ -10,6 +10,7 @@ public abstract class Character : MyComponent
     public System.Action<string, float> AnimFloat;
     public System.Action<string, int> AnimInt;
     public System.Action<string, bool> AnimBool;
+    public System.Action AnimIK;
 
     protected Socket.Container sockets = new Socket.Container();
 

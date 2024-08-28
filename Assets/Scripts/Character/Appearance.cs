@@ -8,6 +8,7 @@ public class Appearance : MonoBehaviour
     [SerializeField] Character owner;
 
     [SerializeField] bool ikActive = false;
+    [SerializeField] GameObject ikTarget = null;
     [SerializeField] Transform rightHand = null;
     [SerializeField] Transform leftHand = null;
     [SerializeField] Transform rightElbow = null;
@@ -28,13 +29,16 @@ public class Appearance : MonoBehaviour
         if (!target) return;
         owner = target; //이 친구한테 연결되는 거구나!
         target.AnimBool -= SetBool;
-        target.AnimBool += SetBool;
         target.AnimFloat -= SetFloat;
-        target.AnimFloat += SetFloat;
         target.AnimInt -= SetInt;
-        target.AnimInt += SetInt;
         target.AnimTrigger -= SetTrigger;
+        target.AnimIK -= SetIK;
+
+        target.AnimBool += SetBool;
+        target.AnimFloat += SetFloat;
+        target.AnimInt += SetInt;
         target.AnimTrigger += SetTrigger;
+        target.AnimIK += SetIK;
     }
     public void DisConnectCharacter()
     {
@@ -43,6 +47,7 @@ public class Appearance : MonoBehaviour
         owner.AnimFloat -= SetFloat;
         owner.AnimInt -= SetInt;
         owner.AnimTrigger -= SetTrigger;
+        owner.AnimIK -= SetIK;
         owner = null;
     }
     public void SetBool(string name, bool value) => anim?.SetBool(name, value);
@@ -50,9 +55,10 @@ public class Appearance : MonoBehaviour
     public void SetInt(string name, int value) => anim?.SetInteger(name, value);
     public void SetTrigger(string name) => anim?.SetTrigger(name);
 
-    public void SetIK(bool value)
+    public void SetIK()
     {
-        ikActive = value;
+        ikActive = !ikActive;
+        ikTarget.SetActive(ikActive);
     }
 
     //a callback for calculating IK

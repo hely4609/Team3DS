@@ -62,6 +62,7 @@ public partial class NetworkPhotonCallbacks
         buildingIndex = -1;
         tryBuild = false;
         tryCancel = false;
+        tryFarming = false;
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
 
@@ -120,8 +121,8 @@ public partial class NetworkPhotonCallbacks
         mouseWheelDelta = value.Get<Vector2>();
     }
 
-    public void OnFarming(InputValue value)
+    public void OnFarming()
     {
-        tryFarming = value.isPressed;
+        tryFarming = true;
     }
 }

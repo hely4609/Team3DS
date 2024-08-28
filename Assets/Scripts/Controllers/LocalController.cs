@@ -13,10 +13,11 @@ public class LocalController : ControllerBase
             OnMove(data.moveDirection);
             //OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
-            OnFarming(data.buttons.IsSet(MyButtons.Farming));
+            
             OnMouseWheel(data.scrollbarDelta);
 
             if(data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
+            if (data.buttons.IsSet(MyButtons.Farming)) OnFarming();
             // DesignBuilding
             // 호스트는 OnDesignBuilding을 한다.
             if(HasStateAuthority)
@@ -168,8 +169,8 @@ public class LocalController : ControllerBase
         DoCancel?.Invoke();
     }
 
-    protected void OnFarming(bool isPressed)
+    protected void OnFarming()
     {
-        DoFarming?.Invoke(isPressed);
+        DoFarming?.Invoke();
     }
 }
