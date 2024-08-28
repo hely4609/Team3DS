@@ -16,7 +16,6 @@ public class ResourcesPath
         // Character
         "Prefabs/Characters/Player",
         "Prefabs/Characters/Rope",
-        "Prefabs/Characters/Hammer",
         // Tower
         "Prefabs/Buildings/Road",
         "Prefabs/Buildings/EnergyBarrier",
@@ -51,6 +50,7 @@ public class ResourcesPath
     public static string[] SFXPathArray =
     {
         "Sounds/SFX/Cannon_1",
+        "Sounds/SFX/Cannon_2",
     };
 
     public const string AudioMixerPath = "Sounds/AudioMixer";
