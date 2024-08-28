@@ -3538,6 +3538,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 5314609561174821285}
   owner: {fileID: 0}
+  ikActive: 0
+  rightHand: {fileID: 2425715002569380131}
+  leftHand: {fileID: 2619771667246722625}
+  rightElbow: {fileID: 3398462723814385658}
+  leftElbow: {fileID: 8846728191163224280}
 --- !u!114 &3751669480913735530
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3563,7 +3568,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1129097313062114863}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ac61d663146dab14e947b0835f02c4fa, type: 3}
   m_Name: 
@@ -4583,7 +4588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &8916964755127165961
 Transform:
   m_ObjectHideFlags: 0

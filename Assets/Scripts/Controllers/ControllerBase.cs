@@ -12,6 +12,7 @@ public delegate bool InteractionStartDelegate();
 public delegate bool InteractionEndDelegate();
 public delegate void WheelDelegate(Vector2 scrollDelta);
 public delegate void CancelDelegate();
+public delegate void FarmingDelegate(bool onOff);
 
 
 public class ControllerBase : MyComponent
@@ -24,6 +25,7 @@ public class ControllerBase : MyComponent
     public InteractionEndDelegate   DoInteractionEnd;
     public WheelDelegate            DoMouseWheel;
     public CancelDelegate           DoCancel;
+    public FarmingDelegate          DoFarming;
 
     [SerializeField]protected Player controlledPlayer;
     public Player ControlledPlayer => controlledPlayer;
