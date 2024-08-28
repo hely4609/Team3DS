@@ -151,8 +151,39 @@ public abstract class Building : MyComponent
     protected virtual bool BridgeCheck(Building building, Vector2Int thisBuildingPos)
     {
         bool isBuildable;
-        Vector2Int buildingPosRight = building.StartPos + Vector2Int.down * 2;
-        Vector2Int buildingPosLeft = building.StartPos + new Vector2Int(0, 12);
+        Vector2Int buildingPosRight = Vector2Int.zero;
+        Vector2Int buildingPosLeft = Vector2Int.zero;
+        
+        //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLeft : {stairPosLeft}, railLength : {railLength}, originToMid = {originToMid}, fullSize : {fullSize}");
+
+
+        if (building.transform.rotation.eulerAngles.y == 0f)
+        {
+            buildingPosRight = building.startPos + Vector2Int.down * 2;
+            buildingPosLeft = building.startPos + new Vector2Int(0, 12);
+            size = new Vector2Int(2, 4);
+
+        }
+        else if (building.transform.rotation.eulerAngles.y == 90f)
+        {
+            buildingPosRight = building.startPos + Vector2Int.left * 2;
+            buildingPosLeft = building.startPos + new Vector2Int(12, 0);
+            size = new Vector2Int(4, 2);
+        }
+        else if (building.transform.rotation.eulerAngles.y == 180f)
+        {
+            buildingPosRight = building.startPos + Vector2Int.up * 2;
+            buildingPosLeft = building.startPos + new Vector2Int(0, -12);
+            size = new Vector2Int(2, 4);
+
+        }
+        else if (building.transform.rotation.eulerAngles.y == 270f)
+        {
+            buildingPosRight = building.startPos + Vector2Int.right * 2;
+            buildingPosLeft = building.startPos + new Vector2Int(-12, 0);
+            size = new Vector2Int(4, 2);
+        }
+
         Vector2Int distance = buildingPosRight - thisBuildingPos;
         Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
 

@@ -43,35 +43,63 @@ public class Bridge : InteractableBuilding
         Vector2Int originToMid = new Vector2Int(0, 7); // 원점(한쪽 다리에서) 중앙까지의 거리
 
         Vector2Int fullSize = railLength + new Vector2Int(0, size.y * 2); // 이 다리의 전체 크기
-        Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLeft : {stairPosLeft}, railLength : {railLength}, originToMid = {originToMid}, fullSize : {fullSize}");
+        //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLeft : {stairPosLeft}, railLength : {railLength}, originToMid = {originToMid}, fullSize : {fullSize}");
 
-        //if(90도 돌면, 반전되어야할것)
-        if (transform.rotation.eulerAngles.y == 90)
+
+        if (transform.rotation.eulerAngles.y == 0f)
         {
-            size = new Vector2Int(size.y, size.x);
-            stairPosRight = tiledBuildingPositionLast + Vector2Int.left * 2;
-            railLength = new Vector2Int(railLength.y, railLength.x);
-            stairPosLeft = tiledBuildingPositionLast + railLength;
-            originToMid = new Vector2Int(originToMid.y, originToMid.x);
-            fullSize = railLength + new Vector2Int(size.x * 2, 0); // 이 다리의 전체 크기
-            //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLeft : {stairPosLeft}, railLength : {railLength}, originToMid = {originToMid}, fullSize : {fullSize}");
+            stairPosRight = tiledBuildingPositionLast + Vector2Int.down * 2;
+            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, 12);
+            size = new Vector2Int(2, 4);
+
         }
-        else if (transform.rotation.eulerAngles.y == 180)
+        else if (transform.rotation.eulerAngles.y == 90f)
+        {
+            stairPosRight = tiledBuildingPositionLast + Vector2Int.left * 2;
+            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(12, 0);
+            size = new Vector2Int(4, 2);
+        }
+        else if (transform.rotation.eulerAngles.y == 180f)
         {
             stairPosRight = tiledBuildingPositionLast + Vector2Int.up * 2;
-            fullSize = railLength + new Vector2Int(0, size.y*2); // 이 다리의 전체 크기
-            //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLef
+            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, -12);
+            size = new Vector2Int(2, 4);
+
         }
-        else if (transform.rotation.eulerAngles.y == 270)
+        else if (transform.rotation.eulerAngles.y == 270f)
         {
-            size = new Vector2Int(size.y, size.x);
             stairPosRight = tiledBuildingPositionLast + Vector2Int.right * 2;
-            railLength = new Vector2Int(railLength.y, railLength.x);
-            stairPosLeft = tiledBuildingPositionLast + railLength;
-            originToMid = new Vector2Int(originToMid.y, originToMid.x);
-            fullSize = railLength + new Vector2Int(size.x * 2, 0); // 이 다리의 전체 크기
-            //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLef
+            stairPosLeft = tiledBuildingPositionLast + new Vector2Int(-12, 0);
+            size = new Vector2Int(4, 2);
         }
+
+        //if(90도 돌면, 반전되어야할것)
+        //if (transform.rotation.eulerAngles.y == 90)
+        //{
+        //    size = new Vector2Int(size.y, size.x);
+        //    stairPosRight = tiledBuildingPositionLast + Vector2Int.left * 2;
+        //    railLength = new Vector2Int(railLength.y, railLength.x);
+        //    stairPosLeft = tiledBuildingPositionLast + railLength;
+        //    originToMid = new Vector2Int(originToMid.y, originToMid.x);
+        //    fullSize = railLength + new Vector2Int(size.x * 2, 0); // 이 다리의 전체 크기
+        //    //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLeft : {stairPosLeft}, railLength : {railLength}, originToMid = {originToMid}, fullSize : {fullSize}");
+        //}
+        //else if (transform.rotation.eulerAngles.y == 180)
+        //{
+        //    stairPosRight = tiledBuildingPositionLast + Vector2Int.up * 2;
+        //    fullSize = railLength + new Vector2Int(0, size.y*2); // 이 다리의 전체 크기
+        //    //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLef
+        //}
+        //else if (transform.rotation.eulerAngles.y == 270)
+        //{
+        //    size = new Vector2Int(size.y, size.x);
+        //    stairPosRight = tiledBuildingPositionLast + Vector2Int.right * 2;
+        //    railLength = new Vector2Int(railLength.y, railLength.x);
+        //    stairPosLeft = tiledBuildingPositionLast + railLength;
+        //    originToMid = new Vector2Int(originToMid.y, originToMid.x);
+        //    fullSize = railLength + new Vector2Int(size.x * 2, 0); // 이 다리의 전체 크기
+        //    //Debug.Log($"size : {size}, stairPosRight : {stairPosRight}, stairPosLef
+        //}
 
 
         if (buildingList.Count > 0)
