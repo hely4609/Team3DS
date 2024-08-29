@@ -14,6 +14,13 @@ public class Appearance : MonoBehaviour
     [SerializeField] Transform rightElbow = null;
     [SerializeField] Transform leftElbow = null;
 
+
+    float rightHandWeight;
+    float leftHandWeight;
+    float rightElbowWeight;
+    float leftElbowWeight;
+
+
     private void OnEnable()
     {
         ConnectCharacter(GetComponentInParent<Character>());
@@ -66,56 +73,52 @@ public class Appearance : MonoBehaviour
     {
         if (anim)
         {
+            rightHandWeight =  Mathf.Lerp(rightHandWeight,  ikActive ? 1f : 0f, 0.03f);
+            leftHandWeight =   Mathf.Lerp(leftHandWeight,   ikActive ? 1f : 0f, 0.03f);
+            rightElbowWeight = Mathf.Lerp(rightElbowWeight, ikActive ? 1f : 0f, 0.03f);
+            leftElbowWeight =  Mathf.Lerp(leftElbowWeight,  ikActive ? 1f : 0f, 0.03f);
+
             if (ikActive)
             {
-                // Set the look target position, if one has been assigned
-                //if (lookObj != null)
-                //{
-                //    animator.SetLookAtWeight(1);
-                //    animator.SetLookAtPosition(lookObj.position);
-                //}
 
                 if (rightHand != null)
                 {
-                    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-                    anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+                    anim.SetIKPositionWeight(AvatarIKGoal.RightHand, rightHandWeight);
+                    anim.SetIKRotationWeight(AvatarIKGoal.RightHand, rightHandWeight);
                     anim.SetIKPosition(AvatarIKGoal.RightHand, rightHand.position);
                     anim.SetIKRotation(AvatarIKGoal.RightHand, rightHand.rotation);
                 }
 
                 if (rightElbow != null)
                 {
-                    anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1);
+                    anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, rightElbowWeight);
                     anim.SetIKHintPosition(AvatarIKHint.RightElbow, rightElbow.position);
                 }
 
                 if (leftHand != null)
                 {
-                    anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1);
-                    anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1);
+                    anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftHandWeight);
+                    anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftHandWeight);
                     anim.SetIKPosition(AvatarIKGoal.LeftHand, leftHand.position);
                     anim.SetIKRotation(AvatarIKGoal.LeftHand, leftHand.rotation);
                 }
 
                 if (leftElbow != null)
                 {
-
-                    anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1);
+                    anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow,leftElbowWeight);
                     anim.SetIKHintPosition(AvatarIKHint.LeftElbow, leftElbow.position);
                 }
-
             }
-
             else
-            {
-                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0);
-                anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 0);
+            { 
+                anim.SetIKPositionWeight(AvatarIKGoal.RightHand, rightHandWeight);
+                anim.SetIKRotationWeight(AvatarIKGoal.RightHand, rightHandWeight);
 
-                anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0);
-                anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0);
+                anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, leftHandWeight);
+                anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, leftHandWeight);
 
-                anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0);
-                anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 0);
+                anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, rightElbowWeight);
+                anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, leftElbowWeight);
             }
         }
     }
