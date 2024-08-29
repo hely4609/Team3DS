@@ -196,7 +196,7 @@ public partial class Player : Character
         //updateTime += deltaTime;
         //interpolatedPosition = previousPosition + MoveDirCalculrate(MoveDir) * updateTime;
         //rb.MovePosition(interpolatedPosition);
-        currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, 0.1f), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, 0.1f));
+        currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, deltaTime), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, deltaTime));
 
         AnimFloat?.Invoke("Speed", MoveDir.magnitude);
         AnimFloat?.Invoke("MoveForward", currentDir.z);
