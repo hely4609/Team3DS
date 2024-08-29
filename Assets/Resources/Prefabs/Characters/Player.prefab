@@ -3538,7 +3538,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   anim: {fileID: 5314609561174821285}
   owner: {fileID: 0}
-  ikActive: 0
+  _IKActive: 0
   ikTarget: {fileID: 1569465589582014497}
   rightHand: {fileID: 2425715002569380131}
   leftHand: {fileID: 2619771667246722625}
@@ -3557,10 +3557,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 5314609561174821285}
-  TotalWords: 5
-  ApplyTiming: 2
-  SyncSettings: 79
-  StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9dfdd617c0812b98afe96ff1d9314e52e
+  TotalWords: 12
+  ApplyTiming: 0
+  SyncSettings: 127
+  StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9dfdd617c0812b98afe96ff1d9314e52e60342ad00db630e3
   TriggerHashes: 00000000
 --- !u!114 &4131951010265648181
 MonoBehaviour:
@@ -16996,6 +16996,7 @@ MonoBehaviour:
   - {fileID: 748615415056933878}
   - {fileID: 4485169977118929429}
   - {fileID: 8601115899010305847}
+  - {fileID: 7972636452116571196}
   - {fileID: 3751669480913735530}
 --- !u!114 &4485169977118929429
 MonoBehaviour:

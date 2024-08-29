@@ -12,7 +12,7 @@ public delegate bool InteractionStartDelegate();
 public delegate bool InteractionEndDelegate();
 public delegate void WheelDelegate(Vector2 scrollDelta);
 public delegate void CancelDelegate();
-public delegate void FarmingDelegate();
+public delegate void FarmingDelegate(bool isFarming);
 
 
 public class ControllerBase : MyComponent

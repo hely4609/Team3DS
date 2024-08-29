@@ -392,10 +392,9 @@ public partial class Player : Character
         
     }
 
-    public void Farming()
+    public void Farming(bool isFarming)
     {
-        if (HasInputAuthority)
-        AnimIK?.Invoke();
+        AnimIK?.Invoke(isFarming);
     }
 
     public bool InteractionStart()
