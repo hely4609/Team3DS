@@ -1,4 +1,5 @@
 using Fusion;
+using Obi;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,11 @@ public class Tower : InteractableBuilding
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject gunBarrel;
     [SerializeField] protected float gunBarrelRotateCorrection;
+
+    // Rope관련
+    [SerializeField] protected GameObject obiObject;
+    [SerializeField] protected ObiRope obiRope;
+    [SerializeField] protected ObiParticleAttachment attach;
     public override void Spawned()
     {
         base.Spawned();
@@ -47,11 +53,16 @@ public class Tower : InteractableBuilding
         {
             return Interaction.Build;
         }
-        else
+        else if(OnOff)
         {
             // 전원 끄기. 반대 상태로 토글합니다.
             TurnOnOff(!OnOff);
             return Interaction.OnOff;
+        }
+        else
+        {
+            GetRope(player);
+            return Interaction.takeRope;
         }
     }
     protected override void MyUpdate(float deltaTime)
@@ -170,6 +181,22 @@ public class Tower : InteractableBuilding
                 currentPowerConsumption = 0;
             }
         }
+    }
+
+    public void GetRope(Player player)
+    {
+        //if(HasStateAuthority && OnOff == false)
+        {
+            obiObject.SetActive(true);
+            attach.target = player.transform;
+        }
+    }
+
+    public float StrechRope(float lenght)
+    {
+        //obiRope.lengthChange += lenght;
+
+        return lenght + obiRope.restLength;
     }
 
     public override void Render()
