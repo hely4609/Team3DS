@@ -31,6 +31,7 @@ public class Tower : InteractableBuilding
     [SerializeField] protected GameObject obiObject;
     [SerializeField] protected ObiRope obiRope;
     [SerializeField] protected ObiParticleAttachment attach;
+    [Networked] protected Transform playerTransform { get; set; }
     public override void Spawned()
     {
         base.Spawned();
@@ -61,7 +62,7 @@ public class Tower : InteractableBuilding
         }
         else
         {
-            GetRope(player);
+            playerTransform = player.transform;
             return Interaction.takeRope;
         }
     }
@@ -183,12 +184,12 @@ public class Tower : InteractableBuilding
         }
     }
 
-    public void GetRope(Player player)
+    public void GetRope(Transform playerTransform)
     {
         //if(HasStateAuthority && OnOff == false)
         {
             obiObject.SetActive(true);
-            attach.target = player.transform;
+            attach.target = playerTransform;
         }
     }
 
@@ -244,6 +245,10 @@ public class Tower : InteractableBuilding
                         r.material.SetFloat("_OnOff", OnOff? 1f : 0f);
                     }
                     break;
+                case nameof(playerTransform):
+                    GetRope(playerTransform);
+                    break;
+
             }
         }
     }
