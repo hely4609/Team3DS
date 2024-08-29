@@ -91,13 +91,14 @@ public class SoundManager : Manager
         soundManager.AudioEffectUpdate += soundManager.UpdateBGMMixer;
     }
 
-    public static void Play(ResourceEnum.SFX wantSFX, Vector3 soundOrigin)
+    public static void Play(ResourceEnum.SFX wantSFX, Vector3 soundOrigin, bool loop = false)
     {
         SoundManager soundManager = GameManager.Instance.SoundManager;
         AudioClip clip = ResourceManager.Get(wantSFX);
         if(soundManager.sfxQueue.TryDequeue(out AudioSource currentSource))
         {
             currentSource.clip = clip;
+            currentSource.loop = loop;
             currentSource.transform.position = soundOrigin;
             currentSource.Play();
             soundManager.sfxQueue.Enqueue(currentSource);
