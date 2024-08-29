@@ -125,6 +125,8 @@ public class LocalController : ControllerBase
     protected void OnPutDown() { }
     protected void OnDesignBuilding(int index) 
     {
+        if (isFarmingKeyPressed) return;
+
         if (controlledPlayer == null || controlledPlayer.DesigningBuilding != null || !controlledPlayer.IsThisPlayerCharacterUICanvasActivated) return;
         DoDesignBuilding?.Invoke(index);
 
@@ -154,6 +156,8 @@ public class LocalController : ControllerBase
     {
         if (controlledPlayer == null) return;
 
+        if (isFarmingKeyPressed) return;
+
         if (isPressed ^ alreadyPressed)
         { 
             if(isPressed)
@@ -168,7 +172,6 @@ public class LocalController : ControllerBase
                 DoInteractionEnd?.Invoke();
                 alreadyPressed = false;
             }
-        
         }
     }
 
@@ -180,7 +183,9 @@ public class LocalController : ControllerBase
     bool isFarmingKeyPressed = false;
     protected void OnFarming(bool isPressed)
     {
-        Debug.Log($"버튼눌림? : {isPressed}");
+        if (controlledPlayer?.DesigningBuilding != null) return;
+        if (alreadyPressed) return;
+
         if (isPressed ^ isFarmingKeyPressed)
         {
             if (isPressed) isFarmingKeyPressed = true;
