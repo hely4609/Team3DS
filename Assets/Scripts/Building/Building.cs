@@ -112,12 +112,12 @@ public abstract class Building : MyComponent
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(new Vector3(startPos.x, 0, startPos.y), new Vector3(size.x, 0, size.y));
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawCube(new Vector3(startPos.x, 0, startPos.y), new Vector3(size.x, 0, size.y));
         
-    }
+    //}
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 중앙값
     {
         isBuildable = true;
@@ -256,7 +256,7 @@ public abstract class Building : MyComponent
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
         if (CompletePercent < 1)
         {
-            BuildingTimeCurrent += deltaTime * 100;
+            BuildingTimeCurrent += deltaTime;
         }
       
     }
