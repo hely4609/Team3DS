@@ -394,6 +394,7 @@ public partial class Player : Character
 
     public void Farming()
     {
+        if (HasInputAuthority)
         AnimIK?.Invoke();
     }
 
