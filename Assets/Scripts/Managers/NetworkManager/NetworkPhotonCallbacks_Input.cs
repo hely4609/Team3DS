@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEngine.Rendering.DebugUI;
 
 public enum MyButtons
 {
@@ -64,7 +65,6 @@ public partial class NetworkPhotonCallbacks
         buildingIndex = -1;
         tryBuild = false;
         tryCancel = false;
-        tryFarming = false;
         tryRope= false;
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
@@ -127,8 +127,9 @@ public partial class NetworkPhotonCallbacks
         mouseWheelDelta = value.Get<Vector2>();
     }
 
-    public void OnFarming()
+    public void OnFarming(InputValue value)
     {
-        tryFarming = true;
+        tryFarming = value.isPressed;
+        Debug.Log($"{value.isPressed}");    
     }
 }

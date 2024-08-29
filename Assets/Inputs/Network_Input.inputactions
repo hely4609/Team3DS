@@ -97,12 +97,12 @@
                 },
                 {
                     "name": "Farming",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "aa2f479a-0e1d-4794-8fb1-23a1c3851bba",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Rope",
