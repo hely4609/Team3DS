@@ -12,6 +12,8 @@ public class NormalTower : Tower
         TurnOnOff(false);
         objectName = "기본 타워";
 
+        powerConsumption = 10;
+
         AttackRangeSetting();
     }
     protected override void OnHit()

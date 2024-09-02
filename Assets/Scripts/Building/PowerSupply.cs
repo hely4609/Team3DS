@@ -1,24 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 public class PowerSupply : InteractableBuilding
 {
+    protected TextMeshProUGUI levelText;
+    protected TextMeshProUGUI expText;
+    protected TextMeshProUGUI powerText;
+
+    protected Image expFillImage;
+    protected Image powerFillImage;
+
+
     protected int powerMax;
     public int PowerMax
     {
         get { return powerMax; }
-        set { powerMax = value; }
+        set
+        {
+            powerMax = value;
+            powerText.text = $"{powerCurrent} / {powerMax}";
+            powerFillImage.fillAmount = powerCurrent / (float)powerMax;
+        }
     }
 
     protected int powerCurrent;
     public int PowerCurrent
     {
         get { return powerCurrent; }
-        set { powerCurrent = value; }
+        set 
+        { 
+            powerCurrent = value;
+            powerText.text = $"{powerCurrent} / {powerMax}";
+            powerFillImage.fillAmount = powerCurrent / (float)powerMax;
+        }
     }
 
-    [SerializeField] protected int level;
+    [SerializeField] protected int level =1;
     [SerializeField] protected int expCurrent; // 몹을 잡아서 Ore를 넣으면 .. 레벨업..
     [SerializeField] protected int expMax;
     public int ExpCurrent
@@ -32,18 +52,39 @@ public class PowerSupply : InteractableBuilding
                 expCurrent = 0;
                 expMax *= 2;
                 level++;
+
+                levelText.text = $"Lv.{level}";
             }
         }
     }
 
-
     protected override void Initialize()
     {
-        powerMax = 10;
-        PowerCurrent = powerMax;
-        expCurrent = 0;
-        expMax = 5;
 
+        levelText = GameObject.FindGameObjectWithTag("LevelText").GetComponent<TextMeshProUGUI>();
+        expText = GameObject.FindGameObjectWithTag("ExpText").GetComponent<TextMeshProUGUI>();
+        powerText = GameObject.FindGameObjectWithTag("PowerText").GetComponent<TextMeshProUGUI>();
+
+        expFillImage = GameObject.FindGameObjectWithTag("ExpFillImage").GetComponent<Image>();
+        powerFillImage = GameObject.FindGameObjectWithTag("PowerFillImage").GetComponent<Image>();
+
+        levelText.text = "Lv.1";
+        expText.text = "0 / 2";
+        powerText.text = "0 / 10";
+
+        expFillImage.fillAmount = 0;
+        powerFillImage.fillAmount = 0;
+
+        PowerMax = 100;
+        PowerCurrent = powerMax;
+        ExpCurrent = 0;
+        expMax = 2;
+
+    }
+
+    protected override void MyStart()
+    {
+       
     }
 
     public override Interaction InteractionStart(Player player)
@@ -76,6 +117,9 @@ public class PowerSupply : InteractableBuilding
         for (int i = 0; i < player?.OreAmount; i++)
         {
             ExpCurrent++;
+
+            expFillImage.fillAmount = expCurrent / (float)expMax;
+            expText.text = $"{expCurrent} / {expMax}";
         }
         ////if(player.BePicked != null)
         //{

@@ -183,7 +183,6 @@ GameObject:
   - component: {fileID: 2290281809893651226}
   - component: {fileID: 667561063578481595}
   - component: {fileID: 1148834793154820774}
-  - component: {fileID: 8327997586730859596}
   m_Layer: 0
   m_Name: EnergyBarrierGenerator
   m_TagString: Untagged
@@ -341,24 +340,6 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
---- !u!114 &8327997586730859596
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6849127201315086628}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6757b231cedd544c583ef8aeaf773b2a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  thickness: 0
-  inverted: 0
-  material: {fileID: 0}
-  filter: -65535
-  m_SourceCollider: {fileID: 0}
-  m_DistanceField: {fileID: 0}
 --- !u!1 &8686797311467670305
 GameObject:
   m_ObjectHideFlags: 0
