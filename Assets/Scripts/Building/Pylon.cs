@@ -1,12 +1,21 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
+public struct RopeStruct
+{
+    public List<NetworkObject> ropeObjects;
+    public List<Vector2> ropePositions;
+}
 public class Pylon : InteractableBuilding
 {
     protected int cost;
     // protected int powerCurrent;
     protected float powerRange;
+    // 로프 관련 기능
+    protected RopeStruct ropeStruct;
 
     protected override void Initialize()
     {
@@ -53,5 +62,47 @@ public class Pylon : InteractableBuilding
         ropePrefab.transform.position = (Vector3)(nowPos - beforePos)*0.5f + (Vector3)(beforePos);
     }
     //public void ResetRope()
+    public Vector3 RopePosition(Vector2 start, Vector2 end)
+    {
+        Vector2 lengthSize = (end - start) * 0.5f;
+
+        return new Vector3(start.x + lengthSize.x, 0.1f, start.y + lengthSize.y);
+    }
+    public Vector3 RopeScale(Vector2 start, Vector2 end)
+    {
+        Vector3 result;
+        Vector2 delta = end - start;
+        float deltaScale = Mathf.Abs(delta.x + delta.y);
+
+        result = new Vector3(0.2f, 0.2f, deltaScale);
+
+        return result;
+    }
+    public void ropedeta() // 전선을 놓기. 길이랑 같은 원리.
+    {
+        if(ropeStruct.ropePositions.Count<1)
+        {
+            ropeStruct.ropePositions.Add(transform.position); // 타워의 위치.(정수값)
+            ropeStruct.ropePositions.Add(transform.position);// 플레이어의 위치(정수값)
+            NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope));
+            ropeObject.transform.position = RopePosition(ropeStruct.ropePositions[0], ropeStruct.ropePositions[1]);
+            ropeObject.transform.localScale = RopeScale(ropeStruct.ropePositions[0], ropeStruct.ropePositions[1]);
+            ropeStruct.ropeObjects.Add(ropeObject);
+        }
+        else
+        {
+            Vector2 delta = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 3] - ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
+            if(delta.x == 0 || delta.y== 0)
+            {
+                // 마지막 값을 플레이어 위치로 수정
+            }
+            else
+            {
+                // 플레이어 위치를 ropePosition에 저장.
+
+            }
+        }
+    }
+
 
 }

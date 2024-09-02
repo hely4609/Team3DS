@@ -12,6 +12,9 @@ public class BuildingManager : Manager
     // 시작점만 알면 하나의 시작점과 다음 시작점을 이으면 해당 길이 됨.
     protected List<GameObject> corners;
     protected List<GameObject> roads;
+    
+    protected List<RopeStruct> roadsStructs;
+    public List<RopeStruct> RoadStructs=> roadsStructs;
 
     public EnergyBarrierGenerator generator;
 
