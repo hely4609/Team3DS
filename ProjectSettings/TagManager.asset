@@ -11,6 +11,11 @@ TagManager:
   - BuildingSelectUI
   - InteractionUpdateUI
   - OreText
+  - LevelText
+  - ExpText
+  - PowerText
+  - ExpFillImage
+  - PowerFillImage
   layers:
   - Default
   - TransparentFX
