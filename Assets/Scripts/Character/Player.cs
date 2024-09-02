@@ -324,6 +324,8 @@ public partial class Player : Character
     }
 
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
+    [SerializeField]AudioSource footstepAudioSource;
+    ResourceEnum.SFX currentFootstep = ResourceEnum.SFX.None;
     public override void Move(Vector3 direction)
     {
         MoveDir = direction.normalized;
@@ -337,6 +339,50 @@ public partial class Player : Character
             if (IsGround)
             {
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
+
+                Debug.Log(direction.magnitude);
+                if(direction.magnitude > 0)
+                {
+                    ResourceEnum.SFX footstep_sfx;
+                    switch (ground.material.name)
+                    {
+                        case "Metal (Instance)":
+                            footstep_sfx = ResourceEnum.SFX.footsteps_metal_cut;
+                            break;
+                        case "Dirt (Instance)":
+                        default:
+                            footstep_sfx = ResourceEnum.SFX.footsteps_dirt_cut;
+                            break;
+                           
+                    }
+
+                    if (footstepAudioSource == null)
+                    {
+                        // 오디오 소스가 없는경우
+                        SoundManager.Play(footstep_sfx, transform.position, out footstepAudioSource);
+                        currentFootstep = footstep_sfx;
+                    }
+                    else if (footstep_sfx != currentFootstep)
+                    {
+                        // 오디오 소스는 있는데 현재 재생되고있는 바닥재질과 재생하고싶은 바닥재질이 다른경우
+                        SoundManager.StopSFX(footstepAudioSource);
+                        footstepAudioSource = null;
+                        SoundManager.Play(footstep_sfx, transform.position, out footstepAudioSource);
+                        currentFootstep = footstep_sfx;
+                    }
+                    else
+                    {
+                        footstepAudioSource.transform.position = transform.position;
+                    }
+
+                }
+                else if(footstepAudioSource != null)
+                {
+                    // 안걷고있는경우
+                    SoundManager.StopSFX(footstepAudioSource);
+                    footstepAudioSource = null;
+                }
+
             }
 
             if (!IsGround) velocity *= 0.1f;
