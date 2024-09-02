@@ -221,9 +221,11 @@ MonoBehaviour:
   marker_on: {fileID: 7553672752727594850}
   marker_off: {fileID: 2224825689332038233}
   objectName: "\u3147\u3145\u3147"
-  level: 1
-  expCurrent: 0
-  expMax: 2
+  _PowerMax: 100
+  _PowerCurrent: 100
+  _Level: 1
+  _ExpMax: 2
+  _ExpCurrent: 0
 --- !u!114 &8269475572223652752
 MonoBehaviour:
   m_ObjectHideFlags: 0

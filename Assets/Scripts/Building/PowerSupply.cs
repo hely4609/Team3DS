@@ -47,17 +47,29 @@ public class PowerSupply : InteractableBuilding
         expFillImage = GameObject.FindGameObjectWithTag("ExpFillImage").GetComponent<Image>();
         powerFillImage = GameObject.FindGameObjectWithTag("PowerFillImage").GetComponent<Image>();
 
-        levelText.text = "Lv.1";
-        expText.text = "0 / 2";
-        powerText.text = "0 / 10";
+        //levelText.text = "Lv.1";
+        //expText.text = "0 / 2";
+        //powerText.text = "0 / 10";
 
-        expFillImage.fillAmount = 0;
-        powerFillImage.fillAmount = 0;
+        //expFillImage.fillAmount = 0;
+        //powerFillImage.fillAmount = 0;
 
-        PowerMax = 100;
-        PowerCurrent = PowerMax;
-        ExpCurrent = 0;
-        ExpMax = 2;
+        //PowerMax = 100;
+        //PowerCurrent = PowerMax;
+        //ExpCurrent = 0;
+        //ExpMax = 2;
+    }
+
+    protected override void MyStart()
+    {
+        levelText.text = $"Lv.{Level}";
+
+        expText.text = $"{ExpCurrent} / {ExpMax}";
+        expFillImage.fillAmount = ExpCurrent / (float)ExpMax;
+
+        powerText.text = $"{PowerCurrent} / {PowerMax}";
+        powerFillImage.fillAmount = PowerCurrent / (float)PowerMax;
+
     }
 
     public override Interaction InteractionStart(Player player)
@@ -120,8 +132,8 @@ public class PowerSupply : InteractableBuilding
 
                         levelText.text = $"Lv.{Level}";
                     }
-                    expFillImage.fillAmount = ExpCurrent / (float)ExpMax;
                     expText.text = $"{ExpCurrent} / {ExpMax}";
+                    expFillImage.fillAmount = ExpCurrent / (float)ExpMax;
 
                     break;
                 case nameof(PowerMax):
