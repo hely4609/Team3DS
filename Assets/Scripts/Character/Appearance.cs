@@ -58,64 +58,8 @@ public class Appearance : NetworkBehaviour
     public void SetInt(string name, int value) => anim?.SetInteger(name, value);
     public void SetTrigger(string name) => anim?.SetTrigger(name);
 
-    public void SetIK(bool value)
-    {
-        IKActive = value;
-        Debug.Log($"IKActive = {IKActive}");
-
-        //if (anim)
-        //{
-        //    //if (_layerIndex != anim.GetLayerIndex("IKLayer")) return;
-
-        //    //ikWeight = Mathf.Lerp(ikWeight, IKActive ? 1f : 0f, 0.1f);
-        //    //anim.SetLayerWeight(anim.GetLayerIndex("IKLayer"), ikWeight);
-        //    ikTarget.SetActive(IKActive);
-
-        //    if (IKActive)
-        //    {
-        //        if (rightHand != null)
-        //        {
-        //            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1f);
-        //            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1f);
-        //            anim.SetIKPosition(AvatarIKGoal.RightHand, rightHand.position);
-        //            anim.SetIKRotation(AvatarIKGoal.RightHand, rightHand.rotation);
-        //        }
-
-        //        if (rightElbow != null)
-        //        {
-        //            anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 1f);
-        //            anim.SetIKHintPosition(AvatarIKHint.RightElbow, rightElbow.position);
-        //        }
-
-        //        if (leftHand != null)
-        //        {
-        //            anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 1f);
-        //            anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 1f);
-        //            anim.SetIKPosition(AvatarIKGoal.LeftHand, leftHand.position);
-        //            anim.SetIKRotation(AvatarIKGoal.LeftHand, leftHand.rotation);
-        //        }
-
-        //        if (leftElbow != null)
-        //        {
-        //            anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 1f);
-        //            anim.SetIKHintPosition(AvatarIKHint.LeftElbow, leftElbow.position);
-        //        }
-        //    }
-        //    else
-        //    {
-        //        anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 0f);
-        //        anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 0f);
-
-        //        anim.SetIKPositionWeight(AvatarIKGoal.LeftHand, 0f);
-        //        anim.SetIKRotationWeight(AvatarIKGoal.LeftHand, 0f);
-
-        //        anim.SetIKHintPositionWeight(AvatarIKHint.RightElbow, 0f);
-        //        anim.SetIKHintPositionWeight(AvatarIKHint.LeftElbow, 0f);
-        //    }
-        //}
-    }
-
-
+    public void SetIK(bool value) => IKActive = value;
+    
     //a callback for calculating IK
     void OnAnimatorIK(int _layerIndex)
     {
