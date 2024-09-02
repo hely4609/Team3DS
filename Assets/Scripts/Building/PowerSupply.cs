@@ -18,9 +18,9 @@ public class PowerSupply : InteractableBuilding
         set { powerCurrent = value; }
     }
 
-    protected int level;
-    protected int expCurrent; // 몹을 잡아서 Ore를 넣으면 .. 레벨업..
-    protected int expMax;
+    [SerializeField] protected int level;
+    [SerializeField] protected int expCurrent; // 몹을 잡아서 Ore를 넣으면 .. 레벨업..
+    [SerializeField] protected int expMax;
     public int ExpCurrent
     {
         get { return expCurrent; }
@@ -42,13 +42,15 @@ public class PowerSupply : InteractableBuilding
         powerMax = 10;
         PowerCurrent = powerMax;
         expCurrent = 0;
-        expMax = 10;
+        expMax = 5;
+
     }
 
     public override Interaction InteractionStart(Player player)
     {
         if (player != null) // 플레이어가 가진 물건이 납품할 물건이라면
         {
+            Deliver(player);
             return Interaction.Deliver;
         }
         else
@@ -69,16 +71,20 @@ public class PowerSupply : InteractableBuilding
 
         //return false;
     //}
-    protected void Deliver(Player player)
+    public void Deliver(Player player)
     {
-        //if(player.BePicked != null)
+        for (int i = 0; i < player?.OreAmount; i++)
         {
-            // if(player.BePicked == 운반품)
-            {
-                // expCurrent += 운반품.currentOre
-                // 운반품을 비활성화.
-                // player.bePicked = null
-            }
+            ExpCurrent++;
         }
+        ////if(player.BePicked != null)
+        //{
+        //    // if(player.BePicked == 운반품)
+        //    {
+        //        // expCurrent += 운반품.currentOre
+        //        // 운반품을 비활성화.
+        //        // player.bePicked = null
+        //    }
+        //}
     }
 }
