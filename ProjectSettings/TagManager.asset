@@ -10,6 +10,7 @@ TagManager:
   - InteractionContent
   - BuildingSelectUI
   - InteractionUpdateUI
+  - OreText
   layers:
   - Default
   - TransparentFX

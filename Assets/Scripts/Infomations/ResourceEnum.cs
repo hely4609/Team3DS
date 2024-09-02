@@ -54,5 +54,14 @@ namespace ResourceEnum
         None = 0,
         Cannon_1 = 1,
         Cannon_2 = 2,
+        anvil_1 = 3,
+        _switch = 4,
+        cleaner_start = 5,
+        cleaner_loop = 6,
+        cleaner_end = 7,
+        coin = 8,
+        // Footsteps
+        footsteps_dirt = 1000,
+        footsteps_metal = 1001,
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 2569378127811375843}
   - component: {fileID: 66397920209497620}
   - component: {fileID: 7739147878222450410}
+  - component: {fileID: 5035238427750337186}
   m_Layer: 0
   m_Name: Ore
   m_TagString: Untagged
@@ -57,6 +58,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75ae1b41495671f459c35cee8ab008d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  amount: 0
 --- !u!23 &1026992443211819367
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -155,3 +157,15 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &5035238427750337186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4011389842920097186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3805c92fad61ca94b8b301d87675f9cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

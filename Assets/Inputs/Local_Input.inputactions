@@ -1,5 +1,5 @@
 {
-    "name": "LocalPlayerInput",
+    "name": "Local_Input",
     "maps": [
         {
             "name": "Normal",

@@ -14,13 +14,14 @@ public class LocalController : ControllerBase
             OnMove(data.moveDirection);
             //OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
-            
+            OnFarming(data.buttons.IsSet(MyButtons.Farming));
             OnMouseWheel(data.scrollbarDelta);
 
             if(data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
             if (data.buttons.IsSet(MyButtons.Rope)) OnRope();
 
-            if (data.buttons.IsSet(MyButtons.Farming)) OnFarming();
+            //if (data.buttons.IsSet(MyButtons.Farming)) OnFarming();
+
             // DesignBuilding
             // 호스트는 OnDesignBuilding을 한다.
             if(HasStateAuthority)
@@ -124,6 +125,8 @@ public class LocalController : ControllerBase
     protected void OnPutDown() { }
     protected void OnDesignBuilding(int index) 
     {
+        if (isFarmingKeyPressed) return;
+
         if (controlledPlayer == null || controlledPlayer.DesigningBuilding != null || !controlledPlayer.IsThisPlayerCharacterUICanvasActivated) return;
         DoDesignBuilding?.Invoke(index);
 
@@ -153,6 +156,8 @@ public class LocalController : ControllerBase
     {
         if (controlledPlayer == null) return;
 
+        if (isFarmingKeyPressed) return;
+
         if (isPressed ^ alreadyPressed)
         { 
             if(isPressed)
@@ -167,7 +172,6 @@ public class LocalController : ControllerBase
                 DoInteractionEnd?.Invoke();
                 alreadyPressed = false;
             }
-        
         }
     }
 
@@ -176,8 +180,18 @@ public class LocalController : ControllerBase
         DoCancel?.Invoke();
     }
 
-    protected void OnFarming()
+    bool isFarmingKeyPressed = false;
+    protected void OnFarming(bool isPressed)
     {
-        DoFarming?.Invoke();
+        if (controlledPlayer?.DesigningBuilding != null) return;
+        if (alreadyPressed) return;
+
+        if (isPressed ^ isFarmingKeyPressed)
+        {
+            if (isPressed) isFarmingKeyPressed = true;
+            else           isFarmingKeyPressed = false;
+          
+            DoFarming?.Invoke(isFarmingKeyPressed);
+        }
     }
 }

@@ -48,17 +48,20 @@ public class Tower : InteractableBuilding
         {
             return Interaction.Build;
         }
-        else if(OnOff)
+        else //if(OnOff)
         {
             // 전원 끄기. 반대 상태로 토글합니다.
             TurnOnOff(!OnOff);
             return Interaction.OnOff;
         }
-        else
-        {
-            GetRope(player);
-            return Interaction.takeRope;
-        }
+
+        return Interaction.None;
+        //else
+        //{
+        //    playerTransform = player.transform.position;
+        //    return Interaction.takeRope;
+        //}
+
     }
     protected override void MyUpdate(float deltaTime)
     {

@@ -20,9 +20,11 @@ public partial class Player : Character
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
     [SerializeField] protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
     [SerializeField] public GameObject buildingSelectUI; // 빌딩 선택 UI
+    
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
+    protected TextMeshProUGUI oreAmountText; // 가지고 있는 Text양을 보여줄 UI
 
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
@@ -35,7 +37,15 @@ public partial class Player : Character
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
 
     [SerializeField]protected int oreAmount;
-    public int OreAmount { get { return oreAmount; } set { oreAmount = value; } }
+    public int OreAmount 
+    { 
+        get => oreAmount;
+        set
+        { 
+            oreAmount = value;
+            oreAmountText.text = "x "+$"{oreAmount}";
+        }  
+    }
     /////////////////////////////
     [SerializeField] protected GameObject myMarker;
     [SerializeField] protected GameObject otherMarker;
@@ -152,12 +162,23 @@ public partial class Player : Character
             buildableEnumArray[x, y] = index;
         }
 
-        //buildableEnumArray[0, 0] = ResourceEnum.Prefab.Turret1a;
-        //buildableEnumArray[0, 1] = ResourceEnum.Prefab.ION_Cannon;
 
         if(HasInputAuthority) otherMarker.SetActive(false);
         else myMarker.SetActive(false);
 
+        if (possessionController != null && HasInputAuthority)
+        {
+            interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
+            interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
+            interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
+            buildingSelectUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
+            oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();
+
+            interactionUpdateUI.SetActive(false);
+            buildingSelectUI.SetActive(false);
+
+            GameManager.CloseLoadInfo();
+        }
     }
 
     public override void Spawned()
@@ -204,20 +225,21 @@ public partial class Player : Character
         //////////////////////////
 
         // CharacterUICanvas
-        if (buildingSelectUI == null)
-        {
-            if(possessionController != null && HasInputAuthority)
-            {
-                interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
-                interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
-                interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
-                buildingSelectUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
+        //if (buildingSelectUI == null)
+        //{
+        //    if(possessionController != null && HasInputAuthority)
+        //    {
+        //        interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
+        //        interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
+        //        interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
+        //        buildingSelectUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
+        //        oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();
 
-                interactionUpdateUI.SetActive(false);
-                buildingSelectUI.SetActive(false);
-            }
-            GameManager.CloseLoadInfo();
-        }
+        //        interactionUpdateUI.SetActive(false);
+        //        buildingSelectUI.SetActive(false);
+        //    }
+        //    GameManager.CloseLoadInfo();
+        //}
 
         /////////////////////////////
         // 상호작용
@@ -392,10 +414,9 @@ public partial class Player : Character
         
     }
 
-    public void Farming()
+    public void Farming(bool isFarming)
     {
-        if (HasInputAuthority)
-        AnimIK?.Invoke();
+        AnimIK?.Invoke(isFarming);
     }
 
     public bool InteractionStart()
@@ -447,6 +468,9 @@ public partial class Player : Character
         switch (interactionType)
         {
             default: break;
+            case Interaction.Deliver:
+                OreAmount = 0;
+                break;
             case Interaction.Build: 
                 AnimBool?.Invoke("isBuild", false);
                 if(HasInputAuthority)
