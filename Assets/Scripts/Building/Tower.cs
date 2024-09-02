@@ -1,5 +1,4 @@
 using Fusion;
-using Obi;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,13 +25,6 @@ public class Tower : InteractableBuilding
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject gunBarrel;
     [SerializeField] protected float gunBarrelRotateCorrection;
-
-    // Rope°ü·Ã
-    [SerializeField] protected GameObject obiObject;
-    [SerializeField] protected ObiRope obiRope;
-    [SerializeField] protected ObiSolver obiSolver;
-    [SerializeField] protected ObiParticleAttachment attach;
-    [Networked] protected Vector3 playerTransform { get; set; }
 
     public override void Spawned()
     {
@@ -64,7 +56,7 @@ public class Tower : InteractableBuilding
         }
         else
         {
-            playerTransform = player.transform.position;
+            GetRope(player);
             return Interaction.takeRope;
         }
     }
@@ -186,22 +178,10 @@ public class Tower : InteractableBuilding
         }
     }
 
-    public void GetRope(Transform playerTransform)
+    public void GetRope(Player player)
     {
-        //if(HasStateAuthority && OnOff == false)
-        {
-            obiObject.SetActive(true);
-
-            attach.target = playerTransform;
-        }
     }
 
-    public float StrechRope(float lenght)
-    {
-        //obiRope.lengthChange += lenght;
-
-        return lenght + obiRope.restLength;
-    }
 
     public override void Render()
     {
@@ -248,10 +228,6 @@ public class Tower : InteractableBuilding
                         r.material.SetFloat("_OnOff", OnOff? 1f : 0f);
                     }
                     break;
-                case nameof(playerTransform):
-                    //GetRope(player.transform);
-                    break;
-
             }
         }
     }
