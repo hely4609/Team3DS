@@ -14,6 +14,8 @@ public class BuildingManager : Manager
     protected List<GameObject> roads;
 
     public EnergyBarrierGenerator generator;
+    public PowerSupply supply;
+  
 
     public override IEnumerator Initiate()
     {
@@ -48,10 +50,13 @@ public class BuildingManager : Manager
         if (runner.IsServer)
         {
             generator = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 5, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
+            supply = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.PowerSupply), new Vector3(roadData[0].x + 15, 2, roadData[0].y)).GetComponent<PowerSupply>();
+
         }
         else
         {
             generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
+            supply = GameObject.FindObjectOfType<PowerSupply>();
         }
     }
 

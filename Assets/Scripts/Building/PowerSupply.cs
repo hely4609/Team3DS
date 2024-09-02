@@ -58,18 +58,9 @@ public class PowerSupply : InteractableBuilding
         }
     }
 
-
     protected override void Initialize()
     {
-        powerMax = 10;
-        PowerCurrent = powerMax;
-        expCurrent = 0;
-        expMax = 2;
 
-    }
-
-    protected override void MyStart()
-    {
         levelText = GameObject.FindGameObjectWithTag("LevelText").GetComponent<TextMeshProUGUI>();
         expText = GameObject.FindGameObjectWithTag("ExpText").GetComponent<TextMeshProUGUI>();
         powerText = GameObject.FindGameObjectWithTag("PowerText").GetComponent<TextMeshProUGUI>();
@@ -83,6 +74,17 @@ public class PowerSupply : InteractableBuilding
 
         expFillImage.fillAmount = 0;
         powerFillImage.fillAmount = 0;
+
+        PowerMax = 100;
+        PowerCurrent = powerMax;
+        ExpCurrent = 0;
+        expMax = 2;
+
+    }
+
+    protected override void MyStart()
+    {
+       
     }
 
     public override Interaction InteractionStart(Player player)
