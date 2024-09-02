@@ -13,8 +13,8 @@ public class BuildingManager : Manager
     protected List<GameObject> corners;
     protected List<GameObject> roads;
     
-    protected List<RopeStruct> roadsStructs;
-    public List<RopeStruct> RoadStructs=> roadsStructs;
+    protected List<RopeStruct> ropeStructs;
+    public List<RopeStruct> RopeStructs=> ropeStructs;
 
     public EnergyBarrierGenerator generator;
     public PowerSupply supply;
