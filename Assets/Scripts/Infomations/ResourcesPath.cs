@@ -58,8 +58,8 @@ public class ResourcesPath
         "Sounds/SFX/cleaner_end",
         "Sounds/SFX/coin",
         // Foodsteps
-        "Sounds/SFX/Footsteps/footsteps_dirt",
-        "Sounds/SFX/Footsteps/footsteps_metal",
+        "Sounds/SFX/Footsteps/footsteps_dirt_cut",
+        "Sounds/SFX/Footsteps/footsteps_metal_cut",
     };
 
     public const string AudioMixerPath = "Sounds/AudioMixer";

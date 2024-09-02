@@ -12,7 +12,7 @@ public class SoundManager : Manager
     AudioMixerGroup AMGsfx;
 
     AudioSource[] bgmArray = new AudioSource[2];
-    const int sfxMaxNumber = 10;
+    const int sfxMaxNumber = 30;
     Queue<AudioSource> sfxQueue = new();
 
     Action<float> AudioEffectUpdate;
@@ -105,6 +105,20 @@ public class SoundManager : Manager
         }
     }
 
+    public static void Play(ResourceEnum.SFX wantSFX, Vector3 soundOrigin, bool loop, out AudioSource source)
+    {
+        SoundManager soundManager = GameManager.Instance.SoundManager;
+        AudioClip clip = ResourceManager.Get(wantSFX);
+        if (soundManager.sfxQueue.TryDequeue(out AudioSource currentSource))
+        {
+            currentSource.clip = clip;
+            currentSource.loop = loop;
+            currentSource.transform.position = soundOrigin;
+            currentSource.Play();
+            source = currentSource;
+        }
+        else source = null;
+    }
     public static void StopBGM()
     {
         foreach(var bgm in GameManager.Instance.SoundManager.bgmArray)
@@ -113,11 +127,9 @@ public class SoundManager : Manager
         }
     }
 
-    public static void StopSFX()
+    public static void StopSFX(AudioSource source)
     {
-        foreach(var sfx in GameManager.Instance.SoundManager.sfxQueue)
-        {
-            sfx.Stop();
-        }
+        source.Stop();
+        GameManager.Instance.SoundManager.sfxQueue.Enqueue(source);
     }
 }
