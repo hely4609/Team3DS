@@ -54,13 +54,6 @@ public class Tower : InteractableBuilding
             TurnOnOff(!OnOff);
             return Interaction.OnOff;
         }
-<<<<<<< HEAD
-        else
-        {
-            GetRope(player);
-            return Interaction.takeRope;
-        }
-=======
 
         return Interaction.None;
         //else
@@ -68,7 +61,7 @@ public class Tower : InteractableBuilding
         //    playerTransform = player.transform.position;
         //    return Interaction.takeRope;
         //}
->>>>>>> Character
+
     }
     protected override void MyUpdate(float deltaTime)
     {
