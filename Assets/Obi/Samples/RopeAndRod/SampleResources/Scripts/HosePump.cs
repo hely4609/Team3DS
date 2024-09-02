@@ -52,7 +52,6 @@ public class HosePump : MonoBehaviour {
                 int previousIndex = rope.solverIndices[i - 1];
                 distance += Vector3.Distance(rope.solver.positions[solverIndex],rope.solver.positions[previousIndex]);
             }
-
             sine = Mathf.Max(0, Mathf.Sin(distance * bulgeFrequency - time));
 
             rope.solver.principalRadii[solverIndex] = Vector3.one * Mathf.Lerp(baseThickness,bulgeThickness, sine);

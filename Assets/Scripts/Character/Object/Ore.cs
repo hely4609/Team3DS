@@ -17,6 +17,10 @@ public class Ore : MyComponent
         amount = 1;
     }
 
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        SoundManager.Play(ResourceEnum.SFX.coin, transform.position);
+    }
     //private void OnCollisionEnter(Collision collision)
     //{
     //    if(collision.gameObject.TryGetComponent(out Player player))

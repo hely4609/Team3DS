@@ -1,4 +1,5 @@
 using Fusion;
+using Obi;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -25,6 +26,14 @@ public class Tower : InteractableBuilding
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject gunBarrel;
     [SerializeField] protected float gunBarrelRotateCorrection;
+
+    // Rope관련
+    [SerializeField] protected GameObject obiObject;
+    [SerializeField] protected ObiRope obiRope;
+    [SerializeField] protected ObiSolver obiSolver;
+    [SerializeField] protected ObiParticleAttachment attach;
+    [Networked] protected Vector3 playerTransform { get; set; }
+
     public override void Spawned()
     {
         base.Spawned();
@@ -47,11 +56,16 @@ public class Tower : InteractableBuilding
         {
             return Interaction.Build;
         }
-        else
+        else if(OnOff)
         {
             // 전원 끄기. 반대 상태로 토글합니다.
             TurnOnOff(!OnOff);
             return Interaction.OnOff;
+        }
+        else
+        {
+            playerTransform = player.transform.position;
+            return Interaction.takeRope;
         }
     }
     protected override void MyUpdate(float deltaTime)
@@ -172,6 +186,23 @@ public class Tower : InteractableBuilding
         }
     }
 
+    public void GetRope(Transform playerTransform)
+    {
+        //if(HasStateAuthority && OnOff == false)
+        {
+            obiObject.SetActive(true);
+
+            attach.target = playerTransform;
+        }
+    }
+
+    public float StrechRope(float lenght)
+    {
+        //obiRope.lengthChange += lenght;
+
+        return lenght + obiRope.restLength;
+    }
+
     public override void Render()
     {
         foreach(var chage in _changeDetector.DetectChanges(this))
@@ -217,6 +248,10 @@ public class Tower : InteractableBuilding
                         r.material.SetFloat("_OnOff", OnOff? 1f : 0f);
                     }
                     break;
+                case nameof(playerTransform):
+                    //GetRope(player.transform);
+                    break;
+
             }
         }
     }

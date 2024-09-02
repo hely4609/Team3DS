@@ -112,12 +112,12 @@ public abstract class Building : MyComponent
     }
     protected abstract void Initialize(); // 건물의 Enum 값 지정해줘야함.
 
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawCube(new Vector3(startPos.x, 0, startPos.y), new Vector3(size.x, 0, size.y));
+    //private void OnDrawGizmos()
+    //{
+    //    Gizmos.color = Color.yellow;
+    //    Gizmos.DrawCube(new Vector3(startPos.x, 0, startPos.y), new Vector3(size.x, 0, size.y));
         
-    }
+    //}
     public virtual bool CheckBuild()  // buildPos는 건설하는 타워의 중앙값
     {
         isBuildable = true;
