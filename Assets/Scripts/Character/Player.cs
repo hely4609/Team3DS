@@ -316,6 +316,26 @@ public partial class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
+        if(cleanerAudioSource != null)
+        {
+            cleanerAudioSource.transform.position = transform.position;
+            
+            if (!cleanerAudioSource.isPlaying)
+            {
+                if(wasPlayingCleanerEnd)
+                {
+                    cleanerAudioSource = null;
+                    wasPlayingCleanerEnd = false;
+                }
+                else
+                {
+                    SoundManager.Play(ResourceEnum.SFX.cleaner_loop, transform.position, true, out cleanerAudioSource);
+
+                }
+            }
+
+
+        }
     }
 
     public Vector3 MoveDirCalculrate(Vector3 input)
@@ -340,7 +360,6 @@ public partial class Player : Character
             {
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
 
-                Debug.Log(direction.magnitude);
                 if(direction.magnitude > 0)
                 {
                     ResourceEnum.SFX footstep_sfx;
@@ -359,7 +378,7 @@ public partial class Player : Character
                     if (footstepAudioSource == null)
                     {
                         // 오디오 소스가 없는경우
-                        SoundManager.Play(footstep_sfx, transform.position, out footstepAudioSource);
+                        SoundManager.Play(footstep_sfx, transform.position, true, out footstepAudioSource);
                         currentFootstep = footstep_sfx;
                     }
                     else if (footstep_sfx != currentFootstep)
@@ -367,7 +386,7 @@ public partial class Player : Character
                         // 오디오 소스는 있는데 현재 재생되고있는 바닥재질과 재생하고싶은 바닥재질이 다른경우
                         SoundManager.StopSFX(footstepAudioSource);
                         footstepAudioSource = null;
-                        SoundManager.Play(footstep_sfx, transform.position, out footstepAudioSource);
+                        SoundManager.Play(footstep_sfx, transform.position, true, out footstepAudioSource);
                         currentFootstep = footstep_sfx;
                     }
                     else
@@ -460,8 +479,29 @@ public partial class Player : Character
         
     }
 
+    [SerializeField]AudioSource cleanerAudioSource;
+    bool wasPlayingCleanerEnd;
     public void Farming(bool isFarming)
     {
+        if (isFarming)
+        {
+            if(cleanerAudioSource != null)
+            {
+                SoundManager.StopSFX(cleanerAudioSource);
+                wasPlayingCleanerEnd = false;
+            }
+            SoundManager.Play(ResourceEnum.SFX.cleaner_start, transform.position, false, out cleanerAudioSource);
+        }
+        else
+        {
+            if (cleanerAudioSource != null)
+            {
+                SoundManager.StopSFX(cleanerAudioSource);
+                SoundManager.Play(ResourceEnum.SFX.cleaner_end, transform.position, false, out cleanerAudioSource);
+                wasPlayingCleanerEnd = true;
+            }
+
+        }
         AnimIK?.Invoke(isFarming);
     }
 
