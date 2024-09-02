@@ -61,7 +61,7 @@ namespace ResourceEnum
         cleaner_end = 7,
         coin = 8,
         // Footsteps
-        footsteps_dirt = 1000,
-        footsteps_metal = 1001,
+        footsteps_dirt_cut = 1000,
+        footsteps_metal_cut = 1001,
     }
 }

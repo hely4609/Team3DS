@@ -316,6 +316,26 @@ public partial class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
+        if(cleanerAudioSource != null)
+        {
+            cleanerAudioSource.transform.position = transform.position;
+            
+            if (!cleanerAudioSource.isPlaying)
+            {
+                if(wasPlayingCleanerEnd)
+                {
+                    cleanerAudioSource = null;
+                    wasPlayingCleanerEnd = false;
+                }
+                else
+                {
+                    SoundManager.Play(ResourceEnum.SFX.cleaner_loop, transform.position, true, out cleanerAudioSource);
+
+                }
+            }
+
+
+        }
     }
 
     public Vector3 MoveDirCalculrate(Vector3 input)
@@ -324,6 +344,8 @@ public partial class Player : Character
     }
 
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
+    [SerializeField]AudioSource footstepAudioSource;
+    ResourceEnum.SFX currentFootstep = ResourceEnum.SFX.None;
     public override void Move(Vector3 direction)
     {
         MoveDir = direction.normalized;
@@ -337,6 +359,49 @@ public partial class Player : Character
             if (IsGround)
             {
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
+
+                if(direction.magnitude > 0)
+                {
+                    ResourceEnum.SFX footstep_sfx;
+                    switch (ground.material.name)
+                    {
+                        case "Metal (Instance)":
+                            footstep_sfx = ResourceEnum.SFX.footsteps_metal_cut;
+                            break;
+                        case "Dirt (Instance)":
+                        default:
+                            footstep_sfx = ResourceEnum.SFX.footsteps_dirt_cut;
+                            break;
+                           
+                    }
+
+                    if (footstepAudioSource == null)
+                    {
+                        // 오디오 소스가 없는경우
+                        SoundManager.Play(footstep_sfx, transform.position, true, out footstepAudioSource);
+                        currentFootstep = footstep_sfx;
+                    }
+                    else if (footstep_sfx != currentFootstep)
+                    {
+                        // 오디오 소스는 있는데 현재 재생되고있는 바닥재질과 재생하고싶은 바닥재질이 다른경우
+                        SoundManager.StopSFX(footstepAudioSource);
+                        footstepAudioSource = null;
+                        SoundManager.Play(footstep_sfx, transform.position, true, out footstepAudioSource);
+                        currentFootstep = footstep_sfx;
+                    }
+                    else
+                    {
+                        footstepAudioSource.transform.position = transform.position;
+                    }
+
+                }
+                else if(footstepAudioSource != null)
+                {
+                    // 안걷고있는경우
+                    SoundManager.StopSFX(footstepAudioSource);
+                    footstepAudioSource = null;
+                }
+
             }
 
             if (!IsGround) velocity *= 0.1f;
@@ -414,8 +479,29 @@ public partial class Player : Character
         
     }
 
+    [SerializeField]AudioSource cleanerAudioSource;
+    bool wasPlayingCleanerEnd;
     public void Farming(bool isFarming)
     {
+        if (isFarming)
+        {
+            if(cleanerAudioSource != null)
+            {
+                SoundManager.StopSFX(cleanerAudioSource);
+                wasPlayingCleanerEnd = false;
+            }
+            SoundManager.Play(ResourceEnum.SFX.cleaner_start, transform.position, false, out cleanerAudioSource);
+        }
+        else
+        {
+            if (cleanerAudioSource != null)
+            {
+                SoundManager.StopSFX(cleanerAudioSource);
+                SoundManager.Play(ResourceEnum.SFX.cleaner_end, transform.position, false, out cleanerAudioSource);
+                wasPlayingCleanerEnd = true;
+            }
+
+        }
         AnimIK?.Invoke(isFarming);
     }
 

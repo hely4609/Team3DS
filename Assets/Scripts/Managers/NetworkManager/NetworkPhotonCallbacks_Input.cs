@@ -130,6 +130,5 @@ public partial class NetworkPhotonCallbacks
     public void OnFarming(InputValue value)
     {
         tryFarming = value.isPressed;
-        Debug.Log($"{value.isPressed}");    
     }
 }
