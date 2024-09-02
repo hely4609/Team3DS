@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Fusion;
+using static UnityEngine.Rendering.DebugUI;
 
 public class PowerSupply : InteractableBuilding
 {
@@ -13,53 +15,30 @@ public class PowerSupply : InteractableBuilding
     protected Image expFillImage;
     protected Image powerFillImage;
 
-
-    protected int powerMax;
-    public int PowerMax
+    [Networked] public int PowerMax
     {
-        get { return powerMax; }
-        set
-        {
-            powerMax = value;
-            powerText.text = $"{powerCurrent} / {powerMax}";
-            powerFillImage.fillAmount = powerCurrent / (float)powerMax;
-        }
+        get => PowerMax; 
+        set => PowerMax = value;
     }
 
-    protected int powerCurrent;
-    public int PowerCurrent
+    [Networked] public int PowerCurrent
     {
-        get { return powerCurrent; }
-        set 
-        { 
-            powerCurrent = value;
-            powerText.text = $"{powerCurrent} / {powerMax}";
-            powerFillImage.fillAmount = powerCurrent / (float)powerMax;
-        }
+        get => PowerCurrent; 
+        set => PowerCurrent = value;
     }
 
-    [SerializeField] protected int level =1;
-    [SerializeField] protected int expCurrent; // 몹을 잡아서 Ore를 넣으면 .. 레벨업..
-    [SerializeField] protected int expMax;
-    public int ExpCurrent
+    [Networked, SerializeField] protected int Level { get; set; } = 1;
+    //[SerializeField] protected int ExpCurrent; // 몹을 잡아서 Ore를 넣으면 .. 레벨업..
+    [Networked, SerializeField] protected int ExpMax { get; set; }
+    [Networked] public int ExpCurrent
     {
-        get { return expCurrent; }
-        set
-        {
-            expCurrent = value;
-            if (expCurrent >= expMax)
-            {
-                expCurrent = 0;
-                expMax *= 2;
-                level++;
-
-                levelText.text = $"Lv.{level}";
-            }
-        }
+        get => ExpCurrent; 
+        set => ExpCurrent = value;
     }
 
     protected override void Initialize()
     {
+        GameManager.Instance.BuildingManager.supply = this;
 
         levelText = GameObject.FindGameObjectWithTag("LevelText").GetComponent<TextMeshProUGUI>();
         expText = GameObject.FindGameObjectWithTag("ExpText").GetComponent<TextMeshProUGUI>();
@@ -76,15 +55,9 @@ public class PowerSupply : InteractableBuilding
         powerFillImage.fillAmount = 0;
 
         PowerMax = 100;
-        PowerCurrent = powerMax;
+        PowerCurrent = PowerMax;
         ExpCurrent = 0;
-        expMax = 2;
-
-    }
-
-    protected override void MyStart()
-    {
-       
+        ExpMax = 2;
     }
 
     public override Interaction InteractionStart(Player player)
@@ -118,8 +91,8 @@ public class PowerSupply : InteractableBuilding
         {
             ExpCurrent++;
 
-            expFillImage.fillAmount = expCurrent / (float)expMax;
-            expText.text = $"{expCurrent} / {expMax}";
+            //expFillImage.fillAmount = ExpCurrent / (float)ExpMax;
+            //expText.text = $"{ExpCurrent} / {ExpMax}";
         }
         ////if(player.BePicked != null)
         //{
@@ -130,5 +103,34 @@ public class PowerSupply : InteractableBuilding
         //        // player.bePicked = null
         //    }
         //}
+    }
+
+    public override void Render()
+    {
+        foreach (var chage in _changeDetector.DetectChanges(this))
+        {
+            switch (chage)
+            {
+                case nameof(ExpCurrent):
+                    if (ExpCurrent >= ExpMax)
+                    {
+                        ExpCurrent = 0;
+                        ExpMax *= 2;
+                        Level++;
+
+                        levelText.text = $"Lv.{Level}";
+                    }
+                    expFillImage.fillAmount = ExpCurrent / (float)ExpMax;
+                    expText.text = $"{ExpCurrent} / {ExpMax}";
+
+                    break;
+                case nameof(PowerMax):
+                case nameof(PowerCurrent):
+                    powerText.text = $"{PowerCurrent} / {PowerMax}";
+                    powerFillImage.fillAmount = PowerCurrent / (float)PowerMax;
+                    break;
+                    
+            }
+        }
     }
 }

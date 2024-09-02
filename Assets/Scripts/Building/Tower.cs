@@ -7,7 +7,7 @@ public class Tower : InteractableBuilding
 {
     protected const float rangeConst = 15f;
 
-    protected int powerConsumption; // 타워가 진짜로 소모할 양.
+    [SerializeField] protected int powerConsumption; // 타워가 진짜로 소모할 양.
     protected int currentPowerConsumption; // 현재 사용중인 전력 소모량
 
     [SerializeField]protected int attackDamage; // 공격력
@@ -231,6 +231,7 @@ public class Tower : InteractableBuilding
                         r.material.SetFloat("_OnOff", OnOff? 1f : 0f);
                     }
 
+                    
                     GameManager.Instance.BuildingManager.supply.PowerCurrent += OnOff ? -powerConsumption : powerConsumption;
                     break;
             }

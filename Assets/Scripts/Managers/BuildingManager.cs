@@ -49,15 +49,18 @@ public class BuildingManager : Manager
         NetworkRunner runner = GameManager.Instance.NetworkManager.Runner;
         if (runner.IsServer)
         {
-            generator = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 5, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
-            supply = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.PowerSupply), new Vector3(roadData[0].x + 15, 2, roadData[0].y)).GetComponent<PowerSupply>();
+            generator   = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 5, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
+            supply      = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.PowerSupply),            new Vector3(roadData[0].x + 15, 2, roadData[0].y)).GetComponent<PowerSupply>();
 
         }
         else
         {
-            generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
-            supply = GameObject.FindObjectOfType<PowerSupply>();
+            generator   = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
+            supply      = GameObject.FindObjectOfType<PowerSupply>();
         }
+
+        Debug.Log(generator);
+        Debug.Log(supply);
     }
 
     public Vector3 RoadScale(Vector2 start, Vector2 end)
