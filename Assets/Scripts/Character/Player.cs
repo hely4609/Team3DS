@@ -193,8 +193,15 @@ public partial class Player : Character
         }
     }
 
+    [Networked] bool NetworkIsWalking { get; set; } = false;
+    bool isWalking = false;
+    [SerializeField] AudioSource footstepAudioSource;
+    [Networked, SerializeField] ResourceEnum.SFX FootstepSFX { get; set; }
+    ResourceEnum.SFX currentFootstep = ResourceEnum.SFX.None;
     [Networked] public bool NetworkIsFarmingPressed { get; set; } = false;
     bool isFarmingKeyAlreadyPressed = false;
+    [SerializeField] AudioSource cleanerAudioSource;
+    bool wasPlayingCleanerEnd;
     protected override void MyUpdate(float deltaTime)
     {
         /////////////////////////// 
@@ -316,6 +323,38 @@ public partial class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
+
+        // 발소리
+        if(NetworkIsWalking)
+        {
+
+            if (footstepAudioSource == null)
+            {
+                // 오디오 소스가 없는경우
+                SoundManager.Play(FootstepSFX, transform.position, true, out footstepAudioSource);
+                currentFootstep = FootstepSFX;
+            }
+            else if (FootstepSFX != currentFootstep)
+            {
+                // 오디오 소스는 있는데 현재 재생되고있는 바닥재질과 재생하고싶은 바닥재질이 다른경우
+                SoundManager.StopSFX(footstepAudioSource);
+                footstepAudioSource = null;
+                SoundManager.Play(FootstepSFX, transform.position, true, out footstepAudioSource);
+                currentFootstep = FootstepSFX;
+            }
+            else
+            {
+                footstepAudioSource.transform.position = transform.position;
+            }
+
+        }
+        else if(footstepAudioSource != null)
+        {
+            // 안걷고있는경우
+            SoundManager.StopSFX(footstepAudioSource);
+            footstepAudioSource = null;
+        }
+        // 청소기 소리
         if (NetworkIsFarmingPressed)
         {
             if(!isFarmingKeyAlreadyPressed)
@@ -371,8 +410,6 @@ public partial class Player : Character
     }
 
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
-    [SerializeField]AudioSource footstepAudioSource;
-    ResourceEnum.SFX currentFootstep = ResourceEnum.SFX.None;
     public override void Move(Vector3 direction)
     {
         MoveDir = direction.normalized;
@@ -387,47 +424,13 @@ public partial class Player : Character
             {
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
 
-                // 발소리
-                if(direction.magnitude > 0 && ground != null)
+                if(direction.magnitude > 0)
                 {
-                    ResourceEnum.SFX footstep_sfx;
-                    switch (ground.material.name)
-                    {
-                        case "Metal (Instance)":
-                            footstep_sfx = ResourceEnum.SFX.footsteps_metal_cut;
-                            break;
-                        case "Dirt (Instance)":
-                        default:
-                            footstep_sfx = ResourceEnum.SFX.footsteps_dirt_cut;
-                            break;
-                           
-                    }
-
-                    if (footstepAudioSource == null)
-                    {
-                        // 오디오 소스가 없는경우
-                        SoundManager.Play(footstep_sfx, transform.position, true, out footstepAudioSource);
-                        currentFootstep = footstep_sfx;
-                    }
-                    else if (footstep_sfx != currentFootstep)
-                    {
-                        // 오디오 소스는 있는데 현재 재생되고있는 바닥재질과 재생하고싶은 바닥재질이 다른경우
-                        SoundManager.StopSFX(footstepAudioSource);
-                        footstepAudioSource = null;
-                        SoundManager.Play(footstep_sfx, transform.position, true, out footstepAudioSource);
-                        currentFootstep = footstep_sfx;
-                    }
-                    else
-                    {
-                        footstepAudioSource.transform.position = transform.position;
-                    }
-
+                    NetworkIsWalking = true;
                 }
-                else if(footstepAudioSource != null)
+                else
                 {
-                    // 안걷고있는경우
-                    SoundManager.StopSFX(footstepAudioSource);
-                    footstepAudioSource = null;
+                    NetworkIsWalking = false;
                 }
 
             }
@@ -505,8 +508,6 @@ public partial class Player : Character
         
     }
 
-    [SerializeField]AudioSource cleanerAudioSource;
-    bool wasPlayingCleanerEnd;
     public void Farming(bool isFarming)
     {
         AnimIK?.Invoke(isFarming);
@@ -800,6 +801,17 @@ public partial class Player : Character
         }
 
         ground = collision.collider;
+        switch (ground.material.name)
+        {
+            case "Metal (Instance)":
+                FootstepSFX = ResourceEnum.SFX.footsteps_metal_cut;
+                break;
+            case "Dirt (Instance)":
+            default:
+                FootstepSFX = ResourceEnum.SFX.footsteps_dirt_cut;
+                break;
+
+        }
         GroundNormal = normal;
         
 
