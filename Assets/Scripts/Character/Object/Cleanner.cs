@@ -19,35 +19,39 @@ public class Cleanner : MyComponent
         owner = GetComponentInParent<Player>();
     }
 
-    protected override void MyUpdate(float deltaTime)
-    {
-        Suction();
-    }
+    //protected override void MyUpdate(float deltaTime)
+    //{
+    //    Suction();
+    //}
 
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Ore target))
         {
+            target.SetTarget(owner);
             targets.Add(target);
         }
     }
 
-    private void Suction()
+    protected override void MyDestroy()
     {
-        if (targets.Count == 0) return;
-
         foreach (var target in targets)
         {
-            if (target != null)
-            {
-                target.transform.position = Vector3.Lerp(target.transform.position, transform.position, suctionPower);
-                if (Vector3.Distance(target.transform.position, transform.position) < 0.5f)
-                {
-                    owner.OreAmount += target.amount;
-                    Debug.Log($"OreAmount = {owner.OreAmount}");
-                    Runner.Despawn(target.GetComponent<NetworkObject>());
-                }
-            }
+            target.SetTarget(null);
         }
     }
+
+    //private void Suction()
+    //{
+    //    if (targets.Count == 0) return;
+
+    //    foreach (var target in targets)
+    //    {
+    //        if (target != null)
+    //        {
+    //            target.transform.position = Vector3.Lerp(target.transform.position, transform.position, suctionPower);
+
+    //        }
+    //    }
+    //}
 }
