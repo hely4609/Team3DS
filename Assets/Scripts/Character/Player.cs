@@ -360,7 +360,8 @@ public partial class Player : Character
             {
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
 
-                if(direction.magnitude > 0)
+                // ¹ß¼Ò¸®
+                if(direction.magnitude > 0 && ground != null)
                 {
                     ResourceEnum.SFX footstep_sfx;
                     switch (ground.material.name)
@@ -483,6 +484,7 @@ public partial class Player : Character
     bool wasPlayingCleanerEnd;
     public void Farming(bool isFarming)
     {
+        Debug.Log(isFarming);
         if (isFarming)
         {
             if(cleanerAudioSource != null)
