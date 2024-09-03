@@ -181,7 +181,7 @@ GameObject:
   - component: {fileID: 8651922591512447639}
   - component: {fileID: 8414889189550769889}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -327,8 +327,9 @@ MonoBehaviour:
   _BuildingTimeCurrent: 0
   completeMat: {fileID: 0}
   meshes: []
-  cols: []
-  _IsFixed: 0
+  cols:
+  - {fileID: 8414889189550769889}
+  _IsFixed: 1
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   size: {x: 10, y: 10}
