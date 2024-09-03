@@ -142,13 +142,13 @@ public class SoundManager : Manager
         switch (type)
         {
             case AudioMixerGroupType.Master:
-                AMGmaster.audioMixer.SetFloat("Master", toggle ? value : 0);
+                AMGmaster.audioMixer.SetFloat("Master", toggle ? value : -80);
                 break;
             case AudioMixerGroupType.BGM:
-                AMGmaster.audioMixer.SetFloat("BGM", toggle ? value : 0);
+                AMGmaster.audioMixer.SetFloat("BGM", toggle ? value : -80);
                 break;
             case AudioMixerGroupType.SFX:
-                AMGmaster.audioMixer.SetFloat("SFX", toggle ? value : 0);
+                AMGmaster.audioMixer.SetFloat("SFX", toggle ? value : -80);
                 break;
         }
     }

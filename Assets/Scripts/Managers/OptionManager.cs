@@ -32,6 +32,10 @@ public class OptionManager : MonoBehaviour
     public void ToggleMaster()
     {
         masterSlider.interactable = masterToggle.isOn;
+        bgmToggle.interactable = masterToggle.isOn;
+        sfxToggle.interactable = masterToggle.isOn;
+        bgmSlider.interactable = masterToggle.isOn;
+        sfxSlider.interactable = masterToggle.isOn;
         GameManager.Instance.SoundManager.ToggleAudioMixerGroup(SoundManager.AudioMixerGroupType.Master, masterToggle.isOn, masterSlider.value);
     }
     public void ToggleBGM()
