@@ -96,21 +96,14 @@ public class InteractableBuilding : Building, IInteraction
             ResetRope();
         }
     }
-    public Vector3 RopePosition(Vector2 start, Vector2 end)
+    public void RopeSetting(NetworkObject obj, Vector2 start, Vector2 end)
     {
-        Vector2 lengthSize = (end - start) * 0.5f;
-        //Debug.Log($"{end.x},{end.y} - {start.x},{start.y} : {lengthSize} / {new Vector3((start.x + lengthSize.x), 0.1f, (start.y + lengthSize.y))}");
-        return new Vector3((start.x + lengthSize.x), 0.1f, (start.y + lengthSize.y));
-    }
-    public Vector3 RopeScale(Vector2 start, Vector2 end)
-    {
-        Vector3 result;
         Vector2 delta = end - start;
-        float deltaScale = Mathf.Abs(delta.x + delta.y);
+        float deltaScale = delta.x + delta.y;
+        obj.transform.position = new Vector3(start.x, 0, start.y);
+        obj.transform.localScale = new Vector3(1, 1, deltaScale);
 
-        result = new Vector3(0.2f, 0.2f, deltaScale);
-
-        return result;
+        //Debug.Log($"{end.x},{end.y} - {start.x},{start.y} : {lengthSize} / {new Vector3((start.x + lengthSize.x), 0.1f, (start.y + lengthSize.y))}");
     }
     public void OnRopeSet(Vector2 playerPosition) // 전선을 놓기. 길이랑 같은 원리.
     {
@@ -134,37 +127,16 @@ public class InteractableBuilding : Building, IInteraction
                 ropeObject = CreateRope();
                 ropeObject.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
-                Debug.Log($"{ropeStruct.ropePositions.Count} 리스트 개수");
+            Debug.Log($"{ropeStruct.ropePositions.Count} 리스트 개수");
         }
         else
         {
-            delta = playerPosition - ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2];
-            if (delta.x == 0 || delta.y == 0)
+            ropeStruct.ropePositions.Add(playerPosition);
+            CreateRope();
+            delta = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2] - ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
+            if (delta.x != 0)
             {
-                // 마지막 값을 플레이어 위치로 수정
-                ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1] = playerPosition;
-                ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.position = RopePosition(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
-                ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.localScale = RopeScale(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
-            }
-            else
-            {
-                if(ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.rotation != Quaternion.Euler(new Vector3(0,90,0)))
-                {
-                    // 이전에 오던 축은 그대로 더 늘리고, 거기서부터 새로 만들기.
-                    ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1] = new Vector2(playerPosition.x, StartPos.y);
-                }
-                else
-                {
-                    ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1] = new Vector2(StartPos.x, playerPosition.y);
-                }
-                ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.position = RopePosition(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
-                ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.localScale = RopeScale(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
-                ropeStruct.ropePositions.Add(playerPosition);
-                CreateRope();
-            }
-            if (ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 2].transform.rotation != Quaternion.Euler(new Vector3(0, 90, 0)))
-            {
-                ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count-1].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+                ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
         }
     }
@@ -172,8 +144,7 @@ public class InteractableBuilding : Building, IInteraction
     {
         NetworkObject ropeObject;
         ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope));
-        ropeObject.transform.position = RopePosition(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
-        ropeObject.transform.localScale = RopeScale(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
+        RopeSetting(ropeObject, ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
         ropeStruct.ropeObjects.Add(ropeObject);
         return ropeObject;
     }
