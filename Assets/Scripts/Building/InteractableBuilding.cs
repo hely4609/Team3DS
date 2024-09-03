@@ -1,10 +1,12 @@
 using Fusion;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.Rendering;
 
+[Serializable]
 public struct RopeStruct
 {
     public List<NetworkObject> ropeObjects;
@@ -16,9 +18,11 @@ public class InteractableBuilding : Building, IInteraction
     //protected Collider[] interactionColliders;
     //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
     protected bool isRoped = false;
-    protected RopeStruct ropeStruct = new RopeStruct();
+    [SerializeField] protected RopeStruct ropeStruct = new RopeStruct();
     protected override void Initialize()
     {
+        ropeStruct.ropeObjects = new List<NetworkObject>();
+        ropeStruct.ropePositions = new List<Vector2>();
     }
     // 위치를 고정함.
 
@@ -45,19 +49,20 @@ public class InteractableBuilding : Building, IInteraction
         {
             return Interaction.None;
         }
+
     }
     public virtual float InteractionUpdate(float deltaTime, Interaction interaction) // 상호작용시 적용할 함수. 제작하라는 명령이 들어오면 제작을 진행함.
     {
         if (interaction == Interaction.Build)
         {
             BuildBuilding(deltaTime);
-            
+
         }
         return CompletePercent;
     }
 
     public virtual bool InteractionEnd()
-    { 
+    {
         return false;
     }
 
@@ -83,59 +88,65 @@ public class InteractableBuilding : Building, IInteraction
         ropeStruct.ropePositions.Clear();
     }
     public void SetRope(InteractableBuilding building) // 건물을 터치하면 그 건물이랑 전선 연결함.
-    { 
-        if(!building.isRoped)
+    {
+        if (!building.isRoped)
         {
-            building.isRoped= true;
+            building.isRoped = true;
             GameManager.Instance.BuildingManager.RopeStructs.Add(ropeStruct);
             ResetRope();
         }
     }
-    public Vector3 RopePosition(Vector2 start, Vector2 end)
+    public void RopeSetting(NetworkObject obj, Vector2 start, Vector2 end)
     {
-        Vector2 lengthSize = (end - start) * 0.5f;
-
-        return new Vector3(start.x + lengthSize.x, 0.1f, start.y + lengthSize.y);
-    }
-    public Vector3 RopeScale(Vector2 start, Vector2 end)
-    {
-        Vector3 result;
         Vector2 delta = end - start;
-        float deltaScale = Mathf.Abs(delta.x + delta.y);
+        float deltaScale = delta.x + delta.y;
+        obj.transform.position = new Vector3(start.x, 0, start.y);
+        obj.transform.localScale = new Vector3(1, 1, deltaScale);
 
-        result = new Vector3(0.2f, 0.2f, deltaScale);
-
-        return result;
+        //Debug.Log($"{end.x},{end.y} - {start.x},{start.y} : {lengthSize} / {new Vector3((start.x + lengthSize.x), 0.1f, (start.y + lengthSize.y))}");
     }
     public void OnRopeSet(Vector2 playerPosition) // 전선을 놓기. 길이랑 같은 원리.
     {
+        Vector2 delta;
+        NetworkObject ropeObject;
         if (ropeStruct.ropePositions.Count < 1)
         {
-            ropeStruct.ropePositions.Add(transform.position); // 타워의 위치.(정수값)
-            ropeStruct.ropePositions.Add(playerPosition);// 플레이어의 위치(정수값)
-            NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope));
-            ropeObject.transform.position = RopePosition(ropeStruct.ropePositions[0], ropeStruct.ropePositions[1]);
-            ropeObject.transform.localScale = RopeScale(ropeStruct.ropePositions[0], ropeStruct.ropePositions[1]);
-            ropeStruct.ropeObjects.Add(ropeObject);
-        }
-        else
-        {
-            Vector2 delta = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 3] - ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
+            delta = playerPosition - StartPos;
+            ropeStruct.ropePositions.Add(StartPos); // 타워의 위치.(정수값)
             if (delta.x == 0 || delta.y == 0)
             {
-                // 마지막 값을 플레이어 위치로 수정
-                ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1] = playerPosition;
+                ropeStruct.ropePositions.Add(playerPosition);// 플레이어의 위치(정수값)
+                CreateRope();
             }
             else
             {
-                // 플레이어 위치를 ropePosition에 저장.
+                ropeStruct.ropePositions.Add(new Vector2(StartPos.x, playerPosition.y));
+                CreateRope();
+
                 ropeStruct.ropePositions.Add(playerPosition);
-                NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope));
-                ropeStruct.ropeObjects.Add(ropeObject);
+                ropeObject = CreateRope();
+                ropeObject.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
             }
-            ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.position = RopePosition(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
-            ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.localScale = RopeScale(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
+            Debug.Log($"{ropeStruct.ropePositions.Count} 리스트 개수");
         }
+        else
+        {
+            ropeStruct.ropePositions.Add(playerPosition);
+            CreateRope();
+            delta = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2] - ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
+            if (delta.x != 0)
+            {
+                ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+            }
+        }
+    }
+    public NetworkObject CreateRope()
+    {
+        NetworkObject ropeObject;
+        ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope));
+        RopeSetting(ropeObject, ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]);
+        ropeStruct.ropeObjects.Add(ropeObject);
+        return ropeObject;
     }
 
 

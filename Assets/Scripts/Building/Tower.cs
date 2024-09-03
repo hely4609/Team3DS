@@ -48,20 +48,18 @@ public class Tower : InteractableBuilding
         {
             return Interaction.Build;
         }
-        else //if(OnOff)
+        else if(OnOff)
         {
             // 전원 끄기. 반대 상태로 토글합니다.
             TurnOnOff(!OnOff);
             return Interaction.OnOff;
         }
-
-        return Interaction.None;
-        //else
-        //{
-        //    playerTransform = player.transform.position;
-        //    return Interaction.takeRope;
-        //}
-
+        else
+        {
+            Vector2 playerTransformVector2 = new Vector2((int)(player.transform.position.x), (int)(player.transform.position.z));
+            OnRopeSet(playerTransformVector2);
+            return Interaction.takeRope;
+        }
     }
     protected override void MyUpdate(float deltaTime)
     {
@@ -180,11 +178,6 @@ public class Tower : InteractableBuilding
             }
         }
     }
-
-    public void GetRope(Player player)
-    {
-    }
-
 
     public override void Render()
     {
