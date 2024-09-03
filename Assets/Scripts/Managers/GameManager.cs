@@ -101,8 +101,9 @@ public class GameManager : MonoBehaviour
         yield return soundManager.Initiate();
         saveManager = new SaveManager();
         yield return saveManager.Initiate();
-        optionManager = new OptionManager();
-        yield return optionManager.Initiate();
+        //optionManager = new OptionManager();
+        //yield return optionManager.Initiate();
+        optionManager = GetComponent<OptionManager>();
         controllerManager = new ControllerManager();
         yield return controllerManager.Initiate();        
         poolManager = new PoolManager();

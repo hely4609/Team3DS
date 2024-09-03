@@ -14,7 +14,13 @@ public class LocalController : ControllerBase
             OnMove(data.moveDirection);
             //OnScreenRotate(data.lookRotationDelta);
             OnInteraction(data.buttons.IsSet(MyButtons.Interaction));
-            OnFarming(data.buttons.IsSet(MyButtons.Farming));
+            if(HasStateAuthority)
+            {
+                OnFarming(data.buttons.IsSet(MyButtons.Farming));
+                controlledPlayer.NetworkIsFarmingPressed = data.buttons.IsSet(MyButtons.Farming);
+
+            }
+
             OnMouseWheel(data.scrollbarDelta);
 
             if(data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
@@ -35,7 +41,6 @@ public class LocalController : ControllerBase
             if(data.selectedBuildingIndex != -1)
             {
                 controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
-                Debug.Log($"IsThisPCUICA : {controlledPlayer.IsThisPlayerCharacterUICanvasActivated}");
                 if(HasInputAuthority)
                 {
                     controlledPlayer.buildingSelectUI.SetActive(false);

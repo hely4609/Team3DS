@@ -224,7 +224,7 @@ public class Tower : InteractableBuilding
                         r.material.SetFloat("_OnOff", OnOff? 1f : 0f);
                     }
 
-                    GameManager.Instance.BuildingManager.supply.PowerCurrent += OnOff ? -powerConsumption : powerConsumption;
+                    GameManager.Instance.BuildingManager.supply.ChangePowerConsumption(OnOff ? -powerConsumption : powerConsumption); 
                     break;
             }
         }

@@ -132,4 +132,24 @@ public class SoundManager : Manager
         source.Stop();
         GameManager.Instance.SoundManager.sfxQueue.Enqueue(source);
     }
+
+    public enum AudioMixerGroupType
+    {
+        Master, BGM, SFX
+    }
+    public void ToggleAudioMixerGroup(AudioMixerGroupType type, bool toggle, float value)
+    {
+        switch (type)
+        {
+            case AudioMixerGroupType.Master:
+                AMGmaster.audioMixer.SetFloat("Master", toggle ? value : -80);
+                break;
+            case AudioMixerGroupType.BGM:
+                AMGmaster.audioMixer.SetFloat("BGM", toggle ? value : -80);
+                break;
+            case AudioMixerGroupType.SFX:
+                AMGmaster.audioMixer.SetFloat("SFX", toggle ? value : -80);
+                break;
+        }
+    }
 }
