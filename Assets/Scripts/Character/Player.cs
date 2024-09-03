@@ -142,8 +142,6 @@ public partial class Player : Character
 
     protected override void MyStart()
     {
-        Debug.Log("player mystart");
-
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
@@ -195,6 +193,8 @@ public partial class Player : Character
         }
     }
 
+    [Networked] public bool NetworkIsFarmingPressed { get; set; } = false;
+    bool isFarmingKeyAlreadyPressed = false;
     protected override void MyUpdate(float deltaTime)
     {
         /////////////////////////// 
@@ -316,7 +316,34 @@ public partial class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
-        if(cleanerAudioSource != null)
+        if (NetworkIsFarmingPressed)
+        {
+            if(!isFarmingKeyAlreadyPressed)
+            {
+                if (cleanerAudioSource != null)
+                {
+                    SoundManager.StopSFX(cleanerAudioSource);
+                    wasPlayingCleanerEnd = false;
+                }
+                SoundManager.Play(ResourceEnum.SFX.cleaner_start, transform.position, false, out cleanerAudioSource);
+                isFarmingKeyAlreadyPressed = true;
+            }
+        }
+        else
+        {
+            if(isFarmingKeyAlreadyPressed)
+            {
+                if (cleanerAudioSource != null)
+                {
+                    SoundManager.StopSFX(cleanerAudioSource);
+                    SoundManager.Play(ResourceEnum.SFX.cleaner_end, transform.position, false, out cleanerAudioSource);
+                    wasPlayingCleanerEnd = true;
+                }
+                isFarmingKeyAlreadyPressed = false;
+
+            }
+        }
+        if (cleanerAudioSource != null)
         {
             cleanerAudioSource.transform.position = transform.position;
             
@@ -444,7 +471,6 @@ public partial class Player : Character
         //return true;
 
         if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
-        Debug.Log(buildableEnumArray[buildableEnumPageIndex, index]);
         
         NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
@@ -458,7 +484,6 @@ public partial class Player : Character
         if (DesigningBuilding == null)
         {
             IsThisPlayerCharacterUICanvasActivated = true;
-            Debug.Log($"IsThisPCUICA : {IsThisPlayerCharacterUICanvasActivated}");
             return true;
         }
         return false;
@@ -484,26 +509,6 @@ public partial class Player : Character
     bool wasPlayingCleanerEnd;
     public void Farming(bool isFarming)
     {
-        Debug.Log(isFarming);
-        if (isFarming)
-        {
-            if(cleanerAudioSource != null)
-            {
-                SoundManager.StopSFX(cleanerAudioSource);
-                wasPlayingCleanerEnd = false;
-            }
-            SoundManager.Play(ResourceEnum.SFX.cleaner_start, transform.position, false, out cleanerAudioSource);
-        }
-        else
-        {
-            if (cleanerAudioSource != null)
-            {
-                SoundManager.StopSFX(cleanerAudioSource);
-                SoundManager.Play(ResourceEnum.SFX.cleaner_end, transform.position, false, out cleanerAudioSource);
-                wasPlayingCleanerEnd = true;
-            }
-
-        }
         AnimIK?.Invoke(isFarming);
     }
 
@@ -778,7 +783,6 @@ public partial class Player : Character
         if (normal.y <= 0.3f) return;
 
 
-        Debug.Log(normal.y);
 
         //그래서 부딪힌 대상을 저장할 거예요! 상대와  닿은 노말!
         if (attachedCollision.ContainsKey(collision.collider))
