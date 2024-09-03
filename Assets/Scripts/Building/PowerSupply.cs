@@ -4,16 +4,24 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using Fusion;
-using static UnityEngine.Rendering.DebugUI;
 
 public class PowerSupply : InteractableBuilding
 {
+    [SerializeField] protected Animator anim;
+
     protected TextMeshProUGUI levelText;
     protected TextMeshProUGUI expText;
     protected TextMeshProUGUI powerText;
 
     protected Image expFillImage;
     protected Image powerFillImage;
+
+    protected int level = 1;
+    protected int expMax = 2;
+    protected int expCurrent = 0;
+
+    protected int powerMax = 100;
+    protected int powerCurrent = 100;
 
     [Networked] public int PowerMax
     {
@@ -47,17 +55,7 @@ public class PowerSupply : InteractableBuilding
         expFillImage = GameObject.FindGameObjectWithTag("ExpFillImage").GetComponent<Image>();
         powerFillImage = GameObject.FindGameObjectWithTag("PowerFillImage").GetComponent<Image>();
 
-        //levelText.text = "Lv.1";
-        //expText.text = "0 / 2";
-        //powerText.text = "0 / 10";
-
-        //expFillImage.fillAmount = 0;
-        //powerFillImage.fillAmount = 0;
-
-        //PowerMax = 100;
-        //PowerCurrent = PowerMax;
-        //ExpCurrent = 0;
-        //ExpMax = 2;
+        anim = GetComponentInChildren<Animator>();
     }
 
     protected override void MyStart()
@@ -74,9 +72,10 @@ public class PowerSupply : InteractableBuilding
 
     public override Interaction InteractionStart(Player player)
     {
-        if (player != null) // 플레이어가 가진 물건이 납품할 물건이라면
+        if (player?.OreAmount != 0) // 플레이어가 가진 물건이 납품할 물건이라면
         {
             Deliver(player);
+            
             return Interaction.Deliver;
         }
         else
@@ -84,37 +83,54 @@ public class PowerSupply : InteractableBuilding
             return Interaction.None;
         }
     }
+
     //public bool Interaction(GameObject target) // 납품 받기
     //{
-        //if (target.TryGetComponent<Player>(out Player player)) // 상호작용한것이 플레이어인가?
-        //{
-            //// 그렇다면 bePicked가 있나?
-            //// 그것이 납품하는 물건인가?
-            //// 납품할 물건의 수가 0보다 큰가?
-            //Debug.Log($"{gameObject.name}과 납품 상호작용을 하였습니다.");
-            //return true;
-        //}
+    //if (target.TryGetComponent<Player>(out Player player)) // 상호작용한것이 플레이어인가?
+    //{
+    //// 그렇다면 bePicked가 있나?
+    //// 그것이 납품하는 물건인가?
+    //// 납품할 물건의 수가 0보다 큰가?
+    //Debug.Log($"{gameObject.name}과 납품 상호작용을 하였습니다.");
+    //return true;
+    //}
 
-        //return false;
+    //return false;
     //}
     public void Deliver(Player player)
     {
+        anim.SetTrigger("DoorTrigger");
+
         for (int i = 0; i < player?.OreAmount; i++)
         {
-            ExpCurrent++;
+            expCurrent++;
 
-            //expFillImage.fillAmount = ExpCurrent / (float)ExpMax;
-            //expText.text = $"{ExpCurrent} / {ExpMax}";
+            if (expCurrent >= expMax)
+            {
+                expCurrent -= expMax;
+                expMax *= 2;
+
+                powerMax += 10;
+                powerCurrent += 10;
+
+                level++;
+            }
         }
-        ////if(player.BePicked != null)
-        //{
-        //    // if(player.BePicked == 운반품)
-        //    {
-        //        // expCurrent += 운반품.currentOre
-        //        // 운반품을 비활성화.
-        //        // player.bePicked = null
-        //    }
-        //}
+
+        Level = level;
+       
+        ExpCurrent = expCurrent;
+        ExpMax = expMax;
+
+        PowerMax = powerMax;
+        PowerCurrent = powerCurrent;
+    }
+
+    public void ChangePowerConsumption(int value)
+    {
+        powerCurrent += value;
+
+        PowerCurrent = powerCurrent;
     }
 
     public override void Render()
@@ -123,20 +139,13 @@ public class PowerSupply : InteractableBuilding
         {
             switch (chage)
             {
+                case nameof(Level):
+                    levelText.text = $"Lv.{Level}";
+                    break;
                 case nameof(ExpCurrent):
-                    if (ExpCurrent >= ExpMax)
-                    {
-                        ExpCurrent = 0;
-                        ExpMax *= 2;
-                        Level++;
-
-                        levelText.text = $"Lv.{Level}";
-                    }
                     expText.text = $"{ExpCurrent} / {ExpMax}";
                     expFillImage.fillAmount = ExpCurrent / (float)ExpMax;
-
                     break;
-                case nameof(PowerMax):
                 case nameof(PowerCurrent):
                     powerText.text = $"{PowerCurrent} / {PowerMax}";
                     powerFillImage.fillAmount = PowerCurrent / (float)PowerMax;
