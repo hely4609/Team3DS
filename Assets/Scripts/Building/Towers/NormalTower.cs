@@ -15,6 +15,7 @@ public class NormalTower : Tower
         powerConsumption = 10;
 
         AttackRangeSetting();
+        base.Initialize();
     }
     protected override void OnHit()
     {

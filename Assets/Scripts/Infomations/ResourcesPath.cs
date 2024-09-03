@@ -15,7 +15,6 @@ public class ResourcesPath
         "Prefabs/UIs/CharacterUI/Minimap",
         // Character
         "Prefabs/Characters/Player",
-        "Prefabs/Characters/Rope",
         // Tower
         "Prefabs/Buildings/Road",
         "Prefabs/Buildings/EnergyBarrier",
@@ -28,6 +27,7 @@ public class ResourcesPath
         "Prefabs/Buildings/Bridge",
         // Object
         "Prefabs/Objects/Ore",
+        "Prefabs/Objects/Rope",
         // Enemy
         "Prefabs/Characters/EnemyTest",
 
