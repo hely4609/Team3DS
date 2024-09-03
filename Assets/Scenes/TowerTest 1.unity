@@ -5738,6 +5738,10 @@ MonoBehaviour:
   marker_on: {fileID: 0}
   marker_off: {fileID: 0}
   objectName: 
+  ropeStruct:
+    ropeObjects: []
+    ropePositions: []
+  powerConsumption: 0
   attackDamage: 2
   attackSpeed: 0.5
   attackRange: 0
