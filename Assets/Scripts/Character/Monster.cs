@@ -17,9 +17,9 @@ public class Monster : Character
     protected MonsterEnum monsterType;
 
 
-
     bool isRelease = false;
-    bool isReady = false;
+    [Networked]bool isReady { get; set; } = false;
+    public bool IsReady { get { return isReady; } }
 
     public MonsterDestroyFunction destroyFunction;
     protected EnergyBarrierGenerator generator;
@@ -47,7 +47,9 @@ public class Monster : Character
         if (hpCurrent <= 0)
         {
             isReady = false;
-            GetComponent<Collider>().enabled = false;
+
+            GetComponent<Collider>().isTrigger = true;
+
             AnimTrigger?.Invoke("DieTrigger");
             AnimBool?.Invoke("isMove", false);
             //  destroyFunction.Invoke(this);
