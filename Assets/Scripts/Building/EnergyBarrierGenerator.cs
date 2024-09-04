@@ -34,9 +34,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
     {
         if (collision.gameObject.TryGetComponent(out Monster enemy))
         {
-            TakeDamage(1);
-            
-            Destroy(collision.gameObject);
+            enemy.Attack(this);
         }
     }
     public void RepairBarrier()

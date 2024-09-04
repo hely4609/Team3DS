@@ -15,7 +15,8 @@ public class Monster : Character
     protected List<Vector2> roadsVector2; // 길 정보 배열
     [SerializeField]protected int roadDestination; // 지금 어디로 향하고 있는가.
     protected MonsterEnum monsterType;
-    
+
+
 
     bool isRelease = false;
     bool isReady = false;
@@ -42,14 +43,16 @@ public class Monster : Character
 
     public override int TakeDamage(Tower attacker, int damage)
     {
-            hpCurrent -= damage;
-            if (hpCurrent <= 0)
-            {
-                destroyFunction.Invoke(this);
-                Runner.Despawn(GetComponent<NetworkObject>());
-                //Destroy(gameObject);
-            }
-            Debug.Log($"{HpCurrent} / {gameObject.name}");
+        hpCurrent -= damage;
+        if (hpCurrent <= 0)
+        {
+            isReady = false;
+            AnimTrigger?.Invoke("DieTrigger");
+            AnimBool?.Invoke("isMove", false);
+            //  destroyFunction.Invoke(this);
+            //  Runner.Despawn(GetComponent<NetworkObject>());
+        }
+        Debug.Log($"{HpCurrent} / {gameObject.name}");
         
         return 0;
     }
@@ -65,15 +68,13 @@ public class Monster : Character
     {
         if (GameManager.IsGameStart)
         {
-
-
             if (isReady)
             {
                 MonsterMove(NextDestination(), Runner.DeltaTime);
                 if (IsDestinationArrive(NextDestination()))
                 {
                     roadDestination--;
-                    transform.Rotate(0f, 90f, 0f);
+                    
 
                     if (roadDestination <= 0)
                     {
@@ -94,8 +95,10 @@ public class Monster : Character
         if (!isRelease)
         { 
             Vector2 dest = roadsVector2[roadDestination];
+
             destVector3 = new Vector3(dest.x, transform.position.y, dest.y);
-            
+
+
         }
         else
         {
@@ -109,6 +112,7 @@ public class Monster : Character
         // 해당방향으로 간다.
         Vector3 dir = (destination - transform.position).normalized;
         transform.position += dir * deltaTime * MoveSpeed;
+        transform.LookAt(destination);
     }
 
     public void ReleaseMonster()
@@ -137,8 +141,24 @@ public class Monster : Character
         
     }
 
+    public void Dead()
+    {
+        destroyFunction.Invoke(this);
+        Despawn();
+    }
+
+    public void Despawn()
+    {
+        Runner.Despawn(GetComponent<NetworkObject>());
+    }
+
     public void Attack(EnergyBarrierGenerator target) 
     {
+        isReady = false;
+
         AnimTrigger?.Invoke("AttackTrigger");
+        AnimBool?.Invoke("isMove", false);
+
+        target.TakeDamage(attackDamage);
     }
 }
