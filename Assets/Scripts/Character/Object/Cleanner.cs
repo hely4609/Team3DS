@@ -19,11 +19,6 @@ public class Cleanner : MyComponent
         owner = GetComponentInParent<Player>();
     }
 
-    //protected override void MyUpdate(float deltaTime)
-    //{
-    //    Suction();
-    //}
-
     private void OnTriggerEnter(Collider other)
     {
         if (other.TryGetComponent(out Ore target))
@@ -41,17 +36,4 @@ public class Cleanner : MyComponent
         }
     }
 
-    //private void Suction()
-    //{
-    //    if (targets.Count == 0) return;
-
-    //    foreach (var target in targets)
-    //    {
-    //        if (target != null)
-    //        {
-    //            target.transform.position = Vector3.Lerp(target.transform.position, transform.position, suctionPower);
-
-    //        }
-    //    }
-    //}
 }

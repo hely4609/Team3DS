@@ -26,7 +26,7 @@ public class WaveManager : Manager
         {
             List<Vector2> roadData = GameManager.Instance.BuildingManager.roadData;
             Debug.Log($"roadData : {roadData.Count}");
-            monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnemyTest), new Vector3(roadData[roadData.Count - 1].x, 2.5f, roadData[roadData.Count - 1].y)).GetComponent<Monster>());
+            monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnemyTest), new Vector3(roadData[roadData.Count - 1].x, 0, roadData[roadData.Count - 1].y)).GetComponent<Monster>());
         }
 
     }

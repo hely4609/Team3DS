@@ -15,7 +15,7 @@ public class Monster : Character
     protected List<Vector2> roadsVector2; // 길 정보 배열
     [SerializeField]protected int roadDestination; // 지금 어디로 향하고 있는가.
     protected MonsterEnum monsterType;
-    public override void Attack(Character target) { }
+    
 
     bool isRelease = false;
     bool isReady = false;
@@ -73,6 +73,8 @@ public class Monster : Character
                 if (IsDestinationArrive(NextDestination()))
                 {
                     roadDestination--;
+                    transform.Rotate(0f, 90f, 0f);
+
                     if (roadDestination <= 0)
                     {
                         roadDestination = 0;
@@ -93,6 +95,7 @@ public class Monster : Character
         { 
             Vector2 dest = roadsVector2[roadDestination];
             destVector3 = new Vector3(dest.x, transform.position.y, dest.y);
+            
         }
         else
         {
@@ -127,10 +130,15 @@ public class Monster : Character
         {
             if(transform.position.x > downDestination.x && transform.position.z > downDestination.z) 
             { 
-        return true;
+                return true;
             }
         }
         return false;
         
+    }
+
+    public void Attack(EnergyBarrierGenerator target) 
+    {
+        AnimTrigger?.Invoke("AttackTrigger");
     }
 }
