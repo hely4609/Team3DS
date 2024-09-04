@@ -66,7 +66,7 @@ public class Tower : InteractableBuilding
     {
         if(OnOff)
         {
-            if(HasStateAuthority)
+            
                 Attack();
         }
         
@@ -102,7 +102,8 @@ public class Tower : InteractableBuilding
 
     protected virtual void OnHit()
     {
-        target.TakeDamage(this, attackDamage);
+        if (HasStateAuthority)
+            target.TakeDamage(this, attackDamage);
 
         Debug.Log($"{gameObject.name}");
     }
