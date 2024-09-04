@@ -47,6 +47,7 @@ public class Monster : Character
         if (hpCurrent <= 0)
         {
             isReady = false;
+            GetComponent<Collider>().enabled = false;
             AnimTrigger?.Invoke("DieTrigger");
             AnimBool?.Invoke("isMove", false);
             //  destroyFunction.Invoke(this);
