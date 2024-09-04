@@ -43,6 +43,7 @@ public partial class Player : Character
         set
         { 
             oreAmount = value;
+            if (HasInputAuthority)
             oreAmountText.text = "x "+$"{oreAmount}";
         }  
     }
