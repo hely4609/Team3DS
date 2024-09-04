@@ -48,7 +48,8 @@ public class Monster : Character
         {
             isReady = false;
 
-            GetComponent<Collider>().isTrigger = true;
+            GetComponent<Collider>().enabled = false;
+            GetComponent<Rigidbody>().isKinematic = true;
 
             AnimTrigger?.Invoke("DieTrigger");
             AnimBool?.Invoke("isMove", false);
