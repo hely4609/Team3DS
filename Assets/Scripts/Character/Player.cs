@@ -37,16 +37,8 @@ public partial class Player : Character
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
 
     [SerializeField]protected int oreAmount;
-    public int OreAmount 
-    { 
-        get => oreAmount;
-        set
-        { 
-            oreAmount = value;
-            if (HasInputAuthority)
-            oreAmountText.text = "x "+$"{oreAmount}";
-        }  
-    }
+    [Networked] public int OreAmount { get; set; }
+    
     /////////////////////////////
     [SerializeField] protected GameObject myMarker;
     [SerializeField] protected GameObject otherMarker;
@@ -771,6 +763,10 @@ public partial class Player : Character
                     bool isUseGravity;
                     isUseGravity = IsGround ? false : true;
                     rb.useGravity = isUseGravity;
+                    break;
+                case nameof(OreAmount):
+                    if (HasInputAuthority)
+                        oreAmountText.text = "x " + $"{OreAmount}";
                     break;
             }
             
