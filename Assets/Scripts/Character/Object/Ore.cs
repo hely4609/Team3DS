@@ -2,7 +2,6 @@ using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static UnityEngine.UI.GridLayoutGroup;
 
 public class Ore : MyComponent
 {
@@ -25,12 +24,15 @@ public class Ore : MyComponent
         if (target != null)
         {
             transform.position = Vector3.Lerp(transform.position, target.transform.position,0.2f);
+        }
+    }
 
-            if (Vector3.Distance(target.transform.position, transform.position) < 0.5f)
-            {
-                target.OreAmount += amount;
-                Runner.Despawn(GetComponent<NetworkObject>());
-            }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Player player))
+        {
+            player.OreAmount += amount;
+            Runner.Despawn(GetComponent<NetworkObject>());
         }
     }
 
