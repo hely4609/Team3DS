@@ -38,7 +38,5 @@ public abstract class Character : MyComponent
     public virtual void MoveToDestination(Vector3 destination) { }
     public virtual int TakeDamage(Character attacker, int damage) { return default; }
     public virtual int TakeDamage(Tower attacker, int damage) { return default; }
-    public virtual void Attack(Character target) { }
-
     
 }
