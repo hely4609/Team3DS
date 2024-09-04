@@ -184,6 +184,12 @@ public partial class Player : Character
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
     }
 
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        if (footstepAudioSource != null) SoundManager.StopSFX(footstepAudioSource);
+        if (cleanerAudioSource != null) SoundManager.StopSFX(cleanerAudioSource);
+    }
+
     public override void FixedUpdateNetwork()
     {
         if (GetInput(out NetworkInputData data))
@@ -194,7 +200,6 @@ public partial class Player : Character
     }
 
     [Networked] bool NetworkIsWalking { get; set; } = false;
-    bool isWalking = false;
     [SerializeField] AudioSource footstepAudioSource;
     [Networked, SerializeField] ResourceEnum.SFX FootstepSFX { get; set; }
     ResourceEnum.SFX currentFootstep = ResourceEnum.SFX.None;
