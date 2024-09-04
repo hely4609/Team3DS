@@ -65,6 +65,7 @@ public partial class Player : Character
 
     [Networked] public Vector3 MoveDir { get; set; }
     protected Vector3 currentDir = Vector3.zero;
+    Vector2 lastPos;
 
     [Networked] public Vector3 PreviousPosition { get; set; }
     [Networked] public Quaternion PreviousRotation { get; set; }
@@ -338,8 +339,11 @@ public partial class Player : Character
             int x = (int)ropePos.x;
             int z = (int)ropePos.z;
             Vector2 currentPos = new Vector2(x, z);
-
-            ropeBuilding.OnRopeSet(currentPos);
+            if(currentPos != lastPos)
+            {
+                ropeBuilding.OnRopeSet(currentPos);
+                lastPos = currentPos;
+            }
 
         }
 
