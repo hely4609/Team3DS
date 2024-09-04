@@ -105,11 +105,12 @@ public class Tower : InteractableBuilding
         if (HasStateAuthority)
         {
             target.TakeDamage(this, attackDamage);
-            if (!target.IsReady)
-            {
-                MonsterListOut(target);
-                target = null;
-            }
+        }
+
+        if (!target.IsReady)
+        {
+            MonsterListOut(target);
+            target = null;
         }
 
         Debug.Log($"{gameObject.name}");
