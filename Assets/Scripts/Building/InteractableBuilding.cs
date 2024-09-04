@@ -99,7 +99,7 @@ public class InteractableBuilding : Building, IInteraction
     public void RopeSetting(NetworkObject obj, Vector2 start, Vector2 end)
     {
         Vector2 delta = end - start;
-        float deltaScale = delta.x + delta.y;
+        float deltaScale = Mathf.Abs(delta.x + delta.y);
         obj.transform.position = new Vector3(start.x, 0, start.y);
         obj.transform.localScale = new Vector3(1, 1, deltaScale);
 
@@ -139,8 +139,9 @@ public class InteractableBuilding : Building, IInteraction
                     delta = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2] - ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
                     if (delta.x != 0)
                     {
-                        ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-                    }
+                        ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.rotation = Quaternion.Euler(GameManager.Instance.BuildingManager.CornerRotation(ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 3], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2], ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1]));
+                    
+                }
                 }
             }
         }
