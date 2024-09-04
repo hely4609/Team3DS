@@ -17,7 +17,7 @@ public abstract class Character : MyComponent
     [SerializeField]protected int hpMax;
     [SerializeField]protected int hpCurrent;
     public int HpCurrent => hpCurrent;
-    protected int attackDamage;
+    protected int attackDamage = 1;
     protected float attackSpeed;
     [SerializeField] protected float moveSpeed = 5;
     public float MoveSpeed

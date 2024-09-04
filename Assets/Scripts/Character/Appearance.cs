@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using Fusion;
+using System;
 
 public class Appearance : NetworkBehaviour
 {
@@ -57,9 +59,38 @@ public class Appearance : NetworkBehaviour
     public void SetFloat(string name, float value) => anim?.SetFloat(name, value);
     public void SetInt(string name, int value) => anim?.SetInteger(name, value);
     public void SetTrigger(string name) => anim?.SetTrigger(name);
-
     public void SetIK(bool value) => IKActive = value;
-    
+
+    public void SendMessageToOwner(string name)
+    {
+        owner.SendMessage(name);
+    }
+    public void SendMessageToOwner(string name , string value)
+    {
+        owner.SendMessage(name, value);
+    }
+    public void SendMessageToOwner(string name, int value)
+    {
+        owner.SendMessage(name , value);
+    }
+    public void SendMessageToOwner(string name, float value)
+    {
+        owner.SendMessage(name, value);
+    }
+    public void SendMessageToOwner(string name, bool value)
+    {
+        owner.SendMessage(name, value);
+    }
+
+    public void CSharpReflection(string name)
+    {
+        Type tp = owner.GetType();
+        MethodInfo method = tp.GetMethod(name);
+
+        // Parameter들을 object[]형태로 넘겨주기 가능
+        method.Invoke(owner, null);
+    }
+
     //a callback for calculating IK
     void OnAnimatorIK(int _layerIndex)
     {
