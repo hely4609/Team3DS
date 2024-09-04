@@ -27,7 +27,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 15, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2389722441524938469}
@@ -111,7 +111,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 15, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2389722441524938469}
@@ -179,7 +179,6 @@ GameObject:
   - component: {fileID: 5323114618063545392}
   - component: {fileID: 6277480332337860404}
   - component: {fileID: 8651922591512447639}
-  - component: {fileID: 8414889189550769889}
   m_Layer: 0
   m_Name: Mesh
   m_TagString: Untagged
@@ -252,27 +251,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &8414889189550769889
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5766977083304876532}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 8.2, y: 8.8, z: 10}
-  m_Center: {x: 0, y: 0, z: 5}
 --- !u!1 &6849127201315086628
 GameObject:
   m_ObjectHideFlags: 0
@@ -285,6 +263,7 @@ GameObject:
   - component: {fileID: 2290281809893651226}
   - component: {fileID: 667561063578481595}
   - component: {fileID: 1148834793154820774}
+  - component: {fileID: 518098322203005798}
   m_Layer: 0
   m_Name: EnergyBarrierGenerator
   m_TagString: Untagged
@@ -327,8 +306,7 @@ MonoBehaviour:
   _BuildingTimeCurrent: 0
   completeMat: {fileID: 0}
   meshes: []
-  cols:
-  - {fileID: 8414889189550769889}
+  cols: []
   _IsFixed: 1
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
@@ -337,6 +315,9 @@ MonoBehaviour:
   marker_on: {fileID: 5054706063076145097}
   marker_off: {fileID: 8686797311467670305}
   objectName: "\uC5D0\uB108\uC9C0\uBC29\uBCBD\uC0DD\uC131\uAE30"
+  ropeStruct:
+    ropeObjects: []
+    ropePositions: []
   hpCurrent: 0
 --- !u!114 &667561063578481595
 MonoBehaviour:
@@ -373,6 +354,27 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!65 &518098322203005798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6849127201315086628}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 5, z: 0}
 --- !u!1 &8686797311467670305
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,7 +402,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 15, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2389722441524938469}

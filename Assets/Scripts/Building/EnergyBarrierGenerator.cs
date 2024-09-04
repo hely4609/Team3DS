@@ -32,10 +32,10 @@ public class EnergyBarrierGenerator : InteractableBuilding
     }
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.TryGetComponent(out Monster enemy))
+        if (collision.gameObject.TryGetComponent(out Monster enemy))
         {
             TakeDamage(1);
-            Debug.Log("¾Æ¾ß");
+            
             Destroy(collision.gameObject);
         }
     }
