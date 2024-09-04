@@ -109,44 +109,8 @@ public class InteractableBuilding : Building, IInteraction
     {
         if (HasStateAuthority)
         {
-            Vector2 delta;
             ropeStruct.ropePositions.Add(playerPosition);
-            delta = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2] - ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
             CreateRope();
-            //    Vector2 delta;
-            //    if (ropeStruct.ropePositions.Count < 1)
-            //    {
-            //        delta = playerPosition - StartPos;
-            //        ropeStruct.ropePositions.Add(StartPos); // 타워의 위치.(정수값)
-            //        if (delta.x == 0 || delta.y == 0)
-            //        {
-            //            ropeStruct.ropePositions.Add(playerPosition);// 플레이어의 위치(정수값)
-            //            CreateRope();
-            //        }
-            //        else
-            //        {
-            //            ropeStruct.ropePositions.Add(new Vector2(StartPos.x, playerPosition.y));
-            //            CreateRope();
-
-            //            ropeStruct.ropePositions.Add(playerPosition);
-            //            CreateRope();
-            //            ropeStruct.ropeObjects[RopeStruct.ropeObjects.Count - 1].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-            //        }
-            //        Debug.Log($"{ropeStruct.ropePositions.Count} 리스트 개수");
-            //    }
-            //    else
-            //    {
-            //        if (RopeStruct.ropePositions[RopeStruct.ropePositions.Count - 1] != playerPosition)
-            //        {
-            //            ropeStruct.ropePositions.Add(playerPosition);
-            //            CreateRope();
-            //            delta = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2] - ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
-            //            if (delta.x != 0)
-            //            {
-            //                ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1].transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
-            //            }
-            //        }
-            //    }
         }
     }
     public void CreateRope()
@@ -160,8 +124,9 @@ public class InteractableBuilding : Building, IInteraction
         if (delta.x < 0) deltaAngleCorrection = -1;
         deltaAngle = Vector2.Angle(delta, Vector2.up) * deltaAngleCorrection;
         Debug.Log($"start : {start}, delta : {delta}, deltaAngle : {deltaAngle}");
-
+        
         NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
+        ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeStruct.ropeObjects.Add(ropeObject);
     }
 
