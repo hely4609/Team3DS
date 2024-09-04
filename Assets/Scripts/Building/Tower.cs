@@ -58,6 +58,7 @@ public class Tower : InteractableBuilding
         {
             Vector2 playerTransformVector2 = new Vector2((int)(player.transform.position.x), (int)(player.transform.position.z));
             OnRopeSet(playerTransformVector2);
+            player.ropeBuilding = this;
             return Interaction.takeRope;
         }
     }

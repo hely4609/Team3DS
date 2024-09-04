@@ -57,6 +57,7 @@ public partial class Player : Character
     protected int buildableEnumPageIndex = 0;
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
+    public InteractableBuilding ropeBuilding { get; set; }
 
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
@@ -257,6 +258,7 @@ public partial class Player : Character
         // 상호작용
         if (isInteracting && interactionObject != null)
         {
+            // 건설 게이지 차오르기
             float progress = interactionObject.InteractionUpdate(deltaTime, interactionType);
 
             if (possessionController != null && HasInputAuthority)
@@ -293,6 +295,7 @@ public partial class Player : Character
                     UpdateInteractionUI(interactionIndex);
                 }
             }
+            // 건설 끝
         }
 
         ////////////////////////////
@@ -328,9 +331,25 @@ public partial class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
+        if(ropeBuilding != null)
+        {
+            // 로프 끌기
+            Vector3 ropePos = transform.position;
+            int x = (int)ropePos.x;
+            int z = (int)ropePos.z;
+            Vector2 currentPos = new Vector2(x, z);
+
+            // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
+            if (ropeBuilding.RopeStruct.ropePositions[ropeBuilding.RopeStruct.ropePositions.Count-1] != currentPos)
+            {
+                ropeBuilding.OnRopeSet(currentPos);
+            }
+        }
+
+        //
 
         // 발소리
-        if(NetworkIsWalking)
+        if (NetworkIsWalking)
         {
 
             if (footstepAudioSource == null)

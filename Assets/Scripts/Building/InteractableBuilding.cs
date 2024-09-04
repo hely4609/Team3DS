@@ -19,6 +19,7 @@ public class InteractableBuilding : Building, IInteraction
     //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
     protected bool isRoped = false;
     [SerializeField] protected RopeStruct ropeStruct = new RopeStruct();
+    public RopeStruct RopeStruct { get { return ropeStruct; } }
     protected override void Initialize()
     {
         ropeStruct.ropeObjects = new List<NetworkObject>();
@@ -47,9 +48,8 @@ public class InteractableBuilding : Building, IInteraction
         }
         else
         {
-            return Interaction.None;
+            return Interaction.takeRope;
         }
-
     }
     public virtual float InteractionUpdate(float deltaTime, Interaction interaction) // 상호작용시 적용할 함수. 제작하라는 명령이 들어오면 제작을 진행함.
     {
