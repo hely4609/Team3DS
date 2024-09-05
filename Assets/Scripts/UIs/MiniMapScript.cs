@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MiniMapScript : MyComponent
 {
@@ -12,12 +13,14 @@ public class MiniMapScript : MyComponent
     Player controlledPlayer;
     Vector3 pos;
     Vector3 rot;
+    [SerializeField] Slider minimapSlider;
     bool isMiniMapLocked = true;
 
     protected override void MyStart()
     {
         miniMapCamera = GetComponentInChildren<Camera>();
         controlledPlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
+        minimapSlider.value = miniMapCamera.orthographicSize;
     }
     protected override void MyUpdate(float deltaTime)
     {
@@ -47,10 +50,17 @@ public class MiniMapScript : MyComponent
     public void ZoomIn()
     {
         miniMapCamera.orthographicSize = Mathf.Clamp(miniMapCamera.orthographicSize - 5, 10, miniMapCamera.orthographicSize);
+        minimapSlider.value = miniMapCamera.orthographicSize;
     }
 
     public void ZoomOut()
     {
         miniMapCamera.orthographicSize = Mathf.Clamp(miniMapCamera.orthographicSize + 5, miniMapCamera.orthographicSize, 100);
+        minimapSlider.value = miniMapCamera.orthographicSize;
+    }
+
+    public void ZoomSlider()
+    {
+        miniMapCamera.orthographicSize = minimapSlider.value;
     }
 }

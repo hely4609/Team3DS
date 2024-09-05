@@ -57,9 +57,13 @@ public class Tower : InteractableBuilding
         else
         {
             Vector2 playerTransformVector2 = new Vector2((int)(player.transform.position.x), (int)(player.transform.position.z));
-            OnRopeSet(playerTransformVector2);
-            player.ropeBuilding = this;
-            return Interaction.takeRope;
+            if(!IsRoped && player.ropeBuilding == null)
+            {
+                OnRopeSet(playerTransformVector2);
+                player.ropeBuilding = this;
+                return Interaction.takeRope;
+            }
+            else return Interaction.None;
         }
     }
     protected override void MyUpdate(float deltaTime)

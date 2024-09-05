@@ -2,10 +2,7 @@ using Fusion;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 [Serializable]
 public struct RopeStruct
@@ -18,7 +15,7 @@ public class InteractableBuilding : Building, IInteraction
     [SerializeField] protected string objectName;
     //protected Collider[] interactionColliders;
     //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
-    protected bool isRoped = false;
+    [Networked, SerializeField]protected bool IsRoped { get; set; } = false;
     [SerializeField] protected RopeStruct ropeStruct = new RopeStruct();
     public RopeStruct RopeStruct { get { return ropeStruct; } }
     protected override void Initialize()
@@ -92,23 +89,20 @@ public class InteractableBuilding : Building, IInteraction
 
     public void ResetRope()
     {
+        foreach(var rope in ropeStruct.ropeObjects)
+        {
+            Runner.Despawn(rope);
+        }
         ropeStruct.ropeObjects.Clear();
         ropeStruct.ropePositions.Clear();
         ropeStruct.ropePositions.Add(startPos);
-    }
-    public void SetRope(InteractableBuilding building) // 건물을 터치하면 그 건물이랑 전선 연결함.
-    {
-        if (!building.isRoped)
-        {
-            building.isRoped = true;
-            GameManager.Instance.BuildingManager.RopeStructs.Add(ropeStruct);
-            ResetRope();
-        }
+        IsRoped = false;
     }
     public void OnRopeSet(Vector2 playerPosition) // 전선을 놓기. 길이랑 같은 원리.
     {
         if (HasStateAuthority)
         {
+            IsRoped = true;
             ropeStruct.ropePositions.Add(playerPosition);
             CreateRope();
         }
@@ -123,12 +117,10 @@ public class InteractableBuilding : Building, IInteraction
         int deltaAngleCorrection = 1;
         if (delta.x < 0) deltaAngleCorrection = -1;
         deltaAngle = Vector2.Angle(delta, Vector2.up) * deltaAngleCorrection;
-        Debug.Log($"start : {start}, delta : {delta}, deltaAngle : {deltaAngle}");
         
         NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
-        ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeStruct.ropeObjects.Add(ropeObject);
+        ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
+        ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
     }
-
-
 }
