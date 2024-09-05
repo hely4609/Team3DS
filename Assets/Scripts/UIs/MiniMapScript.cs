@@ -20,6 +20,7 @@ public class MiniMapScript : MyComponent
     {
         miniMapCamera = GetComponentInChildren<Camera>();
         controlledPlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
+        minimapSlider.value = miniMapCamera.orthographicSize;
     }
     protected override void MyUpdate(float deltaTime)
     {
