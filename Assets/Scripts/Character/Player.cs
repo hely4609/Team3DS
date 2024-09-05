@@ -523,6 +523,12 @@ public partial class Player : Character
         {
             Runner.Despawn(DesigningBuilding.GetComponent<NetworkObject>());
         }
+
+        if (ropeBuilding != null)
+        {
+            ropeBuilding.ResetRope();
+            ropeBuilding = null;
+        }
         
     }
 

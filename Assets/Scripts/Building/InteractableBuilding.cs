@@ -15,7 +15,7 @@ public class InteractableBuilding : Building, IInteraction
     [SerializeField] protected string objectName;
     //protected Collider[] interactionColliders;
     //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
-    protected bool isRoped = false;
+    [Networked, SerializeField]protected bool IsRoped { get; set; } = false;
     [SerializeField] protected RopeStruct ropeStruct = new RopeStruct();
     public RopeStruct RopeStruct { get { return ropeStruct; } }
     protected override void Initialize()
@@ -89,23 +89,20 @@ public class InteractableBuilding : Building, IInteraction
 
     public void ResetRope()
     {
+        foreach(var rope in ropeStruct.ropeObjects)
+        {
+            Runner.Despawn(rope);
+        }
         ropeStruct.ropeObjects.Clear();
         ropeStruct.ropePositions.Clear();
         ropeStruct.ropePositions.Add(startPos);
-    }
-    public void SetRope(InteractableBuilding building) // 건물을 터치하면 그 건물이랑 전선 연결함.
-    {
-        if (!building.isRoped)
-        {
-            building.isRoped = true;
-            GameManager.Instance.BuildingManager.RopeStructs.Add(ropeStruct);
-            ResetRope();
-        }
+        IsRoped = false;
     }
     public void OnRopeSet(Vector2 playerPosition) // 전선을 놓기. 길이랑 같은 원리.
     {
         if (HasStateAuthority)
         {
+            IsRoped = true;
             ropeStruct.ropePositions.Add(playerPosition);
             CreateRope();
         }
