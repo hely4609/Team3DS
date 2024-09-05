@@ -119,9 +119,8 @@ public class InteractableBuilding : Building, IInteraction
         deltaAngle = Vector2.Angle(delta, Vector2.up) * deltaAngleCorrection;
         
         NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
-        ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeStruct.ropeObjects.Add(ropeObject);
+        //ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
+        ropeObject.GetComponent<Rope>().Initializer(delta.magnitude);
     }
-
-
 }
