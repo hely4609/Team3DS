@@ -2,7 +2,6 @@ using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public enum MonsterEnum
 { First }
@@ -25,7 +24,6 @@ public class Monster : Character
     protected EnergyBarrierGenerator generator;
     protected override void MyStart()
     {
-        Debug.Log("monster Mystart");
         hpMax = 5;
         hpCurrent = 5;
         roadsVector2 = GameManager.Instance.BuildingManager.roadData;

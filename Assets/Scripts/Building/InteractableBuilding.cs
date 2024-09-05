@@ -2,10 +2,7 @@ using Fusion;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 [Serializable]
 public struct RopeStruct
@@ -123,7 +120,6 @@ public class InteractableBuilding : Building, IInteraction
         int deltaAngleCorrection = 1;
         if (delta.x < 0) deltaAngleCorrection = -1;
         deltaAngle = Vector2.Angle(delta, Vector2.up) * deltaAngleCorrection;
-        Debug.Log($"start : {start}, delta : {delta}, deltaAngle : {deltaAngle}");
         
         NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
         ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
