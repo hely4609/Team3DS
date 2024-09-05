@@ -82,7 +82,7 @@ public class Appearance : NetworkBehaviour
         owner.SendMessage(name, value);
     }
 
-    public void CSharpReflection(string name)
+    public void CSharpReflectionToOwner(string name)
     {
         Type tp = owner.GetType();
         MethodInfo method = tp.GetMethod(name);
