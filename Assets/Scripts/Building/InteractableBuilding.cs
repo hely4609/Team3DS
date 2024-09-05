@@ -120,7 +120,7 @@ public class InteractableBuilding : Building, IInteraction
         
         NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
         ropeStruct.ropeObjects.Add(ropeObject);
-        //ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
-        ropeObject.GetComponent<Rope>().Initializer(delta.magnitude);
+        ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
+        ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
     }
 }

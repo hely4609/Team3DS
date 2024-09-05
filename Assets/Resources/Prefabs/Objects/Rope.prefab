@@ -173,6 +173,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: -5250934019433287487}
+  - {fileID: 909299966476337889}
 --- !u!114 &-5250934019433287487
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,3 +202,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fa48a919e01e5d4ab69c20bc9c020cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _Scale: 0
