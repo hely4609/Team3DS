@@ -531,6 +531,7 @@ public partial class Player : Character
         if (HasInputAuthority && buildingSelectUI.activeSelf)
         {
             buildingSelectUI.SetActive(false);
+            IsThisPlayerCharacterUICanvasActivated = false;
         }
 
         if (DesigningBuilding != null)
