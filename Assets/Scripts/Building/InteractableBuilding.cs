@@ -18,6 +18,8 @@ public class InteractableBuilding : Building, IInteraction
     [Networked, SerializeField]protected bool IsRoped { get; set; } = false;
     [SerializeField] protected RopeStruct ropeStruct = new RopeStruct();
     public RopeStruct RopeStruct { get { return ropeStruct; } }
+    [SerializeField] protected float maxRopeLength;
+    [SerializeField] protected float currentRopeLength;
     protected override void Initialize()
     {
         ropeStruct.ropeObjects = new List<NetworkObject>();
@@ -96,7 +98,17 @@ public class InteractableBuilding : Building, IInteraction
         ropeStruct.ropeObjects.Clear();
         ropeStruct.ropePositions.Clear();
         ropeStruct.ropePositions.Add(startPos);
+        currentRopeLength = maxRopeLength;
         IsRoped = false;
+    }
+    public bool CheckRopeLength(float moveDistance) // 전선을 끌수 있었나?
+    {
+        if (currentRopeLength > 0)
+        {
+            currentRopeLength -= moveDistance;
+            return true;
+        }
+        else return false;
     }
     public void OnRopeSet(Vector2 playerPosition) // 전선을 놓기. 길이랑 같은 원리.
     {

@@ -334,8 +334,11 @@ public partial class Player : Character
             Vector2 currentPos = new Vector2(x, z);
             if(currentPos != lastPos)
             {
-                ropeBuilding.OnRopeSet(currentPos);
-                lastPos = currentPos;
+                if(ropeBuilding.CheckRopeLength(deltaTime))
+                {
+                    ropeBuilding.OnRopeSet(currentPos);
+                    lastPos = currentPos;
+                }
             }
 
         }

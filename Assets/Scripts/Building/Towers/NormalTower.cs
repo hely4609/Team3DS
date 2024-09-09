@@ -15,6 +15,8 @@ public class NormalTower : Tower
         powerConsumption = 10;
 
         AttackRangeSetting();
+        maxRopeLength = 10;
+        currentRopeLength = maxRopeLength;
         base.Initialize();
     }
     protected override void OnHit()
