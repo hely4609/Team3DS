@@ -315,12 +315,12 @@ public partial class Player : Character
             Vector3 pickPos = transform.position + transform.forward * 5f;
             int x = (int)pickPos.x;
             int z = (int)pickPos.z;
-            DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
             Vector2Int currentPos = new Vector2Int(x, z);
 
             // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
             if (DesigningBuilding.TiledBuildingPos != currentPos)
             {
+                DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
                 DesigningBuilding.TiledBuildingPos = currentPos;
                 DesigningBuilding.CheckBuild();
             }

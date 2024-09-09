@@ -74,6 +74,7 @@ public class PowerSupply : InteractableBuilding
     {
         if (player?.OreAmount != 0) // 플레이어가 가진 물건이 납품할 물건이라면
         {
+            
             Deliver(player);
             
             return Interaction.Deliver;
@@ -99,6 +100,7 @@ public class PowerSupply : InteractableBuilding
     //}
     public void Deliver(Player player)
     {
+        if(HasStateAuthority)
         anim.SetTrigger("DoorTrigger");
 
         for (int i = 0; i < player?.OreAmount; i++)
