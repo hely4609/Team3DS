@@ -179,6 +179,7 @@ public class Tower : InteractableBuilding
 
     public void TurnOnOff(bool power) //전원을 키고 끄는 함수
     {
+        SoundManager.Play(ResourceEnum.SFX._switch, transform.position);
         if (HasStateAuthority && power != OnOff)
         {
             OnOff = power;

@@ -486,7 +486,7 @@ public partial class Player : Character
 
             mouseDelta_y = -mouseDelta.y * 0.02f * 10f;
             rotate_x += mouseDelta_y;
-            rotate_x = Mathf.Clamp(rotate_x, -45f, 45f);
+            rotate_x = Mathf.Clamp(rotate_x, -45f, 30f + 13f / Mathf.Abs(GroundNormal.y));
 
             // 상하회전은 카메라만 회전
             cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
@@ -803,7 +803,7 @@ public partial class Player : Character
     protected Dictionary<Collider, Vector3> attachedCollision = new();
 
     //지금 제가 딛고 있는 땅의 노말을 저장해둡시다!
-    Vector3 _groundNormal = Vector3.down;
+    [SerializeField]Vector3 _groundNormal = Vector3.down;
     Vector3 GroundNormal
     {
         get => _groundNormal;
