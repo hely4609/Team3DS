@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using Fusion;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 
 public partial class Player : Character
@@ -20,7 +19,7 @@ public partial class Player : Character
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
     [SerializeField] protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
     [SerializeField] public GameObject buildingSelectUI; // 빌딩 선택 UI
-    
+
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
@@ -36,9 +35,9 @@ public partial class Player : Character
     public bool IsInteracting => isInteracting;
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
 
-    [SerializeField]protected int oreAmount;
+    [SerializeField] protected int oreAmount;
     [Networked] public int OreAmount { get; set; }
-    
+
     /////////////////////////////
     [SerializeField] protected GameObject myMarker;
     [SerializeField] protected GameObject otherMarker;
@@ -50,7 +49,9 @@ public partial class Player : Character
     protected int buildableEnumPageIndex = 0;
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
-    [Networked]public InteractableBuilding ropeBuilding { get; set; }
+    [Networked] public InteractableBuilding ropeBuilding { get; set; }
+    bool canSetRope = true;
+    public bool CanSetRope { get { return canSetRope; } set { canSetRope = value; } }
 
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
@@ -96,7 +97,7 @@ public partial class Player : Character
         targetController.DoCancel += Cancel;
         targetController.DoFarming += Farming;
     }
-    
+
     protected void UnRegistrationFunction(ControllerBase targetController)
     {
         targetController.DoMove -= Move;
@@ -104,12 +105,12 @@ public partial class Player : Character
         targetController.DoDesignBuilding -= DesignBuilding;
         targetController.DoBuild -= Build;
         targetController.DoInteractionStart -= InteractionStart;
-        targetController.DoInteractionEnd-= InteractionEnd;
+        targetController.DoInteractionEnd -= InteractionEnd;
         targetController.DoMouseWheel -= MouseWheel;
         targetController.DoCancel -= Cancel;
-        targetController.DoFarming-= Farming;
+        targetController.DoFarming -= Farming;
     }
-   
+
     public virtual void Possession(ControllerBase targetController)
     {
         if (TryPossession() == false)
@@ -147,16 +148,16 @@ public partial class Player : Character
             cameraOffset_FPS = transform.Find("CameraOffset");
         }
 
-        for (ResourceEnum.Prefab index = ResourceEnum.Prefab.buildingStart+1; index < ResourceEnum.Prefab.buildingEnd; index++)
+        for (ResourceEnum.Prefab index = ResourceEnum.Prefab.buildingStart + 1; index < ResourceEnum.Prefab.buildingEnd; index++)
         {
-            int y = index - (ResourceEnum.Prefab.buildingStart+1);
+            int y = index - (ResourceEnum.Prefab.buildingStart + 1);
             int x = y / 5;
             y %= 5;
             buildableEnumArray[x, y] = index;
         }
 
 
-        if(HasInputAuthority) otherMarker.SetActive(false);
+        if (HasInputAuthority) otherMarker.SetActive(false);
         else myMarker.SetActive(false);
 
         if (possessionController != null && HasInputAuthority)
@@ -325,17 +326,22 @@ public partial class Player : Character
                 DesigningBuilding.CheckBuild();
             }
         }
-        if(ropeBuilding != null)
+        if (ropeBuilding != null)
         {
             // 로프 끌기
             Vector3 ropePos = transform.position;
             int x = (int)ropePos.x;
             int z = (int)ropePos.z;
             Vector2 currentPos = new Vector2(x, z);
-            if(currentPos != lastPos)
+            if (currentPos != lastPos)
             {
-                ropeBuilding.OnRopeSet(currentPos);
-                lastPos = currentPos;
+                canSetRope = ropeBuilding.CheckRopeLength(currentPos);
+                if (canSetRope)
+                {
+                    ropeBuilding.OnRopeSet(currentPos);
+                    lastPos = currentPos;
+                }
+
             }
 
         }
@@ -366,7 +372,7 @@ public partial class Player : Character
             }
 
         }
-        else if(footstepAudioSource != null)
+        else if (footstepAudioSource != null)
         {
             // 안걷고있는경우
             SoundManager.StopSFX(footstepAudioSource);
@@ -375,7 +381,7 @@ public partial class Player : Character
         // 청소기 소리
         if (NetworkIsFarmingPressed)
         {
-            if(!isFarmingKeyAlreadyPressed)
+            if (!isFarmingKeyAlreadyPressed)
             {
                 if (cleanerAudioSource != null)
                 {
@@ -388,7 +394,7 @@ public partial class Player : Character
         }
         else
         {
-            if(isFarmingKeyAlreadyPressed)
+            if (isFarmingKeyAlreadyPressed)
             {
                 if (cleanerAudioSource != null)
                 {
@@ -403,10 +409,10 @@ public partial class Player : Character
         if (cleanerAudioSource != null)
         {
             cleanerAudioSource.transform.position = transform.position;
-            
+
             if (!cleanerAudioSource.isPlaying)
             {
-                if(wasPlayingCleanerEnd)
+                if (wasPlayingCleanerEnd)
                 {
                     cleanerAudioSource = null;
                     wasPlayingCleanerEnd = false;
@@ -430,19 +436,20 @@ public partial class Player : Character
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
     public override void Move(Vector3 direction)
     {
+       
         MoveDir = direction.normalized;
 
         if (possessionController != null && HasInputAuthority)
         {
             Vector3 wantMoveDir = transform.forward * MoveDir.z + transform.right * MoveDir.x;
             Vector3 velocity = CalculrateNextFrameGroundAngle() < 85f ? wantMoveDir : Vector3.zero;
-            Vector3 gravity = IsGround? Vector3.zero : Vector3.down * Mathf.Abs(rb.velocity.y);
+            Vector3 gravity = IsGround ? Vector3.zero : Vector3.down * Mathf.Abs(rb.velocity.y);
 
             if (IsGround)
             {
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
 
-                if(direction.magnitude > 0)
+                if (direction.magnitude > 0)
                 {
                     NetworkIsWalking = true;
                 }
@@ -454,14 +461,21 @@ public partial class Player : Character
             }
 
             if (!IsGround) velocity *= 0.1f;
+            if (canSetRope)
+            { 
             rb.velocity = velocity * moveSpeed + gravity;
+            }
+            else
+            {
+                rb.velocity = Vector3.zero;
+            }
         }
         else
         {
             rb.position = PreviousPosition;
         }
     }
-    
+
     public virtual void ScreenRotate(Vector2 mouseDelta)
     {
         if (HasInputAuthority)
@@ -492,7 +506,7 @@ public partial class Player : Character
         //return true;
 
         if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
-        
+
         NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
 
@@ -526,10 +540,10 @@ public partial class Player : Character
 
         if (ropeBuilding != null)
         {
-            ropeBuilding.ResetRope();
+            ropeBuilding.ResetRope(this);
             ropeBuilding = null;
         }
-        
+
     }
 
     public void Farming(bool isFarming)
@@ -539,7 +553,7 @@ public partial class Player : Character
 
     public bool InteractionStart()
     {
-        if(DesigningBuilding != null)
+        if (DesigningBuilding != null)
         {
             if (DesigningBuilding.FixPlace())
             {
@@ -568,7 +582,7 @@ public partial class Player : Character
                     buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
                     buttonText.text = $"건설중...";
                 }
-                
+
                 //GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
                 break;
         }
@@ -589,9 +603,9 @@ public partial class Player : Character
             case Interaction.Deliver:
                 OreAmount = 0;
                 break;
-            case Interaction.Build: 
+            case Interaction.Build:
                 AnimBool?.Invoke("isBuild", false);
-                if(HasInputAuthority)
+                if (HasInputAuthority)
                 {
                     interactionUI.gameObject.SetActive(true);
                     interactionUpdateUI.SetActive(false);
@@ -644,7 +658,7 @@ public partial class Player : Character
 
             UpdateInteractionUI(interactionIndex);
         }
-        
+
     }
 
     // 상호작용 가능한 대상 리스트에 있는 대상이 감지범위에서 나갔을 때 처리
@@ -659,7 +673,7 @@ public partial class Player : Character
         }
 
         if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
-        { 
+        {
             interactionObjectList.Remove(target);
 
             if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
@@ -695,7 +709,7 @@ public partial class Player : Character
 
             UpdateInteractionUI(interactionIndex);
         }
-        
+
     }
 
     // 마우스 휠을 굴려서 상호작용할 대상을 정함.
@@ -715,7 +729,7 @@ public partial class Player : Character
             if (interactionIndex < interactionObjectList.Count - 4 && HasInputAuthority)
             {
                 interactionContent.anchoredPosition -= new Vector2(0, 50f);
-                interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y,0, (interactionObjectList.Count - 6) * 50f));
+                interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionObjectList.Count - 6) * 50f));
             }
         }
         // 휠을 아래로 굴렸을 때
@@ -750,7 +764,7 @@ public partial class Player : Character
                 {
                     mouseLeftImage.transform.position = button.transform.position;
                 }
-            } 
+            }
             else buttonImage.color = Color.white;
         }
     }
@@ -775,7 +789,7 @@ public partial class Player : Character
                         oreAmountText.text = "x " + $"{OreAmount}";
                     break;
             }
-            
+
         }
 
     }
@@ -803,7 +817,7 @@ public partial class Player : Character
     //땅에 있는지 여부는 계산하는 거니까, isGround는 get만 열어줄 거예요! 땅이 있으면 땅에 있는 거예요!
     [Networked] public bool IsGround { get; set; }
 
-    
+
     private void OnCollisionEnter(Collision collision)
     {
         //일단 닿은 바닥의 방향을 확인해볼게요!
@@ -815,7 +829,7 @@ public partial class Player : Character
 
         //그래서 부딪힌 대상을 저장할 거예요! 상대와  닿은 노말!
         if (attachedCollision.ContainsKey(collision.collider))
-        {    
+        {
             //닿은 바닥의 방향이 옛날과 다르면
             if (attachedCollision[collision.collider] != normal)
             {
@@ -841,7 +855,7 @@ public partial class Player : Character
 
         }
         GroundNormal = normal;
-        
+
 
         //그리고 변경되었으니 땅을 체크해봅시다! 
         //Calculate_Ground();
@@ -849,7 +863,7 @@ public partial class Player : Character
 
 
     private void OnCollisionExit(Collision collision)
-    { 
+    {
         //대상이 나갔으니 그냥 지웁시다!
         if (attachedCollision.Remove(collision.collider))
         {
@@ -914,13 +928,13 @@ public partial class Player : Character
 
     private float CalculrateNextFrameGroundAngle()
     {
-        var nextFramePlayerPosition = transform.position + transform.forward * 1.25f + (transform.forward * MoveDir.z  + transform.right * MoveDir.x) * Runner.DeltaTime * moveSpeed ;
+        var nextFramePlayerPosition = transform.position + transform.forward * 1.25f + (transform.forward * MoveDir.z + transform.right * MoveDir.x) * Runner.DeltaTime * moveSpeed;
 
         if (Physics.Raycast(nextFramePlayerPosition, Vector3.down, out RaycastHit hitInfo, 1f))
-        { 
+        {
             return Vector3.Angle(Vector3.up, hitInfo.normal);
         }
-        
+
         return 0f;
     }
 }
