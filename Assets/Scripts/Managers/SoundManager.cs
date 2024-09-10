@@ -65,9 +65,10 @@ public class SoundManager : Manager
 
     public void UpdateBGMMixer(float deltaTime)
     {
+        Debug.Log(bgmArray[0].volume);
         bgmArray[0].volume = Mathf.SmoothStep(bgmArray[0].volume, 1, deltaTime * 5);
         bgmArray[1].volume = Mathf.SmoothStep(bgmArray[1].volume, 0, deltaTime * 5);
-        if (bgmArray[0].volume == 1)
+        if (bgmArray[0].volume > 0.99)
         {
             AudioEffectUpdate -= UpdateBGMMixer;
         }
@@ -86,6 +87,7 @@ public class SoundManager : Manager
         soundManager.bgmArray[0].clip = ResourceManager.Get(wantBGM);
         soundManager.bgmArray[0].time = 0;
         soundManager.bgmArray[0].volume = 0;
+        soundManager.bgmArray[0].Play();
 
         soundManager.AudioEffectUpdate -= soundManager.UpdateBGMMixer;
         soundManager.AudioEffectUpdate += soundManager.UpdateBGMMixer;

@@ -1,3 +1,6 @@
+using Unity.VisualScripting.Antlr3.Runtime;
+using UnityEditor.PackageManager;
+
 public class ResourcesPath
 {
     public static string[] prefabPathArray =
@@ -45,7 +48,7 @@ public class ResourcesPath
 
     public static string[] BGMPathArray =
     {
-
+        "Sounds/BGM/Silent_Partner__Whistling_Down_the_Road",
     };
 
     public static string[] SFXPathArray =
@@ -58,6 +61,7 @@ public class ResourcesPath
         "Sounds/SFX/cleaner_loop",
         "Sounds/SFX/cleaner_end",
         "Sounds/SFX/coin",
+        "Sounds/SFX/Wind",
         // Foodsteps
         "Sounds/SFX/Footsteps/footsteps_dirt_cut",
         "Sounds/SFX/Footsteps/footsteps_metal_cut",
