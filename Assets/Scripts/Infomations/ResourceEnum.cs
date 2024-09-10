@@ -48,7 +48,7 @@ namespace ResourceEnum
 
     public enum BGM
     {
-
+        Silent_Partner__Whistling_Down_the_Road,
     }
 
     public enum SFX
@@ -62,6 +62,7 @@ namespace ResourceEnum
         cleaner_loop = 6,
         cleaner_end = 7,
         coin = 8,
+        Wind = 9,
         // Footsteps
         footsteps_dirt_cut = 1000,
         footsteps_metal_cut = 1001,
