@@ -429,7 +429,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3000917550605773369}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -550,9 +550,9 @@ GameObject:
   - component: {fileID: 3004089179630653249}
   - component: {fileID: 3014678884735705229}
   - component: {fileID: 3021959068509481553}
-  - component: {fileID: 2974483349376624849}
   - component: {fileID: 4745613938894177325}
   - component: {fileID: 5063340613675039996}
+  - component: {fileID: 8617139414010354151}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -628,28 +628,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!64 &2974483349376624849
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3001550493025402093}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 4300044, guid: e900fbebbd438304bb103b7ee8579ca6, type: 3}
 --- !u!95 &4745613938894177325
 Animator:
   serializedVersion: 5
@@ -687,8 +665,29 @@ MonoBehaviour:
   TotalWords: 1
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 000000002b1a167c79406955d4d2bdeace438700a93d4a4342fec2be
+  StateHashes: 000000002b1a167c79406955d4d2bdeace438700f37b6e208bc56641a93d4a4342fec2be
   TriggerHashes: 000000005bb5ef08
+--- !u!65 &8617139414010354151
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001550493025402093}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.1956866, y: 3.3102937, z: 3.3315778}
+  m_Center: {x: -0.015907405, y: -1.42, z: -0.000000059602225}
 --- !u!1 &3001580151872610743
 GameObject:
   m_ObjectHideFlags: 0
@@ -871,6 +870,7 @@ GameObject:
   - component: {fileID: 8269475572223652752}
   - component: {fileID: 7634725787000575253}
   - component: {fileID: 7915837961000511779}
+  - component: {fileID: 4094685767413464528}
   m_Layer: 0
   m_Name: PowerSupply
   m_TagString: Untagged
@@ -924,7 +924,7 @@ MonoBehaviour:
   marker_designed: {fileID: 6260957102490015115}
   marker_on: {fileID: 7553672752727594850}
   marker_off: {fileID: 2224825689332038233}
-  objectName: "\u3147\u3145\u3147"
+  objectName: "\uC804\uC6D0\uACF5\uAE09\uAE30"
   _IsSettingRope: 0
   _IsRoped: 0
   ropeStruct:
@@ -932,7 +932,8 @@ MonoBehaviour:
     ropePositions: []
   maxRopeLength: 0
   currentRopeLength: 0
-  anim: {fileID: 0}
+  anim: {fileID: 4745613938894177325}
+  doorOpenTriggerCol: {fileID: 4094685767413464528}
   _PowerMax: 100
   _PowerCurrent: 100
   _Level: 1
@@ -1008,6 +1009,27 @@ MonoBehaviour:
     ropePositions: []
   maxRopeLength: 0
   currentRopeLength: 0
+--- !u!65 &4094685767413464528
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919248342739845651}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.41, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 1.7}
 --- !u!1 &6260957102490015115
 GameObject:
   m_ObjectHideFlags: 0
