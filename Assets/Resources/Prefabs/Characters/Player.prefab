@@ -4639,7 +4639,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   owner: {fileID: 0}
-  suctionPower: 0.2
 --- !u!54 &3152402398838791084
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -16914,10 +16913,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.25
-  m_Height: 1.36
+  m_Radius: 0.6
+  m_Height: 2
   m_Direction: 1
-  m_Center: {x: 0, y: 0.68, z: 0}
+  m_Center: {x: 0, y: 0.99, z: 0}
 --- !u!136 &3063893609680588044
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -16937,7 +16936,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.8
+  m_Radius: 0.6
   m_Height: 2.94
   m_Direction: 1
   m_Center: {x: 0, y: 0.68, z: 0.4}
@@ -16967,14 +16966,21 @@ MonoBehaviour:
   buildingSelectUI: {fileID: 0}
   interactionIndex: -1
   oreAmount: 0
+  _OreAmount: 0
   myMarker: {fileID: 8035184359376342701}
   otherMarker: {fileID: 4886176525193278536}
   _DesigningBuilding: {fileID: 0}
   _IsThisPlayerCharacterUICanvasActivated: 0
+  _ropeBuilding: {fileID: 0}
   _MoveDir: {x: 0, y: 0, z: 0}
   _PreviousPosition: {x: 0, y: 0, z: 0}
   _PreviousRotation: {x: 0, y: 0, z: 0, w: 0}
+  footstepAudioSource: {fileID: 0}
+  _FootstepSFX: 0
+  _NetworkIsFarmingPressed: 0
+  cleanerAudioSource: {fileID: 0}
   ground: {fileID: 0}
+  _groundNormal: {x: 0, y: -1, z: 0}
   _IsGround: 0
 --- !u!114 &-3966098195265333311
 MonoBehaviour:

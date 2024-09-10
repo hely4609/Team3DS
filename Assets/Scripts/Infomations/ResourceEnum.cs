@@ -15,6 +15,7 @@ namespace ResourceEnum
         Minimap,
         // Character
         Player,
+        PlayerPrefab,
         // Building
         Road,
         EnergyBarrier,
