@@ -43,7 +43,8 @@ public class Pylon : InteractableBuilding
     }
     public override void AttachRope(InteractableBuilding building)
     {
-        if (building.GetType().IsSubclassOf(typeof(Tower)))
+        if(building is Tower)
+        //if (building.GetType().IsSubclassOf(typeof(Tower)))
         {
             Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
             
