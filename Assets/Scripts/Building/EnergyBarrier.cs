@@ -6,6 +6,6 @@ public class EnergyBarrier : Building
 {
     protected override void Initialize()
     {
-        type = BuildingEnum.Barrier;
+        buildingType = BuildingEnum.Barrier;
     }
 }

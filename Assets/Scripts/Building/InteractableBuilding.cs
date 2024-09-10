@@ -16,7 +16,8 @@ public class InteractableBuilding : Building, IInteraction
     [SerializeField] protected string objectName;
     //protected Collider[] interactionColliders;
     //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
-    [Networked, SerializeField] protected bool IsRoped { get; set; } = false;
+    [Networked, SerializeField] protected bool IsSettingRope { get; set; } = false;
+    [Networked, SerializeField] public bool IsRoped { get; set; } = false;
     [SerializeField] protected RopeStruct ropeStruct = new RopeStruct();
     public RopeStruct RopeStruct { get { return ropeStruct; } }
     [SerializeField] protected float maxRopeLength;
@@ -101,7 +102,7 @@ public class InteractableBuilding : Building, IInteraction
         ropeStruct.ropePositions.Add(startPos);
         currentRopeLength = maxRopeLength;
         player.CanSetRope = true;
-        IsRoped = false;
+        IsSettingRope = false;
     }
     public bool CheckRopeLength(Vector2 end) // 전선을 끌수 있었나?
     {
@@ -118,8 +119,10 @@ public class InteractableBuilding : Building, IInteraction
     {
         if (HasStateAuthority)
         {
-            IsRoped = true;
+            IsSettingRope = true;
             ropeStruct.ropePositions.Add(playerPosition);
+            Debug.Log($"{ropeStruct.ropePositions[RopeStruct.ropePositions.Count-1]}");
+            
             CreateRope();
         }
     }
@@ -138,5 +141,8 @@ public class InteractableBuilding : Building, IInteraction
         ropeStruct.ropeObjects.Add(ropeObject);
         ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
+    }
+    virtual public void AttachRope(InteractableBuilding building)
+    {
     }
 }

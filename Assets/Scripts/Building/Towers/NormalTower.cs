@@ -7,7 +7,7 @@ public class NormalTower : Tower
     protected override void Initialize()
     {
         // 디폴트 값.
-        type = BuildingEnum.Tower;
+        buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "기본 타워";

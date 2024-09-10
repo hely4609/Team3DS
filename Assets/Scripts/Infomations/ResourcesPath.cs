@@ -25,6 +25,8 @@ public class ResourcesPath
         "Prefabs/Buildings/PowerSupply",
         "Prefabs/Buildings/EnergyBarrierGenerator",
         "Prefabs/Buildings/Bridge",
+        "Prefabs/Buildings/Pylon"
+        ,
         // Object
         "Prefabs/Objects/Ore",
         "Prefabs/Objects/Rope",

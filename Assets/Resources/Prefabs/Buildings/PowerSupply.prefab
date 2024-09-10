@@ -870,6 +870,7 @@ GameObject:
   - component: {fileID: 3190618893350269314}
   - component: {fileID: 8269475572223652752}
   - component: {fileID: 7634725787000575253}
+  - component: {fileID: 7915837961000511779}
   m_Layer: 0
   m_Name: PowerSupply
   m_TagString: Untagged
@@ -924,9 +925,13 @@ MonoBehaviour:
   marker_on: {fileID: 7553672752727594850}
   marker_off: {fileID: 2224825689332038233}
   objectName: "\u3147\u3145\u3147"
+  _IsSettingRope: 0
+  _IsRoped: 0
   ropeStruct:
     ropeObjects: []
     ropePositions: []
+  maxRopeLength: 0
+  currentRopeLength: 0
   anim: {fileID: 0}
   _PowerMax: 100
   _PowerCurrent: 100
@@ -952,6 +957,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 3190618893350269314}
   - {fileID: 7634725787000575253}
+  - {fileID: 7915837961000511779}
   - {fileID: 5063340613675039996}
 --- !u!114 &7634725787000575253
 MonoBehaviour:
@@ -969,6 +975,39 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &7915837961000511779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3919248342739845651}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125a6d7fc04769f4ab365d560ffc763e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingTimeMax: 0
+  _BuildingTimeCurrent: 0
+  completeMat: {fileID: 0}
+  meshes: []
+  cols:
+  - {fileID: 2023970382415248982}
+  _IsFixed: 0
+  tiledBuildingPositionLast: {x: 0, y: 0}
+  startPos: {x: 0, y: 0}
+  size: {x: 0, y: 0}
+  marker_designed: {fileID: 6260957102490015115}
+  marker_on: {fileID: 7553672752727594850}
+  marker_off: {fileID: 2224825689332038233}
+  objectName: 
+  _IsSettingRope: 0
+  _IsRoped: 0
+  ropeStruct:
+    ropeObjects: []
+    ropePositions: []
+  maxRopeLength: 0
+  currentRopeLength: 0
 --- !u!1 &6260957102490015115
 GameObject:
   m_ObjectHideFlags: 0

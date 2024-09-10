@@ -8,7 +8,7 @@ public class Road : Building
     
     protected override void Initialize()
     {
-        type = BuildingEnum.Barrier;
+        buildingType = BuildingEnum.Barrier;
     }
             
     public Vector2Int Size { get { return size; } set { 

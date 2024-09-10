@@ -48,22 +48,22 @@ public class Tower : InteractableBuilding
         {
             return Interaction.Build;
         }
-        else if(OnOff)
-        {
-            // 전원 끄기. 반대 상태로 토글합니다.
-            TurnOnOff(!OnOff);
-            return Interaction.OnOff;
-        }
-        else
+        else if(!IsRoped)
         {
             Vector2 playerTransformVector2 = new Vector2((int)(player.transform.position.x), (int)(player.transform.position.z));
-            if(!IsRoped && player.ropeBuilding == null)
+            if(!IsSettingRope && player.ropeBuilding == null)
             {
                 OnRopeSet(playerTransformVector2);
                 player.ropeBuilding = this;
                 return Interaction.takeRope;
             }
             else return Interaction.None;
+        }
+        else
+        {
+            // 전원 끄기. 반대 상태로 토글합니다.
+            TurnOnOff(!OnOff);
+            return Interaction.OnOff;
         }
     }
     protected override void MyUpdate(float deltaTime)
@@ -225,7 +225,7 @@ public class Tower : InteractableBuilding
                             {
                                 r.material = completeMat;
                             }
-                            TurnOnOff(true);
+                            TurnOnOff(false);
                             marker_designed.SetActive(false);
                             marker_on.SetActive(true);
                         }
@@ -242,6 +242,19 @@ public class Tower : InteractableBuilding
                     GameManager.Instance.BuildingManager.supply.ChangePowerConsumption(OnOff ? -powerConsumption : powerConsumption); 
                     break;
             }
+        }
+    }
+    public override void AttachRope(InteractableBuilding building)
+    {
+        if (building.GetType() == typeof(Pylon))
+        {
+            Vector3 ropePos = building.transform.position;
+            int x = (int)ropePos.x;
+            int z = (int)ropePos.z;
+            Vector2 currentPos = new Vector2(x, z);
+            OnRopeSet(currentPos);
+            IsSettingRope = false;
+            IsRoped = true;
         }
     }
 

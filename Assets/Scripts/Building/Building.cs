@@ -13,8 +13,8 @@ public enum BuildingEnum
 
 public abstract class Building : MyComponent
 {
-    protected BuildingEnum type; // 타워 종류
-    public BuildingEnum Type { get { return type; } }
+    protected BuildingEnum buildingType; // 타워 종류
+    public BuildingEnum BuildingType { get { return buildingType; } }
 
     protected bool isNeedLine; // 전선이 필요한가?
 
@@ -129,7 +129,7 @@ public abstract class Building : MyComponent
                 Vector2Int distance = building.startPos - tiledBuildingPositionLast;
                 Vector2Int sizeSum = (building.size + size + Vector2Int.one) / 2;
 
-                if (building.Type == BuildingEnum.Bridge)
+                if (building.BuildingType == BuildingEnum.Bridge)
                 {
                     if(!(isBuildable = BridgeCheck(building, tiledBuildingPositionLast)))
                     {

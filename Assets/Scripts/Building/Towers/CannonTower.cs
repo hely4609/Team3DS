@@ -9,7 +9,7 @@ public class CannonTower : Tower
     
     protected override void Initialize()
     {
-        type = BuildingEnum.Tower;
+        buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "캐논 타워";

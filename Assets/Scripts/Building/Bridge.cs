@@ -25,7 +25,7 @@ public class Bridge : InteractableBuilding
 
     protected override void Initialize()
     {
-        type = BuildingEnum.Bridge;
+        buildingType = BuildingEnum.Bridge;
         isNeedLine = false;
         size = new Vector2Int(2, 4);
         buildingTimeMax = 10;
@@ -108,7 +108,7 @@ public class Bridge : InteractableBuilding
             {
                 Vector2Int distance = building.StartPos - stairPosRight;
                 Vector2Int sizeSum = (building.BuildingSize + size) / 2;
-                if (building.Type == BuildingEnum.Bridge)
+                if (building.BuildingType == BuildingEnum.Bridge)
                 {
                     isBuildable = BridgeCheck(building, stairPosRight);
                     if (!isBuildable)

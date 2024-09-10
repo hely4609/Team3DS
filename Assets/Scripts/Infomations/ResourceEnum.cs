@@ -33,6 +33,7 @@ namespace ResourceEnum
         Turret1a,
         ION_Cannon,
         Bridge,
+        Pylon,
         buildingEnd
     }
 
