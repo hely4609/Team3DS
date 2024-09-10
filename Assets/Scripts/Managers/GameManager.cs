@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
     public static UpdateFunction ObjectUpdates;
     public static UpdateFunction ControllerUpdates;
     public static UpdateFunction NetworkUpdates;
+    public static UpdateFunction SoundUpdates;
 
     public static DestroyFunction ManagerDestroies;
     public static DestroyFunction ObjectDestroies;
@@ -125,7 +126,7 @@ public class GameManager : MonoBehaviour
         cameraManager = new CameraManager();
         yield return cameraManager.Initiate();
 
-        ManagerUpdates += SoundManager.ManagerUpdate;
+        SoundUpdates += SoundManager.ManagerUpdate;
         ManagerUpdates += UIManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
         ManagerUpdates += WaveManager.ManagerUpdate;
@@ -134,12 +135,16 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += InteractionManager.ManagerUpdate;
 
         CloseLoadInfo();
+        SoundManager.Play(ResourceEnum.BGM.Silent_Partner__Whistling_Down_the_Road);
+        SoundManager.Play(ResourceEnum.SFX.Wind, transform.position, true, out AudioSource temp);
+        temp.spatialBlend = 0;
 
     }
 
     void FixedUpdate()
     {
         NetworkUpdates?.Invoke(Time.fixedDeltaTime);
+        SoundUpdates?.Invoke(Time.fixedDeltaTime);
         if (!isGameStart) return;
 
         // 매니저 먼저
