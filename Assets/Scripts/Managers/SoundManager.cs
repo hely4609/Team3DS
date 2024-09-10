@@ -65,7 +65,6 @@ public class SoundManager : Manager
 
     public void UpdateBGMMixer(float deltaTime)
     {
-        Debug.Log(bgmArray[0].volume);
         bgmArray[0].volume = Mathf.SmoothStep(bgmArray[0].volume, 1, deltaTime * 5);
         bgmArray[1].volume = Mathf.SmoothStep(bgmArray[1].volume, 0, deltaTime * 5);
         if (bgmArray[0].volume > 0.99)

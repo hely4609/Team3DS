@@ -63,6 +63,8 @@ namespace ResourceEnum
         cleaner_end = 7,
         coin = 8,
         Wind = 9,
+        door_open = 10,
+        door_close = 11,
         // Footsteps
         footsteps_dirt_cut = 1000,
         footsteps_metal_cut = 1001,

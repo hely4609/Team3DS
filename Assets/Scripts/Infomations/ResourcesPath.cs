@@ -64,6 +64,8 @@ public class ResourcesPath
         "Sounds/SFX/cleaner_end",
         "Sounds/SFX/coin",
         "Sounds/SFX/Wind",
+        "Sounds/SFX/door_open",
+        "Sounds/SFX/door_close",
         // Foodsteps
         "Sounds/SFX/Footsteps/footsteps_dirt_cut",
         "Sounds/SFX/Footsteps/footsteps_metal_cut",
