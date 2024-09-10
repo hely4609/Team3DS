@@ -50,7 +50,7 @@ public partial class Player : Character
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
     [Networked] public InteractableBuilding ropeBuilding { get; set; }
-    bool canSetRope = true;
+    [SerializeField]bool canSetRope = true;
     public bool CanSetRope { get { return canSetRope; } set { canSetRope = value; } }
 
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
