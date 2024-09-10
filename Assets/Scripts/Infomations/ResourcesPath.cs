@@ -15,6 +15,7 @@ public class ResourcesPath
         "Prefabs/UIs/CharacterUI/Minimap",
         // Character
         "Prefabs/Characters/Player",
+        "Prefabs/Characters/PlayerPrefab",
         // Tower
         "Prefabs/Buildings/Road",
         "Prefabs/Buildings/EnergyBarrier",

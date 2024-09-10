@@ -9,6 +9,10 @@ public class PowerSupply : InteractableBuilding
 {
     [SerializeField] protected Animator anim;
 
+    [SerializeField] protected Collider doorOpenTriggerCol;
+    protected List<Player> doorNearPlayers = new List<Player>();
+
+
     protected TextMeshProUGUI levelText;
     protected TextMeshProUGUI expText;
     protected TextMeshProUGUI powerText;
@@ -155,5 +159,38 @@ public class PowerSupply : InteractableBuilding
                     
             }
         }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (HasStateAuthority)
+        {
+            if (other.gameObject.TryGetComponent(out Player player))
+            {
+                doorNearPlayers.Add(player);
+                if (doorNearPlayers.Count == 1)
+                {
+
+                    anim.SetBool("isDoorOpen", true);
+                }
+            }
+        }
+    }
+
+    private void OnTriggerExit(Collider other) 
+    {
+        if (HasStateAuthority)
+        {
+            if (other.gameObject.TryGetComponent(out Player player))
+            {
+                doorNearPlayers.Remove(player);
+                if (doorNearPlayers.Count == 0)
+                {
+
+                    anim.SetBool("isDoorOpen", false);
+                }
+            }
+        }
+         
     }
 }

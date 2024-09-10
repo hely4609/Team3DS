@@ -8,8 +8,8 @@ public class Cleanner : MyComponent
 
     private List<Ore> targets = new();
 
-    [Range(0, 1), SerializeField]
-    private float suctionPower = 0.2f;
+    //[Range(0, 1), SerializeField]
+    //private float suctionPower = 0.2f;
 
     protected override void MyStart()
     {

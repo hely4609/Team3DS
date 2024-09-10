@@ -47,11 +47,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d4ff34a659015d4ab69222359d7504b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildingTimeMax: 0
+  _BuildingTimeCurrent: 0
+  completeMat: {fileID: 0}
   meshes: []
   cols: []
+  _IsFixed: 0
   tiledBuildingPositionLast: {x: 0, y: 0}
   startPos: {x: 0, y: 0}
   size: {x: 0, y: 0}
+  marker_designed: {fileID: 0}
+  marker_on: {fileID: 0}
+  marker_off: {fileID: 0}
 --- !u!1 &4002175124257899480
 GameObject:
   m_ObjectHideFlags: 0
@@ -70,7 +77,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &6941937622833088216
 Transform:
   m_ObjectHideFlags: 0

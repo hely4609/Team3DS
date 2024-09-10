@@ -321,8 +321,8 @@ public partial class Player : Character
             // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
             if (DesigningBuilding.TiledBuildingPos != currentPos)
             {
-                DesigningBuilding.transform.position = new Vector3(x, DesigningBuilding.gameObject.transform.position.y, z);
                 DesigningBuilding.TiledBuildingPos = currentPos;
+                DesigningBuilding.transform.position = new Vector3(currentPos.x, DesigningBuilding.gameObject.transform.position.y, currentPos.y);
                 DesigningBuilding.CheckBuild();
             }
         }
@@ -341,9 +341,7 @@ public partial class Player : Character
                     ropeBuilding.OnRopeSet(currentPos);
                     lastPos = currentPos;
                 }
-
             }
-
         }
 
         //
@@ -531,6 +529,7 @@ public partial class Player : Character
         if (HasInputAuthority && buildingSelectUI.activeSelf)
         {
             buildingSelectUI.SetActive(false);
+            IsThisPlayerCharacterUICanvasActivated = false;
         }
 
         if (DesigningBuilding != null)
