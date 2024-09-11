@@ -37,6 +37,7 @@ public class Pylon : InteractableBuilding
     }
     public override Interaction InteractionStart(Player player)
     {
+        int playerID = player.PossesionController.myAuthority.PlayerId;
         // 완성이 아직 안됨.
         if (CompletePercent < 1)
         {
@@ -44,12 +45,10 @@ public class Pylon : InteractableBuilding
         }
         else if (player.ropeBuilding == null)
         {
-            int myNumber = GameManager.Instance.NetworkManager.LocalController.myAuthority.PlayerId;
-
             Vector2 playerTransformVector2 = new Vector2((int)(player.transform.position.x), (int)(player.transform.position.z));
-            if (!isSettingRopeList[myNumber] && player.ropeBuilding == null)
+            if (!isSettingRopeList[playerID] && player.ropeBuilding == null)
             {
-                OnRopeSet(playerTransformVector2);
+                OnRopeSet(playerTransformVector2, playerID);
                 player.ropeBuilding = this;
                 // 줄을 집을거임.
                 return Interaction.takeRope;
@@ -57,46 +56,40 @@ public class Pylon : InteractableBuilding
         }
         else
         {
-            AttachRope(player.ropeBuilding);
+            AttachRope(player.ropeBuilding, playerID);
             player.ropeBuilding = null;
         }
         return Interaction.None;
     }
-    public override void AttachRope(InteractableBuilding building)
+    public override void AttachRope(InteractableBuilding building, int number)
     {
-        int myNumber = GameManager.Instance.NetworkManager.LocalController.myAuthority.PlayerId;
-
         if (building is Tower)
         //if (building.GetType().IsSubclassOf(typeof(Tower)))
         {
             Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
 
-            building.OnRopeSet(thisVector2);
-            isSettingRopeList[myNumber] = false;
+            building.OnRopeSet(thisVector2, number);
+            isSettingRopeList[number] = false;
             building.IsRoped = true;
         }
     }
 
-    public override void ResetRope(Player player)
+    public override void ResetRope(Player player, int number)
     {
-        int myNumber = GameManager.Instance.NetworkManager.LocalController.myAuthority.PlayerId;
-
-        foreach (var rope in multiTabList[myNumber].ropeObjects)
+        foreach (var rope in multiTabList[number].ropeObjects)
         {
             Runner.Despawn(rope);
         }
-        multiTabList[myNumber].ropeObjects.Clear();
-        multiTabList[myNumber].ropePositions.Clear();
-        multiTabList[myNumber].ropePositions.Add(startPos);
+        multiTabList[number].ropeObjects.Clear();
+        multiTabList[number].ropePositions.Clear();
+        multiTabList[number].ropePositions.Add(startPos);
         currentRopeLength = maxRopeLength;
         player.CanSetRope = true;
-        isSettingRopeList[myNumber] = false;
-    }
-    public override bool CheckRopeLength(Vector2 end) // 전선을 끌수 있었나?
+        isSettingRopeList[number] = false;
+    }   
+    public override bool CheckRopeLength(Vector2 end, int number) // 전선을 끌수 있었나?
     {
-        int myNumber = GameManager.Instance.NetworkManager.LocalController.myAuthority.PlayerId;
-
-        Vector2 start = multiTabList[myNumber].ropePositions[multiTabList[myNumber].ropePositions.Count - 1];
+        Vector2 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
         Vector2 delta = end - start;
         if (currentRopeLength > 0)
         {
@@ -105,24 +98,21 @@ public class Pylon : InteractableBuilding
         }
         else return false;
     }
-    public override void OnRopeSet(Vector2 playerPosition) // 전선을 놓기. 길이랑 같은 원리.
+    public override void OnRopeSet(Vector2 playerPosition, int number) // 전선을 놓기. 길이랑 같은 원리.
     {
-        int myNumber = GameManager.Instance.NetworkManager.LocalController.myAuthority.PlayerId;
         if (HasStateAuthority)
         {
             IsSettingRope = true;
-            multiTabList[myNumber].ropePositions.Add(playerPosition);
-            Debug.Log($"{multiTabList[myNumber].ropePositions[multiTabList[myNumber].ropePositions.Count - 1]}");
+            multiTabList[number].ropePositions.Add(playerPosition);
+            Debug.Log($"{multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1]}");
 
-            CreateRope();
+            CreateRope(number);
         }
     }
-    public override void CreateRope()
+    public override void CreateRope(int number)
     {
-        int myNumber = GameManager.Instance.NetworkManager.LocalController.myAuthority.PlayerId;
-
-        Vector2 start = multiTabList[myNumber].ropePositions[multiTabList[myNumber].ropePositions.Count - 2];
-        Vector2 end = multiTabList[myNumber].ropePositions[multiTabList[myNumber].ropePositions.Count - 1];
+        Vector2 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 2];
+        Vector2 end = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
         Vector2 delta = end - start;
 
         float deltaAngle = Vector2.Angle(delta, Vector2.up);
@@ -131,7 +121,7 @@ public class Pylon : InteractableBuilding
         deltaAngle = Vector2.Angle(delta, Vector2.up) * deltaAngleCorrection;
 
         NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
-        multiTabList[myNumber].ropeObjects.Add(ropeObject);
+        multiTabList[number].ropeObjects.Add(ropeObject);
         ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
     }

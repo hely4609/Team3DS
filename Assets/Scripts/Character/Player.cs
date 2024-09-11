@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public partial class Player : Character
 {
     [SerializeField] protected ControllerBase possessionController;
+    public ControllerBase PossesionController { get { return possessionController; } }
     [SerializeField] bool TPS_Mode;
     [SerializeField] protected Transform cameraOffset_FPS;
     [SerializeField] protected Transform cameraOffset_TPS;
@@ -330,15 +331,16 @@ public partial class Player : Character
         {
             // ·ÎÇÁ ²ø±â
             Vector3 ropePos = transform.position;
+            int playerID = possessionController.myAuthority.PlayerId;
             int x = (int)ropePos.x;
             int z = (int)ropePos.z;
             Vector2 currentPos = new Vector2(x, z);
             if (currentPos != lastPos)
             {
-                canSetRope = ropeBuilding.CheckRopeLength(currentPos);
+                canSetRope = ropeBuilding.CheckRopeLength(currentPos, playerID);
                 if (canSetRope)
                 {
-                    ropeBuilding.OnRopeSet(currentPos);
+                    ropeBuilding.OnRopeSet(currentPos, playerID);
                     lastPos = currentPos;
                 }
             }
@@ -572,7 +574,7 @@ public partial class Player : Character
 
         if (ropeBuilding != null)
         {
-            ropeBuilding.ResetRope(this);
+            ropeBuilding.ResetRope(this, possessionController.myAuthority.PlayerId);
             ropeBuilding = null;
         }
 
