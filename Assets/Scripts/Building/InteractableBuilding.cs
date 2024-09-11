@@ -142,7 +142,7 @@ public class InteractableBuilding : Building, IInteraction
         ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
     }
-    virtual public void AttachRope(InteractableBuilding building, int number)
+    virtual public void AttachRope(Player player, int number)
     {
     }
 }

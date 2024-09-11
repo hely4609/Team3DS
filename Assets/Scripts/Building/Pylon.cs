@@ -18,7 +18,7 @@ public class Pylon : InteractableBuilding
         // 디폴트 값.
         buildingType = BuildingEnum.Pylon;
         buildingTimeMax = 1;
-        size = new Vector2Int(1, 1);
+        size = new Vector2Int(2, 2);
         maxRopeLength = 20;
         currentRopeLength = maxRopeLength;
         multiTabList = new List<RopeStruct>();
@@ -56,13 +56,14 @@ public class Pylon : InteractableBuilding
         }
         else
         {
-            AttachRope(player.ropeBuilding, playerID);
-            player.ropeBuilding = null;
+            AttachRope(player, playerID);
+            
         }
         return Interaction.None;
     }
-    public override void AttachRope(InteractableBuilding building, int number)
+    public override void AttachRope(Player player, int number)
     {
+        InteractableBuilding building = player.ropeBuilding;
         if (building is Tower)
         //if (building.GetType().IsSubclassOf(typeof(Tower)))
         {
@@ -71,7 +72,9 @@ public class Pylon : InteractableBuilding
             building.OnRopeSet(thisVector2, number);
             isSettingRopeList[number] = false;
             building.IsRoped = true;
+            player.ropeBuilding = null;
         }
+        base.AttachRope(player, number);
     }
 
     public override void ResetRope(Player player, int number)

@@ -1,6 +1,7 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : InteractableBuilding
@@ -68,8 +69,7 @@ public class Tower : InteractableBuilding
         }
         else
         {
-            AttachRope(player.ropeBuilding, 0);
-            player.ropeBuilding = null;
+            AttachRope(player, player.PossesionController.myAuthority.PlayerId);
             return Interaction.None;
         }
     }
@@ -251,16 +251,22 @@ public class Tower : InteractableBuilding
             }
         }
     }
-    public override void AttachRope(InteractableBuilding building, int number)
+    public override void AttachRope(Player player, int number)
     {
+        InteractableBuilding building = player.ropeBuilding;
         if (building is Pylon)
         //if (building.GetType().IsSubclassOf(typeof(Tower)))
         {
+            Pylon py = building as Pylon;
             Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
 
-            building.OnRopeSet(thisVector2, number);
+            py.OnRopeSet(thisVector2, number);
             IsSettingRope = false;
+            
             IsRoped = true;
+            py.MultiTabList[number].ropeObjects.Clear();
+            py.MultiTabList[number].ropePositions.Clear();
+            py.ResetRope(player, player.PossesionController.myAuthority.PlayerId);
         }
     }
 }
