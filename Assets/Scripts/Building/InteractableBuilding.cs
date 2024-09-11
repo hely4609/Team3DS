@@ -91,7 +91,7 @@ public class InteractableBuilding : Building, IInteraction
     }
 
 
-    public void ResetRope(Player player)
+    public virtual void ResetRope(Player player)
     {
         foreach (var rope in ropeStruct.ropeObjects)
         {
@@ -104,7 +104,7 @@ public class InteractableBuilding : Building, IInteraction
         player.CanSetRope = true;
         IsSettingRope = false;
     }
-    public bool CheckRopeLength(Vector2 end) // 전선을 끌수 있었나?
+    public virtual bool CheckRopeLength(Vector2 end) // 전선을 끌수 있었나?
     {
         Vector2 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
         Vector2 delta = end - start;
@@ -115,7 +115,7 @@ public class InteractableBuilding : Building, IInteraction
         }
         else return false;
     }
-    public void OnRopeSet(Vector2 playerPosition) // 전선을 놓기. 길이랑 같은 원리.
+    public virtual void OnRopeSet(Vector2 playerPosition) // 전선을 놓기. 길이랑 같은 원리.
     {
         if (HasStateAuthority)
         {
@@ -126,7 +126,7 @@ public class InteractableBuilding : Building, IInteraction
             CreateRope();
         }
     }
-    public void CreateRope()
+    public virtual void CreateRope()
     {
         Vector2 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2];
         Vector2 end = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];

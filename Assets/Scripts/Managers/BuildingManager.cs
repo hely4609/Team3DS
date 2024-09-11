@@ -15,6 +15,9 @@ public class BuildingManager : Manager
     protected List<RopeStruct> ropeStructs;
     public List<RopeStruct> RopeStructs=> ropeStructs;
 
+    protected List<Pylon> pylonList;
+    public List<Pylon> PylonList => pylonList;
+
     public EnergyBarrierGenerator generator;
     public PowerSupply supply;
   
@@ -25,6 +28,7 @@ public class BuildingManager : Manager
         roadData = new();
         corners = new();
         roads = new();
+        pylonList= new List<Pylon>();
         // 리스트로 만들고, 순서를 역순으로 변경.
         // 길을 만든 뒤에도 계속 길이 확장될 예정이라 추가되기 위해서는 이 구조가 편할것으로 예상.
         roadData.Add(new Vector2(-20, 10));
