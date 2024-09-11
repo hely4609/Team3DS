@@ -4,6 +4,7 @@ using UnityEngine;
 using Fusion;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
+using System;
 
 public enum GameType : int
 {
@@ -72,9 +73,9 @@ public partial class NetworkManager : Manager
         GameManager.ClaimLoadInfo("Entering game");
         var result = await runner.StartGame(new StartGameArgs()
         {
+            SessionName = $"{DateTime.Now.ToString("mmss")}",
             GameMode = GameMode.Host,
             SessionProperties = customProps,
-            //CustomLobbyName = $"{GameManager.Instance.NetworkManager.MyNickname}'s lobby",
         });
         GameManager.ClaimLoadInfo("Entering game", 1, 2);
 
@@ -170,16 +171,21 @@ public partial class NetworkManager : Manager
 
     public static async Task JoinRoom(NetworkRunner runner, string roomName)
     {
+        GameManager.ClaimLoadInfo("Entering game");
         var result = await runner.JoinSessionLobby(SessionLobby.Custom, roomName);
+        GameManager.ClaimLoadInfo("Entering game", 1, 2);
 
         if (result.Ok)
         {
             // all good
+            GameObject.Find("LobbyCanvas").SetActive(false);
+
         }
         else
         {
             Debug.LogError($"Failed to Start: {result.ShutdownReason}");
         }
+        GameManager.ClaimLoadInfo("Entering game", 2, 2);
     }
 
     public static void ClaimMatchMaking()
