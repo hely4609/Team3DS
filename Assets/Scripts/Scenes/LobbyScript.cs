@@ -12,6 +12,8 @@ public class LobbyScript : MonoBehaviour
     [SerializeField] GameObject inviteWindow;
     [SerializeField] TMP_InputField nicknameWhoesToInvite;
     [SerializeField] GameObject startBtn;
+    [SerializeField] GameObject sessionIDInputFieldWindow;
+    [SerializeField] TMP_InputField sessionIDInptField;
     private void Start()
     {
         playerNicknames = new TextMeshProUGUI[players.Length];
@@ -37,9 +39,19 @@ public class LobbyScript : MonoBehaviour
         NetworkManager.ClaimJoinRandomRoom();
     }
 
-    public void JoinRoom(string roomName)
+    public void JoinRoom()
     {
-        NetworkManager.ClaimJoinRoom(roomName);
+        NetworkManager.ClaimJoinRoom(sessionIDInptField.text);
+    }
+
+    public  void OpenSessionIDInputFieldWindow()
+    {
+        sessionIDInputFieldWindow.SetActive(true);
+    }
+
+    public void CloseSessionIDInputFieldWindow()
+    {
+        sessionIDInputFieldWindow.SetActive(false);
     }
 
     public void OpenRoom(bool isHost)

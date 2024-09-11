@@ -3,6 +3,7 @@ using Fusion.Sockets;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,11 +15,12 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public Dictionary<PlayerRef, NetworkObject> SpawnedCharacter => _spawnedCharacters;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
+        Debug.Log(player);
         if (player == runner.LocalPlayer)
         {
             StartCoroutine(GameManager.Instance.GameStart());
             GameManager.ClaimLoadInfo("Joining room");
-        }
+        }   
         if (runner.IsServer)
         {
             // Create a unique position for the player

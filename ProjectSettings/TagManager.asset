@@ -16,6 +16,7 @@ TagManager:
   - PowerText
   - ExpFillImage
   - PowerFillImage
+  - SessionIDText
   layers:
   - Default
   - TransparentFX

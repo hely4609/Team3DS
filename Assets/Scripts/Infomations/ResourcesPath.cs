@@ -1,4 +1,3 @@
-
 public class ResourcesPath
 {
     public static string[] prefabPathArray =

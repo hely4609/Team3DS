@@ -148,7 +148,7 @@ public class Monster : Character
 
     public void Despawn()
     {
-        destroyFunction.Invoke(this);
+        destroyFunction?.Invoke(this);
         Runner.Despawn(GetComponent<NetworkObject>());
     }
 
