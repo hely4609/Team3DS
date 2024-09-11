@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Fusion;
+using TMPro;
 
 public delegate void MoveDelegate(Vector3 dir);
 public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
@@ -59,7 +59,11 @@ public class ControllerBase : MyComponent
         // Å×½ºÆ®  
         if(HasInputAuthority)
         {
-            GameManager.Instance.UIManager.GetUI(UIEnum.CharacterUICanvas);
+            GameObject characterUICanvas = GameManager.Instance.UIManager.GetUI(UIEnum.CharacterUICanvas);
+
+            GameObject sessionName = GameObject.FindGameObjectWithTag("SessionIDText");
+            sessionName.GetComponent<TextMeshProUGUI>().text = $"Session ID : {Runner.SessionInfo.Name}";
+
             GameManager.Instance.UIManager.GetUI(UIEnum.Minimap).GetComponentInChildren<Camera>();
         }
         Spawn(0, 0, 0);

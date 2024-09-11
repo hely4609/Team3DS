@@ -1,6 +1,3 @@
-using Unity.VisualScripting.Antlr3.Runtime;
-using UnityEditor.PackageManager;
-
 public class ResourcesPath
 {
     public static string[] prefabPathArray =
