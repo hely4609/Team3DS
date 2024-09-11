@@ -170,7 +170,6 @@ public class PowerSupply : InteractableBuilding
                 doorNearPlayers.Add(player);
                 if (doorNearPlayers.Count == 1)
                 {
-
                     anim.SetBool("isDoorOpen", true);
                 }
             }

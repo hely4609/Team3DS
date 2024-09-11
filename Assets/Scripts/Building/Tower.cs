@@ -48,10 +48,17 @@ public class Tower : InteractableBuilding
         {
             return Interaction.Build;
         }
-        else if(!IsRoped)
+
+        else if (IsRoped)
+        {
+            // 전원 끄기. 반대 상태로 토글합니다.
+            TurnOnOff(!OnOff);
+            return Interaction.OnOff;
+        }
+        else if (player.ropeBuilding == null)
         {
             Vector2 playerTransformVector2 = new Vector2((int)(player.transform.position.x), (int)(player.transform.position.z));
-            if(!IsSettingRope && player.ropeBuilding == null)
+            if (!IsSettingRope && player.ropeBuilding == null)
             {
                 OnRopeSet(playerTransformVector2);
                 player.ropeBuilding = this;
@@ -61,9 +68,9 @@ public class Tower : InteractableBuilding
         }
         else
         {
-            // 전원 끄기. 반대 상태로 토글합니다.
-            TurnOnOff(!OnOff);
-            return Interaction.OnOff;
+            AttachRope(player.ropeBuilding);
+            player.ropeBuilding = null;
+            return Interaction.None;
         }
     }
     protected override void MyUpdate(float deltaTime)
@@ -246,16 +253,14 @@ public class Tower : InteractableBuilding
     }
     public override void AttachRope(InteractableBuilding building)
     {
-        if (building.GetType() == typeof(Pylon))
+        if (building is Pylon)
+        //if (building.GetType().IsSubclassOf(typeof(Tower)))
         {
-            Vector3 ropePos = building.transform.position;
-            int x = (int)ropePos.x;
-            int z = (int)ropePos.z;
-            Vector2 currentPos = new Vector2(x, z);
-            OnRopeSet(currentPos);
+            Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
+
+            building.OnRopeSet(thisVector2);
             IsSettingRope = false;
             IsRoped = true;
         }
     }
-
 }

@@ -223,6 +223,7 @@ GameObject:
   - component: {fileID: 2055600715135948364}
   - component: {fileID: 2063243469749741372}
   - component: {fileID: 2023970382415248982}
+  - component: {fileID: 1815488916069874009}
   m_Layer: 0
   m_Name: Terraform_base
   m_TagString: Untagged
@@ -318,6 +319,39 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4.3148293, y: 7.0909414, z: 3.0740902}
   m_Center: {x: -0.00001513958, y: -0.00000023841864, z: 0.000015199184}
+--- !u!114 &1815488916069874009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2086777971032376830}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 125a6d7fc04769f4ab365d560ffc763e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingTimeMax: 0
+  _BuildingTimeCurrent: 0
+  completeMat: {fileID: 0}
+  meshes: []
+  cols:
+  - {fileID: 2023970382415248982}
+  _IsFixed: 1
+  tiledBuildingPositionLast: {x: -10, y: 10}
+  startPos: {x: -10, y: 10}
+  size: {x: 18, y: 6}
+  marker_designed: {fileID: 6260957102490015115}
+  marker_on: {fileID: 7553672752727594850}
+  marker_off: {fileID: 2224825689332038233}
+  objectName: "\u3147\u3145\u3147"
+  _IsSettingRope: 0
+  _IsRoped: 0
+  ropeStruct:
+    ropeObjects: []
+    ropePositions: []
+  maxRopeLength: 0
+  currentRopeLength: 0
 --- !u!1 &2224825689332038233
 GameObject:
   m_ObjectHideFlags: 0
@@ -554,6 +588,7 @@ GameObject:
   - component: {fileID: 5063340613675039996}
   - component: {fileID: 8617139414010354151}
   - component: {fileID: 7027507068654702855}
+  - component: {fileID: 8631416748803719041}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -687,8 +722,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.1956866, y: 3.3102937, z: 3.3315778}
-  m_Center: {x: -0.015907405, y: -1.42, z: -0.000000059602225}
+  m_Size: {x: 2.54, y: 1.7, z: 3.3315778}
+  m_Center: {x: -0.015907405, y: -2.15, z: -0.000000059602225}
 --- !u!114 &7027507068654702855
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,6 +736,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3805c92fad61ca94b8b301d87675f9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!65 &8631416748803719041
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001550493025402093}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.1956866, y: 3.3102937, z: 3.3315778}
+  m_Center: {x: -0.015907405, y: 0.08334274, z: -0.000000059602225}
 --- !u!1 &3001580151872610743
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,6 +871,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3003754192084450257}
+  - component: {fileID: 4946839115977802920}
+  - component: {fileID: 7226517670788025124}
   m_Layer: 0
   m_Name: ore_container
   m_TagString: Untagged
@@ -838,6 +896,68 @@ Transform:
   - {fileID: 3004089179630653249}
   m_Father: {fileID: 6915719862524437111}
   m_LocalEulerAnglesHint: {x: -89.98, y: 0, z: 0}
+--- !u!114 &4946839115977802920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001630001794690537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2148852ebdd14f2488977bc16da8618f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingTimeMax: 0
+  _BuildingTimeCurrent: 0
+  completeMat: {fileID: 0}
+  meshes: []
+  cols:
+  - {fileID: 2974263846508737057}
+  - {fileID: 2975047873093218981}
+  _IsFixed: 1
+  tiledBuildingPositionLast: {x: -10, y: 10}
+  startPos: {x: -10, y: 10}
+  size: {x: 18, y: 6}
+  marker_designed: {fileID: 6260957102490015115}
+  marker_on: {fileID: 7553672752727594850}
+  marker_off: {fileID: 2224825689332038233}
+  objectName: "\uC804\uC6D0\uACF5\uAE09\uAE30"
+  _IsSettingRope: 0
+  _IsRoped: 0
+  ropeStruct:
+    ropeObjects: []
+    ropePositions: []
+  maxRopeLength: 0
+  currentRopeLength: 0
+  anim: {fileID: 4745613938894177325}
+  doorOpenTriggerCol: {fileID: 0}
+  _PowerMax: 100
+  _PowerCurrent: 100
+  _Level: 1
+  _ExpMax: 2
+  _ExpCurrent: 0
+--- !u!65 &7226517670788025124
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3001630001794690537}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 3.93, y: 5.71, z: 3.63}
+  m_Center: {x: 0, y: -1.2, z: 0}
 --- !u!1 &3001632906521525291
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,11 +999,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6915719862524437111}
-  - component: {fileID: 3190618893350269314}
   - component: {fileID: 8269475572223652752}
   - component: {fileID: 7634725787000575253}
-  - component: {fileID: 7915837961000511779}
-  - component: {fileID: 4094685767413464528}
   m_Layer: 0
   m_Name: PowerSupply
   m_TagString: Untagged
@@ -911,47 +1028,6 @@ Transform:
   - {fileID: 8344271878385002504}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3190618893350269314
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3919248342739845651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2148852ebdd14f2488977bc16da8618f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingTimeMax: 0
-  _BuildingTimeCurrent: 0
-  completeMat: {fileID: 0}
-  meshes: []
-  cols:
-  - {fileID: 2974263846508737057}
-  - {fileID: 2975047873093218981}
-  _IsFixed: 1
-  tiledBuildingPositionLast: {x: -10, y: 10}
-  startPos: {x: -10, y: 10}
-  size: {x: 18, y: 6}
-  marker_designed: {fileID: 6260957102490015115}
-  marker_on: {fileID: 7553672752727594850}
-  marker_off: {fileID: 2224825689332038233}
-  objectName: "\uC804\uC6D0\uACF5\uAE09\uAE30"
-  _IsSettingRope: 0
-  _IsRoped: 0
-  ropeStruct:
-    ropeObjects: []
-    ropePositions: []
-  maxRopeLength: 0
-  currentRopeLength: 0
-  anim: {fileID: 4745613938894177325}
-  doorOpenTriggerCol: {fileID: 4094685767413464528}
-  _PowerMax: 100
-  _PowerCurrent: 100
-  _Level: 1
-  _ExpMax: 2
-  _ExpCurrent: 0
 --- !u!114 &8269475572223652752
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -969,9 +1045,9 @@ MonoBehaviour:
   Flags: 262145
   NestedObjects: []
   NetworkedBehaviours:
-  - {fileID: 3190618893350269314}
   - {fileID: 7634725787000575253}
-  - {fileID: 7915837961000511779}
+  - {fileID: 1815488916069874009}
+  - {fileID: 4946839115977802920}
   - {fileID: 5063340613675039996}
 --- !u!114 &7634725787000575253
 MonoBehaviour:
@@ -989,60 +1065,6 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
---- !u!114 &7915837961000511779
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3919248342739845651}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 125a6d7fc04769f4ab365d560ffc763e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingTimeMax: 0
-  _BuildingTimeCurrent: 0
-  completeMat: {fileID: 0}
-  meshes: []
-  cols:
-  - {fileID: 2023970382415248982}
-  _IsFixed: 1
-  tiledBuildingPositionLast: {x: 0, y: 0}
-  startPos: {x: 0, y: 0}
-  size: {x: 0, y: 0}
-  marker_designed: {fileID: 6260957102490015115}
-  marker_on: {fileID: 7553672752727594850}
-  marker_off: {fileID: 2224825689332038233}
-  objectName: 
-  _IsSettingRope: 0
-  _IsRoped: 0
-  ropeStruct:
-    ropeObjects: []
-    ropePositions: []
-  maxRopeLength: 0
-  currentRopeLength: 0
---- !u!65 &4094685767413464528
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3919248342739845651}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1.41, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 1.7}
 --- !u!1 &6260957102490015115
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class Pylon : InteractableBuilding
         buildingTimeMax = 1;
         size = new Vector2Int(1, 1);
         maxRopeLength = 20;
+        currentRopeLength= maxRopeLength;
+        base.Initialize();
     }
     public override Interaction InteractionStart(Player player)
     {
