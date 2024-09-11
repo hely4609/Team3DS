@@ -791,7 +791,7 @@ public partial class Player : Character
             Image buttonImage = button.GetComponentInChildren<Image>();
             if (targetIndex == i)
             {
-                buttonImage.color = Color.yellow;
+                buttonImage.color = Color.blue;
                 if (HasInputAuthority)
                 {
                     mouseLeftImage.transform.position = button.transform.position;
