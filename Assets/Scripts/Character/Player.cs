@@ -547,7 +547,8 @@ public partial class Player : Character
 
         if (DesigningBuilding != null)
         {
-            buildingConfirmUI.SetActive(false);
+            if (HasInputAuthority)
+                buildingConfirmUI.SetActive(false);
             Runner.Despawn(DesigningBuilding.GetComponent<NetworkObject>());
            
         }
@@ -571,7 +572,8 @@ public partial class Player : Character
         {
             if (DesigningBuilding.FixPlace())
             {
-                buildingConfirmUI.SetActive(false);
+                if (HasInputAuthority)
+                    buildingConfirmUI.SetActive(false);
                 DesigningBuilding = null;
 
                 return true;

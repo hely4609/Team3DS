@@ -26,6 +26,7 @@ public class InteractableBuilding : Building, IInteraction
     {
         ropeStruct.ropeObjects = new List<NetworkObject>();
         ropeStruct.ropePositions = new List<Vector2>();
+        ropeStruct.ropePositions.Add(startPos);
     }
     // 위치를 고정함.
 
@@ -86,7 +87,7 @@ public class InteractableBuilding : Building, IInteraction
     public override bool FixPlace()
     {
         bool toReturn = base.FixPlace();
-        ropeStruct.ropePositions.Add(startPos);
+        ropeStruct.ropePositions[0] = startPos;
         return toReturn;
     }
 
