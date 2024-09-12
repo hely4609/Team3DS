@@ -207,6 +207,7 @@ public partial class Player : Character
     bool isFarmingKeyAlreadyPressed = false;
     [SerializeField] AudioSource cleanerAudioSource;
     bool wasPlayingCleanerEnd;
+    AudioSource ropeSource;
     protected override void MyUpdate(float deltaTime)
     {
         /////////////////////////// 
@@ -346,6 +347,13 @@ public partial class Player : Character
                     ropeBuilding.OnRopeSet(currentPos, playerID);
                     lastPos = currentPos;
                 }
+                else 
+                {
+                    if(ropeSource == null || !ropeSource.isPlaying)
+                    {
+                        SoundManager.Play(ResourceEnum.SFX.rope_stretching, transform.position, false, out ropeSource);
+                    }
+                }
             }
         }
 
@@ -466,7 +474,7 @@ public partial class Player : Character
             if (!IsGround) velocity *= 0.1f;
             if (canSetRope)
             { 
-            rb.velocity = velocity * moveSpeed + gravity;
+                rb.velocity = velocity * moveSpeed + gravity;
             }
             else
             {

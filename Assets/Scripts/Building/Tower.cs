@@ -1,7 +1,6 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Tower : InteractableBuilding
@@ -267,6 +266,8 @@ public class Tower : InteractableBuilding
             py.MultiTabList[number].ropeObjects.Clear();
             py.MultiTabList[number].ropePositions.Clear();
             py.ResetRope(player, player.PossesionController.myAuthority.PlayerId);
+
+            SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
         }
     }
 }
