@@ -65,6 +65,8 @@ namespace ResourceEnum
         Wind = 9,
         door_open = 10,
         door_close = 11,
+        rope_stretching = 12,
+        plug_in = 13,
         // Footsteps
         footsteps_dirt_cut = 1000,
         footsteps_metal_cut = 1001,

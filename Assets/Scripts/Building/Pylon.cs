@@ -1,9 +1,6 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pylon : InteractableBuilding
@@ -87,8 +84,9 @@ public class Pylon : InteractableBuilding
             isSettingRopeList[number] = false;
             building.IsRoped = true;
             player.ropeBuilding = null;
+
+            SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
         }
-        base.AttachRope(player, number);
     }
 
     public override void ResetRope(Player player, int number)

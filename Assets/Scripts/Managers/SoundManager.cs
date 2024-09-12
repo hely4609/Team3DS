@@ -117,6 +117,7 @@ public class SoundManager : Manager
             currentSource.transform.position = soundOrigin;
             currentSource.Play();
             source = currentSource;
+            if(!loop) soundManager.sfxQueue.Enqueue(currentSource);
         }
         else source = null;
     }
