@@ -344,7 +344,7 @@ MonoBehaviour:
   marker_designed: {fileID: 6260957102490015115}
   marker_on: {fileID: 7553672752727594850}
   marker_off: {fileID: 2224825689332038233}
-  objectName: "\u3147\u3145\u3147"
+  objectName: "\uC804\uC6D0\uACF5\uAE09\uAE30"
   _IsSettingRope: 0
   _IsRoped: 0
   ropeStruct:
@@ -922,7 +922,7 @@ MonoBehaviour:
   marker_designed: {fileID: 6260957102490015115}
   marker_on: {fileID: 7553672752727594850}
   marker_off: {fileID: 2224825689332038233}
-  objectName: "\uC804\uC6D0\uACF5\uAE09\uAE30"
+  objectName: "\uB0A9\uD488\uD558\uAE30"
   _IsSettingRope: 0
   _IsRoped: 0
   ropeStruct:
