@@ -12,6 +12,7 @@ public class Pylon : InteractableBuilding
     protected List<RopeStruct> multiTabList;
     public List<RopeStruct> MultiTabList { get { return multiTabList; } }
     public List<bool> isSettingRopeList;
+    public List<float> ropeLengthList;
     protected override void Initialize()
     {
         GameManager.Instance.BuildingManager.PylonList.Add(this);
@@ -32,8 +33,21 @@ public class Pylon : InteractableBuilding
 
             multiTabList[i].ropePositions.Add(startPos);
             isSettingRopeList.Add(false);
+            ropeLengthList.Add(maxRopeLength);
         }
 
+    }
+
+    public override bool FixPlace()
+    {
+        base.FixPlace();
+
+        foreach (var rope in multiTabList)
+        {
+            rope.ropePositions[0] = startPos;
+        }
+
+        return true;
     }
     public override Interaction InteractionStart(Player player)
     {
@@ -114,6 +128,19 @@ public class Pylon : InteractableBuilding
     }
     public override void CreateRope(int number)
     {
+        if (multiTabList[number].ropePositions.Count >= 3 && multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 3] == multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1])
+        {
+
+            multiTabList[number].ropePositions.RemoveRange(multiTabList[number].ropePositions.Count - 2, 2);
+            NetworkObject target = multiTabList[number].ropeObjects[multiTabList[number].ropeObjects.Count - 1];
+            ropeLengthList[number] += target.gameObject.transform.localScale.z;
+            Debug.Log($"{number}:{ropeLengthList[number]} 전선 길이");
+            Runner.Despawn(target);
+            multiTabList[number].ropeObjects.Remove(target);
+
+            return;
+        }
+
         Vector2 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 2];
         Vector2 end = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
         Vector2 delta = end - start;
