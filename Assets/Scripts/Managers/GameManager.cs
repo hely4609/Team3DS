@@ -65,9 +65,6 @@ public class GameManager : MonoBehaviour
     protected CameraManager cameraManager;
     public CameraManager CameraManager => cameraManager;
 
-    protected InteractionManager interactionManager;
-    public InteractionManager InteractionManager => interactionManager;
-
     protected NetworkManager networkManager;
     public NetworkManager NetworkManager => networkManager;
 
@@ -105,6 +102,7 @@ public class GameManager : MonoBehaviour
         yield return saveManager.Initiate();
         //optionManager = new OptionManager();
         //yield return optionManager.Initiate();
+        // 옵션 매니저는 UI를 끌어다 놓으려고 인스펙터창에 넣어 놓기로 했다.
         optionManager = GetComponent<OptionManager>();
         controllerManager = new ControllerManager();
         yield return controllerManager.Initiate();        
@@ -112,14 +110,14 @@ public class GameManager : MonoBehaviour
         yield return poolManager.Initiate();
         uiManager = new UIManager();
         yield return uiManager.Initiate();
+        networkManager = new NetworkManager();
+        yield return networkManager.Initiate();
+
+        // 게임 시작후 Initiate할 매니저들
         buildingManager = new BuildingManager();
         //yield return buildingManager.Initiate();
         cameraManager = new CameraManager();
         //yield return cameraManager.Initiate();
-        interactionManager = new InteractionManager();
-        yield return interactionManager.Initiate();
-        networkManager = new NetworkManager();
-        yield return networkManager.Initiate();
         waveManager = new WaveManager();
         //yield return waveManager.Initiate();
 
@@ -130,10 +128,9 @@ public class GameManager : MonoBehaviour
         SoundUpdates += SoundManager.ManagerUpdate;
         ManagerUpdates += UIManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
-        ManagerUpdates += WaveManager.ManagerUpdate;
 
+        ManagerUpdates += WaveManager.ManagerUpdate;
         ManagerUpdates += CameraManager.ManagerUpdate;
-        ManagerUpdates += InteractionManager.ManagerUpdate;
 
         CloseLoadInfo();
         SoundManager.Play(ResourceEnum.BGM.Silent_Partner__Whistling_Down_the_Road);
