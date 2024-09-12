@@ -9,12 +9,19 @@ public class CannonTower : Tower
     
     protected override void Initialize()
     {
+
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "캐논 타워";
 
+        powerConsumption = 20;
+
         AttackRangeSetting();
+        maxRopeLength = 10;
+        currentRopeLength = maxRopeLength;
+
+        base.Initialize();
     }
 
     protected override void OnHit()
