@@ -81,6 +81,7 @@ public class GameManager : MonoBehaviour
     {
         yield return BuildingManager.Initiate();
         yield return CameraManager.Initiate();
+        yield return WaveManager.Initiate();
         isGameStart = true; 
     }
     public void GameOver() 
@@ -120,7 +121,7 @@ public class GameManager : MonoBehaviour
         networkManager = new NetworkManager();
         yield return networkManager.Initiate();
         waveManager = new WaveManager();
-        yield return waveManager.Initiate();
+        //yield return waveManager.Initiate();
 
 
         cameraManager = new CameraManager();
