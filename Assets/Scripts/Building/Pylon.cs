@@ -96,6 +96,7 @@ public class Pylon : InteractableBuilding
             building.OnRopeSet(thisVector2, number);
             isSettingRopeList[number] = false;
             building.IsRoped = true;
+            player.CanSetRope = true;
             player.ropeBuilding = null;
 
             SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);

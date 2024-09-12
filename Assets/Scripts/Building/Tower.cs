@@ -267,6 +267,8 @@ public class Tower : InteractableBuilding
             py.MultiTabList[number].ropePositions.Clear();
             py.ResetRope(player, player.PossesionController.myAuthority.PlayerId);
 
+            player.CanSetRope = true;
+            player.ropeBuilding = null;
             SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
         }
     }
