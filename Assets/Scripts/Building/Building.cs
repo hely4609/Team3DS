@@ -235,7 +235,8 @@ public abstract class Building : MyComponent
     }
     public virtual bool FixPlace() // 건설완료
     {
-        startPos = tiledBuildingPositionLast;
+        //startPos = tiledBuildingPositionLast;
+        startPos = new Vector2Int((int)transform.position.x, (int)transform.position.z);
         Debug.Log($"startPos : {startPos}, transform.position : {transform.position}");
         if (isBuildable)
         {

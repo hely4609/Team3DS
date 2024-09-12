@@ -17,6 +17,7 @@ TagManager:
   - ExpFillImage
   - PowerFillImage
   - SessionIDText
+  - BuildingConfirmUI
   layers:
   - Default
   - TransparentFX
