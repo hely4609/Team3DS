@@ -50,14 +50,14 @@ public class Pylon : InteractableBuilding
 
     public override bool FixPlace()
     {
-        base.FixPlace();
+        bool toReturn = base.FixPlace();
 
         foreach (var rope in multiTabList)
         {
             rope.ropePositions[0] = startPos;
         }
 
-        return true;
+        return toReturn;
     }
     public override Interaction InteractionStart(Player player)
     {

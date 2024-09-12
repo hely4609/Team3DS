@@ -51,6 +51,7 @@ public partial class Player : Character
     protected int buildableEnumPageIndex = 0;
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
+    [Networked] public bool IsBuildingComfirmUIOpen { get; set; } = false;
     [Networked] public InteractableBuilding ropeBuilding { get; set; }
     [SerializeField]bool canSetRope = true;
     public bool CanSetRope { get { return canSetRope; } set { canSetRope = value; } }
@@ -520,6 +521,7 @@ public partial class Player : Character
 
         NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
+        IsBuildingComfirmUIOpen = true;
 
         return true;
 
@@ -547,8 +549,7 @@ public partial class Player : Character
 
         if (DesigningBuilding != null)
         {
-            if (HasInputAuthority)
-                buildingConfirmUI.SetActive(false);
+            IsBuildingComfirmUIOpen = false;
             Runner.Despawn(DesigningBuilding.GetComponent<NetworkObject>());
            
         }
@@ -572,8 +573,7 @@ public partial class Player : Character
         {
             if (DesigningBuilding.FixPlace())
             {
-                if (HasInputAuthority)
-                    buildingConfirmUI.SetActive(false);
+                IsBuildingComfirmUIOpen = false;
                 DesigningBuilding = null;
 
                 return true;
@@ -805,6 +805,10 @@ public partial class Player : Character
                 case nameof(OreAmount):
                     if (HasInputAuthority)
                         oreAmountText.text = "x " + $"{OreAmount}";
+                    break;
+                case nameof(IsBuildingComfirmUIOpen):
+                    if (HasInputAuthority)
+                    buildingConfirmUI.SetActive(IsBuildingComfirmUIOpen);
                     break;
             }
 

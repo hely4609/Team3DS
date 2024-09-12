@@ -43,7 +43,7 @@ public class LocalController : ControllerBase
                 if(HasInputAuthority && controlledPlayer.IsThisPlayerCharacterUICanvasActivated)
                 {
                     controlledPlayer.buildingSelectUI.SetActive(false);
-                    controlledPlayer.buildingConfirmUI.SetActive(true);
+                    //controlledPlayer.buildingConfirmUI.SetActive(true);
                 }
                 controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
             }
