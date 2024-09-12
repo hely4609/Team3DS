@@ -19,6 +19,7 @@ public partial class Player : Character
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
     [SerializeField] protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
     [SerializeField] public GameObject buildingSelectUI; // 빌딩 선택 UI
+    [SerializeField] public GameObject buildingConfirmUI; // 가건물 들고있을때 설치 취소키 보여주는 UI
 
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
@@ -166,10 +167,12 @@ public partial class Player : Character
             interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
             interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
             buildingSelectUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
+            buildingConfirmUI = GameObject.FindGameObjectWithTag("BuildingConfirmUI");
             oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();
 
             interactionUpdateUI.SetActive(false);
             buildingSelectUI.SetActive(false);
+            buildingConfirmUI.SetActive(false);
 
             GameManager.CloseLoadInfo();
         }
@@ -508,39 +511,6 @@ public partial class Player : Character
         NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
 
-        //if (HasStateAuthority)
-        //{
-        //    if (transform.rotation.eulerAngles.y < 45f || transform.rotation.eulerAngles.y >= 315f)
-        //    {
-        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 0f, 0f);
-        //    }
-        //    else if (transform.rotation.eulerAngles.y < 135f)
-        //    {
-        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 90f, 0f);
-        //    }
-        //    else if (transform.rotation.eulerAngles.y < 225f)
-        //    {
-        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 180f, 0f);
-        //    }
-        //    else if (transform.rotation.eulerAngles.y < 315f)
-        //    {
-        //        DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 270f, 0f);
-        //    }
-
-        //    Vector3 pickPos = transform.position + transform.forward * 5f;
-        //    int x = (int)pickPos.x;
-        //    int z = (int)pickPos.z;
-        //    Vector2Int currentPos = new Vector2Int(x, z);
-
-        //    // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
-        //    if (DesigningBuilding.TiledBuildingPos != currentPos)
-        //    {
-        //        DesigningBuilding.TiledBuildingPos = currentPos;
-        //        DesigningBuilding.transform.position = new Vector3(currentPos.x, DesigningBuilding.gameObject.transform.position.y, currentPos.y);
-        //        DesigningBuilding.CheckBuild();
-        //    }
-        //}
-
         return true;
 
     }
@@ -567,7 +537,9 @@ public partial class Player : Character
 
         if (DesigningBuilding != null)
         {
+            buildingConfirmUI.SetActive(false);
             Runner.Despawn(DesigningBuilding.GetComponent<NetworkObject>());
+           
         }
 
         if (ropeBuilding != null)
@@ -589,7 +561,9 @@ public partial class Player : Character
         {
             if (DesigningBuilding.FixPlace())
             {
+                buildingConfirmUI.SetActive(false);
                 DesigningBuilding = null;
+
                 return true;
             }
 

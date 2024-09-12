@@ -8851,6 +8851,8 @@ MonoBehaviour:
   inviteWindow: {fileID: 0}
   nicknameWhoesToInvite: {fileID: 0}
   startBtn: {fileID: 0}
+  sessionIDInputFieldWindow: {fileID: 0}
+  sessionIDInptField: {fileID: 0}
 --- !u!114 &1796378886
 MonoBehaviour:
   m_ObjectHideFlags: 0
