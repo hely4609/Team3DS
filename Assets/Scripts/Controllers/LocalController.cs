@@ -40,12 +40,12 @@ public class LocalController : ControllerBase
             // 로컬은 UI를 끈다
             if(data.selectedBuildingIndex != -1)
             {
-                controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
-                if(HasInputAuthority)
+                if(HasInputAuthority && controlledPlayer.IsThisPlayerCharacterUICanvasActivated)
                 {
                     controlledPlayer.buildingSelectUI.SetActive(false);
                     controlledPlayer.buildingConfirmUI.SetActive(true);
                 }
+                controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
             }
         }
     }
