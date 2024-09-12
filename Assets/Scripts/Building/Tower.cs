@@ -185,18 +185,26 @@ public class Tower : InteractableBuilding
 
     public void TurnOnOff(bool power) //전원을 키고 끄는 함수
     {
-        SoundManager.Play(ResourceEnum.SFX._switch, transform.position);
         if (HasStateAuthority && power != OnOff)
         {
-            OnOff = power;
-            if (OnOff)
+            if (power)
             {
-                currentPowerConsumption = powerConsumption;
+                if ( GameManager.Instance.BuildingManager.supply.PowerCurrent >= powerConsumption)
+                {
+                    currentPowerConsumption = powerConsumption;
+                }
+                else
+                {
+                    return;
+                }
             }
-            else
+            else 
             {
                 currentPowerConsumption = 0;
             }
+
+            SoundManager.Play(ResourceEnum.SFX._switch, transform.position);
+            OnOff = power;
         }
     }
 
