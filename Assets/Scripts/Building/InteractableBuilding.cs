@@ -110,7 +110,7 @@ public class InteractableBuilding : Building, IInteraction
         Vector2 delta = end - start;
         if (currentRopeLength > 0)
         {
-            currentRopeLength -= delta.magnitude;
+            
             return true;
         }
         else return false;
@@ -128,10 +128,24 @@ public class InteractableBuilding : Building, IInteraction
     }
     public virtual void CreateRope(int number)
     {
+        if (ropeStruct.ropePositions.Count >= 3 && ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 3] == ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1])
+        {
+
+            ropeStruct.ropePositions.RemoveRange(ropeStruct.ropePositions.Count - 2, 2);
+            NetworkObject target = ropeStruct.ropeObjects[ropeStruct.ropeObjects.Count - 1];
+            currentRopeLength += target.gameObject.transform.localScale.z;
+            Runner.Despawn(target);
+            ropeStruct.ropeObjects.Remove(target);
+
+            return;
+        }
+
+
         Vector2 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2];
         Vector2 end = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
         Vector2 delta = end - start;
 
+        currentRopeLength -= delta.magnitude;
         float deltaAngle = Vector2.Angle(delta, Vector2.up);
         int deltaAngleCorrection = 1;
         if (delta.x < 0) deltaAngleCorrection = -1;

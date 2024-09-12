@@ -100,7 +100,7 @@ public class Pylon : InteractableBuilding
         multiTabList[number].ropeObjects.Clear();
         multiTabList[number].ropePositions.Clear();
         multiTabList[number].ropePositions.Add(startPos);
-        currentRopeLength = maxRopeLength;
+        ropeLengthList[number] = maxRopeLength;
         player.CanSetRope = true;
         isSettingRopeList[number] = false;
     }   
@@ -108,9 +108,9 @@ public class Pylon : InteractableBuilding
     {
         Vector2 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
         Vector2 delta = end - start;
-        if (currentRopeLength > 0)
+        if (ropeLengthList[number] > 0)
         {
-            currentRopeLength -= delta.magnitude;
+            
             return true;
         }
         else return false;
@@ -134,7 +134,7 @@ public class Pylon : InteractableBuilding
             multiTabList[number].ropePositions.RemoveRange(multiTabList[number].ropePositions.Count - 2, 2);
             NetworkObject target = multiTabList[number].ropeObjects[multiTabList[number].ropeObjects.Count - 1];
             ropeLengthList[number] += target.gameObject.transform.localScale.z;
-            Debug.Log($"{number}:{ropeLengthList[number]} 전선 길이");
+            Debug.Log($"{number}:{ropeLengthList[number]} + {target.gameObject.transform.localScale.z} 전선 길이");
             Runner.Despawn(target);
             multiTabList[number].ropeObjects.Remove(target);
 
@@ -145,6 +145,7 @@ public class Pylon : InteractableBuilding
         Vector2 end = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
         Vector2 delta = end - start;
 
+        ropeLengthList[number] -= delta.magnitude;
         float deltaAngle = Vector2.Angle(delta, Vector2.up);
         int deltaAngleCorrection = 1;
         if (delta.x < 0) deltaAngleCorrection = -1;
@@ -155,5 +156,6 @@ public class Pylon : InteractableBuilding
         ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
     }
+
 }
 

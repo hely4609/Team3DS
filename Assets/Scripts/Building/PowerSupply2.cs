@@ -24,6 +24,7 @@ public class PowerSupply2 : Pylon
 
             multiTabList[i].ropePositions.Add(startPos);
             isSettingRopeList.Add(false);
+            ropeLengthList.Add(maxRopeLength);
         }
     }
 }
