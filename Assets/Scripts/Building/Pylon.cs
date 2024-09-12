@@ -10,8 +10,20 @@ public class Pylon : InteractableBuilding
     public List<RopeStruct> MultiTabList { get { return multiTabList; } }
     public List<bool> isSettingRopeList;
     public List<float> ropeLengthList;
+    
+    public float this[int index]
+    {
+        get => ropeLengthList[index];
+    }
+    [Networked] float p1 { get; set; }
+    [Networked] float p2 { get; set; }
+    [Networked] float p3 { get; set; }
+    [Networked] float p4 { get; set; }
+
     protected override void Initialize()
     {
+        ropeStruct.ropePositions.Add(startPos);
+
         GameManager.Instance.BuildingManager.PylonList.Add(this);
         // 디폴트 값.
         buildingType = BuildingEnum.Pylon;
@@ -32,6 +44,7 @@ public class Pylon : InteractableBuilding
             isSettingRopeList.Add(false);
             ropeLengthList.Add(maxRopeLength);
         }
+
 
     }
 
