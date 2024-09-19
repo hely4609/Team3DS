@@ -200,4 +200,9 @@ public class LocalController : ControllerBase
             DoFarming?.Invoke(isFarmingKeyPressed);
         }
     }
+
+    protected void OnKeyGuide()
+    {
+        
+    }
 }
