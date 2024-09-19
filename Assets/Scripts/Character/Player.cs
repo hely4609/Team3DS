@@ -53,8 +53,7 @@ public partial class Player : Character
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
     [Networked] public bool IsBuildingComfirmUIOpen { get; set; } = false;
     [Networked] public InteractableBuilding ropeBuilding { get; set; }
-    [SerializeField]bool canSetRope = true;
-    public bool CanSetRope { get { return canSetRope; } set { canSetRope = value; } }
+    [SerializeField, Networked] public bool CanSetRope { get; set; }
 
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
@@ -141,6 +140,7 @@ public partial class Player : Character
 
     protected override void MyStart()
     {
+        CanSetRope = true;
         if (rb == null)
         {
             rb = GetComponent<Rigidbody>();
@@ -342,8 +342,8 @@ public partial class Player : Character
             Vector2 currentPos = new Vector2(x, z);
             if (currentPos != lastPos)
             {
-                canSetRope = ropeBuilding.CheckRopeLength(currentPos, playerID);
-                if (canSetRope)
+                CanSetRope = ropeBuilding.CheckRopeLength(currentPos, playerID);
+                if (CanSetRope)
                 {
                     ropeBuilding.OnRopeSet(currentPos, playerID);
                     lastPos = currentPos;
@@ -473,7 +473,7 @@ public partial class Player : Character
             }
 
             if (!IsGround) velocity *= 0.1f;
-            if (canSetRope)
+            if (CanSetRope)
             { 
                 rb.velocity = velocity * moveSpeed + gravity;
             }
