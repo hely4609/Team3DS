@@ -336,7 +336,7 @@ public partial class Player : Character
         {
             // ·ÎÇÁ ²ø±â
             Vector3 ropePos = transform.position;
-            int playerID = possessionController.myAuthority.PlayerId;
+            int playerID = possessionController.MyNumber;
             int x = (int)ropePos.x;
             int z = (int)ropePos.z;
             Vector2 currentPos = new Vector2(x, z);
@@ -556,7 +556,7 @@ public partial class Player : Character
 
         if (ropeBuilding != null)
         {
-            ropeBuilding.ResetRope(this, possessionController.myAuthority.PlayerId);
+            ropeBuilding.ResetRope(this, possessionController.MyNumber);
             ropeBuilding = null;
         }
 
