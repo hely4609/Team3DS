@@ -18,6 +18,7 @@ TagManager:
   - PowerFillImage
   - SessionIDText
   - BuildingConfirmUI
+  - RopeMaxDistanceSignUI
   layers:
   - Default
   - TransparentFX
