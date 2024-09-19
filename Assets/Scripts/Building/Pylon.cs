@@ -39,6 +39,21 @@ public class Pylon : InteractableBuilding
         }
     }
 
+    public override void Spawned()
+    {
+        base.Spawned();
+        marker_on.SetActive(OnOff);
+        marker_off.SetActive(!OnOff);
+        foreach (MeshRenderer r in meshes)
+        {
+            r.material.SetFloat("_OnOff", OnOff ? 1f : 0f);
+        }
+        foreach (Pylon py in attachedPylonList)
+        {
+            py.TurnOnOff(OnOff);
+        }
+    }
+
     public override bool FixPlace()
     {
         bool toReturn = base.FixPlace();
