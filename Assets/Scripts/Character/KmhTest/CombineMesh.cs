@@ -3,7 +3,7 @@ using System.Collections;
 
 // Copy meshes from children into the parent's Mesh.
 // CombineInstance stores the list of meshes.  These are combined
-// and assigned to the attached Mesh.
+// and assigned to the attachedPylonList Mesh.
 
 public class CombineMesh : MonoBehaviour
 {
