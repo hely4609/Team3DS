@@ -26,7 +26,7 @@ Transform:
   m_GameObject: {fileID: 2894029210644804140}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -423,7 +423,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 1
   _BuildingTimeCurrent: 0
-  completeMat: {fileID: 2100000, guid: 499f636039cff53419956b156122b2f3, type: 2}
+  completeMat: {fileID: 2100000, guid: 252a6853d06b8214d8cd3f8f3ed04a55, type: 2}
   meshes:
   - {fileID: 4065499076986777232}
   - {fileID: 4065067305369771856}
@@ -445,6 +445,8 @@ MonoBehaviour:
     ropePositions: []
   maxRopeLength: 20
   currentRopeLength: 0
+  isSettingRopeList: 
+  ropeLengthList: []
 --- !u!65 &8939931637654039337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -492,7 +494,7 @@ Transform:
   m_GameObject: {fileID: 8536452984131014355}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -576,7 +578,7 @@ Transform:
   m_GameObject: {fileID: 8913329558517099434}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 6, z: 0}
   m_LocalScale: {x: 0.4, y: 0.4, z: 0.4}
   m_ConstrainProportionsScale: 1
   m_Children: []
