@@ -25,6 +25,7 @@ public class Tower : InteractableBuilding
     [SerializeField] protected Animator animator;
     [SerializeField] protected GameObject gunBarrel;
     [SerializeField] protected float gunBarrelRotateCorrection;
+    public Pylon attachedPylon;
 
     public override void Spawned()
     {
@@ -185,7 +186,7 @@ public class Tower : InteractableBuilding
 
     public void TurnOnOff(bool power) //전원을 키고 끄는 함수
     {
-        if (HasStateAuthority && power != OnOff)
+        if (HasStateAuthority && power != OnOff && attachedPylon.OnOff)
         {
             if (power)
             {
@@ -277,6 +278,7 @@ public class Tower : InteractableBuilding
 
             player.CanSetRope = true;
             player.ropeBuilding = null;
+            attachedPylon = py;
             SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
         }
     }
