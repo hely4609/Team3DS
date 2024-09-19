@@ -161,6 +161,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minimapSlider: {fileID: 4253236687834972191}
+  largeMap: {fileID: 8674742331313543498}
 --- !u!1 &1159031893793120749
 GameObject:
   m_ObjectHideFlags: 0
