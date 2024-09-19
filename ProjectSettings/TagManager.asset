@@ -19,6 +19,7 @@ TagManager:
   - SessionIDText
   - BuildingConfirmUI
   - RopeMaxDistanceSignUI
+  - OnScreenKeyGuideUI
   layers:
   - Default
   - TransparentFX

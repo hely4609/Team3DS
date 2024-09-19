@@ -1,6 +1,7 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pylon : InteractableBuilding
@@ -10,7 +11,8 @@ public class Pylon : InteractableBuilding
     public List<RopeStruct> MultiTabList { get { return multiTabList; } }
     public List<bool> isSettingRopeList;
     public List<float> ropeLengthList;
-    
+    [SerializeField, Networked] protected bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
+    public List<Pylon> attachedPylonList;
     protected override void Initialize()
     {
         ropeStruct.ropePositions.Add(startPos);
@@ -35,8 +37,21 @@ public class Pylon : InteractableBuilding
             isSettingRopeList.Add(false);
             ropeLengthList.Add(maxRopeLength);
         }
+    }
 
-
+    public override void Spawned()
+    {
+        base.Spawned();
+        marker_on.SetActive(OnOff);
+        marker_off.SetActive(!OnOff);
+        foreach (MeshRenderer r in meshes)
+        {
+            r.material.SetFloat("_OnOff", OnOff ? 1f : 0f);
+        }
+        foreach (Pylon py in attachedPylonList)
+        {
+            py.TurnOnOff(OnOff);
+        }
     }
 
     public override bool FixPlace()
@@ -92,6 +107,35 @@ public class Pylon : InteractableBuilding
 
             SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
         }
+        else if (building is Pylon && !building.IsRoped)
+        {
+            Pylon py = building as Pylon;
+            if (!attachedPylonList.Contains(py))
+            {
+                Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
+
+                building.OnRopeSet(thisVector2, number);
+                isSettingRopeList[number] = false;
+                player.CanSetRope = true;
+                player.ropeBuilding = null;
+
+                SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
+
+                py.attachedPylonList.Add(this);
+                this.attachedPylonList.Add(py);
+                foreach (Pylon listPy in py.attachedPylonList)
+                {
+                    if (listPy.OnOff)
+                    {
+                        py.TurnOnOff(true);
+                        this.TurnOnOff(true);
+                        break;
+                    }
+                }
+                py.FixRope(player, number);
+            }
+        }
+
     }
 
     public override void ResetRope(Player player, int number)
@@ -106,7 +150,16 @@ public class Pylon : InteractableBuilding
         ropeLengthList[number] = maxRopeLength;
         player.CanSetRope = true;
         isSettingRopeList[number] = false;
-    }   
+    }  
+    public virtual void FixRope(Player player, int number)
+    {
+        multiTabList[number].ropeObjects.Clear();
+        multiTabList[number].ropePositions.Clear();
+        multiTabList[number].ropePositions.Add(startPos);
+        ropeLengthList[number] = maxRopeLength;
+        player.CanSetRope = true;
+        isSettingRopeList[number] = false;
+    }
     public override bool CheckRopeLength(Vector2 end, int number) // 전선을 끌수 있었나?
     {
         Vector2 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
@@ -159,6 +212,66 @@ public class Pylon : InteractableBuilding
         ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
     }
+    public void TurnOnOff(bool power) //전원을 키고 끄는 함수
+    {
+        if (HasStateAuthority && power != OnOff)
+        {
+            SoundManager.Play(ResourceEnum.SFX._switch, transform.position);
+            OnOff = power;
+        }
+    }
 
+    public override void Render()
+    {
+        foreach (var chage in _changeDetector.DetectChanges(this))
+        {
+            switch (chage)
+            {
+                case nameof(isBuildable):
+                    VisualizeBuildable();
+                    break;
+
+
+                case nameof(IsFixed):
+                    foreach (Collider col in cols)
+                    {
+                        col.enabled = true;
+                    }
+                    break;
+
+                case nameof(BuildingTimeCurrent):
+                    {
+                        foreach (MeshRenderer r in meshes)
+                        {
+                            r.material.SetFloat("_CompletePercent", CompletePercent);
+                        }
+
+                        if (CompletePercent >= 1)
+                        {
+                            foreach (MeshRenderer r in meshes)
+                            {
+                                r.material = completeMat;
+                            }
+                            TurnOnOff(false);
+                            marker_designed.SetActive(false);
+                            marker_on.SetActive(true);
+                        }
+                    }
+                    break;
+                case nameof(OnOff):
+                    marker_on.SetActive(OnOff);
+                    marker_off.SetActive(!OnOff);
+                    foreach (MeshRenderer r in meshes)
+                    {
+                        r.material.SetFloat("_OnOff", OnOff ? 1f : 0f);
+                    }
+                    foreach(Pylon py in attachedPylonList)
+                    {
+                        py.TurnOnOff(OnOff);
+                    }
+                    break;
+            }
+        }
+    }
 }
 

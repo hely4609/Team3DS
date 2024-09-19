@@ -12,9 +12,10 @@ public class PowerSupply2 : Pylon
         maxRopeLength = 30;
         currentRopeLength = maxRopeLength;
         ropeStruct.ropePositions.Add(startPos);
-
+        
         multiTabList = new List<RopeStruct>();
         isSettingRopeList = new List<bool>();
+        OnOff = true;
         for (int i = 0; i < 4; i++)
         {
             RopeStruct ropes = new RopeStruct();

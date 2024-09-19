@@ -22,6 +22,7 @@ public partial class Player : Character
     [SerializeField] public GameObject buildingSelectUI; // 빌딩 선택 UI
     [SerializeField] public GameObject buildingConfirmUI; // 가건물 들고있을때 설치 취소키 보여주는 UI
     protected GameObject ropeMaxDistanceSignUI; // 로프 길이가 최대일 때 보여줄 경고 UI
+    protected Animator onScreenKeyGuideUIAnim;
 
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
@@ -89,6 +90,7 @@ public partial class Player : Character
         targetController.DoMouseWheel -= MouseWheel;
         targetController.DoCancel -= Cancel;
         targetController.DoFarming -= Farming;
+        targetController.DoKeyGuide -= SetKeyGuideUI;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
@@ -99,6 +101,7 @@ public partial class Player : Character
         targetController.DoMouseWheel += MouseWheel;
         targetController.DoCancel += Cancel;
         targetController.DoFarming += Farming;
+        targetController.DoKeyGuide += SetKeyGuideUI;
     }
 
     protected void UnRegistrationFunction(ControllerBase targetController)
@@ -112,6 +115,7 @@ public partial class Player : Character
         targetController.DoMouseWheel -= MouseWheel;
         targetController.DoCancel -= Cancel;
         targetController.DoFarming -= Farming;
+        targetController.DoKeyGuide -= SetKeyGuideUI;
     }
 
     public virtual void Possession(ControllerBase targetController)
@@ -173,6 +177,7 @@ public partial class Player : Character
             buildingConfirmUI = GameObject.FindGameObjectWithTag("BuildingConfirmUI");
             ropeMaxDistanceSignUI = GameObject.FindGameObjectWithTag("RopeMaxDistanceSignUI");
             oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();
+            onScreenKeyGuideUIAnim = GameObject.FindGameObjectWithTag("OnScreenKeyGuideUI").GetComponent<Animator>();
             
 
             interactionUpdateUI.SetActive(false);
@@ -440,8 +445,6 @@ public partial class Player : Character
 
                 }
             }
-
-
         }
     }
 
@@ -968,5 +971,10 @@ public partial class Player : Character
         }
 
         return 0f;
+    }
+
+    private void SetKeyGuideUI()
+    {
+        onScreenKeyGuideUIAnim.SetBool("OnOff", !onScreenKeyGuideUIAnim.GetBool("OnOff"));
     }
 }
