@@ -31,6 +31,7 @@ public class ControllerBase : MyComponent
     public Player ControlledPlayer => controlledPlayer;
 
     public PlayerRef myAuthority;
+    [Networked] public int MyNumber { get; set; }
 
     protected override void OnEnable()
     {

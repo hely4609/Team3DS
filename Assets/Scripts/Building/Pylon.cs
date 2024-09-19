@@ -11,15 +11,6 @@ public class Pylon : InteractableBuilding
     public List<bool> isSettingRopeList;
     public List<float> ropeLengthList;
     
-    public float this[int index]
-    {
-        get => ropeLengthList[index];
-    }
-    [Networked] float p1 { get; set; }
-    [Networked] float p2 { get; set; }
-    [Networked] float p3 { get; set; }
-    [Networked] float p4 { get; set; }
-
     protected override void Initialize()
     {
         ropeStruct.ropePositions.Add(startPos);
@@ -61,7 +52,7 @@ public class Pylon : InteractableBuilding
     }
     public override Interaction InteractionStart(Player player)
     {
-        int playerID = player.PossesionController.myAuthority.PlayerId;
+        int playerID = player.PossesionController.MyNumber;
         // 완성이 아직 안됨.
         if (CompletePercent < 1)
         {

@@ -11,6 +11,8 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
 {
     [SerializeField] private NetworkPrefabRef _playerPrefab;
 
+    public static bool[] playerArray = new bool[4];
+    
     private Dictionary<PlayerRef, NetworkObject> _spawnedCharacters = new Dictionary<PlayerRef, NetworkObject>();
     public Dictionary<PlayerRef, NetworkObject> SpawnedCharacter => _spawnedCharacters;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
@@ -28,8 +30,16 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
             Vector3 spawnPosition = new Vector3(0, 1, 0);
             NetworkObject networkPlayerObject = runner.Spawn(_playerPrefab, spawnPosition, Quaternion.identity, player);
             //networkPlayerObject.GetComponent<ControllerBase>().myAuthority = player;
+
+            ControllerBase con = networkPlayerObject.GetComponent<ControllerBase>();
+            int playerNumber = System.Array.FindIndex(playerArray, target => target == false);
+            playerArray[playerNumber] = true;
+            con.MyNumber = playerNumber;
+
             if (networkPlayerObject.HasInputAuthority)
-            GameManager.Instance.NetworkManager.LocalController = networkPlayerObject.GetComponent<ControllerBase>();
+            {
+                GameManager.Instance.NetworkManager.LocalController = con;
+            }
 
             // Keep track of the player avatars for easy access
             _spawnedCharacters.Add(player, networkPlayerObject);

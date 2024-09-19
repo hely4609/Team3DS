@@ -60,8 +60,8 @@ public class LocalController : ControllerBase
         {
             if (controlledPlayer.DesigningBuilding != null)
             runner.Despawn(controlledPlayer.DesigningBuilding.GetComponent<NetworkObject>());
-
             runner.Despawn(controlledPlayer.GetComponent<NetworkObject>());
+            NetworkPhotonCallbacks.playerArray[MyNumber] = false;
         }
     }
 
