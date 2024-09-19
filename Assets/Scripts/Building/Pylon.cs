@@ -11,7 +11,7 @@ public class Pylon : InteractableBuilding
     public List<RopeStruct> MultiTabList { get { return multiTabList; } }
     public List<bool> isSettingRopeList;
     public List<float> ropeLengthList;
-    [SerializeField, Networked] protected bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
+    [SerializeField, Networked] public bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
     public List<Pylon> attachedPylonList;
     protected override void Initialize()
     {
@@ -97,14 +97,16 @@ public class Pylon : InteractableBuilding
         if (building is Tower)
         //if (building.GetType().IsSubclassOf(typeof(Tower)))
         {
+            Tower tw = building as Tower;
             Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
 
-            building.OnRopeSet(thisVector2, number);
+            tw.OnRopeSet(thisVector2, number);
             isSettingRopeList[number] = false;
-            building.IsRoped = true;
+            tw.IsRoped = true;
+            tw.attachedPylon = this;
             player.CanSetRope = true;
             player.ropeBuilding = null;
-
+            
             SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
         }
         else if (building is Pylon && !building.IsRoped)
