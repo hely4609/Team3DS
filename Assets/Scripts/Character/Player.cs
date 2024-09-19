@@ -973,8 +973,9 @@ public partial class Player : Character
         return 0f;
     }
 
-    private void SetKeyGuideUI()
+    public void SetKeyGuideUI()
     {
+        if (HasInputAuthority)
         onScreenKeyGuideUIAnim.SetBool("OnOff", !onScreenKeyGuideUIAnim.GetBool("OnOff"));
     }
 }
