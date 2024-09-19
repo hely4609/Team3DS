@@ -60,6 +60,8 @@ public class LocalController : ControllerBase
         {
             if (controlledPlayer.DesigningBuilding != null)
             runner.Despawn(controlledPlayer.DesigningBuilding.GetComponent<NetworkObject>());
+            if (controlledPlayer.ropeBuilding != null)
+            controlledPlayer.ropeBuilding.ResetRope(controlledPlayer, MyNumber);
             runner.Despawn(controlledPlayer.GetComponent<NetworkObject>());
             NetworkPhotonCallbacks.playerArray[MyNumber] = false;
         }
@@ -203,6 +205,6 @@ public class LocalController : ControllerBase
 
     protected void OnKeyGuide()
     {
-        
+        DoKeyGuide?.Invoke();
     }
 }
