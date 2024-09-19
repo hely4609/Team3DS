@@ -7,7 +7,7 @@ using UnityEngine;
 public class Pylon : InteractableBuilding
 {
     protected int cost;
-    protected List<RopeStruct> multiTabList;
+    [SerializeField]protected List<RopeStruct> multiTabList;
     public List<RopeStruct> MultiTabList { get { return multiTabList; } }
     public List<bool> isSettingRopeList;
     public List<float> ropeLengthList;
@@ -100,7 +100,16 @@ public class Pylon : InteractableBuilding
             Tower tw = building as Tower;
             Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
 
-            tw.OnRopeSet(thisVector2, number);
+            tw.OnRopeSet(thisVector2, number); marker_on.SetActive(OnOff);
+            marker_off.SetActive(!OnOff);
+            foreach (MeshRenderer r in meshes)
+            {
+                r.material.SetFloat("_OnOff", OnOff ? 1f : 0f);
+            }
+            foreach (Pylon py in attachedPylonList)
+            {
+                py.TurnOnOff(OnOff);
+            }
             isSettingRopeList[number] = false;
             tw.IsRoped = true;
             tw.attachedPylon = this;

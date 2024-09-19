@@ -69,7 +69,7 @@ public class Tower : InteractableBuilding
         }
         else
         {
-            AttachRope(player, player.PossesionController.myAuthority.PlayerId);
+            AttachRope(player, player.PossesionController.MyNumber);
             return Interaction.None;
         }
     }
@@ -274,7 +274,7 @@ public class Tower : InteractableBuilding
             IsRoped = true;
             py.MultiTabList[number].ropeObjects.Clear();
             py.MultiTabList[number].ropePositions.Clear();
-            py.ResetRope(player, player.PossesionController.myAuthority.PlayerId);
+            py.ResetRope(player, player.PossesionController.MyNumber);
 
             player.CanSetRope = true;
             player.ropeBuilding = null;

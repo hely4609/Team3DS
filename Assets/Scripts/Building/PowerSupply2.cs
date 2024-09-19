@@ -8,10 +8,11 @@ public class PowerSupply2 : Pylon
 {
     protected override void Initialize()
     {
+        ropeStruct.ropePositions.Add(startPos);
+
         buildingType = BuildingEnum.Pylon;
         maxRopeLength = 30;
         currentRopeLength = maxRopeLength;
-        ropeStruct.ropePositions.Add(startPos);
         
         multiTabList = new List<RopeStruct>();
         isSettingRopeList = new List<bool>();
