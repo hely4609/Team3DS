@@ -7,7 +7,8 @@ public class Ore : MyComponent
 {
     public int amount;
 
-    protected Player target; 
+    protected Player target;
+    protected bool isEaten;
 
     public void Initialize()
     {
@@ -29,8 +30,9 @@ public class Ore : MyComponent
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out Player player))
+        if (other.TryGetComponent(out Player player) && !isEaten)
         {
+            isEaten = true;
             player.OreAmount += amount;
             Runner.Despawn(GetComponent<NetworkObject>());
         }
