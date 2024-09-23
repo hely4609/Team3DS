@@ -118,7 +118,7 @@ public class Pylon : InteractableBuilding
             
             SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
         }
-        else if (building is Pylon && !building.IsRoped)
+        else if (building is Pylon && building != this)
         {
             Pylon py = building as Pylon;
             if (!attachedPylonList.Contains(py))
@@ -134,7 +134,7 @@ public class Pylon : InteractableBuilding
 
                 py.attachedPylonList.Add(this);
                 this.attachedPylonList.Add(py);
-                foreach (Pylon listPy in py.attachedPylonList)
+                foreach (Pylon listPy in attachedPylonList)
                 {
                     if (listPy.OnOff)
                     {
