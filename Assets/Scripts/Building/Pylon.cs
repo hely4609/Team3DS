@@ -1,7 +1,6 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Pylon : InteractableBuilding
@@ -112,6 +111,7 @@ public class Pylon : InteractableBuilding
             }
             isSettingRopeList[number] = false;
             tw.IsRoped = true;
+            buildingSignCanvas.SetActive(false);
             tw.attachedPylon = this;
             player.CanSetRope = true;
             player.ropeBuilding = null;
@@ -228,6 +228,7 @@ public class Pylon : InteractableBuilding
         if (HasStateAuthority && power != OnOff)
         {
             SoundManager.Play(ResourceEnum.SFX._switch, transform.position);
+            IsRoped = true;
             OnOff = power;
         }
     }
@@ -266,6 +267,10 @@ public class Pylon : InteractableBuilding
                             TurnOnOff(false);
                             marker_designed.SetActive(false);
                             marker_on.SetActive(true);
+                            buildingSignCanvas.transform.localPosition = new Vector3(0, heightMax * 0.5f / transform.localScale.y, 0);
+                            buildingSignCanvas.transform.localScale /= transform.localScale.x;
+                            buildingSignCanvas.GetComponent<BuildingSignCanvas>().SetRadius(size.x);
+                            buildingSignCanvas.SetActive(!IsRoped);
                         }
                     }
                     break;
@@ -280,6 +285,9 @@ public class Pylon : InteractableBuilding
                     {
                         py.TurnOnOff(OnOff);
                     }
+                    break;
+                case nameof(IsRoped):
+                    buildingSignCanvas.SetActive(!IsRoped);
                     break;
             }
         }

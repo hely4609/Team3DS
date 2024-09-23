@@ -11340,7 +11340,7 @@ Transform:
   m_GameObject: {fileID: 4886176525193278536}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 7.9, z: 0}
+  m_LocalPosition: {x: 0, y: 29, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -16964,6 +16964,7 @@ MonoBehaviour:
   interactionContent: {fileID: 0}
   interactionUpdateUI: {fileID: 0}
   buildingSelectUI: {fileID: 0}
+  buildingConfirmUI: {fileID: 0}
   interactionIndex: -1
   oreAmount: 0
   _OreAmount: 0
@@ -16971,7 +16972,9 @@ MonoBehaviour:
   otherMarker: {fileID: 4886176525193278536}
   _DesigningBuilding: {fileID: 0}
   _IsThisPlayerCharacterUICanvasActivated: 0
+  _IsBuildingComfirmUIOpen: 0
   _ropeBuilding: {fileID: 0}
+  _CanSetRope: 0
   _MoveDir: {x: 0, y: 0, z: 0}
   _PreviousPosition: {x: 0, y: 0, z: 0}
   _PreviousRotation: {x: 0, y: 0, z: 0, w: 0}
@@ -20650,7 +20653,7 @@ Transform:
   m_GameObject: {fileID: 8035184359376342701}
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 8, z: 0}
+  m_LocalPosition: {x: 0, y: 30, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

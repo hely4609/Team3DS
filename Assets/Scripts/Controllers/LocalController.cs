@@ -207,4 +207,14 @@ public class LocalController : ControllerBase
     {
         DoKeyGuide?.Invoke();
     }
+
+    MiniMapScript minimap;
+    protected void OnLargeMap()
+    {
+        if(minimap == null)
+        {
+            minimap = FindObjectOfType<MiniMapScript>();
+        }
+        if(minimap != null) minimap.LargeMapToggle();
+    }
 }

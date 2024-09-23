@@ -15,6 +15,7 @@ public class MiniMapScript : MyComponent
     Vector3 rot;
     [SerializeField] Slider minimapSlider;
     bool isMiniMapLocked = true;
+    [SerializeField] GameObject largeMap;
 
     protected override void MyStart()
     {
@@ -62,5 +63,10 @@ public class MiniMapScript : MyComponent
     public void ZoomSlider()
     {
         miniMapCamera.orthographicSize = minimapSlider.value;
+    }
+
+    public void LargeMapToggle()
+    {
+        largeMap.SetActive(!largeMap.activeSelf);
     }
 }
