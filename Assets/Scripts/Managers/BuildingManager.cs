@@ -11,16 +11,16 @@ public class BuildingManager : Manager
     // 시작점만 알면 하나의 시작점과 다음 시작점을 이으면 해당 길이 됨.
     protected List<GameObject> corners;
     protected List<GameObject> roads;
-    
+
     protected List<RopeStruct> ropeStructs;
-    public List<RopeStruct> RopeStructs=> ropeStructs;
+    public List<RopeStruct> RopeStructs => ropeStructs;
 
     protected List<Pylon> pylonList;
     public List<Pylon> PylonList => pylonList;
 
     public EnergyBarrierGenerator generator;
     public PowerSupply supply;
-  
+
 
     public override IEnumerator Initiate()
     {
@@ -28,23 +28,32 @@ public class BuildingManager : Manager
         roadData = new();
         corners = new();
         roads = new();
-        pylonList= new List<Pylon>();
+        pylonList = new List<Pylon>();
         // 리스트로 만들고, 순서를 역순으로 변경.
         // 길을 만든 뒤에도 계속 길이 확장될 예정이라 추가되기 위해서는 이 구조가 편할것으로 예상.
         roadData.Add(new Vector2(-20, 10));
-        roadData.Add(new Vector2(-40, 10)); // 시작점
-        roadData.Add(new Vector2(-40, -40)); // 시작점
-        roadData.Add(new Vector2(40, -40)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
-        roadData.Add(new Vector2(40, 50)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
-        roadData.Add(new Vector2(-75, 50)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
-        roadData.Add(new Vector2(-75, -75));
-        roadData.Add(new Vector2(75, -75));
-        roadData.Add(new Vector2(75, 75));
-        roadData.Add(new Vector2(-75, 75)); // 마지막점.
+        //roadData.Add(new Vector2(-40, 10)); // 시작점
+        PointRegistration(true, -20);
+        //roadData.Add(new Vector2(-40, -40)); // 시작점
+        PointRegistration(false, -50);
+        //roadData.Add(new Vector2(40, -40)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
+        PointRegistration(true, 80);
+        //roadData.Add(new Vector2(40, 50)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
+        PointRegistration(false, 90);
+        //roadData.Add(new Vector2(-75, 50)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
+        PointRegistration(true, -115);
+        //roadData.Add(new Vector2(-75, -75));
+        PointRegistration(false, -125);
+        //roadData.Add(new Vector2(75, -75));
+        PointRegistration(true, 150);
+        //roadData.Add(new Vector2(75, 75));
+        PointRegistration(false, 150);
+        //roadData.Add(new Vector2(-75, 75)); // 마지막점.
+        PointRegistration(true, -150);
 
         // 이걸 어디에 
         CreateRoad();
-        
+
         GameManager.ManagerStarts += ManagerStart;
 
         yield return null;
@@ -55,35 +64,54 @@ public class BuildingManager : Manager
         NetworkRunner runner = GameManager.Instance.NetworkManager.Runner;
         if (runner.IsServer)
         {
-            generator   = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 0, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
-            supply      = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.PowerSupply),            new Vector3(-10, 2, 10), Quaternion.Euler(0,90,0)).GetComponentInChildren<PowerSupply>();
-            
+            generator = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 0, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
+            supply = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.PowerSupply), new Vector3(-10, 2, 10), Quaternion.Euler(0, 90, 0)).GetComponentInChildren<PowerSupply>();
+
             buildings.Add(supply);
         }
         else
         {
-            generator   = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
-            supply      = GameObject.FindObjectOfType<PowerSupply>();
+            generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
+            supply = GameObject.FindObjectOfType<PowerSupply>();
         }
 
         Debug.Log(generator);
         Debug.Log(supply);
     }
 
+    protected void PointRegistration(bool isX, int distance)
+    {
+        if (roadData.Count > 0)
+        {
+            Vector2 endPoint = roadData[roadData.Count - 1];
+            if (isX)
+            {
+                roadData.Add(new Vector2(endPoint.x + distance, endPoint.y));
+            }
+            else
+            {
+                roadData.Add(new Vector2(endPoint.x, endPoint.y + distance));
+            }
+        }
+        else
+        {
+            Debug.LogError("처음이 등록되어있지 않습니다.");
+        }
+    }
     public Vector3 RoadScale(Vector2 start, Vector2 end)
     {
         Vector3 result;
         Vector2 delta = end - start;
         float deltaScale = (Mathf.Abs(delta.x + delta.y) - 10) / 10;
-        
+
         result = new Vector3(deltaScale, 1, 1);
-       
+
         return result;
     }
     public Vector3 RoadPosition(Vector2 start, Vector2 end)
     {
-        Vector2 lengthSize = (end - start)*0.5f;
-        
+        Vector2 lengthSize = (end - start) * 0.5f;
+
         return new Vector3(start.x + lengthSize.x, 0.1f, start.y + lengthSize.y);
     }
     protected void CreateRoad()
@@ -99,10 +127,11 @@ public class BuildingManager : Manager
             }
             else
             {
-                corners.Add(CornerInstantiate());
-                corners[i].transform.position = new Vector3(roadData[i].x, 0.1f, roadData[i].y);
-                corners[i].transform.rotation = Quaternion.Euler(CornerRotation(roadData[i - 1], roadData[i], roadData[i + 1]));
-                corners[i].GetComponent<Road>().Size = new Vector2Int(10, 10);
+                //corners.Add(CornerInstantiate());
+                //corners[i].transform.position = new Vector3(roadData[i].x, 0.1f, roadData[i].y);
+                //corners[i].transform.rotation = Quaternion.Euler(CornerRotation(roadData[i - 1], roadData[i], roadData[i + 1]));
+                //corners[i].GetComponent<Road>().Size = new Vector2Int(10, 10);
+                corners.Add(CornerInstantiate(roadData[i - 1], roadData[i], roadData[i + 1]));
             }
         }
 
@@ -136,13 +165,33 @@ public class BuildingManager : Manager
         }
         corners[0].gameObject.SetActive(false);
     }
-    protected GameObject CornerInstantiate()
+    protected GameObject CornerInstantiate(Vector2 before, Vector2 now, Vector2 after)
     {
-        return GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.CornerWithBarrier);
+        GameObject pointObject;
+        if (  LineCheck(before, now, after))
+        {
+            pointObject = RoadInstantiate();
+        }
+        else
+        {
+            pointObject =  GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.CornerWithBarrier);
+        }
+        pointObject.transform.position = new Vector3(now.x, 0.1f, now.y);
+        pointObject.transform.rotation = Quaternion.Euler(CornerRotation(before, now, after));
+        pointObject.GetComponent<Road>().Size = new Vector2Int(10, 10);
+        return pointObject;
     }
     protected GameObject RoadInstantiate()
     {
         return GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.RoadWithBarrier);
+    }
+    protected bool LineCheck(Vector2 before, Vector2 now, Vector2 after)
+    {
+        if (before.x == after.x || before.y == after.y )
+        {
+            return true;
+        }
+        return false ;
     }
     public Vector3 CornerRotation(Vector2 before, Vector2 now, Vector2 after)
     {
@@ -164,6 +213,10 @@ public class BuildingManager : Manager
                 // 270도 돌아감
                 return new Vector3(0, 270, 0);
             }
+            if (back == Vector2.zero)
+            {
+                return new Vector3(0,90,0);
+            }
         }
         else if (front == Vector2.left) // x가 작아짐
         {
@@ -178,6 +231,10 @@ public class BuildingManager : Manager
                 // 180
                 return new Vector3(0, 180, 0);
 
+            }
+            if (back == Vector2.zero)
+            {
+                return new Vector3(0, 90, 0);
             }
         }
         else if (front == Vector2.up) // y가 커짐
@@ -194,6 +251,10 @@ public class BuildingManager : Manager
                 return new Vector3(0, 270, 0);
 
             }
+            if (back == Vector2.zero)
+            {
+                return Vector3.zero;
+            }
         }
         else if (front == Vector2.down) // y가 작아짐
         {
@@ -206,6 +267,10 @@ public class BuildingManager : Manager
             else if (back == Vector2.left) // x가 작아짐
             {
                 // 0
+                return Vector3.zero;
+            }
+            if (back == Vector2.zero)
+            {
                 return Vector3.zero;
             }
         }
@@ -224,5 +289,5 @@ public class BuildingManager : Manager
     {
         buildings = newBuildingList;
     }
-    
+
 }
