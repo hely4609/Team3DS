@@ -160,6 +160,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8990604787f8ca24ebc52f2271c6e51b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  miniMapCamera: {fileID: 5457664204301404731}
+  largeMapCamera: {fileID: 921125451114106830}
   minimapSlider: {fileID: 4253236687834972191}
   largeMap: {fileID: 8674742331313543498}
 --- !u!1 &1159031893793120749

@@ -9,7 +9,8 @@ public class MiniMapScript : MyComponent
     //Layer설정으로관리
     //MiniMapCamera의 CullingMask로 보고싶은 Layer조정가능
     //RenderTexture필요
-    Camera miniMapCamera;
+    [SerializeField] Camera miniMapCamera;
+    [SerializeField] Camera largeMapCamera;
     Player controlledPlayer;
     Vector3 pos;
     Vector3 rot;
@@ -19,7 +20,6 @@ public class MiniMapScript : MyComponent
 
     protected override void MyStart()
     {
-        miniMapCamera = GetComponentInChildren<Camera>();
         controlledPlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
         minimapSlider.value = miniMapCamera.orthographicSize;
     }
@@ -68,5 +68,11 @@ public class MiniMapScript : MyComponent
     public void LargeMapToggle()
     {
         largeMap.SetActive(!largeMap.activeSelf);
+    }
+
+    public void LargeMapZoom(float value)
+    {
+        if (!largeMap.activeSelf) return;
+        largeMapCamera.orthographicSize = Mathf.Clamp(largeMapCamera.orthographicSize - value * 0.05f, 10, 100);
     }
 }

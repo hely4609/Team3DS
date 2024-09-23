@@ -150,6 +150,7 @@ public class LocalController : ControllerBase
     protected void OnMouseWheel(Vector2 value)
     {
         DoMouseWheel?.Invoke(value);
+        if (minimap != null) minimap.LargeMapZoom(value.y);
     }
 
     protected void OnMouseWheel(InputValue value)

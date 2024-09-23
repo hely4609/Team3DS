@@ -134,13 +134,23 @@ public class Pylon : InteractableBuilding
 
                 py.attachedPylonList.Add(this);
                 this.attachedPylonList.Add(py);
-                foreach (Pylon listPy in attachedPylonList)
+                if(OnOff)
                 {
-                    if (listPy.OnOff)
+                    foreach(Pylon listPy in attachedPylonList)
                     {
-                        py.TurnOnOff(true);
-                        this.TurnOnOff(true);
-                        break;
+                        listPy.TurnOnOff(true);
+                    }
+                }
+                else
+                {
+                    foreach (Pylon listPy in attachedPylonList)
+                    {
+                        if (listPy.OnOff)
+                        {
+                            py.TurnOnOff(true);
+                            this.TurnOnOff(true);
+                            break;
+                        }
                     }
                 }
                 py.FixRope(player, number);
