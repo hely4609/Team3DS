@@ -86,6 +86,7 @@ public abstract class Building : MyComponent
             }
         }
 
+        HeightCheck();
         if (CompletePercent < 1)
         {
             foreach (var r in meshes)
@@ -107,7 +108,6 @@ public abstract class Building : MyComponent
             buildingSignCanvas.transform.localScale /= transform.localScale.x;
             buildingSignCanvas.GetComponent<BuildingSignCanvas>().SetRadius(size.x);
         }
-        HeightCheck();
 
         CheckBuild();
         VisualizeBuildable();
