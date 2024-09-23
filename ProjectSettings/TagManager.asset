@@ -20,6 +20,7 @@ TagManager:
   - BuildingConfirmUI
   - RopeMaxDistanceSignUI
   - OnScreenKeyGuideUI
+  - LevelUpEffect
   layers:
   - Default
   - TransparentFX
