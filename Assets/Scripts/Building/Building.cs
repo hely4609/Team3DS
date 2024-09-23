@@ -55,18 +55,22 @@ public abstract class Building : MyComponent
     [SerializeField] protected GameObject marker_designed;
     [SerializeField] protected GameObject marker_on;
     [SerializeField] protected GameObject marker_off;
+    [SerializeField] protected GameObject buildingSignCanvas;
 
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
 
         Initialize();
+        
+        buildingSignCanvas = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.BuildingSignCanvas));
+        buildingSignCanvas.transform.SetParent(transform, false);
+        buildingSignCanvas.SetActive(false);
 
         marker_designed.SetActive(false);
         marker_on.SetActive(false);
         marker_off.SetActive(false);
 
-        Debug.Log($"BTC {BuildingTimeCurrent}, btm : {buildingTimeMax}, cp : {CompletePercent}");
         if (IsFixed)
         {
             foreach (var col in cols)
@@ -81,6 +85,7 @@ public abstract class Building : MyComponent
                 col.enabled = false;
             }
         }
+
         if (CompletePercent < 1)
         {
             foreach (var r in meshes)
@@ -97,6 +102,10 @@ public abstract class Building : MyComponent
                 r.material = completeMat;
             }
             marker_on.SetActive(true);
+
+            buildingSignCanvas.transform.localPosition = new Vector3(0, heightMax * 0.5f / transform.localScale.y, 0);
+            buildingSignCanvas.transform.localScale /= transform.localScale.x;
+            buildingSignCanvas.GetComponent<BuildingSignCanvas>().SetRadius(size.x);
         }
         HeightCheck();
 
@@ -328,6 +337,9 @@ public abstract class Building : MyComponent
                                 r.material = completeMat;
                             marker_designed.SetActive(false);
                             marker_on.SetActive(true);
+                            buildingSignCanvas.transform.localPosition = new Vector3(0, heightMax * 0.5f / transform.localScale.y, 0);
+                            buildingSignCanvas.transform.localScale /= transform.localScale.x;
+                            buildingSignCanvas.GetComponent<BuildingSignCanvas>().SetRadius(size.x);
                         }
                     }
                     break;

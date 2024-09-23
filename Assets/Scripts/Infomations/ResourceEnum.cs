@@ -35,7 +35,10 @@ namespace ResourceEnum
         ION_Cannon,
         Bridge,
         Pylon,
-        buildingEnd
+        buildingEnd,
+
+        // ETC
+        BuildingSignCanvas,
     }
 
     public enum Material

@@ -33,6 +33,8 @@ public class ResourcesPath
         "Prefabs/Objects/Rope",
         // Enemy
         "Prefabs/Characters/EnemyTest",
+        // ETC
+        "Prefabs/UIs/Signs/BuildingSignCanvas",
 
 
     };
