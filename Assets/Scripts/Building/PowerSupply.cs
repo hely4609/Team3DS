@@ -16,6 +16,7 @@ public class PowerSupply : InteractableBuilding
     protected TextMeshProUGUI levelText;
     protected TextMeshProUGUI expText;
     protected TextMeshProUGUI powerText;
+    protected TextMeshProUGUI levelUpEffect;
 
     protected Image expFillImage;
     protected Image powerFillImage;
@@ -55,6 +56,7 @@ public class PowerSupply : InteractableBuilding
         levelText = GameObject.FindGameObjectWithTag("LevelText").GetComponent<TextMeshProUGUI>();
         expText = GameObject.FindGameObjectWithTag("ExpText").GetComponent<TextMeshProUGUI>();
         powerText = GameObject.FindGameObjectWithTag("PowerText").GetComponent<TextMeshProUGUI>();
+        levelUpEffect = GameObject.FindGameObjectWithTag("LevelUpEffect").GetComponent<TextMeshProUGUI>();
 
         expFillImage = GameObject.FindGameObjectWithTag("ExpFillImage").GetComponent<Image>();
         powerFillImage = GameObject.FindGameObjectWithTag("PowerFillImage").GetComponent<Image>();
@@ -147,6 +149,8 @@ public class PowerSupply : InteractableBuilding
             {
                 case nameof(Level):
                     levelText.text = $"Lv.{Level}";
+                    levelUpEffect.GetComponent<Animator>().SetTrigger("LevelUp");
+                    SoundManager.Play(ResourceEnum.SFX.Rise03, Camera.main.transform.position);
                     break;
                 case nameof(ExpCurrent):
                     expText.text = $"{ExpCurrent} / {ExpMax}";

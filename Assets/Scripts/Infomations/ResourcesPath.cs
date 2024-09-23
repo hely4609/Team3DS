@@ -67,6 +67,7 @@ public class ResourcesPath
         "Sounds/SFX/door_close",
         "Sounds/SFX/rope_stretching",
         "Sounds/SFX/plug_in",
+        "Sounds/SFX/Rise03",
         // Foodsteps
         "Sounds/SFX/Footsteps/footsteps_dirt_cut",
         "Sounds/SFX/Footsteps/footsteps_metal_cut",
