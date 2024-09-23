@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class MiniMapScript : MyComponent
@@ -73,6 +74,18 @@ public class MiniMapScript : MyComponent
     public void LargeMapZoom(float value)
     {
         if (!largeMap.activeSelf) return;
+
+        float bef = largeMapCamera.orthographicSize;
         largeMapCamera.orthographicSize = Mathf.Clamp(largeMapCamera.orthographicSize - value * 0.05f, 10, 100);
+        float aft = largeMapCamera.orthographicSize;
+
+        if (bef > aft)
+        {
+            Vector3 wantVector = new Vector3(Input.mousePosition.x - Screen.width * 0.5f, 0, Input.mousePosition.y - Screen.height * 0.5f);
+            wantVector.Normalize();
+            largeMapCamera.transform.position += wantVector * 10;
+            largeMapCamera.transform.position = new Vector3(Mathf.Clamp(largeMapCamera.transform.position.x + wantVector.x * 10, -100, 100), largeMapCamera.transform.position.y, Mathf.Clamp(largeMapCamera.transform.position.z + wantVector.z * 10, -100, 100));
+
+        }
     }
 }
