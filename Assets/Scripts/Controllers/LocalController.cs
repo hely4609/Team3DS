@@ -150,7 +150,7 @@ public class LocalController : ControllerBase
     protected void OnMouseWheel(Vector2 value)
     {
         DoMouseWheel?.Invoke(value);
-        if (minimap != null) minimap.LargeMapZoom(value.y);
+        if (HasInputAuthority && minimap != null) minimap.LargeMapZoom(value.y);
     }
 
     protected void OnMouseWheel(InputValue value)
@@ -212,10 +212,13 @@ public class LocalController : ControllerBase
     MiniMapScript minimap;
     protected void OnLargeMap()
     {
-        if(minimap == null)
+        if (HasInputAuthority)
         {
-            minimap = FindObjectOfType<MiniMapScript>();
+            if (minimap == null)
+            {
+                minimap = FindObjectOfType<MiniMapScript>();
+            }
+            if(minimap != null) minimap.LargeMapToggle();
         }
-        if(minimap != null) minimap.LargeMapToggle();
     }
 }
