@@ -75,8 +75,6 @@ public class BuildingManager : Manager
             supply = GameObject.FindObjectOfType<PowerSupply>();
         }
 
-        Debug.Log(generator);
-        Debug.Log(supply);
     }
 
     protected void PointRegistration(bool isX, int distance)

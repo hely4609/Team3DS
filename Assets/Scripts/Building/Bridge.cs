@@ -28,7 +28,6 @@ public class Bridge : InteractableBuilding
         buildingType = BuildingEnum.Bridge;
         isNeedLine = false;
         size = new Vector2Int(2, 4);
-        buildingTimeMax = 10;
         objectName = "´Ù¸®";
 
     }
