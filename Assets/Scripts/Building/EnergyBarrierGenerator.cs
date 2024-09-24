@@ -1,13 +1,17 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
-using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class EnergyBarrierGenerator : InteractableBuilding
 {
     protected int hpMax;
-    [SerializeField]protected int hpCurrent;
-    public int HpCurrent { get { return hpCurrent; } }
+    [SerializeField, Networked] protected int hpCurrent { get; set; }
+
+    protected TextMeshProUGUI hpText;
+    protected Image hpFillImage;
 
     protected GameObject[] energyBarrierArray;
 
@@ -23,6 +27,8 @@ public class EnergyBarrierGenerator : InteractableBuilding
     public void TakeDamage(int damage)
     {
         hpCurrent -= damage;
+        hpText.text = $"{hpCurrent} / {hpMax}";
+        hpFillImage.fillAmount = hpCurrent / (float)hpMax;
         if (hpCurrent <= 0)
         {
             onOff = false;
@@ -32,6 +38,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
     }
     private void OnCollisionEnter(Collision collision)
     {
+        if (!HasStateAuthority) return;
         if (collision.gameObject.TryGetComponent(out Monster enemy))
         {
             enemy.Attack(this);
@@ -54,8 +61,14 @@ public class EnergyBarrierGenerator : InteractableBuilding
     {
         onOff = true;
         hpMax = 30000;
-        hpCurrent = hpMax;
+        if (HasStateAuthority) hpCurrent = hpMax;
         energyBarrierArray = GameObject.FindGameObjectsWithTag("EnergyBarrier");
+
+        hpText = GameObject.FindGameObjectWithTag("HPText").GetComponent<TextMeshProUGUI>();
+        hpFillImage = GameObject.FindGameObjectWithTag("HPFillImage").GetComponent<Image>();
+
+        hpText.text = $"{hpCurrent} / {hpMax}";
+        hpFillImage.fillAmount = hpCurrent / (float)hpMax;
 
         SetActiveEnergyBarrier();
     }
@@ -76,5 +89,21 @@ public class EnergyBarrierGenerator : InteractableBuilding
     {
         RepairBarrier();
         return default;
+    }
+
+    public override void Render()
+    {
+
+        foreach (var change in _changeDetector.DetectChanges(this))
+        {
+            switch (change)
+            {
+                case nameof(hpCurrent):
+                    hpText.text = $"{hpCurrent} / {hpMax}";
+                    hpFillImage.fillAmount = hpCurrent / (float)hpMax;
+                    break;
+
+            }
+        }
     }
 }

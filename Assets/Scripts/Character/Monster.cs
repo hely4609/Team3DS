@@ -154,6 +154,7 @@ public class Monster : Character
 
     public void Attack(EnergyBarrierGenerator target) 
     {
+        if (!isReady) return;
         isReady = false;
 
         AnimTrigger?.Invoke("AttackTrigger");

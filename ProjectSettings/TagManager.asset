@@ -21,6 +21,8 @@ TagManager:
   - RopeMaxDistanceSignUI
   - OnScreenKeyGuideUI
   - LevelUpEffect
+  - HPText
+  - HPFillImage
   layers:
   - Default
   - TransparentFX
