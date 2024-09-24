@@ -729,8 +729,17 @@ MonoBehaviour:
   marker_designed: {fileID: 3231269781303809827}
   marker_on: {fileID: 3801119828751985946}
   marker_off: {fileID: 6891789838605177302}
+  buildingSignCanvas: {fileID: 0}
   objectName: 
-  attackDamage: 1
+  _IsSettingRope: 0
+  _IsRoped: 0
+  ropeStruct:
+    ropeObjects: []
+    ropePositions: []
+  maxRopeLength: 0
+  currentRopeLength: 0
+  powerConsumption: 0
+  attackDamage: 4
   attackSpeed: 2
   attackRange: 1
   target: {fileID: 0}
@@ -739,6 +748,7 @@ MonoBehaviour:
   animator: {fileID: 2445322502128708340}
   gunBarrel: {fileID: 8364908034670313472}
   gunBarrelRotateCorrection: 0
+  attachedPylon: {fileID: 0}
   splashRadius: 10
 --- !u!136 &5371794395544762303
 CapsuleCollider:
