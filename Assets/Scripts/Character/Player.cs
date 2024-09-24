@@ -539,7 +539,7 @@ public partial class Player : Character
     {
         if (DesigningBuilding == null)
         {
-            IsThisPlayerCharacterUICanvasActivated = true;
+            IsThisPlayerCharacterUICanvasActivated = !IsThisPlayerCharacterUICanvasActivated;
             return true;
         }
         return false;

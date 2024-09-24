@@ -100,7 +100,7 @@ public class LocalController : ControllerBase
     protected void OnOpenDesignBuildingUI()
     {
         if (controlledPlayer.DesigningBuilding == null && HasInputAuthority)
-            controlledPlayer.buildingSelectUI.SetActive(true);
+            controlledPlayer.buildingSelectUI.SetActive(!controlledPlayer.buildingSelectUI.activeInHierarchy);
     }
 
     protected void OnMove(Vector3 direaction)
