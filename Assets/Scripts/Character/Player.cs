@@ -50,7 +50,7 @@ public partial class Player : Character
     public GameObject BePicked => bePicked;
     // protected bool isHandFree;
     protected ResourceEnum.Prefab[,] buildableEnumArray = new ResourceEnum.Prefab[5, 5];
-    protected int buildableEnumPageIndex = 0;
+    public int buildableEnumPageIndex = 0;
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
     [Networked] public bool IsBuildingComfirmUIOpen { get; set; } = false;

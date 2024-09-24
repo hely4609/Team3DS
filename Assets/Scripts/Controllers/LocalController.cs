@@ -1,7 +1,6 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -220,5 +219,10 @@ public class LocalController : ControllerBase
             }
             if(minimap != null) minimap.LargeMapToggle();
         }
+    }
+
+    protected void OnBuildingPageUpDown(InputValue value)
+    {
+        controlledPlayer.buildableEnumPageIndex = Mathf.Clamp(controlledPlayer.buildableEnumPageIndex + (int)value.Get(), 0, 4);
     }
 }
