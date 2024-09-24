@@ -346,21 +346,23 @@ public partial class Player : Character
             // ·ÎÇÁ ²ø±â
             Vector3 ropePos = transform.position;
             int playerID = possessionController.MyNumber;
-            int x = (int)ropePos.x;
-            int z = (int)ropePos.z;
+            int x = (int)Mathf.Round(ropePos.x);
+            float y = ropePos.y;
+            int z = (int)Mathf.Round(ropePos.z);
             Vector2 currentPos = new Vector2(x, z);
+            Vector3 playerIntPos = new Vector3(x, y, z);
             if (currentPos != lastPos)
             {
-                CanSetRope = ropeBuilding.CheckRopeLength(currentPos, playerID);
+                CanSetRope = ropeBuilding.CheckRopeLength(playerIntPos, playerID);
                 if (CanSetRope)
                 {
-                    ropeBuilding.OnRopeSet(currentPos, playerID);
+                    ropeBuilding.OnRopeSet(playerIntPos, playerID);
                     lastPos = currentPos;
                 }
-                else 
+                else
                 {
-                    if(ropeMaxDistanceSignUI != null) ropeMaxDistanceSignUI.SetActive(true);
-                    if(ropeSource == null || !ropeSource.isPlaying)
+                    if (ropeMaxDistanceSignUI != null) ropeMaxDistanceSignUI.SetActive(true);
+                    if (ropeSource == null || !ropeSource.isPlaying)
                     {
                         SoundManager.Play(ResourceEnum.SFX.rope_stretching, transform.position, false, out ropeSource);
                     }

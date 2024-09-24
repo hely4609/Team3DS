@@ -59,10 +59,10 @@ public class Tower : InteractableBuilding
         }
         else if (player.ropeBuilding == null)
         {
-            Vector2 playerTransformVector2 = new Vector2((int)(player.transform.position.x), (int)(player.transform.position.z));
+            Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
             if (!IsSettingRope && player.ropeBuilding == null)
             {
-                OnRopeSet(playerTransformVector2, 0);
+                OnRopeSet(playerTransformVector3, 0);
                 player.ropeBuilding = this;
                 return Interaction.takeRope;
             }

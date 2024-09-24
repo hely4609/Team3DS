@@ -14,7 +14,7 @@ public class Pylon : InteractableBuilding
     public List<Pylon> attachedPylonList;
     protected override void Initialize()
     {
-        ropeStruct.ropePositions.Add(startPos);
+        ropeStruct.ropePositions.Add(transform.position);
 
         GameManager.Instance.BuildingManager.PylonList.Add(this);
         // 디폴트 값.
@@ -28,11 +28,11 @@ public class Pylon : InteractableBuilding
         for (int i = 0; i < 4; i++)
         {
             RopeStruct ropes = new RopeStruct();
-            ropes.ropePositions = new List<Vector2>();
+            ropes.ropePositions = new List<Vector3>();
             ropes.ropeObjects = new List<NetworkObject>();
             multiTabList.Add(ropes);
 
-            multiTabList[i].ropePositions.Add(startPos);
+            multiTabList[i].ropePositions.Add(transform.position);
             isSettingRopeList.Add(false);
             ropeLengthList.Add(maxRopeLength);
         }
@@ -59,7 +59,7 @@ public class Pylon : InteractableBuilding
 
         foreach (var rope in multiTabList)
         {
-            rope.ropePositions[0] = startPos;
+            rope.ropePositions[0] = transform.position;
         }
 
         return toReturn;
@@ -167,7 +167,7 @@ public class Pylon : InteractableBuilding
         }
         multiTabList[number].ropeObjects.Clear();
         multiTabList[number].ropePositions.Clear();
-        multiTabList[number].ropePositions.Add(startPos);
+        multiTabList[number].ropePositions.Add(transform.position);
         ropeLengthList[number] = maxRopeLength;
         player.CanSetRope = true;
         isSettingRopeList[number] = false;
@@ -176,15 +176,15 @@ public class Pylon : InteractableBuilding
     {
         multiTabList[number].ropeObjects.Clear();
         multiTabList[number].ropePositions.Clear();
-        multiTabList[number].ropePositions.Add(startPos);
+        multiTabList[number].ropePositions.Add(transform.position);
         ropeLengthList[number] = maxRopeLength;
         player.CanSetRope = true;
         isSettingRopeList[number] = false;
     }
-    public override bool CheckRopeLength(Vector2 end, int number) // 전선을 끌수 있었나?
+    public override bool CheckRopeLength(Vector3 end, int number) // 전선을 끌수 있었나?
     {
-        Vector2 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
-        Vector2 delta = end - start;
+        Vector3 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
+        Vector3 delta = end - start;
         if (ropeLengthList[number] > 0)
         {
             
@@ -192,7 +192,7 @@ public class Pylon : InteractableBuilding
         }
         else return false;
     }
-    public override void OnRopeSet(Vector2 playerPosition, int number) // 전선을 놓기. 길이랑 같은 원리.
+    public override void OnRopeSet(Vector3 playerPosition, int number) // 전선을 놓기. 길이랑 같은 원리.
     {
         if (HasStateAuthority)
         {
@@ -218,15 +218,15 @@ public class Pylon : InteractableBuilding
             return;
         }
 
-        Vector2 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 2];
-        Vector2 end = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
-        Vector2 delta = end - start;
+        Vector3 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 2];
+        Vector3 end = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
+        Vector3 delta = end - start;
 
         ropeLengthList[number] -= delta.magnitude;
-        float deltaAngle = Vector2.Angle(delta, Vector2.up);
+        float deltaAngle = Vector3.Angle(delta, Vector3.up);
         int deltaAngleCorrection = 1;
         if (delta.x < 0) deltaAngleCorrection = -1;
-        deltaAngle = Vector2.Angle(delta, Vector2.up) * deltaAngleCorrection;
+        deltaAngle = Vector3.Angle(delta, Vector3.up) * deltaAngleCorrection;
 
         NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
         multiTabList[number].ropeObjects.Add(ropeObject);

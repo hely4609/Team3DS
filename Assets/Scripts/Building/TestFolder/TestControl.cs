@@ -41,19 +41,4 @@ public class TestControl : MonoBehaviour
     //        }
     //    }
     //}
-    public EnergyBarrierGenerator gen;
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            List<Building> buildinglist = GameManager.Instance.BuildingManager.Buildings;
-            for (int i = 0; i < buildinglist.Count; i++)
-            {
-                Debug.Log($"{GameManager.Instance.BuildingManager.Buildings[i].name} : {GameManager.Instance.BuildingManager.Buildings[i].transform.position}, {GameManager.Instance.BuildingManager.Buildings[i].transform.localScale}");
-            
-            }
-
-        }
-    }
-
 }

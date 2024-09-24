@@ -9,7 +9,7 @@ using UnityEngine;
 public struct RopeStruct
 {
     public List<NetworkObject> ropeObjects;
-    public List<Vector2> ropePositions;
+    public List<Vector3> ropePositions;
 }
 public class InteractableBuilding : Building, IInteraction
 {
@@ -25,8 +25,8 @@ public class InteractableBuilding : Building, IInteraction
     protected override void Initialize()
     {
         ropeStruct.ropeObjects = new List<NetworkObject>();
-        ropeStruct.ropePositions = new List<Vector2>();
-        ropeStruct.ropePositions.Add(startPos);
+        ropeStruct.ropePositions = new List<Vector3>();
+        ropeStruct.ropePositions.Add(transform.position);
     }
     // 위치를 고정함.
 
@@ -87,7 +87,7 @@ public class InteractableBuilding : Building, IInteraction
     public override bool FixPlace()
     {
         bool toReturn = base.FixPlace();
-        ropeStruct.ropePositions[0] = startPos;
+        ropeStruct.ropePositions[0] = transform.position;
         return toReturn;
     }
 
@@ -100,15 +100,15 @@ public class InteractableBuilding : Building, IInteraction
         }
         ropeStruct.ropeObjects.Clear();
         ropeStruct.ropePositions.Clear();
-        ropeStruct.ropePositions.Add(startPos);
+        ropeStruct.ropePositions.Add(transform.position);
         currentRopeLength = maxRopeLength;
         player.CanSetRope = true;
         IsSettingRope = false;
     }
-    public virtual bool CheckRopeLength(Vector2 end, int number) // 전선을 끌수 있었나?
+    public virtual bool CheckRopeLength(Vector3 end, int number) // 전선을 끌수 있었나?
     {
-        Vector2 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
-        Vector2 delta = end - start;
+        Vector3 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
+        Vector3 delta = end - start;
         if (currentRopeLength > 0)
         {
             
@@ -116,14 +116,31 @@ public class InteractableBuilding : Building, IInteraction
         }
         else return false;
     }
-    public virtual void OnRopeSet(Vector2 playerPosition, int number) // 전선을 놓기. 길이랑 같은 원리.
+    public virtual void OnRopeSet(Vector3 playerPosition, int number) // 전선을 놓기. 길이랑 같은 원리.
     {
         if (HasStateAuthority)
         {
             IsSettingRope = true;
+            if (ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1].y > playerPosition.y)
+            {
+                if(playerPosition.y<4.7)
+                {
+                    playerPosition.y = (int)playerPosition.y-1;
+                    if (playerPosition.y < 0)
+                        playerPosition.y = 0;
+                }
+                else
+                {
+                    playerPosition.y = (int)Mathf.Round(playerPosition.y);
+                }
+            }
+            else
+            {
+                playerPosition.y = (int)Mathf.Round(playerPosition.y);
+
+            }
+
             ropeStruct.ropePositions.Add(playerPosition);
-            Debug.Log($"{ropeStruct.ropePositions[RopeStruct.ropePositions.Count-1]}");
-            
             CreateRope(number);
         }
     }
@@ -140,19 +157,15 @@ public class InteractableBuilding : Building, IInteraction
 
             return;
         }
-
-
-        Vector2 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2];
-        Vector2 end = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
-        Vector2 delta = end - start;
+        Vector3 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2];
+        Vector3 end = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
+        Vector3 delta = end - start;
 
         currentRopeLength -= delta.magnitude;
-        float deltaAngle = Vector2.Angle(delta, Vector2.up);
-        int deltaAngleCorrection = 1;
-        if (delta.x < 0) deltaAngleCorrection = -1;
-        deltaAngle = Vector2.Angle(delta, Vector2.up) * deltaAngleCorrection;
+        
+        NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, start.y, start.z), Quaternion.LookRotation(delta));
+        //ropeObject.transform.LookAt(end);
 
-        NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
         ropeStruct.ropeObjects.Add(ropeObject);
         ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
