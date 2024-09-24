@@ -27,7 +27,9 @@ namespace ResourceEnum
         EnergyBarrierGenerator,
         Ore,
         // Monster
-        EnemyTest,
+        Slime_Leaf,
+        Slime_Viking,
+        Slime_King,
 
         // 지을 수 있는것
         buildingStart,
