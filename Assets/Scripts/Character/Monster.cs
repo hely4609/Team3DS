@@ -10,11 +10,17 @@ public delegate void MonsterDestroyFunction(Monster monster);
 
 public class Monster : Character
 {
-    protected int oreAmount;
+    [SerializeField] protected int oreAmount;
     protected List<Vector2> roadsVector2; // 길 정보 배열
     [SerializeField]protected int roadDestination; // 지금 어디로 향하고 있는가.
     protected MonsterEnum monsterType;
 
+
+    [SerializeField] protected int hpMax;
+    [SerializeField] protected int hpCurrent;
+    public int HpCurrent => hpCurrent;
+    [SerializeField] protected int attackDamage = 1;
+    protected float attackSpeed;
 
     bool isRelease = false;
     [Networked]bool isReady { get; set; } = false;
@@ -24,8 +30,7 @@ public class Monster : Character
     protected EnergyBarrierGenerator generator;
     protected override void MyStart()
     {
-        hpMax = 5;
-        hpCurrent = 5;
+        hpCurrent = hpMax;
         roadsVector2 = GameManager.Instance.BuildingManager.roadData;
         roadDestination = roadsVector2.Count-1;
         monsterType = MonsterEnum.First;

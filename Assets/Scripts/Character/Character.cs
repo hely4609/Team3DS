@@ -14,11 +14,6 @@ public abstract class Character : MyComponent
 
     protected Socket.Container sockets = new Socket.Container();
 
-    [SerializeField]protected int hpMax;
-    [SerializeField]protected int hpCurrent;
-    public int HpCurrent => hpCurrent;
-    protected int attackDamage = 1;
-    protected float attackSpeed;
     [SerializeField] protected float moveSpeed = 5;
     public float MoveSpeed
     {

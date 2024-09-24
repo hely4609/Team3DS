@@ -32,7 +32,9 @@ public class ResourcesPath
         "Prefabs/Objects/Ore",
         "Prefabs/Objects/Rope",
         // Enemy
-        "Prefabs/Characters/EnemyTest",
+        "Prefabs/Characters/Slime_Leaf",
+        "Prefabs/Characters/Slime_Viking",
+        "Prefabs/Characters/Slime_King",
         // ETC
         "Prefabs/UIs/Signs/BuildingSignCanvas",
 

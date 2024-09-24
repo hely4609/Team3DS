@@ -130,8 +130,8 @@ GameObject:
   - component: {fileID: 7058748826662107400}
   - component: {fileID: 5112656511851648211}
   - component: {fileID: -3294657781394866977}
-  m_Layer: 0
-  m_Name: EnemyTest
+  m_Layer: 8
+  m_Name: Slime_King
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -147,7 +147,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4644625060330405144}
@@ -167,10 +167,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5398990968178988966}
-  hpMax: 0
-  hpCurrent: 0
-  moveSpeed: 5
+  moveSpeed: 3
+  oreAmount: 3
   roadDestination: 0
+  hpMax: 20
+  hpCurrent: 20
+  attackDamage: 1
 --- !u!54 &5398990968178988966
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -210,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 569333891
+  SortKey: 1822317502
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []
@@ -232,7 +234,7 @@ SphereCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 256
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
@@ -339,8 +341,8 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a027387037c52884fbdb0ba64da507c6, type: 2}
-  - {fileID: 2100000, guid: 5b87a972518a3154aa254612d431fa98, type: 2}
+  - {fileID: 2100000, guid: 507fed0338ce65948937cd10a0904a51, type: 2}
+  - {fileID: 2100000, guid: 4d0ca150427ac2f41b5cd8b25e023e6d, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -437,7 +439,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 9215723875220697907}
   - {fileID: 386095581874609653}
@@ -580,7 +582,7 @@ GameObject:
   - component: {fileID: 5589312817562557103}
   - component: {fileID: 7671263133709266533}
   m_Layer: 0
-  m_Name: VikingHelmet
+  m_Name: Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -595,7 +597,7 @@ Transform:
   m_GameObject: {fileID: 8175494975034085296}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.003, y: 0.298, z: 0}
+  m_LocalPosition: {x: 0.003, y: 0.447, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -608,7 +610,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8175494975034085296}
-  m_Mesh: {fileID: 5304856063399976830, guid: 2e6931140dfc0a342b8aaca58929e860, type: 3}
+  m_Mesh: {fileID: -8918359706675279303, guid: 7f9934f54349dc2489d80b0298740ae5, type: 3}
 --- !u!23 &7671263133709266533
 MeshRenderer:
   m_ObjectHideFlags: 0
