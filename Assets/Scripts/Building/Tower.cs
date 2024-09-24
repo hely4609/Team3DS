@@ -271,9 +271,9 @@ public class Tower : InteractableBuilding
         //if (building.GetType().IsSubclassOf(typeof(Tower)))
         {
             Pylon py = building as Pylon;
-            Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
+            Vector3 thisVector3 = new Vector3((int)(transform.position.x),(int)(transform.position.y) ,(int)(transform.position.z));
 
-            py.OnRopeSet(thisVector2, number);
+            py.OnRopeSet(thisVector3, number);
             IsSettingRope = false;
             
             IsRoped = true;

@@ -6,7 +6,7 @@ using UnityEngine;
 public class Pylon : InteractableBuilding
 {
     protected int cost;
-    [SerializeField]protected List<RopeStruct> multiTabList;
+    [SerializeField] protected List<RopeStruct> multiTabList;
     public List<RopeStruct> MultiTabList { get { return multiTabList; } }
     public List<bool> isSettingRopeList;
     public List<float> ropeLengthList;
@@ -74,10 +74,10 @@ public class Pylon : InteractableBuilding
         }
         else if (player.ropeBuilding == null)
         {
-            Vector2 playerTransformVector2 = new Vector2((int)(player.transform.position.x), (int)(player.transform.position.z));
+            Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
             if (!isSettingRopeList[playerID] && player.ropeBuilding == null)
             {
-                OnRopeSet(playerTransformVector2, playerID);
+                OnRopeSet(playerTransformVector3, playerID);
                 player.ropeBuilding = this;
                 // 줄을 집을거임.
                 return Interaction.takeRope;
@@ -86,7 +86,7 @@ public class Pylon : InteractableBuilding
         else
         {
             AttachRope(player, playerID);
-            
+
         }
         return Interaction.None;
     }
@@ -97,9 +97,10 @@ public class Pylon : InteractableBuilding
         //if (building.GetType().IsSubclassOf(typeof(Tower)))
         {
             Tower tw = building as Tower;
-            Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
+            Vector3 thisVector3 = new Vector3((int)(transform.position.x), (int)(transform.position.y), (int)(transform.position.z));
 
-            tw.OnRopeSet(thisVector2, number); marker_on.SetActive(OnOff);
+            tw.OnRopeSet(thisVector3, number);
+            marker_on.SetActive(OnOff);
             marker_off.SetActive(!OnOff);
             foreach (MeshRenderer r in meshes)
             {
@@ -111,11 +112,14 @@ public class Pylon : InteractableBuilding
             }
             isSettingRopeList[number] = false;
             tw.IsRoped = true;
-            buildingSignCanvas.SetActive(false);
+            if (this.OnOff)
+            {
+                tw.BuildingSignCanvas.SetActive(false);
+            }
             tw.attachedPylon = this;
             player.CanSetRope = true;
             player.ropeBuilding = null;
-            
+
             SoundManager.Play(ResourceEnum.SFX.plug_in, transform.position);
         }
         else if (building is Pylon && building != this)
@@ -123,9 +127,9 @@ public class Pylon : InteractableBuilding
             Pylon py = building as Pylon;
             if (!attachedPylonList.Contains(py))
             {
-                Vector2 thisVector2 = new Vector2((int)(transform.position.x), (int)(transform.position.z));
+                Vector3 thisVector3 = new Vector3((int)(transform.position.x), (int)(transform.position.y), (int)(transform.position.z));
 
-                building.OnRopeSet(thisVector2, number);
+                py.OnRopeSet(thisVector3, number);
                 isSettingRopeList[number] = false;
                 player.CanSetRope = true;
                 player.ropeBuilding = null;
@@ -134,9 +138,9 @@ public class Pylon : InteractableBuilding
 
                 py.attachedPylonList.Add(this);
                 this.attachedPylonList.Add(py);
-                if(OnOff)
+                if (OnOff)
                 {
-                    foreach(Pylon listPy in attachedPylonList)
+                    foreach (Pylon listPy in attachedPylonList)
                     {
                         listPy.TurnOnOff(true);
                     }
@@ -171,7 +175,7 @@ public class Pylon : InteractableBuilding
         ropeLengthList[number] = maxRopeLength;
         player.CanSetRope = true;
         isSettingRopeList[number] = false;
-    }  
+    }
     public virtual void FixRope(Player player, int number)
     {
         multiTabList[number].ropeObjects.Clear();
@@ -187,7 +191,7 @@ public class Pylon : InteractableBuilding
         Vector3 delta = end - start;
         if (ropeLengthList[number] > 0)
         {
-            
+
             return true;
         }
         else return false;
@@ -197,9 +201,26 @@ public class Pylon : InteractableBuilding
         if (HasStateAuthority)
         {
             IsSettingRope = true;
-            multiTabList[number].ropePositions.Add(playerPosition);
-            Debug.Log($"{multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1]}");
+            if (multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1].y > playerPosition.y)
+            {
+                if (playerPosition.y < 4.7)
+                {
+                    playerPosition.y = (int)playerPosition.y - 1;
+                    if (playerPosition.y < 0)
+                        playerPosition.y = 0;
+                }
+                else
+                {
+                    playerPosition.y = (int)Mathf.Round(playerPosition.y);
+                }
+            }
+            else
+            {
+                playerPosition.y = (int)Mathf.Round(playerPosition.y);
 
+            }
+
+            multiTabList[number].ropePositions.Add(playerPosition);
             CreateRope(number);
         }
     }
@@ -207,11 +228,9 @@ public class Pylon : InteractableBuilding
     {
         if (multiTabList[number].ropePositions.Count >= 3 && multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 3] == multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1])
         {
-
             multiTabList[number].ropePositions.RemoveRange(multiTabList[number].ropePositions.Count - 2, 2);
             NetworkObject target = multiTabList[number].ropeObjects[multiTabList[number].ropeObjects.Count - 1];
             ropeLengthList[number] += target.gameObject.transform.localScale.z;
-            Debug.Log($"{number}:{ropeLengthList[number]} + {target.gameObject.transform.localScale.z} 전선 길이");
             Runner.Despawn(target);
             multiTabList[number].ropeObjects.Remove(target);
 
@@ -223,12 +242,8 @@ public class Pylon : InteractableBuilding
         Vector3 delta = end - start;
 
         ropeLengthList[number] -= delta.magnitude;
-        float deltaAngle = Vector3.Angle(delta, Vector3.up);
-        int deltaAngleCorrection = 1;
-        if (delta.x < 0) deltaAngleCorrection = -1;
-        deltaAngle = Vector3.Angle(delta, Vector3.up) * deltaAngleCorrection;
 
-        NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, 0, start.y), Quaternion.Euler(new Vector3(0, deltaAngle, 0)));
+        NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, start.y, start.z), Quaternion.LookRotation(delta));
         multiTabList[number].ropeObjects.Add(ropeObject);
         ropeObject.transform.localScale = new Vector3(1, 1, delta.magnitude);
         ropeObject.GetComponent<Rope>().Scale = delta.magnitude;
@@ -291,7 +306,7 @@ public class Pylon : InteractableBuilding
                     {
                         r.material.SetFloat("_OnOff", OnOff ? 1f : 0f);
                     }
-                    foreach(Pylon py in attachedPylonList)
+                    foreach (Pylon py in attachedPylonList)
                     {
                         py.TurnOnOff(OnOff);
                     }
