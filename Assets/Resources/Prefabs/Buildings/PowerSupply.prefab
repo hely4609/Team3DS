@@ -344,6 +344,7 @@ MonoBehaviour:
   marker_designed: {fileID: 6260957102490015115}
   marker_on: {fileID: 7553672752727594850}
   marker_off: {fileID: 2224825689332038233}
+  buildingSignCanvas: {fileID: 0}
   objectName: "\uC804\uC6D0\uACF5\uAE09\uAE30"
   _IsSettingRope: 0
   _IsRoped: 0
@@ -352,6 +353,11 @@ MonoBehaviour:
     ropePositions: []
   maxRopeLength: 0
   currentRopeLength: 0
+  multiTabList: []
+  isSettingRopeList: 
+  ropeLengthList: []
+  _OnOff: 0
+  attachedPylonList: []
 --- !u!1 &2224825689332038233
 GameObject:
   m_ObjectHideFlags: 0
@@ -922,6 +928,7 @@ MonoBehaviour:
   marker_designed: {fileID: 6260957102490015115}
   marker_on: {fileID: 7553672752727594850}
   marker_off: {fileID: 2224825689332038233}
+  buildingSignCanvas: {fileID: 0}
   objectName: "\uB0A9\uD488\uD558\uAE30"
   _IsSettingRope: 0
   _IsRoped: 0
@@ -956,8 +963,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 3.93, y: 5.71, z: 3.63}
-  m_Center: {x: 0, y: -1.2, z: 0}
+  m_Size: {x: 3.06, y: 3.31, z: 3.63}
+  m_Center: {x: 0, y: -2.4, z: 0}
 --- !u!1 &3001632906521525291
 GameObject:
   m_ObjectHideFlags: 0
