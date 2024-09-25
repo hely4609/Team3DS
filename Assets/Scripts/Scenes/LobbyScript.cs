@@ -24,6 +24,20 @@ public class LobbyScript : MonoBehaviour
         }
         
     }
+    private void Update()
+    {
+        // Return¿Ã Enter¿”
+        if ((Input.GetKeyUp(KeyCode.Return) || Input.GetKeyUp(KeyCode.KeypadEnter)) && sessionIDInptField.text != string.Empty)
+        {
+            JoinRoom();
+            CloseSessionIDInputFieldWindow();
+        }
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            CloseSessionIDInputFieldWindow();
+        }
+
+    }
     public void StartHost()
     {
         NetworkManager.ClaimStartHost();
@@ -42,15 +56,19 @@ public class LobbyScript : MonoBehaviour
     public void JoinRoom()
     {
         NetworkManager.ClaimJoinRoom(sessionIDInptField.text);
+        sessionIDInptField.text = string.Empty;
     }
 
-    public  void OpenSessionIDInputFieldWindow()
+    public void OpenSessionIDInputFieldWindow()
     {
+        if (!sessionIDInputFieldWindow.activeSelf) OptionManager.cancelable++;
         sessionIDInputFieldWindow.SetActive(true);
+        sessionIDInptField.ActivateInputField();
     }
 
     public void CloseSessionIDInputFieldWindow()
     {
+        if (sessionIDInputFieldWindow.activeSelf) OptionManager.cancelable--;
         sessionIDInputFieldWindow.SetActive(false);
     }
 

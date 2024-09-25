@@ -85,6 +85,9 @@ public class GameManager : MonoBehaviour
     { 
         isGameStart = false;
         NetworkManager.LocalController = null;
+        buildingManager = null;
+        cameraManager = null;
+        waveManager = null;
     }
 
     LoadingCanvas loadingCanvas;
