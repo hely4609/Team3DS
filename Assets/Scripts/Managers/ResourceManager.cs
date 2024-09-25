@@ -8,6 +8,7 @@ using UnityEngine.Audio;
 public class ResourceManager : Manager
 {
     static Dictionary<ResourceEnum.Prefab, GameObject> prefabDictionary;
+    static Dictionary<ResourceEnum.Sprite, Sprite> spriteDictionary;
     static Dictionary<ResourceEnum.Material, UnityEngine.Material> materialDictionary;
     static Dictionary<ResourceEnum.BGM, AudioClip> bgmDictionary;
     static Dictionary<ResourceEnum.SFX, AudioClip> sfxDictionary;
@@ -23,6 +24,7 @@ public class ResourceManager : Manager
         if (materialDictionary != null) yield break;
 
         prefabDictionary = new();
+        spriteDictionary = new();
         materialDictionary = new();
         bgmDictionary = new();
         sfxDictionary = new();
@@ -30,14 +32,16 @@ public class ResourceManager : Manager
         resourceAmount = 0;
         resourceLoadCompleted = 0;
 
-        resourceAmount += ResourcesPath.prefabPathArray.Length;
+        resourceAmount += ResourcesPath.PrefabPathArray.Length;
+        resourceAmount += ResourcesPath.SpritePathArray.Length;
         resourceAmount += ResourcesPath.MaterialPathArray.Length;
         resourceAmount += ResourcesPath.BGMPathArray.Length;
         resourceAmount += ResourcesPath.SFXPathArray.Length;
 
         audioMixer = Load<AudioMixer>($"{ResourcesPath.AudioMixerPath}");
 
-        yield return Load<ResourceEnum.Prefab, GameObject>(prefabDictionary, ResourcesPath.prefabPathArray, "prefabs");
+        yield return Load<ResourceEnum.Prefab, GameObject>(prefabDictionary, ResourcesPath.PrefabPathArray, "prefabs");
+        yield return Load<ResourceEnum.Sprite, Sprite>(spriteDictionary, ResourcesPath.SpritePathArray, "sprites");
         yield return Load<ResourceEnum.Material, UnityEngine.Material>(materialDictionary, ResourcesPath.MaterialPathArray, "materials");
         yield return Load<ResourceEnum.BGM, AudioClip>(bgmDictionary, ResourcesPath.BGMPathArray, "BGMs");
         yield return Load<ResourceEnum.SFX, AudioClip>(sfxDictionary, ResourcesPath.SFXPathArray, "SFXs");
@@ -109,6 +113,15 @@ public class ResourceManager : Manager
     public static GameObject Get(ResourceEnum.Prefab prefab)
     {
         if (prefabDictionary.TryGetValue(prefab, out GameObject result))
+        {
+            return result;
+        }
+        return null;
+    }
+
+    public static Sprite Get(ResourceEnum.Sprite sprite)
+    {
+        if(spriteDictionary.TryGetValue(sprite, out Sprite result))
         {
             return result;
         }

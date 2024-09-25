@@ -23,6 +23,7 @@ TagManager:
   - LevelUpEffect
   - HPText
   - HPFillImage
+  - BuildingSelectUIBuildingImage
   layers:
   - Default
   - TransparentFX

@@ -20,6 +20,7 @@ public partial class Player : Character
     [SerializeField] protected RectTransform interactionContent; // 상호작용대상 UI띄워줄 컨텐츠의 위치
     [SerializeField] protected GameObject interactionUpdateUI; // 상호작용 진행중 UI
     [SerializeField] public GameObject buildingSelectUI; // 빌딩 선택 UI
+    public GameObject[] buildingSelectUIBuildingImages;
     [SerializeField] public GameObject buildingConfirmUI; // 가건물 들고있을때 설치 취소키 보여주는 UI
     protected GameObject ropeMaxDistanceSignUI; // 로프 길이가 최대일 때 보여줄 경고 UI
     protected Animator onScreenKeyGuideUIAnim;
@@ -50,6 +51,7 @@ public partial class Player : Character
     public GameObject BePicked => bePicked;
     // protected bool isHandFree;
     protected ResourceEnum.Prefab[,] buildableEnumArray = new ResourceEnum.Prefab[5, 5];
+    public ResourceEnum.Prefab[,] BuildableEnumArray => buildableEnumArray;
     public int buildableEnumPageIndex = 0;
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
@@ -174,6 +176,7 @@ public partial class Player : Character
             interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
             interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
             buildingSelectUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
+            buildingSelectUIBuildingImages = GameObject.FindGameObjectsWithTag("BuildingSelectUIBuildingImage");
             buildingConfirmUI = GameObject.FindGameObjectWithTag("BuildingConfirmUI");
             ropeMaxDistanceSignUI = GameObject.FindGameObjectWithTag("RopeMaxDistanceSignUI");
             oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();

@@ -3,7 +3,7 @@ namespace ResourceEnum
     public enum Prefab
     {
         // UI
-        Test, 
+        Default, 
         ErrorWindow,
         SignInCanvas,
         SetNicknameCanvas,
@@ -37,10 +37,21 @@ namespace ResourceEnum
         ION_Cannon,
         Bridge,
         Pylon,
+        Turret1d,
         buildingEnd,
 
         // ETC
         BuildingSignCanvas,
+    }
+
+    public enum Sprite
+    {
+        Default,
+        Turret1a,
+        ION_Cannon,
+        Bridge,
+        Pylon,
+        Turret1d,
     }
 
     public enum Material
