@@ -808,7 +808,7 @@ MonoBehaviour:
     ropePositions: []
   maxRopeLength: 0
   currentRopeLength: 0
-  powerConsumption: 0
+  powerConsumption: 40
   attackDamage: 1
   attackSpeed: 0.125
   attackRange: 1

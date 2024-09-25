@@ -1,9 +1,9 @@
 public class ResourcesPath
 {
-    public static string[] prefabPathArray =
+    public static string[] PrefabPathArray =
     {
+        "Prefabs/Default",
         // UI
-        "Prefabs/Test",
         "Prefabs/UIs/ErrorWindow",
         "Prefabs/UIs/SignInCanvas",
         "Prefabs/UIs/SetNicknameCanvas",
@@ -39,6 +39,16 @@ public class ResourcesPath
         "Prefabs/UIs/Signs/BuildingSignCanvas",
 
 
+    };
+
+    public static string[] SpritePathArray =
+    {
+        "Images/Building/Default",
+        "Images/Building/Turret1a",
+        "Images/Building/ION_Cannon",
+        "Images/Building/Bridge",
+        "Images/Building/Pylon",
+        "Images/Building/Turret1d",
     };
 
     public static string[] MaterialPathArray =

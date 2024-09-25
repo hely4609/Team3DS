@@ -1,9 +1,11 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using ResourceEnum;
+using System;
 
 public class LocalController : ControllerBase
 {
@@ -100,7 +102,24 @@ public class LocalController : ControllerBase
     protected void OnOpenDesignBuildingUI()
     {
         if (controlledPlayer.DesigningBuilding == null && HasInputAuthority)
+        {
             controlledPlayer.buildingSelectUI.SetActive(!controlledPlayer.buildingSelectUI.activeInHierarchy);
+            RenewBuildingImanges();
+        }
+    }
+
+    protected void RenewBuildingImanges()
+    {
+        if(controlledPlayer.buildingSelectUI.activeInHierarchy)
+        {
+            for(int i =0; i < 5; i++)
+            {
+                Debug.Log(controlledPlayer.BuildableEnumArray[controlledPlayer.buildableEnumPageIndex, i].ToString());
+                Enum.TryParse(controlledPlayer.BuildableEnumArray[controlledPlayer.buildableEnumPageIndex, i].ToString(), out ResourceEnum.Sprite result);
+                controlledPlayer.buildingSelectUIBuildingImages[i].GetComponent<Image>().sprite = ResourceManager.Get(result);
+            }
+        }
+
     }
 
     protected void OnMove(Vector3 direaction)
@@ -220,5 +239,13 @@ public class LocalController : ControllerBase
             }
             if(minimap != null) minimap.LargeMapToggle();
         }
+    }
+
+    protected void OnBuildingPageUpDown(InputValue value)
+    {
+        if (value.Get() == null) return;
+        int i = value.Get().ToString() == "1" ? 1 : -1;
+        controlledPlayer.buildableEnumPageIndex = Mathf.Clamp(controlledPlayer.buildableEnumPageIndex + i, 0, 4);
+        RenewBuildingImanges();
     }
 }
