@@ -10,14 +10,15 @@ public class BuildingSignCanvas : MonoBehaviour
     [SerializeField] RectTransform canvas2;
     [SerializeField] RectTransform canvas3;
 
+    float rate = 100;
     public void SetRadius(float radius)
     {
         this.radius = radius;
         canvas0.ForceUpdateRectTransforms();
-        canvas0.localPosition = new Vector3(0, 0, radius * 50);
-        canvas1.localPosition = new Vector3(0, 0, -radius * 50);
-        canvas2.localPosition = new Vector3(radius * 50, 0, 0);
-        canvas3.localPosition = new Vector3(-radius * 50, 0, 0);
+        canvas0.localPosition = new Vector3(0, 0, radius * rate);
+        canvas1.localPosition = new Vector3(0, 0, -radius * rate);
+        canvas2.localPosition = new Vector3(radius * rate, 0, 0);
+        canvas3.localPosition = new Vector3(-radius * rate, 0, 0);
     }
 
     private void Update()
