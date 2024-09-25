@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class OptionManager : MonoBehaviour
 {
+    public static int cancelable = 0;
     // 마우스 감도.
     private float mouseSensitivity;
 
@@ -17,7 +18,7 @@ public class OptionManager : MonoBehaviour
     [SerializeField] GameObject settingsUICanvas;
     protected void OnESC(InputValue value)
     {
-        if (settingsUICanvas != null)
+        if (settingsUICanvas != null && cancelable == 0)
         {
             settingsUICanvas.SetActive(!settingsUICanvas.activeInHierarchy);
         }
