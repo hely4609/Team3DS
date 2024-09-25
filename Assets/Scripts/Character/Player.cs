@@ -28,7 +28,8 @@ public partial class Player : Character
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
-    protected TextMeshProUGUI oreAmountText; // 가지고 있는 Text양을 보여줄 UI
+    protected TextMeshProUGUI oreAmountText; // 가지고 있는 광물양을 보여줄 UI
+    public TextMeshProUGUI pageIndexText;
 
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
@@ -181,7 +182,7 @@ public partial class Player : Character
             ropeMaxDistanceSignUI = GameObject.FindGameObjectWithTag("RopeMaxDistanceSignUI");
             oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();
             onScreenKeyGuideUIAnim = GameObject.FindGameObjectWithTag("OnScreenKeyGuideUI").GetComponent<Animator>();
-            
+            pageIndexText = GameObject.FindGameObjectWithTag("PageIndexText").GetComponent<TextMeshProUGUI>();
 
             interactionUpdateUI.SetActive(false);
             buildingSelectUI.SetActive(false);
@@ -981,6 +982,13 @@ public partial class Player : Character
     public void SetKeyGuideUI()
     {
         if (HasInputAuthority)
-        onScreenKeyGuideUIAnim.SetBool("OnOff", !onScreenKeyGuideUIAnim.GetBool("OnOff"));
+            onScreenKeyGuideUIAnim.SetBool("OnOff", !onScreenKeyGuideUIAnim.GetBool("OnOff"));
+    }
+
+    public void SetPageIndexText()
+    {
+        if (HasInputAuthority)
+            pageIndexText.text = $"{buildableEnumPageIndex + 1} / 5";
+        
     }
 }

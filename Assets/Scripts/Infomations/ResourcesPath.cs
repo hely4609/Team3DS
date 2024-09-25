@@ -20,6 +20,7 @@ public class ResourcesPath
         "Prefabs/Buildings/Road",
         "Prefabs/Buildings/EnergyBarrier",
         "Prefabs/Buildings/Turret1a",
+        "Prefabs/Buildings/Turret1d",
         "Prefabs/Buildings/ION_Cannon",
         "Prefabs/Buildings/CornerWithBarrier",
         "Prefabs/Buildings/RoadWithBarrier",

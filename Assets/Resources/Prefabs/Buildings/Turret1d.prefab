@@ -817,7 +817,7 @@ MonoBehaviour:
   _OnOff: 0
   animator: {fileID: 3803933175711257711}
   gunBarrel: {fileID: 8177992274299104779}
-  gunBarrelRotateCorrection: 90
+  gunBarrelRotateCorrection: 270
   attachedPylon: {fileID: 0}
 --- !u!1 &8177992274299104779
 GameObject:

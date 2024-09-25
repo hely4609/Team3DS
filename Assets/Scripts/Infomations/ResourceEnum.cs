@@ -34,10 +34,10 @@ namespace ResourceEnum
         // 지을 수 있는것
         buildingStart,
         Turret1a,
+        Turret1d,
         ION_Cannon,
         Bridge,
         Pylon,
-        Turret1d,
         buildingEnd,
 
         // ETC
