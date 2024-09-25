@@ -51,7 +51,7 @@ public partial class Player : Character
     protected GameObject bePicked;
     public GameObject BePicked => bePicked;
     // protected bool isHandFree;
-    protected ResourceEnum.Prefab[,] buildableEnumArray = new ResourceEnum.Prefab[5, 5];
+    protected ResourceEnum.Prefab[,] buildableEnumArray;
     public ResourceEnum.Prefab[,] BuildableEnumArray => buildableEnumArray;
     public int buildableEnumPageIndex = 0;
     [Networked] public Building DesigningBuilding { get; set; }
@@ -159,6 +159,10 @@ public partial class Player : Character
             cameraOffset_FPS = transform.Find("CameraOffset");
         }
 
+        int xSize = (ResourceEnum.Prefab.buildingEnd - ResourceEnum.Prefab.buildingStart - 2) / 5 + 1;
+        
+        buildableEnumArray = new ResourceEnum.Prefab[xSize , 5];
+        
         for (ResourceEnum.Prefab index = ResourceEnum.Prefab.buildingStart + 1; index < ResourceEnum.Prefab.buildingEnd; index++)
         {
             int y = index - (ResourceEnum.Prefab.buildingStart + 1);
@@ -988,7 +992,7 @@ public partial class Player : Character
     public void SetPageIndexText()
     {
         if (HasInputAuthority)
-            pageIndexText.text = $"{buildableEnumPageIndex + 1} / 5";
+            pageIndexText.text = $"{buildableEnumPageIndex + 1} / {(ResourceEnum.Prefab.buildingEnd - ResourceEnum.Prefab.buildingStart - 2) / 5 + 1}";
         
     }
 }

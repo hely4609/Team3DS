@@ -256,8 +256,12 @@ public class LocalController : ControllerBase
     {
         if (value.Get() == null) return;
         int i = value.Get().ToString() == "1" ? 1 : -1;
-        controlledPlayer.buildableEnumPageIndex = Mathf.Clamp(controlledPlayer.buildableEnumPageIndex + i, 0, 4);
-        controlledPlayer.SetPageIndexText();
-        RenewBuildingImanges();
+        if (controlledPlayer.buildableEnumPageIndex != Mathf.Clamp(controlledPlayer.buildableEnumPageIndex + i, 0, controlledPlayer.BuildableEnumArray.GetLength(0) - 1))
+        {
+            controlledPlayer.buildableEnumPageIndex = Mathf.Clamp(controlledPlayer.buildableEnumPageIndex + i, 0, controlledPlayer.BuildableEnumArray.GetLength(0) - 1);
+            controlledPlayer.SetPageIndexText();
+            RenewBuildingImanges();
+        }
+       
     }
 }
