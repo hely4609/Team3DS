@@ -87,6 +87,7 @@ public GameObject BuildingSignCanvas { get { return buildingSignCanvas; } }
         }
 
         HeightCheck();
+
         if (CompletePercent < 1)
         {
             foreach (var r in meshes)
@@ -109,6 +110,7 @@ public GameObject BuildingSignCanvas { get { return buildingSignCanvas; } }
             buildingSignCanvas.GetComponent<BuildingSignCanvas>().SetRadius(size.x);
         }
 
+        HeightCheck();
         CheckBuild();
         VisualizeBuildable();
     }
