@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 776494429456688073}
   - component: {fileID: 4626496294994319652}
   - component: {fileID: 3394611538298363692}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnergyBarrier
   m_TagString: EnergyBarrier
   m_Icon: {fileID: 0}
@@ -115,7 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5917604693799210818}
   - component: {fileID: 15457572642927550}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: CornerWithBarrier
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,6 +164,7 @@ MonoBehaviour:
   marker_designed: {fileID: 0}
   marker_on: {fileID: 0}
   marker_off: {fileID: 0}
+  buildingSignCanvas: {fileID: 0}
 --- !u!1 &5990255498259986758
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,7 +177,7 @@ GameObject:
   - component: {fileID: 4991162012933682962}
   - component: {fileID: 1132126612876955135}
   - component: {fileID: 6962168979246238711}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: EnergyBarrier (1)
   m_TagString: EnergyBarrier
   m_Icon: {fileID: 0}
@@ -320,6 +321,10 @@ PrefabInstance:
     - target: {fileID: 8548327507909967344, guid: adb38baffce608242bc72b6bc0c921e4, type: 3}
       propertyPath: m_Name
       value: Road
+      objectReference: {fileID: 0}
+    - target: {fileID: 8548327507909967344, guid: adb38baffce608242bc72b6bc0c921e4, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 8548327507909967344, guid: adb38baffce608242bc72b6bc0c921e4, type: 3}
       propertyPath: m_IsActive
