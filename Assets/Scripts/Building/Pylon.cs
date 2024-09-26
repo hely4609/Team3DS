@@ -291,7 +291,7 @@ public class Pylon : InteractableBuilding
                             }
                             TurnOnOff(false);
                             marker_designed.SetActive(false);
-                            marker_on.SetActive(true);
+                            marker_off.SetActive(true);
                             buildingSignCanvas.transform.localPosition = new Vector3(0, heightMax * 0.5f / transform.localScale.y, 0);
                             buildingSignCanvas.transform.localScale /= transform.localScale.x;
                             buildingSignCanvas.GetComponent<BuildingSignCanvas>().SetRadius(size.x);
