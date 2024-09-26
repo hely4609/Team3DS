@@ -22,7 +22,7 @@ public class Tower : InteractableBuilding
     [SerializeField] protected List<Monster> targetList = new List<Monster>();
     [SerializeField, Networked] protected bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
 
-    [SerializeField] protected Animator animator;
+    [SerializeField] protected Animator attackAnimator;
     [SerializeField] protected GameObject gunBarrel;
     [SerializeField] protected float gunBarrelRotateCorrection;
     public Pylon attachedPylon;
@@ -30,6 +30,7 @@ public class Tower : InteractableBuilding
     public override void Spawned()
     {
         base.Spawned();
+        attackAnimator.SetFloat("AttackSpeed", 1 / attackSpeed);
         if (CompletePercent >= 1)
         {
             marker_on.SetActive(OnOff);
@@ -78,8 +79,7 @@ public class Tower : InteractableBuilding
     {
         if(OnOff)
         {
-            
-                Attack();
+            Attack();
         }
         
     }
@@ -88,7 +88,9 @@ public class Tower : InteractableBuilding
     {
         if (!target)
         {
+            attackAnimator.SetBool("Attack", false);
             LockOn();
+            
         }
         else
         {
@@ -101,7 +103,7 @@ public class Tower : InteractableBuilding
 
                 // 공격
                 // *애니메이션 재생*
-                animator.SetTrigger("Attack");
+                attackAnimator.SetBool("Attack", true);
                 OnHit();
                 nowTime = attackSpeed;
             }
@@ -203,6 +205,7 @@ public class Tower : InteractableBuilding
             else 
             {
                 currentPowerConsumption = 0;
+                attackAnimator.SetBool("Attack", false);
             }
 
             SoundManager.Play(ResourceEnum.SFX._switch, transform.position);
@@ -243,7 +246,7 @@ public class Tower : InteractableBuilding
                             }
                             TurnOnOff(false);
                             marker_designed.SetActive(false);
-                            marker_on.SetActive(true);
+                            marker_off.SetActive(true);
                             buildingSignCanvas.transform.localPosition = new Vector3(0, heightMax * 0.5f / transform.localScale.y, 0);
                             buildingSignCanvas.transform.localScale /= transform.localScale.x;
                             buildingSignCanvas.GetComponent<BuildingSignCanvas>().SetRadius(size.x);

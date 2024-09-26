@@ -97,7 +97,7 @@ Animator:
   m_GameObject: {fileID: 294221631397181880}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 0c74d5021d3a8374ca13c2d072995345, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3d77ce8d7b98436428c5978a14fbfae9, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -136,8 +136,8 @@ MonoBehaviour:
   TotalWords: 1
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 000000007d530e6c67c23486d0f79677cdf05130
-  TriggerHashes: 000000000d286c40
+  StateHashes: 00000000f2a7641ce8365ef6d9e9497b378b810ed720da715a12a55fad6497d4d068a81f
+  TriggerHashes: 00000000
 --- !u!1 &1605638871560030290
 GameObject:
   m_ObjectHideFlags: 0
@@ -815,7 +815,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetList: []
   _OnOff: 0
-  animator: {fileID: 3803933175711257711}
+  attackAnimator: {fileID: 3803933175711257711}
   gunBarrel: {fileID: 8177992274299104779}
   gunBarrelRotateCorrection: 270
   attachedPylon: {fileID: 0}

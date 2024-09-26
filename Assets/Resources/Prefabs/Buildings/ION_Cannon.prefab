@@ -745,7 +745,7 @@ MonoBehaviour:
   target: {fileID: 0}
   targetList: []
   _OnOff: 0
-  animator: {fileID: 2445322502128708340}
+  attackAnimator: {fileID: 2445322502128708340}
   gunBarrel: {fileID: 8364908034670313472}
   gunBarrelRotateCorrection: 0
   attachedPylon: {fileID: 0}

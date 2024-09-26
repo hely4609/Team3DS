@@ -65,7 +65,7 @@ public class BuildingManager : Manager
         if (runner.IsServer)
         {
             generator = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 0, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
-            supply = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.PowerSupply), new Vector3(-10, 2, 10), Quaternion.Euler(0, 90, 0)).GetComponentInChildren<PowerSupply>();
+            supply = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.PowerSupply), new Vector3(-11, 2, 10), Quaternion.Euler(0, 90, 0)).GetComponentInChildren<PowerSupply>();
 
             buildings.Add(supply);
         }
