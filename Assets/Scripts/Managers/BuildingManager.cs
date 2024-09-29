@@ -36,12 +36,13 @@ public class BuildingManager : Manager
         PointRegistration(true, -20);
         //roadData.Add(new Vector2(-40, -40)); // 시작점
         PointRegistration(false, -50);
+
         //roadData.Add(new Vector2(40, -40)); // 다음 지점까지 y 40, 길의 위치값 : (50,0.1,20), 스케일 : (1,1,5)
         PointRegistration(true, 80);
         //roadData.Add(new Vector2(40, 50)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
         PointRegistration(false, 90);
         //roadData.Add(new Vector2(-75, 50)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
-        PointRegistration(true, -115);
+        PointRegistration(false, -115);
         //roadData.Add(new Vector2(-75, -75));
         PointRegistration(false, -125);
         //roadData.Add(new Vector2(75, -75));
@@ -169,6 +170,12 @@ public class BuildingManager : Manager
         if (  LineCheck(before, now, after))
         {
             pointObject = RoadInstantiate();
+            if(before.x == after.x)
+            {
+                pointObject.transform.rotation = Quaternion.Euler(new Vector3(0, 90, 0));
+            }
+            pointObject.transform.position = new Vector3(now.x, 0.1f, now.y);
+            return pointObject;
         }
         else
         {
@@ -272,7 +279,7 @@ public class BuildingManager : Manager
                 return Vector3.zero;
             }
         }
-        return Vector3.one;
+        return new Vector3(45, 45, 45);
     }
 
     public void AddBuilding(Building addedBuilding) // 건물을 새로 건설했다.
