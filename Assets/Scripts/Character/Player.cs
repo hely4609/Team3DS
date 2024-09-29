@@ -344,8 +344,8 @@ public partial class Player : Character
             // 건물위치에 변화가 생겼을 때 건물을 지을 수 있는 상태인지 체크함.
             if (DesigningBuilding.TiledBuildingPos != currentPos)
             {
-                DesigningBuilding.TiledBuildingPos = currentPos;
                 DesigningBuilding.transform.position = new Vector3(currentPos.x, DesigningBuilding.gameObject.transform.position.y, currentPos.y);
+                DesigningBuilding.TiledBuildingPos = new Vector2Int((int)DesigningBuilding.transform.position.x, (int)DesigningBuilding.transform.position.z);
                 DesigningBuilding.CheckBuild();
             }
         }

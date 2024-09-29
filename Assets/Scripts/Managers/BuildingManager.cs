@@ -42,7 +42,7 @@ public class BuildingManager : Manager
         //roadData.Add(new Vector2(40, 50)); // 다음 지점까지 x -40, 길의 위치값 : (30, 0.1, 40), 스케일 : (5,1,1)
         PointRegistration(false, 90);
         //roadData.Add(new Vector2(-75, 50)); // 다음 지점까지 y -90, 길의 위치값 : (10, 0.1, -5), 스케일 : (1,1,10)
-        PointRegistration(false, -115);
+        PointRegistration(true, -115);
         //roadData.Add(new Vector2(-75, -75));
         PointRegistration(false, -125);
         //roadData.Add(new Vector2(75, -75));
