@@ -18,6 +18,7 @@ public class MiniMapScript : MyComponent
     [SerializeField] Slider minimapSlider;
     bool isMiniMapLocked = true;
     [SerializeField] GameObject largeMap;
+    public bool isLargeMapOpend;
 
     protected override void MyStart()
     {
@@ -66,9 +67,21 @@ public class MiniMapScript : MyComponent
         miniMapCamera.orthographicSize = minimapSlider.value;
     }
 
+    bool lastCursorLock;
     public void LargeMapToggle()
     {
+        if (largeMap.activeSelf)
+        {
+            Cursor.lockState = lastCursorLock ? CursorLockMode.Locked : CursorLockMode.None;
+        }
+        else
+        {
+            if (Cursor.lockState == CursorLockMode.Locked) lastCursorLock = true;
+            else lastCursorLock = false;
+            Cursor.lockState = CursorLockMode.None;
+        }
         largeMap.SetActive(!largeMap.activeSelf);
+        isLargeMapOpend = largeMap.activeSelf;
     }
 
     public void LargeMapZoom(float value)
