@@ -76,15 +76,27 @@ public class GameManager : MonoBehaviour
     public static bool IsGameStart => instance && instance.isGameStart;
     public IEnumerator GameStart()
     {
+        // 게임 시작후 Initiate할 매니저들
+        buildingManager = new BuildingManager();
         yield return BuildingManager.Initiate();
+        cameraManager = new CameraManager();
         yield return CameraManager.Initiate();
+        waveManager = new WaveManager();
         yield return WaveManager.Initiate();
+
+        ManagerUpdates += CameraManager.ManagerUpdate;
+        ManagerUpdates += WaveManager.ManagerUpdate;
+
         isGameStart = true; 
     }
     public void GameOver() 
     { 
         isGameStart = false;
         NetworkManager.LocalController = null;
+
+        ManagerUpdates -= CameraManager.ManagerUpdate;
+        ManagerUpdates -= WaveManager.ManagerUpdate;
+        
         buildingManager = null;
         cameraManager = null;
         waveManager = null;
@@ -116,13 +128,6 @@ public class GameManager : MonoBehaviour
         networkManager = new NetworkManager();
         yield return networkManager.Initiate();
 
-        // 게임 시작후 Initiate할 매니저들
-        buildingManager = new BuildingManager();
-        //yield return buildingManager.Initiate();
-        cameraManager = new CameraManager();
-        //yield return cameraManager.Initiate();
-        waveManager = new WaveManager();
-        //yield return waveManager.Initiate();
 
 
         cameraManager = new CameraManager();
@@ -132,8 +137,6 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += UIManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
 
-        ManagerUpdates += WaveManager.ManagerUpdate;
-        ManagerUpdates += CameraManager.ManagerUpdate;
 
         CloseLoadInfo();
         SoundManager.Play(ResourceEnum.BGM.Silent_Partner__Whistling_Down_the_Road);
