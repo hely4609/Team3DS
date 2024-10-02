@@ -22,6 +22,7 @@ public class ResourcesPath
         "Prefabs/Buildings/Turret1a",
         "Prefabs/Buildings/Turret1d",
         "Prefabs/Buildings/ION_Cannon",
+        "Prefabs/Buildings/BlastTower",
         "Prefabs/Buildings/CornerWithBarrier",
         "Prefabs/Buildings/RoadWithBarrier",
         "Prefabs/Buildings/PowerSupply",
@@ -50,6 +51,7 @@ public class ResourcesPath
         "Images/Building/Bridge",
         "Images/Building/Pylon",
         "Images/Building/Turret1d",
+        "Images/Building/BlastTower",
     };
 
     public static string[] MaterialPathArray =

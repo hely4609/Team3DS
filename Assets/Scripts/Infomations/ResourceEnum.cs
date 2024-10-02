@@ -36,6 +36,7 @@ namespace ResourceEnum
         Turret1a,
         Turret1d,
         ION_Cannon,
+        BlastTower,
         Bridge,
         Pylon,
         buildingEnd,
@@ -52,6 +53,7 @@ namespace ResourceEnum
         Bridge,
         Pylon,
         Turret1d,
+        BlastTower,
     }
 
     public enum Material
