@@ -133,11 +133,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 3803933175711257711}
-  TotalWords: 1
+  TotalWords: 2
   ApplyTiming: 2
   SyncSettings: 79
   StateHashes: 000000007d530e6c67c23486d0f79677cdf05130
-  TriggerHashes: 000000000d286c40
+  TriggerHashes: 00000000
 --- !u!1 &1605638871560030290
 GameObject:
   m_ObjectHideFlags: 0
@@ -763,6 +763,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: -4987246587671253148}
   - {fileID: 2629911216346672159}
+  - {fileID: 8178348538202786747}
   - {fileID: 3616456972517454780}
 --- !u!114 &2629911216346672159
 MonoBehaviour:
@@ -830,6 +831,7 @@ GameObject:
   - component: {fileID: 1644990912748593901}
   - component: {fileID: 349840225552702386}
   - component: {fileID: 5990246788191409780}
+  - component: {fileID: 8178348538202786747}
   m_Layer: 0
   m_Name: Pylon
   m_TagString: Untagged
@@ -904,6 +906,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &8178348538202786747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8177992274299104779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &8536452984131014355
 GameObject:
   m_ObjectHideFlags: 0

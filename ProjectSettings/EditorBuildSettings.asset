@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/KYH.unity
-    guid: ed2680e42d0ebe644b6f943ab7410fb1
+    path: Assets/Scenes/Character.unity
+    guid: 2f6ffffbd76f11547a1d8c33c6c024fc
   m_configObjects: {}

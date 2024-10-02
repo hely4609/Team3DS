@@ -60,14 +60,16 @@ public partial class NetworkManager : Manager
         // 그래서 새로운 오브젝트가 들게 함
         // 프리팹으로 callback 스크립트를 가지고있는 게임오브젝트를 만들어 놓고 인스턴시에이트함
         // 그 오브젝트에 NetworkRunner를 AddComponent함.
+        
         _runner = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Photon"));
         _runner.AddComponent<NetworkRunner>();
         Runner.ProvideInput = true;
 
         currentNetworkState = NetworkState.Initiating;
 
-        GameManager.NetworkUpdates += (deltaTime) => {
-            if(!Runner)
+        GameManager.NetworkUpdates += (deltaTime) =>
+        {
+            if (!Runner)
             {
                 _runner = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Photon"));
                 _runner.AddComponent<NetworkRunner>();
@@ -76,7 +78,7 @@ public partial class NetworkManager : Manager
 
         //_controller = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/LocalController")).GetComponent<ControllerBase>();
         // 컨트롤러를 만든다. 입력받기용.
-        
+
         yield return null;
     }
 

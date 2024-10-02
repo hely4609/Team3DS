@@ -25,6 +25,7 @@ TagManager:
   - HPFillImage
   - BuildingSelectUIBuildingImage
   - PageIndexText
+  - Runner
   layers:
   - Default
   - TransparentFX

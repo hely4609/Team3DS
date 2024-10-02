@@ -59,6 +59,8 @@ namespace Fusion.Addons.Physics {
 
     /// <inheritdoc/>
     protected override void SimulatePrimaryScene(float deltaTime) {
+            if (Runner == null) return;
+            if (Runner.SceneManager == null) return;
       if (Runner.SceneManager.TryGetPhysicsScene3D(out var physicsScene)) {
         if (physicsScene.IsValid()) {
           physicsScene.Simulate(deltaTime);

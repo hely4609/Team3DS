@@ -9,6 +9,22 @@ using UnityEngine.SceneManagement;
 
 public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallbacks
 {
+    //protected static NetworkPhotonCallbacks instance;
+
+    //private void Awake()
+    //{
+    //    if (instance == null)
+    //    {
+    //        instance = this;
+    //        //DontDestroyOnLoad(this);
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
+
+
     [SerializeField] private NetworkPrefabRef _playerPrefab;
 
     public static bool[] playerArray = new bool[4];

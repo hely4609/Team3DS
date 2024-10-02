@@ -77,12 +77,15 @@ public class GameManager : MonoBehaviour
     public IEnumerator GameStart()
     {
         // 게임 시작후 Initiate할 매니저들
+        poolManager = new PoolManager();
+        yield return poolManager.Initiate();
         buildingManager = new BuildingManager();
         yield return BuildingManager.Initiate();
         cameraManager = new CameraManager();
         yield return CameraManager.Initiate();
         waveManager = new WaveManager();
         yield return WaveManager.Initiate();
+        
 
         ManagerUpdates += CameraManager.ManagerUpdate;
         ManagerUpdates += WaveManager.ManagerUpdate;
@@ -97,9 +100,10 @@ public class GameManager : MonoBehaviour
         ManagerUpdates -= CameraManager.ManagerUpdate;
         ManagerUpdates -= WaveManager.ManagerUpdate;
         
-        buildingManager = null;
-        cameraManager = null;
         waveManager = null;
+        cameraManager = null;
+        buildingManager = null;
+        poolManager = null;
     }
 
     LoadingCanvas loadingCanvas;
@@ -121,8 +125,7 @@ public class GameManager : MonoBehaviour
         optionManager = GetComponent<OptionManager>();
         controllerManager = new ControllerManager();
         yield return controllerManager.Initiate();        
-        poolManager = new PoolManager();
-        yield return poolManager.Initiate();
+        
         uiManager = new UIManager();
         yield return uiManager.Initiate();
         networkManager = new NetworkManager();
@@ -176,6 +179,11 @@ public class GameManager : MonoBehaviour
         ObjectDestroies = null;
         ManagerDestroies?.Invoke();
         ManagerDestroies = null;
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            networkManager.Runner.Shutdown();
+        }
     }
 
     public static void ClaimLoadInfo(string info, int numerator = 0, int denominator = 1)

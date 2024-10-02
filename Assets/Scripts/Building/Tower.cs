@@ -77,7 +77,7 @@ public class Tower : InteractableBuilding
     }
     protected override void MyUpdate(float deltaTime)
     {
-        if(OnOff)
+        if(HasStateAuthority && OnOff)
         {
             Attack();
         }
@@ -132,23 +132,32 @@ public class Tower : InteractableBuilding
 
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가
     {
-        other.gameObject.TryGetComponent<Monster>(out Monster monster);
-        if (monster != null)
+        if (HasStateAuthority)
         {
-            targetList.Add(monster);
-            monster.destroyFunction += MonsterListOut; 
+            other.gameObject.TryGetComponent<Monster>(out Monster monster);
+            if (monster != null)
+            {
+                targetList.Add(monster);
+                monster.destroyFunction += MonsterListOut;
+            }
         }
+      
     }
     protected void OnTriggerExit(Collider other) // 영역에서 나가면 리스트에서 제외
     {
-        other.gameObject.TryGetComponent<Monster>(out Monster monster);
-        if (monster != null)
+        if (HasStateAuthority)
         {
-            if (target == monster)
-            { target = null; }
-            targetList.Remove(monster);
-            monster.destroyFunction -= MonsterListOut;
+
+            other.gameObject.TryGetComponent<Monster>(out Monster monster);
+            if (monster != null)
+            {
+                if (target == monster)
+                { target = null; }
+                targetList.Remove(monster);
+                monster.destroyFunction -= MonsterListOut;
+            }
         }
+
     }
 
     protected void MonsterListOut(Monster monster) // 한줄짜리 함수 만든 이유 : 델리게이트에 넣고 빼기 할수 있게하려고. 람다식은 빼기 불가능.
@@ -263,6 +272,9 @@ public class Tower : InteractableBuilding
                     }
 
                     GameManager.Instance.BuildingManager.supply.ChangePowerConsumption(OnOff ? -powerConsumption : powerConsumption); 
+                    break;
+                case nameof(IsRoped):
+                    buildingSignCanvas.SetActive(!IsRoped);
                     break;
             }
         }
