@@ -13,6 +13,7 @@ namespace ResourceEnum
         MouseLeftUI,
         RoomButton,
         Minimap,
+        GameOverCanvas,
         // Character
         Player,
         PlayerPrefab,

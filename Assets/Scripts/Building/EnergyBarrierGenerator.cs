@@ -33,6 +33,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
         {
             onOff = false;
             SetActiveEnergyBarrier();
+            GameManager.Instance.GameOver();
         }
         //Debug.Log($"{HpCurrent} / {gameObject.name}");
     }
@@ -60,7 +61,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
     protected override void Initialize()
     {
         onOff = true;
-        hpMax = 30000;
+        hpMax = 3;
         if (HasStateAuthority) hpCurrent = hpMax;
         energyBarrierArray = GameObject.FindGameObjectsWithTag("EnergyBarrier");
 

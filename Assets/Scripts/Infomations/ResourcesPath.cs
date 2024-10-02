@@ -13,6 +13,7 @@ public class ResourcesPath
         "Prefabs/UIs/CharacterUI/CharacterUICanvas",
         "Prefabs/UIs/RoomButton",
         "Prefabs/UIs/CharacterUI/Minimap",
+        "Prefabs/UIs/GameOverCanvas",
         // Character
         "Prefabs/Characters/Player",
         "Prefabs/Characters/PlayerPrefab",
@@ -28,8 +29,7 @@ public class ResourcesPath
         "Prefabs/Buildings/PowerSupply",
         "Prefabs/Buildings/EnergyBarrierGenerator",
         "Prefabs/Buildings/Bridge",
-        "Prefabs/Buildings/Pylon"
-        ,
+        "Prefabs/Buildings/Pylon",
         // Object
         "Prefabs/Objects/Ore",
         "Prefabs/Objects/Rope",

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public delegate void StartFunction();
 public delegate void UpdateFunction(float deltaTime);
@@ -111,6 +112,7 @@ public class GameManager : MonoBehaviour
     public void GameOver() 
     { 
         isGameStart = false;
+        uiManager.GetUI(UIEnum.GameOverCanvas);
         NetworkManager.LocalController = null;
 
         ManagerStarts -= BuildingManager.ManagerStart;
@@ -128,6 +130,11 @@ public class GameManager : MonoBehaviour
         //networkManager = new NetworkManager();
         //networkManager.Initiate();
 
+    }
+
+    public void GoTitle()
+    {
+        networkManager.Runner.Shutdown();
     }
 
     public IEnumerator SeverInitiate()
