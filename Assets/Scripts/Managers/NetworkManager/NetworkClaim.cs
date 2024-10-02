@@ -56,7 +56,7 @@ public partial class NetworkManager : Manager
         GameManager.Instance.NetworkManager.myInfo = gotInfo;
         
         GameManager.Instance.UIManager.Close(UIEnum.SetNicknameCanvas);
-        GameManager.Instance.UIManager.ClaimError("Success", "Nickname has been changed successfully", "OK");
+        GameManager.Instance.UIManager.ClaimError("Success", "Nickname has been changed successfully", "확인");
 
     }
 
@@ -88,7 +88,7 @@ public partial class NetworkManager : Manager
         }
         else
         {
-            GameManager.Instance.UIManager.ClaimError("Failed to Start", result.ShutdownReason.ToString(), "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+            GameManager.Instance.UIManager.ClaimError("Failed to Start", "방 생성에 실패하였습니다.", "확인", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
         GameManager.ClaimLoadInfo("Entering game", 2, 2);
         
@@ -160,7 +160,7 @@ public partial class NetworkManager : Manager
         }
         else
         {
-            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), result.ErrorMessage, "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), result.ErrorMessage, "확인", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
         GameManager.ClaimLoadInfo("Entering game", 2, 2);
         GameManager.CloseLoadInfo();
@@ -189,7 +189,7 @@ public partial class NetworkManager : Manager
         }
         else
         {
-            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), result.ErrorMessage, "OK", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), "입력한 번호와 매칭되는 방이 없습니다.", "확인", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
         GameManager.ClaimLoadInfo("Entering game", 2, 2);
         GameManager.CloseLoadInfo();

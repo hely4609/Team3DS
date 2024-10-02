@@ -1,0 +1,21 @@
+fileFormatVersion: 2
+guid: b63ebe06e1b19514faeaf76270ffbf65
+timeCreated: 1485467332
+licenseType: Store
+TrueTypeFontImporter:
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: ImpLD37
+  fontNames:
+  - ImpLD37
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -793,6 +793,7 @@ MonoBehaviour:
   - {fileID: 3539466090241050540}
   - {fileID: -3519175632691191382}
   - {fileID: 3211342776581018301}
+  - {fileID: 8359801824240879034}
 --- !u!114 &-3519175632691191382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2812,6 +2813,7 @@ GameObject:
   - component: {fileID: 3211342776581018301}
   - component: {fileID: 2445322502128708340}
   - component: {fileID: 6939472810497779581}
+  - component: {fileID: 8359801824240879034}
   m_Layer: 0
   m_Name: Gyroscope
   m_TagString: Untagged
@@ -2902,11 +2904,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 2445322502128708340}
-  TotalWords: 1
+  TotalWords: 2
   ApplyTiming: 2
   SyncSettings: 79
   StateHashes: 00000000beec9f5da3eb581af22084188a9e8c79
-  TriggerHashes: 000000000d286c40
+  TriggerHashes: 00000000
 --- !u!95 &2445322502128708340
 Animator:
   serializedVersion: 5
@@ -2940,6 +2942,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3805c92fad61ca94b8b301d87675f9cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8359801824240879034
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8364908034670313472}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 158639473, guid: e725a070cec140c4caffb81624c8c787, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SyncScale: 0
+  SyncParent: 0
+  _autoAOIOverride: 1
+  DisableSharedModeInterpolation: 0
 --- !u!1 &8732948430743810585
 GameObject:
   m_ObjectHideFlags: 0

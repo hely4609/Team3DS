@@ -77,7 +77,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
         GameManager.Instance.GameOver();
-        GameManager.Instance.UIManager.ClaimError("Shutdowned", shutdownReason.ToString(), "OK", () => { 
+        GameManager.Instance.UIManager.ClaimError("Shutdowned", "서버와 연결이 해제되었습니다.", "확인", () => { 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         });
     }
@@ -88,7 +88,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public void OnDisconnectedFromServer(NetworkRunner runner, NetDisconnectReason reason) 
     { 
         GameManager.Instance.GameOver();
-        GameManager.Instance.UIManager.ClaimError("Disconneccted", reason.ToString(), "OK", () => { 
+        GameManager.Instance.UIManager.ClaimError("Disconneccted", "네트워크 연결이 끊겼습니다.", "확인", () => { 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
         });
     }
@@ -96,7 +96,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) 
     { 
         GameManager.Instance.GameOver();
-        GameManager.Instance.UIManager.ClaimError("Connect failed", reason.ToString(), "OK", () => { 
+        GameManager.Instance.UIManager.ClaimError("Connect failed", "네트워크 연결에 실패했습니다.", "확인", () => { 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         });
 
