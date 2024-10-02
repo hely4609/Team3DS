@@ -92,7 +92,11 @@ public class LocalController : ControllerBase
 
     protected void OnCursorLockTogle()
     {
-        if (HasInputAuthority)
+        if (minimap == null)
+        {
+            minimap = FindObjectOfType<MiniMapScript>();
+        }
+        if (HasInputAuthority && (minimap == null || !minimap.isLargeMapOpend))
         {
             if (Cursor.lockState == CursorLockMode.Locked) Cursor.lockState = CursorLockMode.None;
             else Cursor.lockState = CursorLockMode.Locked;
