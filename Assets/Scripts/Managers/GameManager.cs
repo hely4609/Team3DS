@@ -77,25 +77,43 @@ public class GameManager : MonoBehaviour
     public IEnumerator GameStart()
     {
         // 게임 시작후 Initiate할 매니저들
-        poolManager = new PoolManager();
-        yield return poolManager.Initiate();
-        buildingManager = new BuildingManager();
-        yield return BuildingManager.Initiate();
-        cameraManager = new CameraManager();
-        yield return CameraManager.Initiate();
-        waveManager = new WaveManager();
-        yield return WaveManager.Initiate();
+        if (poolManager == null)
+        {
+            poolManager = new PoolManager();
+            yield return poolManager.Initiate();
+        }
+
+        if (buildingManager == null)
+        {
+            buildingManager = new BuildingManager();
+            yield return BuildingManager.Initiate();
+        }
+
+        if (cameraManager == null)
+        {
+            cameraManager = new CameraManager();
+            yield return CameraManager.Initiate();
+            ManagerUpdates += CameraManager.ManagerUpdate;
+        }
+
+        if (waveManager == null)
+        {
+            waveManager = new WaveManager();
+            yield return WaveManager.Initiate();
+            ManagerUpdates += WaveManager.ManagerUpdate;
+        }
         
-
-        ManagerUpdates += CameraManager.ManagerUpdate;
-        ManagerUpdates += WaveManager.ManagerUpdate;
-
         isGameStart = true; 
     }
+
+    
+
     public void GameOver() 
     { 
         isGameStart = false;
         NetworkManager.LocalController = null;
+
+        ManagerStarts -= BuildingManager.ManagerStart;
 
         ManagerUpdates -= CameraManager.ManagerUpdate;
         ManagerUpdates -= WaveManager.ManagerUpdate;
@@ -104,6 +122,28 @@ public class GameManager : MonoBehaviour
         cameraManager = null;
         buildingManager = null;
         poolManager = null;
+
+        StartCoroutine(SeverInitiate());
+
+        //networkManager = new NetworkManager();
+        //networkManager.Initiate();
+
+    }
+
+    public IEnumerator SeverInitiate()
+    {
+        // 게임 시작후 Initiate할 매니저들
+        poolManager = new PoolManager();
+        yield return poolManager.Initiate();
+        buildingManager = new BuildingManager();
+        yield return BuildingManager.Initiate();
+        cameraManager = new CameraManager();
+        yield return CameraManager.Initiate();
+        waveManager = new WaveManager();
+        yield return WaveManager.Initiate();
+
+        ManagerUpdates += CameraManager.ManagerUpdate;
+        ManagerUpdates += WaveManager.ManagerUpdate;
     }
 
     LoadingCanvas loadingCanvas;
@@ -125,16 +165,13 @@ public class GameManager : MonoBehaviour
         optionManager = GetComponent<OptionManager>();
         controllerManager = new ControllerManager();
         yield return controllerManager.Initiate();        
-        
         uiManager = new UIManager();
         yield return uiManager.Initiate();
         networkManager = new NetworkManager();
         yield return networkManager.Initiate();
 
-
-
-        cameraManager = new CameraManager();
-        yield return cameraManager.Initiate();
+        //cameraManager = new CameraManager();
+        //yield return cameraManager.Initiate();
 
         SoundUpdates += SoundManager.ManagerUpdate;
         ManagerUpdates += UIManager.ManagerUpdate;
