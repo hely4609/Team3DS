@@ -21,7 +21,7 @@ public class SignInCanvas : MonoBehaviour
     {
         if(string.Compare(SignUpPassword.text, SignUpConfirmPassword.text) != 0)
         {
-            GameManager.Instance.UIManager.ClaimError("Error", "Password and password confirm dose not match", "OK");
+            GameManager.Instance.UIManager.ClaimError("Error", "비밀번호가 틀렸습니다.", "확인");
         }
         else
         {
