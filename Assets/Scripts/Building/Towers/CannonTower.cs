@@ -13,7 +13,7 @@ public class CannonTower : Tower
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
-        objectName = "캐논 타워";
+        objectName = "Cannon Tower";
 
         powerConsumption = 20;
 

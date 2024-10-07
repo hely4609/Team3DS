@@ -10,7 +10,7 @@ public class NormalTower : Tower
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
-        objectName = "기본 타워";
+        objectName = "Normal Tower";
 
         powerConsumption = 10;
 

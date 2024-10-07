@@ -18,7 +18,13 @@ MonoBehaviour:
   m_GUID: 84bd3b5842111614e8e2515b50b8b60c
   m_SerializeEntries:
   - m_GUID: 1251df12ab71d2e43b5861e66449cb2b
-    m_Address: dataTable_en
+    m_Address: CanvasTable_en
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-en
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 6687c0aa96a2866449e4a7870b73c207
+    m_Address: ChangeableTable_en
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-en
