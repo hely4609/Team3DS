@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public delegate void StartFunction();
 public delegate void UpdateFunction(float deltaTime);
@@ -73,8 +72,11 @@ public class GameManager : MonoBehaviour
     public WaveManager WaveManager => waveManager;
     #endregion
 
-    [SerializeField]bool isGameStart;
+    [SerializeField] bool isGameStart;
     public static bool IsGameStart => instance && instance.isGameStart;
+    
+    [SerializeField] bool isDefeated;
+    public void Defeat() { isDefeated = true; }
     public IEnumerator GameStart()
     {
         // 게임 시작후 Initiate할 매니저들
@@ -112,7 +114,7 @@ public class GameManager : MonoBehaviour
     public void GameOver() 
     { 
         isGameStart = false;
-        uiManager.GetUI(UIEnum.GameOverCanvas);
+        if(isDefeated) uiManager.GetUI(UIEnum.GameOverCanvas);
         NetworkManager.LocalController = null;
 
         ManagerStarts -= BuildingManager.ManagerStart;
