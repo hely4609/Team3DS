@@ -22,7 +22,7 @@ public partial class Player : Character
     [SerializeField] public GameObject buildingSelectUI; // 빌딩 선택 UI
     public GameObject[] buildingSelectUIBuildingImages;
     [SerializeField] public GameObject buildingConfirmUI; // 가건물 들고있을때 설치 취소키 보여주는 UI
-    protected GameObject ropeMaxDistanceSignUI; // 로프 길이가 최대일 때 보여줄 경고 UI
+    public GameObject ropeMaxDistanceSignUI; // 로프 길이가 최대일 때 보여줄 경고 UI
     protected Animator onScreenKeyGuideUIAnim;
 
     protected ImgsFillDynamic interactionUpdateProgress; // 상호작용 진행중 UI 채울 정도

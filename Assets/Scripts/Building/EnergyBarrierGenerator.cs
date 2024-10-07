@@ -33,6 +33,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
         {
             onOff = false;
             SetActiveEnergyBarrier();
+            GameManager.Instance.Defeat();
             GameManager.Instance.GameOver();
         }
         //Debug.Log($"{HpCurrent} / {gameObject.name}");

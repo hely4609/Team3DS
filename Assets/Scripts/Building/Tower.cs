@@ -281,6 +281,7 @@ public class Tower : InteractableBuilding
     }
     public override void AttachRope(Player player, int number)
     {
+        player.ropeMaxDistanceSignUI.SetActive(false);
         InteractableBuilding building = player.ropeBuilding;
         if (building is Pylon)
         //if (building.GetType().IsSubclassOf(typeof(Tower)))
