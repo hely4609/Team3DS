@@ -92,8 +92,8 @@ public class GameManager : MonoBehaviour
         if (buildingManager == null)
         {
             buildingManager = new BuildingManager();
-            yield return BuildingManager.Initiate();
         }
+        yield return BuildingManager.Initiate();
 
         if (cameraManager == null)
         {
@@ -116,6 +116,7 @@ public class GameManager : MonoBehaviour
     public void GameOver() 
     { 
         isGameStart = false;
+        Cursor.lockState = CursorLockMode.None;
         if(isDefeated) uiManager.GetUI(UIEnum.GameOverCanvas);
         NetworkManager.LocalController = null;
 
@@ -147,7 +148,7 @@ public class GameManager : MonoBehaviour
         poolManager = new PoolManager();
         yield return poolManager.Initiate();
         buildingManager = new BuildingManager();
-        yield return BuildingManager.Initiate();
+        //yield return BuildingManager.Initiate();
         cameraManager = new CameraManager();
         yield return CameraManager.Initiate();
         waveManager = new WaveManager();

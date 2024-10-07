@@ -76,7 +76,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     }
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
-        GameManager.Instance.GameOver();
+        if(GameManager.IsGameStart)GameManager.Instance.GameOver();
         GameManager.Instance.UIManager.ClaimError("Shutdowned", "서버와 연결이 해제되었습니다.", "확인", () => { 
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         });

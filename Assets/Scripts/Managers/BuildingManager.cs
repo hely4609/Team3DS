@@ -24,6 +24,7 @@ public class BuildingManager : Manager
 
     public override IEnumerator Initiate()
     {
+        Debug.Log("BM Initiated");
         buildings = new();
         roadData = new();
         corners = new();
@@ -52,8 +53,6 @@ public class BuildingManager : Manager
         //roadData.Add(new Vector2(-75, 75)); // 마지막점.
         PointRegistration(true, -150);
 
-        // 이걸 어디에 
-        CreateRoad();
 
         GameManager.ManagerStarts += ManagerStart;
 
@@ -76,6 +75,8 @@ public class BuildingManager : Manager
             supply = GameObject.FindObjectOfType<PowerSupply>();
         }
 
+        // 이걸 어디에 
+        CreateRoad();
     }
 
     protected void PointRegistration(bool isX, int distance)

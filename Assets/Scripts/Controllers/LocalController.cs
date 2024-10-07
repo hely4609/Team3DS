@@ -92,6 +92,7 @@ public class LocalController : ControllerBase
 
     protected void OnCursorLockTogle()
     {
+        if (!GameManager.IsGameStart) return;
         if (minimap == null)
         {
             minimap = FindObjectOfType<MiniMapScript>();
@@ -105,6 +106,7 @@ public class LocalController : ControllerBase
 
     protected void OnOpenDesignBuildingUI()
     {
+        if (!GameManager.IsGameStart) return;
         if (controlledPlayer.DesigningBuilding == null && HasInputAuthority)
         {
             controlledPlayer.buildingSelectUI.SetActive(!controlledPlayer.buildingSelectUI.activeInHierarchy);
@@ -226,6 +228,7 @@ public class LocalController : ControllerBase
     bool isFarmingKeyPressed = false;
     protected void OnFarming(bool isPressed)
     {
+        if (!GameManager.IsGameStart) return;
         if (controlledPlayer?.DesigningBuilding != null) return;
         if (alreadyPressed) return;
 
@@ -240,12 +243,14 @@ public class LocalController : ControllerBase
 
     protected void OnKeyGuide()
     {
+        if (!GameManager.IsGameStart) return;
         DoKeyGuide?.Invoke();
     }
 
     MiniMapScript minimap;
     protected void OnLargeMap()
     {
+        if (!GameManager.IsGameStart) return;
         if (HasInputAuthority)
         {
             if (minimap == null)
