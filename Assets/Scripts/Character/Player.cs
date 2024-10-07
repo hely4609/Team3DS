@@ -53,7 +53,7 @@ public partial class Player : Character
     // protected bool isHandFree;
     protected ResourceEnum.Prefab[,] buildableEnumArray;
     public ResourceEnum.Prefab[,] BuildableEnumArray => buildableEnumArray;
-    public int buildableEnumPageIndex = 0;
+    [Networked] public int buildableEnumPageIndex { get; set; } = 0;
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
     [Networked] public bool IsBuildingComfirmUIOpen { get; set; } = false;
@@ -361,19 +361,11 @@ public partial class Player : Character
             Vector3 playerIntPos = new Vector3(x, y, z);
             if (currentPos != lastPos)
             {
-                CanSetRope = ropeBuilding.CheckRopeLength(playerIntPos, playerID);
+                if(HasStateAuthority)CanSetRope = ropeBuilding.CheckRopeLength(playerIntPos, playerID);
                 if (CanSetRope)
                 {
                     ropeBuilding.OnRopeSet(playerIntPos, playerID);
                     lastPos = currentPos;
-                }
-                else
-                {
-                    if (ropeMaxDistanceSignUI != null) ropeMaxDistanceSignUI.SetActive(true);
-                    if (ropeSource == null || !ropeSource.isPlaying)
-                    {
-                        SoundManager.Play(ResourceEnum.SFX.rope_stretching, transform.position, false, out ropeSource);
-                    }
                 }
             }
         }
@@ -832,6 +824,16 @@ public partial class Player : Character
                 case nameof(IsBuildingComfirmUIOpen):
                     if (HasInputAuthority)
                     buildingConfirmUI.SetActive(IsBuildingComfirmUIOpen);
+                    break;
+                case nameof(CanSetRope):
+                    if(!CanSetRope)
+                    {
+                        if (HasInputAuthority && ropeMaxDistanceSignUI != null) ropeMaxDistanceSignUI.SetActive(true);
+                        if (ropeSource == null || !ropeSource.isPlaying)
+                        {
+                            SoundManager.Play(ResourceEnum.SFX.rope_stretching, transform.position, false, out ropeSource);
+                        }
+                    }
                     break;
             }
 

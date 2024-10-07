@@ -263,7 +263,7 @@ public class LocalController : ControllerBase
 
     protected void OnBuildingPageUpDown(InputValue value)
     {
-        if (value.Get() == null) return;
+        if (!HasInputAuthority || value.Get() == null) return;
         int i = value.Get().ToString() == "1" ? 1 : -1;
         if (controlledPlayer.buildableEnumPageIndex != Mathf.Clamp(controlledPlayer.buildableEnumPageIndex + i, 0, controlledPlayer.BuildableEnumArray.GetLength(0) - 1))
         {
