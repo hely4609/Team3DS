@@ -24,7 +24,6 @@ public class BuildingManager : Manager
 
     public override IEnumerator Initiate()
     {
-        Debug.Log("BM Initiated");
         buildings = new();
         roadData = new();
         corners = new();

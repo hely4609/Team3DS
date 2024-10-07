@@ -1,7 +1,9 @@
 using Fusion;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 
@@ -53,7 +55,11 @@ public partial class Player : Character
     // protected bool isHandFree;
     protected ResourceEnum.Prefab[,] buildableEnumArray;
     public ResourceEnum.Prefab[,] BuildableEnumArray => buildableEnumArray;
+<<<<<<< HEAD
     [Networked] public int BuildableEnumPageIndex { get; set; }
+=======
+    [Networked] public int buildableEnumPageIndex { get; set; } = 0;
+>>>>>>> 7d96c17a54bb9e838e7d99b419e84b2f4c6e44de
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
     [Networked] public bool IsBuildingComfirmUIOpen { get; set; } = false;
@@ -78,6 +84,7 @@ public partial class Player : Character
     //public Vector3 planeMovementVector;
     ////바닥 노말을 기준으로 움직이는 벡터입니다!
     //public Vector3 groundMovementVelocity;
+
 
 
     public bool TryPossession() => possessionController == null;
@@ -361,19 +368,11 @@ public partial class Player : Character
             Vector3 playerIntPos = new Vector3(x, y, z);
             if (currentPos != lastPos)
             {
-                CanSetRope = ropeBuilding.CheckRopeLength(playerIntPos, playerID);
+                if(HasStateAuthority)CanSetRope = ropeBuilding.CheckRopeLength(playerIntPos, playerID);
                 if (CanSetRope)
                 {
                     ropeBuilding.OnRopeSet(playerIntPos, playerID);
                     lastPos = currentPos;
-                }
-                else
-                {
-                    if (ropeMaxDistanceSignUI != null) ropeMaxDistanceSignUI.SetActive(true);
-                    if (ropeSource == null || !ropeSource.isPlaying)
-                    {
-                        SoundManager.Play(ResourceEnum.SFX.rope_stretching, transform.position, false, out ropeSource);
-                    }
                 }
             }
         }
@@ -621,7 +620,8 @@ public partial class Player : Character
                     interactionUpdateUI.SetActive(true);
                     interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
                     buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
-                    buttonText.text = $"건설중...";
+                    buttonText.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable", "NowBuilding");
+
                 }
 
                 //GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
@@ -681,9 +681,11 @@ public partial class Player : Character
 
             //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
             GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+
             button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
             buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = $"{target.GetName()}";
+            button.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable",target.GetName());
+            //buttonText.text = $"{target.GetName()}";
             interactionObjectDictionary.Add(target, button);
 
             if (interactionObjectList.Count == 1)
@@ -832,6 +834,16 @@ public partial class Player : Character
                 case nameof(IsBuildingComfirmUIOpen):
                     if (HasInputAuthority)
                     buildingConfirmUI.SetActive(IsBuildingComfirmUIOpen);
+                    break;
+                case nameof(CanSetRope):
+                    if(!CanSetRope)
+                    {
+                        if (HasInputAuthority && ropeMaxDistanceSignUI != null) ropeMaxDistanceSignUI.SetActive(true);
+                        if (ropeSource == null || !ropeSource.isPlaying)
+                        {
+                            SoundManager.Play(ResourceEnum.SFX.rope_stretching, transform.position, false, out ropeSource);
+                        }
+                    }
                     break;
             }
 

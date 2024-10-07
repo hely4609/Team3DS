@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
-  m_Name: dataTable_ko-KR
+  m_Name: CanvasTable_ko-KR
   m_EditorClassIdentifier: 
   m_LocaleId:
     m_Code: ko-KR
@@ -32,6 +32,34 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 363406462976
     m_Localized: "\uB79C\uB364 \uBC29 \uB4E4\uC5B4\uAC00\uAE30"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768034556874752
+    m_Localized: "\uD0A4\uAC00\uC774\uB4DC \uBCF4\uAE30/\uC228\uAE30\uAE30"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768145651404800
+    m_Localized: "\uC635\uC158\uCC3D \uBCF4\uAE30/\uC228\uAE30\uAE30"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768422811013120
+    m_Localized: "\uCCAD\uC18C\uAE30(\uD640\uB4DC)"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768535319023616
+    m_Localized: "\uAC74\uC124"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768589341659136
+    m_Localized: "\uC0C1\uD638\uC791\uC6A9"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768645612441600
+    m_Localized: "\uCDE8\uC18C"
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1770627039399936
+    m_Localized: "\uB9C8\uC6B0\uC2A4 \uCEE4\uC11C \uBCF4\uAE30/\uC228\uAE30\uAE30"
     m_Metadata:
       m_Items: []
   references:

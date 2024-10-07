@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: ChangeableTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: ChangeableTable
+  m_TableCollectionNameGuidString: d11c5825c8e34174f8a121e2eff408f3
+  m_Entries:
+  - m_Id: 8002113536
+    m_Key: Normal Tower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 66416185344
+    m_Key: Gatling Tower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 146741301248
+    m_Key: Blast Tower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 210998038528
+    m_Key: Cannon Tower
+    m_Metadata:
+      m_Items: []
+  - m_Id: 257475121152
+    m_Key: Pylon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 292573057024
+    m_Key: Bridge
+    m_Metadata:
+      m_Items: []
+  - m_Id: 338039312384
+    m_Key: Power Supply
+    m_Metadata:
+      m_Items: []
+  - m_Id: 544298405888
+    m_Key: Delivery
+    m_Metadata:
+      m_Items: []
+  - m_Id: 43109928308736
+    m_Key: NowBuilding
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4425536660078592039
+  references:
+    version: 2
+    RefIds:
+    - rid: 4425536660078592039
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1728267017424

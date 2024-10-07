@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
-  m_Name: dataTable Shared Data
+  m_Name: CanvasTable Shared Data
   m_EditorClassIdentifier: 
-  m_TableCollectionName: dataTable
+  m_TableCollectionName: CanvasTable
   m_TableCollectionNameGuidString: 073a8e91ca28b3f4b8cc03e2fbe2f900
   m_Entries:
   - m_Id: 18001334272
@@ -29,6 +29,34 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 363406462976
     m_Key: Join Random Room
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768034556874752
+    m_Key: KeyGuideOpenHide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768145651404800
+    m_Key: OptionMenuOpenHide
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768422811013120
+    m_Key: Cleaner
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768535319023616
+    m_Key: Build
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768589341659136
+    m_Key: Interaction
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1768645612441600
+    m_Key: Cancle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1770627039399936
+    m_Key: MouseCurserOpenHide
     m_Metadata:
       m_Items: []
   m_Metadata:
