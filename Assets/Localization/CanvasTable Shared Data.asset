@@ -59,6 +59,10 @@ MonoBehaviour:
     m_Key: MouseCurserOpenHide
     m_Metadata:
       m_Items: []
+  - m_Id: 1778063297122304
+    m_Key: Confirm
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -64,6 +64,10 @@ MonoBehaviour:
     m_Localized: Mouse Curser Open/Hide
     m_Metadata:
       m_Items: []
+  - m_Id: 1778063297122304
+    m_Localized: Confirm
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
