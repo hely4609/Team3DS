@@ -1,7 +1,7 @@
 using Fusion;
+using System;
 using System.Collections.Generic;
 using TMPro;
-using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
@@ -557,8 +557,8 @@ public partial class Player : Character
         if (HasInputAuthority && buildingSelectUI.activeSelf)
         {
             buildingSelectUI.SetActive(false);
-            IsThisPlayerCharacterUICanvasActivated = false;
         }
+        IsThisPlayerCharacterUICanvasActivated = false;
 
         if (DesigningBuilding != null)
         {
@@ -841,6 +841,14 @@ public partial class Player : Character
                         }
                     }
                     break;
+                case nameof(BuildableEnumPageIndex):
+                    if (HasInputAuthority)
+                    {
+                        SetPageIndexText();
+                        RenewBuildingImanges();
+                        Canvas.ForceUpdateCanvases();
+                    }
+                    break;
             }
 
         }
@@ -999,8 +1007,26 @@ public partial class Player : Character
 
     public void SetPageIndexText()
     {
-        if (HasInputAuthority)
+        if (buildingSelectUI.activeInHierarchy && HasInputAuthority)
             pageIndexText.text = $"{BuildableEnumPageIndex + 1} / {(ResourceEnum.Prefab.buildingEnd - ResourceEnum.Prefab.buildingStart - 2) / 5 + 1}";
         
+    }
+
+    public void RenewBuildingImanges()
+    {
+        if (buildingSelectUI.activeInHierarchy && HasInputAuthority)
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                int siblingIndex = buildingSelectUIBuildingImages[i].transform.parent.GetSiblingIndex();
+
+
+                Debug.Log(BuildableEnumArray[BuildableEnumPageIndex, siblingIndex].ToString());
+                Enum.TryParse(BuildableEnumArray[BuildableEnumPageIndex, siblingIndex].ToString(), out ResourceEnum.Sprite result);
+
+                buildingSelectUIBuildingImages[i].GetComponent<Image>().sprite = ResourceManager.Get(result);
+            }
+        }
+
     }
 }

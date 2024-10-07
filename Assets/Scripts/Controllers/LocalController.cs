@@ -51,15 +51,15 @@ public class LocalController : ControllerBase
                 controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
             }
 
-            if (data.buildableEnumPageIndexDelta != 0)
-            {
-                if (HasInputAuthority)
-                {
-                    controlledPlayer.SetPageIndexText();
-                    RenewBuildingImanges();
-                    Canvas.ForceUpdateCanvases();
-                }
-            }
+            //if (data.buildableEnumPageIndexDelta != 0)
+            //{
+            //    if (HasInputAuthority)
+            //    {
+            //        controlledPlayer.SetPageIndexText();
+            //        RenewBuildingImanges();
+            //        Canvas.ForceUpdateCanvases();
+            //    }
+            //}
         }
     }
     protected override void MyStart()
@@ -118,10 +118,7 @@ public class LocalController : ControllerBase
     protected void OnOpenDesignBuildingUI()
     {
         if (!GameManager.IsGameStart) return;
-        if (controlledPlayer.DesigningBuilding == null && HasStateAuthority)
-        {
-            ControlledPlayer.BuildableEnumPageIndex = 0;
-        }
+
         if (controlledPlayer.DesigningBuilding == null && HasInputAuthority)
         {
             controlledPlayer.buildingSelectUI.SetActive(!controlledPlayer.buildingSelectUI.activeInHierarchy);
@@ -129,31 +126,31 @@ public class LocalController : ControllerBase
             if (controlledPlayer.buildingSelectUI.activeInHierarchy)
             {
                 controlledPlayer.SetPageIndexText();
-                RenewBuildingImanges();
+                controlledPlayer.RenewBuildingImanges();
 
                 Canvas.ForceUpdateCanvases();
             }
-            
+
         }
     }
 
-    protected void RenewBuildingImanges()
-    {
-        if(controlledPlayer.buildingSelectUI.activeInHierarchy)
-        {
-            for(int i =0; i < 5; i++)
-            {
-                int siblingIndex = controlledPlayer.buildingSelectUIBuildingImages[i].transform.parent.GetSiblingIndex();
+    //protected void RenewBuildingImanges()
+    //{
+    //    if(controlledPlayer.buildingSelectUI.activeInHierarchy)
+    //    {
+    //        for(int i =0; i < 5; i++)
+    //        {
+    //            int siblingIndex = controlledPlayer.buildingSelectUIBuildingImages[i].transform.parent.GetSiblingIndex();
 
 
-                Debug.Log(controlledPlayer.BuildableEnumArray[controlledPlayer.BuildableEnumPageIndex, siblingIndex].ToString());
-                Enum.TryParse(controlledPlayer.BuildableEnumArray[controlledPlayer.BuildableEnumPageIndex, siblingIndex].ToString(), out ResourceEnum.Sprite result);
+    //            Debug.Log(controlledPlayer.BuildableEnumArray[controlledPlayer.BuildableEnumPageIndex, siblingIndex].ToString());
+    //            Enum.TryParse(controlledPlayer.BuildableEnumArray[controlledPlayer.BuildableEnumPageIndex, siblingIndex].ToString(), out ResourceEnum.Sprite result);
 
-                controlledPlayer.buildingSelectUIBuildingImages[i].GetComponent<Image>().sprite = ResourceManager.Get(result);
-            }
-        }
+    //            controlledPlayer.buildingSelectUIBuildingImages[i].GetComponent<Image>().sprite = ResourceManager.Get(result);
+    //        }
+    //    }
 
-    }
+    //}
 
     protected void OnMove(Vector3 direaction)
     {
@@ -196,6 +193,23 @@ public class LocalController : ControllerBase
     }
     protected void OnBuild() 
     {
+        if (!GameManager.IsGameStart) return;
+
+        //if (controlledPlayer.DesigningBuilding == null && HasInputAuthority)
+        //{
+        //    controlledPlayer.buildingSelectUI.SetActive(!controlledPlayer.buildingSelectUI.activeInHierarchy);
+
+        //    if (controlledPlayer.buildingSelectUI.activeInHierarchy)
+        //    {
+        //        controlledPlayer.SetPageIndexText();
+        //        controlledPlayer.RenewBuildingImanges();
+
+        //        Canvas.ForceUpdateCanvases();
+        //    }
+        //}
+
+        controlledPlayer.BuildableEnumPageIndex = 0;
+
         DoBuild?.Invoke();
     }
 
