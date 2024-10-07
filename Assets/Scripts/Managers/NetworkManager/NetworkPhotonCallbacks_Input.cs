@@ -22,6 +22,7 @@ public struct NetworkInputData : INetworkInput
     //public Vector2 lookRotationDelta;
     public Vector2 scrollbarDelta;
     public int selectedBuildingIndex;
+    public int buildableEnumPageIndexDelta;
     public NetworkButtons buttons;
 }
 
@@ -31,6 +32,7 @@ public partial class NetworkPhotonCallbacks
     //Vector2 mouseDelta;
     Vector2 mouseWheelDelta;
     int buildingIndex = -1;
+    int buildableEnumPageIndexDelta = 0;
     bool tryFarming;
     bool tryBuild;
     bool tryCancel;
@@ -53,6 +55,7 @@ public partial class NetworkPhotonCallbacks
         //data.lookRotationDelta = mouseDelta;
         data.selectedBuildingIndex = buildingIndex;
         data.scrollbarDelta = mouseWheelDelta;
+        data.buildableEnumPageIndexDelta = buildableEnumPageIndexDelta;
 
         data.buttons.Set(MyButtons.Build, tryBuild);
         data.buttons.Set(MyButtons.Cancel, tryCancel);
@@ -62,6 +65,7 @@ public partial class NetworkPhotonCallbacks
         input.Set(data);
 
         buildingIndex = -1;
+        buildableEnumPageIndexDelta = 0;
         tryBuild = false;
         tryCancel = false;
         tryRope= false;
@@ -129,5 +133,11 @@ public partial class NetworkPhotonCallbacks
     public void OnFarming(InputValue value)
     {
         tryFarming = value.isPressed;
+    }
+
+    public void OnBuildingPageUpDown(InputValue value)
+    {
+        if (value.Get() == null) return;
+        buildableEnumPageIndexDelta = value.Get().ToString() == "1" ? 1 : -1;
     }
 }

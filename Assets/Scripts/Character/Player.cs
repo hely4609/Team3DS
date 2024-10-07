@@ -53,7 +53,7 @@ public partial class Player : Character
     // protected bool isHandFree;
     protected ResourceEnum.Prefab[,] buildableEnumArray;
     public ResourceEnum.Prefab[,] BuildableEnumArray => buildableEnumArray;
-    public int buildableEnumPageIndex = 0;
+    [Networked] public int BuildableEnumPageIndex { get; set; }
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
     [Networked] public bool IsBuildingComfirmUIOpen { get; set; } = false;
@@ -535,9 +535,9 @@ public partial class Player : Character
         //buildingSelectUI.SetActive(false);
         //return true;
 
-        if (index < 0 || buildableEnumArray[buildableEnumPageIndex, index] == 0) return false;
+        if (index < 0 || buildableEnumArray[BuildableEnumPageIndex, index] == 0) return false;
 
-        NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[buildableEnumPageIndex, index]));
+        NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
         IsBuildingComfirmUIOpen = true;
 
@@ -992,7 +992,7 @@ public partial class Player : Character
     public void SetPageIndexText()
     {
         if (HasInputAuthority)
-            pageIndexText.text = $"{buildableEnumPageIndex + 1} / {(ResourceEnum.Prefab.buildingEnd - ResourceEnum.Prefab.buildingStart - 2) / 5 + 1}";
+            pageIndexText.text = $"{BuildableEnumPageIndex + 1} / {(ResourceEnum.Prefab.buildingEnd - ResourceEnum.Prefab.buildingStart - 2) / 5 + 1}";
         
     }
 }

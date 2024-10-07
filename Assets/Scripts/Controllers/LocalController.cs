@@ -36,6 +36,7 @@ public class LocalController : ControllerBase
             {
                 if(data.buttons.IsSet(MyButtons.Build)) OnBuild();
                 OnDesignBuilding(data.selectedBuildingIndex);
+                OnBuildingPageUpDown(data.buildableEnumPageIndexDelta);
 
             }
             
@@ -48,6 +49,16 @@ public class LocalController : ControllerBase
                     //controlledPlayer.buildingConfirmUI.SetActive(true);
                 }
                 controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
+            }
+
+            if (data.buildableEnumPageIndexDelta != 0)
+            {
+                if (HasInputAuthority)
+                {
+                    controlledPlayer.SetPageIndexText();
+                    RenewBuildingImanges();
+                    Canvas.ForceUpdateCanvases();
+                }
             }
         }
     }
@@ -107,15 +118,20 @@ public class LocalController : ControllerBase
     protected void OnOpenDesignBuildingUI()
     {
         if (!GameManager.IsGameStart) return;
+        if (controlledPlayer.DesigningBuilding == null && HasStateAuthority)
+        {
+            ControlledPlayer.BuildableEnumPageIndex = 0;
+        }
         if (controlledPlayer.DesigningBuilding == null && HasInputAuthority)
         {
             controlledPlayer.buildingSelectUI.SetActive(!controlledPlayer.buildingSelectUI.activeInHierarchy);
 
             if (controlledPlayer.buildingSelectUI.activeInHierarchy)
             {
-                controlledPlayer.buildableEnumPageIndex = 0;
                 controlledPlayer.SetPageIndexText();
                 RenewBuildingImanges();
+
+                Canvas.ForceUpdateCanvases();
             }
             
         }
@@ -130,8 +146,8 @@ public class LocalController : ControllerBase
                 int siblingIndex = controlledPlayer.buildingSelectUIBuildingImages[i].transform.parent.GetSiblingIndex();
 
 
-                Debug.Log(controlledPlayer.BuildableEnumArray[controlledPlayer.buildableEnumPageIndex, siblingIndex].ToString());
-                Enum.TryParse(controlledPlayer.BuildableEnumArray[controlledPlayer.buildableEnumPageIndex, siblingIndex].ToString(), out ResourceEnum.Sprite result);
+                Debug.Log(controlledPlayer.BuildableEnumArray[controlledPlayer.BuildableEnumPageIndex, siblingIndex].ToString());
+                Enum.TryParse(controlledPlayer.BuildableEnumArray[controlledPlayer.BuildableEnumPageIndex, siblingIndex].ToString(), out ResourceEnum.Sprite result);
 
                 controlledPlayer.buildingSelectUIBuildingImages[i].GetComponent<Image>().sprite = ResourceManager.Get(result);
             }
@@ -261,16 +277,17 @@ public class LocalController : ControllerBase
         }
     }
 
-    protected void OnBuildingPageUpDown(InputValue value)
+    protected void OnBuildingPageUpDown(int value)
     {
-        if (value.Get() == null) return;
-        int i = value.Get().ToString() == "1" ? 1 : -1;
-        if (controlledPlayer.buildableEnumPageIndex != Mathf.Clamp(controlledPlayer.buildableEnumPageIndex + i, 0, controlledPlayer.BuildableEnumArray.GetLength(0) - 1))
+        if (!GameManager.IsGameStart) return;
+        if (value == 0) return;
+        if (controlledPlayer == null) return;
+        if (controlledPlayer.BuildableEnumArray == null) return;
+
+        if (controlledPlayer.BuildableEnumPageIndex != Mathf.Clamp(controlledPlayer.BuildableEnumPageIndex + value, 0, controlledPlayer.BuildableEnumArray.GetLength(0) - 1))
         {
-            controlledPlayer.buildableEnumPageIndex = Mathf.Clamp(controlledPlayer.buildableEnumPageIndex + i, 0, controlledPlayer.BuildableEnumArray.GetLength(0) - 1);
-            controlledPlayer.SetPageIndexText();
-            RenewBuildingImanges();
+            controlledPlayer.BuildableEnumPageIndex = Mathf.Clamp(controlledPlayer.BuildableEnumPageIndex + value, 0, controlledPlayer.BuildableEnumArray.GetLength(0) - 1);
         }
-       
+        
     }
 }
