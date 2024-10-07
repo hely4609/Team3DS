@@ -29,13 +29,6 @@ public class EnergyBarrierGenerator : InteractableBuilding
         hpCurrent -= damage;
         hpText.text = $"{hpCurrent} / {hpMax}";
         hpFillImage.fillAmount = hpCurrent / (float)hpMax;
-        if (hpCurrent <= 0)
-        {
-            onOff = false;
-            SetActiveEnergyBarrier();
-            GameManager.Instance.Defeat();
-            GameManager.Instance.GameOver();
-        }
         //Debug.Log($"{HpCurrent} / {gameObject.name}");
     }
     private void OnCollisionEnter(Collision collision)
@@ -103,6 +96,13 @@ public class EnergyBarrierGenerator : InteractableBuilding
                 case nameof(hpCurrent):
                     hpText.text = $"{hpCurrent} / {hpMax}";
                     hpFillImage.fillAmount = hpCurrent / (float)hpMax;
+                    if (hpCurrent <= 0)
+                    {
+                        onOff = false;
+                        SetActiveEnergyBarrier();
+                        GameManager.Instance.Defeat();
+                        GameManager.Instance.GameOver();
+                    }
                     break;
 
             }
