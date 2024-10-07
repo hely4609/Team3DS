@@ -55,11 +55,7 @@ public partial class Player : Character
     // protected bool isHandFree;
     protected ResourceEnum.Prefab[,] buildableEnumArray;
     public ResourceEnum.Prefab[,] BuildableEnumArray => buildableEnumArray;
-<<<<<<< HEAD
     [Networked] public int BuildableEnumPageIndex { get; set; }
-=======
-    [Networked] public int buildableEnumPageIndex { get; set; } = 0;
->>>>>>> 7d96c17a54bb9e838e7d99b419e84b2f4c6e44de
     [Networked] public Building DesigningBuilding { get; set; }
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
     [Networked] public bool IsBuildingComfirmUIOpen { get; set; } = false;
