@@ -68,6 +68,14 @@ MonoBehaviour:
     m_Localized: Confirm
     m_Metadata:
       m_Items: []
+  - m_Id: 1793389866946560
+    m_Localized: Maximum wire length
+    m_Metadata:
+      m_Items: []
+  - m_Id: 1793983411294208
+    m_Localized: No Power
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []
