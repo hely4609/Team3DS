@@ -1,0 +1,44 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: dataTable Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: dataTable
+  m_TableCollectionNameGuidString: 073a8e91ca28b3f4b8cc03e2fbe2f900
+  m_Entries:
+  - m_Id: 18001334272
+    m_Key: MainTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 124368883712
+    m_Key: GameHosting
+    m_Metadata:
+      m_Items: []
+  - m_Id: 211371331584
+    m_Key: Join With Code
+    m_Metadata:
+      m_Items: []
+  - m_Id: 363406462976
+    m_Key: Join Random Room
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items: []
+  m_KeyGenerator:
+    rid: 4425536553304195096
+  references:
+    version: 2
+    RefIds:
+    - rid: 4425536553304195096
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1727854772754

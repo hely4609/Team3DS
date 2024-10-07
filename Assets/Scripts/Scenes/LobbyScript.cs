@@ -36,7 +36,10 @@ public class LobbyScript : MonoBehaviour
         {
             CloseSessionIDInputFieldWindow();
         }
-
+    }
+    public void ChangeLocale(int i)
+    {
+        GameManager.Instance.LocaleManager.ChangeLocale(i);
     }
     public void StartHost()
     {

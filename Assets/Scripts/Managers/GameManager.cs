@@ -70,6 +70,9 @@ public class GameManager : MonoBehaviour
 
     protected WaveManager waveManager;
     public WaveManager WaveManager => waveManager;
+
+    protected LocaleManager localeManager;
+    public LocaleManager LocaleManager => localeManager;
     #endregion
 
     [SerializeField] bool isGameStart;
@@ -105,7 +108,6 @@ public class GameManager : MonoBehaviour
             yield return WaveManager.Initiate();
             ManagerUpdates += WaveManager.ManagerUpdate;
         }
-        
         isGameStart = true; 
     }
 
@@ -178,6 +180,8 @@ public class GameManager : MonoBehaviour
         yield return uiManager.Initiate();
         networkManager = new NetworkManager();
         yield return networkManager.Initiate();
+        localeManager = new LocaleManager();
+        yield return localeManager.Initiate();
 
         //cameraManager = new CameraManager();
         //yield return cameraManager.Initiate();
