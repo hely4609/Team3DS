@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class OptionManager : MonoBehaviour
 {
@@ -30,6 +31,8 @@ public class OptionManager : MonoBehaviour
     [SerializeField] Slider masterSlider;
     [SerializeField] Slider bgmSlider;
     [SerializeField] Slider sfxSlider;
+    
+    
     public void ToggleMaster()
     {
         masterSlider.interactable = masterToggle.isOn;
@@ -48,5 +51,27 @@ public class OptionManager : MonoBehaviour
     {
         sfxSlider.interactable = sfxToggle.isOn;
         GameManager.Instance.SoundManager.ToggleAudioMixerGroup(SoundManager.AudioMixerGroupType.SFX, sfxToggle.isOn, sfxSlider.value);
+    }
+
+    public void GameQuit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
+
+    public void GoTitle()
+    {
+        if (settingsUICanvas != null && cancelable == 0)
+        {
+            settingsUICanvas.SetActive(false);
+        }
+
+        if (GameManager.IsGameStart)
+        {
+            GameManager.Instance.NetworkManager.Runner.Shutdown();
+        }
     }
 }
