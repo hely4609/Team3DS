@@ -1,6 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using UnityEditor.Localization;
 using UnityEngine;
+using UnityEngine.Localization;
+using UnityEngine.Localization.Components;
 using UnityEngine.Localization.Settings;
 
 public class LocaleManager : Manager
@@ -19,7 +23,7 @@ public class LocaleManager : Manager
         isChanging = true;
         yield return LocalizationSettings.InitializationOperation;
         LocalizationSettings.SelectedLocale = LocalizationSettings.AvailableLocales.Locales[index];
-
+        //yield return null;
         isChanging = false;
     }
 
@@ -27,8 +31,8 @@ public class LocaleManager : Manager
     {
 
         languageInt = 0;
-        ChangeLocale(0);
-        return ChangeRoutine(languageInt);
+        ChangeLocale(languageInt);
+        yield return null;
     }
     public void Initialize()
     {

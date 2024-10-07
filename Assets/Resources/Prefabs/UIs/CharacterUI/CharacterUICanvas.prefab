@@ -539,7 +539,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCDE8\uC18C"
+  m_text: Cancle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -1391,7 +1391,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB9C8\uC6B0\uC2A4 \uCEE4\uC11C \uBCF4\uAE30/\uC228\uAE30\uAE30"
+  m_text: Mouse Curser Open/Hide
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -2318,7 +2318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uB85C\uD504 \uAE38\uC774 \uCD5C\uB300"
+  m_text: No translation found for '' in CanvasTable
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -2345,8 +2345,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 23.6
+  m_fontSizeBase: 23.6
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2403,7 +2403,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:073a8e91ca28b3f4b8cc03e2fbe2f900
     m_TableEntryReference:
-      m_KeyId: 1772529365979136
+      m_KeyId: 1793389866946560
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -4663,7 +4663,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCDE8\uC18C"
+  m_text: Cancle
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -5392,7 +5392,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC0C1\uD638\uC791\uC6A9"
+  m_text: Interaction
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -5604,7 +5604,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC124\uCE58"
+  m_text: Build
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -5689,7 +5689,7 @@ MonoBehaviour:
     m_TableReference:
       m_TableCollectionName: GUID:073a8e91ca28b3f4b8cc03e2fbe2f900
     m_TableEntryReference:
-      m_KeyId: 1772941108219904
+      m_KeyId: 1768535319023616
       m_Key: 
     m_FallbackState: 0
     m_WaitForCompletion: 0
@@ -6154,7 +6154,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uCCAD\uC18C\uAE30 (\uD640\uB4DC)"
+  m_text: Cleaner(Hold)
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -7798,7 +7798,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC635\uC158\uCC3D \uBCF4\uAE30/\uC228\uAE30\uAE30"
+  m_text: Option Menu Open/Hide
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -8107,7 +8107,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uD0A4\uAC00\uC774\uB4DC \uBCF4\uAE30/\uC228\uAE30\uAE30"
+  m_text: Key Guide Open/Hide
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
@@ -9394,7 +9394,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uAC74\uC124 "
+  m_text: Build
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
