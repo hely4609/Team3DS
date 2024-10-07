@@ -10,7 +10,7 @@ public class BlastTower : Tower
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
-        objectName = "블래스트 타워";
+        objectName = "Blast Tower";
 
         powerConsumption = 30;
 

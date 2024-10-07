@@ -10,7 +10,7 @@ public class GatlingTower : Tower
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
-        objectName = "게틀링 타워";
+        objectName = "Gatling Tower";
 
         powerConsumption = 40;
 

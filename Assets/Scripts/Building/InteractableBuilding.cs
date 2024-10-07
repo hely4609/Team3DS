@@ -14,6 +14,7 @@ public struct RopeStruct
 public class InteractableBuilding : Building, IInteraction
 {
     [SerializeField] protected string objectName;
+    public string ObjectName { get { return objectName; } }
     //protected Collider[] interactionColliders;
     //[SerializeField] protected Renderer interactionRenderer; // 상호작용 기준이될 Base Renderer 등록
     [Networked, SerializeField] protected bool IsSettingRope { get; set; } = false;

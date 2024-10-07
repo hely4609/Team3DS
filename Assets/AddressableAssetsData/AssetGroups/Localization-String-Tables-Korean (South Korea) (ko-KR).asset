@@ -18,7 +18,13 @@ MonoBehaviour:
   m_GUID: a323981a296c9e443b4df36b76007feb
   m_SerializeEntries:
   - m_GUID: 0b70264dbbf69e848af8f0b5c124170a
-    m_Address: dataTable_ko-KR
+    m_Address: CanvasTable_ko-KR
+    m_ReadOnly: 1
+    m_SerializedLabels:
+    - Locale-ko-KR
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c0babeccb342ec940995b8aae8aab3ee
+    m_Address: ChangeableTable_ko-KR
     m_ReadOnly: 1
     m_SerializedLabels:
     - Locale-ko-KR
