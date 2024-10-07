@@ -314,11 +314,16 @@ MonoBehaviour:
   marker_designed: {fileID: 1608406327930371463}
   marker_on: {fileID: 5054706063076145097}
   marker_off: {fileID: 8686797311467670305}
-  objectName: "\uC5D0\uB108\uC9C0\uBC29\uBCBD\uC0DD\uC131\uAE30"
+  buildingSignCanvas: {fileID: 0}
+  objectName: Energy Barrier Generator
+  _IsSettingRope: 0
+  _IsRoped: 0
   ropeStruct:
     ropeObjects: []
     ropePositions: []
-  hpCurrent: 0
+  maxRopeLength: 0
+  currentRopeLength: 0
+  _hpCurrent: 0
 --- !u!114 &667561063578481595
 MonoBehaviour:
   m_ObjectHideFlags: 0

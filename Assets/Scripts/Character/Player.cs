@@ -1,7 +1,9 @@
 using Fusion;
 using System.Collections.Generic;
 using TMPro;
+using UnityEditor.Build.Pipeline.Utilities;
 using UnityEngine;
+using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
 
@@ -78,6 +80,7 @@ public partial class Player : Character
     //public Vector3 planeMovementVector;
     ////바닥 노말을 기준으로 움직이는 벡터입니다!
     //public Vector3 groundMovementVelocity;
+
 
 
     public bool TryPossession() => possessionController == null;
@@ -621,7 +624,8 @@ public partial class Player : Character
                     interactionUpdateUI.SetActive(true);
                     interactionUpdateProgress = interactionUpdateUI.GetComponentInChildren<ImgsFillDynamic>();
                     buttonText = interactionUpdateUI.GetComponentInChildren<TextMeshProUGUI>();
-                    buttonText.text = $"건설중...";
+                    buttonText.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable", "NowBuilding");
+
                 }
 
                 //GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.Hammer, sockets.FindSocket("RightHand").gameObject.transform);
@@ -681,9 +685,11 @@ public partial class Player : Character
 
             //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
             GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+
             button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
             buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-            buttonText.text = $"{target.GetName()}";
+            button.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable",target.GetName());
+            //buttonText.text = $"{target.GetName()}";
             interactionObjectDictionary.Add(target, button);
 
             if (interactionObjectList.Count == 1)

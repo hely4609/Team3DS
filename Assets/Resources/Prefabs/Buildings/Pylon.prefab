@@ -346,8 +346,8 @@ GameObject:
   - component: {fileID: 8522698738898084457}
   - component: {fileID: -4987246587671253148}
   - component: {fileID: -8626605937255627563}
-  - component: {fileID: 8423881744049437816}
   - component: {fileID: 8939931637654039337}
+  - component: {fileID: -2821246717546671668}
   m_Layer: 0
   m_Name: Pylon
   m_TagString: Untagged
@@ -408,45 +408,7 @@ MonoBehaviour:
   NestedObjects: []
   NetworkedBehaviours:
   - {fileID: -4987246587671253148}
-  - {fileID: 8423881744049437816}
---- !u!114 &8423881744049437816
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6860581916195568055}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4996364cc982ce469c9685ef061babf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  buildingTimeMax: 1
-  _BuildingTimeCurrent: 0
-  completeMat: {fileID: 2100000, guid: 252a6853d06b8214d8cd3f8f3ed04a55, type: 2}
-  meshes:
-  - {fileID: 4065499076986777232}
-  - {fileID: 4065067305369771856}
-  - {fileID: 4065064371901350918}
-  cols:
-  - {fileID: 8939931637654039337}
-  _IsFixed: 0
-  tiledBuildingPositionLast: {x: 0, y: 0}
-  startPos: {x: 0, y: 0}
-  size: {x: 0, y: 0}
-  marker_designed: {fileID: 8913329558517099434}
-  marker_on: {fileID: 2894029210644804140}
-  marker_off: {fileID: 8536452984131014355}
-  objectName: "\uC911\uACC4\uAE30"
-  _IsSettingRope: 0
-  _IsRoped: 0
-  ropeStruct:
-    ropeObjects: []
-    ropePositions: []
-  maxRopeLength: 20
-  currentRopeLength: 0
-  isSettingRopeList: 
-  ropeLengthList: []
+  - {fileID: -2821246717546671668}
 --- !u!65 &8939931637654039337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -468,6 +430,48 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.45, y: 8.1, z: 2.8307767}
   m_Center: {x: -0.000030040741, y: 2.7, z: 0}
+--- !u!114 &-2821246717546671668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6860581916195568055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dce688859e37f284fb0a20b92db3c93b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buildingTimeMax: 1
+  _BuildingTimeCurrent: 0
+  completeMat: {fileID: 2100000, guid: 252a6853d06b8214d8cd3f8f3ed04a55, type: 2}
+  meshes:
+  - {fileID: 4065499076986777232}
+  - {fileID: 4065067305369771856}
+  - {fileID: 4065064371901350918}
+  cols:
+  - {fileID: 8939931637654039337}
+  _IsFixed: 0
+  tiledBuildingPositionLast: {x: 0, y: 0}
+  startPos: {x: 0, y: 0}
+  size: {x: 0, y: 0}
+  marker_designed: {fileID: 8913329558517099434}
+  marker_on: {fileID: 2894029210644804140}
+  marker_off: {fileID: 8536452984131014355}
+  buildingSignCanvas: {fileID: 0}
+  objectName: 
+  _IsSettingRope: 0
+  _IsRoped: 0
+  ropeStruct:
+    ropeObjects: []
+    ropePositions: []
+  maxRopeLength: 20
+  currentRopeLength: 0
+  multiTabList: []
+  isSettingRopeList: 
+  ropeLengthList: []
+  _OnOff: 0
+  attachedPylonList: []
 --- !u!1 &8536452984131014355
 GameObject:
   m_ObjectHideFlags: 0
