@@ -54,6 +54,18 @@ MonoBehaviour:
     m_Localized: Now Building...
     m_Metadata:
       m_Items: []
+  - m_Id: 54460604125184
+    m_Localized: The server has been disconnected.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54528186945536
+    m_Localized: The network connection has been lost.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54564790636544
+    m_Localized: Network connection failed.
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

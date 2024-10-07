@@ -51,6 +51,18 @@ MonoBehaviour:
     m_Key: NowBuilding
     m_Metadata:
       m_Items: []
+  - m_Id: 54460604125184
+    m_Key: ServerDisconnect
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54528186945536
+    m_Key: NetworkLost
+    m_Metadata:
+      m_Items: []
+  - m_Id: 54564790636544
+    m_Key: NetworkFailed
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
