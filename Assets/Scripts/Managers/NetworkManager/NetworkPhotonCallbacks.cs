@@ -84,11 +84,6 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             });
         }
-        else
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        }
-        
     }
     public void OnConnectedToServer(NetworkRunner runner) 
     {

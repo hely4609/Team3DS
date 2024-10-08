@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class GameOverCanvas : MonoBehaviour
 {
@@ -10,6 +11,7 @@ public class GameOverCanvas : MonoBehaviour
     public void GoTitle()
     {
         GameManager.Instance.GoTitle();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void SetResultText()
