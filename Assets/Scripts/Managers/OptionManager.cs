@@ -69,11 +69,8 @@ public class OptionManager : MonoBehaviour
             settingsUICanvas.SetActive(false);
         }
 
-        if (GameManager.IsGameStart)
-        {
-            GameManager.Instance.NetworkManager.Runner.Shutdown();
-        }
-
+        GameManager.Instance.GoTitle();
+        
         if (GameManager.Instance.IsDefeated)
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
