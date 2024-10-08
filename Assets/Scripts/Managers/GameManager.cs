@@ -112,7 +112,9 @@ public class GameManager : MonoBehaviour
             yield return WaveManager.Initiate();
             ManagerUpdates += WaveManager.ManagerUpdate;
         }
-        isGameStart = true; 
+
+        isGameStart = true;
+        isDefeated = false;
     }
 
     
