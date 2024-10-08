@@ -42,6 +42,7 @@ public class OptionManager : MonoBehaviour
         sfxSlider.interactable = masterToggle.isOn;
         GameManager.Instance.SoundManager.ToggleAudioMixerGroup(SoundManager.AudioMixerGroupType.Master, masterToggle.isOn, masterSlider.value);
     }
+
     public void ToggleBGM()
     {
         bgmSlider.interactable = bgmToggle.isOn;
@@ -75,5 +76,9 @@ public class OptionManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+    }
+    public void ChangeLocale(int i)
+    {
+        GameManager.Instance.LocaleManager.ChangeLocale(i);
     }
 }
