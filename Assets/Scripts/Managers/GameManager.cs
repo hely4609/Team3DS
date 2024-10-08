@@ -172,6 +172,8 @@ public class GameManager : MonoBehaviour
     IEnumerator Start()
     {
         loadingCanvas = GetComponentInChildren<LoadingCanvas>();
+        localeManager = new LocaleManager();
+        yield return localeManager.Initiate();
 
         resourceManager = new ResourceManager();
         yield return resourceManager.Initiate();
@@ -189,8 +191,6 @@ public class GameManager : MonoBehaviour
         yield return uiManager.Initiate();
         networkManager = new NetworkManager();
         yield return networkManager.Initiate();
-        localeManager = new LocaleManager();
-        yield return localeManager.Initiate();
 
         //cameraManager = new CameraManager();
         //yield return cameraManager.Initiate();
