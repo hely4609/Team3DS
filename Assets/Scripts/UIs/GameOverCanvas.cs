@@ -14,6 +14,6 @@ public class GameOverCanvas : MonoBehaviour
 
     public void SetResultText()
     {
-        resultText.text = "결과창\n" + $"플레이 시간 : {(int)GameManager.PlayTime / 60}분{(GameManager.PlayTime % 60).ToString("F0")}초\n" + $"잡은 몬스터 수 : {GameManager.KillCount}마리";
+        resultText.text = "결과창\n" + $"플레이 시간 : {(int)GameManager.Instance.BuildingManager.generator.PlayTime / 60}분{(GameManager.Instance.BuildingManager.generator.PlayTime % 60).ToString("F0")}초\n" + $"잡은 몬스터 수 : {GameManager.Instance.BuildingManager.generator.KillCount}마리";
     }
 }

@@ -9,6 +9,8 @@ public class EnergyBarrierGenerator : InteractableBuilding
 {
     protected int hpMax;
     [SerializeField, Networked] protected int hpCurrent { get; set; }
+    [Networked, SerializeField] public float PlayTime { get; set; }
+    [Networked, SerializeField] public int KillCount { get; set; }
 
     protected TextMeshProUGUI hpText;
     protected Image hpFillImage;
@@ -17,6 +19,11 @@ public class EnergyBarrierGenerator : InteractableBuilding
 
     protected bool onOff; // on/off시 올라오고 내려가는 연출 like 경찰바리게이트 
     public bool OnOff { get { return onOff; } }
+
+    protected override void MyUpdate(float deltaTime)
+    {
+        if (HasStateAuthority) PlayTime += Time.fixedUnscaledDeltaTime;
+    }
     public void SetActiveEnergyBarrier()  // 현재 On인지 Off인제 
     {
         for (int i = 0; i < energyBarrierArray.Length; i++)

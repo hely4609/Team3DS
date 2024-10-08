@@ -82,8 +82,6 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool isDefeated;
     public void Defeat() { isDefeated = true; }
 
-    [Networked,SerializeField] public static float PlayTime { get; set; }
-    [Networked,SerializeField] public static int KillCount { get; set; }
 
     public IEnumerator GameStart()
     {
@@ -122,8 +120,6 @@ public class GameManager : MonoBehaviour
     { 
         isGameStart = false;
         if (isDefeated) uiManager.GetUI(UIEnum.GameOverCanvas).GetComponent<GameOverCanvas>().SetResultText();
-        PlayTime = 0;
-        KillCount = 0;
         Cursor.lockState = CursorLockMode.None;
         
         NetworkManager.LocalController = null;
@@ -213,7 +209,6 @@ public class GameManager : MonoBehaviour
         SoundUpdates?.Invoke(Time.fixedDeltaTime);
         if (!isGameStart) return;
 
-        if (networkManager.Runner.IsServer) PlayTime += Time.fixedUnscaledDeltaTime;
 
         // 매니저 먼저
         if(ManagerStarts != null)
