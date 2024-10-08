@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.Extensions;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 public class GameOverCanvas : MonoBehaviour
 {
-    [SerializeField] TextMeshProUGUI resultText;
-
     public void GoTitle()
     {
         GameManager.Instance.GoTitle();
@@ -16,7 +17,21 @@ public class GameOverCanvas : MonoBehaviour
 
     public void SetResultText()
     {
-        if(GameManager.Instance.BuildingManager.generator == null) GameManager.Instance.BuildingManager.generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
-        resultText.text = "결과창\n" + $"플레이 시간 : {(int)GameManager.Instance.BuildingManager.generator.PlayTime / 60}분{(GameManager.Instance.BuildingManager.generator.PlayTime % 60).ToString("F0")}초\n" + $"잡은 몬스터 수 : {GameManager.Instance.BuildingManager.generator.KillCount}마리";
+        // Get our GlobalVariablesSource
+        var source = LocalizationSettings
+            .StringDatabase
+            .SmartFormatter
+            .GetSourceExtension<PersistentVariablesSource>();
+        // Get the specific global variable
+        var Miniute =
+            source["ResultGroup"]["Min"] as IntVariable;
+        var Second =
+    source["ResultGroup"]["Sec"] as IntVariable;
+        var Monster =
+    source["ResultGroup"]["Monster"] as IntVariable;
+
+        Monster.Value = GameManager.Instance.BuildingManager.generator.KillCount;
+        Miniute.Value = (int)GameManager.Instance.BuildingManager.generator.PlayTime / 60;
+        Second.Value = (int)GameManager.Instance.BuildingManager.generator.PlayTime % 60;
     }
 }

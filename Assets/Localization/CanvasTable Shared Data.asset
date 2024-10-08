@@ -71,6 +71,50 @@ MonoBehaviour:
     m_Key: NoPower
     m_Metadata:
       m_Items: []
+  - m_Id: 2083176339378176
+    m_Key: Result
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2083256593190912
+    m_Key: Time
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2083711427710976
+    m_Key: Monster
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084178136305664
+    m_Key: GameOver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2084204006772736
+    m_Key: GameOverText
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2099190850555904
+    m_Key: toTitle
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2113394479370240
+    m_Key: exit
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2113478663245824
+    m_Key: gotoLobby
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2113547785375744
+    m_Key: master
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2113614760022016
+    m_Key: background
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2113691197018112
+    m_Key: sfx
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
