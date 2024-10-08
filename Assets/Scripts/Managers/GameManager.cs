@@ -80,6 +80,7 @@ public class GameManager : MonoBehaviour
     public static bool IsGameStart => instance && instance.isGameStart;
     
     [SerializeField] bool isDefeated;
+    public bool IsDefeated => isDefeated;
     public void Defeat() { isDefeated = true; }
 
 
@@ -133,6 +134,8 @@ public class GameManager : MonoBehaviour
         cameraManager = null;
         buildingManager = null;
         poolManager = null;
+
+        
 
         StartCoroutine(SeverInitiate());
 
@@ -195,6 +198,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += UIManager.ManagerUpdate;
         ManagerUpdates += ControllerManager.ManagerUpdate;
 
+        isDefeated = false;
 
         CloseLoadInfo();
         SoundManager.Play(ResourceEnum.BGM.Silent_Partner__Whistling_Down_the_Road);
@@ -236,10 +240,6 @@ public class GameManager : MonoBehaviour
         ManagerDestroies?.Invoke();
         ManagerDestroies = null;
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            networkManager.Runner.Shutdown();
-        }
     }
 
     public static void ClaimLoadInfo(string info, int numerator = 0, int denominator = 1)
