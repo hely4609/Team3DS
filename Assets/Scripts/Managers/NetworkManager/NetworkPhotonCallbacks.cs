@@ -77,10 +77,18 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
         if(GameManager.IsGameStart)GameManager.Instance.GameOver();
-        if(!GameManager.Instance.IsDefeated)
-        GameManager.Instance.UIManager.ClaimError("Shutdowned", "The server has been disconnected.", "확인", () => { 
+        if (!GameManager.Instance.IsDefeated)
+        {
+            GameManager.Instance.UIManager.ClaimError("Shutdowned", "The server has been disconnected.", "확인", () =>
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            });
+        }
+        else
+        {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-        });
+        }
+        
     }
     public void OnConnectedToServer(NetworkRunner runner) 
     {
