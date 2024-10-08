@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Fusion;
 
 public delegate void StartFunction();
 public delegate void UpdateFunction(float deltaTime);
@@ -80,6 +81,10 @@ public class GameManager : MonoBehaviour
     
     [SerializeField] bool isDefeated;
     public void Defeat() { isDefeated = true; }
+
+    [Networked,SerializeField] public static float PlayTime { get; set; }
+    [Networked,SerializeField] public static int KillCount { get; set; }
+
     public IEnumerator GameStart()
     {
         // 게임 시작후 Initiate할 매니저들
@@ -116,8 +121,11 @@ public class GameManager : MonoBehaviour
     public void GameOver() 
     { 
         isGameStart = false;
+        if (isDefeated) uiManager.GetUI(UIEnum.GameOverCanvas).GetComponent<GameOverCanvas>().SetResultText();
+        PlayTime = 0;
+        KillCount = 0;
         Cursor.lockState = CursorLockMode.None;
-        if(isDefeated) uiManager.GetUI(UIEnum.GameOverCanvas);
+        
         NetworkManager.LocalController = null;
 
         ManagerStarts -= BuildingManager.ManagerStart;
@@ -204,6 +212,8 @@ public class GameManager : MonoBehaviour
         NetworkUpdates?.Invoke(Time.fixedDeltaTime);
         SoundUpdates?.Invoke(Time.fixedDeltaTime);
         if (!isGameStart) return;
+
+        if (networkManager.Runner.IsServer) PlayTime += Time.fixedUnscaledDeltaTime;
 
         // 매니저 먼저
         if(ManagerStarts != null)

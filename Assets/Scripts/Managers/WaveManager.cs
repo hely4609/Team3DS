@@ -15,7 +15,7 @@ public class WaveManager : Manager
 
     protected int currentMonsterIndex = 0; //현재 웨이브에서 몇번째 몬스터인가.
     private float monsterInterval = 2; // 몬스터간의 간격(필요한가?)
-    private float waveInterval = 20; // 다음 웨이브까지의 시간
+    private float waveInterval = 10; // 다음 웨이브까지의 시간
     protected float nowMonsterTime = 0; // 현재 몬스터 생성 시간
     protected float nowWaveTime = 0; // 현재 웨이브 진행 시간
 
@@ -44,8 +44,8 @@ public class WaveManager : Manager
 
 
             nowMonsterTime += deltaTime;
-            nowWaveTime += deltaTime;
-            if (currentMonsterIndex < monsterNumber)
+            
+            if (currentMonsterIndex < monsterNumber + currentWaveIndex)
             {
                 if (nowMonsterTime >= monsterInterval)
                 {
@@ -54,11 +54,15 @@ public class WaveManager : Manager
                     nowMonsterTime = 0;
                 }
             }
-            if (nowWaveTime >= waveInterval)
+            else if (nowWaveTime >= waveInterval)
             {
                 nowWaveTime = 0;
                 currentMonsterIndex = 0;
-
+                currentWaveIndex++;
+            }
+            else
+            {
+                nowWaveTime += deltaTime;
             }
         }
     }

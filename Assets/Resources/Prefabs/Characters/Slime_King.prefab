@@ -170,8 +170,8 @@ MonoBehaviour:
   moveSpeed: 3
   oreAmount: 3
   roadDestination: 0
-  hpMax: 20
-  hpCurrent: 20
+  hpMax: 80
+  hpCurrent: 80
   attackDamage: 1
 --- !u!54 &5398990968178988966
 Rigidbody:

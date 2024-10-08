@@ -146,7 +146,11 @@ public class Monster : Character
     public void Dead()
     {
         if (HasStateAuthority)
-        GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position);
+        {
+            GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position);
+            GameManager.KillCount++;
+        }
+        
         
         Despawn();
     }
