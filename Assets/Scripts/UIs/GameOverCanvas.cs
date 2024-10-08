@@ -16,6 +16,7 @@ public class GameOverCanvas : MonoBehaviour
 
     public void SetResultText()
     {
+        if(GameManager.Instance.BuildingManager.generator == null) GameManager.Instance.BuildingManager.generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
         resultText.text = "결과창\n" + $"플레이 시간 : {(int)GameManager.Instance.BuildingManager.generator.PlayTime / 60}분{(GameManager.Instance.BuildingManager.generator.PlayTime % 60).ToString("F0")}초\n" + $"잡은 몬스터 수 : {GameManager.Instance.BuildingManager.generator.KillCount}마리";
     }
 }
