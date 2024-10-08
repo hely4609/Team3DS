@@ -73,5 +73,10 @@ public class OptionManager : MonoBehaviour
         {
             GameManager.Instance.NetworkManager.Runner.Shutdown();
         }
+
+        if (GameManager.Instance.IsDefeated)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
     }
 }
