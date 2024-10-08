@@ -148,7 +148,7 @@ public class Monster : Character
         if (HasStateAuthority)
         {
             GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position);
-            GameManager.KillCount++;
+            GameManager.Instance.BuildingManager.generator.KillCount++;
         }
         
         
