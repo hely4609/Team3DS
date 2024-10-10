@@ -115,6 +115,14 @@ MonoBehaviour:
     m_Key: sfx
     m_Metadata:
       m_Items: []
+  - m_Id: 2894554913509376
+    m_Key: roomNumber
+    m_Metadata:
+      m_Items: []
+  - m_Id: 2894826486304768
+    m_Key: Cancel
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

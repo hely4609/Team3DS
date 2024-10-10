@@ -88,7 +88,7 @@ public partial class NetworkManager : Manager
         }
         else
         {
-            GameManager.Instance.UIManager.ClaimError("Failed to Start", "방 생성에 실패하였습니다.", "확인", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+            GameManager.Instance.UIManager.ClaimError("Failed to Start", "Room creation failed.", "확인", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
         GameManager.ClaimLoadInfo("Entering game", 2, 2);
         
@@ -189,7 +189,7 @@ public partial class NetworkManager : Manager
         }
         else
         {
-            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), "입력한 번호와 매칭되는 방이 없습니다.", "확인", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+            GameManager.Instance.UIManager.ClaimError(result.ShutdownReason.ToString(), "No room matches the number you entered.", "확인", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
         }
         GameManager.ClaimLoadInfo("Entering game", 2, 2);
         GameManager.CloseLoadInfo();
