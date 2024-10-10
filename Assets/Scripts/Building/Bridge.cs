@@ -50,6 +50,7 @@ public class Bridge : InteractableBuilding
             stairPosRight = tiledBuildingPositionLast + Vector2Int.down * 2;
             stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, 12);
             size = new Vector2Int(2, 4);
+            fullSize = new Vector2Int(0, 20);
 
         }
         else if (transform.rotation.eulerAngles.y == 90f)
@@ -57,19 +58,21 @@ public class Bridge : InteractableBuilding
             stairPosRight = tiledBuildingPositionLast + Vector2Int.left * 2;
             stairPosLeft = tiledBuildingPositionLast + new Vector2Int(12, 0);
             size = new Vector2Int(4, 2);
+            fullSize = new Vector2Int(20, 0);
         }
         else if (transform.rotation.eulerAngles.y == 180f)
         {
             stairPosRight = tiledBuildingPositionLast + Vector2Int.up * 2;
             stairPosLeft = tiledBuildingPositionLast + new Vector2Int(0, -12);
             size = new Vector2Int(2, 4);
-
+            fullSize = new Vector2Int(0, 20);
         }
         else if (transform.rotation.eulerAngles.y == 270f)
         {
             stairPosRight = tiledBuildingPositionLast + Vector2Int.right * 2;
             stairPosLeft = tiledBuildingPositionLast + new Vector2Int(-12, 0);
             size = new Vector2Int(4, 2);
+            fullSize = new Vector2Int(20, 0);
         }
 
         //if(90도 돌면, 반전되어야할것)
@@ -176,14 +179,35 @@ public class Bridge : InteractableBuilding
         Vector2Int buildingPosRight = building.StartPos + Vector2Int.down * 2;
         Vector2Int buildingPosLeft = building.StartPos + railLength; //여길 고쳐야함.
 
+        if (building.transform.rotation.eulerAngles.y == 0)
+        {
+            railLength = new Vector2Int(0, 12);
+            buildingPosRight = building.StartPos + Vector2Int.down * 2;
+            buildingPosLeft = building.StartPos + railLength;
+        }
 
         if (building.transform.rotation.eulerAngles.y == 90)
         {
-            size = new Vector2Int(size.y, size.x);
-            railLength = new Vector2Int(railLength.y, railLength.x);
-            buildingPosRight = building.StartPos + Vector2Int.left;
+            railLength = new Vector2Int(12, 0);
+            buildingPosRight = building.StartPos + Vector2Int.left * 2;
             buildingPosLeft = building.StartPos + railLength;
         }
+
+        if (building.transform.rotation.eulerAngles.y == 180)
+        {
+            railLength = new Vector2Int(0, -12);
+            buildingPosRight = building.StartPos + Vector2Int.up * 2;
+            buildingPosLeft = building.StartPos + railLength;
+        }
+
+        if (building.transform.rotation.eulerAngles.y == 270)
+        {
+            railLength = new Vector2Int(-12, 0);
+            buildingPosRight = building.StartPos + Vector2Int.right * 2;
+            buildingPosLeft = building.StartPos + railLength;
+        }
+
+
 
         Vector2Int distance = buildingPosRight - thisBuildingPos;
         Vector2Int sizeSum = (building.BuildingSize + size + Vector2Int.one) / 2;

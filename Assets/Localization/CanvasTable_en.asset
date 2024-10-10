@@ -90,7 +90,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 2083711427710976
-    m_Localized: 'Catched Monster : {ResultGroup.Monster}'
+    m_Localized: 'Killed Monster : {ResultGroup.Monster}'
     m_Metadata:
       m_Items:
       - rid: 4425536683114758151
