@@ -287,7 +287,10 @@ public class Tower : InteractableBuilding
     }
     public override void AttachRope(Player player, int number)
     {
-        if (HasInputAuthority) player.ropeMaxDistanceSignUI.SetActive(false);
+        if (player.PossesionController.myAuthority == Runner.LocalPlayer)
+        {
+            player.ropeMaxDistanceSignUI.SetActive(false);
+        }
         InteractableBuilding building = player.ropeBuilding;
         if (building is Pylon)
         //if (building.GetType().IsSubclassOf(typeof(Tower)))
