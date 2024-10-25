@@ -7,15 +7,15 @@ public class Tower : InteractableBuilding
 {
     protected const float rangeConst = 15f;
 
-    [SerializeField] protected int powerConsumption; // 타워가 진짜로 소모할 양.
+    [SerializeField, Networked] protected int powerConsumption { get; set; } // 타워가 진짜로 소모할 양.
     protected int currentPowerConsumption; // 현재 사용중인 전력 소모량
 
-    [SerializeField]protected int attackDamage; // 공격력
+    [SerializeField, Networked] protected int attackDamage { get; set; } // 공격력
     public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } }
     protected float nowTime;
-    [SerializeField]protected float attackSpeed; // 공격 스피드
+    [SerializeField, Networked] protected float attackSpeed { get; set; } // 공격 스피드
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
-    [SerializeField]protected float attackRange; // 공격 범위
+    [SerializeField, Networked] protected float attackRange { get; set; } // 공격 범위
     public float AttackRange { get { return attackRange; } set { attackRange = value; AttackRangeSetting(); } }
 
     [SerializeField] protected Monster target = null; // 타겟 지정된 몬스터
@@ -26,6 +26,8 @@ public class Tower : InteractableBuilding
     [SerializeField] protected GameObject gunBarrel;
     [SerializeField] protected float gunBarrelRotateCorrection;
     public Pylon attachedPylon;
+
+    [SerializeField] protected GameObject attackRangeMarker;
 
     public override void Spawned()
     {
@@ -189,6 +191,7 @@ public class Tower : InteractableBuilding
             Debug.Log(transform.localScale.x);
             col.radius = attackRange * rangeConst / transform.localScale.x;
             //col.center = new Vector3(0, col.radius * 0.5f, 0);
+            attackRangeMarker.transform.localScale = new Vector3(col.radius * 2, col.radius * 2, col.radius * 2);
         }
         else
         {
@@ -275,6 +278,9 @@ public class Tower : InteractableBuilding
                     break;
                 case nameof(IsRoped):
                     buildingSignCanvas.SetActive(!IsRoped);
+                    break;
+                case nameof(attackRange):
+                    AttackRangeSetting();
                     break;
             }
         }
