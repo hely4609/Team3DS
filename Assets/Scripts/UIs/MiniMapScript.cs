@@ -101,4 +101,18 @@ public class MiniMapScript : MyComponent
 
         }
     }
+
+    public void ShowTowerRangeToggle()
+    {
+        Debug.Log(miniMapCamera.cullingMask);
+        Debug.Log(LayerMask.GetMask("AttackRangeMarker"));
+        if((miniMapCamera.cullingMask & LayerMask.GetMask("AttackRangeMarker")) == 1)
+        {
+            miniMapCamera.cullingMask -= LayerMask.GetMask("AttackRangeMarker");
+        }
+        else
+        {
+            miniMapCamera.cullingMask += LayerMask.GetMask("AttackRangeMarker");
+        }
+    }
 }
