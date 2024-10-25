@@ -83,7 +83,12 @@ public class GameManager : MonoBehaviour
     public bool IsDefeated => isDefeated;
     public void Defeat() { isDefeated = true; }
 
+    public void WaveStart() 
+    {
+        if (!isGameStart) return;
 
+        WaveManager.IsWaveStart = true;
+    }
     public IEnumerator GameStart()
     {
         // 게임 시작후 Initiate할 매니저들
@@ -113,11 +118,10 @@ public class GameManager : MonoBehaviour
             ManagerUpdates += WaveManager.ManagerUpdate;
         }
 
-        isGameStart = true;
         isDefeated = false;
+        waveManager.IsWaveStart = false;
+        isGameStart = true;
     }
-
-    
 
     public void GameOver() 
     { 

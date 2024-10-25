@@ -5,6 +5,9 @@ using UnityEngine;
 
 public class WaveManager : Manager
 {
+    [Networked] public bool IsWaveStart { get; set;}
+
+
     private List<ResourceEnum.Prefab> waveMonsterList = new List<ResourceEnum.Prefab>(); //몇 웨이브에 어떤 몬스터가.
     private int monsterNumber = 5; // 몬스터의 수
 
@@ -31,18 +34,17 @@ public class WaveManager : Manager
         }
 
     }
+
     public override IEnumerator Initiate()
     {
         //waveMonsterList.Add(ResourceEnum.Prefab.EnemyTest);
         yield return base.Initiate();
     }
+
     public override void ManagerUpdate(float deltaTime)
     {
-
-        if (GameManager.IsGameStart)
+        if (GameManager.IsGameStart && IsWaveStart)
         {
-
-
             nowMonsterTime += deltaTime;
             
             if (currentMonsterIndex < monsterNumber + currentWaveIndex)

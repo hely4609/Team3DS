@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Fusion;
 using TMPro;
+using UnityEngine.UI;
 
 public delegate void MoveDelegate(Vector3 dir);
 public delegate void ScreenRotateDelegate(Vector2 mouseDelta);
@@ -63,6 +64,19 @@ public class ControllerBase : MyComponent
         if(HasInputAuthority)
         {
             GameObject characterUICanvas = GameManager.Instance.UIManager.GetUI(UIEnum.CharacterUICanvas);
+
+
+            Button button = characterUICanvas.GetComponentInChildren<Button>();
+            if (HasStateAuthority)
+            {
+                button.onClick.AddListener(() => GameManager.Instance.WaveStart());
+                button.onClick.AddListener(() => button.gameObject.SetActive(false));
+            }
+            else
+            {
+                button.gameObject.SetActive(false);
+            }
+
 
             GameObject sessionName = GameObject.FindGameObjectWithTag("SessionIDText");
             sessionName.GetComponent<TextMeshProUGUI>().text = $"Session ID : {Runner.SessionInfo.Name}";
