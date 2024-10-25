@@ -191,8 +191,7 @@ public class Monster : Character
                     if (HpCurrent <= 0)
                     {
                         isReady = false;
-                        destroyFunction?.Invoke(this);
-
+                        
                         GetComponent<Collider>().enabled = false;
                         GetComponent<Rigidbody>().isKinematic = true;
 

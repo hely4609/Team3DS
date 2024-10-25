@@ -104,8 +104,6 @@ public class Tower : InteractableBuilding
                 // 공격 대상을 선택. 이미 공격 대상이 정해져있다면 계속 공격.
 
                 // 공격
-                // *애니메이션 재생*
-                attackAnimator.SetBool("Attack", true);
                 OnHit();
                 nowTime = attackSpeed;
             }
@@ -128,6 +126,8 @@ public class Tower : InteractableBuilding
 
         if (HasStateAuthority)
         {
+            // *애니메이션 재생*
+            attackAnimator.SetBool("Attack", true);
             target.TakeDamage(this, attackDamage);
         }
 
