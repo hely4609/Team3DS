@@ -118,16 +118,19 @@ public class Tower : InteractableBuilding
 
     protected virtual void OnHit()
     {
+        if (!target.isReady)
+        {
+            MonsterListOut(target);
+            target = null;
+            Attack();
+            return;
+        }
+
         if (HasStateAuthority)
         {
             target.TakeDamage(this, attackDamage);
         }
 
-        if (!target.IsReady)
-        {
-            MonsterListOut(target);
-            target = null;
-        }
 
         Debug.Log($"{gameObject.name}");
     }

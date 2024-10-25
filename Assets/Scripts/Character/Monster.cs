@@ -1,7 +1,9 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum MonsterEnum
 { First }
@@ -10,6 +12,11 @@ public delegate void MonsterDestroyFunction(Monster monster);
 
 public class Monster : Character
 {
+    [SerializeField] Canvas hpCanvas;
+    [SerializeField] Image hpFillImage;
+    [SerializeField] TextMeshProUGUI hpText;
+
+
     [SerializeField] protected int oreAmount;
     protected List<Vector2> roadsVector2; // 길 정보 배열
     [SerializeField]protected int roadDestination; // 지금 어디로 향하고 있는가.
@@ -18,19 +25,28 @@ public class Monster : Character
 
     [SerializeField] protected int hpMax;
     [SerializeField] protected int hpCurrent;
-    public int HpCurrent => hpCurrent;
+    [Networked] public int HpCurrent { get; set; }
     [SerializeField] protected int attackDamage = 1;
     protected float attackSpeed;
 
     bool isRelease = false;
-    [Networked]bool isReady { get; set; } = false;
-    public bool IsReady { get { return isReady; } }
+    [Networked]public bool isReady { get; set; } = false;
+    //public bool IsReady { get { return isReady; } }
 
     public MonsterDestroyFunction destroyFunction;
     protected EnergyBarrierGenerator generator;
+
+    private ChangeDetector _changeDetector;
+
+    public override void Spawned()
+    {
+        _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);
+    }
+
+
     protected override void MyStart()
     {
-        hpCurrent = hpMax;
+        HpCurrent = hpMax;
         roadsVector2 = GameManager.Instance.BuildingManager.roadData;
         roadDestination = roadsVector2.Count-1;
         monsterType = MonsterEnum.First;
@@ -41,19 +57,8 @@ public class Monster : Character
 
     public override int TakeDamage(Tower attacker, int damage)
     {
-        hpCurrent -= damage;
-        if (hpCurrent <= 0)
-        {
-            isReady = false;
-
-            GetComponent<Collider>().enabled = false;
-            GetComponent<Rigidbody>().isKinematic = true;
-
-            AnimTrigger?.Invoke("DieTrigger");
-            AnimBool?.Invoke("isMove", false);
-            //  destroyFunction.Invoke(this);
-            //  Runner.Despawn(GetComponent<NetworkObject>());
-        }
+        HpCurrent -= damage;
+        
         Debug.Log($"{HpCurrent} / {gameObject.name}");
         
         return 0;
@@ -87,6 +92,8 @@ public class Monster : Character
                 {
                     isRelease = true;
                 }
+
+                hpCanvas.transform.LookAt(Camera.main.transform.position);
 
             }
         }
@@ -170,5 +177,32 @@ public class Monster : Character
         AnimBool?.Invoke("isMove", false);
 
         target.TakeDamage(attackDamage);
+    }
+
+    public override void Render()
+    {
+        foreach (var change in _changeDetector.DetectChanges(this, out var previousBuffer, out var currentBuffer))
+        {
+            switch (change)
+            {
+                case nameof(HpCurrent):
+                    hpText.text = $"{HpCurrent} / {hpMax}";
+                    hpFillImage.fillAmount = HpCurrent / (float)hpMax;
+                    if (HpCurrent <= 0)
+                    {
+                        isReady = false;
+                        destroyFunction?.Invoke(this);
+
+                        GetComponent<Collider>().enabled = false;
+                        GetComponent<Rigidbody>().isKinematic = true;
+
+                        AnimTrigger?.Invoke("DieTrigger");
+                        AnimBool?.Invoke("isMove", false);
+                        //  destroyFunction.Invoke(this);
+                        //  Runner.Despawn(GetComponent<NetworkObject>());
+                    }
+                    break;
+            }
+        }
     }
 }
