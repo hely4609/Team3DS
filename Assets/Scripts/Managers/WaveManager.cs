@@ -2,6 +2,7 @@ using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class WaveManager : Manager
 {
@@ -9,10 +10,9 @@ public class WaveManager : Manager
 
 
     private List<ResourceEnum.Prefab> waveMonsterList = new List<ResourceEnum.Prefab>(); //몇 웨이브에 어떤 몬스터가.
-    private int monsterNumber = 5; // 몬스터의 수
 
 
-    protected WaveInfo[] allWaveInfo;
+    protected WaveInfo waveInfo;
     protected int currentWaveIndex = 0; //현재 웨이브는 몇번째 웨이브인가.
     protected List<Monster> monsterList = new List<Monster>(); // 남은 몬스터 수. 
 
@@ -26,11 +26,14 @@ public class WaveManager : Manager
     {
         if (GameManager.Instance.NetworkManager.Runner.IsServer)
         {
-            int number = Random.Range((int)ResourceEnum.Prefab.Slime_Leaf, (int)ResourceEnum.Prefab.Slime_King + 1);
-
-            List<Vector2> roadData = GameManager.Instance.BuildingManager.roadData;
-            //Debug.Log($"roadData : {roadData.Count}");
-            monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get((ResourceEnum.Prefab)number), new Vector3(roadData[roadData.Count - 1].x, 0, roadData[roadData.Count - 1].y)).GetComponent<Monster>());
+            if (waveInfo.waveOrder.Peek().Count > 0)
+            {
+                //int number = Random.Range((int)ResourceEnum.Prefab.Slime_Leaf, (int)ResourceEnum.Prefab.Slime_King + 1);
+                int number = (int)waveInfo.waveOrder.Peek().Dequeue();
+                List<Vector2> roadData = GameManager.Instance.BuildingManager.roadData;
+                //Debug.Log($"roadData : {roadData.Count}");
+                monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get((ResourceEnum.Prefab)number), new Vector3(roadData[roadData.Count - 1].x, 0, roadData[roadData.Count - 1].y)).GetComponent<Monster>());
+            }
         }
 
     }
@@ -38,6 +41,8 @@ public class WaveManager : Manager
     public override IEnumerator Initiate()
     {
         //waveMonsterList.Add(ResourceEnum.Prefab.EnemyTest);
+        waveInfo = new WaveInfo();
+        waveInfo.Initialize();
         yield return base.Initiate();
     }
 
@@ -47,19 +52,18 @@ public class WaveManager : Manager
         {
             nowMonsterTime += deltaTime;
             
-            if (currentMonsterIndex < monsterNumber + currentWaveIndex)
+            if (nowMonsterTime >= monsterInterval && waveInfo.waveOrder.Peek().Count > 0) 
             {
-                if (nowMonsterTime >= monsterInterval)
-                {
                     MonsterInstantiate();
-                    currentMonsterIndex++;
                     nowMonsterTime = 0;
-                }
+                Debug.Log($"{waveInfo.waveOrder.Peek().Count}마리 남음");
             }
-            else if (nowWaveTime >= waveInterval)
+            else if (nowWaveTime >= waveInterval && waveInfo.waveOrder.Peek().Count <= 0)
             {
                 nowWaveTime = 0;
                 currentMonsterIndex = 0;
+                waveInfo.waveOrder.Dequeue();
+                Debug.Log($"{currentWaveIndex}번째 웨이브 끝");
                 currentWaveIndex++;
             }
             else
