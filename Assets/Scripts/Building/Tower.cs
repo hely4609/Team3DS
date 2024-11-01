@@ -29,6 +29,8 @@ public class Tower : InteractableBuilding
     public Pylon attachedPylon;
 
     [SerializeField] protected GameObject attackRangeMarker;
+    [SerializeField, Networked] protected int Level { get; set; }
+    [SerializeField, Networked] protected int UpgradeRequire { get; set; }
 
     public override void Spawned()
     {
@@ -60,6 +62,7 @@ public class Tower : InteractableBuilding
         {
             currentAbleInteractions.Add(Interaction.OnOff);
             currentAbleInteractions.Add(Interaction.Demolish);
+            currentAbleInteractions.Add(Interaction.Upgrade);
             return currentAbleInteractions;
         }
         else if (player.ropeBuilding == null)
@@ -108,6 +111,10 @@ public class Tower : InteractableBuilding
                 break;
             case Interaction.AttachRope:
                 AttachRope(player, player.PossesionController.MyNumber);
+                break;
+            case Interaction.Upgrade:
+                Debug.Log("업그레이드");
+                Upgrade();
                 break;
 
         }
@@ -236,6 +243,12 @@ public class Tower : InteractableBuilding
         targetList.Remove(monster);
     }
 
+    public virtual void Upgrade()
+    {
+        attackDamage += 1;
+        UpgradeRequire = (int)1.5f*UpgradeRequire;
+        Level += 1;
+    }
 
 
     public virtual void LockOn()
