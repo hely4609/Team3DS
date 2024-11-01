@@ -2,6 +2,7 @@ using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.ResourceManagement.ResourceProviders.Simulation;
 
 public class Tower : InteractableBuilding
 {
@@ -44,38 +45,90 @@ public class Tower : InteractableBuilding
             buildingSignCanvas.SetActive(!IsRoped);
         }
     }
-
-
-    public override Interaction InteractionStart(Player player)
+    public override List<Interaction> GetInteractions(Player player)
     {
-        // 완성이 아직 안됨.
+        List<Interaction> currentAbleInteractions = new List<Interaction>();
+
         if (CompletePercent < 1)
         {
-            return Interaction.Build;
+            currentAbleInteractions.Add(Interaction.Build);
+            currentAbleInteractions.Add(Interaction.None);
+            return currentAbleInteractions;
         }
-
         else if (IsRoped)
         {
-            // 전원 끄기. 반대 상태로 토글합니다.
-            TurnOnOff(!OnOff);
-            return Interaction.OnOff;
+            currentAbleInteractions.Add(Interaction.OnOff);
+            currentAbleInteractions.Add(Interaction.Demolish);
+            return currentAbleInteractions;
         }
         else if (player.ropeBuilding == null)
         {
-            Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
             if (!IsSettingRope && player.ropeBuilding == null)
             {
-                OnRopeSet(playerTransformVector3, 0);
-                player.ropeBuilding = this;
-                return Interaction.takeRope;
+                currentAbleInteractions.Add(Interaction.takeRope);
+                currentAbleInteractions.Add(Interaction.Demolish);
             }
-            else return Interaction.None;
+
+            return currentAbleInteractions;
         }
         else
         {
-            AttachRope(player, player.PossesionController.MyNumber);
-            return Interaction.None;
+            return currentAbleInteractions;
         }
+    }
+    public override Interaction InteractionStart(Player player, Interaction interactionType)
+    {
+        switch (interactionType)
+        {
+            default:
+                break;
+            case Interaction.Build:
+                Debug.Log("건설중");
+                break;
+            case Interaction.None:
+                Debug.Log("None");
+                break;
+            case Interaction.takeRope:
+                Debug.Log("전선들기");
+                break;
+            case Interaction.Demolish:
+                Debug.Log("해체");
+                break;
+            case Interaction.OnOff:
+                Debug.Log("켜기/끄기");
+                break;
+        }
+
+        return interactionType;
+
+        //// 완성이 아직 안됨.
+        //if (CompletePercent < 1)
+        //{
+        //    return Interaction.Build;
+        //}
+
+        //else if (IsRoped)
+        //{
+        //    // 전원 끄기. 반대 상태로 토글합니다.
+        //    TurnOnOff(!OnOff);
+        //    return Interaction.OnOff;
+        //}
+        //else if (player.ropeBuilding == null)
+        //{
+        //    Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
+        //    if (!IsSettingRope && player.ropeBuilding == null)
+        //    {
+        //        OnRopeSet(playerTransformVector3, 0);
+        //        player.ropeBuilding = this;
+        //        return Interaction.takeRope;
+        //    }
+        //    else return Interaction.None;
+        //}
+        //else
+        //{
+        //    AttachRope(player, player.PossesionController.MyNumber);
+        //    return Interaction.None;
+        //}
     }
     protected override void MyUpdate(float deltaTime)
     {

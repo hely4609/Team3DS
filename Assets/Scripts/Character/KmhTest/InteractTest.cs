@@ -40,7 +40,7 @@ public class InteractTest : MonoBehaviour ,IInteraction
         return default;
     }
 
-    Interaction IInteraction.InteractionStart(Player player)
+    Interaction IInteraction.InteractionStart(Player player, Interaction interactionType)
     {
         return default;
 
@@ -49,5 +49,10 @@ public class InteractTest : MonoBehaviour ,IInteraction
     float IInteraction.InteractionUpdate(float deltaTime, Interaction interaction)
     {
         return default;
+    }
+
+    public List<Interaction> GetInteractions(Player player)
+    {
+        throw new System.NotImplementedException();
     }
 }

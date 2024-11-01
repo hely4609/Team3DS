@@ -64,7 +64,7 @@ public class Pylon : InteractableBuilding
 
         return toReturn;
     }
-    public override Interaction InteractionStart(Player player)
+    public override Interaction InteractionStart(Player player, Interaction interactionType)
     {
         int playerID = player.PossesionController.MyNumber;
         // 완성이 아직 안됨.

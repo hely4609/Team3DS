@@ -43,7 +43,7 @@ public class InteractableBuilding : Building, IInteraction
     // 지속 = 업데이트.
 
     // 아무것도 없는 깡통건물. 세우기만 하고 상호작용 없음. ex) 육교
-    public virtual Interaction InteractionStart(Player player)
+    public virtual Interaction InteractionStart(Player player, Interaction interactionType)
     {
         // 완성이 아직 안됨.
         if (CompletePercent < 1)
@@ -67,7 +67,7 @@ public class InteractableBuilding : Building, IInteraction
 
     public virtual bool InteractionEnd()
     {
-        return false;
+        return true;
     }
 
     public Collider[] GetInteractionColliders()
@@ -83,6 +83,11 @@ public class InteractableBuilding : Building, IInteraction
     public virtual string GetName()
     {
         return objectName;
+    }
+
+    public virtual List<Interaction> GetInteractions(Player player)
+    {
+        throw new NotImplementedException();
     }
 
     public override bool FixPlace()
@@ -174,4 +179,5 @@ public class InteractableBuilding : Building, IInteraction
     virtual public void AttachRope(Player player, int number)
     {
     }
+
 }

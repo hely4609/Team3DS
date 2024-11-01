@@ -75,7 +75,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
         SetActiveEnergyBarrier();
     }
 
-    public override Interaction InteractionStart(Player player)
+    public override Interaction InteractionStart(Player player, Interaction interactionType)
     {
         if (!onOff) // 에너지방벽이 고장났다면
         {

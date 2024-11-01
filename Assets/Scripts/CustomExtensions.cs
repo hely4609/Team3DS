@@ -6,13 +6,13 @@ using UnityEngine;
 public enum Interaction
 {
     // 아무것도 안함, 건물짓기, 켜고끄기, 수리, 버리기, 줍기, 납품, 전선 잡기
-    None, Build, OnOff, Repair, Dump, Pick, Deliver, takeRope
+    None, Build, OnOff, Repair, Dump, Pick, Deliver, takeRope, Upgrade, Demolish
 }
 
 public interface IInteraction
 {
     // 인터액션 enum 제작해야함. 
-    public Interaction InteractionStart( Player player);
+    public Interaction InteractionStart(Player player, Interaction interaction);
 
     public float InteractionUpdate(float deltaTime, Interaction interaction);
 
@@ -20,6 +20,7 @@ public interface IInteraction
 
     public Bounds GetInteractionBounds();
     public abstract string GetName();
+    public List<Interaction> GetInteractions(Player player);
     public Collider[] GetInteractionColliders();
 
 }

@@ -76,7 +76,7 @@ public class PowerSupply : InteractableBuilding
 
     }
 
-    public override Interaction InteractionStart(Player player)
+    public override Interaction InteractionStart(Player player, Interaction interactionType)
     {
         if (player?.OreAmount != 0) // 플레이어가 가진 물건이 납품할 물건이라면
         {

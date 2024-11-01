@@ -2,10 +2,25 @@ using Fusion;
 using System;
 using System.Collections.Generic;
 using TMPro;
+using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
+
+public class InteractionButtonInfo
+{
+    public GameObject button;
+    public IInteraction interactionObject;
+    public Interaction interactionType;
+
+    public InteractionButtonInfo(GameObject button, IInteraction interactionObject, Interaction interactionType)
+    {
+        this.button = button;
+        this.interactionObject = interactionObject;
+        this.interactionType = interactionType;
+    }
+}
 
 public partial class Player : Character
 {
@@ -33,17 +48,19 @@ public partial class Player : Character
     protected TextMeshProUGUI oreAmountText; // 가지고 있는 광물양을 보여줄 UI
     public TextMeshProUGUI pageIndexText;
 
-    protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
     [SerializeField] protected int interactionIndex = -1; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
+    protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
-
+    
+    // test
+    protected List<InteractionButtonInfo> interactionButtonInfos = new List<InteractionButtonInfo>();
+     
     protected bool isInteracting; // 나는 지금 상호작용 중인가?
     public bool IsInteracting => isInteracting;
     protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
 
-    [SerializeField] protected int oreAmount;
     [Networked] public int OreAmount { get; set; }
 
     /////////////////////////////
@@ -289,18 +306,27 @@ public partial class Player : Character
             {
                 if (InteractionEnd())
                 {
-                    interactionObjectList.Remove(interactionObject);
+                    //interactionButtonInfos.RemoveAll(target => target.interactionObject == interactionObject);
 
-                    if (interactionObjectDictionary.TryGetValue(interactionObject, out GameObject result))
+                    List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == interactionObject);
+
+                    foreach (InteractionButtonInfo info in removeInfos)
                     {
-                        GameManager.Instance.PoolManager.Destroy(result);
-                        interactionObjectDictionary.Remove(interactionObject);
+                        GameManager.Instance.PoolManager.Destroy(info.button);
+                        interactionButtonInfos.Remove(info);
                     }
 
-                    if (interactionObjectList.Count == 0)
+                    //if (interactionObjectDictionary.TryGetValue(interactionObject, out GameObject result))
+                    //{
+                    //    GameManager.Instance.PoolManager.Destroy(result);
+                    //    interactionObjectDictionary.Remove(interactionObject);
+                    //}
+
+                    if (interactionButtonInfos.Count == 0)
                     {
                         interactionIndex = -1;
                         interactionObject = null;
+                        interactionType = Interaction.None;
 
                         if (HasInputAuthority)
                         {
@@ -310,7 +336,8 @@ public partial class Player : Character
                     else
                     {
                         interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
-                        interactionObject = interactionObjectList[interactionIndex];
+                        interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+                        interactionType = interactionButtonInfos[interactionIndex].interactionType;
                     }
 
                     UpdateInteractionUI(interactionIndex);
@@ -601,7 +628,7 @@ public partial class Player : Character
         }
         if (interactionObject == null) return false;
 
-        interactionType = interactionObject.InteractionStart(this);
+        interactionObject.InteractionStart(this, interactionType);
 
         switch (interactionType)
         {
@@ -653,7 +680,7 @@ public partial class Player : Character
         }
 
         //interactionObject = null;
-        interactionType = Interaction.None;
+        //interactionType = Interaction.None;
 
         return result;
     }
@@ -670,32 +697,45 @@ public partial class Player : Character
         }
 
         // 이미 있다면 추가하지않음
-        if (interactionObjectList.Exists(inst => inst == target)) return;
+        //if (interactionObjectList.Exists(inst => inst == target)) return;
+        if (interactionButtonInfos.Exists(inst => inst.interactionObject == target)) return;
+
         if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
         {
-            interactionObjectList.Add(target);
+            List<Interaction> interactions = target.GetInteractions(this);
 
-            //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
-            GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
-
-            button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
-            buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
-            button.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable",target.GetName());
-            //buttonText.text = $"{target.GetName()}";
-            interactionObjectDictionary.Add(target, button);
-
-            if (interactionObjectList.Count == 1)
+            foreach (var interaction in interactions)
             {
-                interactionIndex = 0;
-                interactionObject = target;
-                if (HasInputAuthority)
+                GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+
+                button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
+                buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+                //button.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable", target.GetName());
+                buttonText.text = $"{target.GetName()}({interaction})";
+                //interactionObjectDictionary.Add(target, button);
+
+                interactionButtonInfos.Add(new InteractionButtonInfo(button, target, interaction));
+
+                if (interactionButtonInfos.Count == 1)
                 {
-                    mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
-                    Canvas.ForceUpdateCanvases();
+                    interactionIndex = 0;
+                    interactionObject = target;
+                    interactionType = interaction;
+                    if (HasInputAuthority)
+                    {
+                        mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
+                        Canvas.ForceUpdateCanvases();
+                    }
                 }
+
+                UpdateInteractionUI(interactionIndex);
             }
 
-            UpdateInteractionUI(interactionIndex);
+            //interactionObjectList.Add(target);
+            
+
+            //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
+            
         }
 
     }
@@ -713,15 +753,24 @@ public partial class Player : Character
 
         if (System.Array.Find(target.GetInteractionColliders(), col => other == col))
         {
-            interactionObjectList.Remove(target);
+            //interactionObjectList.Remove(target);
 
-            if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
+            List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == target);
+
+            foreach (InteractionButtonInfo info in removeInfos)
             {
-                GameManager.Instance.PoolManager.Destroy(result);
-                interactionObjectDictionary.Remove(target);
+                GameManager.Instance.PoolManager.Destroy(info.button);
+                interactionButtonInfos.Remove(info);
             }
 
-            if (interactionObjectList.Count == 0)
+            
+            //if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
+            //{
+            //    GameManager.Instance.PoolManager.Destroy(result);
+            //    interactionObjectDictionary.Remove(target);
+            //}
+
+            if (interactionButtonInfos.Count == 0)
             {
                 interactionIndex = -1;
                 if (isInteracting)
@@ -729,6 +778,7 @@ public partial class Player : Character
                     InteractionEnd();
                 }
                 interactionObject = null;
+                interactionType = Interaction.None;
 
                 if (HasInputAuthority)
                 {
@@ -737,12 +787,13 @@ public partial class Player : Character
             }
             else
             {
-                interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                interactionIndex = Mathf.Min(interactionIndex, interactionButtonInfos.Count - 1);
                 if (isInteracting && target == interactionObject)
                 {
                     InteractionEnd();
                 }
-                interactionObject = interactionObjectList[interactionIndex];
+                interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+                interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             }
 
@@ -755,7 +806,7 @@ public partial class Player : Character
     public void MouseWheel(Vector2 scrollDelta)
     {
         if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
-        if (interactionObjectList.Count == 0) return;
+        if (interactionButtonInfos.Count == 0) return;
         if (scrollDelta.y == 0f) return;
 
         // 휠을 위로 굴렸을 때
@@ -763,25 +814,27 @@ public partial class Player : Character
         {
             interactionIndex--;
             interactionIndex = Mathf.Max(interactionIndex, 0);
-            interactionObject = interactionObjectList[interactionIndex];
+            interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+            interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
-            if (interactionIndex < interactionObjectList.Count - 4 && HasInputAuthority)
+            if (interactionIndex < interactionButtonInfos.Count - 4 && HasInputAuthority)
             {
                 interactionContent.anchoredPosition -= new Vector2(0, 50f);
-                interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionObjectList.Count - 6) * 50f));
+                interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionButtonInfos.Count - 6) * 50f));
             }
         }
         // 휠을 아래로 굴렸을 때
         else if (scrollDelta.y < 0)
         {
             interactionIndex++;
-            interactionIndex = Mathf.Min(interactionObjectList.Count - 1, interactionIndex);
-            interactionObject = interactionObjectList[interactionIndex];
+            interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, interactionIndex);
+            interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+            interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             if (interactionIndex > 4 && HasInputAuthority)
             {
                 interactionContent.anchoredPosition += new Vector2(0, 50f);
-                interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionObjectList.Count - 6) * 50f));
+                interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionButtonInfos.Count - 6) * 50f));
             }
         }
         UpdateInteractionUI(interactionIndex);
@@ -792,9 +845,9 @@ public partial class Player : Character
     {
         Canvas.ForceUpdateCanvases();
 
-        for (int i = 0; i < interactionObjectList.Count; i++)
+        for (int i = 0; i < interactionButtonInfos.Count; i++)
         {
-            GameObject button = interactionObjectDictionary[interactionObjectList[i]];
+            GameObject button = interactionButtonInfos[i].button;
             Image buttonImage = button.GetComponentInChildren<Image>();
             if (targetIndex == i)
             {
