@@ -45,6 +45,7 @@ public class Tower : InteractableBuilding
             buildingSignCanvas.SetActive(!IsRoped);
         }
     }
+
     public override List<Interaction> GetInteractions(Player player)
     {
         List<Interaction> currentAbleInteractions = new List<Interaction>();
@@ -90,12 +91,19 @@ public class Tower : InteractableBuilding
                 break;
             case Interaction.takeRope:
                 Debug.Log("전선들기");
+                Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
+                if (!IsSettingRope && player.ropeBuilding == null)
+                {
+                    OnRopeSet(playerTransformVector3, 0);
+                    player.ropeBuilding = this;
+                }
                 break;
             case Interaction.Demolish:
                 Debug.Log("해체");
                 break;
             case Interaction.OnOff:
                 Debug.Log("켜기/끄기");
+                TurnOnOff(!OnOff);
                 break;
         }
 
@@ -176,8 +184,7 @@ public class Tower : InteractableBuilding
             Attack();
             return;
         }
-
-        if (HasStateAuthority)
+        else if (HasStateAuthority)
         {
             // *애니메이션 재생*
             attackAnimator.SetBool("Attack", true);
