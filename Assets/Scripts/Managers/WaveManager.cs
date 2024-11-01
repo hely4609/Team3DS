@@ -15,6 +15,7 @@ public class WaveManager : Manager
     protected WaveInfo waveInfo;
     protected int currentWaveIndex = 0; //현재 웨이브는 몇번째 웨이브인가.
     protected List<Monster> monsterList = new List<Monster>(); // 남은 몬스터 수. 
+    public int monsterCount = 0;
 
     protected int currentMonsterIndex = 0; //현재 웨이브에서 몇번째 몬스터인가.
     private float monsterInterval = 2; // 몬스터간의 간격(필요한가?)
@@ -33,6 +34,8 @@ public class WaveManager : Manager
                 List<Vector2> roadData = GameManager.Instance.BuildingManager.roadData;
                 //Debug.Log($"roadData : {roadData.Count}");
                 monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get((ResourceEnum.Prefab)number), new Vector3(roadData[roadData.Count - 1].x, 0, roadData[roadData.Count - 1].y)).GetComponent<Monster>());
+                monsterCount++;
+                Debug.Log($"monsterCount : {monsterCount}");
             }
         }
 
@@ -48,27 +51,43 @@ public class WaveManager : Manager
 
     public override void ManagerUpdate(float deltaTime)
     {
-        if (GameManager.IsGameStart && IsWaveStart)
+        if (GameManager.Instance.NetworkManager.Runner.IsServer && GameManager.IsGameStart)
         {
-            nowMonsterTime += deltaTime;
+            if(IsWaveStart)
+            {
+                nowMonsterTime += deltaTime;
             
-            if (nowMonsterTime >= monsterInterval && waveInfo.waveOrder.Peek().Count > 0) 
-            {
-                    MonsterInstantiate();
-                    nowMonsterTime = 0;
-                Debug.Log($"{waveInfo.waveOrder.Peek().Count}마리 남음");
+                if (nowMonsterTime >= monsterInterval && waveInfo.waveOrder.Peek().Count > 0) 
+                {
+                        MonsterInstantiate();
+                        nowMonsterTime = 0;
+                    Debug.Log($"{waveInfo.waveOrder.Peek().Count}마리 남음");
+                }
+                else if(waveInfo.waveOrder.Count > 0)
+                {
+                    if (nowWaveTime >= waveInterval && waveInfo.waveOrder.Peek().Count <= 0)
+                    {
+                        nowWaveTime = 0;
+                        currentMonsterIndex = 0;
+                        waveInfo.waveOrder.Dequeue();
+                        Debug.Log($"{currentWaveIndex}번째 웨이브 끝");
+                        currentWaveIndex++;
+                    }
+                    else
+                    {
+                        nowWaveTime += deltaTime;
+                    }
+
+                }
+                else
+                {
+                    IsWaveStart = false;
+                }
+
             }
-            else if (nowWaveTime >= waveInterval && waveInfo.waveOrder.Peek().Count <= 0)
+            else if(waveInfo.waveOrder.Count == 0 && monsterCount == 0)
             {
-                nowWaveTime = 0;
-                currentMonsterIndex = 0;
-                waveInfo.waveOrder.Dequeue();
-                Debug.Log($"{currentWaveIndex}번째 웨이브 끝");
-                currentWaveIndex++;
-            }
-            else
-            {
-                nowWaveTime += deltaTime;
+                Debug.Log("클리어!");
             }
         }
     }
