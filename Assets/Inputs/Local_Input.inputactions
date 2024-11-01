@@ -33,15 +33,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "MouseWheel",
-                    "type": "Value",
-                    "id": "99e5e269-7af7-411b-9bcd-dc452192a0dc",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
                     "name": "ESC",
                     "type": "Button",
                     "id": "e3c977a6-764b-475c-9937-024604e2fc33",
@@ -100,17 +91,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "ScreenRotate",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7a08e648-7f1f-44d3-b048-0dd6311b2d92",
-                    "path": "<Mouse>/scroll",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MouseWheel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

@@ -158,14 +158,17 @@ public class Monster : Character
             GameManager.Instance.BuildingManager.generator.KillCount++;
         }
         
-        
         Despawn();
     }
 
     public void Despawn()
     {
-        destroyFunction?.Invoke(this);
         Runner.Despawn(GetComponent<NetworkObject>());
+    }
+
+    public void OnDestroyFunction()
+    {
+        destroyFunction?.Invoke(this);
     }
 
     public void Attack(EnergyBarrierGenerator target) 

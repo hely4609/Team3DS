@@ -2,7 +2,6 @@ using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.ResourceManagement.ResourceProviders.Simulation;
 
 public class Tower : InteractableBuilding
 {
@@ -161,14 +160,20 @@ public class Tower : InteractableBuilding
 
     public void Attack()
     {
+        // 판단기준
+        // 타겟이있는가
+        // 타겟이있다면 살아있는가(isReady)
+
         if (!target)
         {
-            attackAnimator.SetBool("Attack", false);
+            //attackAnimator.SetBool("Attack", false);
             LockOn();
             
         }
         else
         {
+            attackAnimator.SetBool("Attack", false);
+
             // 타워포대를 그 대상을 향해서 옮김.
             gunBarrel.transform.LookAt(target.transform);
             gunBarrel.transform.eulerAngles = new Vector3(0, gunBarrel.transform.eulerAngles.y + gunBarrelRotateCorrection, 0);
@@ -196,13 +201,12 @@ public class Tower : InteractableBuilding
             Attack();
             return;
         }
-        else if (HasStateAuthority)
+        else
         {
             // *애니메이션 재생*
             attackAnimator.SetBool("Attack", true);
             target.TakeDamage(this, attackDamage);
         }
-
 
         Debug.Log($"{gameObject.name}");
     }

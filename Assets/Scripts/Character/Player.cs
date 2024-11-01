@@ -2,7 +2,7 @@ using Fusion;
 using System;
 using System.Collections.Generic;
 using TMPro;
-using TMPro.EditorUtilities;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
@@ -306,41 +306,43 @@ public partial class Player : Character
             {
                 if (InteractionEnd())
                 {
+                    RenewalInteractionUI();
+
                     //interactionButtonInfos.RemoveAll(target => target.interactionObject == interactionObject);
 
-                    List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == interactionObject);
+                    //List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == interactionObject);
 
-                    foreach (InteractionButtonInfo info in removeInfos)
-                    {
-                        GameManager.Instance.PoolManager.Destroy(info.button);
-                        interactionButtonInfos.Remove(info);
-                    }
-
-                    //if (interactionObjectDictionary.TryGetValue(interactionObject, out GameObject result))
+                    //foreach (InteractionButtonInfo info in removeInfos)
                     //{
-                    //    GameManager.Instance.PoolManager.Destroy(result);
-                    //    interactionObjectDictionary.Remove(interactionObject);
+                    //    GameManager.Instance.PoolManager.Destroy(info.button);
+                    //    interactionButtonInfos.Remove(info);
                     //}
 
-                    if (interactionButtonInfos.Count == 0)
-                    {
-                        interactionIndex = -1;
-                        interactionObject = null;
-                        interactionType = Interaction.None;
+                    ////if (interactionObjectDictionary.TryGetValue(interactionObject, out GameObject result))
+                    ////{
+                    ////    GameManager.Instance.PoolManager.Destroy(result);
+                    ////    interactionObjectDictionary.Remove(interactionObject);
+                    ////}
 
-                        if (HasInputAuthority)
-                        {
-                            GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
-                        }
-                    }
-                    else
-                    {
-                        interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
-                        interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
-                        interactionType = interactionButtonInfos[interactionIndex].interactionType;
-                    }
+                    //if (interactionButtonInfos.Count == 0)
+                    //{
+                    //    interactionIndex = -1;
+                    //    interactionObject = null;
+                    //    interactionType = Interaction.None;
 
-                    UpdateInteractionUI(interactionIndex);
+                    //    if (HasInputAuthority)
+                    //    {
+                    //        GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
+                    //    interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+                    //    interactionType = interactionButtonInfos[interactionIndex].interactionType;
+                    //}
+
+                    //UpdateInteractionUI(interactionIndex);
                 }
             }
             // 건설 끝
@@ -663,7 +665,13 @@ public partial class Player : Character
 
         switch (interactionType)
         {
-            default: break;
+            default:
+                //interactionType = Interaction.None;
+                
+                break;
+            case Interaction.AttachRope:
+                RenewalInteractionUI();
+                break;
             case Interaction.Deliver:
                 OreAmount = 0;
                 break;
@@ -680,7 +688,8 @@ public partial class Player : Character
         }
 
         //interactionObject = null;
-        //interactionType = Interaction.None;
+        
+
 
         return result;
     }
@@ -858,6 +867,46 @@ public partial class Player : Character
                 }
             }
             else buttonImage.color = Color.white;
+        }
+    }
+
+    public void RenewalInteractionUI()
+    {
+        List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == interactionObject);
+
+        foreach (InteractionButtonInfo info in removeInfos)
+        {
+            GameManager.Instance.PoolManager.Destroy(info.button);
+            interactionButtonInfos.Remove(info);
+        }
+
+        List<Interaction> interactions = interactionObject.GetInteractions(this);
+
+        foreach (var interaction in interactions)
+        {
+            GameObject button = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.InteractableObjButton, interactionContent);
+
+            button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
+            buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
+            //button.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable", interactionObject.GetName());
+            buttonText.text = $"{interactionObject.GetName()}({interaction})";
+            //interactionObjectDictionary.Add(interactionObject, button);
+
+            interactionButtonInfos.Add(new InteractionButtonInfo(button, interactionObject, interaction));
+
+            if (interactionButtonInfos.Count == 1)
+            {
+                interactionIndex = 0;
+                interactionType = interaction;
+                //if (HasInputAuthority)
+                //{
+                //    mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
+                //    Canvas.ForceUpdateCanvases();
+                //}
+            }
+
+            UpdateInteractionUI(interactionIndex);
+
         }
     }
 
