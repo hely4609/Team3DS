@@ -2,7 +2,6 @@ using Fusion;
 using System;
 using System.Collections.Generic;
 using TMPro;
-using TMPro.EditorUtilities;
 using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
