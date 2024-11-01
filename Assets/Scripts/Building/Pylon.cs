@@ -64,31 +64,77 @@ public class Pylon : InteractableBuilding
 
         return toReturn;
     }
-    public override Interaction InteractionStart(Player player, Interaction interactionType)
+
+    public override List<Interaction> GetInteractions(Player player)
     {
-        int playerID = player.PossesionController.MyNumber;
-        // 완성이 아직 안됨.
+        List<Interaction> currentAbleInteractions = new List<Interaction>();
+
         if (CompletePercent < 1)
         {
-            return Interaction.Build;
+            currentAbleInteractions.Add(Interaction.Build);
         }
         else if (player.ropeBuilding == null)
         {
-            Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
-            if (!isSettingRopeList[playerID] && player.ropeBuilding == null)
-            {
-                OnRopeSet(playerTransformVector3, playerID);
-                player.ropeBuilding = this;
-                // 줄을 집을거임.
-                return Interaction.takeRope;
-            }
+            currentAbleInteractions.Add(Interaction.takeRope);
         }
         else
         {
-            AttachRope(player, playerID);
-
+            currentAbleInteractions.Add(Interaction.AttachRope);
         }
-        return Interaction.None;
+
+
+        return currentAbleInteractions;
+    }
+
+    public override Interaction InteractionStart(Player player, Interaction interactionType)
+    {
+        int playerID = player.PossesionController.MyNumber;
+
+        switch (interactionType)
+        {
+            case Interaction.takeRope:
+               
+                Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
+                if (!isSettingRopeList[playerID] && player.ropeBuilding == null)
+                {
+                    OnRopeSet(playerTransformVector3, playerID);
+                    player.ropeBuilding = this;
+                    // 줄을 집을거임.
+                    return Interaction.takeRope;
+                }
+                break;
+
+            case Interaction.AttachRope:
+                AttachRope(player, playerID);
+                break;
+        }
+
+        return interactionType;
+        
+
+        //int playerID = player.PossesionController.MyNumber;
+        //// 완성이 아직 안됨.
+        //if (CompletePercent < 1)
+        //{
+        //    return Interaction.Build;
+        //}
+        //else if (player.ropeBuilding == null)
+        //{
+        //    Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
+        //    if (!isSettingRopeList[playerID] && player.ropeBuilding == null)
+        //    {
+        //        OnRopeSet(playerTransformVector3, playerID);
+        //        player.ropeBuilding = this;
+        //        // 줄을 집을거임.
+        //        return Interaction.takeRope;
+        //    }
+        //}
+        //else
+        //{
+        //    AttachRope(player, playerID);
+
+        //}
+        //return Interaction.None;
     }
     public override void AttachRope(Player player, int number)
     {

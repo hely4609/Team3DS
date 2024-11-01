@@ -6,7 +6,7 @@ using UnityEngine;
 public enum Interaction
 {
     // 아무것도 안함, 건물짓기, 켜고끄기, 수리, 버리기, 줍기, 납품, 전선 잡기
-    None, Build, OnOff, Repair, Dump, Pick, Deliver, takeRope, Upgrade, Demolish
+    None, Build, OnOff, Repair, Dump, Pick, Deliver, takeRope, AttachRope, Upgrade, Demolish
 }
 
 public interface IInteraction

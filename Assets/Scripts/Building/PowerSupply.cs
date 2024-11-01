@@ -76,19 +76,25 @@ public class PowerSupply : InteractableBuilding
 
     }
 
+    public override List<Interaction> GetInteractions(Player player)
+    {
+        List<Interaction> currentAbleInteractions = new List<Interaction>();
+
+        currentAbleInteractions.Add(Interaction.Deliver);
+            
+        return currentAbleInteractions;
+    }
+
     public override Interaction InteractionStart(Player player, Interaction interactionType)
     {
-        if (player?.OreAmount != 0) // 플레이어가 가진 물건이 납품할 물건이라면
+        switch (interactionType)
         {
-            
-            Deliver(player);
-            
-            return Interaction.Deliver;
+            case Interaction.Deliver:
+                if (player?.OreAmount != 0) Deliver(player);
+                break;
         }
-        else
-        {
-            return Interaction.None;
-        }
+
+        return interactionType;
     }
 
     //public bool Interaction(GameObject target) // 납품 받기

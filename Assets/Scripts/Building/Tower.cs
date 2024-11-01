@@ -53,7 +53,7 @@ public class Tower : InteractableBuilding
         if (CompletePercent < 1)
         {
             currentAbleInteractions.Add(Interaction.Build);
-            currentAbleInteractions.Add(Interaction.None);
+            //currentAbleInteractions.Add(Interaction.None);
             return currentAbleInteractions;
         }
         else if (IsRoped)
@@ -74,6 +74,7 @@ public class Tower : InteractableBuilding
         }
         else
         {
+            currentAbleInteractions.Add(Interaction.AttachRope);
             return currentAbleInteractions;
         }
     }
@@ -105,6 +106,10 @@ public class Tower : InteractableBuilding
                 Debug.Log("ÄÑ±â/²ô±â");
                 TurnOnOff(!OnOff);
                 break;
+            case Interaction.AttachRope:
+                AttachRope(player, player.PossesionController.MyNumber);
+                break;
+
         }
 
         return interactionType;
