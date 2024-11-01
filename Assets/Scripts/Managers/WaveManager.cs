@@ -35,6 +35,7 @@ public class WaveManager : Manager
                 //Debug.Log($"roadData : {roadData.Count}");
                 monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get((ResourceEnum.Prefab)number), new Vector3(roadData[roadData.Count - 1].x, 0, roadData[roadData.Count - 1].y)).GetComponent<Monster>());
                 monsterCount++;
+                Debug.Log($"monsterCount : {monsterCount}");
             }
         }
 
@@ -50,7 +51,7 @@ public class WaveManager : Manager
 
     public override void ManagerUpdate(float deltaTime)
     {
-        if (GameManager.IsGameStart)
+        if (GameManager.Instance.NetworkManager.Runner.IsServer && GameManager.IsGameStart)
         {
             if(IsWaveStart)
             {
@@ -84,7 +85,7 @@ public class WaveManager : Manager
                 }
 
             }
-            else if(monsterCount == 0)
+            else if(waveInfo.waveOrder.Count == 0 && monsterCount == 0)
             {
                 Debug.Log("Å¬¸®¾î!");
             }

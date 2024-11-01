@@ -156,6 +156,8 @@ public class Monster : Character
         {
             GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position);
             GameManager.Instance.BuildingManager.generator.KillCount++;
+            GameManager.Instance.WaveManager.monsterCount--;
+            Debug.Log($"monsterCount : {GameManager.Instance.WaveManager.monsterCount}");
         }
         
         
