@@ -28,6 +28,8 @@ public class Tower : InteractableBuilding
     public Pylon attachedPylon;
 
     [SerializeField] protected GameObject attackRangeMarker;
+    [SerializeField, Networked] protected int Level { get; set; }
+    [SerializeField, Networked] protected int UpgradeRequire { get; set; }
 
     public override void Spawned()
     {
@@ -44,6 +46,7 @@ public class Tower : InteractableBuilding
             buildingSignCanvas.SetActive(!IsRoped);
         }
     }
+
     public override List<Interaction> GetInteractions(Player player)
     {
         List<Interaction> currentAbleInteractions = new List<Interaction>();
@@ -51,13 +54,14 @@ public class Tower : InteractableBuilding
         if (CompletePercent < 1)
         {
             currentAbleInteractions.Add(Interaction.Build);
-            currentAbleInteractions.Add(Interaction.None);
+            //currentAbleInteractions.Add(Interaction.None);
             return currentAbleInteractions;
         }
         else if (IsRoped)
         {
             currentAbleInteractions.Add(Interaction.OnOff);
             currentAbleInteractions.Add(Interaction.Demolish);
+            currentAbleInteractions.Add(Interaction.Upgrade);
             return currentAbleInteractions;
         }
         else if (player.ropeBuilding == null)
@@ -72,6 +76,7 @@ public class Tower : InteractableBuilding
         }
         else
         {
+            currentAbleInteractions.Add(Interaction.AttachRope);
             return currentAbleInteractions;
         }
     }
@@ -89,13 +94,28 @@ public class Tower : InteractableBuilding
                 break;
             case Interaction.takeRope:
                 Debug.Log("전선들기");
+                Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
+                if (!IsSettingRope && player.ropeBuilding == null)
+                {
+                    OnRopeSet(playerTransformVector3, 0);
+                    player.ropeBuilding = this;
+                }
                 break;
             case Interaction.Demolish:
                 Debug.Log("해체");
                 break;
             case Interaction.OnOff:
                 Debug.Log("켜기/끄기");
+                TurnOnOff(!OnOff);
                 break;
+            case Interaction.AttachRope:
+                AttachRope(player, player.PossesionController.MyNumber);
+                break;
+            case Interaction.Upgrade:
+                Debug.Log("업그레이드");
+                Upgrade();
+                break;
+
         }
 
         return interactionType;
@@ -175,8 +195,7 @@ public class Tower : InteractableBuilding
             Attack();
             return;
         }
-
-        if (HasStateAuthority)
+        else if (HasStateAuthority)
         {
             // *애니메이션 재생*
             attackAnimator.SetBool("Attack", true);
@@ -223,6 +242,12 @@ public class Tower : InteractableBuilding
         targetList.Remove(monster);
     }
 
+    public virtual void Upgrade()
+    {
+        attackDamage += 1;
+        UpgradeRequire = (int)1.5f*UpgradeRequire;
+        Level += 1;
+    }
 
 
     public virtual void LockOn()

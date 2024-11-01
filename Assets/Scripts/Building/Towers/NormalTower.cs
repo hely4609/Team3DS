@@ -27,4 +27,8 @@ public class NormalTower : Tower
     {
         base.LockOn();
     }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+    }
 }

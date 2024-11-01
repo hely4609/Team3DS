@@ -45,15 +45,17 @@ public class InteractableBuilding : Building, IInteraction
     // 아무것도 없는 깡통건물. 세우기만 하고 상호작용 없음. ex) 육교
     public virtual Interaction InteractionStart(Player player, Interaction interactionType)
     {
-        // 완성이 아직 안됨.
-        if (CompletePercent < 1)
+        switch (interactionType)
         {
-            return Interaction.Build;
+            case Interaction.Build:
+                break;
+            case Interaction.takeRope:
+                break;
         }
-        else
-        {
-            return Interaction.takeRope;
-        }
+
+        return interactionType;
+        
+        
     }
     public virtual float InteractionUpdate(float deltaTime, Interaction interaction) // 상호작용시 적용할 함수. 제작하라는 명령이 들어오면 제작을 진행함.
     {
@@ -87,7 +89,18 @@ public class InteractableBuilding : Building, IInteraction
 
     public virtual List<Interaction> GetInteractions(Player player)
     {
-        throw new NotImplementedException();
+        List<Interaction> currentAbleInteractions = new List<Interaction>();
+
+        if (CompletePercent < 1)
+        {
+            currentAbleInteractions.Add(Interaction.Build);
+            return currentAbleInteractions;
+        }
+        else
+        {
+            currentAbleInteractions.Add(Interaction.takeRope);
+            return currentAbleInteractions;
+        }
     }
 
     public override bool FixPlace()
