@@ -59,7 +59,6 @@ public class Monster : Character
     {
         HpCurrent -= damage;
         
-        Debug.Log($"{HpCurrent} / {gameObject.name}");
         
         return 0;
     }
@@ -156,6 +155,8 @@ public class Monster : Character
         {
             GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position);
             GameManager.Instance.BuildingManager.generator.KillCount++;
+            GameManager.Instance.WaveManager.monsterCount--;
+            Debug.Log($"monsterCount : {GameManager.Instance.WaveManager.monsterCount}");
         }
         
         Despawn();
@@ -180,6 +181,8 @@ public class Monster : Character
         AnimBool?.Invoke("isMove", false);
 
         target.TakeDamage(attackDamage);
+        GameManager.Instance.WaveManager.monsterCount--;
+        Debug.Log($"monsterCount : {GameManager.Instance.WaveManager.monsterCount}");
     }
 
     public override void Render()

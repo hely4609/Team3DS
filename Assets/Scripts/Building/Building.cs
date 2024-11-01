@@ -248,7 +248,6 @@ public GameObject BuildingSignCanvas { get { return buildingSignCanvas; } }
     {
         //startPos = tiledBuildingPositionLast;
         startPos = new Vector2Int((int)transform.position.x, (int)transform.position.z);
-        Debug.Log($"startPos : {startPos}, transform.position : {transform.position}");
         if (isBuildable)
         {
             GameManager.Instance.BuildingManager.AddBuilding(this);
