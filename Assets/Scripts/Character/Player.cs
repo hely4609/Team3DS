@@ -394,7 +394,7 @@ public partial class Player : Character
             if (currentPos != lastPos)
             {
                 if(HasStateAuthority)CanSetRope = ropeBuilding.CheckRopeLength(playerIntPos, playerID);
-                if (CanSetRope)
+                //if (CanSetRope)
                 {
                     ropeBuilding.OnRopeSet(playerIntPos, playerID);
                     lastPos = currentPos;
@@ -515,13 +515,29 @@ public partial class Player : Character
             }
 
             if (!IsGround) velocity *= 0.1f;
+
             if (CanSetRope)
-            { 
+            {
                 rb.velocity = velocity * moveSpeed + gravity;
             }
-            else
+            else 
             {
-                rb.velocity = Vector3.zero;
+                // CanSetRope가 false이면 로프 회수만 가능하게
+                bool angleCheck;
+                if(ropeBuilding is Pylon)
+                {
+                    Pylon ropePylon = ropeBuilding as Pylon;
+                    angleCheck = Vector3.Angle(velocity, ropePylon.MultiTabList[possessionController.MyNumber].ropePositions[ropePylon.MultiTabList[possessionController.MyNumber].ropePositions.Count - 2] - transform.position) < 45.0f;
+                }
+                else
+                {
+                    angleCheck = Vector3.Angle(velocity, ropeBuilding.RopeStruct.ropePositions[ropeBuilding.RopeStruct.ropePositions.Count - 2] - transform.position) < 45.0f;
+                }
+
+                if (angleCheck)
+                    rb.velocity = velocity * moveSpeed + gravity;
+                else
+                    rb.velocity = Vector3.zero;
             }
         }
         else
@@ -941,6 +957,10 @@ public partial class Player : Character
                         {
                             SoundManager.Play(ResourceEnum.SFX.rope_stretching, transform.position, false, out ropeSource);
                         }
+                    }
+                    else
+                    {
+                        if (HasInputAuthority && ropeMaxDistanceSignUI != null) ropeMaxDistanceSignUI.SetActive(false);
                     }
                     break;
                 case nameof(BuildableEnumPageIndex):

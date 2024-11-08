@@ -15,7 +15,7 @@ public class WaveManager : Manager
     protected WaveInfo waveInfo;
     protected int currentWaveIndex = 0; //현재 웨이브는 몇번째 웨이브인가.
     protected List<Monster> monsterList = new List<Monster>(); // 남은 몬스터 수. 
-    public int monsterCount = 0;
+    public int monsterCount = 0; // 현재 필드에 있는 몬스터 수.
 
     protected int currentMonsterIndex = 0; //현재 웨이브에서 몇번째 몬스터인가.
     private float monsterInterval = 2; // 몬스터간의 간격(필요한가?)
@@ -59,8 +59,8 @@ public class WaveManager : Manager
             
                 if (nowMonsterTime >= monsterInterval && waveInfo.waveOrder.Peek().Count > 0) 
                 {
-                        MonsterInstantiate();
-                        nowMonsterTime = 0;
+                    MonsterInstantiate();
+                    nowMonsterTime = 0;
                     Debug.Log($"{waveInfo.waveOrder.Peek().Count}마리 남음");
                 }
                 else if(waveInfo.waveOrder.Count > 0)

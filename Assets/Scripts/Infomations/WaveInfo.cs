@@ -13,7 +13,7 @@ public class WaveInfo
     public void Initialize()
     {
         waveOrder = new Queue<Queue<ResourceEnum.Prefab>>();
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 30; i++)
         {
             MonsterQueue();
         }
