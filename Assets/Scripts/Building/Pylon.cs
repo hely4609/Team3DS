@@ -77,7 +77,7 @@ public class Pylon : InteractableBuilding
         {
             currentAbleInteractions.Add(Interaction.takeRope);
         }
-        else
+        else if(player.ropeBuilding != this)
         {
             currentAbleInteractions.Add(Interaction.AttachRope);
         }

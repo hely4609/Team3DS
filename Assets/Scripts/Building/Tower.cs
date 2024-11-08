@@ -55,14 +55,12 @@ public class Tower : InteractableBuilding
         {
             currentAbleInteractions.Add(Interaction.Build);
             //currentAbleInteractions.Add(Interaction.None);
-            return currentAbleInteractions;
         }
         else if (IsRoped)
         {
             currentAbleInteractions.Add(Interaction.OnOff);
             currentAbleInteractions.Add(Interaction.Demolish);
             currentAbleInteractions.Add(Interaction.Upgrade);
-            return currentAbleInteractions;
         }
         else if (player.ropeBuilding == null)
         {
@@ -72,13 +70,12 @@ public class Tower : InteractableBuilding
                 currentAbleInteractions.Add(Interaction.Demolish);
             }
 
-            return currentAbleInteractions;
         }
-        else
+        else if(player.ropeBuilding != this) 
         {
             currentAbleInteractions.Add(Interaction.AttachRope);
-            return currentAbleInteractions;
         }
+        return currentAbleInteractions;
     }
     public override Interaction InteractionStart(Player player, Interaction interactionType)
     {

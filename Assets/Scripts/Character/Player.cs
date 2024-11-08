@@ -830,10 +830,9 @@ public partial class Player : Character
     // ¸¶¿ì½º ÈÙÀ» ±¼·Á¼­ »óÈ£ÀÛ¿ëÇÒ ´ë»óÀ» Á¤ÇÔ.
     public void MouseWheel(Vector2 scrollDelta)
     {
-        if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
+        //if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
         if (interactionButtonInfos.Count == 0) return;
         if (scrollDelta.y == 0f) return;
-
         // ÈÙÀ» À§·Î ±¼·ÈÀ» ¶§
         else if (scrollDelta.y > 0)
         {
