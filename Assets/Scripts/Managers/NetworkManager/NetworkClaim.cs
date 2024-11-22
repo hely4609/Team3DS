@@ -74,7 +74,7 @@ public partial class NetworkManager : Manager
         GameManager.ClaimLoadInfo("Entering game");
         var result = await runner.StartGame(new StartGameArgs()
         {
-            SessionName = $"{DateTime.Now.ToString("mmss")}",
+            //SessionName = $"{DateTime.Now.ToString("mmss")}",
             GameMode = GameMode.Host,
             SessionProperties = customProps,
         });

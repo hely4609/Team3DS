@@ -26,6 +26,7 @@ TagManager:
   - BuildingSelectUIBuildingImage
   - PageIndexText
   - Runner
+  - WaveStartButton
   layers:
   - Default
   - TransparentFX
