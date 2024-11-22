@@ -66,7 +66,7 @@ public class ControllerBase : MyComponent
             GameObject characterUICanvas = GameManager.Instance.UIManager.GetUI(UIEnum.CharacterUICanvas);
 
 
-            Button button = characterUICanvas.GetComponentInChildren<Button>();
+            Button button = GameObject.FindGameObjectWithTag("WaveStartButton").GetComponent<Button>();
             if (HasStateAuthority)
             {
                 button.onClick.AddListener(() => GameManager.Instance.WaveStart());
@@ -77,13 +77,26 @@ public class ControllerBase : MyComponent
                 button.gameObject.SetActive(false);
             }
 
-
             GameObject sessionName = GameObject.FindGameObjectWithTag("SessionIDText");
-            sessionName.GetComponent<TextMeshProUGUI>().text = $"Session ID : {Runner.SessionInfo.Name}";
+            sessionName.GetComponentInChildren<TextMeshProUGUI>().text = $"Session ID : {Runner.SessionInfo.Name}";
+            Button sessionNameCopy = sessionName.GetComponentInChildren<Button>();
+            GameObject checkMark = sessionNameCopy.GetComponentsInChildren<Image>()[1].gameObject;
+            sessionNameCopy.onClick.AddListener(() => { 
+                GUIUtility.systemCopyBuffer = Runner.SessionInfo.Name;
+                checkMark.SetActive(true);
+                StartCoroutine(TrashCode(checkMark));
+            });
+            checkMark.SetActive(false);
 
             GameManager.Instance.UIManager.GetUI(UIEnum.Minimap).GetComponentInChildren<Camera>();
         }
         Spawn(0, 0, 0);
+    }
+
+    IEnumerator TrashCode(GameObject wantObject)
+    {
+        yield return new WaitForSeconds(1);
+        wantObject.SetActive(false);
     }
 
     public void Spawn(float dst_x, float dst_y, float dst_z)

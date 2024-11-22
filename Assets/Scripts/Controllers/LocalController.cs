@@ -3,9 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
-using ResourceEnum;
-using System;
 
 public class LocalController : ControllerBase
 {

@@ -105,8 +105,7 @@ public class MiniMapScript : MyComponent
     public void LargeMapDrag(Vector2 mouseDelta)
     {
         Vector3 wantVector = new Vector3(-mouseDelta.x, 0, -mouseDelta.y);
-        wantVector.Normalize();
-        largeMapCamera.transform.position += wantVector * largeMapCamera.orthographicSize * 0.1f;
+        largeMapCamera.transform.position += wantVector * largeMapCamera.orthographicSize * 0.01f;
     }
 
     public void ShowTowerRangeToggle()
