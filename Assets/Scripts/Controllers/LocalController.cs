@@ -166,15 +166,18 @@ public class LocalController : ControllerBase
         
     }
 
-    protected void OnScreenRotate(Vector2 mouseDelta)
-    {
-        
-        DoScreenRotate?.Invoke(mouseDelta);
-    }
+    //protected void OnScreenRotate(Vector2 mouseDelta)
+    //{
+    //    DoScreenRotate?.Invoke(mouseDelta);
+    //}
 
     protected void OnScreenRotate(InputValue value)
     {
         DoScreenRotate?.Invoke(value.Get<Vector2>());
+        if (largeMapClicked)
+        {
+            minimap.LargeMapDrag(value.Get<Vector2>());
+        }
     }
 
     protected void OnPickUp() { }
@@ -227,8 +230,17 @@ public class LocalController : ControllerBase
     ////////////////////////////////////////////
 
     bool alreadyPressed = false;
+    bool largeMapClicked = false;
     protected void OnInteraction(bool isPressed) 
     {
+        // ¹Ì´Ï¸Ê(¶óÁö¸Ê) µå·¡±×
+        if(minimap != null && minimap.isLargeMapOpend && isPressed)
+        {
+            largeMapClicked = true;
+        }
+        else largeMapClicked = false;
+
+        // Interactions
         if (controlledPlayer == null) return;
 
         if (isFarmingKeyPressed) return;
