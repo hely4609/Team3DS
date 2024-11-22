@@ -99,7 +99,6 @@ public partial class Player : Character
     //public Vector3 groundMovementVelocity;
 
 
-
     public bool TryPossession() => possessionController == null;
 
     protected void RegistrationFunctions(ControllerBase targetController)
@@ -523,13 +522,13 @@ public partial class Player : Character
             else 
             {
                 // CanSetRope가 false이면 로프 회수만 가능하게
-                bool angleCheck;
+                bool angleCheck = false;
                 if(ropeBuilding is Pylon)
                 {
                     Pylon ropePylon = ropeBuilding as Pylon;
                     angleCheck = Vector3.Angle(velocity, ropePylon.MultiTabList[possessionController.MyNumber].ropePositions[ropePylon.MultiTabList[possessionController.MyNumber].ropePositions.Count - 2] - transform.position) < 45.0f;
                 }
-                else
+                else if (ropeBuilding != null)
                 {
                     angleCheck = Vector3.Angle(velocity, ropeBuilding.RopeStruct.ropePositions[ropeBuilding.RopeStruct.ropePositions.Count - 2] - transform.position) < 45.0f;
                 }
@@ -683,7 +682,10 @@ public partial class Player : Character
         {
             default:
                 //interactionType = Interaction.None;
-                
+
+                break;
+            case Interaction.Demolish:
+                RenewalInteractionUI(interactionObject);
                 break;
             case Interaction.AttachRope:
                 RenewalInteractionUI();
@@ -713,6 +715,7 @@ public partial class Player : Character
     // 상호작용 가능한 대상이 감지되었을 때 처리
     private void OnTriggerEnter(Collider other)
     {
+
         IInteraction target;
 
         if (!other.TryGetComponent(out target))
@@ -924,6 +927,48 @@ public partial class Player : Character
 
         }
     }
+
+    public void RenewalInteractionUI(IInteraction target)
+    {
+        List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == target);
+
+        foreach (InteractionButtonInfo info in removeInfos)
+        {
+            GameManager.Instance.PoolManager.Destroy(info.button);
+            interactionButtonInfos.Remove(info);
+        }
+
+        if (interactionButtonInfos.Count == 0)
+        {
+            interactionIndex = -1;
+            if (isInteracting)
+            {
+                InteractionEnd();
+            }
+            interactionObject = null;
+            interactionType = Interaction.None;
+
+            if (HasInputAuthority)
+            {
+                GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
+            }
+        }
+        else
+        {
+            interactionIndex = Mathf.Min(interactionIndex, interactionButtonInfos.Count - 1);
+            if (isInteracting && target == interactionObject)
+            {
+                InteractionEnd();
+            }
+            interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+            interactionType = interactionButtonInfos[interactionIndex].interactionType;
+
+        }
+
+        UpdateInteractionUI(interactionIndex);
+    }
+
+
 
     public override void Render()
     {

@@ -1,7 +1,10 @@
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class Tower : InteractableBuilding
 {
@@ -100,6 +103,18 @@ public class Tower : InteractableBuilding
                 break;
             case Interaction.Demolish:
                 Debug.Log("해체");
+                GameManager.Instance.BuildingManager.RemoveBuilding(this);
+                GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.RenewalInteractionUI(this);
+                
+                if (HasStateAuthority)
+                {
+                    foreach (var rope in ropeStruct.ropeObjects)
+                    {
+                        Runner.Despawn(rope);
+                    }
+                    Runner.Despawn(GetComponent<NetworkObject>());
+                }
+                
                 break;
             case Interaction.OnOff:
                 Debug.Log("켜기/끄기");
@@ -146,6 +161,7 @@ public class Tower : InteractableBuilding
         //    return Interaction.None;
         //}
     }
+
     protected override void MyUpdate(float deltaTime)
     {
         if(HasStateAuthority && OnOff)
@@ -270,7 +286,7 @@ public class Tower : InteractableBuilding
     {
         if(gameObject.TryGetComponent<SphereCollider>(out SphereCollider col))
         {
-            Debug.Log(transform.localScale.x);
+            Debug.Log(transform.localScale.x);  
             col.radius = attackRange * rangeConst / transform.localScale.x;
             //col.center = new Vector3(0, col.radius * 0.5f, 0);
             attackRangeMarker.transform.localScale = new Vector3(col.radius * 2, col.radius * 2, col.radius * 2);
@@ -385,6 +401,12 @@ public class Tower : InteractableBuilding
             
             IsRoped = true;
             buildingSignCanvas.SetActive(false);
+
+            foreach (var item in py.MultiTabList[number].ropeObjects)
+            {
+                ropeStruct.ropeObjects.Add(item);    
+            }
+
             py.MultiTabList[number].ropeObjects.Clear();
             py.MultiTabList[number].ropePositions.Clear();
             py.ResetRope(player, player.PossesionController.MyNumber);

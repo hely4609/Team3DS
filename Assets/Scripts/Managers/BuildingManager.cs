@@ -21,7 +21,6 @@ public class BuildingManager : Manager
     public EnergyBarrierGenerator generator;
     public PowerSupply supply;
 
-
     public override IEnumerator Initiate()
     {
         buildings = new();
@@ -294,5 +293,5 @@ public class BuildingManager : Manager
     {
         buildings = newBuildingList;
     }
-
+    
 }
