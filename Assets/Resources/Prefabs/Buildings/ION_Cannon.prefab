@@ -740,9 +740,9 @@ MonoBehaviour:
   maxRopeLength: 0
   currentRopeLength: 0
   _powerConsumption: 20
-  _attackDamage: 4
-  _attackSpeed: 2
-  _attackRange: 1
+  _attackDamage: 60
+  _attackSpeed: 15
+  _attackRange: 2
   target: {fileID: 0}
   targetList: []
   _OnOff: 0
@@ -751,6 +751,8 @@ MonoBehaviour:
   gunBarrelRotateCorrection: 0
   attachedPylon: {fileID: 0}
   attackRangeMarker: {fileID: 4375568238647190245}
+  _Level: 0
+  _UpgradeRequire: 0
   splashRadius: 10
 --- !u!136 &5371794395544762303
 CapsuleCollider:

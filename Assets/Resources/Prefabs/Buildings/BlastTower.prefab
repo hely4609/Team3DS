@@ -80,9 +80,9 @@ MonoBehaviour:
   maxRopeLength: 0
   currentRopeLength: 0
   _powerConsumption: 30
-  _attackDamage: 4
-  _attackSpeed: 1
-  _attackRange: 1
+  _attackDamage: 20
+  _attackSpeed: 5
+  _attackRange: 1.5
   target: {fileID: 0}
   targetList: []
   _OnOff: 0
@@ -91,6 +91,8 @@ MonoBehaviour:
   gunBarrelRotateCorrection: 0
   attachedPylon: {fileID: 0}
   attackRangeMarker: {fileID: 7149592453140854696}
+  _Level: 0
+  _UpgradeRequire: 0
 --- !u!114 &4178355832652842898
 MonoBehaviour:
   m_ObjectHideFlags: 0

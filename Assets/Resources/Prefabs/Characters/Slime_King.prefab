@@ -173,8 +173,8 @@ MonoBehaviour:
   hpText: {fileID: 2912436540255165044}
   oreAmount: 3
   roadDestination: 0
-  hpMax: 80
-  hpCurrent: 80
+  hpMax: 140
+  hpCurrent: 140
   _HpCurrent: 0
   attackDamage: 1
   _isReady: 0
