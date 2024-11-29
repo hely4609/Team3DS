@@ -288,6 +288,18 @@ public class Pylon : InteractableBuilding
         }
 
         Vector3 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 2];
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var player in players)
+        {
+            var playerCS = player.GetComponent<Player>();
+            if (number == playerCS.PossesionController.MyNumber)
+            {
+                playerCS.angleCheckVector = start;
+            }
+        }
+
         Vector3 end = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1];
         Vector3 delta = end - start;
 
