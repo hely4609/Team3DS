@@ -177,6 +177,7 @@ public class InteractableBuilding : Building, IInteraction
     }
     public virtual void CreateRope(int number)
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if (ropeStruct.ropePositions.Count >= 3 && ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 3] == ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1])
         {
 
@@ -186,11 +187,19 @@ public class InteractableBuilding : Building, IInteraction
             Runner.Despawn(target);
             ropeStruct.ropeObjects.Remove(target);
 
+            foreach (var player in players)
+            {
+                var playerCS = player.GetComponent<Player>();
+                if (number == playerCS.PossesionController.MyNumber)
+                {
+                    playerCS.angleCheckVector = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2];
+                }
+            }
+
             return;
         }
         Vector3 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2];
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (var player in players)
         {

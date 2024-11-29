@@ -276,6 +276,7 @@ public class Pylon : InteractableBuilding
     }
     public override void CreateRope(int number)
     {
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if (multiTabList[number].ropePositions.Count >= 3 && multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 3] == multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 1])
         {
             multiTabList[number].ropePositions.RemoveRange(multiTabList[number].ropePositions.Count - 2, 2);
@@ -284,12 +285,19 @@ public class Pylon : InteractableBuilding
             Runner.Despawn(target);
             multiTabList[number].ropeObjects.Remove(target);
 
+            foreach (var player in players)
+            {
+                var playerCS = player.GetComponent<Player>();
+                if (number == playerCS.PossesionController.MyNumber)
+                {
+                    playerCS.angleCheckVector = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 2];
+                }
+            }
             return;
         }
 
         Vector3 start = multiTabList[number].ropePositions[multiTabList[number].ropePositions.Count - 2];
 
-        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
 
         foreach (var player in players)
         {
