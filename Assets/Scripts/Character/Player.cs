@@ -85,7 +85,8 @@ public partial class Player : Character
     [Networked] public Vector3 MoveDir { get; set; }
     protected Vector3 currentDir = Vector3.zero;
     Vector2 lastPos;
-    [Networked] bool angleCheck { get; set; } = false;
+    [Networked] bool AngleCheck { get; set; } = false;
+    bool angleCheck;
 
     [Networked] public Vector3 PreviousPosition { get; set; }
     [Networked] public Quaternion PreviousRotation { get; set; }
@@ -525,17 +526,16 @@ public partial class Player : Character
             else 
             {
                 // CanSetRope가 false이면 로프 회수만 가능하게
-                angleCheck = false;
                 if(HasStateAuthority)
                 {
                     if(ropeBuilding is Pylon)
                     {
                         Pylon ropePylon = ropeBuilding as Pylon;
-                        angleCheck = Vector3.Angle(velocity, ropePylon.MultiTabList[possessionController.MyNumber].ropePositions[ropePylon.MultiTabList[possessionController.MyNumber].ropePositions.Count - 2] - transform.position) < 45.0f;
+                        AngleCheck = Vector3.Angle(velocity, ropePylon.MultiTabList[possessionController.MyNumber].ropePositions[ropePylon.MultiTabList[possessionController.MyNumber].ropePositions.Count - 2] - transform.position) < 45.0f;
                     }
                     else if (ropeBuilding != null)
                     {
-                        angleCheck = Vector3.Angle(velocity, ropeBuilding.RopeStruct.ropePositions[ropeBuilding.RopeStruct.ropePositions.Count - 2] - transform.position) < 45.0f;
+                        AngleCheck = Vector3.Angle(velocity, ropeBuilding.RopeStruct.ropePositions[ropeBuilding.RopeStruct.ropePositions.Count - 2] - transform.position) < 45.0f;
                     }
 
                 }
@@ -1043,6 +1043,9 @@ public partial class Player : Character
                         }
                     }
                     UpdateInteractionUI(interactionIndex);
+                    break;
+                case nameof(AngleCheck):
+                    angleCheck = AngleCheck;
                     break;
             }
 
