@@ -103,18 +103,9 @@ public class Tower : InteractableBuilding
                 break;
             case Interaction.Demolish:
                 Debug.Log("해체");
-                GameManager.Instance.BuildingManager.RemoveBuilding(this);
-                GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.RenewalInteractionUI(this);
-                
-                if (HasStateAuthority)
-                {
-                    foreach (var rope in ropeStruct.ropeObjects)
-                    {
-                        Runner.Despawn(rope);
-                    }
-                    Runner.Despawn(GetComponent<NetworkObject>());
-                }
-                
+
+                Runner.Despawn(GetComponent<NetworkObject>());
+
                 break;
             case Interaction.OnOff:
                 Debug.Log("켜기/끄기");
@@ -160,6 +151,21 @@ public class Tower : InteractableBuilding
         //    AttachRope(player, player.PossesionController.MyNumber);
         //    return Interaction.None;
         //}
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        if (HasStateAuthority)
+        {
+            GameManager.Instance.BuildingManager.RemoveBuilding(this);
+        }
+
+        GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.RenewalInteractionUI(this);
+
+        foreach (var rope in ropeStruct.ropeObjects)
+        {
+            Runner.Despawn(rope);
+        }
     }
 
     protected override void MyUpdate(float deltaTime)
