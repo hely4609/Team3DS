@@ -189,6 +189,18 @@ public class InteractableBuilding : Building, IInteraction
             return;
         }
         Vector3 start = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 2];
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+
+        foreach (var player in players)
+        {
+            var playerCS = player.GetComponent<Player>();
+            if (number == playerCS.PossesionController.MyNumber)
+            {
+                playerCS.angleCheckVector = start;
+            }
+        }
+
         Vector3 end = ropeStruct.ropePositions[ropeStruct.ropePositions.Count - 1];
         Vector3 delta = end - start;
 
