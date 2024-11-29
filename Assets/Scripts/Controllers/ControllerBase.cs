@@ -78,7 +78,7 @@ public class ControllerBase : MyComponent
             }
 
             GameObject sessionName = GameObject.FindGameObjectWithTag("SessionIDText");
-            sessionName.GetComponentInChildren<TextMeshProUGUI>().text = $"Session ID : {Runner.SessionInfo.Name}";
+            sessionName.GetComponentInChildren<TextMeshProUGUI>().text = "Copy Session ID";
             Button sessionNameCopy = sessionName.GetComponentInChildren<Button>();
             GameObject checkMark = sessionNameCopy.GetComponentsInChildren<Image>()[1].gameObject;
             sessionNameCopy.onClick.AddListener(() => { 
