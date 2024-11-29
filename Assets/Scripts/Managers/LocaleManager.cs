@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -53,11 +54,8 @@ public class LocaleManager : Manager
     {
         LocalizedString localizedString = new LocalizedString() { TableReference = "ChangeableTable", TableEntryReference = str };
         var stringOperation = localizedString.GetLocalizedStringAsync();
+        stringOperation.WaitForCompletion(); // Force synchronous loading
         Debug.Log($"{stringOperation.IsDone} / {stringOperation.Status}");
-        if (stringOperation.IsDone && stringOperation.Status == AsyncOperationStatus.Succeeded)
-        {
-            return stringOperation.Result;
-        }
-        return "∞Ì¿Â≥≤";
+        return stringOperation.Result;
     }
 }
