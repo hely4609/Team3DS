@@ -64,6 +64,9 @@ public class PowerSupply : InteractableBuilding
         powerFillImage = GameObject.FindGameObjectWithTag("PowerFillImage").GetComponent<Image>();
 
         anim = GetComponentInChildren<Animator>();
+
+        objectName = "Power Supply";
+        localeName = LocaleNameSet();
     }
 
     protected override void MyStart()

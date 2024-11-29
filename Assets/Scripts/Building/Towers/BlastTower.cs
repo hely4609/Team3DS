@@ -11,7 +11,7 @@ public class BlastTower : Tower
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "Blast Tower";
-
+        localeName = LocaleNameSet();
         powerConsumption = 30;
 
         AttackRangeSetting();

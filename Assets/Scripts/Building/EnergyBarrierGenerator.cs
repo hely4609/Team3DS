@@ -68,6 +68,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
 
         hpText = GameObject.FindGameObjectWithTag("HPText").GetComponent<TextMeshProUGUI>();
         hpFillImage = GameObject.FindGameObjectWithTag("HPFillImage").GetComponent<Image>();
+        
 
         hpText.text = $"{hpCurrent} / {hpMax}";
         hpFillImage.fillAmount = hpCurrent / (float)hpMax;

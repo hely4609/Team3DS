@@ -77,8 +77,9 @@ public class OptionManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
-    public void ChangeLocale(int i)
+    public void ChangeLocale(string i)
     {
-        GameManager.Instance.LocaleManager.ChangeLocale(i);
+        //GameManager.Instance.LocaleManager.ChangeLocale(i);
+        GameManager.Instance.LocaleManager.LoadLocale(i);
     }
 }

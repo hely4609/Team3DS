@@ -11,7 +11,7 @@ public class GatlingTower : Tower
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "Gatling Tower";
-
+        localeName = LocaleNameSet();
         powerConsumption = 40;
 
         AttackRangeSetting();

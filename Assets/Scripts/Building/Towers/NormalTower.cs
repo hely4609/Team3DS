@@ -11,7 +11,7 @@ public class NormalTower : Tower
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "Normal Tower";
-
+        localeName = LocaleNameSet();
         powerConsumption = 10;
 
         AttackRangeSetting();

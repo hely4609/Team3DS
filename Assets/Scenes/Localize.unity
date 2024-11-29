@@ -2877,6 +2877,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 408151654217907426, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 408151654217907426, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 543193719}
@@ -2887,6 +2891,10 @@ PrefabInstance:
     - target: {fileID: 408151654217907426, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: OptionManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 408151654217907426, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: en
       objectReference: {fileID: 0}
     - target: {fileID: 735515399361754666, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
       propertyPath: m_AnchorMax.x
@@ -2917,6 +2925,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 543193719}
     - target: {fileID: 1535556516523953406, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535556516523953406, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 543193719}
@@ -2927,6 +2939,10 @@ PrefabInstance:
     - target: {fileID: 1535556516523953406, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: OptionManager, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 1535556516523953406, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
+      value: ko-KR
       objectReference: {fileID: 0}
     - target: {fileID: 1964873782038741611, guid: 7af7f7f09e6eefe41b8547adfe170a33, type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
