@@ -25,6 +25,7 @@ public class LocalController : ControllerBase
 
             if (data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
             if (data.buttons.IsSet(MyButtons.Rope)) OnRope();
+            if (data.buttons.IsSet(MyButtons.Greeting)) OnGreeting();
 
             //if (data.buttons.IsSet(MyButtons.Farming)) OnFarming();
 
@@ -317,5 +318,10 @@ public class LocalController : ControllerBase
             controlledPlayer.BuildableEnumPageIndex = Mathf.Clamp(controlledPlayer.BuildableEnumPageIndex + value, 0, controlledPlayer.BuildableEnumArray.GetLength(0) - 1);
         }
         
+    }
+
+    protected void OnGreeting()
+    {
+        DoGreeting?.Invoke();
     }
 }

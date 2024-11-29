@@ -155,19 +155,33 @@ public class Tower : InteractableBuilding
 
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
-        if (GameManager.IsGameStart)
+        if (!GameManager.IsGameStart) return;
 
         if (HasStateAuthority)
         {
             GameManager.Instance.BuildingManager.RemoveBuilding(this);
+
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        
+            foreach(var player in players)
+            {
+                var playerCS = player.GetComponent<Player>();
+                if (playerCS.ropeBuilding == this)
+                {
+                    playerCS.CanSetRope = true;
+                }
+
+            }
         }
 
-        GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.RenewalInteractionUI(this); 
+        var ropePlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
+        ropePlayer.RenewalInteractionUI(this);
 
         foreach (var rope in ropeStruct.ropeObjects)
         {
             Runner.Despawn(rope);
         }
+
     }
 
     protected override void MyUpdate(float deltaTime)
