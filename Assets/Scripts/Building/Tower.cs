@@ -160,16 +160,28 @@ public class Tower : InteractableBuilding
         if (HasStateAuthority)
         {
             GameManager.Instance.BuildingManager.RemoveBuilding(this);
+
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        
+            foreach(var player in players)
+            {
+                var playerCS = player.GetComponent<Player>();
+                if (playerCS.ropeBuilding == this)
+                {
+                    playerCS.CanSetRope = true;
+                }
+
+            }
         }
 
         var ropePlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
-        ropePlayer.RenewalInteractionUI(this); 
+        ropePlayer.RenewalInteractionUI(this);
 
         foreach (var rope in ropeStruct.ropeObjects)
         {
             Runner.Despawn(rope);
         }
-        if (ropePlayer.ropeBuilding == this) ropePlayer.CanSetRope = true;
+
     }
 
     protected override void MyUpdate(float deltaTime)
