@@ -12,6 +12,7 @@ public enum MyButtons
     Interaction = 3,
     Farming = 4,
     Rope = 5,
+    Greeting = 6,
 }
 public struct NetworkInputData : INetworkInput
 {
@@ -38,6 +39,7 @@ public partial class NetworkPhotonCallbacks
     bool tryCancel;
     bool tryInteraction;
     bool tryRope;
+    bool tryGreeting;
 
     public void OnInput(NetworkRunner runner, NetworkInput input)
     {
@@ -61,7 +63,8 @@ public partial class NetworkPhotonCallbacks
         data.buttons.Set(MyButtons.Cancel, tryCancel);
         data.buttons.Set(MyButtons.Interaction, tryInteraction);
         data.buttons.Set(MyButtons.Farming, tryFarming);
-        data.buttons.Set(MyButtons.Rope, tryRope);  
+        data.buttons.Set(MyButtons.Rope, tryRope);
+        data.buttons.Set(MyButtons.Greeting, tryGreeting);
         input.Set(data);
 
         buildingIndex = -1;
@@ -69,6 +72,7 @@ public partial class NetworkPhotonCallbacks
         tryBuild = false;
         tryCancel = false;
         tryRope= false;
+        tryGreeting = false;
     }
     public void OnInputMissing(NetworkRunner runner, PlayerRef player, NetworkInput input) { }
 
@@ -140,5 +144,10 @@ public partial class NetworkPhotonCallbacks
     {
         if (value.Get() == null) return;
         buildableEnumPageIndexDelta = value.Get().ToString() == "1" ? 1 : -1;
+    }
+
+    public void OnGreeting(InputValue value)
+    {
+        tryGreeting = value.isPressed;
     }
 }

@@ -3560,7 +3560,7 @@ MonoBehaviour:
   TotalWords: 12
   ApplyTiming: 0
   SyncSettings: 127
-  StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9f6b4d31ed504d0b8dfdd617c0812b98afe96ff1d9314e52e60342ad00db630e3
+  StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9dfdd617c0812b98afe96ff1d9314e52ef6b4d31ebf58818a60342ad00db630e3
   TriggerHashes: 00000000dd66394b
 --- !u!114 &4131951010265648181
 MonoBehaviour:
@@ -16966,7 +16966,8 @@ MonoBehaviour:
   buildingConfirmUI: {fileID: 0}
   ropeMaxDistanceSignUI: {fileID: 0}
   pageIndexText: {fileID: 0}
-  interactionIndex: -1
+  _interactionIndex: -1
+  interactionButtonInfos: []
   _OreAmount: 0
   myMarker: {fileID: 8035184359376342701}
   otherMarker: {fileID: 4886176525193278536}

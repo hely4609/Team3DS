@@ -112,6 +112,7 @@ public partial class Player : Character
         targetController.DoCancel -= Cancel;
         targetController.DoFarming -= Farming;
         targetController.DoKeyGuide -= SetKeyGuideUI;
+        targetController.DoGreeting -= Greeting;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
@@ -123,6 +124,7 @@ public partial class Player : Character
         targetController.DoCancel += Cancel;
         targetController.DoFarming += Farming;
         targetController.DoKeyGuide += SetKeyGuideUI;
+        targetController.DoGreeting += Greeting;
     }
 
     protected void UnRegistrationFunction(ControllerBase targetController)
@@ -137,6 +139,7 @@ public partial class Player : Character
         targetController.DoCancel -= Cancel;
         targetController.DoFarming -= Farming;
         targetController.DoKeyGuide -= SetKeyGuideUI;
+        targetController.DoGreeting -= Greeting;
     }
 
     public virtual void Possession(ControllerBase targetController)
@@ -1031,6 +1034,7 @@ public partial class Player : Character
                         if (HasInputAuthority)
                         {
                             mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
+                            Canvas.ForceUpdateCanvases();
                         }
                     }
                     UpdateInteractionUI(interactionIndex);
@@ -1213,6 +1217,10 @@ public partial class Player : Character
                 buildingSelectUIBuildingImages[i].GetComponent<Image>().sprite = ResourceManager.Get(result);
             }
         }
+    }
 
+    public void Greeting()
+    {
+        AnimTrigger?.Invoke("GreetingTrigger");
     }
 }
