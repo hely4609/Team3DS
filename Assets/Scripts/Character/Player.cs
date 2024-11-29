@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.Localization.Components;
 using UnityEngine.UI;
 
-
+[Serializable]
 public class InteractionButtonInfo
 {
     public GameObject button;
@@ -49,12 +49,12 @@ public partial class Player : Character
 
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
-    [SerializeField] protected int interactionIndex = -1; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
+    [SerializeField, Networked] protected int interactionIndex { get; set; } = -1; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
     
     // test
-    protected List<InteractionButtonInfo> interactionButtonInfos = new List<InteractionButtonInfo>();
+    [SerializeField]protected List<InteractionButtonInfo> interactionButtonInfos = new List<InteractionButtonInfo>();
      
     protected bool isInteracting; // 나는 지금 상호작용 중인가?
     public bool IsInteracting => isInteracting;
@@ -76,7 +76,7 @@ public partial class Player : Character
     [Networked] public bool IsThisPlayerCharacterUICanvasActivated { get; set; } = false;
     [Networked] public bool IsBuildingComfirmUIOpen { get; set; } = false;
     [Networked] public InteractableBuilding ropeBuilding { get; set; }
-    [SerializeField, Networked] public bool CanSetRope { get; set; }
+    [SerializeField, Networked] public bool CanSetRope { get; set; } = true;
 
     protected float rotate_x; // 마우스 이동에 따른 시점 회전 x값
     protected float rotate_y; // 마우스 이동에 따른 시점 회전 y값
@@ -745,17 +745,17 @@ public partial class Player : Character
 
                 if (interactionButtonInfos.Count == 1)
                 {
-                    interactionIndex = 0;
+                    if(HasStateAuthority)interactionIndex = 0;
                     interactionObject = target;
                     interactionType = interaction;
-                    if (HasInputAuthority)
-                    {
-                        mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
-                        Canvas.ForceUpdateCanvases();
-                    }
+                    //if (HasInputAuthority)
+                    //{
+                    //    mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
+                    //    //Canvas.ForceUpdateCanvases();
+                    //}
                 }
 
-                UpdateInteractionUI(interactionIndex);
+                //UpdateInteractionUI(interactionIndex);
             }
 
             //interactionObjectList.Add(target);
@@ -799,7 +799,7 @@ public partial class Player : Character
 
             if (interactionButtonInfos.Count == 0)
             {
-                interactionIndex = -1;
+                if(HasStateAuthority)interactionIndex = -1;
                 if (isInteracting)
                 {
                     InteractionEnd();
@@ -814,7 +814,7 @@ public partial class Player : Character
             }
             else
             {
-                interactionIndex = Mathf.Min(interactionIndex, interactionButtonInfos.Count - 1);
+                if (HasStateAuthority) interactionIndex = Mathf.Min(interactionIndex, interactionButtonInfos.Count - 1);
                 if (isInteracting && target == interactionObject)
                 {
                     InteractionEnd();
@@ -824,7 +824,7 @@ public partial class Player : Character
 
             }
 
-            UpdateInteractionUI(interactionIndex);
+            //UpdateInteractionUI(interactionIndex);
         }
 
     }
@@ -838,8 +838,11 @@ public partial class Player : Character
         // 휠을 위로 굴렸을 때
         else if (scrollDelta.y > 0)
         {
-            interactionIndex--;
-            interactionIndex = Mathf.Max(interactionIndex, 0);
+            if (HasStateAuthority)
+            {
+                interactionIndex--;
+                interactionIndex = Mathf.Max(interactionIndex, 0);
+            }
             interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
@@ -852,8 +855,11 @@ public partial class Player : Character
         // 휠을 아래로 굴렸을 때
         else if (scrollDelta.y < 0)
         {
-            interactionIndex++;
-            interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, interactionIndex);
+            if (HasStateAuthority)
+            {
+                interactionIndex++;
+                interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, interactionIndex);
+            }
             interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
@@ -863,7 +869,7 @@ public partial class Player : Character
                 interactionContent.anchoredPosition = new Vector2(0, Mathf.Clamp(interactionContent.anchoredPosition.y, 0, (interactionButtonInfos.Count - 6) * 50f));
             }
         }
-        UpdateInteractionUI(interactionIndex);
+        //UpdateInteractionUI(interactionIndex);
     }
 
     // 상호작용 UI를 최신화하는 함수
@@ -1013,6 +1019,21 @@ public partial class Player : Character
                         RenewBuildingImanges();
                         Canvas.ForceUpdateCanvases();
                     }
+                    break;
+                case nameof(interactionIndex):
+                    var reader = GetPropertyReader<int>(nameof(interactionIndex));
+                    int previous;
+                    int current;
+                    (previous, current) = reader.Read(previousBuffer, currentBuffer);
+                    Debug.Log($"pre : {previous}, cur : {current}");
+                    if (previous == -1 && current == 0)
+                    {
+                        if (HasInputAuthority)
+                        {
+                            mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
+                        }
+                    }
+                    UpdateInteractionUI(interactionIndex);
                     break;
             }
 
