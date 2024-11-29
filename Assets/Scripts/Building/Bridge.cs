@@ -29,8 +29,7 @@ public class Bridge : InteractableBuilding
         isNeedLine = false;
         size = new Vector2Int(2, 4);
         objectName = "Bridge";
-        localeName = LocaleNameSet();
-
+        
     }
 
     public override bool CheckBuild()

@@ -63,6 +63,50 @@ MonoBehaviour:
     m_Key: NetworkFailed
     m_Metadata:
       m_Items: []
+  - m_Id: 19277407708639232
+    m_Key: None
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277489094914048
+    m_Key: Build
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277527195971584
+    m_Key: OnOff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277534842187776
+    m_Key: Repair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277556862283776
+    m_Key: Dump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277592266403840
+    m_Key: Pick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277601355460608
+    m_Key: Deliver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277619856535552
+    m_Key: takeRope
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277644850393088
+    m_Key: AttachRope
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277670926381056
+    m_Key: Upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277691730128896
+    m_Key: Demolish
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

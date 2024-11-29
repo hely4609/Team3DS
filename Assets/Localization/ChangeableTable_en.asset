@@ -66,6 +66,50 @@ MonoBehaviour:
     m_Localized: Network connection failed.
     m_Metadata:
       m_Items: []
+  - m_Id: 19277407708639232
+    m_Localized: None
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277489094914048
+    m_Localized: Build
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277527195971584
+    m_Localized: OnOff
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277534842187776
+    m_Localized: Repair
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277556862283776
+    m_Localized: Dump
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277592266403840
+    m_Localized: Pick
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277601355460608
+    m_Localized: Deliver
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277619856535552
+    m_Localized: takeRope
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277644850393088
+    m_Localized: AttachRope
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277670926381056
+    m_Localized: Upgrade
+    m_Metadata:
+      m_Items: []
+  - m_Id: 19277691730128896
+    m_Localized: Demolish
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds: []

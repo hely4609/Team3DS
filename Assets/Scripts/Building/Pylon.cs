@@ -20,7 +20,6 @@ public class Pylon : InteractableBuilding
         // 디폴트 값.
         buildingType = BuildingEnum.Pylon;
         objectName = "Pylon";
-        localeName = LocaleNameSet();
         buildingTimeMax = 1;
         size = new Vector2Int(2, 2);
         maxRopeLength = 20;

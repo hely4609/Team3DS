@@ -746,7 +746,7 @@ public partial class Player : Character
                 button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
                 buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
                 //button.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable", target.GetName());
-                buttonText.text = $"{target.GetName()}({interaction})";
+                buttonText.text = $"{GameManager.Instance.LocaleManager.LocaleNameSet(target.GetName())}({GameManager.Instance.LocaleManager.LocaleNameSet(interaction.ToString())})";
                 //interactionObjectDictionary.Add(target, button);
 
                 interactionButtonInfos.Add(new InteractionButtonInfo(button, target, interaction));

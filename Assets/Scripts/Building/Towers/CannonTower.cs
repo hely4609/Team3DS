@@ -14,7 +14,6 @@ public class CannonTower : Tower
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "Cannon Tower";
-        localeName = LocaleNameSet();
         powerConsumption = 20;
 
         AttackRangeSetting();

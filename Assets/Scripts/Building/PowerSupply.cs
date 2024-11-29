@@ -66,7 +66,7 @@ public class PowerSupply : InteractableBuilding
         anim = GetComponentInChildren<Animator>();
 
         objectName = "Power Supply";
-        localeName = LocaleNameSet();
+        localeName = GameManager.Instance.LocaleManager.LocaleNameSet(objectName);
     }
 
     protected override void MyStart()

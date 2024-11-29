@@ -74,17 +74,16 @@ public class InteractableBuilding : Building, IInteraction
     {
         return true;
     }
-    public virtual string LocaleNameSet()
-    {
-        LocalizedString localizedString = new LocalizedString() { TableReference = "ChangeableTable", TableEntryReference = objectName };
-        var stringOperation = localizedString.GetLocalizedStringAsync();
-        Debug.Log($"{stringOperation.IsDone} / {stringOperation.Status == AsyncOperationStatus.Succeeded}");
-        if (stringOperation.IsDone && stringOperation.Status == AsyncOperationStatus.Succeeded)
-        {
-            return stringOperation.Result;
-        }
-        return "고장남";
-    }
+    //public virtual string LocaleNameSet(string str)
+    //{
+    //    LocalizedString localizedString = new LocalizedString() { TableReference = "ChangeableTable", TableEntryReference = str };
+    //    var stringOperation = localizedString.GetLocalizedStringAsync();
+    //    if (stringOperation.IsDone && stringOperation.Status == AsyncOperationStatus.Succeeded)
+    //    {
+    //        return stringOperation.Result;
+    //    }
+    //    return "고장남";
+    //}
     public Collider[] GetInteractionColliders()
     {
         return cols;
@@ -97,7 +96,7 @@ public class InteractableBuilding : Building, IInteraction
 
     public virtual string GetName()
     {
-        return localeName;
+        return objectName;
     }
 
     public virtual List<Interaction> GetInteractions(Player player)
