@@ -121,6 +121,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Greeting",
+                    "type": "Button",
+                    "id": "5ba558e4-e2b9-45c1-975b-257636d2a91b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -420,6 +429,17 @@
                     "action": "BuildingPageUpDown",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "9e254a9f-e496-400a-b08c-dc5b761b964c",
+                    "path": "<Keyboard>/k",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Greeting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

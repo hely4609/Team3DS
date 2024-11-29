@@ -25,6 +25,8 @@ public class PowerSupply : InteractableBuilding
     protected int expMax = 2;
     protected int expCurrent = 0;
 
+    protected int totalOreAmount = 0;
+
     protected int powerMax = 100;
     protected int powerCurrent = 100;
 
