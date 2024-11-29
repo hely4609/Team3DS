@@ -21,8 +21,9 @@ public class LocalController : ControllerBase
             }
 
             OnMouseWheel(data.scrollbarDelta);
+            curWheelInput += Time.fixedDeltaTime;
 
-            if(data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
+            if (data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
             if (data.buttons.IsSet(MyButtons.Rope)) OnRope();
 
             //if (data.buttons.IsSet(MyButtons.Farming)) OnFarming();
@@ -213,10 +214,14 @@ public class LocalController : ControllerBase
         DoBuild?.Invoke();
     }
 
+    float wheelInputCoolTime = 0.02f;
+    float curWheelInput = 0;
     protected void OnMouseWheel(Vector2 value)
     {
+        if (curWheelInput < wheelInputCoolTime) return;
         DoMouseWheel?.Invoke(value);
         if (HasInputAuthority && minimap != null) minimap.LargeMapZoom(value.y);
+        curWheelInput = 0;
     }
 
     protected void OnMouseWheel(InputValue value)
