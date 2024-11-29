@@ -526,7 +526,7 @@ public partial class Player : Character
             }
             else 
             {
-                angleCheck = Vector3.Angle(velocity, angleCheckVector) < 45;
+                angleCheck = Vector3.Angle(velocity, angleCheckVector - transform.position) < 45;
 
                 // CanSetRope가 false이면 로프 회수만 가능하게
                 //if(HasStateAuthority)
