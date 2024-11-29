@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Localize.unity
     guid: b11ed6ef74b9dc142992f4af70f86568
+  - enabled: 1
+    path: Assets/Scenes/KYH.unity
+    guid: ed2680e42d0ebe644b6f943ab7410fb1
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 2ebf3169ad93a4243a1070642f8036d0, type: 2}
     com.unity.localization.settings: {fileID: 11400000, guid: 7f75ab39106f37b4f9e26543a2b5e7de, type: 2}

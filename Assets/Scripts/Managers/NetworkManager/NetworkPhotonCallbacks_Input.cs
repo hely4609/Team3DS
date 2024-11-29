@@ -125,6 +125,7 @@ public partial class NetworkPhotonCallbacks
     {
         tryInteraction = value.isPressed;
     }
+
     public void OnMouseWheel(InputValue value)
     {
         mouseWheelDelta = value.Get<Vector2>();
