@@ -107,7 +107,7 @@ public class PoolManager : Manager
     }
     public void Destroy(GameObject target) 
     { 
-        if(target.TryGetComponent<PoolingInfo>(out PoolingInfo pool))
+        if(target != null && target.TryGetComponent<PoolingInfo>(out PoolingInfo pool))
         {
             if(GameManager.Instance.PoolManager.poolDictionary.TryGetValue(pool.Origin, out Queue<GameObject> result))
             {
