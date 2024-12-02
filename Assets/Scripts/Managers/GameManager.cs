@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
 
         
 
-        StartCoroutine(SeverInitiate());
+        StartCoroutine(ServerInitiate());
 
         //networkManager = new NetworkManager();
         //networkManager.Initiate();
@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
         networkManager.Runner.Shutdown();
     }
 
-    public IEnumerator SeverInitiate()
+    public IEnumerator ServerInitiate()
     {
         // 게임 시작후 Initiate할 매니저들
         poolManager = new PoolManager();

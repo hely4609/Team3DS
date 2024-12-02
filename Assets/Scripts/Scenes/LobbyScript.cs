@@ -43,11 +43,6 @@ public class LobbyScript : MonoBehaviour
         NetworkManager.ClaimStartHost();
     }
 
-    public void LeaveRoom()
-    {
-        NetworkManager.ClaimLeaveRoom();
-    }
-
     public void JoinRandomRoom()
     {
         NetworkManager.ClaimJoinRandomRoom();
@@ -72,44 +67,10 @@ public class LobbyScript : MonoBehaviour
         sessionIDInputFieldWindow.SetActive(false);
     }
 
-    public void OpenRoom(bool isHost)
-    {
-        room.SetActive(true);
-        if (isHost) startBtn.SetActive(true);
-        else startBtn.SetActive(false);
-    }
-
-    public void CloseRoom()
-    {
-        room.SetActive(false);
-    }
-
     public void SetPlayerName(int index, string name)
     {
         if(name == "") playerNicknames[index].text = "<i>Click here to invite</i>";
         else playerNicknames[index].text = name;
-    }
-
-    public void Invite()
-    {
-        //NetworkManager.ClaimInvite(nicknameWhoesToInvite.text);
-        //CloseInviteWindow();
-    }
-
-    public void OpenInviteWindow()
-    {
-        inviteWindow.SetActive(true);
-    }
-
-    public void CloseInviteWindow()
-    {
-        nicknameWhoesToInvite.text = "";
-        inviteWindow.SetActive(false);
-    }
-
-    public void OnClickGameStart()
-    {
-
     }
 
 }
