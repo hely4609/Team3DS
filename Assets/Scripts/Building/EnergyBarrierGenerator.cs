@@ -11,6 +11,9 @@ public class EnergyBarrierGenerator : InteractableBuilding
     [SerializeField, Networked] protected int hpCurrent { get; set; }
     [Networked, SerializeField] public float PlayTime { get; set; }
     [Networked, SerializeField] public int KillCount { get; set; }
+    [Networked] public bool IsWaveStart { get; set; }
+    [Networked] public int MonsterCount { get; set; } = 0; // 현재 필드에 있는 몬스터 수.
+    [Networked] public float WaveInterval { get; set; } // 다음 웨이브까지의 시간
 
     protected TextMeshProUGUI hpText;
     protected Image hpFillImage;

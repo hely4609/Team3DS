@@ -178,7 +178,7 @@ public class Monster : Character
         AnimBool?.Invoke("isMove", false);
 
         target.TakeDamage(attackDamage);
-        GameManager.Instance.WaveManager.MonsterCount--;
+        GameManager.Instance.BuildingManager.generator.MonsterCount--;
     }
 
     public override void Render()
@@ -197,7 +197,7 @@ public class Monster : Character
                         if (HasStateAuthority)
                         {
                             GameManager.Instance.BuildingManager.generator.KillCount++;
-                            GameManager.Instance.WaveManager.MonsterCount--;
+                            GameManager.Instance.BuildingManager.generator.MonsterCount--;
                         }
                         GetComponent<Collider>().enabled = false;
                         GetComponent<Rigidbody>().isKinematic = true;

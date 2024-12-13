@@ -119,7 +119,7 @@ public class GameManager : MonoBehaviour
         }
 
         isDefeated = false;
-        waveManager.IsWaveStart = false;
+        waveManager.WaveStart();
         isGameStart = true;
     }
 
@@ -131,10 +131,9 @@ public class GameManager : MonoBehaviour
         
         NetworkManager.LocalController = null;
 
-        ManagerStarts -= BuildingManager.ManagerStart;
-
-        ManagerUpdates -= CameraManager.ManagerUpdate;
         ManagerUpdates -= WaveManager.ManagerUpdate;
+        ManagerUpdates -= CameraManager.ManagerUpdate;
+        ManagerStarts -= BuildingManager.ManagerStart;
         
         waveManager = null;
         cameraManager = null;

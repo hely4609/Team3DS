@@ -33,10 +33,8 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public Dictionary<PlayerRef, NetworkObject> SpawnedCharacter => _spawnedCharacters;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        Debug.Log($"p : {player}, r.lp : {runner.LocalPlayer}");
         if (player == runner.LocalPlayer)
         {
-            Debug.Log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
             StartCoroutine(GameManager.Instance.GameStart());
             GameManager.ClaimLoadInfo("Joining room");
         }   
