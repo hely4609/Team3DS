@@ -22,6 +22,9 @@ public class WaveManager : Manager
     [Networked]private float WaveInterval { get; set; } = 10; // 다음 웨이브까지의 시간
     protected float nowMonsterTime = 0; // 현재 몬스터 생성 시간
     protected float nowWaveTime = 0; // 현재 웨이브 진행 시간
+    protected int spawnLoc = 4; // 웨이브 시작 위치. 현재 임의로 적어둠.
+    public int SpawnLoc { get { return spawnLoc; } protected set { spawnLoc = value; } }
+    List<Vector2> roadData;
 
     GameObject waveInfoUI;
     TextMeshProUGUI nextWaveTimeText;
@@ -37,7 +40,7 @@ public class WaveManager : Manager
                 int number = (int)waveInfo.waveOrder.Peek().Dequeue();
                 List<Vector2> roadData = GameManager.Instance.BuildingManager.roadData;
                 //Debug.Log($"roadData : {roadData.Count}");
-                monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get((ResourceEnum.Prefab)number), new Vector3(roadData[roadData.Count - 1].x, 0, roadData[roadData.Count - 1].y)).GetComponent<Monster>());
+                monsterList.Add(GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get((ResourceEnum.Prefab)number), new Vector3(roadData[spawnLoc].x, 0, roadData[spawnLoc].y)).GetComponent<Monster>());
                 MonsterCount++;
                 Debug.Log($"monsterCount : {MonsterCount}");
             }
@@ -51,8 +54,13 @@ public class WaveManager : Manager
         waveInfo = new WaveInfo();
         waveInfo.Initialize();
 
+        roadData = GameManager.Instance.BuildingManager.roadData;
+
         Debug.Log($"{GameManager.IsGameStart}, {IsWaveStart}");
         if (GameManager.IsGameStart && GameManager.Instance.NetworkManager.Runner.LocalPlayer == GameManager.Instance.NetworkManager.LocalController.myAuthority && IsWaveStart) WaveStart();
+
+        if (GameManager.IsGameStart) FindWaveInfoUI();
+
 
         yield return base.Initiate();
     }
@@ -122,6 +130,11 @@ public class WaveManager : Manager
                         Debug.Log($"{currentWaveIndex}번째 웨이브 끝");
                         if(waveInfo.waveOrder.Count > 0) WaveInterval = waveInfo.waveOrder.Peek().Count * monsterInterval;
                         currentWaveIndex++;
+                        if (currentWaveIndex % 1 == 0) // 웨이브마다 스폰 장소가 변경됨.
+                        {
+                            if (SpawnLoc <= roadData.Count - 1) // 길 끝이 아니라면 +1
+                                SpawnLoc++;
+                        }
                     }
                     else
                     {
