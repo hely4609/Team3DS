@@ -28,6 +28,7 @@ TagManager:
   - Runner
   - WaveStartButton
   - TotalOreText
+  - WaveInfoText
   layers:
   - Default
   - TransparentFX

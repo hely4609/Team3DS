@@ -71,8 +71,13 @@ public class ControllerBase : MyComponent
             Button button = GameObject.FindGameObjectWithTag("WaveStartButton").GetComponent<Button>();
             if (HasStateAuthority)
             {
-                button.onClick.AddListener(() => GameManager.Instance.WaveStart());
-                button.onClick.AddListener(() => button.gameObject.SetActive(false));
+                button.onClick.AddListener(() => { 
+                    if(GameManager.IsGameStart)
+                    {
+                        GameManager.Instance.WaveStart();
+                        button.gameObject.SetActive(false);
+                    }
+                });
             }
             else
             {
