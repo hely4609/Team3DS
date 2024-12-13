@@ -54,6 +54,10 @@ public class InteractableBuilding : Building, IInteraction
                 break;
             case Interaction.takeRope:
                 break;
+            case Interaction.Demolish:
+                GameManager.Instance.BuildingManager.supply.TotalOreAmount += cost;
+                Runner.Despawn(GetComponent<NetworkObject>());
+                break;
         }
 
         return interactionType;
@@ -106,6 +110,7 @@ public class InteractableBuilding : Building, IInteraction
         if (CompletePercent < 1)
         {
             currentAbleInteractions.Add(Interaction.Build);
+            currentAbleInteractions.Add(Interaction.Demolish);
             return currentAbleInteractions;
         }
         else

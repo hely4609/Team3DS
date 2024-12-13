@@ -58,7 +58,7 @@ public class Tower : InteractableBuilding
         if (CompletePercent < 1)
         {
             currentAbleInteractions.Add(Interaction.Build);
-            //currentAbleInteractions.Add(Interaction.None);
+            currentAbleInteractions.Add(Interaction.Demolish);
         }
         else if (IsRoped)
         {
@@ -104,7 +104,11 @@ public class Tower : InteractableBuilding
                 break;
             case Interaction.Demolish:
                 Debug.Log("ÇØÃ¼");
-                GameManager.Instance.BuildingManager.supply.TotalOreAmount += (int)((cost + TotalUpgradeCost) * 0.7f);
+                int returnCost;
+                if (CompletePercent < 1) returnCost = cost + TotalUpgradeCost;
+                else returnCost = (int)((cost + TotalUpgradeCost) * 0.7f + 0.5f);
+
+                GameManager.Instance.BuildingManager.supply.TotalOreAmount += returnCost;
                 Runner.Despawn(GetComponent<NetworkObject>());
 
                 break;

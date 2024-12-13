@@ -53,6 +53,16 @@ public class Pylon : InteractableBuilding
         }
     }
 
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        if (!GameManager.IsGameStart) return;
+
+        if (hasState)
+        {
+            GameManager.Instance.BuildingManager.RemoveBuilding(this);
+        }
+    }
+
     public override bool FixPlace()
     {
         bool toReturn = base.FixPlace();
@@ -72,6 +82,7 @@ public class Pylon : InteractableBuilding
         if (CompletePercent < 1)
         {
             currentAbleInteractions.Add(Interaction.Build);
+            currentAbleInteractions.Add(Interaction.Demolish);
         }
         else if (player.ropeBuilding == null)
         {
@@ -92,6 +103,11 @@ public class Pylon : InteractableBuilding
 
         switch (interactionType)
         {
+            case Interaction.Demolish:
+                GameManager.Instance.BuildingManager.supply.TotalOreAmount += cost;
+                Runner.Despawn(GetComponent<NetworkObject>());
+                break;
+
             case Interaction.takeRope:
                
                 Vector3 playerTransformVector3 = new Vector3((int)(player.transform.position.x), (int)(player.transform.position.y), (int)(player.transform.position.z));
