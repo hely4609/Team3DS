@@ -154,9 +154,6 @@ public class Monster : Character
         if (HasStateAuthority)
         {
             GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position);
-            GameManager.Instance.BuildingManager.generator.KillCount++;
-            GameManager.Instance.WaveManager.monsterCount--;
-            Debug.Log($"monsterCount : {GameManager.Instance.WaveManager.monsterCount}");
         }
         
         Despawn();
@@ -181,8 +178,7 @@ public class Monster : Character
         AnimBool?.Invoke("isMove", false);
 
         target.TakeDamage(attackDamage);
-        GameManager.Instance.WaveManager.monsterCount--;
-        Debug.Log($"monsterCount : {GameManager.Instance.WaveManager.monsterCount}");
+        GameManager.Instance.WaveManager.MonsterCount--;
     }
 
     public override void Render()
@@ -197,7 +193,12 @@ public class Monster : Character
                     if (HpCurrent <= 0)
                     {
                         isReady = false;
-                        
+
+                        if (HasStateAuthority)
+                        {
+                            GameManager.Instance.BuildingManager.generator.KillCount++;
+                            GameManager.Instance.WaveManager.MonsterCount--;
+                        }
                         GetComponent<Collider>().enabled = false;
                         GetComponent<Rigidbody>().isKinematic = true;
 
