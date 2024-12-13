@@ -6,7 +6,7 @@ public class NormalTower : Tower
 {
     protected override void Initialize()
     {
-        cost = 1;
+        cost = 10;
         // 디폴트 값.
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;

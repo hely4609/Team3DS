@@ -25,7 +25,7 @@ public class Bridge : InteractableBuilding
 
     protected override void Initialize()
     {
-        cost = 5;
+        cost = 50;
 
         buildingType = BuildingEnum.Bridge;
         isNeedLine = false;

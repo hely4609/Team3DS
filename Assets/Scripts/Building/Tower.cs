@@ -33,6 +33,7 @@ public class Tower : InteractableBuilding
     [SerializeField] protected GameObject attackRangeMarker;
     [SerializeField, Networked] protected int Level { get; set; }
     [SerializeField, Networked] protected int UpgradeRequire { get; set; }
+    [Networked] protected int TotalUpgradeCost { get; set; }
 
     public override void Spawned()
     {
@@ -103,7 +104,7 @@ public class Tower : InteractableBuilding
                 break;
             case Interaction.Demolish:
                 Debug.Log("해체");
-
+                GameManager.Instance.BuildingManager.supply.TotalOreAmount += (int)((cost + TotalUpgradeCost) * 0.7f);
                 Runner.Despawn(GetComponent<NetworkObject>());
 
                 break;
@@ -284,8 +285,16 @@ public class Tower : InteractableBuilding
 
     public virtual void Upgrade()
     {
+        if (!HasStateAuthority) return;
+        if (UpgradeRequire > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
+        {
+            Debug.Log("업그레이드에 필요한 광물이 부족합니다.");
+            return;
+        }
         attackDamage += 1;
-        UpgradeRequire = (int)1.5f*UpgradeRequire;
+        GameManager.Instance.BuildingManager.supply.TotalOreAmount -= UpgradeRequire;
+        TotalUpgradeCost += UpgradeRequire;
+        UpgradeRequire = Mathf.CeilToInt(UpgradeRequire * 1.1f);
         Level += 1;
     }
 

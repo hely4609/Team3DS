@@ -6,7 +6,7 @@ public class GatlingTower : Tower
 {
     protected override void Initialize()
     {
-        cost = 3;
+        cost = 20;
 
         // 디폴트 값.
         buildingType = BuildingEnum.Tower;

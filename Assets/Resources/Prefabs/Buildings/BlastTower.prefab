@@ -72,6 +72,7 @@ MonoBehaviour:
   marker_off: {fileID: 4726384089177836273}
   buildingSignCanvas: {fileID: 0}
   objectName: 
+  localeName: 
   _IsSettingRope: 0
   _IsRoped: 0
   ropeStruct:
@@ -92,7 +93,7 @@ MonoBehaviour:
   attachedPylon: {fileID: 0}
   attackRangeMarker: {fileID: 7149592453140854696}
   _Level: 0
-  _UpgradeRequire: 0
+  _UpgradeRequire: 5
 --- !u!114 &4178355832652842898
 MonoBehaviour:
   m_ObjectHideFlags: 0

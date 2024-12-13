@@ -8,5 +8,7 @@ public class PylonBuilding : Pylon
     {
         base.Initialize();
         objectName = "Pylon";
+
+        cost = 10;
     }
 }

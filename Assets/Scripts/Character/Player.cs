@@ -586,6 +586,12 @@ public partial class Player : Character
 
         if (index < 0 || buildableEnumArray[BuildableEnumPageIndex, index] == 0) return false;
 
+        if (ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]).GetComponent<Building>().Cost > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
+        {
+            Debug.Log("건설에 필요한 광물이 부족합니다.");
+            return false;
+        } 
+
         NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
         GameManager.Instance.BuildingManager.supply.TotalOreAmount -= DesigningBuilding.Cost;
