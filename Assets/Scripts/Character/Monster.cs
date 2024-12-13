@@ -48,7 +48,7 @@ public class Monster : Character
     {
         HpCurrent = hpMax;
         roadsVector2 = GameManager.Instance.BuildingManager.roadData;
-        roadDestination = roadsVector2.Count-1;
+        roadDestination = GameManager.Instance.WaveManager.SpawnLoc;
         monsterType = MonsterEnum.First;
         isReady= true;
 
