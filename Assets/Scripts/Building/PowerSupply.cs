@@ -15,6 +15,7 @@ public class PowerSupply : InteractableBuilding
 
     protected TextMeshProUGUI levelText;
     protected TextMeshProUGUI expText;
+    protected TextMeshProUGUI totalOreAmountText;
     protected TextMeshProUGUI powerText;
     protected TextMeshProUGUI levelUpEffect;
 
@@ -25,10 +26,9 @@ public class PowerSupply : InteractableBuilding
     protected int expMax = 2;
     protected int expCurrent = 0;
 
-    protected int totalOreAmount = 0;
-
     protected int powerMax = 100;
     protected int powerCurrent = 100;
+    [Networked] public int TotalOreAmount { get; set; } = 100;
 
     [Networked] public int PowerMax
     {
@@ -57,6 +57,7 @@ public class PowerSupply : InteractableBuilding
 
         levelText = GameObject.FindGameObjectWithTag("LevelText").GetComponent<TextMeshProUGUI>();
         expText = GameObject.FindGameObjectWithTag("ExpText").GetComponent<TextMeshProUGUI>();
+        totalOreAmountText = GameObject.FindGameObjectWithTag("TotalOreText").GetComponent<TextMeshProUGUI>();
         powerText = GameObject.FindGameObjectWithTag("PowerText").GetComponent<TextMeshProUGUI>();
         levelUpEffect = GameObject.FindGameObjectWithTag("LevelUpEffect").GetComponent<TextMeshProUGUI>();
 
@@ -75,6 +76,8 @@ public class PowerSupply : InteractableBuilding
 
         expText.text = $"{ExpCurrent} / {ExpMax}";
         expFillImage.fillAmount = ExpCurrent / (float)ExpMax;
+
+        totalOreAmountText.text = "x " + $"{TotalOreAmount}";
 
         powerText.text = $"{PowerCurrent} / {PowerMax}";
         powerFillImage.fillAmount = PowerCurrent / (float)PowerMax;
@@ -122,6 +125,7 @@ public class PowerSupply : InteractableBuilding
 
         for (int i = 0; i < player?.OreAmount; i++)
         {
+            TotalOreAmount++;
             expCurrent++;
 
             if (expCurrent >= expMax)
@@ -170,6 +174,9 @@ public class PowerSupply : InteractableBuilding
                 case nameof(PowerCurrent):
                     powerText.text = $"{PowerCurrent} / {PowerMax}";
                     powerFillImage.fillAmount = PowerCurrent / (float)PowerMax;
+                    break;
+                case nameof(TotalOreAmount):
+                    totalOreAmountText.text = "x " + $"{TotalOreAmount}";
                     break;
                     
             }
