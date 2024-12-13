@@ -16,7 +16,7 @@ public interface IInteraction
 
     public float InteractionUpdate(float deltaTime, Interaction interaction);
 
-    public bool InteractionEnd();
+    public bool InteractionEnd(Player player, Interaction interaction);
 
     public Bounds GetInteractionBounds();
     public abstract string GetName();

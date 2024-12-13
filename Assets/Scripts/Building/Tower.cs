@@ -10,7 +10,7 @@ public class Tower : InteractableBuilding
 {
     protected const float rangeConst = 15f;
 
-    [SerializeField, Networked] protected int powerConsumption { get; set; } // 타워가 진짜로 소모할 양.
+    [SerializeField, Networked] public int powerConsumption { get; set; } // 타워가 진짜로 소모할 양.
     protected int currentPowerConsumption; // 현재 사용중인 전력 소모량
 
     [SerializeField, Networked] protected int attackDamage { get; set; } // 공격력
@@ -23,7 +23,7 @@ public class Tower : InteractableBuilding
 
     [SerializeField] protected Monster target = null; // 타겟 지정된 몬스터
     [SerializeField] protected List<Monster> targetList = new List<Monster>();
-    [SerializeField, Networked] protected bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
+    [SerializeField, Networked] public bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
 
     [SerializeField] protected Animator attackAnimator;
     [SerializeField] protected GameObject gunBarrel;
@@ -32,8 +32,10 @@ public class Tower : InteractableBuilding
 
     [SerializeField] protected GameObject attackRangeMarker;
     [SerializeField, Networked] protected int Level { get; set; }
-    [SerializeField, Networked] protected int UpgradeRequire { get; set; }
-    [Networked] protected int TotalUpgradeCost { get; set; }
+    [SerializeField, Networked] public int UpgradeRequire { get; set; }
+    [Networked] public int TotalUpgradeCost { get; set; }
+
+    
 
     public override void Spawned()
     {
@@ -83,6 +85,7 @@ public class Tower : InteractableBuilding
     }
     public override Interaction InteractionStart(Player player, Interaction interactionType)
     {
+        
         switch (interactionType)
         {
             default:
@@ -115,17 +118,21 @@ public class Tower : InteractableBuilding
             case Interaction.OnOff:
                 Debug.Log("켜기/끄기");
                 TurnOnOff(!OnOff);
+                IsChangeInfo = !IsChangeInfo;
                 break;
             case Interaction.AttachRope:
                 AttachRope(player, player.PossesionController.MyNumber);
+                IsChangeInfo = !IsChangeInfo;
                 break;
             case Interaction.Upgrade:
                 Debug.Log("업그레이드");
                 Upgrade();
+                IsChangeInfo = !IsChangeInfo;
                 break;
 
         }
 
+        
         return interactionType;
 
         //// 완성이 아직 안됨.
@@ -180,7 +187,7 @@ public class Tower : InteractableBuilding
         }
 
         var ropePlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
-        ropePlayer.RenewalInteractionUI(this);
+        ropePlayer.RenewalInteractionUI(this, false);
 
         foreach (var rope in ropeStruct.ropeObjects)
         {
@@ -364,6 +371,11 @@ public class Tower : InteractableBuilding
         {
             switch(chage)
             {
+                case nameof(IsChangeInfo):
+                    Player local = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
+                    local.RenewalInteractionUI(this);
+                    break;
+
                 case nameof(isBuildable):
                     VisualizeBuildable();
                     break;

@@ -25,7 +25,11 @@ public abstract class Building : MyComponent
     //protected float completePercent; //(0~1) 제작한 퍼센트
 
     protected int cost;
-    public int Cost => cost;
+    public virtual int Cost
+    {
+        get => cost; 
+        set => cost = value;
+    }
 
     protected float heightMax;
     protected float heightMin;
