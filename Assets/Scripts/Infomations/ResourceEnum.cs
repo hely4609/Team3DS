@@ -55,6 +55,9 @@ namespace ResourceEnum
         Pylon,
         Turret1d,
         BlastTower,
+
+        Battery,
+        Ore,
     }
 
     public enum Material

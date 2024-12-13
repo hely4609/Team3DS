@@ -44,7 +44,7 @@ public class PowerSupply : InteractableBuilding
 
     [Networked, SerializeField] protected int Level { get; set; } = 1;
     //[SerializeField] protected int ExpCurrent; // 몹을 잡아서 Ore를 넣으면 .. 레벨업..
-    [Networked, SerializeField] protected int ExpMax { get; set; }
+    [Networked, SerializeField] public int ExpMax { get; set; }
     [Networked] public int ExpCurrent
     {
         get => ExpCurrent; 
@@ -89,16 +89,46 @@ public class PowerSupply : InteractableBuilding
         List<Interaction> currentAbleInteractions = new List<Interaction>();
 
         currentAbleInteractions.Add(Interaction.Deliver);
+        currentAbleInteractions.Add(Interaction.Upgrade);
             
         return currentAbleInteractions;
     }
 
     public override Interaction InteractionStart(Player player, Interaction interactionType)
     {
+        Player localPlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
         switch (interactionType)
         {
             case Interaction.Deliver:
                 if (player?.OreAmount != 0) Deliver(player);
+                localPlayer.RenewalInteractionUI(this);
+                break;
+            case Interaction.Upgrade:
+                if (HasStateAuthority)
+                {
+                    if (TotalOreAmount >= expMax)
+                    {
+                        TotalOreAmount -= expMax;
+                        expMax *= 2;
+
+                        powerMax += 10;
+                        powerCurrent += 10;
+
+                        level++;
+
+                        Level = level;
+
+                        ExpMax = expMax;
+
+                        PowerMax = powerMax;
+                        PowerCurrent = powerCurrent;
+                    }
+                    else
+                    {
+                        Debug.Log($"업그레이드에 필요한 광물이 부족합니다.\n필요광물 : {expMax}");
+                    }
+                }
+                localPlayer.RenewalInteractionUI(this);
                 break;
         }
 

@@ -251,7 +251,7 @@ public class Bridge : InteractableBuilding
         }
     }
 
-    public override bool InteractionEnd()
+    public override bool InteractionEnd(Player player, Interaction interaction)
     {
         return true;
     }

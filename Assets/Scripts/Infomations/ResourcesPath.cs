@@ -52,6 +52,9 @@ public class ResourcesPath
         "Images/Building/Pylon",
         "Images/Building/Turret1d",
         "Images/Building/BlastTower",
+
+        "Images/Object/Battery",
+        "Images/Object/Ore",
     };
 
     public static string[] MaterialPathArray =

@@ -99,6 +99,7 @@ public class Pylon : InteractableBuilding
 
     public override Interaction InteractionStart(Player player, Interaction interactionType)
     {
+        Player localPlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
         int playerID = player.PossesionController.MyNumber;
 
         switch (interactionType)
@@ -106,6 +107,7 @@ public class Pylon : InteractableBuilding
             case Interaction.Demolish:
                 GameManager.Instance.BuildingManager.supply.TotalOreAmount += cost;
                 Runner.Despawn(GetComponent<NetworkObject>());
+                localPlayer.RenewalInteractionUI(this, false);
                 break;
 
             case Interaction.takeRope:
@@ -118,13 +120,17 @@ public class Pylon : InteractableBuilding
                     // 줄을 집을거임.
                     return Interaction.takeRope;
                 }
+                localPlayer.RenewalInteractionUI(this);
                 break;
 
             case Interaction.AttachRope:
                 AttachRope(player, playerID);
+                localPlayer.RenewalInteractionUI(player.ropeBuilding);
+                localPlayer.RenewalInteractionUI(this);
                 break;
         }
 
+        
         return interactionType;
         
 

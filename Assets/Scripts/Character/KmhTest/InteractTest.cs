@@ -35,7 +35,7 @@ public class InteractTest : MonoBehaviour ,IInteraction
         return "InteractableObject";
     }
 
-    bool IInteraction.InteractionEnd()
+    bool IInteraction.InteractionEnd(Player player, Interaction interaction)
     {
         return default;
     }

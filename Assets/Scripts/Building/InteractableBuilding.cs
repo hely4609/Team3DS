@@ -26,6 +26,9 @@ public class InteractableBuilding : Building, IInteraction
     public RopeStruct RopeStruct { get { return ropeStruct; } }
     [SerializeField] protected float maxRopeLength;
     [SerializeField] protected float currentRopeLength;
+
+    [Networked] protected bool IsChangeInfo { get; set; }
+
     protected override void Initialize()
     {
         ropeStruct.ropeObjects = new List<NetworkObject>();
@@ -48,6 +51,7 @@ public class InteractableBuilding : Building, IInteraction
     // 아무것도 없는 깡통건물. 세우기만 하고 상호작용 없음. ex) 육교
     public virtual Interaction InteractionStart(Player player, Interaction interactionType)
     {
+        //Player localPlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
         switch (interactionType)
         {
             case Interaction.Build:
@@ -57,6 +61,7 @@ public class InteractableBuilding : Building, IInteraction
             case Interaction.Demolish:
                 GameManager.Instance.BuildingManager.supply.TotalOreAmount += cost;
                 Runner.Despawn(GetComponent<NetworkObject>());
+                //localPlayer.RenewalInteractionUI(this, false);
                 break;
         }
 
@@ -69,13 +74,20 @@ public class InteractableBuilding : Building, IInteraction
         if (interaction == Interaction.Build)
         {
             BuildBuilding(deltaTime);
-
         }
         return CompletePercent;
     }
 
-    public virtual bool InteractionEnd()
+    public virtual bool InteractionEnd(Player player, Interaction interactionType)
     {
+        switch (interactionType)
+        {
+            case Interaction.Build:
+            IsChangeInfo = !IsChangeInfo;
+                break;
+    }
+        
+        
         return true;
     }
     //public virtual string LocaleNameSet(string str)
