@@ -143,7 +143,7 @@ public class GameManager : MonoBehaviour
 
         
 
-        StartCoroutine(ServerInitiate());
+        //StartCoroutine(ServerInitiate());
 
         //networkManager = new NetworkManager();
         //networkManager.Initiate();
@@ -155,21 +155,21 @@ public class GameManager : MonoBehaviour
         networkManager.Runner.Shutdown();
     }
 
-    public IEnumerator ServerInitiate()
-    {
-        // 게임 시작후 Initiate할 매니저들
-        poolManager = new PoolManager();
-        yield return poolManager.Initiate();
-        buildingManager = new BuildingManager();
-        //yield return BuildingManager.Initiate();
-        cameraManager = new CameraManager();
-        yield return CameraManager.Initiate();
-        waveManager = new WaveManager();
-        yield return WaveManager.Initiate();
+    //public IEnumerator ServerInitiate()
+    //{
+    //    // 게임 시작후 Initiate할 매니저들
+    //    poolManager = new PoolManager();
+    //    yield return poolManager.Initiate();
+    //    buildingManager = new BuildingManager();
+    //    //yield return BuildingManager.Initiate();
+    //    cameraManager = new CameraManager();
+    //    yield return CameraManager.Initiate();
+    //    waveManager = new WaveManager();
+    //    yield return WaveManager.Initiate();
 
-        ManagerUpdates += CameraManager.ManagerUpdate;
-        ManagerUpdates += WaveManager.ManagerUpdate;
-    }
+    //    ManagerUpdates += CameraManager.ManagerUpdate;
+    //    ManagerUpdates += WaveManager.ManagerUpdate;
+    //}
 
     LoadingCanvas loadingCanvas;
 

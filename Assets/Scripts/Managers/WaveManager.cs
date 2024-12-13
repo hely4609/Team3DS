@@ -51,13 +51,15 @@ public class WaveManager : Manager
         waveInfo = new WaveInfo();
         waveInfo.Initialize();
 
-        if(GameManager.IsGameStart) FindWaveInfoUI();
+        Debug.Log($"{GameManager.IsGameStart}, {IsWaveStart}");
+        if (GameManager.IsGameStart && GameManager.Instance.NetworkManager.Runner.LocalPlayer == GameManager.Instance.NetworkManager.LocalController.myAuthority && IsWaveStart) WaveStart();
 
         yield return base.Initiate();
     }
 
     void FindWaveInfoUI()
     {
+        Debug.Log($"{GameManager.Instance.NetworkManager.Runner.LocalPlayer}, {GameManager.Instance.NetworkManager.LocalController.myAuthority}");
         if (GameManager.Instance.NetworkManager.Runner.LocalPlayer == GameManager.Instance.NetworkManager.LocalController.myAuthority)
         {
             waveInfoUI = GameObject.FindGameObjectWithTag("WaveInfoText");
@@ -72,10 +74,16 @@ public class WaveManager : Manager
     }
     public void WaveStart()
     {
-        IsWaveStart = true;
-        if (GameManager.Instance.NetworkManager.Runner.IsServer) WaveInterval = waveInfo.waveOrder.Peek().Count * monsterInterval;
+        if (GameManager.Instance.NetworkManager.Runner.IsServer)
+        {
+            IsWaveStart = true;
+            WaveInterval = waveInfo.waveOrder.Peek().Count * monsterInterval;
+        }
         if (waveInfo == null) FindWaveInfoUI();
-        if (waveInfoUI != null) waveInfoUI.SetActive(true);
+        if (GameManager.Instance.NetworkManager.Runner.LocalPlayer == GameManager.Instance.NetworkManager.LocalController.myAuthority)
+        {
+            if (waveInfoUI != null) waveInfoUI.SetActive(true);
+        }
     }
 
     public override void ManagerUpdate(float deltaTime)
