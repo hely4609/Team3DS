@@ -28,7 +28,7 @@ public class PowerSupply : InteractableBuilding
 
     protected int powerMax = 100;
     protected int powerCurrent = 100;
-    [Networked] public int TotalOreAmount { get; set; } = 100;
+    [Networked, SerializeField] public int TotalOreAmount { get; set; } = 100;
 
     [Networked] public int PowerMax
     {

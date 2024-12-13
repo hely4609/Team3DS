@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class Pylon : InteractableBuilding
 {
-    protected int cost;
     [SerializeField] protected List<RopeStruct> multiTabList;
     public List<RopeStruct> MultiTabList { get { return multiTabList; } }
     public List<bool> isSettingRopeList;

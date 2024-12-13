@@ -346,6 +346,7 @@ MonoBehaviour:
   marker_off: {fileID: 2224825689332038233}
   buildingSignCanvas: {fileID: 0}
   objectName: Power Supply
+  localeName: 
   _IsSettingRope: 0
   _IsRoped: 0
   ropeStruct:
@@ -930,6 +931,7 @@ MonoBehaviour:
   marker_off: {fileID: 2224825689332038233}
   buildingSignCanvas: {fileID: 0}
   objectName: Delivery
+  localeName: 
   _IsSettingRope: 0
   _IsRoped: 0
   ropeStruct:
@@ -938,7 +940,8 @@ MonoBehaviour:
   maxRopeLength: 0
   currentRopeLength: 0
   anim: {fileID: 4745613938894177325}
-  doorOpenTriggerCol: {fileID: 0}
+  doorOpenTriggerCol: {fileID: 7226517670788025124}
+  _TotalOreAmount: 100
   _PowerMax: 100
   _PowerCurrent: 100
   _Level: 1

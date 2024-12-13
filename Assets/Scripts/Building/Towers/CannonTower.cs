@@ -9,6 +9,7 @@ public class CannonTower : Tower
     
     protected override void Initialize()
     {
+        cost = 2;
 
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;

@@ -588,6 +588,7 @@ public partial class Player : Character
 
         NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
+        GameManager.Instance.BuildingManager.supply.TotalOreAmount -= DesigningBuilding.Cost;
         IsBuildingComfirmUIOpen = true;
 
         return true;
@@ -617,8 +618,8 @@ public partial class Player : Character
         if (DesigningBuilding != null)
         {
             IsBuildingComfirmUIOpen = false;
+            GameManager.Instance.BuildingManager.supply.TotalOreAmount += DesigningBuilding.Cost;
             Runner.Despawn(DesigningBuilding.GetComponent<NetworkObject>());
-           
         }
 
         if (ropeBuilding != null)
