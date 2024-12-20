@@ -692,8 +692,6 @@ public partial class Player : Character
 
     public bool InteractionEnd()
     {
-        if (interactionObject == null) return false;
-
         isInteracting = false;
         
         switch (interactionType)
@@ -728,6 +726,7 @@ public partial class Player : Character
 
         //interactionObject = null;
 
+        if (interactionObject == null) return false;
         bool result = interactionObject.InteractionEnd(this, interactionType);
 
         return result;
@@ -914,14 +913,17 @@ public partial class Player : Character
     {
         //if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
         if (interactionButtonInfos.Count == 0) return;
+
+        int index = interactionIndex;
+
         if (scrollDelta.y == 0f) return;
         // 휠을 위로 굴렸을 때
         else if (scrollDelta.y > 0)
         {
             if (HasStateAuthority)
             {
-                interactionIndex--;
-                interactionIndex = Mathf.Max(interactionIndex, 0);
+                index--;
+                if (HasStateAuthority) interactionIndex = Mathf.Max(index, 0);
             }
             interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             interactionType = interactionButtonInfos[interactionIndex].interactionType;
@@ -937,8 +939,8 @@ public partial class Player : Character
         {
             if (HasStateAuthority)
             {
-                interactionIndex++;
-                interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, interactionIndex);
+                index++;
+                if (HasStateAuthority) interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, index);
             }
             interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             interactionType = interactionButtonInfos[interactionIndex].interactionType;
@@ -955,8 +957,6 @@ public partial class Player : Character
     // 상호작용 UI를 최신화하는 함수
     public void UpdateInteractionUI(int targetIndex)
     {
-        Canvas.ForceUpdateCanvases();
-
         for (int i = 0; i < interactionButtonInfos.Count; i++)
         {
             GameObject button = interactionButtonInfos[i].button;
@@ -971,13 +971,17 @@ public partial class Player : Character
             }
             else buttonImage.color = Color.white;
         }
+
+        Canvas.ForceUpdateCanvases();
     }
 
     public void RenewalInteractionUI(IInteraction target, bool isRenewal = true)
     {
+        int index = interactionIndex;
+
         if (isRenewal)
         {
-            int index = interactionIndex;
+            
 
             List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == target);
             if (removeInfos.Count == 0) return;
@@ -985,8 +989,8 @@ public partial class Player : Character
             foreach (InteractionButtonInfo info in removeInfos)
             {
                 info.button.transform.GetChild(1).gameObject.SetActive(true);
-                GameManager.Instance.PoolManager.Destroy(info.button);
                 interactionButtonInfos.Remove(info);
+                GameManager.Instance.PoolManager.Destroy(info.button);
             }
 
             List<Interaction> interactions = target.GetInteractions(this);
@@ -1055,7 +1059,7 @@ public partial class Player : Character
                 button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
                 buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
                 //button.GetComponentInChildren<LocalizeStringEvent>().StringReference.SetReference("ChangeableTable", interactionObject.GetName());
-                buttonText.text = $"{target.GetName()}({interaction})";
+                buttonText.text = $"{GameManager.Instance.LocaleManager.LocaleNameSet(target.GetName())}({GameManager.Instance.LocaleManager.LocaleNameSet(interaction.ToString())})";
                 //interactionObjectDictionary.Add(interactionObject, button);
 
                 interactionButtonInfos.Add(new InteractionButtonInfo(button, target, interaction));
@@ -1077,7 +1081,7 @@ public partial class Player : Character
 
             if (interactionButtonInfos.Count > 0)
             {
-                interactionIndex = Mathf.Clamp(index, 0, interactionButtonInfos.Count - 1);
+                if (HasStateAuthority) interactionIndex = Mathf.Clamp(index, 0, interactionButtonInfos.Count - 1);
                 interactionType = interactionButtonInfos[interactionIndex].interactionType;
                 //UpdateInteractionUI(interactionIndex);
             }
@@ -1088,13 +1092,13 @@ public partial class Player : Character
 
             foreach (InteractionButtonInfo info in removeInfos)
             {
-                GameManager.Instance.PoolManager.Destroy(info.button);
                 interactionButtonInfos.Remove(info);
+                if(GameManager.Instance.NetworkManager.LocalController.ControlledPlayer == this) GameManager.Instance.PoolManager.Destroy(info.button);
             }
 
             if (interactionButtonInfos.Count == 0)
             {
-                interactionIndex = -1;
+                if (HasStateAuthority) interactionIndex = -1;
                 if (isInteracting)
                 {
                     InteractionEnd();
@@ -1109,7 +1113,7 @@ public partial class Player : Character
             }
             else
             {
-                interactionIndex = Mathf.Min(interactionIndex, interactionButtonInfos.Count - 1);
+                if (HasStateAuthority) interactionIndex = Mathf.Min(index, interactionButtonInfos.Count - 1);
                 if (isInteracting && target == interactionObject)
                 {
                     InteractionEnd();
@@ -1225,7 +1229,7 @@ public partial class Player : Character
                             Canvas.ForceUpdateCanvases();
                         }
                     }
-                    UpdateInteractionUI(interactionIndex);
+                    if (interactionIndex != -1) UpdateInteractionUI(interactionIndex);
                     break;
                 //case nameof(AngleCheck):
                 //    angleCheck = AngleCheck;

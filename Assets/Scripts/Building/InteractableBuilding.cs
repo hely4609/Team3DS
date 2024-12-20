@@ -80,14 +80,13 @@ public class InteractableBuilding : Building, IInteraction
 
     public virtual bool InteractionEnd(Player player, Interaction interactionType)
     {
-        switch (interactionType)
-        {
-            case Interaction.Build:
-            IsChangeInfo = !IsChangeInfo;
-                break;
-    }
-        
-        
+        //switch (interactionType)
+        //{
+        //    case Interaction.Build:
+        //        IsChangeInfo = !IsChangeInfo;
+        //        break;
+        //}
+
         return true;
     }
     //public virtual string LocaleNameSet(string str)

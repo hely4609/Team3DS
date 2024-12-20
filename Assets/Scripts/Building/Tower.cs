@@ -112,22 +112,23 @@ public class Tower : InteractableBuilding
                 else returnCost = (int)((cost + TotalUpgradeCost) * 0.7f + 0.5f);
 
                 GameManager.Instance.BuildingManager.supply.TotalOreAmount += returnCost;
+
                 Runner.Despawn(GetComponent<NetworkObject>());
 
                 break;
             case Interaction.OnOff:
                 Debug.Log("켜기/끄기");
                 TurnOnOff(!OnOff);
-                IsChangeInfo = !IsChangeInfo;
+                //IsChangeInfo = !IsChangeInfo;
                 break;
             case Interaction.AttachRope:
                 AttachRope(player, player.PossesionController.MyNumber);
-                IsChangeInfo = !IsChangeInfo;
+                //IsChangeInfo = !IsChangeInfo;
                 break;
             case Interaction.Upgrade:
                 Debug.Log("업그레이드");
                 Upgrade();
-                IsChangeInfo = !IsChangeInfo;
+                //IsChangeInfo = !IsChangeInfo;
                 break;
 
         }
@@ -165,16 +166,29 @@ public class Tower : InteractableBuilding
         //}
     }
 
+    public override bool InteractionEnd(Player player, Interaction interactionType)
+    {
+        switch (interactionType)
+        {
+            case Interaction.Build:
+            case Interaction.Upgrade:
+            case Interaction.OnOff:
+            case Interaction.AttachRope:
+                IsChangeInfo = !IsChangeInfo;
+                break;
+        }
+
+        return true;
+    }
     public override void Despawned(NetworkRunner runner, bool hasState)
     {
         if (!GameManager.IsGameStart) return;
 
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
         if (HasStateAuthority)
         {
             GameManager.Instance.BuildingManager.RemoveBuilding(this);
 
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        
             foreach(var player in players)
             {
                 var playerCS = player.GetComponent<Player>();
@@ -182,12 +196,14 @@ public class Tower : InteractableBuilding
                 {
                     playerCS.CanSetRope = true;
                 }
-
             }
         }
 
-        var ropePlayer = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
-        ropePlayer.RenewalInteractionUI(this, false);
+        foreach(var player in players)
+        {
+            var playerCS = player.GetComponent<Player>();
+            playerCS.RenewalInteractionUI(this, false);
+        }
 
         foreach (var rope in ropeStruct.ropeObjects)
         {
