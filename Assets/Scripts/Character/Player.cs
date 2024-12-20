@@ -915,7 +915,7 @@ public partial class Player : Character
     // 마우스 휠을 굴려서 상호작용할 대상을 정함.
     public void MouseWheel(Vector2 scrollDelta)
     {
-        if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
+        //if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
         if (interactionButtonInfos.Count == 0) return;
 
         int index = interactionIndex;
@@ -929,7 +929,7 @@ public partial class Player : Character
                 index--;
                 interactionIndex = Mathf.Max(index, 0);
             }
-            interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+            if(interactionIndex > -1) interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             if (interactionIndex < interactionButtonInfos.Count - 4 && HasInputAuthority)
@@ -946,7 +946,7 @@ public partial class Player : Character
                 index++;
                 interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, index);
             }
-            interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+            if (interactionIndex > -1 && interactionIndex < interactionButtonInfos.Count) interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             if (interactionIndex > 4 && HasInputAuthority)
@@ -1237,7 +1237,7 @@ public partial class Player : Character
                     int previous;
                     int current;
                     (previous, current) = reader.Read(previousBuffer, currentBuffer);
-                    if (previous == -1 && current == 0)
+                    if (previous == -1 && current != -1)
                     {
                         if (HasInputAuthority)
                         {
