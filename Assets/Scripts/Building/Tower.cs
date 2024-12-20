@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor.AnimatedValues;
 using UnityEngine;
 using UnityEngine.Windows;
 
@@ -203,6 +204,13 @@ public class Tower : InteractableBuilding
         {
             var playerCS = player.GetComponent<Player>();
             playerCS.RenewalInteractionUI(this, false);
+            palyerCs.AnimBool?.Invoke("isBuild", false);
+            if (HasInputAuthority)
+            {
+                interactionUI.gameObject.SetActive(true);
+                interactionUpdateUI.SetActive(false);
+                interactionUpdateProgress = null;
+            }
         }
 
         foreach (var rope in ropeStruct.ropeObjects)

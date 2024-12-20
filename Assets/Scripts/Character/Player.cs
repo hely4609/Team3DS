@@ -57,8 +57,8 @@ public partial class Player : Character
     // test
     [SerializeField]protected List<InteractionButtonInfo> interactionButtonInfos = new List<InteractionButtonInfo>();
      
-    protected bool isInteracting; // 나는 지금 상호작용 중인가?
-    public bool IsInteracting => isInteracting;
+    [SerializeField, Networked] protected bool isInteracting { get; set; } // 나는 지금 상호작용 중인가?
+    //public bool IsInteracting => isInteracting;
     [SerializeField, Networked] protected Interaction interactionType { get; set; } // 나는 어떤 상호작용을 하고있는가?
 
     [Networked] public int OreAmount { get; set; }
@@ -670,7 +670,7 @@ public partial class Player : Character
         {
             default: InteractionEnd(); break;
             case Interaction.Build:
-                isInteracting = true;
+                if (HasStateAuthority) isInteracting = true;
                 AnimBool?.Invoke("isBuild", true);
 
                 if (HasInputAuthority)
@@ -692,7 +692,7 @@ public partial class Player : Character
 
     public bool InteractionEnd()
     {
-        isInteracting = false;
+        if (HasStateAuthority) isInteracting = false;
         
         switch (interactionType)
         {
@@ -915,7 +915,7 @@ public partial class Player : Character
     // 마우스 휠을 굴려서 상호작용할 대상을 정함.
     public void MouseWheel(Vector2 scrollDelta)
     {
-        //if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
+        if (interactionContent == null || interactionContent.gameObject.activeInHierarchy == false) return;
         if (interactionButtonInfos.Count == 0) return;
 
         int index = interactionIndex;
@@ -987,7 +987,11 @@ public partial class Player : Character
 
         if (isRenewal)
         {
-            
+            //if (isInteracting)
+            //{
+            //    InteractionEnd();
+            //    return;
+            //} 
 
             List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == target);
             if (removeInfos.Count == 0) return;
@@ -1099,6 +1103,7 @@ public partial class Player : Character
         else
         {
             List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == target);
+            if (removeInfos.Count == 0) return;
 
             foreach (InteractionButtonInfo info in removeInfos)
             {
