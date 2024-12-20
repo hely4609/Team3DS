@@ -15,11 +15,17 @@ public class WaveInfo
         waveOrder = new Queue<Queue<ResourceEnum.Prefab>>();
         if(GameManager.Instance.NetworkManager.Runner.IsServer)
         {
-            for (int i = 0; i < 3; i++)
-            {
-                MonsterQueue();
-            }
-
+            ResourceEnum.Prefab[] a = new ResourceEnum.Prefab[] { ResourceEnum.Prefab.Slime_Leaf, ResourceEnum.Prefab.Slime_Viking, ResourceEnum.Prefab.Slime_King };
+            int[] b = new int[] { 1, 0, 0 };
+            AddMonsterQueue(a, b, 10);
+            b = new int[] { 1, 1, 0 };
+            AddMonsterQueue(a, b, 5);
+            b = new int[] { 2, 2, 1 };
+            AddMonsterQueue(a, b, 2);
+            b = new int[] { 1, 0, 1 };
+            AddMonsterQueue(a, b, 5);
+            b = new int[] { 0, 0, 1 };
+            AddMonsterQueue(a, b, 10);
         }
     }
 
@@ -41,14 +47,6 @@ public class WaveInfo
             }
         }
         waveOrder.Enqueue(nextQueue);
-    }
-
-    public void MonsterQueue()
-    {
-
-        ResourceEnum.Prefab[] a = new ResourceEnum.Prefab[] { ResourceEnum.Prefab.Slime_Leaf, ResourceEnum.Prefab.Slime_King };
-        int[] b = new int[] { 1, 2 };
-        AddMonsterQueue(a, b, 3);
     }
 
 }

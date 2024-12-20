@@ -74,6 +74,7 @@ public class WaveManager : Manager
         if (GameManager.Instance.NetworkManager.Runner.IsServer)
         {
             GameManager.Instance.BuildingManager.generator.IsWaveStart = true;
+            GameManager.Instance.BuildingManager.generator.IsWaveLeft = true;
             waveInterval = waveInfo.waveOrder.Peek().Count * monsterInterval;
         }
         if (waveInfoUI == null) FindWaveInfoUI();
@@ -108,7 +109,7 @@ public class WaveManager : Manager
             {
                 nowMonsterTime += deltaTime;
             
-                if (nowMonsterTime >= monsterInterval && waveInfo.waveOrder.Peek().Count > 0) 
+                if (nowMonsterTime >= monsterInterval && waveInfo.waveOrder.Count > 0 && waveInfo.waveOrder.Peek().Count > 0) 
                 {
                     MonsterInstantiate();
                     nowMonsterTime = 0;
@@ -145,6 +146,7 @@ public class WaveManager : Manager
                 else
                 {
                     GameManager.Instance.BuildingManager.generator.IsWaveLeft = false;
+                    GameManager.Instance.BuildingManager.generator.IsWaveStart = false;
                 }
 
             }
