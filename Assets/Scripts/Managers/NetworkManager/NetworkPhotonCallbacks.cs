@@ -33,7 +33,6 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public Dictionary<PlayerRef, NetworkObject> SpawnedCharacter => _spawnedCharacters;
     public void OnPlayerJoined(NetworkRunner runner, PlayerRef player)
     {
-        Debug.Log(player);
         if (player == runner.LocalPlayer)
         {
             StartCoroutine(GameManager.Instance.GameStart());
@@ -93,15 +92,17 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     { 
         GameManager.Instance.GameOver();
         GameManager.Instance.UIManager.ClaimError("Disconneccted", "The network connection has been lost.", "확인", () => { 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+            runner.Shutdown();
         });
     }
     public void OnConnectRequest(NetworkRunner runner, NetworkRunnerCallbackArgs.ConnectRequest request, byte[] token) { }
     public void OnConnectFailed(NetworkRunner runner, NetAddress remoteAddress, NetConnectFailedReason reason) 
     { 
         GameManager.Instance.GameOver();
-        GameManager.Instance.UIManager.ClaimError("Connect failed", "Network connection failed.", "확인", () => { 
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        GameManager.Instance.UIManager.ClaimError("Connect failed", "Network connection failed.", "확인", () => {
+            //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); 
+            runner.Shutdown();
         });
 
     }
