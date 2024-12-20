@@ -115,11 +115,13 @@ public class GameManager : MonoBehaviour
         {
             waveManager = new WaveManager();
             yield return WaveManager.Initiate();
+            ManagerStarts += WaveManager.ManagerStart;
             ManagerUpdates += WaveManager.ManagerUpdate;
         }
 
         isDefeated = false;
-        waveManager.WaveStart();
+        // 게스트는 이 타이밍에 제너레이터가 아직 없다!
+        if(BuildingManager.generator != null) waveManager.WaveStart();
         isGameStart = true;
     }
 
