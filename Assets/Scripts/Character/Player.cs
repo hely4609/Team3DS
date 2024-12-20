@@ -59,7 +59,7 @@ public partial class Player : Character
      
     protected bool isInteracting; // 나는 지금 상호작용 중인가?
     public bool IsInteracting => isInteracting;
-    protected Interaction interactionType; // 나는 어떤 상호작용을 하고있는가?
+    [SerializeField, Networked] protected Interaction interactionType { get; set; } // 나는 어떤 상호작용을 하고있는가?
 
     [Networked] public int OreAmount { get; set; }
 
@@ -823,9 +823,13 @@ public partial class Player : Character
 
                 if (interactionButtonInfos.Count == 1)
                 {
-                    if(HasStateAuthority)interactionIndex = 0;
+                    if (HasStateAuthority)
+                    {
+                        interactionIndex = 0;
+                        interactionType = interaction;
+                    } 
                     interactionObject = target;
-                    interactionType = interaction;
+                    
                     //if (HasInputAuthority)
                     //{
                     //    mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
@@ -884,7 +888,7 @@ public partial class Player : Character
                     InteractionEnd();
                 }
                 interactionObject = null;
-                interactionType = Interaction.None;
+                if (HasStateAuthority) interactionType = Interaction.None;
 
                 if (HasInputAuthority)
                 {
@@ -899,7 +903,7 @@ public partial class Player : Character
                     InteractionEnd();
                 }
                 interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
-                interactionType = interactionButtonInfos[interactionIndex].interactionType;
+                if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             }
 
@@ -923,10 +927,10 @@ public partial class Player : Character
             if (HasStateAuthority)
             {
                 index--;
-                if (HasStateAuthority) interactionIndex = Mathf.Max(index, 0);
+                interactionIndex = Mathf.Max(index, 0);
             }
             interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
-            interactionType = interactionButtonInfos[interactionIndex].interactionType;
+            if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             if (interactionIndex < interactionButtonInfos.Count - 4 && HasInputAuthority)
             {
@@ -940,10 +944,10 @@ public partial class Player : Character
             if (HasStateAuthority)
             {
                 index++;
-                if (HasStateAuthority) interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, index);
+                interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, index);
             }
             interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
-            interactionType = interactionButtonInfos[interactionIndex].interactionType;
+            if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             if (interactionIndex > 4 && HasInputAuthority)
             {
@@ -957,6 +961,8 @@ public partial class Player : Character
     // 상호작용 UI를 최신화하는 함수
     public void UpdateInteractionUI(int targetIndex)
     {
+        Canvas.ForceUpdateCanvases();
+
         for (int i = 0; i < interactionButtonInfos.Count; i++)
         {
             GameObject button = interactionButtonInfos[i].button;
@@ -1081,8 +1087,12 @@ public partial class Player : Character
 
             if (interactionButtonInfos.Count > 0)
             {
-                if (HasStateAuthority) interactionIndex = Mathf.Clamp(index, 0, interactionButtonInfos.Count - 1);
-                interactionType = interactionButtonInfos[interactionIndex].interactionType;
+                if (HasStateAuthority)
+                {
+                    interactionIndex = Mathf.Clamp(index, 0, interactionButtonInfos.Count - 1);
+                    interactionType = interactionButtonInfos[interactionIndex].interactionType;
+                } 
+                
                 //UpdateInteractionUI(interactionIndex);
             }
         }
@@ -1104,7 +1114,7 @@ public partial class Player : Character
                     InteractionEnd();
                 }
                 interactionObject = null;
-                interactionType = Interaction.None;
+                if (HasStateAuthority) interactionType = Interaction.None;
 
                 if (HasInputAuthority)
                 {
@@ -1119,12 +1129,14 @@ public partial class Player : Character
                     InteractionEnd();
                 }
                 interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
-                interactionType = interactionButtonInfos[interactionIndex].interactionType;
+                if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             }
 
             //UpdateInteractionUI(interactionIndex);
         }
+
+        if(interactionIndex == index) UpdateInteractionUI(index);
 
     }
 
@@ -1220,7 +1232,6 @@ public partial class Player : Character
                     int previous;
                     int current;
                     (previous, current) = reader.Read(previousBuffer, currentBuffer);
-                    Debug.Log($"pre : {previous}, cur : {current}");
                     if (previous == -1 && current == 0)
                     {
                         if (HasInputAuthority)

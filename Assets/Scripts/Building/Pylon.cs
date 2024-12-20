@@ -57,9 +57,13 @@ public class Pylon : InteractableBuilding
     {
         if (!GameManager.IsGameStart) return;
 
-        if (hasState)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (HasStateAuthority) GameManager.Instance.BuildingManager.RemoveBuilding(this);
+       
+        foreach (var player in players)
         {
-            GameManager.Instance.BuildingManager.RemoveBuilding(this);
+            var playerCS = player.GetComponent<Player>();
+            playerCS.RenewalInteractionUI(this, false);
         }
     }
 
@@ -158,6 +162,22 @@ public class Pylon : InteractableBuilding
         //}
         //return Interaction.None;
     }
+
+    public override bool InteractionEnd(Player player, Interaction interactionType)
+    {
+        switch (interactionType)
+        {
+            case Interaction.Build:
+            case Interaction.AttachRope:
+                IsChangeInfo = !IsChangeInfo;
+                break;
+        }
+
+        return true;
+    }
+
+    
+
     public override void AttachRope(Player player, int number)
     {
         if (player.PossesionController.myAuthority == Runner.LocalPlayer)
@@ -355,6 +375,11 @@ public class Pylon : InteractableBuilding
         {
             switch (chage)
             {
+                case nameof(IsChangeInfo):
+                    Player local = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
+                    local.RenewalInteractionUI(this);
+                    break;
+
                 case nameof(isBuildable):
                     VisualizeBuildable();
                     break;

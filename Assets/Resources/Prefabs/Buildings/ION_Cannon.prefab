@@ -688,6 +688,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 10
   _BuildingTimeCurrent: 0
+  cost: 30
   completeMat: {fileID: 2100000, guid: 454b1227bcbb4594bad3f45b2914b825, type: 2}
   meshes:
   - {fileID: 2829039577149875135}
@@ -754,6 +755,7 @@ MonoBehaviour:
   attackRangeMarker: {fileID: 4375568238647190245}
   _Level: 0
   _UpgradeRequire: 5
+  _TotalUpgradeCost: 0
   splashRadius: 10
 --- !u!136 &5371794395544762303
 CapsuleCollider:

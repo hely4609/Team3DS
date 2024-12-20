@@ -444,6 +444,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 1
   _BuildingTimeCurrent: 0
+  cost: 10
   completeMat: {fileID: 2100000, guid: 252a6853d06b8214d8cd3f8f3ed04a55, type: 2}
   meshes:
   - {fileID: 4065499076986777232}
@@ -460,6 +461,7 @@ MonoBehaviour:
   marker_off: {fileID: 8536452984131014355}
   buildingSignCanvas: {fileID: 0}
   objectName: 
+  localeName: 
   _IsSettingRope: 0
   _IsRoped: 0
   ropeStruct:

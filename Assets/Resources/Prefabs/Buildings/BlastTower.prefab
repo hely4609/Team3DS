@@ -54,6 +54,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 10
   _BuildingTimeCurrent: 0
+  cost: 40
   completeMat: {fileID: 2100000, guid: 0dbfebe9a55cc324cb4991693f449b27, type: 2}
   meshes:
   - {fileID: 845993969202826826}
@@ -94,6 +95,7 @@ MonoBehaviour:
   attackRangeMarker: {fileID: 7149592453140854696}
   _Level: 0
   _UpgradeRequire: 5
+  _TotalUpgradeCost: 0
 --- !u!114 &4178355832652842898
 MonoBehaviour:
   m_ObjectHideFlags: 0

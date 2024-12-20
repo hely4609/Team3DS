@@ -179,6 +179,20 @@ public class PowerSupply : InteractableBuilding
         PowerCurrent = powerCurrent;
     }
 
+    public override bool InteractionEnd(Player player, Interaction interactionType)
+    {
+        switch (interactionType)
+        {
+            case Interaction.Build:
+            case Interaction.Upgrade:
+            case Interaction.AttachRope:
+                IsChangeInfo = !IsChangeInfo;
+                break;
+        }
+
+        return true;
+    }
+
     public void ChangePowerConsumption(int value)
     {
         powerCurrent += value;
@@ -208,7 +222,11 @@ public class PowerSupply : InteractableBuilding
                 case nameof(TotalOreAmount):
                     totalOreAmountText.text = "x " + $"{TotalOreAmount}";
                     break;
-                    
+                case nameof(IsChangeInfo):
+                    Player local = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
+                    local.RenewalInteractionUI(this);
+                    break;
+
             }
         }
     }
@@ -237,7 +255,6 @@ public class PowerSupply : InteractableBuilding
                 doorNearPlayers.Remove(player);
                 if (doorNearPlayers.Count == 0)
                 {
-
                     anim.SetBool("isDoorOpen", false);
                 }
             }

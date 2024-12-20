@@ -1,3 +1,4 @@
+using Fusion;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,6 +21,20 @@ public class Bridge : InteractableBuilding
             }
 
             System.Array.Clear(cols, 0, cols.Length);
+        }
+    }
+
+    public override void Despawned(NetworkRunner runner, bool hasState)
+    {
+        if (!GameManager.IsGameStart) return;
+
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        if (HasStateAuthority) GameManager.Instance.BuildingManager.RemoveBuilding(this);
+
+        foreach (var player in players)
+        {
+            var playerCS = player.GetComponent<Player>();
+            playerCS.RenewalInteractionUI(this, false);
         }
     }
 
@@ -251,11 +266,32 @@ public class Bridge : InteractableBuilding
         }
     }
 
-    public override bool InteractionEnd(Player player, Interaction interaction)
+    public override bool InteractionEnd(Player player, Interaction interactionType)
     {
+        switch (interactionType)
+        {
+            case Interaction.Build:
+                IsChangeInfo = !IsChangeInfo;
+                break;
+        }
         return true;
     }
 
+    public override List<Interaction> GetInteractions(Player player)
+    {
+        List<Interaction> currentAbleInteractions = new List<Interaction>();
+
+        if (CompletePercent < 1)
+        {
+            currentAbleInteractions.Add(Interaction.Build);
+            currentAbleInteractions.Add(Interaction.Demolish);
+            return currentAbleInteractions;
+        }
+        else
+        {
+            return currentAbleInteractions;
+        }
+    }
 
     public override void Render()
     {
@@ -296,6 +332,11 @@ public class Bridge : InteractableBuilding
                             System.Array.Clear(cols, 0, cols.Length);
                         }
                     }
+                    break;
+
+                case nameof(IsChangeInfo):
+                    Player local = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
+                    local.RenewalInteractionUI(this, false);
                     break;
 
             }

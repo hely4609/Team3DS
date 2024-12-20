@@ -24,7 +24,7 @@ public abstract class Building : MyComponent
 
     //protected float completePercent; //(0~1) 제작한 퍼센트
 
-    protected int cost;
+    [SerializeField] protected int cost;
     public virtual int Cost
     {
         get => cost; 
