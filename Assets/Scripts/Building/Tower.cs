@@ -171,7 +171,7 @@ public class Tower : InteractableBuilding
             case Interaction.Upgrade:
             case Interaction.OnOff:
             case Interaction.AttachRope:
-                IsChangeInfo = !IsChangeInfo;
+                if(HasStateAuthority) IsChangeInfo = !IsChangeInfo;
                 break;
         }
 

@@ -302,9 +302,9 @@ public partial class Player : Character
         if (isInteracting && interactionObject != null)
         {
             // 건설 게이지 차오르기
-            float progress = interactionObject.InteractionUpdate(deltaTime, interactionType);
+            float progress = interactionObject.InteractionUpdate(deltaTime, Interaction.Build);
 
-            if (possessionController != null && HasInputAuthority)
+            if (possessionController != null && HasInputAuthority && interactionUpdateProgress != null)
                 interactionUpdateProgress.SetValue(progress, true);
 
             if (progress >= 1f)
