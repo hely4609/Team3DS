@@ -116,8 +116,12 @@ public class EnergyBarrierGenerator : InteractableBuilding
                         GameManager.Instance.GameOver();
                     }
                     break;
+                case nameof(IsWaveStart):
+                    GameManager.Instance.WaveManager.waveInfoUI.SetActive(true);
+                    break;
 
             }
+
         }
     }
 }

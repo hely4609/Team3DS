@@ -22,7 +22,7 @@ public class WaveManager : Manager
     public int SpawnLoc { get { return spawnLoc; } protected set { spawnLoc = value; } }
     List<Vector2> roadData;
 
-    GameObject waveInfoUI;
+    public GameObject waveInfoUI;
     TextMeshProUGUI nextWaveTimeText;
     TextMeshProUGUI monsterCountText;
 
