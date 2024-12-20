@@ -144,7 +144,7 @@ public class WaveManager : Manager
                 }
                 else
                 {
-                    GameManager.Instance.BuildingManager.generator.IsWaveStart = false;
+                    GameManager.Instance.BuildingManager.generator.IsWaveLeft = false;
                 }
 
             }

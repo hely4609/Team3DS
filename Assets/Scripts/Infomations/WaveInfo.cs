@@ -13,9 +13,13 @@ public class WaveInfo
     public void Initialize()
     {
         waveOrder = new Queue<Queue<ResourceEnum.Prefab>>();
-        for (int i = 0; i < 3; i++)
+        if(GameManager.Instance.NetworkManager.Runner.IsServer)
         {
-            MonsterQueue();
+            for (int i = 0; i < 3; i++)
+            {
+                MonsterQueue();
+            }
+
         }
     }
 

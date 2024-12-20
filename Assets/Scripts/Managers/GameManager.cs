@@ -87,7 +87,7 @@ public class GameManager : MonoBehaviour
     {
         if (!isGameStart) return;
 
-        WaveManager.WaveStart();
+        if (BuildingManager.generator != null) WaveManager.WaveStart();
     }
     public IEnumerator GameStart()
     {
