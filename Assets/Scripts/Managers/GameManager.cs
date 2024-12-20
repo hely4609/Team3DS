@@ -74,6 +74,9 @@ public class GameManager : MonoBehaviour
 
     protected LocaleManager localeManager;
     public LocaleManager LocaleManager => localeManager;
+
+    protected CharacterMoveBound moveBound;
+    public CharacterMoveBound MoveBound => moveBound;
     #endregion
 
     [SerializeField] bool isGameStart;
@@ -110,7 +113,11 @@ public class GameManager : MonoBehaviour
             yield return CameraManager.Initiate();
             ManagerUpdates += CameraManager.ManagerUpdate;
         }
-
+        if(moveBound == null)
+        {
+            moveBound = new CharacterMoveBound();
+            yield return MoveBound.Initiate();
+        }
         if (waveManager == null)
         {
             waveManager = new WaveManager();
