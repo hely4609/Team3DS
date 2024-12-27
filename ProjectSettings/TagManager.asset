@@ -29,6 +29,7 @@ TagManager:
   - WaveStartButton
   - TotalOreText
   - WaveInfoText
+  - LeftRopeLengthText
   layers:
   - Default
   - TransparentFX
