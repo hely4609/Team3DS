@@ -26,6 +26,27 @@ public class WaveManager : Manager
     TextMeshProUGUI nextWaveTimeText;
     TextMeshProUGUI monsterCountText;
 
+    // 플레이어 움직임 제한하는 구역
+    public Vector3 BoundLeftUp { get; private set; }
+    public Vector3 BoundRightDown { get; private set; }
+    private int nowArea = 0;
+    public int NowArea { get { return nowArea; } private set { if(value<AreaBounds.Length) value = nowArea; } }
+
+    private static Vector3[] firstArea  = new Vector3[2] { new Vector3(-57, 0, 30), new Vector3(57, 0, -57) };
+    private static Vector3[] secondArea  = new Vector3[2] { new Vector3(-57, 0, 60), new Vector3(57, 0, -57) };
+    private static Vector3[] thirdArea  = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(57, 0, -57) };
+    private static Vector3[] fourthArea  = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(57, 0, -90) };
+    private static Vector3[] fifthArea  = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(90, 0, -90) };
+    private static Vector3[] sixthArea  = new Vector3[2] { new Vector3(-90, 0, 90), new Vector3(90, 0, -90) };
+
+    public Vector3[][] AreaBounds = new Vector3[][]{ firstArea, secondArea, thirdArea, fourthArea, fifthArea, sixthArea };
+    public void DrawBound(Vector3 leftUp, Vector3 rightDown)
+    {
+        BoundLeftUp = leftUp;
+        BoundRightDown = rightDown;
+    }
+    //
+
     protected void MonsterInstantiate()
     {
         if (GameManager.Instance.NetworkManager.Runner.IsServer)
@@ -50,7 +71,7 @@ public class WaveManager : Manager
 
         roadData = GameManager.Instance.BuildingManager.roadData;
 
-
+        DrawBound(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
 
         yield return base.Initiate();
     }
@@ -133,7 +154,14 @@ public class WaveManager : Manager
                         if (currentWaveIndex % 1 == 0) // 웨이브마다 스폰 장소가 변경됨.
                         {
                             if (SpawnLoc <= roadData.Count - 1) // 길 끝이 아니라면 +1
+                            {
                                 SpawnLoc++;
+                                nowArea++;
+                                DrawBound(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+                                Debug.Log($"현재 영역 : {BoundLeftUp}, {BoundRightDown}");
+                            }
+
+
                         }
                     }
                     else

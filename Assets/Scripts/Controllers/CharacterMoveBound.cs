@@ -7,16 +7,16 @@ public class CharacterMoveBound : Manager
     public Vector3 BoundLeftUp { get; private set; }
     public Vector3 BoundRightDown { get; private set; }
 
-//-57 30, 57 -57
-//-57 60, 57 -57
-//-90 60, 57 -57
-//-90 60, 57 -90
-//-90 60, 90 -90
-//-90 90, 90 -90
+    public Vector3[] firstArea { get; private set; } = new Vector3[2] { new Vector3(-57, 0, 30), new Vector3(57, 0, -57) };
+    public Vector3[] secondArea { get; private set; } = new Vector3[2] { new Vector3(-57, 0, 60), new Vector3(57, 0, -57) };
+    public Vector3[] thirdArea { get; private set; } = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(57, 0, -57) };
+    public Vector3[] fourthArea { get; private set; } = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(57, 0, -90) };
+    public Vector3[] fifthArea { get; private set; } = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(90, 0, -90) };
+    public Vector3[] sixthArea { get; private set; } = new Vector3[2] { new Vector3(-90, 0, 90), new Vector3(90, 0, -90) };
 
     public override IEnumerator Initiate()
     {
-        DrawBound(new Vector3(-57, 0, 30), new Vector3(57, 0, -57));
+        DrawBound(firstArea[0], firstArea[1]);
         yield return null;
     }
 

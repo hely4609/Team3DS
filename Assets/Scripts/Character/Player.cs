@@ -501,10 +501,14 @@ public partial class Player : Character
 
         if (possessionController != null && HasInputAuthority)
         {
+            
             Vector3 wantMoveDir = transform.forward * MoveDir.z + transform.right * MoveDir.x;
             Vector3 velocity = CalculrateNextFrameGroundAngle() < 85f ? wantMoveDir : Vector3.zero;
             Vector3 gravity = IsGround ? Vector3.zero : Vector3.down * Mathf.Abs(rb.velocity.y);
+            Vector3 boundaryLeftUp = GameManager.Instance.WaveManager.BoundLeftUp;
+            Vector3 boundaryRightDown = GameManager.Instance.WaveManager.BoundRightDown;
 
+            
             if (IsGround)
             {
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
@@ -548,6 +552,13 @@ public partial class Player : Character
                 if (angleCheck)
                     rb.velocity = velocity * moveSpeed + gravity;
                 else
+                    rb.velocity = Vector3.zero;
+            }
+            if(rb.position.x <boundaryLeftUp.x || rb.position.x > boundaryRightDown.x || rb.position.z > boundaryLeftUp.z || rb.position.z < boundaryRightDown.z)
+            {
+                Debug.Log(Vector3.Angle(velocity, PreviousPosition - transform.position));
+                angleCheck = Vector3.Angle(velocity, PreviousPosition - transform.position) < 45;
+                if (angleCheck)
                     rb.velocity = Vector3.zero;
             }
         }
