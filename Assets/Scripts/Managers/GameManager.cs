@@ -134,6 +134,7 @@ public class GameManager : MonoBehaviour
 
     public void GameOver() 
     { 
+        networkManager.Runner.Shutdown();
         isGameStart = false;
         if (isDefeated) uiManager.GetUI(UIEnum.GameOverCanvas).GetComponent<GameOverCanvas>().SetResultText();
         Cursor.lockState = CursorLockMode.None;

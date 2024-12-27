@@ -61,8 +61,6 @@ public class EnergyBarrierGenerator : InteractableBuilding
         }
     }
 
-
-
     protected override void Initialize()
     {
         onOff = true;
