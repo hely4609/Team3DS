@@ -31,7 +31,7 @@ public class WaveManager : Manager
     public Vector3 BoundRightDown { get; private set; }
     private int nowArea = 0;
     public int NowArea { get { return nowArea; } private set { if(value<AreaBounds.Length) value = nowArea; } }
-
+    public GameObject walls;
     private static Vector3[] firstArea  = new Vector3[2] { new Vector3(-57, 0, 30), new Vector3(57, 0, -57) };
     private static Vector3[] secondArea  = new Vector3[2] { new Vector3(-57, 0, 60), new Vector3(57, 0, -57) };
     private static Vector3[] thirdArea  = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(57, 0, -57) };
@@ -53,16 +53,21 @@ public class WaveManager : Manager
         Vector3 rightMid = new Vector3(rightDown.x, 0, (leftUp.z + rightDown.z) / 2);
         Vector3 leftMid = new Vector3(leftUp.x, 0, (leftUp.z + rightDown.z) / 2);
         float upLength = rightDown.x - leftUp.x;
-        float rightLength = leftUp.x - rightDown.x;
+        float rightLength = leftUp.z - rightDown.z;
         GameObject objParent = new GameObject("wall");
         GameObject upObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, upMid);
         GameObject downObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, downMid);
         GameObject rightObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, rightMid);
         GameObject leftObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, leftMid);
         upObj.transform.SetParent(objParent.transform);
+        upObj.transform.localScale = new Vector3(upLength, upObj.transform.localScale.y, upObj.transform.localScale.z);
         downObj.transform.SetParent(objParent.transform);
+        downObj.transform.localScale = new Vector3(upLength, downObj.transform.localScale.y, downObj.transform.localScale.z);
         rightObj.transform.SetParent(objParent.transform);
+        rightObj.transform.localScale = new Vector3(rightObj.transform.localScale.x, rightObj.transform.localScale.y, rightLength);
         leftObj.transform.SetParent(objParent.transform);
+        leftObj.transform.localScale = new Vector3(leftObj.transform.localScale.x, leftObj.transform.localScale.y, rightLength);
+
 
         return objParent;
     }
@@ -90,7 +95,7 @@ public class WaveManager : Manager
 
         roadData = GameManager.Instance.BuildingManager.roadData;
 
-        CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+        walls = CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
 
         yield return base.Initiate();
     }
@@ -176,7 +181,9 @@ public class WaveManager : Manager
                             {
                                 SpawnLoc++;
                                 nowArea++;
-                                CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+                                GameObject nextWall= CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+                                GameObject.Destroy(walls);
+                                walls = nextWall;
                                 Debug.Log($"현재 영역 : {BoundLeftUp}, {BoundRightDown}");
                             }
 
