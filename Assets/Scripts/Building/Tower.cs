@@ -25,6 +25,7 @@ public class Tower : InteractableBuilding
     [SerializeField] protected Animator attackAnimator;
     [SerializeField] protected GameObject gunBarrel;
     [SerializeField] protected float gunBarrelRotateCorrection;
+    [SerializeField] protected Transform muzzleTF;
     public Pylon attachedPylon;
 
     [SerializeField] protected GameObject attackRangeMarker;
@@ -273,7 +274,15 @@ public class Tower : InteractableBuilding
 
     protected void FireEffect()
     {
-        NetworkObject effect = Runner.Spawn();
+        NetworkObject effect = Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Smoke1), muzzleTF.position);
+
+        StartCoroutine(DespawnEffect(effect));
+    }
+
+    IEnumerator DespawnEffect(NetworkObject effect)
+    {
+        yield return new WaitForSeconds(2);
+        Runner.Despawn(effect);
     }
 
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가

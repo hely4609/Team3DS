@@ -907,6 +907,7 @@ MonoBehaviour:
   attackAnimator: {fileID: 3803933175711257711}
   gunBarrel: {fileID: 8177992274299104779}
   gunBarrelRotateCorrection: -90
+  muzzleTF: {fileID: 4736737432583467432}
   attachedPylon: {fileID: 0}
   attackRangeMarker: {fileID: 3419181252386267939}
   _Level: 0

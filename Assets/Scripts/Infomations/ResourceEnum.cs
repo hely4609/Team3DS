@@ -43,6 +43,9 @@ namespace ResourceEnum
         Pylon,
         buildingEnd,
 
+        // Effects
+        Smoke1,
+
         // ETC
         BuildingSignCanvas,
     }
