@@ -16930,7 +16930,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 0
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -16966,6 +16966,7 @@ MonoBehaviour:
   buildingConfirmUI: {fileID: 0}
   ropeMaxDistanceSignUI: {fileID: 0}
   pageIndexText: {fileID: 0}
+  leftRopeLengthText: {fileID: 0}
   _interactionIndex: -1
   interactionButtonInfos: []
   _isInteracting: 0
