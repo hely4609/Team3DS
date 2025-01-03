@@ -84,6 +84,7 @@ public class MiniMapScript : MyComponent
         isLargeMapOpend = largeMap.activeSelf;
     }
 
+    public float zoomSensitivity = 0.2f;
     public void LargeMapZoom(float value)
     {
         if (!largeMap.activeSelf) return;
@@ -96,16 +97,17 @@ public class MiniMapScript : MyComponent
         {
             Vector3 wantVector = new Vector3(Input.mousePosition.x - Screen.width * 0.5f, 0, Input.mousePosition.y - Screen.height * 0.5f);
             wantVector.Normalize();
-            largeMapCamera.transform.position += wantVector * 10;
+            largeMapCamera.transform.position += wantVector * zoomSensitivity;
             largeMapCamera.transform.position = new Vector3(Mathf.Clamp(largeMapCamera.transform.position.x + wantVector.x * 10, -100, 100), largeMapCamera.transform.position.y, Mathf.Clamp(largeMapCamera.transform.position.z + wantVector.z * 10, -100, 100));
 
         }
     }
 
+    public float dragSensitivity = 0.0055f;
     public void LargeMapDrag(Vector2 mouseDelta)
     {
-        Vector3 wantVector = new Vector3(-mouseDelta.x, 0, -mouseDelta.y);
-        largeMapCamera.transform.position += wantVector * largeMapCamera.orthographicSize * 0.01f;
+        Vector3 wantVector = new(-mouseDelta.x, 0, -mouseDelta.y);
+        largeMapCamera.transform.position += largeMapCamera.orthographicSize * dragSensitivity * wantVector;
     }
 
     public void ShowTowerRangeToggle()
