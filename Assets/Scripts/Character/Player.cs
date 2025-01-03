@@ -1431,14 +1431,32 @@ public partial class Player : Character
             {
                 int siblingIndex = buildingSelectUIBuildingImages[i].transform.parent.GetSiblingIndex();
 
-
+                // 이미지 교체
                 Debug.Log(BuildableEnumArray[BuildableEnumPageIndex, siblingIndex].ToString());
                 Enum.TryParse(BuildableEnumArray[BuildableEnumPageIndex, siblingIndex].ToString(), out ResourceEnum.Sprite result);
 
                 buildingSelectUIBuildingImages[i].GetComponent<Image>().sprite = ResourceManager.Get(result);
+
+                // 광물사용량 텍스트 교체
+                int requireOre = GetRequireOreResourceAmount(BuildableEnumArray[BuildableEnumPageIndex, siblingIndex]);
+                buildingSelectUIBuildingImages[i].transform.parent.GetComponentInChildren<TextMeshProUGUI>().text = requireOre != -1 ? requireOre.ToString() : null;
             }
         }
     }
+
+    private int GetRequireOreResourceAmount(ResourceEnum.Prefab prefab) => prefab switch
+    {
+        ResourceEnum.Prefab.Turret1a => 10,
+        ResourceEnum.Prefab.Turret1d => 20,
+        ResourceEnum.Prefab.ION_Cannon => 30,
+        ResourceEnum.Prefab.BlastTower => 40,
+        ResourceEnum.Prefab.Bridge => 50,
+
+        ResourceEnum.Prefab.Pylon => 10,
+
+        _ => -1,
+    };
+
 
     public void Greeting()
     {
