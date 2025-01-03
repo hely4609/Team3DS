@@ -20,6 +20,7 @@ public class ResourcesPath
         // Tower
         "Prefabs/Buildings/Road",
         "Prefabs/Buildings/EnergyBarrier",
+        "Prefabs/Buildings/NoEnterWall",
         "Prefabs/Buildings/Turret1a",
         "Prefabs/Buildings/Turret1d",
         "Prefabs/Buildings/ION_Cannon",

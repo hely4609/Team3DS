@@ -22,6 +22,7 @@ namespace ResourceEnum
         EnergyBarrier,
         CornerWithBarrier,
         RoadWithBarrier,
+        NoEnterWall,
         // Object
         Rope,
         PowerSupply,

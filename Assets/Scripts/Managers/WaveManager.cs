@@ -40,13 +40,32 @@ public class WaveManager : Manager
     private static Vector3[] sixthArea  = new Vector3[2] { new Vector3(-90, 0, 90), new Vector3(90, 0, -90) };
 
     public Vector3[][] AreaBounds = new Vector3[][]{ firstArea, secondArea, thirdArea, fourthArea, fifthArea, sixthArea };
-    public void DrawBound(Vector3 leftUp, Vector3 rightDown)
-    {
-        BoundLeftUp = leftUp;
-        BoundRightDown = rightDown;
-    }
+    //public void DrawBound(Vector3 leftUp, Vector3 rightDown)
+    //{
+    //    BoundLeftUp = leftUp;
+    //    BoundRightDown = rightDown;
+    //}
     //
+    protected GameObject CreateBox(Vector3 leftUp, Vector3 rightDown)
+    {
+        Vector3 upMid = new Vector3((leftUp.x + rightDown.x) / 2, 0, leftUp.z);
+        Vector3 downMid = new Vector3((leftUp.x + rightDown.x) / 2, 0, rightDown.z);
+        Vector3 rightMid = new Vector3(rightDown.x, 0, (leftUp.z + rightDown.z) / 2);
+        Vector3 leftMid = new Vector3(leftUp.x, 0, (leftUp.z + rightDown.z) / 2);
+        float upLength = rightDown.x - leftUp.x;
+        float rightLength = leftUp.x - rightDown.x;
+        GameObject objParent = new GameObject("wall");
+        GameObject upObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, upMid);
+        GameObject downObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, downMid);
+        GameObject rightObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, rightMid);
+        GameObject leftObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, leftMid);
+        upObj.transform.SetParent(objParent.transform);
+        downObj.transform.SetParent(objParent.transform);
+        rightObj.transform.SetParent(objParent.transform);
+        leftObj.transform.SetParent(objParent.transform);
 
+        return objParent;
+    }
     protected void MonsterInstantiate()
     {
         if (GameManager.Instance.NetworkManager.Runner.IsServer)
@@ -71,7 +90,7 @@ public class WaveManager : Manager
 
         roadData = GameManager.Instance.BuildingManager.roadData;
 
-        DrawBound(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+        CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
 
         yield return base.Initiate();
     }
@@ -157,7 +176,7 @@ public class WaveManager : Manager
                             {
                                 SpawnLoc++;
                                 nowArea++;
-                                DrawBound(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+                                CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
                                 Debug.Log($"현재 영역 : {BoundLeftUp}, {BoundRightDown}");
                             }
 

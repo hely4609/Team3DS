@@ -377,7 +377,7 @@ public partial class Player : Character
                 DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 270f, 0f);
             }
 
-            Vector3 pickPos = transform.position + transform.forward * 5f;
+            Vector3 pickPos = transform.position + transform.forward * Mathf.Lerp(3.5f, 10f, Mathf.InverseLerp(30f + 13f / Mathf.Abs(GroundNormal.y), 0f, Mathf.Clamp(cameraOffset_FPS.localEulerAngles.x > 300f ? 0f : cameraOffset_FPS.localEulerAngles.x, 0f, 30f + 13f / Mathf.Abs(GroundNormal.y))));
             int x = (int)pickPos.x;
             int z = (int)pickPos.z;
             Vector2Int currentPos = new Vector2Int(x, z);
@@ -557,13 +557,6 @@ public partial class Player : Character
                 else
                     rb.velocity = Vector3.zero;
             }
-            if(rb.position.x <boundaryLeftUp.x || rb.position.x > boundaryRightDown.x || rb.position.z > boundaryLeftUp.z || rb.position.z < boundaryRightDown.z)
-            {
-                Debug.Log(Vector3.Angle(velocity, PreviousPosition - transform.position));
-                angleCheck = Vector3.Angle(velocity, PreviousPosition - transform.position) < 45;
-                if (angleCheck)
-                    rb.velocity = Vector3.zero;
-            }
         }
         else
         {
@@ -583,10 +576,13 @@ public partial class Player : Character
             rotate_x += mouseDelta_y;
             rotate_x = Mathf.Clamp(rotate_x, -45f, 30f + 13f / Mathf.Abs(GroundNormal.y));
 
+            
             // 상하회전은 카메라만 회전
             cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
         }
     }
+
+    
 
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
