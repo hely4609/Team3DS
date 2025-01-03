@@ -27,6 +27,7 @@ public class CannonTower : Tower
     protected override void OnHit()
     {
         RaycastHit[] targets = Physics.SphereCastAll(target.transform.position, splashRadius, Vector3.up);
+        if(targets.Length > 0) attackAnimator.SetBool("Attack", true);
         foreach (RaycastHit targetRay in targets)
         {
             if(targetRay.collider.TryGetComponent<Monster>(out Monster targetData))

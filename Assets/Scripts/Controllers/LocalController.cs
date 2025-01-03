@@ -110,7 +110,7 @@ public class LocalController : ControllerBase
                     Pylon pylon = controlledPlayer.ropeBuilding as Pylon;
                     leftRopeLength = pylon.RopeLengthList[MyNumber];
                 }
-                controlledPlayer.leftRopeLengthText.text = $"Left Rope Length : {leftRopeLength}";
+                controlledPlayer.leftRopeLengthText.text = $"Left Rope Length : {leftRopeLength:00.00}";
                 controlledPlayer.leftRopeLengthText.gameObject.SetActive(true);
             }
             else

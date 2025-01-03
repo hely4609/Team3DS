@@ -98,6 +98,7 @@ GameObject:
   - component: {fileID: 3803933175711257711}
   - component: {fileID: 9024403582529899378}
   - component: {fileID: 3616456972517454780}
+  - component: {fileID: 3973304667124375388}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -119,6 +120,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7307234228002043103}
+  - {fileID: 801305925190484542}
   m_Father: {fileID: 1644990912748593901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7046960787149899527
@@ -217,11 +219,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Animator: {fileID: 3803933175711257711}
-  TotalWords: 1
+  TotalWords: 2
   ApplyTiming: 2
   SyncSettings: 79
   StateHashes: 00000000f2a7641ce8365ef6d9e9497b378b810ed720da715a12a55fad6497d4d068a81f
   TriggerHashes: 00000000
+--- !u!114 &3973304667124375388
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294221631397181880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c46b555fec15fe44a4c21ec4398e417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wantTF: {fileID: 801305925190484542}
 --- !u!1 &1605638871560030290
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +655,37 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &6682617816936464168
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 801305925190484542}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &801305925190484542
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6682617816936464168}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.83, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1069629114978717914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6860581916195568055
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +896,7 @@ MonoBehaviour:
   - {fileID: 4956041297887958512}
   - {fileID: 2191854385575338446}
   - {fileID: 3616456972517454780}
+  - {fileID: 3973304667124375388}
 --- !u!114 &4956041297887958512
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,8 +941,8 @@ MonoBehaviour:
   ropeStruct:
     ropeObjects: []
     ropePositions: []
-  maxRopeLength: 0
-  currentRopeLength: 0
+  _maxRopeLength: 0
+  _currentRopeLength: 0
   _powerConsumption: 40
   _attackDamage: 10
   _attackSpeed: 1

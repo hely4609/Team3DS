@@ -79,8 +79,8 @@ MonoBehaviour:
   ropeStruct:
     ropeObjects: []
     ropePositions: []
-  maxRopeLength: 0
-  currentRopeLength: 0
+  _maxRopeLength: 0
+  _currentRopeLength: 0
   _powerConsumption: 30
   _attackDamage: 20
   _attackSpeed: 5
