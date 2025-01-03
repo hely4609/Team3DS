@@ -38,6 +38,8 @@ public class ResourcesPath
         "Prefabs/Characters/Slime_Leaf",
         "Prefabs/Characters/Slime_Viking",
         "Prefabs/Characters/Slime_King",
+        // Effects
+        "Prefabs/Effects/Smokes/Smoke1",
         // ETC
         "Prefabs/UIs/Signs/BuildingSignCanvas",
 

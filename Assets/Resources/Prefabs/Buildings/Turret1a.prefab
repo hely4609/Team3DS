@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3803933175711257711}
   - component: {fileID: 9024403582529899378}
   - component: {fileID: 3616456972517454780}
+  - component: {fileID: 6674480813907795439}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -35,6 +36,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7307234228002043103}
+  - {fileID: 4736737432583467432}
   m_Father: {fileID: 1644990912748593901}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &7046960787149899527
@@ -138,6 +140,19 @@ MonoBehaviour:
   SyncSettings: 79
   StateHashes: 000000007d530e6c67c23486d0f79677cdf05130
   TriggerHashes: 00000000
+--- !u!114 &6674480813907795439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 294221631397181880}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c46b555fec15fe44a4c21ec4398e417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wantTF: {fileID: 4736737432583467432}
 --- !u!1 &1605638871560030290
 GameObject:
   m_ObjectHideFlags: 0
@@ -850,6 +865,7 @@ MonoBehaviour:
   - {fileID: 2629911216346672159}
   - {fileID: 8178348538202786747}
   - {fileID: 3616456972517454780}
+  - {fileID: 6674480813907795439}
 --- !u!114 &2629911216346672159
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -894,8 +910,8 @@ MonoBehaviour:
   ropeStruct:
     ropeObjects: []
     ropePositions: []
-  maxRopeLength: 0
-  currentRopeLength: 0
+  _maxRopeLength: 0
+  _currentRopeLength: 0
   _powerConsumption: 10
   _attackDamage: 6
   _attackSpeed: 2
@@ -906,11 +922,43 @@ MonoBehaviour:
   attackAnimator: {fileID: 3803933175711257711}
   gunBarrel: {fileID: 8177992274299104779}
   gunBarrelRotateCorrection: -90
+  muzzleTF: {fileID: 4736737432583467432}
   attachedPylon: {fileID: 0}
   attackRangeMarker: {fileID: 3419181252386267939}
   _Level: 0
   _UpgradeRequire: 5
   _TotalUpgradeCost: 0
+--- !u!1 &7807255148521292118
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4736737432583467432}
+  m_Layer: 0
+  m_Name: Muzzle
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4736737432583467432
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7807255148521292118}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 6, y: 0.18, z: -0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1069629114978717914}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &8177992274299104779
 GameObject:
   m_ObjectHideFlags: 0

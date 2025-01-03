@@ -271,6 +271,7 @@ public class Tower : InteractableBuilding
         Debug.Log($"{gameObject.name}");
     }
 
+
     protected void OnTriggerEnter(Collider other) // 영역에 들어오면 리스트에 추가
     {
         if (HasStateAuthority)
