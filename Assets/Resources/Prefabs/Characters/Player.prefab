@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6407221942474083481}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndexProximal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1006988781727423130}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Glasses_Chain_Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1335288452543948112}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Foot_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4730945129741182802}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PantsChain_F
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -136,7 +136,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7483028951792368825}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5594631754725256249}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_4_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 502647927377544393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5067990956638553200}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S2_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -263,7 +263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64652654880087691}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 687919385693763267}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -326,7 +326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8230440607076135241}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_ear_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7904611103659443954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shoes_ribbon_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -390,7 +390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3510870778935135998}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -422,7 +422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8194849071593989542}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerArm_twist_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -453,7 +453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6045462791602466137}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -485,7 +485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8093133539214266898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ahoge.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -517,7 +517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5382133468991500270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerArm_twist_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -548,7 +548,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9135742153297616792}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_F_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -580,7 +580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3103216084844915632}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -612,7 +612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8016838291067580945}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -644,7 +644,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6639135174781126887}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ahoge.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -676,7 +676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9000384263817602441}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -708,7 +708,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1267301984367392414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LittleProximal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -740,7 +740,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2572014114304248655}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Sleeve_Target_Hand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -771,7 +771,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7524189649534038796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_bun_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -802,7 +802,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3687082112346806976}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -834,7 +834,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5016145003076126476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -866,7 +866,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5651997796214333963}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ThumbIntermediate_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -898,7 +898,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1257552639680602745}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -930,7 +930,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2720304910250555623}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpperLeg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -965,7 +965,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8137197544516199824}
   - component: {fileID: 2764484471933429036}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Pants
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1256,7 +1256,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2802111854453934204}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleDistal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1287,7 +1287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4087252300958386961}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1319,7 +1319,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3411958332013534423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleIntermediate_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1352,7 +1352,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2469278649454177805}
   - component: {fileID: 8625022306001707734}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1550,7 +1550,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8141806888089490045}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hair_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1586,7 +1586,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2291168766624912333}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1618,7 +1618,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 685890959647151918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Breast_R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1649,7 +1649,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3542805750099087167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket_COL(Chest)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1680,7 +1680,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7480920418089094277}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F_Target_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1713,7 +1713,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8373164488002069460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1745,7 +1745,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6463056400102614869}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_B_L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1776,7 +1776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1046541095317370353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1808,7 +1808,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8569537409496907944}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JacketZipper.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1840,7 +1840,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1107509117919856969}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_F_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1871,7 +1871,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7537859811743840389}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bangs.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1903,7 +1903,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3370625436417662593}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1949,7 +1949,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5798045627281020512}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1980,7 +1980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4420902219547945913}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2012,7 +2012,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1771222506922979001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpperArm_twist_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2043,7 +2043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5229902517141770477}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2074,7 +2074,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7354325306276247176}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S2_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2106,7 +2106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8774545511122539798}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2138,7 +2138,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8858299344313038297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_Inner_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2170,7 +2170,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8210991261908294420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_B_R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2201,7 +2201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9144967716538565809}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LittleIntermediate_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2233,7 +2233,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4930988357538102492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2265,7 +2265,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3267624150845839546}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2301,7 +2301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1162275096557664281}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_Outer_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2333,7 +2333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3244317662178646700}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_F_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2366,7 +2366,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5867942613967981189}
   - component: {fileID: 6719774469013109365}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bangs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2564,7 +2564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8745582446126263760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2607,7 +2607,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7211497482694869788}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tie.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2639,7 +2639,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8248197577945488036}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shoulder_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2671,7 +2671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1389767498495240167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2703,7 +2703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3103853103937780698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2735,7 +2735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7632784474881451331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NameCard.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2767,7 +2767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1890547667935470506}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleIntermediate_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2799,7 +2799,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4626260787510947325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2831,7 +2831,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7295756436219483695}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LittleProximal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2863,7 +2863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1484265436158266615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B2_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2894,7 +2894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4362797158053777003}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket_COL(UL_R)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2925,7 +2925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7501360858184397686}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tie
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2957,7 +2957,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6304502993744693466}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tie.005_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2989,7 +2989,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5780793946705168626}
   - component: {fileID: 2109237396844779022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Earrings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3280,7 +3280,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2059000488038943530}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3312,7 +3312,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3970437084370784260}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket_Target_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3343,7 +3343,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 487073455607592850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3375,7 +3375,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4609148185330290095}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_1_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3407,7 +3407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 769512815826382801}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3439,7 +3439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6323195668491425739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_side_R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3474,7 +3474,7 @@ GameObject:
   - component: {fileID: 7972636452116571196}
   - component: {fileID: 3751669480913735530}
   - component: {fileID: 4131951010265648181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MANUKA_Obsidian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3583,7 +3583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2945920892613154270}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JacketZipper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3615,7 +3615,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4067645145802361806}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3647,7 +3647,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1073773591358679779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3678,7 +3678,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6232900701972938240}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bangs 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3710,7 +3710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6802923124276559147}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3742,7 +3742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6204059781717495265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Sleeve_Twist_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3775,7 +3775,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5451709725646958476}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ground_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3806,7 +3806,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4133561662234114843}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_B_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3838,7 +3838,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 341391313381632383}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_L.003_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3869,7 +3869,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7677007890580366317}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3901,7 +3901,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1990177533996194684}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AutoAnchorObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3932,7 +3932,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4847962591279272497}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3963,7 +3963,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7123219808227953540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_NameCard_COL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3994,7 +3994,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3108144483855784055}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4026,7 +4026,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5549665604933374459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S1_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4058,7 +4058,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2108340055903457185}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_F_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4090,7 +4090,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5678564432682422334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerLeg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4124,7 +4124,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6092957025639034091}
   - component: {fileID: 1840889841929476929}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_underwear_panty
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4447,7 +4447,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8639414182802484557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chest_C2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4478,7 +4478,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8886485185061751897}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4511,7 +4511,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8562081559350792618}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_Outer_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4543,7 +4543,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7789658008563002348}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PantsChain.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4578,7 +4578,7 @@ GameObject:
   - component: {fileID: 6647303613450046277}
   - component: {fileID: 8601115899010305847}
   - component: {fileID: 3152402398838791084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cleanner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4675,7 +4675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2551655380788115414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4708,7 +4708,7 @@ GameObject:
   m_Component:
   - component: {fileID: 574257815015974849}
   - component: {fileID: 7991281949152928361}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5031,7 +5031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3475550845664375539}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JacketZipper.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5063,7 +5063,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3094965687821202206}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5095,7 +5095,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5938607755306255532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5127,7 +5127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6889219459362056014}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5158,7 +5158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 529245144853108551}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_F_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5190,7 +5190,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6596985674051039455}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ThumbDistal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5221,7 +5221,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8060468843568022189}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5253,7 +5253,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1232883415366056572}
   - component: {fileID: 5238546151319809470}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5451,7 +5451,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3802217310871218145}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_Inner_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5483,7 +5483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2892160632041906850}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_B_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5515,7 +5515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7714458145568642587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5547,7 +5547,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7407581482024715805}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F_Root_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5580,7 +5580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6046898278075963921}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5612,7 +5612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7612556974094902810}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraOffset_TPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5643,7 +5643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6677106555832691878}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5675,7 +5675,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4793025269046819318}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F1_L_COL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5706,7 +5706,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1978030059577065325}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ThumbProximal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5738,7 +5738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7359265762707092207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5769,7 +5769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6404584756747530682}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S2_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5801,7 +5801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8530613613238010906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S2_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5832,7 +5832,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5020926750875525438}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_S_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5863,7 +5863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5616220795203277554}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JacketZipper.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5895,7 +5895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2651435245099057769}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PantsChain_F.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5926,7 +5926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7487307389425357584}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5958,7 +5958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 915748459604051620}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5989,7 +5989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3006832612903591834}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_Aim_B_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6021,7 +6021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4232184441389269523}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6053,7 +6053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4843589097051371057}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NameCard_String
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6085,7 +6085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3357038443954214244}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6117,7 +6117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5586555245628426560}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shoes_ribbon_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6149,7 +6149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5380878528712157483}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NadeNade_Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6180,7 +6180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2511577140951525405}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6212,7 +6212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1043856987079672263}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tie.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6244,7 +6244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2438429515419238203}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_1_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6276,7 +6276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4218230670779662675}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6308,7 +6308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2326142251927566560}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6340,7 +6340,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3695388934525836301}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6372,7 +6372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6113915102473609489}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6405,7 +6405,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4988287626575970538}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6437,7 +6437,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6275097858433599110}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ahoge.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6469,7 +6469,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2176526535890631776}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerLeg_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6502,7 +6502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2190235813063238488}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6534,7 +6534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7541300462685882664}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Butt_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6565,7 +6565,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5909224150394494304}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6597,7 +6597,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8545146615700445614}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S1_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6630,7 +6630,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7967368867096524439}
   - component: {fileID: 8897585910741184924}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_GlassesChain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6921,7 +6921,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7882763813183311559}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Foot_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6953,7 +6953,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1311259121592013209}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Breast_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6985,7 +6985,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3253874571114090480}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7017,7 +7017,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3061162643617500435}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Chest_C1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7050,7 +7050,7 @@ GameObject:
   - component: {fileID: 3656019466407869344}
   - component: {fileID: 5728254351804573279}
   - component: {fileID: 3957321002989744038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hammer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7131,7 +7131,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1813261748895976237}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_1_L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7162,7 +7162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6076826172267669812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_B_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7194,7 +7194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8715129330705604030}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NameCard_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7227,7 +7227,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1118635594435396838}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tang.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7259,7 +7259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7164640653904831973}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tang
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7291,7 +7291,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 83100469762278744}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7322,7 +7322,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4170640438036545359}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7354,7 +7354,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5430947141567530663}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F1_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7385,7 +7385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5919304056696475526}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Sleeve_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7418,7 +7418,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1097190778229152956}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cheek_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7450,7 +7450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6678700520353190622}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7481,7 +7481,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7115601690819405899}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_Inner_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7512,7 +7512,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2828764624652827478}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_3_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7544,7 +7544,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7515427217250976118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_ear_R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7575,7 +7575,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2475316679832921399}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_F_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7606,7 +7606,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6798830372434272680}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7638,7 +7638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4528489429178995694}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7669,7 +7669,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5994531181804771496}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7701,7 +7701,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6058601346796522264}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_F_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7733,7 +7733,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 143837741738603127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_4_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7765,7 +7765,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3230430109210927393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_R.003_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7796,7 +7796,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9023534926324226020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Shoulder_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7829,7 +7829,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6152864296034628005}
   - component: {fileID: 6619025070087001335}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Glasses
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8122,7 +8122,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3069478237699486875}
   - component: {fileID: 1454412961001433084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8172,7 +8172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5341939709204911435}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_1_L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8203,7 +8203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4208315711363847793}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_side_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8235,7 +8235,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4911025309006942698}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8267,7 +8267,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4420221518386638854}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Spine
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8302,7 +8302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2726262183123002279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ahoge.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8334,7 +8334,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1698282059052606297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8365,7 +8365,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3655938449777619707}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ThumbProximal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8397,7 +8397,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5594150368372114038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ahoge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8429,7 +8429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4793140297622061245}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_2_L.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8460,7 +8460,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4691114765261963497}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8491,7 +8491,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6739289086318476778}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8523,7 +8523,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1749352309876055837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8555,7 +8555,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 683157245703721563}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8587,7 +8587,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4210695742256038329}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_Shoulder_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8621,7 +8621,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9215788665629465100}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8653,7 +8653,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1868927864108239832}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8685,7 +8685,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4510886845303628093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Earrings_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8718,7 +8718,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3848795645792504540}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8750,7 +8750,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2167511421922739044}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8782,7 +8782,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8810007117807052890}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_B_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8813,7 +8813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7697840324666975248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8845,7 +8845,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6862154723588269856}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LittleIntermediate_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8877,7 +8877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1369116761120620003}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8909,7 +8909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8209895774464657448}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8940,7 +8940,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8210453566979623593}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_1_R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -8971,7 +8971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6325687472441006175}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpperLeg_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9005,7 +9005,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8190009090838845243}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Toe_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9036,7 +9036,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8256941214931163587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_B_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9068,7 +9068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2447799165853912345}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_ear_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9100,7 +9100,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2094711982953543784}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_pants_ribbon_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9132,7 +9132,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1712477278226307296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9164,7 +9164,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6436294469665622983}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.019
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9196,7 +9196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4611208515645920072}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PantsChain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9228,7 +9228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8677684858824801800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Butt_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9260,7 +9260,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5559602713532020477}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9292,7 +9292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6343028850345203133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_F_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9324,7 +9324,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8846728191163224280}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftElbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9355,7 +9355,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3159208743611153315}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cheek_root_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9387,7 +9387,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5381524403018950712}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ahoge.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9419,7 +9419,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1867804163192292195}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_2_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9450,7 +9450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2685896592594535343}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9482,7 +9482,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7196040946890859393}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9514,7 +9514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3825743431197124464}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket_B_COL(Hips)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9545,7 +9545,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8400852038989368693}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ahoge.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9577,7 +9577,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9186105669961612587}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_F_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9609,7 +9609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4947000040403033928}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9640,7 +9640,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2425715002569380131}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9671,7 +9671,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5158173454479169804}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9703,7 +9703,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 941036315021786230}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9735,7 +9735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4028029729446458033}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.017
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9766,7 +9766,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9172838337144126987}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9798,7 +9798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3226620842204437263}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9830,7 +9830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8458852217467569537}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ahoge.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9861,7 +9861,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3105884300301437639}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9892,7 +9892,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7251468125228264640}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.008_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9923,7 +9923,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6918462773051451276}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B1_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9954,7 +9954,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8676324891395801995}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_F_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9986,7 +9986,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5842699725923732052}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_2_R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10017,7 +10017,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2284554805649386550}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10049,7 +10049,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1234146270367795603}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_2_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10081,7 +10081,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3540986612138016804}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hair Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10148,7 +10148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1269833425478720805}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10180,7 +10180,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8700929568044365743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.020
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10211,7 +10211,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7651259547423602502}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpperArm_twist_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10242,7 +10242,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 457569117562363108}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ahoge
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10274,7 +10274,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5416291067490961542}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10306,7 +10306,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4001873311021790111}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10338,7 +10338,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 156532246423578546}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10369,7 +10369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3078636424271795165}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10401,7 +10401,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1251795144546472302}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_F_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10432,7 +10432,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7545932893851318373}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bangs.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10463,7 +10463,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3103105043650875803}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_2_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10495,7 +10495,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6323439581948839229}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F_Root_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10528,7 +10528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7016423312223578440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleProximal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10560,7 +10560,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4536658998391512301}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10592,7 +10592,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5968728850280528405}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_pants_ribbon_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10623,7 +10623,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6835269304120128220}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10655,7 +10655,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7040430178531066093}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_Aim_B_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10687,7 +10687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9219343146029398330}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_4_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10719,7 +10719,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5038477345061516600}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10751,7 +10751,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1348907715429151414}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10783,7 +10783,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3249968169810016668}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Sleeve_Target_Hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10814,7 +10814,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1340590623396500822}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cheek_root_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10846,7 +10846,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7420202656607786205}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_3_R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10877,7 +10877,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8408062095060080252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10909,7 +10909,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4303773329153734726}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.018
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10941,7 +10941,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4766428727165546025}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cheek_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -10972,7 +10972,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 989477490288128648}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail.007_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11003,7 +11003,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8708275968224225613}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_3_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11034,7 +11034,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1065000931487463252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11067,7 +11067,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8994469274672657877}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.008_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11098,7 +11098,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7553501710625784321}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_nameplate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11130,7 +11130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9112677274003358886}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_F_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11162,7 +11162,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6409189852950063317}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_F_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11194,7 +11194,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 393077444546632852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Colliders(Hips)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11228,7 +11228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5568412765682827205}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11259,7 +11259,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 793702620038885134}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Sleeve_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11292,7 +11292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5501853689900908373}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_1.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11324,7 +11324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1545891417314619461}
   - component: {fileID: 924420174196460454}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Character_Marker_Other
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11407,7 +11407,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8825468097943660184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ahoge.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11439,7 +11439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5879486851066941162}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11474,7 +11474,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 146924552518315978}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ahoge.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11506,7 +11506,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5305133828494175183}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S1_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11537,7 +11537,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4806747083599189034}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11569,7 +11569,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2760205818435760994}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11601,7 +11601,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7263473194827717356}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11632,7 +11632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1324235646071450073}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B_Root_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11665,7 +11665,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8692229882897397413}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11698,7 +11698,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6949818968969583358}
   - component: {fileID: 7082079985687201148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Chocker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -11989,7 +11989,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 393606242872081669}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12021,7 +12021,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4440228895982705089}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12053,7 +12053,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 276473659873646243}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12085,7 +12085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4302557415860336869}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12117,7 +12117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3388819406157768736}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MANUKA Back Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12149,7 +12149,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1828416432519215918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ahoge.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12181,7 +12181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8631914489223854265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ahoge.005_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12212,7 +12212,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5169861566558712848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12244,7 +12244,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7565977703352249211}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndexIntermediate_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12276,7 +12276,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6927778490087973591}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12308,7 +12308,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6630268023954014867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12341,7 +12341,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4992540265048840360}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ThumbDistal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12372,7 +12372,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1876819183022189421}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_2_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12403,7 +12403,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1997550070088762751}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PantsChain.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12435,7 +12435,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4475197203154449598}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_4_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12467,7 +12467,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1116834853373433711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12499,7 +12499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4352252674675738779}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12531,7 +12531,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7656183217977689009}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerArm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12564,7 +12564,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2506917897374057900}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_2_R.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12595,7 +12595,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 375160685190758543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_2_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12626,7 +12626,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1493490666091466056}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12658,7 +12658,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3398462723814385658}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RightElbow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12689,7 +12689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1679361562515159937}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PantsChain.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -12721,7 +12721,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2496281038626908719}
   - component: {fileID: 8382692496750510141}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13045,7 +13045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8340958420230850642}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13077,7 +13077,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3918617202216584001}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Glasses_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13110,7 +13110,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9027390899603723717}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LittleDistal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13141,7 +13141,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5748405285244023796}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_B_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13172,7 +13172,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 684995267884511069}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_Aim_S_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13204,7 +13204,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5513499968075651733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13237,7 +13237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2885330956503849576}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13269,7 +13269,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 11345913288331837}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Breast_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13301,7 +13301,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5151940731092095634}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13333,7 +13333,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2360432840167011042}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Ribbon_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13368,7 +13368,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 106154995235147070}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13401,7 +13401,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6812019188263285749}
   - component: {fileID: 2015724053744065283}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13486,7 +13486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2391904151159905054}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_B_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13518,7 +13518,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2416129149597057980}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S2_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13549,7 +13549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 15944802380536439}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B2_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13580,7 +13580,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2604547378163806117}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_ear_L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13611,7 +13611,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3405246821091203455}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_4_L.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13642,7 +13642,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7618183228841043571}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket_S_COL(Hips)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13673,7 +13673,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2187419323426129760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_3_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13704,7 +13704,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8460028904526354266}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13735,7 +13735,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1313709221967716169}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Butt_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13767,7 +13767,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6171985456454512435}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_1_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13798,7 +13798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4807091851073964342}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_S_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13830,7 +13830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7075286220153031149}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B_Root_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13863,7 +13863,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5243290922301959094}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13895,7 +13895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7659151879514125248}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tie.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13927,7 +13927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5924049758697447041}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_S_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13959,7 +13959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5922577694033200385}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_1_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13990,7 +13990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6731739157112586851}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14022,7 +14022,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4162391984314128967}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_2_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14054,7 +14054,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 624145711775361419}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PantsChain_B
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14085,7 +14085,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1667732681353090334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftEye
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14117,7 +14117,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7779941445793053166}
   - component: {fileID: 5281657272030709667}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14408,7 +14408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5782718903017532391}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Breast_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14440,7 +14440,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 679523972472271707}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpperArm_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14476,7 +14476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3298904057552581601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cheek_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14508,7 +14508,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 827734788898504742}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bangs.R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14540,7 +14540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3134040172205838492}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Hat_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14571,7 +14571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3936430600481321503}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14604,7 +14604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 897962392618273326}
   - component: {fileID: 2465364876264483904}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Bracelets
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14895,7 +14895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 794655231305916475}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_B_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14927,7 +14927,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 812989928025491576}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14959,7 +14959,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3045829029630037168}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NameCard.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -14991,7 +14991,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7964683832212558186}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F_Target_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15025,7 +15025,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2880093411589750380}
   - component: {fileID: 2227074534055418431}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15076,7 +15076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5439475673493041733}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_Aim_Hand_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15108,7 +15108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1825413083815171673}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15143,7 +15143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8470212100640000549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndexDistal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15174,7 +15174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4490500223019906391}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: PantsChain_Root
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15208,7 +15208,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4481328999924380541}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_1_R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15239,7 +15239,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2261613363106385469}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15271,7 +15271,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4180223621850179827}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RingDistal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15302,7 +15302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7422696897792517567}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_root_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15337,7 +15337,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9028735120112799727}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_ear_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15369,7 +15369,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5205955315280633242}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: hair_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15402,7 +15402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1574379166462265054}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NameCard.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15433,7 +15433,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4561560779394009252}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_4_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15464,7 +15464,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5349872872437381991}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15499,7 +15499,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1212005581768655436}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15530,7 +15530,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6678585774323156038}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_B_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15562,7 +15562,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2803280964759302783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_ear_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15594,7 +15594,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2600493806781982978}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Apron_ribbon_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15625,7 +15625,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8419794860906988386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_B_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15657,7 +15657,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4605499544148369463}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NameCard.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15689,7 +15689,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6630608046059873862}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15721,7 +15721,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2930063793225371800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_1_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15753,7 +15753,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4779847421995388797}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_nameplate_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15784,7 +15784,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 300014992120827181}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15815,7 +15815,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 700502512295534797}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tie.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15847,7 +15847,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6117399939463674478}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15879,7 +15879,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7096800711200077798}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15911,7 +15911,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7934338068818944130}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15943,7 +15943,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3954362341222457680}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -15975,7 +15975,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2308315443235299864}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_L.003_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16006,7 +16006,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4552766016287740299}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16037,7 +16037,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7050727620904230891}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16069,7 +16069,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2164608133704306037}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_2_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16101,7 +16101,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1657824840095671764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16133,7 +16133,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6409978779351811962}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16165,7 +16165,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6541149700691677148}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F2_R_COL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16196,7 +16196,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2019237903048223597}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_Shoulder_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16230,7 +16230,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3065209058773934135}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S2_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16262,7 +16262,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8959541482192549058}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16293,7 +16293,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1284728569620699080}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16326,7 +16326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3331199120899421800}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16358,7 +16358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5951220012638418580}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ribbon_S_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16389,7 +16389,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 503488057245700460}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16421,7 +16421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6758297259956483760}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_pants_ribbon_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16453,7 +16453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1069334875838115446}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16485,7 +16485,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6431437312339587401}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_4_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16517,7 +16517,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5212589317820808316}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16549,7 +16549,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8523489682701833764}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.013
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16581,7 +16581,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4179081080010333696}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16612,7 +16612,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8556058922769328189}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleDistal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16643,7 +16643,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3091698994511722326}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F1_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16674,7 +16674,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4020575867374552972}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16706,7 +16706,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1857629915266559215}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.016
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16738,7 +16738,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6348744348360902353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bone
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16769,7 +16769,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6301609656340983174}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16801,7 +16801,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5851534218009432867}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16839,7 +16839,7 @@ GameObject:
   - component: {fileID: 748615415056933878}
   - component: {fileID: -3966098195265333311}
   - component: {fileID: 4485169977118929429}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -16930,7 +16930,7 @@ CapsuleCollider:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -16968,6 +16968,8 @@ MonoBehaviour:
   pageIndexText: {fileID: 0}
   _interactionIndex: -1
   interactionButtonInfos: []
+  _isInteracting: 0
+  _interactionType: 0
   _OreAmount: 0
   myMarker: {fileID: 8035184359376342701}
   otherMarker: {fileID: 4886176525193278536}
@@ -16978,6 +16980,7 @@ MonoBehaviour:
   _ropeBuilding: {fileID: 0}
   _CanSetRope: 0
   _MoveDir: {x: 0, y: 0, z: 0}
+  _angleCheckVector: {x: 0, y: 0, z: 0}
   _PreviousPosition: {x: 0, y: 0, z: 0}
   _PreviousRotation: {x: 0, y: 0, z: 0, w: 0}
   footstepAudioSource: {fileID: 0}
@@ -17040,7 +17043,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 853010464442619651}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17071,7 +17074,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7202546447327580513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17103,7 +17106,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2619771667246722625}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LeftHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17134,7 +17137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7486861933621391340}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_bun_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17166,7 +17169,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 615607310088076099}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17198,7 +17201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8181539909863244799}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_3_L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17229,7 +17232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3936726927301043402}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_PantsChain_COL(Hips)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17260,7 +17263,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3449267034563422071}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Cheek_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17291,7 +17294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6282308829058801513}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: NameCard_String.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17323,7 +17326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2359188437571999221}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17355,7 +17358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4807782767154474349}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_B_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17387,7 +17390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3211422340970176353}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17419,7 +17422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4896936961889237265}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17451,7 +17454,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6616082486137648495}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LowerArm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17484,7 +17487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9090609833086949974}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S1_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17517,7 +17520,7 @@ GameObject:
   m_Component:
   - component: {fileID: 198406698219482088}
   - component: {fileID: 5493291997065118898}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17808,7 +17811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8481328018814177834}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17840,7 +17843,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8074654284382774887}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17872,7 +17875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1876230223548087065}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17907,7 +17910,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2873345586556502860}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Breast_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -17940,7 +17943,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9008713977684421043}
   - component: {fileID: 2559839737122347728}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_PantsChain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18231,7 +18234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9089600990776313022}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Ahoge.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18263,7 +18266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 171175324801085341}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_1_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18295,7 +18298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6406369439828916010}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tail_C
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18326,7 +18329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8337143007780030568}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F1_R_COL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18357,7 +18360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2594186043443769671}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18389,7 +18392,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3675126667285915364}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shoes_ribbon_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18420,7 +18423,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6676269816029777290}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.L.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18452,7 +18455,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6450954551678500521}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tie.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18484,7 +18487,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1304254295443757583}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18516,7 +18519,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6592992372842447498}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_Aim_S_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18548,7 +18551,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4663584445912472442}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_side_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18580,7 +18583,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8439143863759295906}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F2_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18611,7 +18614,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6528045742949011440}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F2_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18642,7 +18645,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 326725261831337942}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RingDistal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18673,7 +18676,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 461731340625546047}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_1_L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18704,7 +18707,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5520165052128906127}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -18737,7 +18740,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4000458718501894326}
   - component: {fileID: 5500550669812482531}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Shoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19028,7 +19031,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2732865599256839423}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Sleeve_Twist_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19061,7 +19064,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7583592453944892182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Neck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19093,7 +19096,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6932020055464987145}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19125,7 +19128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5495090365521734699}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_2_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19157,7 +19160,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 374683123084866665}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shirt_root_2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19189,7 +19192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6406920458409198115}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: UpperArm_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19225,7 +19228,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6708768698629929386}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_4_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19258,7 +19261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 555717867669207982}
   - component: {fileID: 8005964337173999795}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_NameCard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19549,7 +19552,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1749518178780873485}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_3_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19581,7 +19584,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6060840411462054918}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_1.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19613,7 +19616,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8387844665852162549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19645,7 +19648,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4056613786029005810}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Butt_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19676,7 +19679,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 911241214462916439}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_F_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19708,7 +19711,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7597087545245700475}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19754,7 +19757,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6229825378105201138}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B2_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19788,7 +19791,7 @@ GameObject:
   - component: {fileID: 6631955653074281703}
   - component: {fileID: 8471012994836390618}
   - component: {fileID: 5309768021645057579}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Armature
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19869,7 +19872,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8842492889871718873}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_1_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19901,7 +19904,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3401226011005212202}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_root_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19936,7 +19939,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4166764153943686545}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19968,7 +19971,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7078297745623624783}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_2_L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -19999,7 +20002,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3695982968138187118}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20031,7 +20034,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7485995695084013302}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20073,7 +20076,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8303934036096823866}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndexIntermediate_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20105,7 +20108,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4709460741055112701}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_1_R.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20136,7 +20139,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7779168833088452194}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R.009
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20168,7 +20171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3956999565655600152}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RingProximal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20200,7 +20203,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1865905803092088875}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LittleDistal_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20231,7 +20234,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5479859521746999428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20263,7 +20266,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 210754028641014327}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_side_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20295,7 +20298,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1320727121286117297}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Toe_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20326,7 +20329,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3314105118029073812}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: CameraOffset_FPS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20357,7 +20360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8503560307578711848}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B1_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20388,7 +20391,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1575156309156469722}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_Outer_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20419,7 +20422,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7277521764647287207}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket_Target_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20450,7 +20453,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 532788279384370054}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_side_L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20481,7 +20484,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4799379118782021167}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_pants_ribbon_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20512,7 +20515,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1577467244137465370}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_Inner_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20543,7 +20546,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5943481984116851033}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20574,7 +20577,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 32596503456350108}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20606,7 +20609,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8438082652538458020}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20639,7 +20642,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4746214103197803710}
   - component: {fileID: 7735422057553925376}
-  m_Layer: 7
+  m_Layer: 6
   m_Name: Character_Marker_Me
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20722,7 +20725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1762843992369171859}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Hips
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20763,7 +20766,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4009699094855593462}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20795,7 +20798,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2092647392793083177}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20827,7 +20830,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5404085154282783305}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.015
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20859,7 +20862,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4040082059608976697}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_2_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20891,7 +20894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4383240554908769383}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_Outer_R_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20922,7 +20925,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2976163000982639367}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S1_R.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -20954,7 +20957,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5666059849439734444}
   - component: {fileID: 713882509335180602}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Shirts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21246,7 +21249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1566000772522376177}
   - component: {fileID: 7197324023339174114}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Stockings
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21537,7 +21540,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7276535626324452173}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21568,7 +21571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2507179905248336743}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndexProximal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21601,7 +21604,7 @@ GameObject:
   m_Component:
   - component: {fileID: 104513422330899359}
   - component: {fileID: 8732105082400170711}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Gloves
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21892,7 +21895,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7681202566613254334}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_F2_L_COL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21923,7 +21926,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1743354918414042907}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_B_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21955,7 +21958,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3591344613316976420}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_1_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -21987,7 +21990,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2854108103374473245}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Breast_L.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22019,7 +22022,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7210943955867124205}
   - component: {fileID: 6868415194498360985}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_LegBelts
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22310,7 +22313,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5982477757447045120}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Obsidian_Jacket_COL(UL_L)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22341,7 +22344,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6770708489737784637}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_Aim_Hand_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22373,7 +22376,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8076297404122765816}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_tail.006
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22405,7 +22408,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4879825089288808852}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: JacketZipper.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22436,7 +22439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4924052975469948894}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: IndexDistal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22467,7 +22470,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6784364073347917182}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sleeve_B1_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22499,7 +22502,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6283685602603548473}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Jacket_S1_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22531,7 +22534,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8639667190476898226}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_front_side_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22563,7 +22566,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1771754087730053343}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22595,7 +22598,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5060135126100256664}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_twin_L.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22627,7 +22630,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 305399231896103651}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R.010
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22659,7 +22662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4048680865096089713}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RingIntermediate_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22691,7 +22694,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6373837143124239525}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_side_R.003_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22722,7 +22725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 599603129269590534}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22753,7 +22756,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5593685513503754736}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_3_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22785,7 +22788,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8982116572641558615}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22817,7 +22820,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6558197295936460532}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bangs.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22848,7 +22851,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4819366148440376447}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.012
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22880,7 +22883,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6728928414774630983}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.R.005
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22911,7 +22914,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5819783602670876296}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Back Hair.R.011
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22942,7 +22945,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4058896633990226514}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: MiddleProximal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -22974,7 +22977,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3637335018483720557}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RingProximal_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23006,7 +23009,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1863263693505992172}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_3_R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23038,7 +23041,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9195112356763567549}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_L.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23070,7 +23073,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2127707671159825601}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_4_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23102,7 +23105,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6928585783218645759}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23134,7 +23137,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7573742207189723654}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bangs.R.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23165,7 +23168,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1232190120641238442}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_2_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23197,7 +23200,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1336201619719644934}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23229,7 +23232,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 954392098932408739}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23261,7 +23264,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 53852411290800446}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_shoes_ribbon_L_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23292,7 +23295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7418230837588526914}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_bun_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23323,7 +23326,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4423147670174879933}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_bun_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23355,7 +23358,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3273614695700542968}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.007
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23387,7 +23390,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3566589490599821016}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Tang.001_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23418,7 +23421,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4278571756774202390}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Sides Hair.L.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23449,7 +23452,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4004939051404230660}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.R.014
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23480,7 +23483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8962587766825908748}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: FF.Sides Hair.L.008
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23511,7 +23514,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5088804179527802773}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_hair_ribbon_4_R.002_end
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23543,7 +23546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1938517229802596678}
   - component: {fileID: 5244445888033645320}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: F.Side
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23741,7 +23744,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 22259146639772085}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RingIntermediate_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23773,7 +23776,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2795158969870196674}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Earring_R.004
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23806,7 +23809,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7300148101630255725}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Manuka_apron_ribbon_1_L.001
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23838,7 +23841,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8087542720176205543}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ThumbIntermediate_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23870,7 +23873,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7495121707323776399}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Glasses_Chain_R.002
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -23902,7 +23905,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3217804395351716954}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Sides Hair.L.003
   m_TagString: Untagged
   m_Icon: {fileID: 0}

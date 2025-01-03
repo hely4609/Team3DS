@@ -51,7 +51,6 @@ public class BuildingManager : Manager
         //roadData.Add(new Vector2(-75, 75)); // 마지막점.
         PointRegistration(true, -150);
 
-
         GameManager.ManagerStarts += ManagerStart;
 
         yield return null;
@@ -112,6 +111,7 @@ public class BuildingManager : Manager
 
         return new Vector3(start.x + lengthSize.x, 0.1f, start.y + lengthSize.y);
     }
+
     protected void CreateRoad()
     {
         for (int i = 0; i < roadData.Count; i++)

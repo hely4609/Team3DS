@@ -557,13 +557,6 @@ public partial class Player : Character
                 else
                     rb.velocity = Vector3.zero;
             }
-            if(rb.position.x <boundaryLeftUp.x || rb.position.x > boundaryRightDown.x || rb.position.z > boundaryLeftUp.z || rb.position.z < boundaryRightDown.z)
-            {
-                Debug.Log(Vector3.Angle(velocity, PreviousPosition - transform.position));
-                angleCheck = Vector3.Angle(velocity, PreviousPosition - transform.position) < 45;
-                if (angleCheck)
-                    rb.velocity = Vector3.zero;
-            }
         }
         else
         {
