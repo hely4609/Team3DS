@@ -98,6 +98,26 @@ public class LocalController : ControllerBase
         //    if (controlledPlayer.DesigningBuilding == null && myAuthority == Runner.LocalPlayer)
         //        controlledPlayer.buildingSelectUI.SetActive(true);
         //}
+        
+        if(controlledPlayer.leftRopeLengthText != null)
+        {
+            if (controlledPlayer.ropeBuilding != null)
+            {
+                float leftRopeLength;
+                if (controlledPlayer.ropeBuilding is Tower) leftRopeLength = controlledPlayer.ropeBuilding.CurrentRopeLength;
+                else
+                {
+                    Pylon pylon = controlledPlayer.ropeBuilding as Pylon;
+                    leftRopeLength = pylon.RopeLengthList[MyNumber];
+                }
+                controlledPlayer.leftRopeLengthText.text = $"Left Rope Length : {leftRopeLength}";
+                controlledPlayer.leftRopeLengthText.gameObject.SetActive(true);
+            }
+            else
+            {
+                controlledPlayer.leftRopeLengthText.gameObject.SetActive(false);
+            }
+        }
     }
 
     protected void OnCursorLockTogle()
