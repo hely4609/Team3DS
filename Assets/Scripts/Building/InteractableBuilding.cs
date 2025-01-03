@@ -3,9 +3,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Localization;
-using UnityEngine.Localization.Components;
-using UnityEngine.ResourceManagement.AsyncOperations;
 
 [Serializable]
 public struct RopeStruct
@@ -24,8 +21,9 @@ public class InteractableBuilding : Building, IInteraction
     [Networked, SerializeField] public bool IsRoped { get; set; } = false;
     [SerializeField] protected RopeStruct ropeStruct = new RopeStruct();
     public RopeStruct RopeStruct { get { return ropeStruct; } }
-    [SerializeField] protected float maxRopeLength;
-    [SerializeField] protected float currentRopeLength;
+    [Networked, SerializeField] protected float maxRopeLength { get; set; }
+    [Networked, SerializeField] protected float currentRopeLength { get; set; }
+    public float CurrentRopeLength => currentRopeLength;
 
     [Networked] protected bool IsChangeInfo { get; set; }
 

@@ -47,6 +47,7 @@ public partial class Player : Character
     protected TextMeshProUGUI oreAmountText; // 가지고 있는 광물양을 보여줄 UI
     protected Image buttonImage;
     public TextMeshProUGUI pageIndexText;
+    public TextMeshProUGUI leftRopeLengthText;
 
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
@@ -212,11 +213,13 @@ public partial class Player : Character
             oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();
             onScreenKeyGuideUIAnim = GameObject.FindGameObjectWithTag("OnScreenKeyGuideUI").GetComponent<Animator>();
             pageIndexText = GameObject.FindGameObjectWithTag("PageIndexText").GetComponent<TextMeshProUGUI>();
+            leftRopeLengthText = GameObject.FindGameObjectWithTag("LeftRopeLengthText").GetComponent<TextMeshProUGUI>();
 
             interactionUpdateUI.SetActive(false);
             buildingSelectUI.SetActive(false);
             buildingConfirmUI.SetActive(false);
             ropeMaxDistanceSignUI.SetActive(false);
+            leftRopeLengthText.gameObject.SetActive(false);
 
             GameManager.CloseLoadInfo();
         }

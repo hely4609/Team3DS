@@ -9,6 +9,7 @@ public class Pylon : InteractableBuilding
     public List<RopeStruct> MultiTabList { get { return multiTabList; } }
     public List<bool> isSettingRopeList;
     public List<float> ropeLengthList;
+    [Networked, Capacity(4)] public NetworkArray<float> RopeLengthList { get; } = MakeInitializer(new float[] { 0, 0, 0, 0 });
     [SerializeField, Networked] public bool OnOff { get; set; } // 꺼졌는지 켜졌는지.
     public List<Pylon> attachedPylonList;
     protected override void Initialize()
@@ -265,6 +266,7 @@ public class Pylon : InteractableBuilding
         multiTabList[number].ropePositions.Clear();
         multiTabList[number].ropePositions.Add(transform.position);
         ropeLengthList[number] = maxRopeLength;
+        RopeLengthList.Set(number, ropeLengthList[number]);
         player.CanSetRope = true;
         isSettingRopeList[number] = false;
     }
@@ -274,6 +276,7 @@ public class Pylon : InteractableBuilding
         multiTabList[number].ropePositions.Clear();
         multiTabList[number].ropePositions.Add(transform.position);
         ropeLengthList[number] = maxRopeLength;
+        RopeLengthList.Set(number, ropeLengthList[number]);
         player.CanSetRope = true;
         isSettingRopeList[number] = false;
     }
@@ -323,6 +326,7 @@ public class Pylon : InteractableBuilding
             multiTabList[number].ropePositions.RemoveRange(multiTabList[number].ropePositions.Count - 2, 2);
             NetworkObject target = multiTabList[number].ropeObjects[multiTabList[number].ropeObjects.Count - 1];
             ropeLengthList[number] += target.gameObject.transform.localScale.z;
+            RopeLengthList.Set(number, ropeLengthList[number]);
             Runner.Despawn(target);
             multiTabList[number].ropeObjects.Remove(target);
 
@@ -353,6 +357,7 @@ public class Pylon : InteractableBuilding
         Vector3 delta = end - start;
 
         ropeLengthList[number] -= delta.magnitude;
+        RopeLengthList.Set(number, ropeLengthList[number]);
 
         NetworkObject ropeObject = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Rope), new Vector3(start.x, start.y, start.z), Quaternion.LookRotation(delta));
         multiTabList[number].ropeObjects.Add(ropeObject);
