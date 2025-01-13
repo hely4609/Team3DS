@@ -253,7 +253,7 @@ public class LocalController : ControllerBase
     ////////////////////////////////////////////
 
     bool alreadyPressed = false;
-    bool largeMapClicked = false;
+    [SerializeField]bool largeMapClicked = false;
     protected void OnInteraction(bool isPressed) 
     {
         // ¹Ì´Ï¸Ê(¶óÁö¸Ê) µå·¡±×

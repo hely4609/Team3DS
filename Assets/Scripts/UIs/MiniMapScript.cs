@@ -88,26 +88,32 @@ public class MiniMapScript : MyComponent
     public void LargeMapZoom(float value)
     {
         if (!largeMap.activeSelf) return;
+        if (value == 0) return;
 
         float bef = largeMapCamera.orthographicSize;
         largeMapCamera.orthographicSize = Mathf.Clamp(largeMapCamera.orthographicSize - value * 0.05f, 10, 100);
         float aft = largeMapCamera.orthographicSize;
 
+        Vector3 wantVector = new Vector3(Input.mousePosition.x - Screen.width * 0.5f, 0, Input.mousePosition.y - Screen.height * 0.5f);
+        wantVector.Normalize();
         if (bef > aft)
         {
-            Vector3 wantVector = new Vector3(Input.mousePosition.x - Screen.width * 0.5f, 0, Input.mousePosition.y - Screen.height * 0.5f);
-            wantVector.Normalize();
             largeMapCamera.transform.position += wantVector * zoomSensitivity;
             largeMapCamera.transform.position = new Vector3(Mathf.Clamp(largeMapCamera.transform.position.x + wantVector.x * 10, -100, 100), largeMapCamera.transform.position.y, Mathf.Clamp(largeMapCamera.transform.position.z + wantVector.z * 10, -100, 100));
-
         }
+        largeMapCamera.transform.position = new Vector3(Mathf.Clamp(largeMapCamera.transform.position.x + wantVector.x * zoomSensitivity, largeMapCamera.orthographicSize - 125, -(largeMapCamera.orthographicSize - 125)), 
+            largeMapCamera.transform.position.y,
+            Mathf.Clamp(largeMapCamera.transform.position.z + wantVector.z * zoomSensitivity, largeMapCamera.orthographicSize - 125, -(largeMapCamera.orthographicSize - 125)));
     }
 
     public float dragSensitivity = 0.0055f;
     public void LargeMapDrag(Vector2 mouseDelta)
     {
         Vector3 wantVector = new(-mouseDelta.x, 0, -mouseDelta.y);
-        largeMapCamera.transform.position += largeMapCamera.orthographicSize * dragSensitivity * wantVector;
+        //largeMapCamera.transform.position += largeMapCamera.orthographicSize * dragSensitivity * wantVector;
+        largeMapCamera.transform.position = new Vector3(Mathf.Clamp(largeMapCamera.transform.position.x + largeMapCamera.orthographicSize * wantVector.x * dragSensitivity * 0.3f, largeMapCamera.orthographicSize - 125, -(largeMapCamera.orthographicSize - 125)),
+            largeMapCamera.transform.position.y,
+            Mathf.Clamp(largeMapCamera.transform.position.z + largeMapCamera.orthographicSize * wantVector.z * dragSensitivity * 0.3f, largeMapCamera.orthographicSize - 125, -(largeMapCamera.orthographicSize - 125)));
     }
 
     public void ShowTowerRangeToggle()
