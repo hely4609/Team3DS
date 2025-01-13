@@ -15,6 +15,7 @@ public class Monster : Character
     [SerializeField] Canvas hpCanvas;
     [SerializeField] Image hpFillImage;
     [SerializeField] TextMeshProUGUI hpText;
+    [SerializeField] EffectPlayer effectPlayer;
 
 
     [SerializeField] protected int oreAmount;
@@ -58,7 +59,8 @@ public class Monster : Character
     public override int TakeDamage(Tower attacker, int damage)
     {
         HpCurrent -= damage;
-        
+        effectPlayer.PlayEffect("BasicHit");
+
         
         return 0;
     }

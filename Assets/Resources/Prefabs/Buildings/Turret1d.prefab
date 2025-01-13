@@ -944,8 +944,8 @@ MonoBehaviour:
   _maxRopeLength: 0
   _currentRopeLength: 0
   _powerConsumption: 40
-  _attackDamage: 10
-  _attackSpeed: 1
+  _attackDamage: 1
+  _attackSpeed: 0.1
   _attackRange: 1.25
   target: {fileID: 0}
   targetList: []

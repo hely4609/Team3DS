@@ -7,7 +7,7 @@ using UnityEngine;
 public class EffectPlayer : NetworkBehaviour
 {
     [SerializeField] Transform wantTF;
-    protected void FireEffect(string wantEffect)
+    public void PlayEffect(string wantEffect)
     {
         if(Enum.TryParse(wantEffect, out ResourceEnum.Prefab wantPrefab))
         {

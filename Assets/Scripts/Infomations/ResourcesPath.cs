@@ -40,6 +40,7 @@ public class ResourcesPath
         "Prefabs/Characters/Slime_King",
         // Effects
         "Prefabs/Effects/Smokes/Smoke1",
+        "Prefabs/Effects/Hits/BasicHit",
         // ETC
         "Prefabs/UIs/Signs/BuildingSignCanvas",
 

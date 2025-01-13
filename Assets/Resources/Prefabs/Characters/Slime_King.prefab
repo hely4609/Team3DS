@@ -115,7 +115,7 @@ Transform:
   m_Children:
   - {fileID: 3291101795005952483}
   m_Father: {fileID: 7709942851702268363}
-  m_LocalEulerAnglesHint: {x: 13.145164, y: 0.13802034, z: 21.450123}
+  m_LocalEulerAnglesHint: {x: 0.000010307133, y: 0.0000013285614, z: 11.945448}
 --- !u!1 &1301895848370091378
 GameObject:
   m_ObjectHideFlags: 0
@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 7058748826662107400}
   - component: {fileID: 5112656511851648211}
   - component: {fileID: -3294657781394866977}
+  - component: {fileID: 279559856443599069}
   m_Layer: 8
   m_Name: Slime_King
   m_TagString: Untagged
@@ -171,6 +172,7 @@ MonoBehaviour:
   hpCanvas: {fileID: 4105329755671595924}
   hpFillImage: {fileID: 2298705483509014747}
   hpText: {fileID: 2912436540255165044}
+  effectPlayer: {fileID: 279559856443599069}
   oreAmount: 3
   roadDestination: 0
   hpMax: 140
@@ -224,6 +226,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 8009699938648516044}
   - {fileID: -3294657781394866977}
+  - {fileID: 279559856443599069}
   - {fileID: 2372102227925938669}
   - {fileID: 3391286554129620}
 --- !u!135 &5112656511851648211
@@ -263,6 +266,19 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &279559856443599069
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301895848370091378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c46b555fec15fe44a4c21ec4398e417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wantTF: {fileID: 7709942851702268363}
 --- !u!1 &2755279602144512376
 GameObject:
   m_ObjectHideFlags: 0
@@ -693,7 +709,7 @@ Transform:
   - {fileID: 7327319948887874612}
   - {fileID: 8808726349126931722}
   m_Father: {fileID: 9215723875220697907}
-  m_LocalEulerAnglesHint: {x: 89.9802, y: -0.00001321638, z: 0}
+  m_LocalEulerAnglesHint: {x: 89.98021, y: -0.000013660382, z: 0}
 --- !u!1 &7131298510694111829
 GameObject:
   m_ObjectHideFlags: 0
@@ -1078,4 +1094,4 @@ Transform:
   m_Children:
   - {fileID: 4797617311838466931}
   m_Father: {fileID: 7709942851702268363}
-  m_LocalEulerAnglesHint: {x: 13.145165, y: -0.13799596, z: -21.45013}
+  m_LocalEulerAnglesHint: {x: 0.0000103071325, y: 0.000025992196, z: -11.945448}

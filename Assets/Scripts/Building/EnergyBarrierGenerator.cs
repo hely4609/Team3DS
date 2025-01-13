@@ -109,7 +109,6 @@ public class EnergyBarrierGenerator : InteractableBuilding
                     if (hpCurrent <= 0)
                     {
                         onOff = false;
-                        SetActiveEnergyBarrier();
                         GameManager.Instance.Defeat();
                         GameManager.Instance.GameOver();
                     }

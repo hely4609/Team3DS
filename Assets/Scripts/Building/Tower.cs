@@ -218,7 +218,7 @@ public class Tower : InteractableBuilding
         
     }
 
-    public void Attack()
+    public virtual void Attack()
     {
         // 판단기준
         // 타겟이있는가

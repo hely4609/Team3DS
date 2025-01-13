@@ -130,6 +130,7 @@ GameObject:
   - component: {fileID: 7058748826662107400}
   - component: {fileID: 5112656511851648211}
   - component: {fileID: -3294657781394866977}
+  - component: {fileID: 8826677546063795630}
   m_Layer: 8
   m_Name: Slime_Viking
   m_TagString: Untagged
@@ -171,6 +172,7 @@ MonoBehaviour:
   hpCanvas: {fileID: 8338855662455383819}
   hpFillImage: {fileID: 4050039137456601926}
   hpText: {fileID: 7969140828470999191}
+  effectPlayer: {fileID: 8826677546063795630}
   oreAmount: 1
   roadDestination: 0
   hpMax: 50
@@ -224,6 +226,7 @@ MonoBehaviour:
   NetworkedBehaviours:
   - {fileID: 8009699938648516044}
   - {fileID: -3294657781394866977}
+  - {fileID: 8826677546063795630}
   - {fileID: 2372102227925938669}
   - {fileID: 3391286554129620}
 --- !u!135 &5112656511851648211
@@ -263,6 +266,19 @@ MonoBehaviour:
   SyncParent: 0
   _autoAOIOverride: 1
   DisableSharedModeInterpolation: 0
+--- !u!114 &8826677546063795630
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1301895848370091378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c46b555fec15fe44a4c21ec4398e417, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wantTF: {fileID: 7709942851702268363}
 --- !u!1 &2617129247861038222
 GameObject:
   m_ObjectHideFlags: 0

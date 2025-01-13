@@ -20,9 +20,45 @@ public class GatlingTower : Tower
         currentRopeLength = maxRopeLength;
         base.Initialize();
     }
+    public override void Attack()
+    {
+        if (!target)
+        {
+            attackAnimator.SetBool("Attack", false);
+            LockOn();
+
+        }
+        else
+        {
+            attackAnimator.SetBool("Attack", true);
+
+            gunBarrel.transform.LookAt(target.transform);
+            gunBarrel.transform.eulerAngles = new Vector3(0, gunBarrel.transform.eulerAngles.y + gunBarrelRotateCorrection, 0);
+            if (nowTime <= 0)
+            {
+                OnHit();
+                nowTime = attackSpeed;
+            }
+            else
+            {
+                nowTime -= Time.deltaTime;
+            }
+        }
+    }
+
     protected override void OnHit()
     {
-        base.OnHit();
+        if (!target.isReady)
+        {
+            MonsterListOut(target);
+            target = null;
+            Attack();
+            return;
+        }
+        else
+        {
+            target.TakeDamage(this, attackDamage);
+        }
     }
     public override void LockOn()
     {
