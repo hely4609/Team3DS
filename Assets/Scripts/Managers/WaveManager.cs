@@ -1,4 +1,3 @@
-using FischlWorks_FogWar;
 using Fusion;
 using System.Collections;
 using System.Collections.Generic;
@@ -26,8 +25,6 @@ public class WaveManager : Manager
     public GameObject waveInfoUI;
     TextMeshProUGUI nextWaveTimeText;
     TextMeshProUGUI monsterCountText;
-    private csFogWar fogWar;
-    public csFogWar FogWar { get { return fogWar; }  }
 
     // 플레이어 움직임 제한하는 구역
     public Vector3 BoundLeftUp { get; private set; }
@@ -99,10 +96,7 @@ public class WaveManager : Manager
         roadData = GameManager.Instance.BuildingManager.roadData;
 
         walls = CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
-        fogWar = GameObject.Find("Fog").GetComponent<csFogWar>();
-        fogWar.AddFogRevealer(new csFogWar.FogRevealer(GameManager.Instance.GetComponent<Transform>(), 10, false));
-   
-        fogWar.ScanLevel();
+
         yield return base.Initiate();
     }
 
@@ -142,8 +136,6 @@ public class WaveManager : Manager
 
     public override void ManagerUpdate(float deltaTime)
     {
-        fogWar.UpdateFog();
-        fogWar.ForceUpdateFog();
         if (waveInfoUI == null) FindWaveInfoUI();
         else if(waveInfo.waveOrder.Count > 1 || GameManager.Instance.BuildingManager.generator.IsWaveLeft)
         {
@@ -161,8 +153,7 @@ public class WaveManager : Manager
             if(GameManager.Instance.BuildingManager.generator.IsWaveStart)
             {
                 nowMonsterTime += deltaTime;
-                fogWar.ScanLevel();
-
+            
                 if (nowMonsterTime >= monsterInterval && waveInfo.waveOrder.Count > 0 && waveInfo.waveOrder.Peek().Count > 0) 
                 {
                     MonsterInstantiate();
@@ -193,9 +184,7 @@ public class WaveManager : Manager
                                 GameObject nextWall= CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
                                 GameObject.Destroy(walls);
                                 walls = nextWall;
-
                                 Debug.Log($"현재 영역 : {BoundLeftUp}, {BoundRightDown}");
-                                fogWar.ScanLevel();
                             }
 
 
