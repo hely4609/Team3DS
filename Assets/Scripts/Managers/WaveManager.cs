@@ -158,7 +158,7 @@ public class WaveManager : Manager
                 {
                     MonsterInstantiate();
                     nowMonsterTime = 0;
-                    Debug.Log($"{waveInfo.waveOrder.Peek().Count}마리 남음");
+                    //Debug.Log($"{waveInfo.waveOrder.Peek().Count}마리 남음");
                 }
                 else if(waveInfo.waveOrder.Count > 0)
                 {
@@ -177,7 +177,7 @@ public class WaveManager : Manager
                         currentWaveIndex++;
                         if (currentWaveIndex % 1 == 0) // 웨이브마다 스폰 장소가 변경됨.
                         {
-                            if (SpawnLoc <= roadData.Count - 1) // 길 끝이 아니라면 +1
+                            if (SpawnLoc < roadData.Count - 1) // 길 끝이 아니라면 +1
                             {
                                 SpawnLoc++;
                                 nowArea++;

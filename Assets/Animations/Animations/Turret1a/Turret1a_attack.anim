@@ -284,7 +284,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.46666667
-    functionName: FireEffect
+    functionName: PlayEffect
     data: Smoke1
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0

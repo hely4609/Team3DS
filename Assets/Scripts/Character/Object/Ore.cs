@@ -5,20 +5,10 @@ using UnityEngine;
 
 public class Ore : MyComponent
 {
-    public int amount;
+    public int amount = 1;
 
     protected Player target;
     protected bool isEaten;
-
-    public void Initialize()
-    {
-        amount = 1;
-    }
-
-    protected override void MyStart()
-    {
-        amount = 1;
-    }
 
     protected override void MyUpdate(float deltaTime)
     {

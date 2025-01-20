@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: -3294657781394866977}
   - component: {fileID: 6116992821626438664}
   m_Layer: 8
-  m_Name: Slime_Leaf
+  m_Name: Slime_Leaf_Elite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -148,7 +148,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4644625060330405144}
@@ -173,10 +173,10 @@ MonoBehaviour:
   hpFillImage: {fileID: 2006082851528027123}
   hpText: {fileID: 4686637549790105594}
   effectPlayer: {fileID: 6116992821626438664}
-  oreAmount: 2
+  oreAmount: 6
   roadDestination: 0
-  hpMax: 25
-  hpCurrent: 25
+  hpMax: 75
+  hpCurrent: 75
   _HpCurrent: 0
   attackDamage: 1
   _isReady: 0
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_Script: {fileID: -1552182283, guid: e725a070cec140c4caffb81624c8c787, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SortKey: 773269459
+  SortKey: 565569314
   ObjectInterest: 1
   Flags: 262145
   NestedObjects: []

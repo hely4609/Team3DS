@@ -30,8 +30,13 @@ namespace ResourceEnum
         Ore,
         // Monster
         Slime_Leaf,
+        Slime_Leaf_Elite,
+        Slime_Leaf_Superfast,
         Slime_Viking,
+        Slime_Viking_Elite,
         Slime_King,
+        Slime_King_Elite,
+        Slime_King_Elite_Elite,
 
         // 지을 수 있는것
         buildingStart,
