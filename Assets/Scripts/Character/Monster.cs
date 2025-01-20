@@ -155,9 +155,17 @@ public class Monster : Character
     {
         if (HasStateAuthority)
         {
-            GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position);
+            Ore ore = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position).GetComponent<Ore>();
+            ore.amount = oreAmount;
         }
-        
+
+        StartCoroutine(DelayedDespawn());
+    }
+
+    IEnumerator DelayedDespawn()
+    {
+        transform.position = new Vector3(1000, 1000, 1000);
+        yield return new WaitForSeconds(2);
         Despawn();
     }
 

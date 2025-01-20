@@ -29,6 +29,16 @@ public class NormalTower : Tower
     }
     public override void Upgrade()
     {
-        base.Upgrade();
+        if (!HasStateAuthority) return;
+        if (UpgradeRequire > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
+        {
+            Debug.Log("업그레이드에 필요한 광물이 부족합니다.");
+            return;
+        }
+        attackDamage += 2;
+        GameManager.Instance.BuildingManager.supply.TotalOreAmount -= UpgradeRequire;
+        TotalUpgradeCost += UpgradeRequire;
+        UpgradeRequire = Mathf.CeilToInt(UpgradeRequire * 1.2f);
+        Level += 1;
     }
 }

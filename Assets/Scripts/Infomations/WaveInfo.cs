@@ -15,7 +15,10 @@ public class WaveInfo
         waveOrder = new Queue<Queue<ResourceEnum.Prefab>>();
         if(GameManager.Instance.NetworkManager.Runner.IsServer)
         {
-            ResourceEnum.Prefab[] a = new ResourceEnum.Prefab[] { ResourceEnum.Prefab.Slime_Leaf, ResourceEnum.Prefab.Slime_Viking, ResourceEnum.Prefab.Slime_King };
+            ResourceEnum.Prefab[] a = new ResourceEnum.Prefab[] 
+            { 
+                ResourceEnum.Prefab.Slime_Viking, ResourceEnum.Prefab.Slime_Leaf, ResourceEnum.Prefab.Slime_King, 
+            };
             int[] b = new int[] { 1, 0, 0 };
             AddMonsterQueue(a, b, 10);
             b = new int[] { 1, 1, 0 };
@@ -26,6 +29,35 @@ public class WaveInfo
             AddMonsterQueue(a, b, 5);
             b = new int[] { 0, 0, 1 };
             AddMonsterQueue(a, b, 10);
+            a = new ResourceEnum.Prefab[]
+            {
+                ResourceEnum.Prefab.Slime_Viking, ResourceEnum.Prefab.Slime_Viking_Elite
+            };
+            b = new int[] { 1, 1 };
+            AddMonsterQueue(a, b, 5);
+
+            a = new ResourceEnum.Prefab[]
+            {
+                ResourceEnum.Prefab.Slime_Viking_Elite, ResourceEnum.Prefab.Slime_Leaf_Elite, ResourceEnum.Prefab.Slime_Leaf_Superfast, ResourceEnum.Prefab.Slime_King_Elite,
+            };
+            b = new int[] { 1, 1, 0, 0 };
+            AddMonsterQueue(a, b, 5);
+            b = new int[] { 0, 0, 1, 0 };
+            AddMonsterQueue(a, b, 10);
+            b = new int[] { 4, 0, 0, 1 };
+            AddMonsterQueue(a, b, 2);
+            b = new int[] { 1, 0, 0, 1 };
+            AddMonsterQueue(a, b, 5);
+            b = new int[] { 0, 0, 0, 1 };
+            AddMonsterQueue(a, b, 10);
+            b = new int[] { 0, 2, 1, 1 };
+            AddMonsterQueue(a, b, 10);
+            a = new ResourceEnum.Prefab[]
+            {
+                ResourceEnum.Prefab.Slime_King_Elite_Elite,
+            };
+            b = new int[] { 1 };
+            AddMonsterQueue(a, b, 1);
         }
     }
 

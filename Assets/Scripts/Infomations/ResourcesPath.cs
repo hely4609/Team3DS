@@ -36,8 +36,13 @@ public class ResourcesPath
         "Prefabs/Objects/Rope",
         // Enemy
         "Prefabs/Characters/Slime_Leaf",
+        "Prefabs/Characters/Slime_Leaf_Elite",
+        "Prefabs/Characters/Slime_Leaf_Superfast",
         "Prefabs/Characters/Slime_Viking",
+        "Prefabs/Characters/Slime_Viking_Elite",
         "Prefabs/Characters/Slime_King",
+        "Prefabs/Characters/Slime_King_Elite",
+        "Prefabs/Characters/Slime_King_Elite_Elite",
         // Effects
         "Prefabs/Effects/Smokes/Smoke1",
         "Prefabs/Effects/Hits/BasicHit",

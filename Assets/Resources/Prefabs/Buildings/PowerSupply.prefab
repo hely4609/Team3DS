@@ -333,6 +333,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 0
   _BuildingTimeCurrent: 0
+  cost: 0
   completeMat: {fileID: 0}
   meshes: []
   cols:
@@ -352,11 +353,16 @@ MonoBehaviour:
   ropeStruct:
     ropeObjects: []
     ropePositions: []
-  maxRopeLength: 0
-  currentRopeLength: 0
+  _maxRopeLength: 0
+  _currentRopeLength: 0
   multiTabList: []
   isSettingRopeList: 
   ropeLengthList: []
+  _RopeLengthList:
+  - 0
+  - 0
+  - 0
+  - 0
   _OnOff: 0
   attachedPylonList: []
 --- !u!1 &2224825689332038233
@@ -917,6 +923,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 0
   _BuildingTimeCurrent: 0
+  cost: 0
   completeMat: {fileID: 0}
   meshes: []
   cols:
@@ -937,13 +944,13 @@ MonoBehaviour:
   ropeStruct:
     ropeObjects: []
     ropePositions: []
-  maxRopeLength: 0
-  currentRopeLength: 0
+  _maxRopeLength: 0
+  _currentRopeLength: 0
   anim: {fileID: 4745613938894177325}
   doorOpenTriggerCol: {fileID: 7226517670788025124}
-  _TotalOreAmount: 100
-  _PowerMax: 100
-  _PowerCurrent: 100
+  _TotalOreAmount: 50
+  _PowerMax: 50
+  _PowerCurrent: 50
   _Level: 1
   _ExpMax: 2
   _ExpCurrent: 0
