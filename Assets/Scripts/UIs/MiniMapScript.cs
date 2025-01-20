@@ -114,19 +114,28 @@ public class MiniMapScript : MyComponent
         largeMapCamera.transform.position = new Vector3(Mathf.Clamp(largeMapCamera.transform.position.x + largeMapCamera.orthographicSize * wantVector.x * dragSensitivity * 0.3f, largeMapCamera.orthographicSize - 125, -(largeMapCamera.orthographicSize - 125)),
             largeMapCamera.transform.position.y,
             Mathf.Clamp(largeMapCamera.transform.position.z + largeMapCamera.orthographicSize * wantVector.z * dragSensitivity * 0.3f, largeMapCamera.orthographicSize - 125, -(largeMapCamera.orthographicSize - 125)));
-    }
+        //ourthographicsize = 작을수록 화면에서 가까이보임.
+/*  0, -12.5, 58
+    0, 1, 64
+    -16 6, 75
+    -16, -15, 75
+    0, -5, 90
+    -1, 0, 90
+*/
 
-    public void ShowTowerRangeToggle()
-    {
-        Debug.Log(miniMapCamera.cullingMask);
-        Debug.Log(LayerMask.GetMask("AttackRangeMarker"));
-        if((miniMapCamera.cullingMask & LayerMask.GetMask("AttackRangeMarker")) == 1)
-        {
-            miniMapCamera.cullingMask -= LayerMask.GetMask("AttackRangeMarker");
-        }
-        else
-        {
-            miniMapCamera.cullingMask += LayerMask.GetMask("AttackRangeMarker");
-        }
-    }
+}
+
+public void ShowTowerRangeToggle()
+{
+Debug.Log(miniMapCamera.cullingMask);
+Debug.Log(LayerMask.GetMask("AttackRangeMarker"));
+if((miniMapCamera.cullingMask & LayerMask.GetMask("AttackRangeMarker")) == 1)
+{
+    miniMapCamera.cullingMask -= LayerMask.GetMask("AttackRangeMarker");
+}
+else
+{
+    miniMapCamera.cullingMask += LayerMask.GetMask("AttackRangeMarker");
+}
+}
 }
