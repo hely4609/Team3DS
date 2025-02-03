@@ -26,7 +26,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
 
     protected override void MyUpdate(float deltaTime)
     {
-        if (HasStateAuthority) PlayTime += Time.fixedUnscaledDeltaTime;
+        if (HasStateAuthority && IsWaveStart) PlayTime += Time.fixedUnscaledDeltaTime;
     }
     public void SetActiveEnergyBarrier()  // 현재 On인지 Off인제 
     {
