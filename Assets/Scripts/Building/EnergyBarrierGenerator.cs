@@ -14,7 +14,7 @@ public class EnergyBarrierGenerator : InteractableBuilding
     [Networked] public bool IsWaveStart { get; set; }
     [Networked] public int MonsterCount { get; set; } = 0; // 현재 필드에 있는 몬스터 수.
     [Networked] public bool IsWaveLeft { get; set; }
-    [Networked] public float WaveLeftTime { get; set; }
+    //[Networked] public float WaveLeftTime { get; set; }
 
     protected TextMeshProUGUI hpText;
     protected Image hpFillImage;

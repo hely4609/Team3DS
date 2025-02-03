@@ -127,6 +127,14 @@ MonoBehaviour:
     m_Key: ChangeView
     m_Metadata:
       m_Items: []
+  - m_Id: 44937401239183360
+    m_Key: CurrentMonsters
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44937875820486656
+    m_Key: WaveStart
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

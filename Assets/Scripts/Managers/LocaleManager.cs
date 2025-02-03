@@ -12,6 +12,7 @@ public class LocaleManager : Manager
 {
     bool isChanging;
     int languageInt;
+    public int LanguageInt { get { return languageInt; } }
     public void ChangeLocale(int index)
     {
         if (isChanging)

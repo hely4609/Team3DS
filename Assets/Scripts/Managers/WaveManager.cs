@@ -3,6 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.Extensions;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 public class WaveManager : Manager
 {
@@ -10,6 +13,7 @@ public class WaveManager : Manager
 
     protected WaveInfo waveInfo;
     protected int currentWaveIndex = 0; //현재 웨이브는 몇번째 웨이브인가.
+    public int CurrentWaveIndex { get { return currentWaveIndex; } }
     protected List<Monster> monsterList = new List<Monster>(); // 남은 몬스터 수. 
     public List<Monster> MonsterList { get { return monsterList; } }
 
@@ -19,6 +23,7 @@ public class WaveManager : Manager
     protected float waveInterval; // 다음 웨이브까지의 시간
     protected float nowWaveTime = 0; // 현재 웨이브 진행 시간
     protected int spawnLoc = 3; // 웨이브 시작 위치. 현재 임의로 적어둠.
+    IntVariable monsterNumber; // 현재 웨이브 남은 몬스터 수를 화면에 띄우기 위한 Localize변수.
 
     public int SpawnLoc { get { return spawnLoc; } protected set { spawnLoc = value; } }
     List<Vector2> roadData;
@@ -111,6 +116,9 @@ public class WaveManager : Manager
             {
                 nextWaveTimeText = waveInfoUI.GetComponentsInChildren<TextMeshProUGUI>()[0];
                 monsterCountText = waveInfoUI.GetComponentsInChildren<TextMeshProUGUI>()[1];
+                var source = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
+                monsterNumber = source["ResultGroup"]["Monster"] as IntVariable;
+                Debug.Log($"{monsterNumber.Value} = 현재 몬스터 수");
                 waveInfoUI.SetActive(false);
             }
         }
@@ -141,13 +149,15 @@ public class WaveManager : Manager
         if (waveInfoUI == null) FindWaveInfoUI();
         else if(waveInfo.waveOrder.Count > 1 || GameManager.Instance.BuildingManager.generator.IsWaveLeft)
         {
-            nextWaveTimeText.text = $"{(int)(GameManager.Instance.BuildingManager.generator.WaveLeftTime) / 60:00} : {(int)(GameManager.Instance.BuildingManager.generator.WaveLeftTime) % 60:00}";
-            monsterCountText.text = $"Current Monsters : {GameManager.Instance.BuildingManager.generator.MonsterCount}";
+            nextWaveTimeText.text = $"{(int)(GameManager.Instance.BuildingManager.generator.PlayTime) / 60:00} : {(int)(GameManager.Instance.BuildingManager.generator.PlayTime) % 60:00}";
+            Debug.Log($"{GameManager.Instance.BuildingManager.generator.MonsterCount}");
+            monsterNumber.Value = GameManager.Instance.BuildingManager.generator.MonsterCount;
+            //monsterCountText.text = $"Current Monsters : {GameManager.Instance.BuildingManager.generator.MonsterCount}";
         }
         else
         {
             nextWaveTimeText.text = "";
-            monsterCountText.text = $"Current Monsters : {GameManager.Instance.BuildingManager.generator.MonsterCount}";
+            //monsterCountText.text = $"Current Monsters : {GameManager.Instance.BuildingManager.generator.MonsterCount}";
         }
 
         if (GameManager.Instance.NetworkManager.Runner.IsServer && GameManager.IsGameStart)
@@ -197,7 +207,7 @@ public class WaveManager : Manager
                     else
                     {
                         nowWaveTime += deltaTime;
-                        GameManager.Instance.BuildingManager.generator.WaveLeftTime = waveInterval - nowWaveTime;
+                        //GameManager.Instance.BuildingManager.generator.WaveLeftTime = waveInterval - nowWaveTime;
                     }
 
                 }
