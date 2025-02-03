@@ -259,51 +259,14 @@ public partial class Player : Character
     AudioSource ropeSource;
     protected override void MyUpdate(float deltaTime)
     {
-        /////////////////////////// 
         //이동방향이 있을 시 해당 방향으로 움직임. + 애니메이션 설정
-        //if (MoveDir.magnitude == 0)
-        //{
-        //    float velocityX = Mathf.Lerp(rb.velocity.x, 0f, 0.1f);
-        //    float velocityZ = Mathf.Lerp(rb.velocity.z, 0f, 0.1f);
-        //    rb.velocity = new Vector3(velocityX, rb.velocity.y, velocityZ);
-        //}
-        //else
-        //{
-
-        //    rb.velocity = (transform.forward * MoveDir.z + transform.right * MoveDir.x).normalized * moveSpeed;
-        //}
-
-        //currentVelocity = rb.velocity;
-        //rb.MovePosition(transform.position + MoveDirCalculrate(MoveDir) * deltaTime);
-        //transform.position += MoveDirCalculrate(MoveDir) * deltaTime;
-        //updateTime += deltaTime;
-        //interpolatedPosition = previousPosition + MoveDirCalculrate(MoveDir) * updateTime;
-        //rb.MovePosition(interpolatedPosition);
+        
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, deltaTime), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, deltaTime));
 
         AnimFloat?.Invoke("Speed", MoveDir.magnitude);
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
-        //////////////////////////
-
-        // CharacterUICanvas
-        //if (buildingSelectUI == null)
-        //{
-        //    if(possessionController != null && HasInputAuthority)
-        //    {
-        //        interactionUI = GameObject.FindGameObjectWithTag("InteractionScrollView").transform;
-        //        interactionContent = GameObject.FindGameObjectWithTag("InteractionContent").GetComponent<RectTransform>();
-        //        interactionUpdateUI = GameObject.FindGameObjectWithTag("InteractionUpdateUI");
-        //        buildingSelectUI = GameObject.FindGameObjectWithTag("BuildingSelectUI");
-        //        oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();
-
-        //        interactionUpdateUI.SetActive(false);
-        //        buildingSelectUI.SetActive(false);
-        //    }
-        //    GameManager.CloseLoadInfo();
-        //}
-
-        /////////////////////////////
+        
         // 상호작용
         if (isInteracting && interactionObject != null)
         {
@@ -316,46 +279,6 @@ public partial class Player : Character
             if (progress >= 1f)
             {
                 InteractionEnd();
-                //if (InteractionEnd())
-                //{
-                //    //RenewalInteractionUI(interactionObject);
-
-                //    //interactionButtonInfos.RemoveAll(target => target.interactionObject == interactionObject);
-
-                //    //List<InteractionButtonInfo> removeInfos = interactionButtonInfos.FindAll(obj => obj.interactionObject == interactionObject);
-
-                //    //foreach (InteractionButtonInfo info in removeInfos)
-                //    //{
-                //    //    GameManager.Instance.PoolManager.Destroy(info.button);
-                //    //    interactionButtonInfos.Remove(info);
-                //    //}
-
-                //    ////if (interactionObjectDictionary.TryGetValue(interactionObject, out GameObject result))
-                //    ////{
-                //    ////    GameManager.Instance.PoolManager.Destroy(result);
-                //    ////    interactionObjectDictionary.Remove(interactionObject);
-                //    ////}
-
-                //    //if (interactionButtonInfos.Count == 0)
-                //    //{
-                //    //    interactionIndex = -1;
-                //    //    interactionObject = null;
-                //    //    interactionType = Interaction.None;
-
-                //    //    if (HasInputAuthority)
-                //    //    {
-                //    //        GameManager.Instance.PoolManager.Destroy(mouseLeftImage);
-                //    //    }
-                //    //}
-                //    //else
-                //    //{
-                //    //    interactionIndex = Mathf.Min(interactionIndex, interactionObjectList.Count - 1);
-                //    //    interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
-                //    //    interactionType = interactionButtonInfos[interactionIndex].interactionType;
-                //    //}
-
-                //    //UpdateInteractionUI(interactionIndex);
-                //}
             }
             // 건설 끝
         }
@@ -601,11 +524,17 @@ public partial class Player : Character
 
         if (index < 0 || buildableEnumArray[BuildableEnumPageIndex, index] == 0) return false;
 
+        if (ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]).GetComponent<Building>() is BlastTower)
+        {
+            return false;
+        }
+
         if (ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]).GetComponent<Building>().Cost > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
         {
             Debug.Log("건설에 필요한 광물이 부족합니다.");
             return false;
         } 
+        
 
         NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
@@ -1434,14 +1363,19 @@ public partial class Player : Character
             {
                 int siblingIndex = buildingSelectUIBuildingImages[i].transform.parent.GetSiblingIndex();
 
-                // 이미지 교체
-                Debug.Log(BuildableEnumArray[BuildableEnumPageIndex, siblingIndex].ToString());
-                Enum.TryParse(BuildableEnumArray[BuildableEnumPageIndex, siblingIndex].ToString(), out ResourceEnum.Sprite result);
+                ResourceEnum.Prefab targetPrefabEnum = BuildableEnumArray[BuildableEnumPageIndex, siblingIndex];
 
-                buildingSelectUIBuildingImages[i].GetComponent<Image>().sprite = ResourceManager.Get(result);
+                // 이미지 교체
+                Debug.Log(targetPrefabEnum.ToString());
+                Enum.TryParse(targetPrefabEnum.ToString(), out ResourceEnum.Sprite result);
+
+                Image buildingImage = buildingSelectUIBuildingImages[i].GetComponent<Image>();
+
+                buildingImage.sprite = ResourceManager.Get(result);
+                buildingImage.transform.GetChild(0).GetComponent<Image>().enabled = result == ResourceEnum.Sprite.BlastTower;
 
                 // 광물사용량 텍스트 교체
-                int requireOre = GetRequireOreResourceAmount(BuildableEnumArray[BuildableEnumPageIndex, siblingIndex]);
+                int requireOre = GetRequireOreResourceAmount(targetPrefabEnum);
                 buildingSelectUIBuildingImages[i].transform.parent.GetComponentInChildren<TextMeshProUGUI>().text = requireOre != -1 ? requireOre.ToString() : null;
             }
         }

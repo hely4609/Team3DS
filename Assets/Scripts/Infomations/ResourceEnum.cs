@@ -43,9 +43,9 @@ namespace ResourceEnum
         Turret1a,
         Turret1d,
         ION_Cannon,
-        BlastTower,
         Bridge,
         Pylon,
+        BlastTower,
         buildingEnd,
 
         // Effects
