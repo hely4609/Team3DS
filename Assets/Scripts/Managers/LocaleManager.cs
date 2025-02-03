@@ -29,6 +29,7 @@ public class LocaleManager : Manager
     }
     public void LoadLocale(string languageIdentifier)
     {
+        Debug.Log("gd");
         LocaleIdentifier localeCode = new LocaleIdentifier(languageIdentifier);
         for (int i = 0; i < LocalizationSettings.AvailableLocales.Locales.Count; i++)
         {
