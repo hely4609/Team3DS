@@ -160,7 +160,7 @@ public class Monster : Character
             Ore ore = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position).GetComponent<Ore>();
             ore.amount = oreAmount;
         }
-
+        GameManager.Instance.WaveManager.MonsterList.Remove(this);
         StartCoroutine(DelayedDespawn());
     }
 
