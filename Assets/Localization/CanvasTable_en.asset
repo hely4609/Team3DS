@@ -131,6 +131,10 @@ MonoBehaviour:
     m_Localized: Cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 44850776445353984
+    m_Localized: ChangeView
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

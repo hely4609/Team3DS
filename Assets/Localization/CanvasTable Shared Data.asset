@@ -123,6 +123,10 @@ MonoBehaviour:
     m_Key: Cancel
     m_Metadata:
       m_Items: []
+  - m_Id: 44850776445353984
+    m_Key: ChangeView
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:
