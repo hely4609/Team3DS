@@ -48,10 +48,10 @@ public class WaveManager : Manager
     //
     protected GameObject CreateBox(Vector3 leftUp, Vector3 rightDown)
     {
-        Vector3 upMid = new Vector3((leftUp.x + rightDown.x) / 2, 0, leftUp.z);
-        Vector3 downMid = new Vector3((leftUp.x + rightDown.x) / 2, 0, rightDown.z);
-        Vector3 rightMid = new Vector3(rightDown.x, 0, (leftUp.z + rightDown.z) / 2);
-        Vector3 leftMid = new Vector3(leftUp.x, 0, (leftUp.z + rightDown.z) / 2);
+        Vector3 upMid = new Vector3((leftUp.x + rightDown.x) / 2, 2, leftUp.z);
+        Vector3 downMid = new Vector3((leftUp.x + rightDown.x) / 2, 2, rightDown.z);
+        Vector3 rightMid = new Vector3(rightDown.x, 2, (leftUp.z + rightDown.z) / 2);
+        Vector3 leftMid = new Vector3(leftUp.x, 2, (leftUp.z + rightDown.z) / 2);
         float upLength = rightDown.x - leftUp.x;
         float rightLength = leftUp.z - rightDown.z;
         GameObject objParent = new GameObject("wall");
