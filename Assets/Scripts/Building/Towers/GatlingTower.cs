@@ -6,14 +6,11 @@ public class GatlingTower : Tower
 {
     protected override void Initialize()
     {
-        cost = 20;
-
         // 디폴트 값.
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "Gatling Tower";
-        powerConsumption = 40;
 
         AttackRangeSetting();
         maxRopeLength = 10;

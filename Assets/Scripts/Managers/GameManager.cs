@@ -85,6 +85,10 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool isDefeated;
     public bool IsDefeated => isDefeated;
     public void Defeat() { isDefeated = true; }
+    public void GameClear() { isClear = true; }
+
+    [SerializeField] bool isClear;
+    public bool IsClear => isClear;
 
     public void WaveStart() 
     {
@@ -127,6 +131,7 @@ public class GameManager : MonoBehaviour
         }
 
         isDefeated = false;
+        isClear = false;
         // 게스트는 이 타이밍에 제너레이터가 아직 없다!
         if(BuildingManager.generator != null) waveManager.WaveStart();
         isGameStart = true;
@@ -136,7 +141,8 @@ public class GameManager : MonoBehaviour
     { 
         networkManager.Runner.Shutdown();
         isGameStart = false;
-        if (isDefeated) uiManager.GetUI(UIEnum.GameOverCanvas).GetComponent<GameOverCanvas>().SetResultText();
+        if (isDefeated) uiManager.GetUI(UIEnum.GameOverCanvas).GetComponent<GameOverCanvas>().SetResultText(true);
+        else if(isClear) uiManager.GetUI(UIEnum.GameOverCanvas).GetComponent<GameOverCanvas>().SetResultText(false);
         Cursor.lockState = CursorLockMode.None;
         
         NetworkManager.LocalController = null;
@@ -150,14 +156,8 @@ public class GameManager : MonoBehaviour
         buildingManager = null;
         poolManager = null;
 
-        
-
-        //StartCoroutine(ServerInitiate());
-
-        //networkManager = new NetworkManager();
-        //networkManager.Initiate();
-
     }
+
 
     public void GoTitle()
     {
@@ -214,6 +214,7 @@ public class GameManager : MonoBehaviour
         ManagerUpdates += ControllerManager.ManagerUpdate;
 
         isDefeated = false;
+        isClear = false;
 
         CloseLoadInfo();
         SoundManager.Play(ResourceEnum.BGM.Silent_Partner__Whistling_Down_the_Road);

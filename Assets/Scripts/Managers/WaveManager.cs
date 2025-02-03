@@ -210,7 +210,8 @@ public class WaveManager : Manager
             }
             else if(waveInfo.waveOrder.Count == 0 && GameManager.Instance.BuildingManager.generator.MonsterCount == 0)
             {
-                Debug.Log("Å¬¸®¾î!");
+                GameManager.Instance.GameClear();
+                GameManager.Instance.GameOver();
             }
         }
     }

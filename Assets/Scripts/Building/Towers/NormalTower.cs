@@ -6,13 +6,11 @@ public class NormalTower : Tower
 {
     protected override void Initialize()
     {
-        cost = 10;
         // 디폴트 값.
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "Normal Tower";
-        powerConsumption = 10;
 
         AttackRangeSetting();
         maxRopeLength = 10;

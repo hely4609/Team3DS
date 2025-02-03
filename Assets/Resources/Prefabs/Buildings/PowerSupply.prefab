@@ -949,8 +949,8 @@ MonoBehaviour:
   anim: {fileID: 4745613938894177325}
   doorOpenTriggerCol: {fileID: 7226517670788025124}
   _TotalOreAmount: 50
-  _PowerMax: 50
-  _PowerCurrent: 50
+  _PowerMax: 100
+  _PowerCurrent: 100
   _Level: 1
   _ExpMax: 2
   _ExpCurrent: 0

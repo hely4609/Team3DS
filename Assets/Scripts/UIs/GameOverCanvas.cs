@@ -9,14 +9,19 @@ using UnityEngine.Localization.SmartFormat.PersistentVariables;
 
 public class GameOverCanvas : MonoBehaviour
 {
+    [SerializeField] GameObject missionFail;
+    [SerializeField] GameObject missionSuccess;
     public void GoTitle()
     {
         GameManager.Instance.GoTitle();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void SetResultText()
+    public void SetResultText(bool isFail)
     {
+        missionFail.SetActive(isFail);
+        missionSuccess.SetActive(!isFail);
+
         // Get our GlobalVariablesSource
         var source = LocalizationSettings
             .StringDatabase

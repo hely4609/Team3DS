@@ -54,9 +54,9 @@ public class WaveInfo
             AddMonsterQueue(a, b, 10);
             a = new ResourceEnum.Prefab[]
             {
-                ResourceEnum.Prefab.Slime_King_Elite_Elite,
+                ResourceEnum.Prefab.Slime_King_Elite_Elite, ResourceEnum.Prefab.Slime_King_Elite, ResourceEnum.Prefab.Slime_King, ResourceEnum.Prefab.Slime_Leaf_Elite, ResourceEnum.Prefab.Slime_Leaf_Superfast
             };
-            b = new int[] { 1 };
+            b = new int[] { 1, 2, 4, 8, 16 };
             AddMonsterQueue(a, b, 1);
         }
     }

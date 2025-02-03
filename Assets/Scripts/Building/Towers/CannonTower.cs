@@ -9,13 +9,10 @@ public class CannonTower : Tower
     
     protected override void Initialize()
     {
-        cost = 30;
-
         buildingType = BuildingEnum.Tower;
         isNeedLine = true;
         TurnOnOff(false);
         objectName = "Cannon Tower";
-        powerConsumption = 20;
 
         AttackRangeSetting();
         maxRopeLength = 10;

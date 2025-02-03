@@ -1385,9 +1385,9 @@ public partial class Player : Character
     {
         ResourceEnum.Prefab.Turret1a => 10,
         ResourceEnum.Prefab.Turret1d => 20,
-        ResourceEnum.Prefab.ION_Cannon => 30,
+        ResourceEnum.Prefab.ION_Cannon => 20,
         ResourceEnum.Prefab.BlastTower => 40,
-        ResourceEnum.Prefab.Bridge => 50,
+        ResourceEnum.Prefab.Bridge => 5,
 
         ResourceEnum.Prefab.Pylon => 10,
 

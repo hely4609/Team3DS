@@ -76,7 +76,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
     public void OnShutdown(NetworkRunner runner, ShutdownReason shutdownReason) 
     { 
         if(GameManager.IsGameStart)GameManager.Instance.GameOver();
-        if (!GameManager.Instance.IsDefeated)
+        if (!GameManager.Instance.IsDefeated && !GameManager.Instance.IsClear)
         {
             GameManager.Instance.UIManager.ClaimError("Shutdowned", "The server has been disconnected.", "È®ÀÎ", () =>
             {
