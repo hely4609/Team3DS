@@ -297,7 +297,8 @@ MonoBehaviour:
   minimapSlider: {fileID: 4253236687834972191}
   largeMap: {fileID: 8674742331313543498}
   isLargeMapOpend: 0
-  sensitivity: 0.0055
+  zoomSensitivity: 0.2
+  dragSensitivity: 0.0055
 --- !u!1 &1159031893793120749
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,7 +432,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 2
   m_TargetDisplay: 0
 --- !u!114 &5304661268923836554
 MonoBehaviour:
@@ -1061,7 +1062,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.11372549}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -1974,8 +1975,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
-  m_Type: 0
+  m_Sprite: {fileID: 21300000, guid: 3c565a6cdb62f7841bbfad4c05d0d17e, type: 3}
+  m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
