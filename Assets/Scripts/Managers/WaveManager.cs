@@ -11,13 +11,14 @@ public class WaveManager : Manager
     protected WaveInfo waveInfo;
     protected int currentWaveIndex = 0; //현재 웨이브는 몇번째 웨이브인가.
     protected List<Monster> monsterList = new List<Monster>(); // 남은 몬스터 수. 
+    public List<Monster> MonsterList { get { return monsterList; } }
 
     protected int currentMonsterIndex = 0; //현재 웨이브에서 몇번째 몬스터인가.
     private float monsterInterval = 2; // 몬스터간의 간격(필요한가?)
     protected float nowMonsterTime = 0; // 현재 몬스터 생성 시간
     protected float waveInterval; // 다음 웨이브까지의 시간
     protected float nowWaveTime = 0; // 현재 웨이브 진행 시간
-    protected int spawnLoc = 4; // 웨이브 시작 위치. 현재 임의로 적어둠.
+    protected int spawnLoc = 3; // 웨이브 시작 위치. 현재 임의로 적어둠.
 
     public int SpawnLoc { get { return spawnLoc; } protected set { spawnLoc = value; } }
     List<Vector2> roadData;
@@ -32,6 +33,7 @@ public class WaveManager : Manager
     private int nowArea = 0;
     public int NowArea { get { return nowArea; } private set { if(value<AreaBounds.Length) value = nowArea; } }
     public GameObject walls;
+    private static Vector3[] zeroArea = new Vector3[2] { new Vector3(-57, 0, 30), new Vector3(20, 0, -57) };
     private static Vector3[] firstArea  = new Vector3[2] { new Vector3(-57, 0, 30), new Vector3(57, 0, -57) };
     private static Vector3[] secondArea  = new Vector3[2] { new Vector3(-57, 0, 60), new Vector3(57, 0, -57) };
     private static Vector3[] thirdArea  = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(57, 0, -57) };
@@ -39,7 +41,7 @@ public class WaveManager : Manager
     private static Vector3[] fifthArea  = new Vector3[2] { new Vector3(-90, 0, 60), new Vector3(90, 0, -90) };
     private static Vector3[] sixthArea  = new Vector3[2] { new Vector3(-90, 0, 90), new Vector3(90, 0, -90) };
 
-    public Vector3[][] AreaBounds = new Vector3[][]{ firstArea, secondArea, thirdArea, fourthArea, fifthArea, sixthArea };
+    public Vector3[][] AreaBounds = new Vector3[][]{ zeroArea, firstArea, secondArea, thirdArea, fourthArea, fifthArea, sixthArea };
     //public void DrawBound(Vector3 leftUp, Vector3 rightDown)
     //{
     //    BoundLeftUp = leftUp;
@@ -162,7 +164,9 @@ public class WaveManager : Manager
                 }
                 else if(waveInfo.waveOrder.Count > 0)
                 {
-                    if (nowWaveTime >= waveInterval)
+                    Debug.Log($"{nowWaveTime}/{waveInterval}   {monsterList.Count}마리");
+                    //if (nowWaveTime >= waveInterval)
+                    if(nowWaveTime >= waveInterval && monsterList.Count <= 0)
                     {
                         nowWaveTime = 0;
                         currentMonsterIndex = 0;
