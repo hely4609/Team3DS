@@ -12,6 +12,7 @@ public class Tower : InteractableBuilding
 
     [SerializeField, Networked] protected int attackDamage { get; set; } // 공격력
     public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } }
+    [SerializeField] int attackUpgradeIncrease;
     protected float nowTime;
     [SerializeField, Networked] protected float attackSpeed { get; set; } // 공격 스피드
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }
@@ -316,7 +317,7 @@ public class Tower : InteractableBuilding
             Debug.Log("업그레이드에 필요한 광물이 부족합니다.");
             return;
         }
-        attackDamage += 1;
+        attackDamage += attackUpgradeIncrease;
         GameManager.Instance.BuildingManager.supply.TotalOreAmount -= UpgradeRequire;
         TotalUpgradeCost += UpgradeRequire;
         UpgradeRequire = Mathf.CeilToInt(UpgradeRequire * 1.1f);

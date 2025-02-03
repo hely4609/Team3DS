@@ -56,11 +56,13 @@ public class Monster : Character
         generator = GameManager.Instance.BuildingManager.generator;
     }
 
-    public override int TakeDamage(Tower attacker, int damage)
+    public override int TakeDamage(Tower attacker, int damage, string effect = "BasicHit")
     {
         HpCurrent -= damage;
-        effectPlayer.PlayEffect("BasicHit");
+        if (HpCurrent < 0) HpCurrent = 0;
+        if(!effect.Equals("")) effectPlayer.PlayEffect(effect);
 
+        Debug.Log(HpCurrent);
         
         return 0;
     }

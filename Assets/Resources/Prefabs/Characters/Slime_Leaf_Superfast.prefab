@@ -173,10 +173,10 @@ MonoBehaviour:
   hpFillImage: {fileID: 2006082851528027123}
   hpText: {fileID: 4686637549790105594}
   effectPlayer: {fileID: 6116992821626438664}
-  oreAmount: 12
+  oreAmount: 6
   roadDestination: 0
-  hpMax: 75
-  hpCurrent: 75
+  hpMax: 25
+  hpCurrent: 25
   _HpCurrent: 0
   attackDamage: 1
   _isReady: 0

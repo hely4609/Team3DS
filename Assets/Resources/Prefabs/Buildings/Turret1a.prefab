@@ -914,6 +914,7 @@ MonoBehaviour:
   _currentRopeLength: 0
   _powerConsumption: 10
   _attackDamage: 6
+  attackUpgradeIncrease: 2
   _attackSpeed: 1
   _attackRange: 1
   target: {fileID: 0}

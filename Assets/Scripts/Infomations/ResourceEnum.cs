@@ -51,6 +51,7 @@ namespace ResourceEnum
         // Effects
         Smoke1,
         BasicHit,
+        Explosion,
 
         // ETC
         BuildingSignCanvas,

@@ -741,9 +741,10 @@ MonoBehaviour:
     ropePositions: []
   _maxRopeLength: 0
   _currentRopeLength: 0
-  _powerConsumption: 20
-  _attackDamage: 60
-  _attackSpeed: 15
+  _powerConsumption: 60
+  _attackDamage: 40
+  attackUpgradeIncrease: 20
+  _attackSpeed: 4
   _attackRange: 2
   target: {fileID: 0}
   targetList: []
@@ -754,7 +755,7 @@ MonoBehaviour:
   attachedPylon: {fileID: 0}
   attackRangeMarker: {fileID: 4375568238647190245}
   _Level: 0
-  _UpgradeRequire: 5
+  _UpgradeRequire: 10
   _TotalUpgradeCost: 0
   splashRadius: 10
 --- !u!136 &5371794395544762303

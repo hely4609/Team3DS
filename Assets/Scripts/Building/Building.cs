@@ -274,6 +274,7 @@ public GameObject BuildingSignCanvas { get { return buildingSignCanvas; } }
         // 델타 타임 만큼 자신의 buildingTimeCurrent를 올림.
         if (CompletePercent < 1)
         {
+            Debug.Log(GameManager.Instance.BuildingManager.generator.IsWaveStart);
             if(GameManager.Instance.BuildingManager.generator.IsWaveStart)
             {
                 BuildingTimeCurrent += deltaTime;

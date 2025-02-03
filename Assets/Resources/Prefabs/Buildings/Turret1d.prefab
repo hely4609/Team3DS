@@ -911,7 +911,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingTimeMax: 10
   _BuildingTimeCurrent: 0
-  cost: 20
+  cost: 10
   completeMat: {fileID: 2100000, guid: 62e59aecaeba6b94ea7ecb12d88100a8, type: 2}
   meshes:
   - {fileID: 1213593497623742753}
@@ -945,6 +945,7 @@ MonoBehaviour:
   _currentRopeLength: 0
   _powerConsumption: 40
   _attackDamage: 1
+  attackUpgradeIncrease: 1
   _attackSpeed: 0.1
   _attackRange: 1.25
   target: {fileID: 0}
@@ -956,7 +957,7 @@ MonoBehaviour:
   attachedPylon: {fileID: 0}
   attackRangeMarker: {fileID: 59603375847243163}
   _Level: 0
-  _UpgradeRequire: 5
+  _UpgradeRequire: 20
   _TotalUpgradeCost: 0
 --- !u!1 &8177992274299104779
 GameObject:

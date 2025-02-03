@@ -46,6 +46,7 @@ public class ResourcesPath
         // Effects
         "Prefabs/Effects/Smokes/Smoke1",
         "Prefabs/Effects/Hits/BasicHit",
+        "Prefabs/Effects/Hits/Explosion",
         // ETC
         "Prefabs/UIs/Signs/BuildingSignCanvas",
 

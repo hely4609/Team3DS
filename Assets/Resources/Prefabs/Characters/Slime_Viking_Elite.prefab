@@ -175,8 +175,8 @@ MonoBehaviour:
   effectPlayer: {fileID: 8826677546063795630}
   oreAmount: 10
   roadDestination: 0
-  hpMax: 250
-  hpCurrent: 250
+  hpMax: 200
+  hpCurrent: 200
   _HpCurrent: 0
   attackDamage: 1
   _isReady: 0

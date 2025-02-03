@@ -32,7 +32,14 @@ public class CannonTower : Tower
         {
             if(targetRay.collider.TryGetComponent<Monster>(out Monster targetData))
             {
-                targetData.TakeDamage(this, attackDamage);
+                if(targetData == target)
+                {
+                    targetData.TakeDamage(this, attackDamage, "Explosion");
+                }
+                else
+                {
+                    targetData.TakeDamage(this, attackDamage, "");
+                }
             }
         }
         Debug.Log($"{gameObject.name}");
@@ -46,5 +53,11 @@ public class CannonTower : Tower
     public override void Upgrade()
     {
         base.Upgrade();
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        if (target != null) Gizmos.DrawWireSphere(target.transform.position, splashRadius);
     }
 }
