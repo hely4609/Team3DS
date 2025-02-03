@@ -16,6 +16,7 @@ public delegate void CancelDelegate();
 public delegate void FarmingDelegate(bool isFarming);
 public delegate void KeyGuideDelegate();
 public delegate void GreetingDelegate();
+public delegate void ChangeViewDelegate();
 
 
 public class ControllerBase : MyComponent
@@ -31,6 +32,7 @@ public class ControllerBase : MyComponent
     public FarmingDelegate          DoFarming;
     public KeyGuideDelegate         DoKeyGuide;
     public GreetingDelegate         DoGreeting;
+    public ChangeViewDelegate       DoChangeView;
 
     [SerializeField]protected Player controlledPlayer;
     public Player ControlledPlayer => controlledPlayer;

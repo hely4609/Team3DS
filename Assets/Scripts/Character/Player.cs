@@ -118,6 +118,7 @@ public partial class Player : Character
         targetController.DoFarming -= Farming;
         targetController.DoKeyGuide -= SetKeyGuideUI;
         targetController.DoGreeting -= Greeting;
+        targetController.DoChangeView -= ChangeView;
 
         targetController.DoMove += Move;
         targetController.DoScreenRotate += ScreenRotate;
@@ -130,6 +131,7 @@ public partial class Player : Character
         targetController.DoFarming += Farming;
         targetController.DoKeyGuide += SetKeyGuideUI;
         targetController.DoGreeting += Greeting;
+        targetController.DoChangeView += ChangeView;
     }
 
     protected void UnRegistrationFunction(ControllerBase targetController)
@@ -145,6 +147,7 @@ public partial class Player : Character
         targetController.DoFarming -= Farming;
         targetController.DoKeyGuide -= SetKeyGuideUI;
         targetController.DoGreeting -= Greeting;
+        targetController.DoChangeView -= ChangeView;
     }
 
     public virtual void Possession(ControllerBase targetController)
@@ -1461,5 +1464,10 @@ public partial class Player : Character
     public void Greeting()
     {
         AnimTrigger?.Invoke("GreetingTrigger");
+    }
+
+    public void ChangeView()
+    {
+        TPS_Mode = !TPS_Mode;
     }
 }

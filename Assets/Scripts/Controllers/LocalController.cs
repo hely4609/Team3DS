@@ -24,7 +24,7 @@ public class LocalController : ControllerBase
             curWheelInput += Time.fixedDeltaTime;
 
             if (data.buttons.IsSet(MyButtons.Cancel)) OnCancel();
-            if (data.buttons.IsSet(MyButtons.Rope)) OnRope();
+            //if (data.buttons.IsSet(MyButtons.Rope)) OnRope();
             if (data.buttons.IsSet(MyButtons.Greeting)) OnGreeting();
 
             //if (data.buttons.IsSet(MyButtons.Farming)) OnFarming();
@@ -180,9 +180,9 @@ public class LocalController : ControllerBase
     //{
     //    DoMove?.Invoke(value.Get<Vector3>());
     //}
-    protected void OnRope()
+    protected void OnChangeView()
     {
-        
+        DoChangeView?.Invoke();
     }
 
     //protected void OnScreenRotate(Vector2 mouseDelta)

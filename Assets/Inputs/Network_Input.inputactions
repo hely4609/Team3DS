@@ -105,15 +105,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Rope",
-                    "type": "Button",
-                    "id": "7df157f9-368f-4c8a-afe8-7370631462e9",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "BuildingPageUpDown",
                     "type": "Value",
                     "id": "f2086e6d-1efb-4e2f-a376-7ff901a35bff",
@@ -240,17 +231,6 @@
                     "processors": "",
                     "groups": "",
                     "action": "PutDown",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "5f6ca99f-48cc-4d21-8ec1-e3f68eab1c02",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Build",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -387,17 +367,6 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "",
-                    "id": "f914a845-aeb6-4806-86e2-5c66a24508ee",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Rope",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
                     "name": "1D Axis",
                     "id": "4fdbd90f-daa2-4c67-a9f6-4592847ec79b",
                     "path": "1DAxis",
@@ -438,6 +407,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Greeting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "5f6ca99f-48cc-4d21-8ec1-e3f68eab1c02",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Build",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
