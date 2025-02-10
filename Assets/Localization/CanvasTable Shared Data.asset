@@ -127,6 +127,18 @@ MonoBehaviour:
     m_Key: ChangeView
     m_Metadata:
       m_Items: []
+  - m_Id: 44952469992341504
+    m_Key: New Entry
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44952579677585408
+    m_Key: MissionComplete
+    m_Metadata:
+      m_Items: []
+  - m_Id: 44952782165999616
+    m_Key: SuccessMessage
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

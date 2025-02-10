@@ -39,6 +39,38 @@ public partial class NetworkManager : Manager
 
     }
 
+    public static void ClaimTutorial()
+    {
+        _ = Tutorial(GameManager.Instance.NetworkManager.Runner, GameMap.Default, GameType.Default);
+    }
+
+    public static async Task Tutorial(NetworkRunner runner, GameMap gameMap, GameType gameType)
+    {
+        var customProps = new Dictionary<string, SessionProperty>();
+        customProps["map"] = (int)gameMap;
+        customProps["type"] = (int)gameType;
+
+        GameManager.ClaimLoadInfo("Entering game");
+        var result = await runner.StartGame(new StartGameArgs()
+        {
+            //SessionName = $"{DateTime.Now.ToString("mmss")}",
+            GameMode = GameMode.Single,
+            SessionProperties = customProps,
+        });
+        GameManager.ClaimLoadInfo("Entering game", 1, 2);
+
+        if (result.Ok)
+        {
+            GameObject.Find("LobbyCanvas").SetActive(false);
+        }
+        else
+        {
+            GameManager.Instance.UIManager.ClaimError("Failed to Start", "Room creation failed.", "È®ÀÎ", () => { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); });
+        }
+        GameManager.ClaimLoadInfo("Entering game", 2, 2);
+
+    }
+
     public static void ClaimStartHost()
     {
         _ = StartHost(GameManager.Instance.NetworkManager.Runner, GameMap.Default, GameType.Default);
