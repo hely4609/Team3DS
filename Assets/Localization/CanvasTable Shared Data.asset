@@ -128,7 +128,7 @@ MonoBehaviour:
     m_Metadata:
       m_Items: []
   - m_Id: 44952469992341504
-    m_Key: New Entry
+    m_Key: CurrentMonsters
     m_Metadata:
       m_Items: []
   - m_Id: 44952579677585408
@@ -141,6 +141,10 @@ MonoBehaviour:
       m_Items: []
   - m_Id: 47426733135953920
     m_Key: GuideBook
+    m_Metadata:
+      m_Items: []
+  - m_Id: 47442527597068288
+    m_Key: WaveStart
     m_Metadata:
       m_Items: []
   m_Metadata:

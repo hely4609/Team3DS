@@ -117,7 +117,7 @@ public class WaveManager : Manager
                 nextWaveTimeText = waveInfoUI.GetComponentsInChildren<TextMeshProUGUI>()[0];
                 monsterCountText = waveInfoUI.GetComponentsInChildren<TextMeshProUGUI>()[1];
                 var source = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
-                monsterNumber = source["ResultGroup"]["Monster"] as IntVariable;
+                monsterNumber = source["ResultGroup"]["CurrentMonsters"] as IntVariable;
                 Debug.Log($"{monsterNumber.Value} = 현재 몬스터 수");
                 waveInfoUI.SetActive(false);
             }

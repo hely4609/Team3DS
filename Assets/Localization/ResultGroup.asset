@@ -22,9 +22,16 @@ MonoBehaviour:
   - name: Monster
     variable:
       rid: 4425536683114758159
+  - name: CurrentMonsters
+    variable:
+      rid: 1534412684868976644
   references:
     version: 2
     RefIds:
+    - rid: 1534412684868976644
+      type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 0
     - rid: 4425536683114758158
       type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
@@ -32,7 +39,7 @@ MonoBehaviour:
     - rid: 4425536683114758159
       type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
-        m_Value: 0
+        m_Value: 5
     - rid: 4425536683114758172
       type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
