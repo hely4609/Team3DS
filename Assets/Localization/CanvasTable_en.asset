@@ -143,6 +143,10 @@ MonoBehaviour:
     m_Localized: Mission successed.
     m_Metadata:
       m_Items: []
+  - m_Id: 47426733135953920
+    m_Localized: GuideBook
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

@@ -341,6 +341,7 @@ public class LocalController : ControllerBase
         
     }
 
+
     protected void OnGreeting()
     {
         DoGreeting?.Invoke();

@@ -139,6 +139,10 @@ MonoBehaviour:
     m_Key: SuccessMessage
     m_Metadata:
       m_Items: []
+  - m_Id: 47426733135953920
+    m_Key: GuideBook
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

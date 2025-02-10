@@ -17,12 +17,33 @@ public class OptionManager : MonoBehaviour
         yield return null;
     }
     [SerializeField] GameObject settingsUICanvas;
+    [SerializeField] GameObject guideBook;
     protected void OnESC(InputValue value)
     {
+        if (guideBook.activeInHierarchy)
+        {
+            guideBook.SetActive(false);
+            return;
+        }
+
         if (settingsUICanvas != null && cancelable == 0)
         {
             settingsUICanvas.SetActive(!settingsUICanvas.activeInHierarchy);
         }
+    }
+    protected void OnGuideBookPageUpDown(InputValue value)
+    {
+        float direaction = value.Get<float>();
+
+        if (direaction == 0) return;
+        if (!guideBook.activeInHierarchy) return;
+
+        AutoFlip book = guideBook.GetComponentInChildren<AutoFlip>();
+
+        if (direaction > 0)
+            book.FlipRightPage();
+        else
+            book.FlipLeftPage();
     }
 
     [SerializeField] Toggle masterToggle;
@@ -77,6 +98,13 @@ public class OptionManager : MonoBehaviour
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
+
+    public void GuideBook()
+    {
+        guideBook.SetActive(true);
+        guideBook.GetComponentInChildren<Book>().currentPage = 2;
+    }
+
     public void ChangeLocale(string i)
     {
         //GameManager.Instance.LocaleManager.ChangeLocale(i);
