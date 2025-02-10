@@ -77,6 +77,7 @@ public class ControllerBase : MyComponent
                     if(GameManager.IsGameStart)
                     {
                         GameManager.Instance.WaveStart();
+                        if(Runner.IsSinglePlayer) controlledPlayer.guidelineText.gameObject.SetActive(false);
                         button.gameObject.SetActive(false);
                     }
                 });

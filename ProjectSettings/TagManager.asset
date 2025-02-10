@@ -30,6 +30,8 @@ TagManager:
   - TotalOreText
   - WaveInfoText
   - LeftRopeLengthText
+  - GuidelineText
+  - DirectPowerSupply
   layers:
   - Default
   - TransparentFX
