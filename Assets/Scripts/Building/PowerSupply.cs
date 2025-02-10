@@ -68,6 +68,7 @@ public class PowerSupply : InteractableBuilding
 
         objectName = "Power Supply";
         localeName = GameManager.Instance.LocaleManager.LocaleNameSet(objectName);
+        if (Runner.IsSinglePlayer) TotalOreAmount = 1000;
     }
 
     protected override void MyStart()

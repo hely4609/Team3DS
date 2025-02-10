@@ -48,6 +48,8 @@ public partial class Player : Character
     protected Image buttonImage;
     public TextMeshProUGUI pageIndexText;
     public TextMeshProUGUI leftRopeLengthText;
+    public TextMeshProUGUI guidelineText;
+    GameObject directPowerSupply;
 
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
     public IInteraction InteractionObject => interactionObject;
@@ -217,12 +219,16 @@ public partial class Player : Character
             onScreenKeyGuideUIAnim = GameObject.FindGameObjectWithTag("OnScreenKeyGuideUI").GetComponent<Animator>();
             pageIndexText = GameObject.FindGameObjectWithTag("PageIndexText").GetComponent<TextMeshProUGUI>();
             leftRopeLengthText = GameObject.FindGameObjectWithTag("LeftRopeLengthText").GetComponent<TextMeshProUGUI>();
+            guidelineText = GameObject.FindGameObjectWithTag("GuidelineText").GetComponent<TextMeshProUGUI>();
+            directPowerSupply = GameObject.FindGameObjectWithTag("DirectPowerSupply");
 
             interactionUpdateUI.SetActive(false);
             buildingSelectUI.SetActive(false);
             buildingConfirmUI.SetActive(false);
             ropeMaxDistanceSignUI.SetActive(false);
             leftRopeLengthText.gameObject.SetActive(false);
+            if(!Runner.IsSinglePlayer) guidelineText.gameObject.SetActive(false);
+            directPowerSupply.SetActive(false);
 
             GameManager.CloseLoadInfo();
         }
@@ -257,6 +263,31 @@ public partial class Player : Character
     [SerializeField] AudioSource cleanerAudioSource;
     bool wasPlayingCleanerEnd;
     AudioSource ropeSource;
+
+    private void Update()
+    {
+        if(directPowerSupply != null && directPowerSupply.activeSelf)
+        {
+            Vector3 screenPos = Camera.main.WorldToScreenPoint(GameManager.Instance.BuildingManager.supply2.transform.position);
+            bool isOnScreen = screenPos.z > 0 && screenPos.x >= 0 && screenPos.x <= Screen.width && screenPos.y >= 0 && screenPos.y <= Screen.height;
+
+            if(isOnScreen)
+            {
+                directPowerSupply.transform.SetPositionAndRotation(Camera.main.WorldToScreenPoint(GameManager.Instance.BuildingManager.supply2.transform.position), Quaternion.Euler(0, 0, 0));
+            }
+            else
+            {
+                if (screenPos.z < 0) screenPos *= -1;
+                float clampedX = Mathf.Clamp(screenPos.x, 50, Screen.width - 50);
+                float clampedY = Mathf.Clamp(screenPos.y, 50, Screen.height - 50);
+
+                directPowerSupply.transform.position = new Vector3(clampedX, clampedY, 0); 
+                Vector2 direction = (Camera.main.WorldToScreenPoint(GameManager.Instance.BuildingManager.supply2.transform.position) - Camera.main.transform.position).normalized;
+                float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+                directPowerSupply.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
+            }
+        }
+    }
     protected override void MyUpdate(float deltaTime)
     {
         //이동방향이 있을 시 해당 방향으로 움직임. + 애니메이션 설정
@@ -598,7 +629,7 @@ public partial class Player : Character
             {
                 IsBuildingComfirmUIOpen = false;
                 DesigningBuilding = null;
-
+                if (Runner.IsSinglePlayer) guidelineText.text = "Click (hold) the temporary building to complete the building.";
                 return true;
             }
 
@@ -611,6 +642,9 @@ public partial class Player : Character
         switch (interactionType)
         {
             default: InteractionEnd(); break;
+            case Interaction.OnOff:
+                if (Runner.IsSinglePlayer) guidelineText.text = "If everything is ready, press \"Wave Start\" button to start the game.";
+                break;
             case Interaction.Build:
                 if (HasStateAuthority) isInteracting = true;
                 AnimBool?.Invoke("isBuild", true);
@@ -645,9 +679,16 @@ public partial class Player : Character
             case Interaction.Demolish:
                 //RenewalInteractionUI(interactionObject, false);
                 break;
-            case Interaction.Upgrade:
-            case Interaction.AttachRope:
             case Interaction.OnOff:
+                break;
+            case Interaction.AttachRope:
+                if (Runner.IsSinglePlayer)
+                {
+                    guidelineText.text = "Click on the tower to turn on the tower.";
+                    directPowerSupply.SetActive(false);
+                }
+                break;
+            case Interaction.Upgrade:
                 //RenewalInteractionUI(interactionObject);
                 break;
             case Interaction.Deliver:
@@ -660,6 +701,11 @@ public partial class Player : Character
                     interactionUI.gameObject.SetActive(true);
                     interactionUpdateUI.SetActive(false);
                     interactionUpdateProgress = null;
+                    if (Runner.IsSinglePlayer)
+                    {
+                        guidelineText.text = "Connect the wires to supply power from power supply.\r\nIf the wire is short, try building an pylon(5).";
+                        directPowerSupply.SetActive(true);
+                    }
                 }
                 //GameManager.Instance.PoolManager.Destroy(sockets.FindSocket("RightHand").gameObject.GetComponentInChildren<PoolingInfo>());
                 break;

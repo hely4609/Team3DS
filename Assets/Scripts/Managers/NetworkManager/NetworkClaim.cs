@@ -4,7 +4,6 @@ using UnityEngine;
 using Fusion;
 using System.Threading.Tasks;
 using UnityEngine.SceneManagement;
-using System;
 
 public enum GameType : int
 {
