@@ -133,12 +133,12 @@ MonoBehaviour:
     m_Localized: "\uC2DC\uC810\uBCC0\uACBD"
     m_Metadata:
       m_Items: []
-  - m_Id: 44937401239183360
-    m_Localized: "\uB0A8\uC740 \uBAAC\uC2A4\uD130 \uC218 :"
+  - m_Id: 44952579677585408
+    m_Localized: "\uBBF8\uC158 \uC131\uACF5!"
     m_Metadata:
       m_Items: []
-  - m_Id: 44937875820486656
-    m_Localized: "\uAC8C\uC784 \uC2DC\uC791!"
+  - m_Id: 44952782165999616
+    m_Localized: "\uBBF8\uC158\uC744 \uC131\uACF5\uD588\uC2B5\uB2C8\uB2E4!"
     m_Metadata:
       m_Items: []
   references:

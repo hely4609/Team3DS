@@ -135,12 +135,12 @@ MonoBehaviour:
     m_Localized: ChangeView
     m_Metadata:
       m_Items: []
-  - m_Id: 44937401239183360
-    m_Localized: 'Current Monsters : '
+  - m_Id: 44952579677585408
+    m_Localized: Mission Complete!
     m_Metadata:
       m_Items: []
-  - m_Id: 44937875820486656
-    m_Localized: Wave Start!
+  - m_Id: 44952782165999616
+    m_Localized: Mission successed.
     m_Metadata:
       m_Items: []
   references:

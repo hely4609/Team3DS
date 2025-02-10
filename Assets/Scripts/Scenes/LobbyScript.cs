@@ -37,6 +37,12 @@ public class LobbyScript : MonoBehaviour
             CloseSessionIDInputFieldWindow();
         }
     }
+
+    public void StartTutorial()
+    {
+        NetworkManager.ClaimTutorial();
+    }
+
     
     public void StartHost()
     {
