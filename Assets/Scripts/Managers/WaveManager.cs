@@ -61,8 +61,8 @@ public class WaveManager : Manager
         Vector3 leftMid = new Vector3(leftUp.x, 2, (leftUp.z + rightDown.z) / 2);
         float upLength = rightDown.x - leftUp.x;
         float rightLength = leftUp.z - rightDown.z;
-        NetworkObject objParent = new NetworkObject();
-        objParent.name = "wall";
+        GameObject objParent = new("wall");
+        objParent.AddComponent<NetworkObject>();
         NetworkObject upObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), upMid);
         NetworkObject downObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), downMid);
         NetworkObject rightObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), rightMid);
@@ -77,7 +77,7 @@ public class WaveManager : Manager
         leftObj.transform.localScale = new Vector3(leftObj.transform.localScale.x, leftObj.transform.localScale.y, rightLength);
 
 
-        return objParent;
+        return objParent.GetComponent<NetworkObject>();
     }
     protected void MonsterInstantiate()
     {
