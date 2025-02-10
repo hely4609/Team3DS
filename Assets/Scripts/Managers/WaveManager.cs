@@ -103,7 +103,7 @@ public class WaveManager : Manager
 
         roadData = GameManager.Instance.BuildingManager.roadData;
 
-        walls = CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+        if(GameManager.Instance.NetworkManager.Runner.IsServer) walls = CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
 
         yield return base.Initiate();
     }
