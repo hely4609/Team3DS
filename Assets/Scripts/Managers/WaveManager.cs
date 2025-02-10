@@ -37,7 +37,7 @@ public class WaveManager : Manager
     public Vector3 BoundRightDown { get; private set; }
     private int nowArea = 0;
     public int NowArea { get { return nowArea; } private set { if(value<AreaBounds.Length) value = nowArea; } }
-    public GameObject walls;
+    public NetworkObject walls;
     private static Vector3[] zeroArea = new Vector3[2] { new Vector3(-57, 0, 30), new Vector3(20, 0, -57) };
     private static Vector3[] firstArea  = new Vector3[2] { new Vector3(-57, 0, 30), new Vector3(57, 0, -57) };
     private static Vector3[] secondArea  = new Vector3[2] { new Vector3(-57, 0, 60), new Vector3(57, 0, -57) };
@@ -53,7 +53,7 @@ public class WaveManager : Manager
     //    BoundRightDown = rightDown;
     //}
     //
-    protected GameObject CreateBox(Vector3 leftUp, Vector3 rightDown)
+    protected NetworkObject CreateBox(Vector3 leftUp, Vector3 rightDown)
     {
         Vector3 upMid = new Vector3((leftUp.x + rightDown.x) / 2, 2, leftUp.z);
         Vector3 downMid = new Vector3((leftUp.x + rightDown.x) / 2, 2, rightDown.z);
@@ -61,11 +61,12 @@ public class WaveManager : Manager
         Vector3 leftMid = new Vector3(leftUp.x, 2, (leftUp.z + rightDown.z) / 2);
         float upLength = rightDown.x - leftUp.x;
         float rightLength = leftUp.z - rightDown.z;
-        GameObject objParent = new GameObject("wall");
-        GameObject upObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, upMid);
-        GameObject downObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, downMid);
-        GameObject rightObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, rightMid);
-        GameObject leftObj = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.NoEnterWall, leftMid);
+        NetworkObject objParent = new NetworkObject();
+        objParent.name = "wall";
+        NetworkObject upObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), upMid);
+        NetworkObject downObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), downMid);
+        NetworkObject rightObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), rightMid);
+        NetworkObject leftObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), leftMid);
         upObj.transform.SetParent(objParent.transform);
         upObj.transform.localScale = new Vector3(upLength, upObj.transform.localScale.y, upObj.transform.localScale.z);
         downObj.transform.SetParent(objParent.transform);
@@ -142,12 +143,12 @@ public class WaveManager : Manager
     public override void ManagerStart()
     {
         if (GameManager.Instance.BuildingManager == null || GameManager.Instance.BuildingManager.generator == null) return;
-        Debug.LogWarning("WaveManagerStart");
         if (GameManager.Instance.NetworkManager.Runner.LocalPlayer == GameManager.Instance.NetworkManager.LocalController.myAuthority && GameManager.Instance.BuildingManager.generator.IsWaveStart) WaveStart();
     }
 
     public override void ManagerUpdate(float deltaTime)
     {
+        if (GameManager.Instance.BuildingManager == null || GameManager.Instance.BuildingManager.generator == null) return;
         if (waveInfoUI == null) FindWaveInfoUI();
         else if(waveInfo.waveOrder.Count > 1 || GameManager.Instance.BuildingManager.generator.IsWaveLeft)
         {
@@ -190,14 +191,14 @@ public class WaveManager : Manager
                         }
                         else GameManager.Instance.BuildingManager.generator.IsWaveLeft = false;
                         currentWaveIndex++;
-                        if (currentWaveIndex % 1 == 0) // 웨이브마다 스폰 장소가 변경됨.
+                        if (currentWaveIndex % 6 == 0) // 웨이브마다 스폰 장소가 변경됨.
                         {
                             if (SpawnLoc < roadData.Count - 1) // 길 끝이 아니라면 +1
                             {
                                 SpawnLoc++;
                                 nowArea++;
-                                GameObject nextWall= CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
-                                GameObject.Destroy(walls);
+                                NetworkObject nextWall= CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+                                GameManager.Instance.NetworkManager.Runner.Despawn(walls);
                                 walls = nextWall;
                                 Debug.Log($"현재 영역 : {BoundLeftUp}, {BoundRightDown}");
                             }

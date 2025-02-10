@@ -60,7 +60,7 @@ public class Monster : Character
     {
         HpCurrent -= damage;
         if (HpCurrent < 0) HpCurrent = 0;
-        if(!effect.Equals("")) effectPlayer.PlayEffect(effect);
+        if(HasStateAuthority && !effect.Equals("")) effectPlayer.PlayEffect(effect);
 
         Debug.Log(HpCurrent);
         
@@ -159,9 +159,9 @@ public class Monster : Character
         {
             Ore ore = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Ore), transform.position).GetComponent<Ore>();
             ore.amount = oreAmount;
+            GameManager.Instance.WaveManager.MonsterList.Remove(this);
+            StartCoroutine(DelayedDespawn());
         }
-        GameManager.Instance.WaveManager.MonsterList.Remove(this);
-        StartCoroutine(DelayedDespawn());
     }
 
     IEnumerator DelayedDespawn()
