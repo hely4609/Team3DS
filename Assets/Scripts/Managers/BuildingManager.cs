@@ -71,6 +71,7 @@ public class BuildingManager : Manager
         else
         {
             generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
+            Debug.LogWarning(generator);
             supply = GameObject.FindObjectOfType<PowerSupply>();
             supply2 = GameObject.FindObjectOfType<PowerSupply2>();
         }

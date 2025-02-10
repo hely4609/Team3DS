@@ -141,6 +141,8 @@ public class WaveManager : Manager
 
     public override void ManagerStart()
     {
+        if (GameManager.Instance.BuildingManager == null || GameManager.Instance.BuildingManager.generator == null) return;
+        Debug.LogWarning("WaveManagerStart");
         if (GameManager.Instance.NetworkManager.Runner.LocalPlayer == GameManager.Instance.NetworkManager.LocalController.myAuthority && GameManager.Instance.BuildingManager.generator.IsWaveStart) WaveStart();
     }
 
@@ -150,7 +152,6 @@ public class WaveManager : Manager
         else if(waveInfo.waveOrder.Count > 1 || GameManager.Instance.BuildingManager.generator.IsWaveLeft)
         {
             nextWaveTimeText.text = $"{(int)(GameManager.Instance.BuildingManager.generator.PlayTime) / 60:00} : {(int)(GameManager.Instance.BuildingManager.generator.PlayTime) % 60:00}";
-            Debug.Log($"{GameManager.Instance.BuildingManager.generator.MonsterCount}");
             monsterNumber.Value = GameManager.Instance.BuildingManager.generator.MonsterCount;
             //monsterCountText.text = $"Current Monsters : {GameManager.Instance.BuildingManager.generator.MonsterCount}";
         }
