@@ -20,6 +20,7 @@ public class BuildingManager : Manager
 
     public EnergyBarrierGenerator generator;
     public PowerSupply supply;
+    public PowerSupply2 supply2;
 
     public override IEnumerator Initiate()
     {
@@ -63,6 +64,7 @@ public class BuildingManager : Manager
         {
             generator = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.EnergyBarrierGenerator), new Vector3(roadData[0].x, 0, roadData[0].y)).GetComponent<EnergyBarrierGenerator>();
             supply = runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.PowerSupply), new Vector3(-11, 2, 10), Quaternion.Euler(0, 90, 0)).GetComponentInChildren<PowerSupply>();
+            supply2 = supply.transform.parent.GetComponentInChildren<PowerSupply2>();
 
             buildings.Add(supply);
         }
@@ -70,6 +72,7 @@ public class BuildingManager : Manager
         {
             generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
             supply = GameObject.FindObjectOfType<PowerSupply>();
+            supply2 = supply.transform.parent.GetComponentInChildren<PowerSupply2>();
         }
 
         // 이걸 어디에 
