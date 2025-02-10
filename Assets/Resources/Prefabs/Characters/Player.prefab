@@ -11324,7 +11324,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1545891417314619461}
   - component: {fileID: 924420174196460454}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Character_Marker_Other
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -16967,6 +16967,7 @@ MonoBehaviour:
   ropeMaxDistanceSignUI: {fileID: 0}
   pageIndexText: {fileID: 0}
   leftRopeLengthText: {fileID: 0}
+  guidelineText: {fileID: 0}
   _interactionIndex: -1
   interactionButtonInfos: []
   _isInteracting: 0
@@ -20643,7 +20644,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4746214103197803710}
   - component: {fileID: 7735422057553925376}
-  m_Layer: 6
+  m_Layer: 7
   m_Name: Character_Marker_Me
   m_TagString: Untagged
   m_Icon: {fileID: 0}

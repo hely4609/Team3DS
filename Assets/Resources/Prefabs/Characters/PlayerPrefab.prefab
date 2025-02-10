@@ -1257,8 +1257,8 @@ MonoBehaviour:
   TotalWords: 6
   ApplyTiming: 2
   SyncSettings: 79
-  StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9dfdd617c0812b98afe96ff1d9314e52e60342ad00db630e3
-  TriggerHashes: 00000000
+  StateHashes: 000000002b1a167c7940695574c37e9447705ba346980c4f14c2736638ef9053227eaab9dfdd617c0812b98afe96ff1d9314e52ef6b4d31ebf58818a60342ad00db630e3
+  TriggerHashes: 00000000dd66394b
 --- !u!114 &5690494566310352591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2432,8 +2432,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 3258906808361241583}
-  hpMax: 0
-  hpCurrent: 0
   moveSpeed: 5
   possessionController: {fileID: 0}
   TPS_Mode: 0
@@ -2443,15 +2441,27 @@ MonoBehaviour:
   interactionContent: {fileID: 0}
   interactionUpdateUI: {fileID: 0}
   buildingSelectUI: {fileID: 0}
-  interactionIndex: -1
-  oreAmount: 0
+  buildingSelectUIBuildingImages: []
+  buildingConfirmUI: {fileID: 0}
+  ropeMaxDistanceSignUI: {fileID: 0}
+  pageIndexText: {fileID: 0}
+  leftRopeLengthText: {fileID: 0}
+  guidelineText: {fileID: 0}
+  _interactionIndex: -1
+  interactionButtonInfos: []
+  _isInteracting: 0
+  _interactionType: 0
   _OreAmount: 0
   myMarker: {fileID: 38876409551982751}
   otherMarker: {fileID: 7139058868489420627}
+  _BuildableEnumPageIndex: 0
   _DesigningBuilding: {fileID: 0}
   _IsThisPlayerCharacterUICanvasActivated: 0
+  _IsBuildingComfirmUIOpen: 0
   _ropeBuilding: {fileID: 0}
+  _CanSetRope: 1
   _MoveDir: {x: 0, y: 0, z: 0}
+  _angleCheckVector: {x: 0, y: 0, z: 0}
   _PreviousPosition: {x: 0, y: 0, z: 0}
   _PreviousRotation: {x: 0, y: 0, z: 0, w: 0}
   footstepAudioSource: {fileID: 0}

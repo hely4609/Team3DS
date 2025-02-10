@@ -40,8 +40,6 @@ public class Bridge : InteractableBuilding
 
     protected override void Initialize()
     {
-        cost = 50;
-
         buildingType = BuildingEnum.Bridge;
         isNeedLine = false;
         size = new Vector2Int(2, 4);
