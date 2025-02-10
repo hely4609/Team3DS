@@ -72,7 +72,7 @@ public class BuildingManager : Manager
         {
             generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
             supply = GameObject.FindObjectOfType<PowerSupply>();
-            supply2 = supply.transform.parent.GetComponentInChildren<PowerSupply2>();
+            supply2 = GameObject.FindObjectOfType<PowerSupply2>();
         }
 
         // 이걸 어디에 
