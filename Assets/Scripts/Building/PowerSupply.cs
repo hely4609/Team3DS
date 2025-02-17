@@ -126,7 +126,7 @@ public class PowerSupply : InteractableBuilding
                     }
                     else
                     {
-                        if(!localPlayer.AlreadyAlert)
+                        if(!localPlayer.AlreadyAlert && HasInputAuthority)
                         {
                             GameManager.ManagerUpdates += localPlayer.NotEnoughOreAlert;
                         }

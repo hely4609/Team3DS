@@ -316,7 +316,7 @@ public class Tower : InteractableBuilding
         if (UpgradeRequire > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
         {
             
-            if (!GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.AlreadyAlert)
+            if (!GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.AlreadyAlert && HasInputAuthority)
             {
                 GameManager.ManagerUpdates += GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.NotEnoughOreAlert;
             }
