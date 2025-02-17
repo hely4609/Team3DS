@@ -797,8 +797,12 @@ public partial class Player : Character
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Ore);
 
-                        buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
-                        buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        if (target as Tower)
+                        {
+                            buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
+                            buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        }
+
 
                         break;
 
@@ -1061,8 +1065,12 @@ public partial class Player : Character
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Ore);
 
-                        buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
-                        buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        if (target as Tower)
+                        {
+                            buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
+                            buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        }
+
 
                         break;
 
