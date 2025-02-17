@@ -156,6 +156,10 @@ MonoBehaviour:
     m_Metadata:
       m_Items:
       - rid: 4425536683114758151
+  - m_Id: 49934744887861248
+    m_Localized: Not Enough Ore
+    m_Metadata:
+      m_Items: []
   references:
     version: 2
     RefIds:

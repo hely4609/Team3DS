@@ -147,6 +147,10 @@ MonoBehaviour:
     m_Key: WaveStart
     m_Metadata:
       m_Items: []
+  - m_Id: 49934744887861248
+    m_Key: NotEnoughMineral
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

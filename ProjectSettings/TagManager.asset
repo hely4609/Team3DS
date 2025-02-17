@@ -32,6 +32,7 @@ TagManager:
   - LeftRopeLengthText
   - GuidelineText
   - DirectPowerSupply
+  - NotEnoughOre
   layers:
   - Default
   - TransparentFX
