@@ -1,5 +1,4 @@
 using Fusion;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -47,6 +46,14 @@ public class LocalController : ControllerBase
                 {
                     controlledPlayer.buildingSelectUI.SetActive(false);
                     //controlledPlayer.buildingConfirmUI.SetActive(true);
+                    if (ResourceManager.Get(controlledPlayer.BuildableEnumArray[controlledPlayer.BuildableEnumPageIndex, data.selectedBuildingIndex]).GetComponent<Building>().Cost > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
+                    {
+                        if (!controlledPlayer.AlreadyAlert && HasInputAuthority)
+                        {
+                            GameManager.ManagerUpdates += controlledPlayer.NotEnoughOreAlert;
+                            Debug.Log("건설에 필요한 광물이 부족합니다.");
+                        }
+                    }
                 }
                 controlledPlayer.IsThisPlayerCharacterUICanvasActivated = false;
             }
@@ -112,8 +119,7 @@ public class LocalController : ControllerBase
                     leftRopeLength = pylon.RopeLengthList[MyNumber];
                 }
                 if (leftRopeLength < 0) leftRopeLength = 0;
-                controlledPlayer.leftRopeLength.Value = (float)(Math.Round(leftRopeLength, 2));
-                //controlledPlayer.leftRopeLengthText.text = $"Left Rope Length : {leftRopeLength:00.00}";
+                controlledPlayer.leftRopeLengthText.text = $"Left Rope Length : {leftRopeLength:00.00}";
                 controlledPlayer.leftRopeLengthText.gameObject.SetActive(true);
             }
             else
