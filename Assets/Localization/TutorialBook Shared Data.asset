@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b11a58205ec3474ca216360e9fa74a8, type: 3}
+  m_Name: TutorialBook Shared Data
+  m_EditorClassIdentifier: 
+  m_TableCollectionName: TutorialBook
+  m_TableCollectionNameGuidString: 412afda191452b34894690a215a9c0c9
+  m_Entries:
+  - m_Id: 18802909184
+    m_Key: page1
+    m_Metadata:
+      m_Items: []
+  - m_Id: 136268587008
+    m_Key: page2
+    m_Metadata:
+      m_Items: []
+  - m_Id: 138751614976
+    m_Key: page3
+    m_Metadata:
+      m_Items: []
+  - m_Id: 140630663168
+    m_Key: page4
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143088525312
+    m_Key: page5
+    m_Metadata:
+      m_Items: []
+  - m_Id: 146242641920
+    m_Key: page6
+    m_Metadata:
+      m_Items: []
+  - m_Id: 148197187584
+    m_Key: page7
+    m_Metadata:
+      m_Items: []
+  - m_Id: 150466306048
+    m_Key: page8
+    m_Metadata:
+      m_Items: []
+  - m_Id: 154123739136
+    m_Key: page9
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156736790528
+    m_Key: page10
+    m_Metadata:
+      m_Items: []
+  m_Metadata:
+    m_Items:
+    - rid: 4698572013697499146
+  m_KeyGenerator:
+    rid: 4698572013697499143
+  references:
+    version: 2
+    RefIds:
+    - rid: 4698572013697499143
+      type: {class: DistributedUIDGenerator, ns: UnityEngine.Localization.Tables, asm: Unity.Localization}
+      data:
+        m_CustomEpoch: 1739772538448
+    - rid: 4698572013697499146
+      type: {class: AssetTypeMetadata, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
+      data:
+        m_Entries:
+        - m_KeyId: 18802909184
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 136268587008
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 138751614976
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 140630663168
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 143088525312
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 146242641920
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 148197187584
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 150466306048
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 154123739136
+          m_TableCodes:
+          - en
+          - ko-KR
+        - m_KeyId: 156736790528
+          m_TableCodes:
+          - en
+          - ko-KR
+        m_TypeString: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null

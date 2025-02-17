@@ -138,8 +138,14 @@ public class Book : MonoBehaviour {
             return localPos;
         }
     }
+    bool first = true;
     void Update()
     {
+        if(first)
+        {
+            UpdateSprites();
+            first = false;
+        }
         if (pageDragging && interactable)
         {
             UpdateBook();
@@ -366,7 +372,7 @@ public class Book : MonoBehaviour {
         }
     }
     public Coroutine currentCoroutine;
-    void UpdateSprites()
+    public void UpdateSprites()
     {
         LeftNext.sprite= (currentPage > 0 && currentPage <= bookPages.Length) ? bookPages[currentPage-1] : background;
         RightNext.sprite=(currentPage>=0 &&currentPage<bookPages.Length) ? bookPages[currentPage] : background;

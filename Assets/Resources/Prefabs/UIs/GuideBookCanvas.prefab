@@ -141,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e06c225c0ed797f42968e08bc22fd79a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6cefd440cd8b10041bf4905ecfb8050a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1631,6 +1631,7 @@ GameObject:
   - component: {fileID: 8261686769943723013}
   - component: {fileID: 7843964901982258361}
   - component: {fileID: 2658413372618276461}
+  - component: {fileID: 7502217243148573863}
   m_Layer: 5
   m_Name: Book
   m_TagString: Untagged
@@ -1690,16 +1691,16 @@ MonoBehaviour:
   background: {fileID: 21300000, guid: 3c47abcf3fb3d12408efe3073b2e379f, type: 3}
   bookPages:
   - {fileID: 21300000, guid: 3c47abcf3fb3d12408efe3073b2e379f, type: 3}
-  - {fileID: 21300000, guid: 0be4606ae89329d4eb50e404dcf68e24, type: 3}
-  - {fileID: 21300000, guid: e06c225c0ed797f42968e08bc22fd79a, type: 3}
-  - {fileID: 21300000, guid: 45cde8f18ec17df4c9c47886f4baed54, type: 3}
-  - {fileID: 21300000, guid: 603b8d1ebe1f0744f90a6fff7237e142, type: 3}
-  - {fileID: 21300000, guid: 9cb3ba9a21f262140964da1e2242d60a, type: 3}
-  - {fileID: 21300000, guid: fab26510fae09f1449b8fbee3c913218, type: 3}
-  - {fileID: 21300000, guid: ac74be486880b7c479b218c7c2245423, type: 3}
-  - {fileID: 21300000, guid: cdc242b3cd0767049a13fd69edaac9d1, type: 3}
-  - {fileID: 21300000, guid: 19de6f01b728ae346a415f085d4fa63c, type: 3}
-  - {fileID: 21300000, guid: da1d670adeebea145b2ea674f59bb69d, type: 3}
+  - {fileID: 21300000, guid: 3e29a8f91aa8d3246b12c5bb6bc2d85c, type: 3}
+  - {fileID: 21300000, guid: 6cefd440cd8b10041bf4905ecfb8050a, type: 3}
+  - {fileID: 21300000, guid: f2be8e4c64312584d93516816b2632c9, type: 3}
+  - {fileID: 21300000, guid: 218201327d180b94790b1db0081474fa, type: 3}
+  - {fileID: 21300000, guid: 54314eada9552f54fb7ffdb1e9de49fd, type: 3}
+  - {fileID: 21300000, guid: 6b9f7e230b62ef64ea1e70e5438a3d63, type: 3}
+  - {fileID: 21300000, guid: 113578f79139cce459b1c11792acdbbe, type: 3}
+  - {fileID: 21300000, guid: 8433c4cabf8c81f4e8880ebb14e5684a, type: 3}
+  - {fileID: 21300000, guid: 100c9431b04dde84c9ec2b24d0ea2f8c, type: 3}
+  - {fileID: 21300000, guid: f4e5466dc6174d94183b387d7b59d873, type: 3}
   - {fileID: 21300000, guid: 3c47abcf3fb3d12408efe3073b2e379f, type: 3}
   interactable: 0
   enableShadowEffect: 1
@@ -1735,6 +1736,215 @@ MonoBehaviour:
   AutoStartFlip: 0
   ControledBook: {fileID: 0}
   AnimationFramesCount: 40
+--- !u!114 &7502217243148573863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7565175990266181084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69beb381e244f92449b8c4cf954630e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TrackedObjects:
+  - rid: 4698572013697499147
+  references:
+    version: 2
+    RefIds:
+    - rid: 4698572013697499147
+      type: {class: TrackedMonoBehaviourObject, ns: UnityEngine.Localization.PropertyVariants.TrackedObjects, asm: Unity.Localization}
+      data:
+        m_Target: {fileID: 7843964901982258361}
+        m_TrackedProperties:
+          items:
+          - rid: 4698572013697499148
+          - rid: 4698572013697499156
+          - rid: 4698572013697499158
+          - rid: 4698572013697499160
+          - rid: 4698572013697499162
+          - rid: 4698572013697499164
+          - rid: 4698572013697499166
+          - rid: 4698572013697499168
+          - rid: 4698572013697499170
+          - rid: 4698572013697499172
+        m_UpdateType: 1
+        m_Changed:
+          m_PersistentCalls:
+            m_Calls:
+            - m_Target: {fileID: 7843964901982258361}
+              m_TargetAssemblyTypeName: Book, Assembly-CSharp
+              m_MethodName: UpdateSprites
+              m_Mode: 1
+              m_Arguments:
+                m_ObjectArgument: {fileID: 0}
+                m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+                m_IntArgument: 0
+                m_FloatArgument: 0
+                m_StringArgument: 
+                m_BoolArgument: 0
+              m_CallState: 2
+    - rid: 4698572013697499148
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499149
+        m_PropertyPath: bookPages.Array.data[1]
+    - rid: 4698572013697499149
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 18802909184
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499156
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499157
+        m_PropertyPath: bookPages.Array.data[2]
+    - rid: 4698572013697499157
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 136268587008
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499158
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499159
+        m_PropertyPath: bookPages.Array.data[3]
+    - rid: 4698572013697499159
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 138751614976
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499160
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499161
+        m_PropertyPath: bookPages.Array.data[4]
+    - rid: 4698572013697499161
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 140630663168
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499162
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499163
+        m_PropertyPath: bookPages.Array.data[5]
+    - rid: 4698572013697499163
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 143088525312
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499164
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499165
+        m_PropertyPath: bookPages.Array.data[6]
+    - rid: 4698572013697499165
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 146242641920
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499166
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499167
+        m_PropertyPath: bookPages.Array.data[7]
+    - rid: 4698572013697499167
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 148197187584
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499168
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499169
+        m_PropertyPath: bookPages.Array.data[8]
+    - rid: 4698572013697499169
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 150466306048
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499170
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499171
+        m_PropertyPath: bookPages.Array.data[9]
+    - rid: 4698572013697499171
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 154123739136
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
+    - rid: 4698572013697499172
+      type: {class: LocalizedAssetProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
+      data:
+        m_Localized:
+          rid: 4698572013697499173
+        m_PropertyPath: bookPages.Array.data[10]
+    - rid: 4698572013697499173
+      type: {class: LocalizedSprite, ns: UnityEngine.Localization, asm: Unity.Localization}
+      data:
+        m_TableReference:
+          m_TableCollectionName: GUID:412afda191452b34894690a215a9c0c9
+        m_TableEntryReference:
+          m_KeyId: 156736790528
+          m_Key: 
+        m_FallbackState: 0
+        m_WaitForCompletion: 0
 --- !u!1 &8576235873617963273
 GameObject:
   m_ObjectHideFlags: 0
@@ -1800,7 +2010,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0be4606ae89329d4eb50e404dcf68e24, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 3e29a8f91aa8d3246b12c5bb6bc2d85c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

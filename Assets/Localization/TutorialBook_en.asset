@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97269afb30aa84742ae3f3342603618a, type: 3}
+  m_Name: TutorialBook_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: 412afda191452b34894690a215a9c0c9, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 18802909184
+    m_Localized: 3e29a8f91aa8d3246b12c5bb6bc2d85c[page1en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 156736790528
+    m_Localized: f4e5466dc6174d94183b387d7b59d873[page10en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 154123739136
+    m_Localized: 100c9431b04dde84c9ec2b24d0ea2f8c[page9en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 150466306048
+    m_Localized: 8433c4cabf8c81f4e8880ebb14e5684a[page8en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 148197187584
+    m_Localized: 113578f79139cce459b1c11792acdbbe[page7en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 143088525312
+    m_Localized: 54314eada9552f54fb7ffdb1e9de49fd[page5en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 146242641920
+    m_Localized: 6b9f7e230b62ef64ea1e70e5438a3d63[page6en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 138751614976
+    m_Localized: f2be8e4c64312584d93516816b2632c9[page3en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 140630663168
+    m_Localized: 218201327d180b94790b1db0081474fa[page4en]
+    m_Metadata:
+      m_Items: []
+  - m_Id: 136268587008
+    m_Localized: 6cefd440cd8b10041bf4905ecfb8050a[page2en]
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
