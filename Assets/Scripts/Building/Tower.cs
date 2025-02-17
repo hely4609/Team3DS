@@ -315,6 +315,11 @@ public class Tower : InteractableBuilding
         if (!HasStateAuthority) return;
         if (UpgradeRequire > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
         {
+            
+            if (!GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.AlreadyAlert)
+            {
+                GameManager.ManagerUpdates += GameManager.Instance.NetworkManager.LocalController.ControlledPlayer.NotEnoughOreAlert;
+            }
             Debug.Log("업그레이드에 필요한 광물이 부족합니다.");
             return;
         }

@@ -126,6 +126,10 @@ public class PowerSupply : InteractableBuilding
                     }
                     else
                     {
+                        if(!localPlayer.AlreadyAlert)
+                        {
+                            GameManager.ManagerUpdates += localPlayer.NotEnoughOreAlert;
+                        }
                         Debug.Log($"업그레이드에 필요한 광물이 부족합니다.\n필요광물 : {expMax}");
                     }
                 }
