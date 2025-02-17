@@ -744,7 +744,7 @@ MonoBehaviour:
   _powerConsumption: 60
   _attackDamage: 40
   attackUpgradeIncrease: 20
-  _attackSpeed: 4
+  _attackSpeed: 8
   _attackRange: 2
   target: {fileID: 0}
   targetList: []
