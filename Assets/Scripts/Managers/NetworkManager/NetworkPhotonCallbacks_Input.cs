@@ -17,6 +17,7 @@ public struct NetworkInputData : INetworkInput
 {
     public Vector3 currentPosition;
     public Quaternion currentRotation;
+    public float currentLookVerticalAngle;
 
     public Vector3 moveDirection;
     //public Vector2 lookRotationDelta;
@@ -49,6 +50,7 @@ public partial class NetworkPhotonCallbacks
         {
             data.currentPosition = inputPlayer.transform.position;
             data.currentRotation = inputPlayer.transform.rotation;
+            data.currentLookVerticalAngle = inputPlayer.CameraOffset.eulerAngles.x;
         }
 
         data.moveDirection = moveDir;
