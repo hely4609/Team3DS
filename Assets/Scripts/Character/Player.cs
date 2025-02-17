@@ -250,6 +250,7 @@ public partial class Player : Character
 
     public override void FixedUpdateNetwork()
     {
+        if(GameManager.Instance.BuildingManager.generator == null) return;
         if (GetInput(out NetworkInputData data))
         {
             PreviousPosition = data.currentPosition;

@@ -757,6 +757,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsUICanvas: {fileID: 817446635}
+  guideBookPrefab: {fileID: 0}
   guideBook: {fileID: 0}
   masterToggle: {fileID: 1520490154}
   bgmToggle: {fileID: 867743945}
@@ -9042,7 +9043,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsUICanvas: {fileID: 797520150}
-  guideBook: {fileID: 1145052847}
+  guideBookPrefab: {fileID: 1768121070450648573, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
+  guideBook: {fileID: 0}
   masterToggle: {fileID: 1419114837}
   bgmToggle: {fileID: 1100950943}
   sfxToggle: {fileID: 394625931}
@@ -10735,6 +10737,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsUICanvas: {fileID: 717982190}
+  guideBookPrefab: {fileID: 0}
   guideBook: {fileID: 0}
   masterToggle: {fileID: 2023195868}
   bgmToggle: {fileID: 842891868}
@@ -10959,11 +10962,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &1145052847 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1768121070450648573, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
-  m_PrefabInstance: {fileID: 1199942346}
-  m_PrefabAsset: {fileID: 0}
 --- !u!224 &1145052851 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5930893625478571482, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
