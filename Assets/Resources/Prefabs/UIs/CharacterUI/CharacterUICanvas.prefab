@@ -4321,8 +4321,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Wave Start!
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
+  m_sharedMaterial: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -4410,36 +4410,8 @@ MonoBehaviour:
       data:
         m_Target: {fileID: 8606495741134379298}
         m_TrackedProperties:
-          items:
-          - rid: 3679008255887278083
-          - rid: 3679008255887278084
+          items: []
         m_UpdateType: 0
-    - rid: 3679008255887278083
-      type: {class: UnityObjectProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
-      data:
-        m_PropertyPath: m_fontAsset
-        m_TypeString: TMPro.TMP_FontAsset, Unity.TextMeshPro, Version=0.0.0.0, Culture=neutral,
-          PublicKeyToken=null
-        m_VariantData:
-        - localeIdentifier:
-            m_Code: en
-          value: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-        - localeIdentifier:
-            m_Code: ko-KR
-          value: {fileID: 11400000, guid: 794239401e960c6408c431704eb60a3b, type: 2}
-    - rid: 3679008255887278084
-      type: {class: UnityObjectProperty, ns: UnityEngine.Localization.PropertyVariants.TrackedProperties, asm: Unity.Localization}
-      data:
-        m_PropertyPath: m_sharedMaterial
-        m_TypeString: UnityEngine.Material, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
-        m_VariantData:
-        - localeIdentifier:
-            m_Code: en
-          value: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-        - localeIdentifier:
-            m_Code: ko-KR
-          value: {fileID: -343619177536985799, guid: 794239401e960c6408c431704eb60a3b, type: 2}
 --- !u!114 &1836395143507288083
 MonoBehaviour:
   m_ObjectHideFlags: 0
