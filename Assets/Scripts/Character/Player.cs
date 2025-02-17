@@ -536,6 +536,9 @@ public partial class Player : Character
             
             // 상하회전은 카메라만 회전
             cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+
+            cameraOffset_TPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
+            cameraOffset_TPS.position = new Vector3(cameraOffset_TPS.position.x, 1.7f + 2 * Mathf.Tan(rotate_x * Mathf.Deg2Rad), cameraOffset_TPS.position.z);
         }
     }
 
