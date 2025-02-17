@@ -1430,7 +1430,11 @@ public partial class Player : Character
 
                 // 광물사용량 텍스트 교체
                 int requireOre = GetRequireOreResourceAmount(targetPrefabEnum);
-                buildingSelectUIBuildingImages[i].transform.parent.GetComponentInChildren<TextMeshProUGUI>().text = requireOre != -1 ? requireOre.ToString() : null;
+                int requirePower = GetRequirePowerAmount(targetPrefabEnum);
+
+                TextMeshProUGUI[] texts = buildingSelectUIBuildingImages[i].transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
+                texts[0].text = requireOre != -1 ? requireOre.ToString() : null;
+                texts[1].text = requirePower != -1 ? requirePower.ToString() : null;
             }
         }
     }
@@ -1444,6 +1448,18 @@ public partial class Player : Character
         ResourceEnum.Prefab.Bridge => 5,
 
         ResourceEnum.Prefab.Pylon => 10,
+
+        _ => -1,
+    };
+
+    private int GetRequirePowerAmount(ResourceEnum.Prefab prefab) => prefab switch
+    {
+        ResourceEnum.Prefab.Turret1a => 10,
+        ResourceEnum.Prefab.Turret1d => 40,
+        ResourceEnum.Prefab.ION_Cannon => 60,
+        ResourceEnum.Prefab.BlastTower => 30,
+        ResourceEnum.Prefab.Bridge => 0,
+        ResourceEnum.Prefab.Pylon => 0,
 
         _ => -1,
     };
