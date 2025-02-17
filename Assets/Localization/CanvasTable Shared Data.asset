@@ -151,6 +151,10 @@ MonoBehaviour:
     m_Key: NotEnoughMineral
     m_Metadata:
       m_Items: []
+  - m_Id: 49981193675710464
+    m_Key: LeftRope
+    m_Metadata:
+      m_Items: []
   m_Metadata:
     m_Items: []
   m_KeyGenerator:

@@ -25,6 +25,9 @@ MonoBehaviour:
   - name: CurrentMonsters
     variable:
       rid: 1534412684868976644
+  - name: LeftRopeLenght
+    variable:
+      rid: 4698572013697499142
   references:
     version: 2
     RefIds:
@@ -42,5 +45,9 @@ MonoBehaviour:
         m_Value: 5
     - rid: 4425536683114758172
       type: {class: IntVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
+      data:
+        m_Value: 0
+    - rid: 4698572013697499142
+      type: {class: FloatVariable, ns: UnityEngine.Localization.SmartFormat.PersistentVariables, asm: Unity.Localization}
       data:
         m_Value: 0

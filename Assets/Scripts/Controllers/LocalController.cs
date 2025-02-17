@@ -1,4 +1,5 @@
 using Fusion;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -111,7 +112,8 @@ public class LocalController : ControllerBase
                     leftRopeLength = pylon.RopeLengthList[MyNumber];
                 }
                 if (leftRopeLength < 0) leftRopeLength = 0;
-                controlledPlayer.leftRopeLengthText.text = $"Left Rope Length : {leftRopeLength:00.00}";
+                controlledPlayer.leftRopeLength.Value = (float)(Math.Round(leftRopeLength, 2));
+                //controlledPlayer.leftRopeLengthText.text = $"Left Rope Length : {leftRopeLength:00.00}";
                 controlledPlayer.leftRopeLengthText.gameObject.SetActive(true);
             }
             else

@@ -160,10 +160,15 @@ MonoBehaviour:
     m_Localized: Not Enough Ore
     m_Metadata:
       m_Items: []
+  - m_Id: 49981193675710464
+    m_Localized: 'Left Rope Length : {ResultGroup.LeftRopeLenght}m'
+    m_Metadata:
+      m_Items:
+      - rid: 4425536683114758151
   references:
     version: 2
     RefIds:
     - rid: 4425536683114758151
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 009076df1f670700009036f9b56607000080ab8508b49f00
+        m_Entries: 009076df1f670700009036f9b56607000080ab8508b49f0000a07d7ea191b100

@@ -158,10 +158,15 @@ MonoBehaviour:
     m_Localized: "\uAD11\uBB3C\uC774 \uBD80\uC871\uD569\uB2C8\uB2E4."
     m_Metadata:
       m_Items: []
+  - m_Id: 49981193675710464
+    m_Localized: "\uB0A8\uC740 \uC804\uC120 \uAE38\uC774 : {ResultGroup.LeftRopeLenght}m"
+    m_Metadata:
+      m_Items:
+      - rid: 4425536683114758150
   references:
     version: 2
     RefIds:
     - rid: 4425536683114758150
       type: {class: SmartFormatTag, ns: UnityEngine.Localization.Metadata, asm: Unity.Localization}
       data:
-        m_Entries: 009076df1f670700009036f9b56607000080ab8508b49f00
+        m_Entries: 009076df1f670700009036f9b56607000080ab8508b49f0000a07d7ea191b100

@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Localization.Components;
+using UnityEngine.Localization.Settings;
+using UnityEngine.Localization.SmartFormat.Extensions;
+using UnityEngine.Localization.SmartFormat.PersistentVariables;
 using UnityEngine.UI;
 
 [Serializable]
@@ -50,6 +53,7 @@ public partial class Player : Character
     protected Image buttonImage;
     public TextMeshProUGUI pageIndexText;
     public TextMeshProUGUI leftRopeLengthText;
+    public FloatVariable leftRopeLength;
     public TextMeshProUGUI guidelineText;
     GameObject directPowerSupply;
 
@@ -233,7 +237,8 @@ public partial class Player : Character
             if (!Runner.IsSinglePlayer) guidelineText.gameObject.SetActive(false);
             directPowerSupply.SetActive(false);
             notEnoughOre.gameObject.SetActive(false);
-
+            var source = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
+            leftRopeLength = source["ResultGroup"]["LeftRopeLenght"] as FloatVariable;
             GameManager.CloseLoadInfo();
         }
     }
