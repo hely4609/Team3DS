@@ -17,12 +17,14 @@ public class OptionManager : MonoBehaviour
         yield return null;
     }
     [SerializeField] GameObject settingsUICanvas;
+    [SerializeField] GameObject guideBookPrefab;
     [SerializeField] GameObject guideBook;
     protected void OnESC(InputValue value)
     {
-        if (guideBook.activeInHierarchy)
+        if (guideBook != null)
         {
-            guideBook.SetActive(false);
+            Destroy(guideBook);
+            guideBook = null;
             return;
         }
 
@@ -36,7 +38,7 @@ public class OptionManager : MonoBehaviour
         float direaction = value.Get<float>();
 
         if (direaction == 0) return;
-        if (!guideBook.activeInHierarchy) return;
+        if (guideBook == null) return;
 
         AutoFlip book = guideBook.GetComponentInChildren<AutoFlip>();
 
@@ -101,8 +103,10 @@ public class OptionManager : MonoBehaviour
 
     public void GuideBook()
     {
-        guideBook.SetActive(true);
-        guideBook.GetComponentInChildren<Book>().currentPage = 2;
+        guideBook = Instantiate(guideBookPrefab);
+        
+        //guideBook.SetActive(true);
+        //guideBook.GetComponentInChildren<Book>().currentPage = 2;
     }
 
     public void ChangeLocale(string i)

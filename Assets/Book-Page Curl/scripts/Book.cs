@@ -67,6 +67,8 @@ public class Book : MonoBehaviour {
     //current flip mode
     FlipMode mode;
 
+    public bool isFilping;
+
     void Start()
     {
         if (!canvas) canvas=GetComponentInParent<Canvas>();
@@ -363,7 +365,7 @@ public class Book : MonoBehaviour {
                 TweenForward();
         }
     }
-    Coroutine currentCoroutine;
+    public Coroutine currentCoroutine;
     void UpdateSprites()
     {
         LeftNext.sprite= (currentPage > 0 && currentPage <= bookPages.Length) ? bookPages[currentPage-1] : background;
@@ -371,6 +373,8 @@ public class Book : MonoBehaviour {
     }
     public void TweenForward()
     {
+        isFilping = true;
+
         if(mode== FlipMode.RightToLeft)
         currentCoroutine = StartCoroutine(TweenTo(ebl, 0.15f, () => { Flip(); }));
         else
@@ -396,6 +400,8 @@ public class Book : MonoBehaviour {
     }
     public void TweenBack()
     {
+        isFilping = true;
+
         if (mode == FlipMode.RightToLeft)
         {
             currentCoroutine = StartCoroutine(TweenTo(ebr,0.15f,
@@ -443,5 +449,7 @@ public class Book : MonoBehaviour {
         }
         if (onFinish != null)
             onFinish();
+
+        
     }
 }

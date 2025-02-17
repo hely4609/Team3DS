@@ -141,7 +141,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: b1bac3987b1ad064a80f72496ee46425, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e06c225c0ed797f42968e08bc22fd79a, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -424,7 +424,7 @@ Canvas:
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 100
   m_TargetDisplay: 0
 --- !u!114 &1712572916431165801
 MonoBehaviour:
@@ -1715,6 +1715,7 @@ MonoBehaviour:
   OnFlip:
     m_PersistentCalls:
       m_Calls: []
+  isFilping: 0
 --- !u!114 &2658413372618276461
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1728,8 +1729,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Mode: 0
-  PageFlipTime: 1
-  TimeBetweenPages: 1
+  PageFlipTime: 0.1
+  TimeBetweenPages: 0.5
   DelayBeforeStarting: 0
   AutoStartFlip: 0
   ControledBook: {fileID: 0}
@@ -1799,7 +1800,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 3c47abcf3fb3d12408efe3073b2e379f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 0be4606ae89329d4eb50e404dcf68e24, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

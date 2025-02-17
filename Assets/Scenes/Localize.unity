@@ -1604,7 +1604,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settingsUICanvas: {fileID: 1385740960}
-  guideBook: {fileID: 1838080460}
+  guideBookPrefab: {fileID: 1768121070450648573, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
+  guideBook: {fileID: 0}
   masterToggle: {fileID: 1318683742}
   bgmToggle: {fileID: 2109080412}
   sfxToggle: {fileID: 1456628496}
@@ -1641,7 +1642,7 @@ Transform:
   m_Children:
   - {fileID: 2031407009}
   - {fileID: 859720075}
-  - {fileID: 1838080459}
+  - {fileID: 5930893625134777360}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &557759298
@@ -12387,7 +12388,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2658413372618276461, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
       propertyPath: PageFlipTime
-      value: 0.1
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 4129191290804472405, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
       propertyPath: m_AnchoredPosition.x
@@ -12414,16 +12415,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
---- !u!224 &1838080459 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5930893625478571482, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
-  m_PrefabInstance: {fileID: 1838080458}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1838080460 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1768121070450648573, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
-  m_PrefabInstance: {fileID: 1838080458}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1939455897
 GameObject:
   m_ObjectHideFlags: 0
@@ -13166,6 +13157,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!224 &5930893625134777360 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5930893625478571482, guid: 2dba1273b3bd63a4ea3ad87bbc9089b2, type: 3}
+  m_PrefabInstance: {fileID: 1838080458}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
