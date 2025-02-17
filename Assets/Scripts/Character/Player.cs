@@ -256,6 +256,7 @@ public partial class Player : Character
 
     public override void FixedUpdateNetwork()
     {
+        if(GameManager.Instance.BuildingManager?.generator == null) return;
         if (GetInput(out NetworkInputData data))
         {
             PreviousPosition = data.currentPosition;
@@ -575,7 +576,7 @@ public partial class Player : Character
 
         if (ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]).GetComponent<Building>().Cost > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
         {
-            if (!alreadyAlert)
+            if (!alreadyAlert && HasInputAuthority)
             {
                 GameManager.ManagerUpdates += NotEnoughOreAlert;
                 Debug.Log("건설에 필요한 광물이 부족합니다.");
@@ -802,8 +803,12 @@ public partial class Player : Character
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Ore);
 
-                        buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
-                        buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        if (target as Tower)
+                        {
+                            buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
+                            buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        }
+
 
                         break;
 
@@ -1066,8 +1071,12 @@ public partial class Player : Character
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Ore);
 
-                        buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
-                        buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        if (target as Tower)
+                        {
+                            buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
+                            buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        }
+
 
                         break;
 
