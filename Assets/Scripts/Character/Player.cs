@@ -251,7 +251,7 @@ public partial class Player : Character
 
     public override void FixedUpdateNetwork()
     {
-        if(GameManager.Instance.BuildingManager.generator == null) return;
+        if(GameManager.Instance.BuildingManager?.generator == null) return;
         if (GetInput(out NetworkInputData data))
         {
             PreviousPosition = data.currentPosition;
@@ -571,7 +571,7 @@ public partial class Player : Character
 
         if (ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]).GetComponent<Building>().Cost > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
         {
-            if (!alreadyAlert)
+            if (!alreadyAlert && HasInputAuthority)
             {
                 GameManager.ManagerUpdates += NotEnoughOreAlert;
                 Debug.Log("건설에 필요한 광물이 부족합니다.");
