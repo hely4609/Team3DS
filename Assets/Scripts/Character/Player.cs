@@ -58,10 +58,10 @@ public partial class Player : Character
     [SerializeField, Networked] protected int interactionIndex { get; set; } = -1; // 내가 선택한 상호작용 대상이 리스트에서 몇번째 인지
     protected List<IInteraction> interactionObjectList = new List<IInteraction>(); // 범위내 상호작용 가능한 대상들의 리스트
     protected Dictionary<IInteraction, GameObject> interactionObjectDictionary = new(); // 상호작용 가능한 대상들의 리스트와 버튼UI오브젝트를 1:1대응시켜줄 Dictionary 
-    
+
     // test
-    [SerializeField]protected List<InteractionButtonInfo> interactionButtonInfos = new List<InteractionButtonInfo>();
-     
+    [SerializeField] protected List<InteractionButtonInfo> interactionButtonInfos = new List<InteractionButtonInfo>();
+
     [SerializeField, Networked] protected bool isInteracting { get; set; } // 나는 지금 상호작용 중인가?
     //public bool IsInteracting => isInteracting;
     [SerializeField, Networked] protected Interaction interactionType { get; set; } // 나는 어떤 상호작용을 하고있는가?
@@ -193,9 +193,9 @@ public partial class Player : Character
         }
 
         int xSize = (ResourceEnum.Prefab.buildingEnd - ResourceEnum.Prefab.buildingStart - 2) / 5 + 1;
-        
-        buildableEnumArray = new ResourceEnum.Prefab[xSize , 5];
-        
+
+        buildableEnumArray = new ResourceEnum.Prefab[xSize, 5];
+
         for (ResourceEnum.Prefab index = ResourceEnum.Prefab.buildingStart + 1; index < ResourceEnum.Prefab.buildingEnd; index++)
         {
             int y = index - (ResourceEnum.Prefab.buildingStart + 1);
@@ -230,8 +230,9 @@ public partial class Player : Character
             buildingConfirmUI.SetActive(false);
             ropeMaxDistanceSignUI.SetActive(false);
             leftRopeLengthText.gameObject.SetActive(false);
-            if(!Runner.IsSinglePlayer) guidelineText.gameObject.SetActive(false);
+            if (!Runner.IsSinglePlayer) guidelineText.gameObject.SetActive(false);
             directPowerSupply.SetActive(false);
+            notEnoughOre.gameObject.SetActive(false);
 
             GameManager.CloseLoadInfo();
         }
@@ -271,12 +272,12 @@ public partial class Player : Character
 
     private void Update()
     {
-        if(directPowerSupply != null && directPowerSupply.activeSelf)
+        if (directPowerSupply != null && directPowerSupply.activeSelf)
         {
             Vector3 screenPos = Camera.main.WorldToScreenPoint(GameManager.Instance.BuildingManager.supply2.transform.position);
             bool isOnScreen = screenPos.z > 0 && screenPos.x >= 0 && screenPos.x <= Screen.width && screenPos.y >= 0 && screenPos.y <= Screen.height;
 
-            if(isOnScreen)
+            if (isOnScreen)
             {
                 directPowerSupply.transform.SetPositionAndRotation(Camera.main.WorldToScreenPoint(GameManager.Instance.BuildingManager.supply2.transform.position), Quaternion.Euler(0, 0, 0));
             }
@@ -286,7 +287,7 @@ public partial class Player : Character
                 float clampedX = Mathf.Clamp(screenPos.x, 50, Screen.width - 50);
                 float clampedY = Mathf.Clamp(screenPos.y, 50, Screen.height - 50);
 
-                directPowerSupply.transform.position = new Vector3(clampedX, clampedY, 0); 
+                directPowerSupply.transform.position = new Vector3(clampedX, clampedY, 0);
                 Vector2 direction = (Camera.main.WorldToScreenPoint(GameManager.Instance.BuildingManager.supply2.transform.position) - Camera.main.transform.position).normalized;
                 float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
                 directPowerSupply.transform.rotation = Quaternion.Euler(0, 0, angle - 90);
@@ -296,13 +297,13 @@ public partial class Player : Character
     protected override void MyUpdate(float deltaTime)
     {
         //이동방향이 있을 시 해당 방향으로 움직임. + 애니메이션 설정
-        
+
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, deltaTime), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, deltaTime));
 
         AnimFloat?.Invoke("Speed", MoveDir.magnitude);
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
-        
+
         // 상호작용
         if (isInteracting && interactionObject != null)
         {
@@ -364,7 +365,7 @@ public partial class Player : Character
             Vector3 playerIntPos = new Vector3(x, y, z);
             if (currentPos != lastPos)
             {
-                if(HasStateAuthority)CanSetRope = ropeBuilding.CheckRopeLength(playerIntPos, playerID);
+                if (HasStateAuthority) CanSetRope = ropeBuilding.CheckRopeLength(playerIntPos, playerID);
                 //if (CanSetRope)
                 {
                     ropeBuilding.OnRopeSet(playerIntPos, playerID);
@@ -461,19 +462,19 @@ public partial class Player : Character
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
     public override void Move(Vector3 direction)
     {
-       
+
         MoveDir = direction.normalized;
 
         if (possessionController != null && HasInputAuthority)
         {
-            
+
             Vector3 wantMoveDir = transform.forward * MoveDir.z + transform.right * MoveDir.x;
             Vector3 velocity = CalculrateNextFrameGroundAngle() < 85f ? wantMoveDir : Vector3.zero;
             Vector3 gravity = IsGround ? Vector3.zero : Vector3.down * Mathf.Abs(rb.velocity.y);
             Vector3 boundaryLeftUp = GameManager.Instance.WaveManager.BoundLeftUp;
             Vector3 boundaryRightDown = GameManager.Instance.WaveManager.BoundRightDown;
 
-            
+
             if (IsGround)
             {
                 velocity = Vector3.ProjectOnPlane(wantMoveDir, GroundNormal);
@@ -495,7 +496,7 @@ public partial class Player : Character
             {
                 rb.velocity = velocity * moveSpeed + gravity;
             }
-            else 
+            else
             {
                 angleCheck = Vector3.Angle(velocity, angleCheckVector - transform.position) < 45;
 
@@ -538,7 +539,7 @@ public partial class Player : Character
             rotate_x += mouseDelta_y;
             rotate_x = Mathf.Clamp(rotate_x, -45f, 30f + 13f / Mathf.Abs(GroundNormal.y));
 
-            
+
             // 상하회전은 카메라만 회전
             cameraOffset_FPS.localEulerAngles = new Vector3(rotate_x, 0f, 0f);
 
@@ -547,7 +548,7 @@ public partial class Player : Character
         }
     }
 
-    
+
 
     public bool PickUp(GameObject target) { return default; }
     public bool PutDown() { return default; }
@@ -570,11 +571,15 @@ public partial class Player : Character
 
         if (ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]).GetComponent<Building>().Cost > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
         {
-            Debug.Log("건설에 필요한 광물이 부족합니다.");
-            
+            if (!alreadyAlert)
+            {
+                GameManager.ManagerUpdates += NotEnoughOreAlert;
+                Debug.Log("건설에 필요한 광물이 부족합니다.");
+            }
+
             return false;
-        } 
-        
+        }
+
 
         NetworkObject building = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]));
         DesigningBuilding = building.GetComponent<Building>();
@@ -618,7 +623,7 @@ public partial class Player : Character
             ropeBuilding = null;
         }
 
-        if(ropeMaxDistanceSignUI != null)
+        if (ropeMaxDistanceSignUI != null)
         {
             ropeMaxDistanceSignUI.SetActive(false);
         }
@@ -678,7 +683,7 @@ public partial class Player : Character
     public bool InteractionEnd()
     {
         if (HasStateAuthority) isInteracting = false;
-        
+
         switch (interactionType)
         {
             default:
@@ -756,10 +761,14 @@ public partial class Player : Character
                 Image[] images = resource.GetComponentsInChildren<Image>();
                 buttonImage = images[1];
 
+                GameObject atk = button.transform.GetChild(2).gameObject;
+                if (target is not Tower || interaction != Interaction.Upgrade) atk.SetActive(false);
+                else atk.SetActive(true);
+
                 switch (interaction)
                 {
                     case Interaction.Demolish:
-                        
+
                         int cost = 0;
                         if (target as Tower)
                         {
@@ -771,7 +780,7 @@ public partial class Player : Character
                         {
                             cost = ((Building)target).Cost;
                         }
-                        
+
                         buttonText.text = "+" + $" {cost}";
                         buttonText.color = Color.green;
 
@@ -779,7 +788,7 @@ public partial class Player : Character
                         break;
 
                     case Interaction.Upgrade:
-                        
+
                         cost = 0;
                         if (target as PowerSupply) cost = ((PowerSupply)target).ExpMax;
                         else if (target as Tower) cost = ((Tower)target).UpgradeRequire;
@@ -788,6 +797,14 @@ public partial class Player : Character
                         buttonText.color = Color.red;
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Ore);
+
+                        if (target as Tower)
+                        {
+                            buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
+                            buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        }
+
+
                         break;
 
                     case Interaction.OnOff:
@@ -797,8 +814,8 @@ public partial class Player : Character
                             Tower tower = (Tower)target;
                             cost = tower.powerConsumption;
 
-                            buttonText.text = tower.OnOff? "+" + $" {cost}" : "-" + $" {cost}";
-                            buttonText.color = tower.OnOff? Color.green : Color.red;
+                            buttonText.text = tower.OnOff ? "+" + $" {cost}" : "-" + $" {cost}";
+                            buttonText.color = tower.OnOff ? Color.green : Color.red;
                         }
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Battery);
@@ -808,7 +825,7 @@ public partial class Player : Character
                         resource.SetActive(false);
                         break;
                 }
-                
+
 
                 button.transform.SetSiblingIndex(9999);  // SiblingIndex - 나는 부모의 자식중에 몇번째 Index에 있는가
                 buttonText = button.GetComponentInChildren<TextMeshProUGUI>();
@@ -824,9 +841,9 @@ public partial class Player : Character
                     {
                         interactionIndex = 0;
                         interactionType = interaction;
-                    } 
+                    }
                     interactionObject = target;
-                    
+
                     //if (HasInputAuthority)
                     //{
                     //    mouseLeftImage = GameManager.Instance.PoolManager.Instantiate(ResourceEnum.Prefab.MouseLeftUI, interactionUI);
@@ -838,10 +855,10 @@ public partial class Player : Character
             }
 
             //interactionObjectList.Add(target);
-            
+
 
             //GameObject button = Instantiate(ResourceManager.Get(ResourceEnum.Prefab.InteractableObjButton), interactionContent);
-            
+
         }
 
     }
@@ -870,7 +887,7 @@ public partial class Player : Character
                 interactionButtonInfos.Remove(info);
             }
 
-            
+
             //if (interactionObjectDictionary.TryGetValue(target, out GameObject result))
             //{
             //    GameManager.Instance.PoolManager.Destroy(result);
@@ -879,7 +896,7 @@ public partial class Player : Character
 
             if (interactionButtonInfos.Count == 0)
             {
-                if(HasStateAuthority)interactionIndex = -1;
+                if (HasStateAuthority) interactionIndex = -1;
                 if (isInteracting)
                 {
                     InteractionEnd();
@@ -927,7 +944,7 @@ public partial class Player : Character
                 interactionIndex = Mathf.Max(index, 0);
             }
             Debug.Log(interactionIndex);
-            if(interactionIndex > -1) interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
+            if (interactionIndex > -1) interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
             if (interactionIndex < interactionButtonInfos.Count - 4 && HasInputAuthority)
@@ -1012,6 +1029,10 @@ public partial class Player : Character
                 Image[] images = resource.GetComponentsInChildren<Image>();
                 buttonImage = images[1];
 
+                GameObject atk = button.transform.GetChild(2).gameObject;
+                if (target is not Tower || interaction != Interaction.Upgrade) atk.SetActive(false);
+                else atk.SetActive(true);
+
                 switch (interaction)
                 {
                     case Interaction.Demolish:
@@ -1044,6 +1065,14 @@ public partial class Player : Character
                         buttonText.color = Color.red;
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Ore);
+
+                        if (target as Tower)
+                        {
+                            buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
+                            buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+                        }
+
+
                         break;
 
                     case Interaction.OnOff:
@@ -1094,8 +1123,8 @@ public partial class Player : Character
                 {
                     interactionIndex = Mathf.Clamp(index, 0, interactionButtonInfos.Count - 1);
                     interactionType = interactionButtonInfos[interactionIndex].interactionType;
-                } 
-                
+                }
+
                 //UpdateInteractionUI(interactionIndex);
             }
         }
@@ -1107,7 +1136,7 @@ public partial class Player : Character
             foreach (InteractionButtonInfo info in removeInfos)
             {
                 interactionButtonInfos.Remove(info);
-                if(GameManager.Instance.NetworkManager.LocalController.ControlledPlayer == this) GameManager.Instance.PoolManager.Destroy(info.button);
+                if (GameManager.Instance.NetworkManager.LocalController.ControlledPlayer == this) GameManager.Instance.PoolManager.Destroy(info.button);
             }
 
             if (interactionButtonInfos.Count == 0)
@@ -1140,7 +1169,7 @@ public partial class Player : Character
             //UpdateInteractionUI(interactionIndex);
         }
 
-        if(interactionIndex == index) UpdateInteractionUI(index);
+        if (interactionIndex == index) UpdateInteractionUI(index);
 
     }
 
@@ -1207,10 +1236,10 @@ public partial class Player : Character
                     break;
                 case nameof(IsBuildingComfirmUIOpen):
                     if (HasInputAuthority)
-                    buildingConfirmUI.SetActive(IsBuildingComfirmUIOpen);
+                        buildingConfirmUI.SetActive(IsBuildingComfirmUIOpen);
                     break;
                 case nameof(CanSetRope):
-                    if(!CanSetRope)
+                    if (!CanSetRope)
                     {
                         if (HasInputAuthority && ropeMaxDistanceSignUI != null) ropeMaxDistanceSignUI.SetActive(true);
                         if (ropeSource == null || !ropeSource.isPlaying)
@@ -1246,9 +1275,9 @@ public partial class Player : Character
                     }
                     if (interactionIndex != -1) UpdateInteractionUI(interactionIndex);
                     break;
-                //case nameof(AngleCheck):
-                //    angleCheck = AngleCheck;
-                //    break;
+                    //case nameof(AngleCheck):
+                    //    angleCheck = AngleCheck;
+                    //    break;
             }
 
         }
@@ -1264,7 +1293,7 @@ public partial class Player : Character
     protected Dictionary<Collider, Vector3> attachedCollision = new();
 
     //지금 제가 딛고 있는 땅의 노말을 저장해둡시다!
-    [SerializeField]Vector3 _groundNormal = Vector3.down;
+    [SerializeField] Vector3 _groundNormal = Vector3.down;
     Vector3 GroundNormal
     {
         get => _groundNormal;
@@ -1409,7 +1438,7 @@ public partial class Player : Character
     {
         if (buildingSelectUI.activeInHierarchy && HasInputAuthority)
             pageIndexText.text = $"{BuildableEnumPageIndex + 1} / {(ResourceEnum.Prefab.buildingEnd - ResourceEnum.Prefab.buildingStart - 2) / 5 + 1}";
-        
+
     }
 
     public void RenewBuildingImanges()
@@ -1476,5 +1505,24 @@ public partial class Player : Character
     public void ChangeView()
     {
         TPS_Mode = !TPS_Mode;
+    }
+
+    float oreTime = 0;
+    bool alreadyAlert = false;
+    public bool AlreadyAlert { get { return alreadyAlert; } }
+    public void NotEnoughOreAlert(float deltaTime)
+    {
+        oreTime += deltaTime;
+        notEnoughOre.gameObject.SetActive(true);
+        alreadyAlert = true;
+        Debug.Log("ing");
+        // 3초 뒤 
+        if (oreTime >= 3.0f)
+        {
+            notEnoughOre.gameObject.SetActive(false);
+            GameManager.ManagerUpdates -= NotEnoughOreAlert;
+            alreadyAlert = false;
+            oreTime = 0;
+        }
     }
 }
