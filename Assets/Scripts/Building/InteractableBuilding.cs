@@ -57,6 +57,7 @@ public class InteractableBuilding : Building, IInteraction
             case Interaction.takeRope:
                 break;
             case Interaction.Demolish:
+                if (this is Bridge) break;
                 GameManager.Instance.BuildingManager.supply.TotalOreAmount += cost;
                 Runner.Despawn(GetComponent<NetworkObject>());
                 //localPlayer.RenewalInteractionUI(this, false);
