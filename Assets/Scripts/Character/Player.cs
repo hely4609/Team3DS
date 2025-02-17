@@ -45,6 +45,7 @@ public partial class Player : Character
     protected GameObject mouseLeftImage; // 마우스좌클릭 Image
     protected TextMeshProUGUI buttonText; // 버튼에 띄워줄 text
     protected TextMeshProUGUI oreAmountText; // 가지고 있는 광물양을 보여줄 UI
+    protected TextMeshProUGUI notEnoughOre; // 광물이 부족할때 띄울 UI
     protected Image buttonImage;
     public TextMeshProUGUI pageIndexText;
     public TextMeshProUGUI leftRopeLengthText;
@@ -218,6 +219,7 @@ public partial class Player : Character
             oreAmountText = GameObject.FindGameObjectWithTag("OreText").GetComponent<TextMeshProUGUI>();
             onScreenKeyGuideUIAnim = GameObject.FindGameObjectWithTag("OnScreenKeyGuideUI").GetComponent<Animator>();
             pageIndexText = GameObject.FindGameObjectWithTag("PageIndexText").GetComponent<TextMeshProUGUI>();
+            notEnoughOre = GameObject.FindGameObjectWithTag("NotEnoughOre").GetComponent<TextMeshProUGUI>();
             leftRopeLengthText = GameObject.FindGameObjectWithTag("LeftRopeLengthText").GetComponent<TextMeshProUGUI>();
             guidelineText = GameObject.FindGameObjectWithTag("GuidelineText").GetComponent<TextMeshProUGUI>();
             directPowerSupply = GameObject.FindGameObjectWithTag("DirectPowerSupply");
@@ -566,6 +568,7 @@ public partial class Player : Character
         if (ResourceManager.Get(buildableEnumArray[BuildableEnumPageIndex, index]).GetComponent<Building>().Cost > GameManager.Instance.BuildingManager.supply.TotalOreAmount)
         {
             Debug.Log("건설에 필요한 광물이 부족합니다.");
+            
             return false;
         } 
         
