@@ -917,6 +917,7 @@ public partial class Player : Character
                 index--;
                 interactionIndex = Mathf.Max(index, 0);
             }
+            Debug.Log(interactionIndex);
             if(interactionIndex > -1) interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
@@ -934,6 +935,7 @@ public partial class Player : Character
                 index++;
                 interactionIndex = Mathf.Min(interactionButtonInfos.Count - 1, index);
             }
+            Debug.Log(interactionIndex);
             if (interactionIndex > -1 && interactionIndex < interactionButtonInfos.Count) interactionObject = interactionButtonInfos[interactionIndex].interactionObject;
             if (HasStateAuthority) interactionType = interactionButtonInfos[interactionIndex].interactionType;
 
