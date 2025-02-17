@@ -13,6 +13,7 @@ public class Tower : InteractableBuilding
     [SerializeField, Networked] protected int attackDamage { get; set; } // 공격력
     public int AttackDamage { get { return attackDamage; } set { attackDamage = value; } }
     [SerializeField] int attackUpgradeIncrease;
+    public int AttackUpgradeIncrease => attackUpgradeIncrease;
     protected float nowTime;
     [SerializeField, Networked] protected float attackSpeed { get; set; } // 공격 스피드
     public float AttackSpeed { get { return attackSpeed; } set { attackSpeed = value; } }

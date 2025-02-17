@@ -755,6 +755,10 @@ public partial class Player : Character
                 Image[] images = resource.GetComponentsInChildren<Image>();
                 buttonImage = images[1];
 
+                GameObject atk = button.transform.GetChild(2).gameObject;
+                if (target is not Tower || interaction != Interaction.Upgrade) atk.SetActive(false);
+                else atk.SetActive(true);
+
                 switch (interaction)
                 {
                     case Interaction.Demolish:
@@ -787,6 +791,10 @@ public partial class Player : Character
                         buttonText.color = Color.red;
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Ore);
+
+                        buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
+                        buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+
                         break;
 
                     case Interaction.OnOff:
@@ -1011,6 +1019,10 @@ public partial class Player : Character
                 Image[] images = resource.GetComponentsInChildren<Image>();
                 buttonImage = images[1];
 
+                GameObject atk = button.transform.GetChild(2).gameObject;
+                if (target is not Tower || interaction != Interaction.Upgrade) atk.SetActive(false);
+                else atk.SetActive(true);
+
                 switch (interaction)
                 {
                     case Interaction.Demolish:
@@ -1043,6 +1055,10 @@ public partial class Player : Character
                         buttonText.color = Color.red;
 
                         buttonImage.sprite = ResourceManager.Get(ResourceEnum.Sprite.Ore);
+
+                        buttonText = atk.GetComponentInChildren<TextMeshProUGUI>();
+                        buttonText.text = $"{((Tower)target).AttackDamage} " + $"(+ {((Tower)target).AttackUpgradeIncrease})";
+
                         break;
 
                     case Interaction.OnOff:
