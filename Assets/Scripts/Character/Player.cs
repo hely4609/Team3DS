@@ -28,6 +28,7 @@ public partial class Player : Character
     [SerializeField] bool TPS_Mode;
     [SerializeField] protected Transform cameraOffset_FPS;
     [SerializeField] protected Transform cameraOffset_TPS;
+    [Networked] float CurrentLookVerticalAngle { get; set; }
     public Transform CameraOffset => TPS_Mode ? cameraOffset_TPS : cameraOffset_FPS;
 
     private ChangeDetector _changeDetector;
@@ -253,6 +254,7 @@ public partial class Player : Character
         {
             PreviousPosition = data.currentPosition;
             PreviousRotation = data.currentRotation;
+            CurrentLookVerticalAngle = data.currentLookVerticalAngle;
         }
     }
 
@@ -336,7 +338,7 @@ public partial class Player : Character
                 DesigningBuilding.transform.rotation = Quaternion.Euler(0f, 270f, 0f);
             }
 
-            Vector3 pickPos = transform.position + transform.forward * Mathf.Lerp(3.5f, 10f, Mathf.InverseLerp(30f + 13f / Mathf.Abs(GroundNormal.y), 0f, Mathf.Clamp(cameraOffset_FPS.localEulerAngles.x > 300f ? 0f : cameraOffset_FPS.localEulerAngles.x, 0f, 30f + 13f / Mathf.Abs(GroundNormal.y))));
+            Vector3 pickPos = transform.position + transform.forward * Mathf.Lerp(3.5f, 10f, Mathf.InverseLerp(30f + 13f / Mathf.Abs(GroundNormal.y), 0f, Mathf.Clamp(CurrentLookVerticalAngle > 300f ? 0f : CurrentLookVerticalAngle, 0f, 30f + 13f / Mathf.Abs(GroundNormal.y))));
             int x = (int)pickPos.x;
             int z = (int)pickPos.z;
             Vector2Int currentPos = new Vector2Int(x, z);
@@ -1430,7 +1432,11 @@ public partial class Player : Character
 
                 // 광물사용량 텍스트 교체
                 int requireOre = GetRequireOreResourceAmount(targetPrefabEnum);
-                buildingSelectUIBuildingImages[i].transform.parent.GetComponentInChildren<TextMeshProUGUI>().text = requireOre != -1 ? requireOre.ToString() : null;
+                int requirePower = GetRequirePowerAmount(targetPrefabEnum);
+
+                TextMeshProUGUI[] texts = buildingSelectUIBuildingImages[i].transform.parent.GetComponentsInChildren<TextMeshProUGUI>();
+                texts[0].text = requireOre != -1 ? requireOre.ToString() : null;
+                texts[1].text = requirePower != -1 ? requirePower.ToString() : null;
             }
         }
     }
@@ -1444,6 +1450,18 @@ public partial class Player : Character
         ResourceEnum.Prefab.Bridge => 5,
 
         ResourceEnum.Prefab.Pylon => 10,
+
+        _ => -1,
+    };
+
+    private int GetRequirePowerAmount(ResourceEnum.Prefab prefab) => prefab switch
+    {
+        ResourceEnum.Prefab.Turret1a => 10,
+        ResourceEnum.Prefab.Turret1d => 40,
+        ResourceEnum.Prefab.ION_Cannon => 60,
+        ResourceEnum.Prefab.BlastTower => 30,
+        ResourceEnum.Prefab.Bridge => 0,
+        ResourceEnum.Prefab.Pylon => 0,
 
         _ => -1,
     };
