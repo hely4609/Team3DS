@@ -16,11 +16,31 @@ MonoBehaviour:
   m_TableCollectionNameGuidString: b67a5b3295c97a248a7f8ad427383db1
   m_Entries:
   - m_Id: 133009612800
-    m_Key: one
+    m_Key: BuildBuilding
     m_Metadata:
       m_Items: []
   - m_Id: 162122276864
-    m_Key: two
+    m_Key: Fix
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6315824750592
+    m_Key: Hold
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6321919074304
+    m_Key: Plyon
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6326067240960
+    m_Key: TurnOn
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6365632110592
+    m_Key: Start
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7500862431232
+    m_Key: PressR
     m_Metadata:
       m_Items: []
   m_Metadata:

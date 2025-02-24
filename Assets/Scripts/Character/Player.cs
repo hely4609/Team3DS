@@ -238,7 +238,8 @@ public partial class Player : Character
             if (!Runner.IsSinglePlayer)
             {
                 guidelineText.gameObject.SetActive(false);
-                guidelineText.text = "Press \"R\" key to build a building.";
+                TutorialLocalizeTextString("PressR");
+                //guidelineText.text = "Press \"R\" key to build a building.";
                 guidelineProgress = 0;
             }
             directPowerSupply.SetActive(false);
@@ -328,7 +329,8 @@ public partial class Player : Character
             {
                 if (Runner.IsSinglePlayer)
                 {
-                    guidelineText.text = "Connect the wires to supply power from power supply.\r\nIf the wire is short, try building an pylon(5).";
+                    TutorialLocalizeTextString("Plyon");
+                    //guidelineText.text = "Connect the wires to supply power from power supply.\r\nIf the wire is short, try building an pylon(5).";
                     guidelineProgress = 4;
                     directPowerSupply.SetActive(true);
                 }
@@ -604,7 +606,8 @@ public partial class Player : Character
         IsBuildingComfirmUIOpen = true;
         if (Runner.IsSinglePlayer && guidelineProgress < 2)
         {
-            guidelineText.text = "Click to fix your building blueprint.";
+            TutorialLocalizeTextString("Fix");
+            //guidelineText.text = "Click to fix your building blueprint.";
             guidelineProgress = 2;
         }
 
@@ -619,7 +622,8 @@ public partial class Player : Character
             IsThisPlayerCharacterUICanvasActivated = !IsThisPlayerCharacterUICanvasActivated;
             if (Runner.IsSinglePlayer && guidelineProgress < 3)
             {
-                guidelineText.text = "Select building number to build.";
+                TutorialLocalizeTextString("BuildBuilding");
+                //guidelineText.text = "Select building number to build.";
                 guidelineProgress = 1;
             }
             return true;
@@ -636,7 +640,8 @@ public partial class Player : Character
             buildingSelectUI.SetActive(false);
             if (Runner.IsSinglePlayer && guidelineProgress < 2)
             {
-                guidelineText.text = "Press \"R\" key to build a building.";
+                TutorialLocalizeTextString("PressR");
+                //guidelineText.text = "Press \"R\" key to build a building.";
                 guidelineProgress = 1;
             }
         }
@@ -649,7 +654,8 @@ public partial class Player : Character
             Runner.Despawn(DesigningBuilding.GetComponent<NetworkObject>());
             if (Runner.IsSinglePlayer && guidelineProgress < 3)
             {
-                guidelineText.text = "Press \"R\" key to build a building.";
+                TutorialLocalizeTextString("PressR");
+                //guidelineText.text = "Press \"R\" key to build a building.";
                 guidelineProgress = 1;
             }
         }
@@ -671,6 +677,10 @@ public partial class Player : Character
     {
         AnimIK?.Invoke(isFarming);
     }
+    public void TutorialLocalizeTextString(string target)
+    {
+        guidelineText.GetComponent<LocalizeStringEvent>().StringReference.SetReference("TutorialTable", target);
+    }
 
     public bool InteractionStart()
     {
@@ -682,7 +692,8 @@ public partial class Player : Character
                 DesigningBuilding = null;
                 if (Runner.IsSinglePlayer)
                 {
-                    guidelineText.text = "Click (hold) the temporary building to complete the building.";
+                    TutorialLocalizeTextString("Hold");
+                    //guidelineText.text = "Click (hold) the temporary building to complete the building.";
                     guidelineProgress = 3;
                 }
                 return true;
@@ -702,12 +713,14 @@ public partial class Player : Character
                 {
                     if((interactionObject as Tower).OnOff)
                     {
-                        guidelineText.text = "If everything is ready, press \"Wave Start\" button to start the game.";
+                        TutorialLocalizeTextString("Start");
+                        //guidelineText.text = "If everything is ready, press \"Wave Start\" button to start the game.";
                         guidelineProgress = 6;
                     }
                     else
                     {
-                        guidelineText.text = "Click on the tower to turn on the tower.";
+                        TutorialLocalizeTextString("TurnOn");
+                        //guidelineText.text = "Click on the tower to turn on the tower.";
                         guidelineProgress = 5;
                     }
                 }
@@ -751,7 +764,8 @@ public partial class Player : Character
             case Interaction.AttachRope:
                 if (Runner.IsSinglePlayer)
                 {
-                    guidelineText.text = "Click on the tower to turn on the tower.";
+                    TutorialLocalizeTextString("TurnOn");
+                    //guidelineText.text = "Click on the tower to turn on the tower.";
                     guidelineProgress = 5;
                     directPowerSupply.SetActive(false);
                 }
