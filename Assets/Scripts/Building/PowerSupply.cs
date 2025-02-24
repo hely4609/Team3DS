@@ -161,27 +161,27 @@ public class PowerSupply : InteractableBuilding
         for (int i = 0; i < player?.OreAmount; i++)
         {
             TotalOreAmount++;
-            expCurrent++;
+            //expCurrent++;
 
-            if (expCurrent >= expMax)
-            {
-                expCurrent -= expMax;
-                expMax *= 2;
+            //if (expCurrent >= expMax)
+            //{
+            //    expCurrent -= expMax;
+            //    expMax *= 2;
 
-                powerMax += 10;
-                powerCurrent += 10;
+            //    powerMax += 10;
+            //    powerCurrent += 10;
 
-                level++;
-            }
+            //    level++;
+            //}
         }
 
-        Level = level;
+        //Level = level;
        
-        ExpCurrent = expCurrent;
-        ExpMax = expMax;
+        //ExpCurrent = expCurrent;
+        //ExpMax = expMax;
 
-        PowerMax = powerMax;
-        PowerCurrent = powerCurrent;
+        //PowerMax = powerMax;
+        //PowerCurrent = powerCurrent;
     }
 
     public override bool InteractionEnd(Player player, Interaction interactionType)
