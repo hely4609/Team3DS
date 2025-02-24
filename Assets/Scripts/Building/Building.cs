@@ -277,7 +277,7 @@ public GameObject BuildingSignCanvas { get { return buildingSignCanvas; } }
             Debug.Log(GameManager.Instance.BuildingManager.generator.IsWaveStart);
             if(GameManager.Instance.BuildingManager.generator.IsWaveStart)
             {
-                BuildingTimeCurrent += deltaTime;
+                BuildingTimeCurrent += deltaTime * GameManager.Instance.BuildingManager.generator.GameSpeed;
             }
             else
             {

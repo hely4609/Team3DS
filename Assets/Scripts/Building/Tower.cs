@@ -39,7 +39,7 @@ public class Tower : InteractableBuilding
     public override void Spawned()
     {
         base.Spawned();
-        attackAnimator.SetFloat("AttackSpeed", 1 / attackSpeed);
+        attackAnimator.SetFloat("AttackSpeed", GameManager.Instance.BuildingManager.generator.GameSpeed / attackSpeed);
         if (CompletePercent >= 1)
         {
             marker_on.SetActive(OnOff);
@@ -215,6 +215,7 @@ public class Tower : InteractableBuilding
     {
         if(HasStateAuthority && OnOff)
         {
+            attackAnimator.SetFloat("AttackSpeed", GameManager.Instance.BuildingManager.generator.GameSpeed / attackSpeed);
             Attack();
         }
         

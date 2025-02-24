@@ -79,6 +79,7 @@ public class ControllerBase : MyComponent
                         GameManager.Instance.WaveStart();
                         if(Runner.IsSinglePlayer) controlledPlayer.guidelineText.gameObject.SetActive(false);
                         button.gameObject.SetActive(false);
+                        GameManager.Instance.BuildingManager.generator.speedUp.SetActive(true);
                     }
                 });
             }

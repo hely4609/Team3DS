@@ -14,19 +14,48 @@ public class EnergyBarrierGenerator : InteractableBuilding
     [Networked] public bool IsWaveStart { get; set; }
     [Networked] public int MonsterCount { get; set; } = 0; // 현재 필드에 있는 몬스터 수.
     [Networked] public bool IsWaveLeft { get; set; }
+    [Networked] public int GameSpeed { get; set; } = 1;
     //[Networked] public float WaveLeftTime { get; set; }
 
     protected TextMeshProUGUI hpText;
     protected Image hpFillImage;
+    public GameObject speedUp;
+    protected Button speedNormal;
+    protected Button speedFaster;
+    protected TextMeshProUGUI currentSpeed;
 
     protected GameObject[] energyBarrierArray;
 
     protected bool onOff; // on/off시 올라오고 내려가는 연출 like 경찰바리게이트 
     public bool OnOff { get { return onOff; } }
 
+    protected override void MyStart()
+    {
+        speedUp = GameObject.FindGameObjectWithTag("SpeedUp");
+        speedNormal = speedUp.GetComponentsInChildren<Button>()[0];
+        speedFaster = speedUp.GetComponentsInChildren<Button>()[1];
+        currentSpeed = speedUp.GetComponentInChildren<TextMeshProUGUI>();
+
+        speedNormal.onClick.AddListener(() => 
+        { 
+            GameSpeed = 1;
+        });
+        
+        speedFaster.onClick.AddListener(() =>
+        {
+            GameSpeed = Mathf.Clamp(GameSpeed * 2, 1, 8);
+        });
+
+        currentSpeed.text = $"x{GameSpeed}";
+
+        speedNormal.gameObject.SetActive(Runner.IsServer);
+        speedFaster.gameObject.SetActive(Runner.IsServer);
+        speedUp.SetActive(false);
+    }
+
     protected override void MyUpdate(float deltaTime)
     {
-        if (HasStateAuthority && IsWaveStart) PlayTime += Time.fixedUnscaledDeltaTime;
+        if (HasStateAuthority && IsWaveStart) PlayTime += Runner.DeltaTime * GameSpeed;
     }
     public void SetActiveEnergyBarrier()  // 현재 On인지 Off인제 
     {
@@ -115,6 +144,9 @@ public class EnergyBarrierGenerator : InteractableBuilding
                     break;
                 case nameof(IsWaveStart):
                     GameManager.Instance.WaveManager.waveInfoUI.SetActive(true);
+                    break;
+                case nameof(GameSpeed):
+                    currentSpeed.text = $"x{GameSpeed}";
                     break;
 
             }

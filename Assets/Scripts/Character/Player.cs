@@ -315,6 +315,7 @@ public partial class Player : Character
         AnimFloat?.Invoke("Speed", MoveDir.magnitude);
         AnimFloat?.Invoke("MoveForward", currentDir.z);
         AnimFloat?.Invoke("MoveRight", currentDir.x);
+        AnimFloat?.Invoke("GameSpeed", GameManager.Instance.BuildingManager.generator.GameSpeed);
 
         // 상호작용
         if (isInteracting && interactionObject != null)
@@ -475,7 +476,7 @@ public partial class Player : Character
 
     public Vector3 MoveDirCalculrate(Vector3 input)
     {
-        return (transform.forward * input.z + transform.right * input.x).normalized * moveSpeed;
+        return (transform.forward * input.z + transform.right * input.x).normalized * moveSpeed * GameManager.Instance.BuildingManager.generator.GameSpeed;
     }
 
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
@@ -513,7 +514,7 @@ public partial class Player : Character
 
             if (CanSetRope)
             {
-                rb.velocity = velocity * moveSpeed + gravity;
+                rb.velocity = (velocity * moveSpeed + gravity) * GameManager.Instance.BuildingManager.generator.GameSpeed;
             }
             else
             {
@@ -535,7 +536,7 @@ public partial class Player : Character
                 //}
 
                 if (angleCheck)
-                    rb.velocity = velocity * moveSpeed + gravity;
+                    rb.velocity = (velocity * moveSpeed + gravity) * GameManager.Instance.BuildingManager.generator.GameSpeed;
                 else
                     rb.velocity = Vector3.zero;
             }
@@ -1481,7 +1482,7 @@ public partial class Player : Character
 
     private float CalculrateNextFrameGroundAngle()
     {
-        var nextFramePlayerPosition = transform.position + transform.forward * 1.25f + (transform.forward * MoveDir.z + transform.right * MoveDir.x) * Runner.DeltaTime * moveSpeed;
+        var nextFramePlayerPosition = transform.position + transform.forward * 1.25f + (transform.forward * MoveDir.z + transform.right * MoveDir.x) * Runner.DeltaTime * moveSpeed * GameManager.Instance.BuildingManager.generator.GameSpeed;
 
         if (Physics.Raycast(nextFramePlayerPosition, Vector3.down, out RaycastHit hitInfo, 1f))
         {
@@ -1537,7 +1538,7 @@ public partial class Player : Character
     private int GetRequireOreResourceAmount(ResourceEnum.Prefab prefab) => prefab switch
     {
         ResourceEnum.Prefab.Turret1a => 10,
-        ResourceEnum.Prefab.Turret1d => 20,
+        ResourceEnum.Prefab.Turret1d => 10,
         ResourceEnum.Prefab.ION_Cannon => 20,
         ResourceEnum.Prefab.BlastTower => 40,
         ResourceEnum.Prefab.Bridge => 5,
