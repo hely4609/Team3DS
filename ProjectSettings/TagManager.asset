@@ -33,6 +33,7 @@ TagManager:
   - GuidelineText
   - DirectPowerSupply
   - NotEnoughOre
+  - SpeedUp
   layers:
   - Default
   - TransparentFX

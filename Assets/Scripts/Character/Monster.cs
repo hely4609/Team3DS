@@ -123,7 +123,8 @@ public class Monster : Character
     {
         // 해당방향으로 간다.
         Vector3 dir = (destination - transform.position).normalized;
-        transform.position += dir * deltaTime * MoveSpeed;
+        transform.position += dir * deltaTime * MoveSpeed * GameManager.Instance.BuildingManager.generator.GameSpeed;
+        AnimFloat?.Invoke("GameSpeed", GameManager.Instance.BuildingManager.generator.GameSpeed);
         transform.LookAt(destination);
     }
 
