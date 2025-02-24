@@ -1483,7 +1483,10 @@ public partial class Player : Character
 
     private float CalculrateNextFrameGroundAngle()
     {
-        var nextFramePlayerPosition = transform.position + transform.forward * 1.25f + (transform.forward * MoveDir.z + transform.right * MoveDir.x) * Runner.DeltaTime * moveSpeed * GameManager.Instance.BuildingManager.generator.GameSpeed;
+        var nextFramePlayerPosition =
+            GameManager.Instance.BuildingManager.generator ? 
+            transform.position + transform.forward * 1.25f + (transform.forward * MoveDir.z + transform.right * MoveDir.x) * Runner.DeltaTime * moveSpeed * GameManager.Instance.BuildingManager.generator.GameSpeed
+            : transform.position + transform.forward * 1.25f + (transform.forward * MoveDir.z + transform.right * MoveDir.x) * Runner.DeltaTime * moveSpeed;
 
         if (Physics.Raycast(nextFramePlayerPosition, Vector3.down, out RaycastHit hitInfo, 1f))
         {
