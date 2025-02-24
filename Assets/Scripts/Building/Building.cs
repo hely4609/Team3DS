@@ -63,7 +63,7 @@ public abstract class Building : MyComponent
     [SerializeField] protected GameObject marker_on;
     [SerializeField] protected GameObject marker_off;
     [SerializeField] protected GameObject buildingSignCanvas;
-public GameObject BuildingSignCanvas { get { return buildingSignCanvas; } }
+    public GameObject BuildingSignCanvas { get { return buildingSignCanvas; } }
     public override void Spawned()
     {
         _changeDetector = GetChangeDetector(ChangeDetector.Source.SimulationState);

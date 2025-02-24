@@ -390,9 +390,10 @@ public class Tower : InteractableBuilding
 
     public override void Render()
     {
-        foreach(var chage in _changeDetector.DetectChanges(this))
+        if (_changeDetector == null) return;
+        foreach(var change in _changeDetector.DetectChanges(this))
         {
-            switch(chage)
+            switch(change)
             {
                 case nameof(IsChangeInfo):
                     Player local = GameManager.Instance.NetworkManager.LocalController.ControlledPlayer;
