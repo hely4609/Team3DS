@@ -9,6 +9,7 @@ public class LocalController : ControllerBase
 {
     public override void FixedUpdateNetwork()
     {
+        if (GameManager.Instance.BuildingManager?.generator == null) return;
         if (GetInput(out NetworkInputData data))
         {
             OnMove(data.moveDirection);
