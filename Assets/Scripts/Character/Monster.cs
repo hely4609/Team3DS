@@ -123,8 +123,8 @@ public class Monster : Character
     {
         // 해당방향으로 간다.
         Vector3 dir = (destination - transform.position).normalized;
-        transform.position += dir * deltaTime * MoveSpeed * GameManager.Instance.BuildingManager.generator.GameSpeed;
-        AnimFloat?.Invoke("GameSpeed", GameManager.Instance.BuildingManager.generator.GameSpeed);
+        transform.position += dir * deltaTime * MoveSpeed * generator.GameSpeed;
+        AnimFloat?.Invoke("GameSpeed", generator.GameSpeed);
         transform.LookAt(destination);
     }
 
@@ -191,7 +191,7 @@ public class Monster : Character
         AnimBool?.Invoke("isMove", false);
 
         target.TakeDamage(attackDamage);
-        GameManager.Instance.BuildingManager.generator.MonsterCount--;
+        generator.MonsterCount--;
     }
 
     public override void Render()
@@ -209,8 +209,8 @@ public class Monster : Character
 
                         if (HasStateAuthority)
                         {
-                            GameManager.Instance.BuildingManager.generator.KillCount++;
-                            GameManager.Instance.BuildingManager.generator.MonsterCount--;
+                            generator.KillCount++;
+                            generator.MonsterCount--;
                         }
                         GetComponent<Collider>().enabled = false;
                         GetComponent<Rigidbody>().isKinematic = true;
