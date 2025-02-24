@@ -70,9 +70,11 @@ public class BuildingManager : Manager
         }
         else
         {
-            generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
-            supply = GameObject.FindObjectOfType<PowerSupply>();
-            supply2 = GameObject.FindObjectOfType<PowerSupply2>();
+            GameManager.ManagerUpdates += Finder;
+
+            //generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
+            //supply = GameObject.FindObjectOfType<PowerSupply>();
+            //supply2 = GameObject.FindObjectOfType<PowerSupply2>();
         }
 
         // 이걸 어디에 
@@ -296,5 +298,13 @@ public class BuildingManager : Manager
     {
         buildings = newBuildingList;
     }
-    
+
+    public void Finder(float deltaTime)
+    { 
+        if (generator == null) generator = GameObject.FindObjectOfType<EnergyBarrierGenerator>();
+        if (supply == null) supply = GameObject.FindObjectOfType<PowerSupply>();
+        if (supply2 == null) supply2 = GameObject.FindObjectOfType<PowerSupply2>();
+
+        if (generator != null & supply != null & supply2 != null) GameManager.ManagerUpdates -= Finder;
+    }
 }
