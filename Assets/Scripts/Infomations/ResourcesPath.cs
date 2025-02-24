@@ -49,6 +49,7 @@ public class ResourcesPath
         "Prefabs/Effects/Hits/Explosion",
         // ETC
         "Prefabs/UIs/Signs/BuildingSignCanvas",
+        "Prefabs/Buildings/Walls",
 
 
     };
