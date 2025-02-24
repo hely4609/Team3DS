@@ -308,6 +308,7 @@ public partial class Player : Character
     }
     protected override void MyUpdate(float deltaTime)
     {
+        if (GameManager.Instance.BuildingManager?.generator == null) return;
         //이동방향이 있을 시 해당 방향으로 움직임. + 애니메이션 설정
 
         currentDir = new Vector3(Mathf.Lerp(currentDir.x, MoveDir.x, deltaTime), currentDir.y, Mathf.Lerp(currentDir.z, MoveDir.z, deltaTime));
