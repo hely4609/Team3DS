@@ -475,10 +475,10 @@ public partial class Player : Character
         }
     }
 
-    public Vector3 MoveDirCalculrate(Vector3 input)
-    {
-        return (transform.forward * input.z + transform.right * input.x).normalized * moveSpeed * GameManager.Instance.BuildingManager.generator.GameSpeed;
-    }
+    //public Vector3 MoveDirCalculrate(Vector3 input)
+    //{
+    //    return (transform.forward * input.z + transform.right * input.x).normalized * moveSpeed * GameManager.Instance.BuildingManager.generator.GameSpeed;
+    //}
 
     // 키보드 입력으로 플레이어 이동방향을 결정하는 함수.
     public override void Move(Vector3 direction)
@@ -515,7 +515,9 @@ public partial class Player : Character
 
             if (CanSetRope)
             {
-                rb.velocity = (velocity * moveSpeed + gravity) * GameManager.Instance.BuildingManager.generator.GameSpeed;
+                rb.velocity = GameManager.Instance.BuildingManager.generator != null?
+                    (velocity * moveSpeed + gravity) * GameManager.Instance.BuildingManager.generator.GameSpeed
+                    : velocity * moveSpeed + gravity;
             }
             else
             {
@@ -537,7 +539,9 @@ public partial class Player : Character
                 //}
 
                 if (angleCheck)
-                    rb.velocity = (velocity * moveSpeed + gravity) * GameManager.Instance.BuildingManager.generator.GameSpeed;
+                    rb.velocity = GameManager.Instance.BuildingManager.generator != null ?
+                        (velocity * moveSpeed + gravity) * GameManager.Instance.BuildingManager.generator.GameSpeed
+                        : velocity * moveSpeed + gravity;
                 else
                     rb.velocity = Vector3.zero;
             }
