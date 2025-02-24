@@ -1537,7 +1537,7 @@ public partial class Player : Character
     private int GetRequireOreResourceAmount(ResourceEnum.Prefab prefab) => prefab switch
     {
         ResourceEnum.Prefab.Turret1a => 10,
-        ResourceEnum.Prefab.Turret1d => 20,
+        ResourceEnum.Prefab.Turret1d => 10,
         ResourceEnum.Prefab.ION_Cannon => 20,
         ResourceEnum.Prefab.BlastTower => 40,
         ResourceEnum.Prefab.Bridge => 5,
