@@ -10,11 +10,15 @@ public class EffectPlayer : NetworkBehaviour
     int cnt = 0;
     public void PlayEffect(string wantEffect)
     {
-        if(Enum.TryParse(wantEffect, out ResourceEnum.Prefab wantPrefab))
+        if(HasStateAuthority)
         {
-            NetworkObject effect = Runner.Spawn(ResourceManager.Get(wantPrefab), wantTF.position);
+            if(Enum.TryParse(wantEffect, out ResourceEnum.Prefab wantPrefab))
+            {
+                NetworkObject effect = Runner.Spawn(ResourceManager.Get(wantPrefab), wantTF.position);
 
-            StartCoroutine(DespawnEffect(effect));
+                StartCoroutine(DespawnEffect(effect));
+            }
+
         }
     }
 

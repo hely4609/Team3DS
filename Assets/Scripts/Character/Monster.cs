@@ -56,6 +56,14 @@ public class Monster : Character
         generator = GameManager.Instance.BuildingManager.generator;
     }
 
+    protected override void MyUpdate(float deltaTime)
+    {
+        if(GameManager.IsGameStart && isReady)
+        {
+            hpCanvas.transform.LookAt(Camera.main.transform.position);
+        }
+    }
+
     public override int TakeDamage(Tower attacker, int damage, string effect = "BasicHit")
     {
         HpCurrent -= damage;
@@ -96,7 +104,6 @@ public class Monster : Character
                     isRelease = true;
                 }
 
-                hpCanvas.transform.LookAt(Camera.main.transform.position);
 
             }
         }
