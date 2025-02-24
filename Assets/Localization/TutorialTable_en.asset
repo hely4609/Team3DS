@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9620f8c34305754d8cc9a7e49e852d9, type: 3}
+  m_Name: TutorialTable_en
+  m_EditorClassIdentifier: 
+  m_LocaleId:
+    m_Code: en
+  m_SharedData: {fileID: 11400000, guid: b67a5b3295c97a248a7f8ad427383db1, type: 2}
+  m_Metadata:
+    m_Items: []
+  m_TableData:
+  - m_Id: 133009612800
+    m_Localized: Select building number to build.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6365632110592
+    m_Localized: If everything is ready, press "Wave Start" button to start the game.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6326067240960
+    m_Localized: Click on the tower to turn on the tower.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6315824750592
+    m_Localized: Click (hold) the temporary building to complete the building.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 162122276864
+    m_Localized: Click to fix your building blueprint.
+    m_Metadata:
+      m_Items: []
+  - m_Id: 6321919074304
+    m_Localized: 'Connect the wires to supply power from power supply.
+
+      If
+      the wire is short, try building an pylon(5).'
+    m_Metadata:
+      m_Items: []
+  - m_Id: 7500862431232
+    m_Localized: Press "R" key to build a building.
+    m_Metadata:
+      m_Items: []
+  references:
+    version: 2
+    RefIds: []
