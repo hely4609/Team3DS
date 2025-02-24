@@ -55,6 +55,7 @@ public partial class Player : Character
     public TextMeshProUGUI leftRopeLengthText;
     public FloatVariable leftRopeLength;
     public TextMeshProUGUI guidelineText;
+    public int guidelineProgress = 0;
     GameObject directPowerSupply;
 
     protected IInteraction interactionObject = null; // 내가 선택한 상호작용 대상
@@ -234,7 +235,12 @@ public partial class Player : Character
             buildingConfirmUI.SetActive(false);
             ropeMaxDistanceSignUI.SetActive(false);
             leftRopeLengthText.gameObject.SetActive(false);
-            if (!Runner.IsSinglePlayer) guidelineText.gameObject.SetActive(false);
+            if (!Runner.IsSinglePlayer)
+            {
+                guidelineText.gameObject.SetActive(false);
+                guidelineText.text = "Press \"R\" key to build a building.";
+                guidelineProgress = 0;
+            }
             directPowerSupply.SetActive(false);
             notEnoughOre.gameObject.SetActive(false);
             var source = LocalizationSettings.StringDatabase.SmartFormatter.GetSourceExtension<PersistentVariablesSource>();
@@ -320,6 +326,12 @@ public partial class Player : Character
 
             if (progress >= 1f)
             {
+                if (Runner.IsSinglePlayer)
+                {
+                    guidelineText.text = "Connect the wires to supply power from power supply.\r\nIf the wire is short, try building an pylon(5).";
+                    guidelineProgress = 4;
+                    directPowerSupply.SetActive(true);
+                }
                 InteractionEnd();
             }
             // 건설 끝
@@ -590,6 +602,11 @@ public partial class Player : Character
         DesigningBuilding = building.GetComponent<Building>();
         GameManager.Instance.BuildingManager.supply.TotalOreAmount -= DesigningBuilding.Cost;
         IsBuildingComfirmUIOpen = true;
+        if (Runner.IsSinglePlayer && guidelineProgress < 2)
+        {
+            guidelineText.text = "Click to fix your building blueprint.";
+            guidelineProgress = 2;
+        }
 
         return true;
 
@@ -600,6 +617,11 @@ public partial class Player : Character
         if (DesigningBuilding == null)
         {
             IsThisPlayerCharacterUICanvasActivated = !IsThisPlayerCharacterUICanvasActivated;
+            if (Runner.IsSinglePlayer && guidelineProgress < 3)
+            {
+                guidelineText.text = "Select building number to build.";
+                guidelineProgress = 1;
+            }
             return true;
         }
         return false;
@@ -612,6 +634,11 @@ public partial class Player : Character
         if (HasInputAuthority && buildingSelectUI.activeSelf)
         {
             buildingSelectUI.SetActive(false);
+            if (Runner.IsSinglePlayer && guidelineProgress < 2)
+            {
+                guidelineText.text = "Press \"R\" key to build a building.";
+                guidelineProgress = 1;
+            }
         }
         IsThisPlayerCharacterUICanvasActivated = false;
 
@@ -620,6 +647,11 @@ public partial class Player : Character
             IsBuildingComfirmUIOpen = false;
             GameManager.Instance.BuildingManager.supply.TotalOreAmount += DesigningBuilding.Cost;
             Runner.Despawn(DesigningBuilding.GetComponent<NetworkObject>());
+            if (Runner.IsSinglePlayer && guidelineProgress < 3)
+            {
+                guidelineText.text = "Press \"R\" key to build a building.";
+                guidelineProgress = 1;
+            }
         }
 
         if (ropeBuilding != null)
@@ -648,7 +680,11 @@ public partial class Player : Character
             {
                 IsBuildingComfirmUIOpen = false;
                 DesigningBuilding = null;
-                if (Runner.IsSinglePlayer) guidelineText.text = "Click (hold) the temporary building to complete the building.";
+                if (Runner.IsSinglePlayer)
+                {
+                    guidelineText.text = "Click (hold) the temporary building to complete the building.";
+                    guidelineProgress = 3;
+                }
                 return true;
             }
 
@@ -662,7 +698,19 @@ public partial class Player : Character
         {
             default: InteractionEnd(); break;
             case Interaction.OnOff:
-                if (Runner.IsSinglePlayer) guidelineText.text = "If everything is ready, press \"Wave Start\" button to start the game.";
+                if (Runner.IsSinglePlayer)
+                {
+                    if((interactionObject as Tower).OnOff)
+                    {
+                        guidelineText.text = "If everything is ready, press \"Wave Start\" button to start the game.";
+                        guidelineProgress = 6;
+                    }
+                    else
+                    {
+                        guidelineText.text = "Click on the tower to turn on the tower.";
+                        guidelineProgress = 5;
+                    }
+                }
                 break;
             case Interaction.Build:
                 if (HasStateAuthority) isInteracting = true;
@@ -704,6 +752,7 @@ public partial class Player : Character
                 if (Runner.IsSinglePlayer)
                 {
                     guidelineText.text = "Click on the tower to turn on the tower.";
+                    guidelineProgress = 5;
                     directPowerSupply.SetActive(false);
                 }
                 break;
@@ -720,11 +769,6 @@ public partial class Player : Character
                     interactionUI.gameObject.SetActive(true);
                     interactionUpdateUI.SetActive(false);
                     interactionUpdateProgress = null;
-                    if (Runner.IsSinglePlayer)
-                    {
-                        guidelineText.text = "Connect the wires to supply power from power supply.\r\nIf the wire is short, try building an pylon(5).";
-                        directPowerSupply.SetActive(true);
-                    }
                 }
                 //GameManager.Instance.PoolManager.Destroy(sockets.FindSocket("RightHand").gameObject.GetComponentInChildren<PoolingInfo>());
                 break;
