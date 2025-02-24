@@ -55,6 +55,7 @@ namespace ResourceEnum
 
         // ETC
         BuildingSignCanvas,
+        Walls
     }
 
     public enum Sprite

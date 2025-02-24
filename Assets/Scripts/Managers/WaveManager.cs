@@ -61,8 +61,8 @@ public class WaveManager : Manager
         Vector3 leftMid = new Vector3(leftUp.x, 3, (leftUp.z + rightDown.z) / 2);
         float upLength = rightDown.x - leftUp.x;
         float rightLength = leftUp.z - rightDown.z;
-        GameObject objParent = new("wall");
-        objParent.AddComponent<NetworkObject>();
+        NetworkObject objParent = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.Walls).GetComponent<NetworkObject>());
+        
         NetworkObject upObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), upMid);
         NetworkObject downObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), downMid);
         NetworkObject rightObj = GameManager.Instance.NetworkManager.Runner.Spawn(ResourceManager.Get(ResourceEnum.Prefab.NoEnterWall).GetComponent<NetworkObject>(), rightMid);
@@ -103,8 +103,7 @@ public class WaveManager : Manager
 
         roadData = GameManager.Instance.BuildingManager.roadData;
 
-        if(GameManager.Instance.NetworkManager.Runner.IsServer) walls = CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
-
+        if (GameManager.Instance.NetworkManager.Runner.IsServer) walls = CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
         yield return base.Initiate();
     }
 
@@ -176,11 +175,13 @@ public class WaveManager : Manager
                 }
                 else if(waveInfo.waveOrder.Count > 0)
                 {
-                    Debug.Log($"{nowWaveTime}/{waveInterval}   {monsterList.Count}마리");
+                    //Debug.Log($"{nowWaveTime}/{waveInterval}   {monsterList.Count}마리");
                     //if (nowWaveTime >= waveInterval)
-                    if(nowWaveTime >= waveInterval && monsterList.Count <= 0)
-                    {
-                        nowWaveTime = 0;
+                    //if(nowWaveTime >= waveInterval && monsterList.Count <= 0)
+                    if (nowWaveTime >= waveInterval && monsterNumber.Value <= 0)
+
+                        {
+                            nowWaveTime = 0;
                         currentMonsterIndex = 0;
                         waveInfo.waveOrder.Dequeue();
                         Debug.Log($"{currentWaveIndex}번째 웨이브 끝");
@@ -197,9 +198,13 @@ public class WaveManager : Manager
                             {
                                 SpawnLoc++;
                                 nowArea++;
-                                NetworkObject nextWall= CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
+                                NetworkObject nextWall = CreateBox(AreaBounds[nowArea][0], AreaBounds[nowArea][1]);
                                 GameManager.Instance.NetworkManager.Runner.Despawn(walls);
-                                walls = nextWall;
+                                if (walls = null)
+                                {
+                                    Debug.Log("야");
+                                }
+                                    walls = nextWall;
                                 Debug.Log($"현재 영역 : {BoundLeftUp}, {BoundRightDown}");
                             }
 
