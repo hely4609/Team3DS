@@ -26,7 +26,7 @@ AnimatorState:
   m_SpeedParameter: AttackSpeed
   m_MirrorParameter: 
   m_CycleOffsetParameter: 
-  m_TimeParameter: 
+  m_TimeParameter: AttackSpeed
 --- !u!1107 &-1722000483009209630
 AnimatorStateMachine:
   serializedVersion: 6
