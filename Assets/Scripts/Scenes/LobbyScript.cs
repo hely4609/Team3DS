@@ -5,24 +5,24 @@ using UnityEngine;
 
 public class LobbyScript : MonoBehaviour
 {
-    [SerializeField] GameObject room;
-    [SerializeField] GameObject[] players;
-    TextMeshProUGUI[] playerNicknames;
-    [SerializeField] GameObject inviteWindow;
-    [SerializeField] TMP_InputField nicknameWhoesToInvite;
-    [SerializeField] GameObject startBtn;
+    //[SerializeField] GameObject room;
+    //[SerializeField] GameObject[] players;
+    //TextMeshProUGUI[] playerNicknames;
+    //[SerializeField] GameObject inviteWindow;
+    //[SerializeField] TMP_InputField nicknameWhoesToInvite;
+    //[SerializeField] GameObject startBtn;
     [SerializeField] GameObject sessionIDInputFieldWindow;
     [SerializeField] TMP_InputField sessionIDInptField;
-    private void Start()
-    {
-        playerNicknames = new TextMeshProUGUI[players.Length];
-        for (int i=0; i<players.Length; i++)
-        {
-            playerNicknames[i] = players[i].GetComponentInChildren<TextMeshProUGUI>();
-            SetPlayerName(i, "");
-        }
-        
-    }
+    //private void Start()
+    //{
+    //    playerNicknames = new TextMeshProUGUI[players.Length];
+    //    for (int i=0; i<players.Length; i++)
+    //    {
+    //        playerNicknames[i] = players[i].GetComponentInChildren<TextMeshProUGUI>();
+    //        SetPlayerName(i, "");
+    //    }
+    //}
+
     private void Update()
     {
         // Return¿Ã Enter¿”
@@ -72,10 +72,10 @@ public class LobbyScript : MonoBehaviour
         sessionIDInputFieldWindow.SetActive(false);
     }
 
-    public void SetPlayerName(int index, string name)
-    {
-        if(name == "") playerNicknames[index].text = "<i>Click here to invite</i>";
-        else playerNicknames[index].text = name;
-    }
+    //public void SetPlayerName(int index, string name)
+    //{
+    //    if(name == "") playerNicknames[index].text = "<i>Click here to invite</i>";
+    //    else playerNicknames[index].text = name;
+    //}
 
 }

@@ -79,6 +79,7 @@ public class ResourcesPath
     public static string[] BGMPathArray =
     {
         "Sounds/BGM/Silent_Partner__Whistling_Down_the_Road",
+        "Sounds/BGM/steel_hammer_master_track",
     };
 
     public static string[] SFXPathArray =

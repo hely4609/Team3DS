@@ -14,6 +14,7 @@ public class GameOverCanvas : MonoBehaviour
     {
         GameManager.Instance.GoTitle();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        SoundManager.Play(ResourceEnum.BGM.Silent_Partner__Whistling_Down_the_Road);
     }
 
     public void SetResultText(bool isFail)

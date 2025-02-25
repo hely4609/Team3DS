@@ -80,6 +80,7 @@ public class ControllerBase : MyComponent
                         if(Runner.IsSinglePlayer) controlledPlayer.guidelineText.gameObject.SetActive(false);
                         button.gameObject.SetActive(false);
                         GameManager.Instance.BuildingManager.generator.speedUp.SetActive(true);
+                        SoundManager.Play(ResourceEnum.BGM.steel_hammer_master_track);
                     }
                 });
             }

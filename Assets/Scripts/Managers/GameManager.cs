@@ -76,6 +76,9 @@ public class GameManager : MonoBehaviour
 
     protected CharacterMoveBound moveBound;
     public CharacterMoveBound MoveBound => moveBound;
+
+    protected AchievementManager achivementManager;
+    public AchievementManager AchivementManager => achivementManager;
     #endregion
 
     [SerializeField] bool isGameStart;
@@ -84,7 +87,11 @@ public class GameManager : MonoBehaviour
     [SerializeField] bool isDefeated;
     public bool IsDefeated => isDefeated;
     public void Defeat() { isDefeated = true; }
-    public void GameClear() { isClear = true; }
+    public void GameClear() 
+    { 
+        isClear = true;
+        achivementManager.SetAchievement("GameClear");
+    }
 
     [SerializeField] bool isClear;
     public bool IsClear => isClear;
@@ -204,6 +211,7 @@ public class GameManager : MonoBehaviour
         yield return uiManager.Initiate();
         networkManager = new NetworkManager();
         yield return networkManager.Initiate();
+        achivementManager = GetComponent<AchievementManager>();
 
         //cameraManager = new CameraManager();
         //yield return cameraManager.Initiate();

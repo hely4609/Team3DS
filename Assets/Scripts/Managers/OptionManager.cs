@@ -99,6 +99,7 @@ public class OptionManager : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+        SoundManager.Play(ResourceEnum.BGM.Silent_Partner__Whistling_Down_the_Road);
     }
 
     public void GuideBook()

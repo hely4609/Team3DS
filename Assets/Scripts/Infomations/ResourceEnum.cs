@@ -83,6 +83,7 @@ namespace ResourceEnum
     public enum BGM
     {
         Silent_Partner__Whistling_Down_the_Road,
+        steel_hammer_master_track,
     }
 
     public enum SFX

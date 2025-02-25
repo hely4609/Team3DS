@@ -80,6 +80,7 @@ public partial class NetworkPhotonCallbacks : MonoBehaviour, INetworkRunnerCallb
             GameManager.Instance.UIManager.ClaimError("Shutdowned", "The server has been disconnected.", "È®ÀÎ", () =>
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                SoundManager.Play(ResourceEnum.BGM.Silent_Partner__Whistling_Down_the_Road);
             });
         }
     }
